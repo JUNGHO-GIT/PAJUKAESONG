@@ -1,7 +1,5 @@
 // NavBar.tsx
 
-import { React } from "../../import/ImportReacts.tsx";
-
 // -------------------------------------------------------------------------------------------------
 export const Div = (props: any) => {
   return (

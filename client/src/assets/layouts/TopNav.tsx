@@ -1,6 +1,6 @@
 // TopNav.tsx
 
-import { React, useState, useEffect } from "../../import/ImportReacts.tsx";
+import { useState, useEffect } from "../../import/ImportReacts.tsx";
 import { useNavigate, useLocation } from "../../import/ImportReacts.tsx";
 import { Tabs, Tab, Grid, Paper } from "../../import/ImportMuis.tsx";
 import { Card, Menu, MenuItem, tabsClasses } from "../../import/ImportMuis.tsx";
@@ -16,21 +16,22 @@ export const TopNav = () => {
   const location = useLocation();
   const PATH = location?.pathname;
   const firstStr = PATH?.split("/")[1] || "";
-  const upperStr = firstStr.charAt(0).toUpperCase() + firstStr.slice(1);
+  const secondStr = PATH?.split("/")[2] || "";
 
   // 2-2. useState ---------------------------------------------------------------------------------
-  const [selectedTab, setSelectedTab] = useState<string>(upperStr);
-  const [selectedMenuItems, setSelectedMenuItems] = useState<Record<string, string>>({});
+  const [selectedTab, setSelectedTab] = useState<string>(firstStr);
+  const [selectedMenuItem, setSelectedMenuItem] = useState<string>(secondStr);
   const [selectedAnchorEl, setSelectedAnchorEl] = useState<Record<string, HTMLElement | null>>({});
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화
   useEffect(() => {
-    if (!dataArray.some((item) => item.title.toLowerCase() === firstStr.toLowerCase())) {
-      setSelectedTab("");
-    }
-    else {
-      setSelectedTab(upperStr);
+    const index = dataArray.findIndex((item) => (
+      item.title === firstStr
+    ));
+    if (index !== -1) {
+      setSelectedTab(firstStr);
+      setSelectedMenuItem(secondStr);
     }
   }, [PATH]);
 
@@ -99,17 +100,17 @@ export const TopNav = () => {
             {item.sub.map((subItem, subIdx) => (
               <MenuItem
                 key={subIdx}
-                selected={selectedMenuItems[item.title] === subItem.title}
+                selected={
+                  selectedTab === item.title &&
+                  selectedMenuItem === subItem.title
+                }
                 onClick={() => {
                   setSelectedAnchorEl((prev) => ({
                     ...prev,
                     [item.title]: null,
                   }));
                   setSelectedTab(item.title);
-                  setSelectedMenuItems((prev) => ({
-                    ...prev,
-                    [item.title]: subItem.title,
-                  }));
+                  setSelectedMenuItem(subItem.title);
                   navigate(subItem.url);
                 }}
               >

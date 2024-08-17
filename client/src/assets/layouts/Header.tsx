@@ -1,6 +1,6 @@
 // Header.tsx
 
-import { React, useNavigate, useState } from "../../import/ImportReacts.tsx";
+import { useNavigate, useState } from "../../import/ImportReacts.tsx";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { Div, Img, Icons } from "../../import/ImportComponents.tsx";
 import { Paper, Card, Grid } from "../../import/ImportMuis.tsx";

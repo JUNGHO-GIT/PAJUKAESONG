@@ -1,6 +1,6 @@
 // Loading.tsx
 
-import { React, useLocation } from "../../import/ImportReacts.tsx";
+import { useLocation } from "../../import/ImportReacts.tsx";
 import { Div } from "../../import/ImportComponents.tsx";
 
 // 14. loading -------------------------------------------------------------------------------------

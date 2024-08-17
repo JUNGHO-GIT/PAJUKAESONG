@@ -1,6 +1,5 @@
 // PopUp.tsx
 
-import { React } from "../../import/ImportReacts.tsx";
 import { Popover, bindPopover } from "../../import/ImportMuis.tsx";
 import { usePopupState } from 'material-ui-popup-state/hooks';
 

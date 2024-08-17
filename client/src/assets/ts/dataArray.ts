@@ -3,7 +3,7 @@
 export const dataArray = [
   {
     icon: "about",
-    title: "About",
+    title: "about",
     sub: [
       {
         icon: "about",
@@ -19,7 +19,7 @@ export const dataArray = [
   },
   {
     icon: "contact",
-    title: "Contact",
+    title: "contact",
     sub: [
       {
         icon: "contact",
@@ -35,7 +35,7 @@ export const dataArray = [
   },
   {
     icon: "menu",
-    title: "Menu",
+    title: "menu",
     sub: [
       {
         icon: "menu",
@@ -51,7 +51,7 @@ export const dataArray = [
   },
   {
     icon: "notice",
-    title: "Notice",
+    title: "notice",
     sub: [
       {
         icon: "notice",
@@ -67,7 +67,7 @@ export const dataArray = [
   },
   {
     icon: "order",
-    title: "Order",
+    title: "order",
     sub: [
       {
         icon: "order",

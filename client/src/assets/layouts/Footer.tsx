@@ -1,6 +1,5 @@
 // Footer.tsx
 
-import { React, useLocation } from "../../import/ImportReacts.tsx";
 import { Paper, Card, Grid } from "../../import/ImportMuis.tsx";
 
 // -------------------------------------------------------------------------------------------------

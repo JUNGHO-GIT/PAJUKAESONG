@@ -1,11 +1,10 @@
 // index.tsx
 
-import { React, ReactDOM, BrowserRouter, Routes, Route } from "./import/ImportReacts.tsx";
+import { ReactDOM, BrowserRouter, Routes, Route } from "./import/ImportReacts.tsx";
 import { CssBaseline } from "./import/ImportMuis.tsx";
 import { useScrollTop, useEnhancedTouch, useRoot } from "./import/ImportHooks.tsx";
 import { useSessionStorage, LanguageProvider } from "./import/ImportHooks.tsx";
 
-import "moment/locale/ko";
 import "./index.css";
 import "./assets/css/Calendar.css";
 import "./assets/css/Chart.css";

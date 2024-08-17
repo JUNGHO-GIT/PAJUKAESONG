@@ -1,6 +1,5 @@
 // Icons.tsx
 
-import { React } from "../../import/ImportReacts.tsx";
 import { IconButton } from "@mui/material";
 
 // -------------------------------------------------------------------------------------------------
