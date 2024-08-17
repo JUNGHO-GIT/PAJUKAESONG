@@ -10658,11 +10658,11 @@
   background-color: #2563EB !important;
 }
 
-.secondary {
-  color: #6c757d !important;
+.bg-secondary {
+  background-color: #6c757d !important;
 }
-.secondary:hover, .secondary:focus, .secondary:active {
-  color: #495057 !important;
+.bg-secondary:hover, .bg-secondary:focus, .bg-secondary:active {
+  background-color: #495057 !important;
 }
 
 .bg-success {
@@ -10771,10 +10771,7 @@
 }
 
 .bg-grey {
-  background-color: #9CA3AF !important;
-}
-.bg-grey:hover, .bg-grey:focus, .bg-grey:active {
-  background-color: #6B7280 !important;
+  background-color: #CBCBCB !important;
 }
 
 .bg-black {

@@ -1,14 +1,12 @@
 // index.tsx
 
-import React from "react";
-import {useLocation} from "react-router-dom";
-import ReactDOM, {createRoot} from "react-dom/client";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import CssBaseline from "@mui/material/CssBaseline";
+import { React, ReactDOM, BrowserRouter, Routes, Route } from "./import/ImportReacts.tsx";
+import { CssBaseline } from "./import/ImportMuis.tsx";
+import { useScrollTop, useEnhancedTouch, useRoot } from "./import/ImportHooks.tsx";
+import { useSessionStorage, LanguageProvider } from "./import/ImportHooks.tsx";
 
-import "./index.css";
 import "moment/locale/ko";
-import "react-calendar/dist/Calendar.css";
+import "./index.css";
 import "./assets/css/Calendar.css";
 import "./assets/css/Chart.css";
 import "./assets/css/Mui.css";
@@ -16,29 +14,78 @@ import "./assets/css/Components.css";
 import "./assets/css/Core.css";
 import "./assets/css/Jstyle.css";
 
-import {Header} from "./import/ImportLayouts.jsx";
-import {TopNav} from "./import/ImportLayouts.jsx";
-import {BottomNav} from "./import/ImportLayouts.jsx";
-import {Banner} from "./import/ImportLayouts.jsx";
+import { Header } from "./import/ImportLayouts.tsx";
+import { Footer } from "./import/ImportLayouts.tsx";
+
+import { MainPage } from "./page/main/Main.tsx";
+import { AboutMain } from "./page/about/AboutMain.tsx";
+import { MenuMain } from "./page/menu/MenuMain.tsx";
+import { NoticeMain } from "./page/notice/NoticeMain.tsx";
+import { ContactMain } from "./page/contact/ContactMain.tsx";
+import { OrderMain } from "./page/order/OrderMain.tsx";
+
+// -------------------------------------------------------------------------------------------------
+const Main = () => (
+  <Routes>
+    <Route path="/main" element={<MainPage />} />
+  </Routes>
+);
+
+// -------------------------------------------------------------------------------------------------
+const About = () => (
+  <Routes>
+    <Route path="/main" element={<AboutMain />} />
+  </Routes>
+);
+
+// -------------------------------------------------------------------------------------------------
+const Menu = () => (
+  <Routes>
+    <Route path="/main" element={<MenuMain />} />
+  </Routes>
+);
+
+// -------------------------------------------------------------------------------------------------
+const Notice = () => (
+  <Routes>
+    <Route path="/main" element={<NoticeMain />} />
+  </Routes>
+);
+
+// -------------------------------------------------------------------------------------------------
+const Contact = () => (
+  <Routes>
+    <Route path="/main" element={<ContactMain />} />
+  </Routes>
+);
+
+// -------------------------------------------------------------------------------------------------
+const Order = () => (
+  <Routes>
+    <Route path="/main" element={<OrderMain />} />
+  </Routes>
+);
 
 // -------------------------------------------------------------------------------------------------
 const App = () => {
+
+  useRoot();
+  useSessionStorage();
+  useScrollTop();
+  useEnhancedTouch();
+
   return (
-    <div className="App">
+    <div className={"App"}>
       <Header />
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/*" element={<Main />} />
+        <Route path="/about/*" element={<About />} />
+        <Route path="/menu/*" element={<Menu />} />
+        <Route path="/notice/*" element={<Notice />} />
+        <Route path="/contact/*" element={<Contact />} />
+        <Route path="/order/*" element={<Order />} />
+      </Routes>
+      <Footer />
     </div>
   );
 };
@@ -52,7 +99,9 @@ if (rootElement === null) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <BrowserRouter>
-    <CssBaseline />
-    <App />
+    <LanguageProvider>
+      <CssBaseline />
+      <App />
+    </LanguageProvider>
   </BrowserRouter>
 );
