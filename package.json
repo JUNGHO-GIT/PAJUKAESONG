@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon --exec ts-node index.ts",
-    "fetch": "git fetch --all && git reset --hard origin/master",
-    "push": "git add . && git commit -m 'update' && git push origin master",
+    "fetch": "git fetch --all && git reset --hard origin/main",
+    "push": "git add . && git commit -m 'update' && git push origin main",
     "gcloud": "node gcloud.cjs"
   },
   "dependencies": {
