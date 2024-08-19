@@ -1,12 +1,12 @@
 // TopNav.tsx
 
-import { useState, useEffect } from "../../import/ImportReacts.tsx";
+import { React, useState, useEffect } from "../../import/ImportReacts.tsx";
 import { useNavigate, useLocation } from "../../import/ImportReacts.tsx";
-import { Tabs, Tab, Grid, Paper } from "../../import/ImportMuis.tsx";
-import { Card, Menu, MenuItem, tabsClasses } from "../../import/ImportMuis.tsx";
+import { Paper, Grid, useMediaQuery, useTheme  } from "../../import/ImportMuis.tsx";
+import { Tabs, Tab, Card, Menu, MenuItem, tabsClasses } from "../../import/ImportMuis.tsx";
 import { Div, Img } from "../../import/ImportComponents.tsx";
 import { dataArray, log } from "../../import/ImportUtils.tsx";
-import { logo2, logo3 } from "../../import/ImportImages.tsx";
+import { logo1 } from "../../import/ImportImages.tsx";
 
 // -------------------------------------------------------------------------------------------------
 export const TopNav = () => {
@@ -41,13 +41,12 @@ export const TopNav = () => {
     const logoFragment = () => (
       <Div className={"d-center"}>
         <Img
-          src={logo2}
-          className={"h-max30"}
+          src={logo1}
+          className={"h-max50"}
           onClick={() => {
             navigate("/");
           }}
         />
-        <Img src={logo3} className={"h-max30"} />
       </Div>
     );
     // 2. tabs
@@ -123,8 +122,8 @@ export const TopNav = () => {
     );
 
     return (
-      <Paper className={"flex-wrapper p-sticky top-0vh radius border shadow-none"}>
-        <Card className={"block-wrapper d-row h-8vh w-100p shadow-none"}>
+      <Paper className={"flex-wrapper p-sticky top-0vh radius border shadow-none p-10"}>
+        <Card className={"block-wrapper d-row w-100p shadow-none"}>
           <Grid container>
             <Grid item xs={2} className={"d-left"}>
               {logoFragment()}

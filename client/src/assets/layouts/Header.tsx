@@ -1,10 +1,9 @@
 // Header.tsx
 
 import { useNavigate, useState } from "../../import/ImportReacts.tsx";
-import { useMediaQuery, useTheme } from "@mui/material";
 import { Div, Img, Icons } from "../../import/ImportComponents.tsx";
-import { Paper, Card, Grid } from "../../import/ImportMuis.tsx";
-import { logo2, logo3 } from "../../import/ImportImages.tsx";
+import { Paper, Card, Grid, useMediaQuery, useTheme  } from "../../import/ImportMuis.tsx";
+import { logo1 } from "../../import/ImportImages.tsx";
 import { SideBar } from '../../import/ImportLayouts.tsx';
 import { TopNav } from '../../import/ImportLayouts.tsx';
 
@@ -28,13 +27,12 @@ export const Header = () => {
     const logoFragment = () => (
       <Div className={"d-center"}>
         <Img
-          src={logo2}
-          className={"h-max30"}
+          src={logo1}
+          className={"h-max50"}
           onClick={() => {
             navigate("/");
           }}
         />
-        <Img src={logo3} className={"h-max30"} />
       </Div>
     );
     const toggleFragment = () => (
@@ -47,16 +45,14 @@ export const Header = () => {
       </Div>
     );
     return (
-      <Paper className={"flex-wrapper p-sticky top-0vh h-8vh radius border shadow-none"}>
+      <Paper className={"flex-wrapper p-sticky top-0vh radius border shadow-none p-10"}>
         <Card className={"block-wrapper d-row w-100p shadow-none"}>
           <Grid container>
             <Grid item xs={1} className={"d-left"}>
               {toggleFragment()}
             </Grid>
-            <Grid item xs={10} className={"d-center"}>
+            <Grid item xs={11} className={"d-center"}>
               {logoFragment()}
-            </Grid>
-            <Grid item xs={1} className={"d-right"}>
             </Grid>
           </Grid>
         </Card>

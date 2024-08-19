@@ -29,6 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "cache-clean": "del /f node_modules\\.cache\\eslintcache",
     "build": "react-scripts build",
     "gcloud": "node gcloud.cjs"
   },
