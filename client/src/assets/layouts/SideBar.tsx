@@ -58,9 +58,10 @@ export const SideBar = (
           <ListItem
             onClick={() => {
               if (selectedTab === item.title) {
-                setSelectedTab(""); // 기존 탭 닫기
-              } else {
-                setSelectedTab(item.title); // 탭 열기
+                setSelectedTab("");
+              }
+              else {
+                setSelectedTab(item.title);
               }
             }}
           >
