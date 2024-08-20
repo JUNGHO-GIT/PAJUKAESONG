@@ -26,6 +26,7 @@ export const SideBar = (
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [selectedTab, setSelectedTab] = useState<string>(firstStr);
+  const [selectedTabVal, setSelectedTabVal] = useState<string>(firstStr);
   const [selectedListItem, setSelectedListItem] = useState<string>(secondStr);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
@@ -55,17 +56,15 @@ export const SideBar = (
         >
           {/* 메인 항목 */}
           <ListItem
-            className={`pointer ${selectedTab === item.title ? "bg-grey" : ""}`}
             onClick={() => {
               if (selectedTab === item.title) {
-                setSelectedTab("");
-              }
-              else {
-                setSelectedTab(item.title);
+                setSelectedTab(""); // 기존 탭 닫기
+              } else {
+                setSelectedTab(item.title); // 탭 열기
               }
             }}
           >
-            <Div className={"fs-1-2rem black"}>
+            <Div className={`pointer fs-1-2rem ${selectedTab === item.title ? "burgundy fs-1-4rem" : ""}`}>
               {item.title}
             </Div>
             {selectedTab === item.title
@@ -83,17 +82,14 @@ export const SideBar = (
               {item.sub.map((subItem, subIdx) => (
                 <ListItem
                   key={subIdx}
-                  className={
-                    `pointer ${selectedTab === item.title && selectedListItem === subItem.title ? "bg-grey" : ""}`
-                  }
                   onClick={() => {
-                    setSelectedTab(item.title);
+                    setSelectedTabVal(item.title);
                     setSelectedListItem(subItem.title);
-                    toggleSidebar();
                     navigate(subItem.url);
+                    toggleSidebar();
                   }}
                 >
-                  <Div className={"fs-1-0rem dark"}>
+                  <Div className={`pointer fs-1-0rem ${selectedTabVal === item.title && selectedListItem === subItem.title ? "burgundy" : ""}`}>
                     {subItem.title}
                   </Div>
                 </ListItem>

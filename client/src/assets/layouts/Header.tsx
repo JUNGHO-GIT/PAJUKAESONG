@@ -45,8 +45,8 @@ export const Header = () => {
       </Div>
     );
     return (
-      <Paper className={"flex-wrapper p-sticky top-0vh radius border shadow-none p-10"}>
-        <Card className={"block-wrapper d-row w-100p shadow-none"}>
+      <Paper className={"flex-wrapper p-sticky top-0vh radius border shadow-none"}>
+        <Card className={"block-wrapper d-row w-100p shadow-none p-10"}>
           <Grid container>
             <Grid item xs={1} className={"d-left"}>
               {toggleFragment()}

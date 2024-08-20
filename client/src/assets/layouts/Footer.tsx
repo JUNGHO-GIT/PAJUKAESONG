@@ -60,8 +60,8 @@ export const Footer = () => {
       </Grid>
     );
     return (
-      <Paper className={"flex-wrapper bottom-0vh radius border shadow-none p-30"}>
-        <Card className={"block-wrapper d-row w-100p shadow-none"}>
+      <Paper className={"flex-wrapper bottom-0vh radius border shadow-none"}>
+        <Card className={"block-wrapper d-row w-100p shadow-none p-30"}>
           <Grid container>
             <Grid item xs={12} sm={4} md={4} lg={4} xl={4} className={`d-center`}>
               {logoFragment()}
