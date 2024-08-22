@@ -1,27 +1,32 @@
 // index.tsx
 
 import { ReactDOM, BrowserRouter, Routes, Route } from "./import/ImportReacts.tsx";
-import { CssBaseline } from "./import/ImportMuis.tsx";
+import { CssBaseline, createTheme, ThemeProvider } from "./import/ImportMuis.tsx";
 import { useScrollTop, useEnhancedTouch, useRoot } from "./import/ImportHooks.tsx";
 import { useSessionStorage, LanguageProvider } from "./import/ImportHooks.tsx";
 
-import "./index.css";
-import "./assets/css/Calendar.css";
-import "./assets/css/Chart.css";
 import "./assets/css/Mui.css";
 import "./assets/css/Components.css";
 import "./assets/css/Core.css";
 import "./assets/css/Jstyle.css";
+import "./index.css";
 
 import { Header } from "./import/ImportLayouts.tsx";
 import { Footer } from "./import/ImportLayouts.tsx";
 
 import { MainPage } from "./page/main/Main.tsx";
 import { AboutMain } from "./page/about/AboutMain.tsx";
+import { AboutGreeting } from "./page/about/AboutGreeting.tsx";
+import { AboutHistory } from "./page/about/AboutHistory.tsx";
+import { AboutLocation } from "./page/about/AboutLocation.tsx";
 import { MenuMain } from "./page/menu/MenuMain.tsx";
-import { NoticeMain } from "./page/notice/NoticeMain.tsx";
-import { ContactMain } from "./page/contact/ContactMain.tsx";
-import { OrderMain } from "./page/order/OrderMain.tsx";
+import { MenuSide } from "./page/menu/MenuSide.tsx";
+import { ProductBuy } from "./page/product/ProductBuy.tsx";
+import { ProductOrder } from "./page/product/ProductOrder.tsx";
+import { FranchiseBranch } from "./page/franchise/FranchiseBranch.tsx";
+import { FranchiseInquiry } from "./page/franchise/FranchiseInquiry.tsx";
+import { ContactNotice } from "./page/contact/ContactNotice.tsx";
+import { ContactInquiry } from "./page/contact/ContactInquiry.tsx";
 
 // -------------------------------------------------------------------------------------------------
 const Main = () => (
@@ -34,6 +39,9 @@ const Main = () => (
 const About = () => (
   <Routes>
     <Route path="/main" element={<AboutMain />} />
+    <Route path="/greeting" element={<AboutGreeting />} />
+    <Route path="/history" element={<AboutHistory />} />
+    <Route path="/location" element={<AboutLocation />} />
   </Routes>
 );
 
@@ -41,27 +49,31 @@ const About = () => (
 const Menu = () => (
   <Routes>
     <Route path="/main" element={<MenuMain />} />
+    <Route path="/side" element={<MenuSide />} />
   </Routes>
 );
 
 // -------------------------------------------------------------------------------------------------
-const Notice = () => (
+const Product = () => (
   <Routes>
-    <Route path="/main" element={<NoticeMain />} />
+    <Route path="/buy" element={<ProductBuy />} />
+    <Route path="/order" element={<ProductOrder />} />
+  </Routes>
+);
+
+// -------------------------------------------------------------------------------------------------
+const Franchise = () => (
+  <Routes>
+    <Route path="/branch" element={<FranchiseBranch />} />
+    <Route path="/inquiry" element={<FranchiseInquiry />} />
   </Routes>
 );
 
 // -------------------------------------------------------------------------------------------------
 const Contact = () => (
   <Routes>
-    <Route path="/main" element={<ContactMain />} />
-  </Routes>
-);
-
-// -------------------------------------------------------------------------------------------------
-const Order = () => (
-  <Routes>
-    <Route path="/main" element={<OrderMain />} />
+    <Route path="/notice" element={<ContactNotice />} />
+    <Route path="/inquiry" element={<ContactInquiry />} />
   </Routes>
 );
 
@@ -80,9 +92,9 @@ const App = () => {
         <Route path="/*" element={<Main />} />
         <Route path="/about/*" element={<About />} />
         <Route path="/menu/*" element={<Menu />} />
-        <Route path="/notice/*" element={<Notice />} />
+        <Route path="/product/*" element={<Product />} />
+        <Route path="/franchise/*" element={<Franchise />} />
         <Route path="/contact/*" element={<Contact />} />
-        <Route path="/order/*" element={<Order />} />
       </Routes>
       <Footer />
     </div>
@@ -90,17 +102,23 @@ const App = () => {
 };
 
 // -------------------------------------------------------------------------------------------------
+const theme = createTheme({
+  typography: {
+    fontFamily: '"Noto Sans KR", sans-serif',
+  },
+});
 const rootElement = document.getElementById("root");
 if (rootElement === null) {
   throw new Error("root element is null");
 }
-
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <BrowserRouter>
     <LanguageProvider>
-      <CssBaseline />
-      <App />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
     </LanguageProvider>
   </BrowserRouter>
 );

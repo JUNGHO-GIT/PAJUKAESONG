@@ -1,10 +1,11 @@
 // SideBar.tsx
 
 import { useState, useEffect } from "../../import/ImportReacts.tsx";
-import { useNavigate, useLocation } from "../../import/ImportReacts.tsx";
+import { useCommon } from "../../import/ImportHooks.tsx";
 import { Drawer, List, ListItem, Collapse } from "../../import/ImportMuis.tsx";
-import { Icons, Div } from "../../import/ImportComponents.tsx";
+import { Icons, Div, Img, Br5, Hr30, Hr50 } from "../../import/ImportComponents.tsx";
 import { dataArray } from "../../import/ImportUtils.tsx";
+import { logo1 } from "../../import/ImportImages.tsx";
 
 // -------------------------------------------------------------------------------------------------
 interface SideBarProps {
@@ -18,16 +19,12 @@ export const SideBar = (
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const navigate = useNavigate();
-  const location = useLocation();
-  const PATH = location?.pathname;
-  const firstStr = PATH?.split("/")[1] || "";
-  const secondStr = PATH?.split("/")[2] || "";
+  const { navigate, PATH, firstStr, secondStr } = useCommon();
 
   // 2-2. useState ---------------------------------------------------------------------------------
-  const [selectedTab, setSelectedTab] = useState<string>(firstStr);
-  const [selectedTabVal, setSelectedTabVal] = useState<string>(firstStr);
-  const [selectedListItem, setSelectedListItem] = useState<string>(secondStr);
+  const [selectedTab, setSelectedTab] = useState<string>("");
+  const [selectedTabVal, setSelectedTabVal] = useState<string>("");
+  const [selectedListItem, setSelectedListItem] = useState<string>("");
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화
@@ -41,64 +38,114 @@ export const SideBar = (
     }
   }, [PATH]);
 
+  // 5. sidebarNode --------------------------------------------------------------------------------
+  const sidebarNode = () => {
+    const sidebarFragment = () => (
+      <Drawer
+        anchor={"left"}
+        open={isOpen}
+        onClose={toggleSidebar}
+        sx={{
+          "& .MuiDrawer-paper": {
+            width: "240px",
+            padding: "15px",
+            borderTopRightRadius: "10px",
+            borderBottomRightRadius: "10px",
+            backgroundColor: "#f8f8f8",
+          },
+        }}
+      >
+        <Img
+          src={logo1}
+          className={"h-max50 m-10"}
+          onClick={() => {
+            navigate("/");
+          }}
+        />
+        <Hr30 />
+        {dataArray.map((item, idx) => (
+          <List
+            key={idx}
+            component={"nav"}
+          >
+            {/* 메인 항목 */}
+            <ListItem
+              onClick={() => {
+                if (selectedTab === item.title) {
+                  setSelectedTab("");
+                }
+                else {
+                  setSelectedTab(item.title);
+                }
+              }}
+            >
+              <Div className={`pointer-burgundy ${selectedTab === item.title ? "burgundy fs-1-3rem fw-600" : "fs-1-0rem"}`}>
+                {item.title}
+              </Div>
+              {selectedTab === item.title
+                ? <Icons name={"TbChevronUp"} className={"w-12 h-12 black"} />
+                : <Icons name={"TbChevronDown"} className={"w-12 h-12 black"} />
+              }
+            </ListItem>
+            {/* 하위 항목 */}
+            <Collapse
+              in={selectedTab === item.title}
+              timeout={"auto"}
+              unmountOnExit={true}
+            >
+              <List>
+                {item.sub.map((subItem, subIdx) => (
+                  <ListItem
+                    key={subIdx}
+                    onClick={() => {
+                      setSelectedTabVal(item.title);
+                      setSelectedListItem(subItem.title);
+                      navigate(subItem.url);
+                      toggleSidebar();
+                    }}
+                  >
+                    <Div className={`pointer-burgundy ${selectedTabVal === item.title && selectedListItem === subItem.title ? "burgundy fs-1-0rem" : "fs-0-9rem"}`}>
+                      {subItem.title}
+                    </Div>
+                  </ListItem>
+                ))}
+              </List>
+            </Collapse>
+          </List>
+        ))}
+        <Hr50 />
+        <Div className={"w-100p mb-20"}>
+          <Div className={"d-center"}>
+            <Div className={"fs-0-8rem me-10"}>
+              &copy; Copyright
+            </Div>
+            <Div className={"fs-0-9rem fw-700"}>
+              PajuKaesong
+            </Div>
+          </Div>
+          <Br5 />
+          <Div className={"d-center"}>
+            <Div className={"fs-0-8rem me-10"}>
+              Designed by
+            </Div>
+            <Div className={"fs-0-9rem fw-700"}>
+              JUNGHO
+            </Div>
+          </Div>
+        </Div>
+      </Drawer>
+    );
+    return (
+      <>
+        {sidebarFragment()}
+      </>
+    );
+  };
+
   // 10. return ------------------------------------------------------------------------------------
   return (
-    <Drawer
-      anchor={"left"}
-      open={isOpen}
-      onClose={toggleSidebar}
-    >
-      {dataArray.map((item, idx) => (
-        <List
-          key={idx}
-          component={"nav"}
-          className={"w-240"}
-        >
-          {/* 메인 항목 */}
-          <ListItem
-            onClick={() => {
-              if (selectedTab === item.title) {
-                setSelectedTab("");
-              }
-              else {
-                setSelectedTab(item.title);
-              }
-            }}
-          >
-            <Div className={`pointer fs-1-2rem ${selectedTab === item.title ? "burgundy fs-1-4rem" : ""}`}>
-              {item.title}
-            </Div>
-            {selectedTab === item.title
-              ? <Icons name={"TbChevronUp"} className={"w-12 h-12 black"} />
-              : <Icons name={"TbChevronDown"} className={"w-12 h-12 black"} />
-            }
-          </ListItem>
-          {/* 하위 항목 */}
-          <Collapse
-            in={selectedTab === item.title}
-            timeout={"auto"}
-            unmountOnExit={true}
-          >
-            <List>
-              {item.sub.map((subItem, subIdx) => (
-                <ListItem
-                  key={subIdx}
-                  onClick={() => {
-                    setSelectedTabVal(item.title);
-                    setSelectedListItem(subItem.title);
-                    navigate(subItem.url);
-                    toggleSidebar();
-                  }}
-                >
-                  <Div className={`pointer fs-1-0rem ${selectedTabVal === item.title && selectedListItem === subItem.title ? "burgundy" : ""}`}>
-                    {subItem.title}
-                  </Div>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </List>
-      ))}
-    </Drawer>
+    <>
+      {sidebarNode()}
+    </>
   );
 };

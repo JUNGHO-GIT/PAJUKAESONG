@@ -1,92 +1,72 @@
-// ImportMui.tsx
+// ImportMui.jsx
 
-// a
 import {
+  // a
   Alert, AlertTitle, AppBar, Autocomplete, Avatar, AvatarGroup,
-  Accordion, AccordionActions, AccordionDetails, AccordionSummary
-} from "@mui/material";
+  Accordion, AccordionActions, AccordionDetails, AccordionSummary,
 
-// b
-import {
-  Backdrop, Badge, BottomNavigation, BottomNavigationAction, Button
-} from "@mui/material";
+  // b
+  Backdrop, Badge, BottomNavigation, BottomNavigationAction, Button,
 
-// c
-import {
-  Card, Checkbox, Collapse, CssBaseline
-} from "@mui/material";
+  // c
+  Card, Checkbox, Collapse, CssBaseline,
 
-// d
-import {
-  Drawer
-} from "@mui/material";
+  // d
+  Drawer,
 
-// f
-import {
-  FormControl, FormControlLabel, FormGroup
-} from "@mui/material";
+  // f
+  FormControl, FormControlLabel, FormGroup,
 
-// i ~ k
-import {
-  InputAdornment, InputBase, InputLabel, IconButton
-} from "@mui/material";
+  // g
+  Grid,
 
-// l
-import {
-  Link, List, ListItem, ListItemText
-} from "@mui/material";
+  // h ~ k
+  InputAdornment, InputBase, InputLabel, IconButton,
 
-// m ~ o
-import {
-  Menu, MenuItem, MenuList, Modal
-} from "@mui/material";
+  // l
+  Link, List, ListItem,
 
-// p ~ r
-import {
-  Pagination, Paper, Popover, Popper
-} from "@mui/material";
+  // m ~ o
+  Menu, MenuItem, MenuList, Modal,
 
-// s
-import {
-  Select, Snackbar, SnackbarContent, Switch, SpeedDial, SpeedDialAction, SpeedDialIcon
-} from "@mui/material";
+  // p ~ r
+  Pagination, Paper, Popover, Popper,
 
-// t
-import {
-  Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton, TextField, Toolbar, Tooltip, Tabs, Tab, tabsClasses
-} from "@mui/material";
+  // s
+  Select, Snackbar, SnackbarContent, Switch, SpeedDial, SpeedDialAction, SpeedDialIcon,
 
-// t
-import {
-  TextareaAutosize as TextArea
+  // t
+  Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton, TextField, Toolbar, Tooltip, Tabs, Tab, tabsClasses,
+  TextareaAutosize as TextArea,
+
+  // u
+  useMediaQuery, useTheme,
+
 } from "@mui/material";
 
 // adopterMoment
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment/index';
+import { AdapterMoment} from '@mui/x-date-pickers/AdapterMoment/index';
 
 // datePickers
-import { LocalizationProvider } from '@mui/x-date-pickers';
+import { LocalizationProvider} from '@mui/x-date-pickers';
 
 // dateCalendar
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import { DateCalendar} from '@mui/x-date-pickers/DateCalendar';
 
 // digitalClock
-import { DigitalClock } from '@mui/x-date-pickers/DigitalClock';
+import { DigitalClock} from '@mui/x-date-pickers/DigitalClock';
 
 // PickersDay
-import { PickersDay } from '@mui/x-date-pickers/PickersDay';
+import { PickersDay} from '@mui/x-date-pickers/PickersDay';
 
 // DayCalendarSkeleton
-import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
+import { DayCalendarSkeleton} from '@mui/x-date-pickers/DayCalendarSkeleton';
 
 // popupState
 import PopupState, { bindTrigger, bindMenu, bindPopover } from 'material-ui-popup-state';
 
-// grid
-import { Grid } from "@mui/material";
-
-// useMediaQuery
-import { useMediaQuery, useTheme } from "@mui/material";
+// theme
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -111,7 +91,7 @@ export {
   InputAdornment, InputBase, InputLabel, IconButton,
 
   // l
-  Link, List, ListItem, ListItemText,
+  Link, List, ListItem,
 
   // m ~ o
   Menu, MenuItem, MenuList, Modal,
@@ -124,9 +104,10 @@ export {
 
   // t
   Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton, TextField, Toolbar, Tooltip, Tabs, Tab, tabsClasses,
-
-  // t
   TextArea,
+
+  // u
+  useMediaQuery, useTheme,
 
   // adopterMoment
   AdapterMoment, DateCalendar, DigitalClock, PickersDay, DayCalendarSkeleton,
@@ -140,6 +121,6 @@ export {
   // grid
   Grid,
 
-  // useMediaQuery
-  useMediaQuery, useTheme
+  // theme
+  createTheme, ThemeProvider,
 };

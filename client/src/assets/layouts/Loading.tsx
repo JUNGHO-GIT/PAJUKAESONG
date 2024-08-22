@@ -1,14 +1,14 @@
 // Loading.tsx
 
-import { React, useLocation } from "../../import/ImportReacts.tsx";
+import { useLocation } from "../../import/ImportReacts.tsx";
+import { useCommon } from "../../import/ImportHooks.tsx";
 import { Div } from "../../import/ImportComponents.tsx";
 
 // 14. loading -------------------------------------------------------------------------------------
 export const Loading = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const location = useLocation();
-  const PATH = location?.pathname;
+  const { PATH } = useCommon();
 
   // 6. loading ------------------------------------------------------------------------------------
   const loadingNode = () => (

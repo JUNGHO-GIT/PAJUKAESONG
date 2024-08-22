@@ -1,15 +1,14 @@
-// OrderMain.tsx
+// MenuSide.tsx
 
-import { React } from "../../import/ImportReacts";
-import { Paper } from "../../import/ImportMuis";
+import { Paper } from "../../import/ImportMuis.tsx";
 import { Div } from "../../import/ImportComponents.tsx";
 
 // -------------------------------------------------------------------------------------------------
-export const OrderMain = () => {
+export const MenuSide = () => {
   return (
     <Paper className={"content-wrapper radius border shadow-none"}>
       <Div className={"block-wrapper h-min75vh"}>
-        order page
+        menu side
       </Div>
     </Paper>
   );

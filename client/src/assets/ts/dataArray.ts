@@ -2,83 +2,77 @@
 
 export const dataArray = [
   {
-    icon: "about",
-    title: "about",
+    title: "브랜드소개",
     sub: [
       {
-        icon: "about",
-        title: "main",
+        title: "파주개성면옥",
         url: "/about/main",
       },
       {
-        icon: "about",
-        title: "sub",
-        url: "/about/sub",
+        title: "대표 인사말",
+        url: "/about/greeting",
+      },
+      {
+        title: "연혁",
+        url: "/about/history",
+      },
+      {
+        title: "오시는 길",
+        url: "/about/location",
       },
     ],
   },
   {
-    icon: "contact",
-    title: "contact",
+    title: "메뉴소개",
     sub: [
       {
-        icon: "contact",
-        title: "main",
-        url: "/contact/main",
-      },
-      {
-        icon: "contact",
-        title: "sub",
-        url: "/contact/sub",
-      },
-    ],
-  },
-  {
-    icon: "menu",
-    title: "menu",
-    sub: [
-      {
-        icon: "menu",
-        title: "main",
+        title: "대표메뉴",
         url: "/menu/main",
       },
       {
-        icon: "menu",
-        title: "sub",
-        url: "/menu/sub",
+        title: "사이드메뉴",
+        url: "/menu/side",
       },
     ],
   },
   {
-    icon: "notice",
-    title: "notice",
+    title: "선물세트",
     sub: [
       {
-        icon: "notice",
-        title: "main",
-        url: "/notice/main",
+        title: "구매하기",
+        url: "/product/buy",
       },
       {
-        icon: "notice",
-        title: "sub",
-        url: "/notice/sub",
+        title: "주문조회",
+        url: "/product/order",
       },
     ],
   },
   {
-    icon: "order",
-    title: "order",
+    title: "가맹문의",
     sub: [
       {
-        icon: "order",
-        title: "main",
-        url: "/order/main",
+        title: "가맹 지점",
+        url: "/franchise/branch",
       },
       {
-        icon: "order",
-        title: "sub",
-        url: "/order/sub",
+        title: "가맹 문의",
+        url: "/franchise/inquiry",
       },
+    ],
+  },
+  {
+    title: "고객문의",
+    sub: [
+      {
+        title: "공지사항",
+        url: "/contact/notice",
+      },
+      {
+        title: "1:1 문의",
+        url: "/contact/inquiry",
+      },
+
     ],
   },
 ];
