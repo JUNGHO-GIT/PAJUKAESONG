@@ -7,27 +7,6 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import morgan from "morgan";
 
-import { router as calendarRouter } from "./src/router/calendar/calendarRouter";
-import { router as exerciseChartRouter } from "./src/router/exercise/exerciseChartRouter";
-import { router as exerciseDiffRouter } from "./src/router/exercise/exerciseDiffRouter";
-import { router as exerciseRouter } from "./src/router/exercise/exerciseRouter";
-import { router as exerciseGoalRouter } from "./src/router/exercise/exerciseGoalRouter";
-import { router as foodChartRouter } from "./src/router/food/foodChartRouter";
-import { router as foodDiffRouter } from "./src/router/food/foodDiffRouter";
-import { router as foodRouter } from "./src/router/food/foodRouter";
-import { router as foodGoalRouter } from "./src/router/food/foodGoalRouter";
-import { router as moneyChartRouter } from "./src/router/money/moneyChartRouter";
-import { router as moneyDiffRouter } from "./src/router/money/moneyDiffRouter";
-import { router as moneyRouter } from "./src/router/money/moneyRouter";
-import { router as moneyGoalRouter } from "./src/router/money/moneyGoalRouter";
-import { router as sleepChartRouter } from "./src/router/sleep/sleepChartRouter";
-import { router as sleepDiffRouter } from "./src/router/sleep/sleepDiffRouter";
-import { router as sleepRouter } from "./src/router/sleep/sleepRouter";
-import { router as sleepGoalRouter } from "./src/router/sleep/sleepGoalRouter";
-import { router as userSyncRouter } from "./src/router/user/userSyncRouter";
-import { router as userRouter } from "./src/router/user/userRouter";
-import { router as googleRouter } from "./src/router/auth/googleRouter";
-
 // -------------------------------------------------------------------------------------------------
 dotenv.config();
 const app = express();
@@ -81,25 +60,3 @@ app.use((req, res, next) => {
   res.set("Content-Type", "application/json; charset=utf-8");
   next();
 });
-
-// -------------------------------------------------------------------------------------------------
-app.use("/api/calendar", calendarRouter);
-app.use("/api/exercise/chart", exerciseChartRouter);
-app.use("/api/exercise/diff", exerciseDiffRouter);
-app.use("/api/exercise/goal", exerciseGoalRouter);
-app.use("/api/exercise", exerciseRouter);
-app.use("/api/food/chart", foodChartRouter);
-app.use("/api/food/diff", foodDiffRouter);
-app.use("/api/food/goal", foodGoalRouter);
-app.use("/api/food", foodRouter);
-app.use("/api/money/chart", moneyChartRouter);
-app.use("/api/money/diff", moneyDiffRouter);
-app.use("/api/money/goal", moneyGoalRouter);
-app.use("/api/money", moneyRouter);
-app.use("/api/sleep/chart", sleepChartRouter);
-app.use("/api/sleep/diff", sleepDiffRouter);
-app.use("/api/sleep/goal", sleepGoalRouter);
-app.use("/api/sleep", sleepRouter);
-app.use("/api/user/sync", userSyncRouter);
-app.use("/api/user", userRouter);
-app.use("/api/google", googleRouter);
