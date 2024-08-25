@@ -1,6 +1,7 @@
 {
   "name": "PAJUKAESONG-client",
   "version": "1.0.0",
+  "homepage": "/PAJUKAESONG",
   "main": "index.tsx",
   "type": "module",
   "license": "MIT",

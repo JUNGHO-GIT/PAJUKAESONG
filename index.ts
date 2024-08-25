@@ -41,7 +41,7 @@ const db = process.env.DB_NAME;
 mongoose.connect(`mongodb://${id}:${pw}@${host}:${port}/${db}`);
 
 // 서버 포트 설정 ----------------------------------------------------------------------------------
-const httpPort = Number(process.env.HTTP_PORT) || 4000;
+const httpPort = Number(process.env.HTTP_PORT) || 4100;
 const httpsPort = Number(process.env.HTTPS_PORT) || 443;
 
 function startServer(httpPort: number, httpsPort: number) {

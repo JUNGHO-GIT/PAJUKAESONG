@@ -28,16 +28,14 @@ const compressBuild = () => {
 // -------------------------------------------------------------------------------------------------
 // upload to gcloud
 const uploadToGCS = () => {
-  const commandRm = 'gsutil rm gs://jungho-bucket/JPAGE/SERVER/build.tar.gz';
-  const commandCp = 'gsutil cp build.tar.gz gs://jungho-bucket/JPAGE/SERVER/build.tar.gz';
-  execSync(commandRm, { stdio: 'inherit' });
+  const commandCp = 'gsutil cp build.tar.gz gs://jungho-bucket/PAJUKAESONG/SERVER/build.tar.gz';
   execSync(commandCp, { stdio: 'inherit' });
 };
 
 // -------------------------------------------------------------------------------------------------
 // run script on server
 const runRemoteScript = () => {
-  const command = 'powershell -Command "ssh -i C:\\Users\\jungh\\.ssh\\JKEY junghomun00@34.23.233.23 \'sudo sh /sh/client.sh\'"';
+  const command = 'powershell -Command "ssh -i C:\\Users\\jungh\\.ssh\\JKEY junghomun00@34.23.233.23 \'sudo sh /sh/PAJUKAESONG/client.sh\'"';
   execSync(command, { stdio: 'inherit' });
 };
 

@@ -1,6 +1,6 @@
 // useLanguageProvider.tsx
 
-import { React, useState, useEffect, useCallback } from "../../import/ImportReacts.tsx";
+import { React, useState, useEffect, useCallback, ReactNode } from "../../import/ImportReacts.tsx";
 import { createContext, useContext } from "../../import/ImportReacts.tsx";
 import { log } from "../../import/ImportUtils.tsx";
 
@@ -10,7 +10,7 @@ const LanguageContext = createContext();
 
 // -------------------------------------------------------------------------------------------------
 interface LanguageProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 // -------------------------------------------------------------------------------------------------

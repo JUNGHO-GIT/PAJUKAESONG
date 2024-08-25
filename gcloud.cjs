@@ -12,8 +12,8 @@ const modifyEnv = () => {
   const envConfig = dotenv.parse(envFile);
 
   // envConfig 수정
-  envConfig.CLIENT_URL = "https://www.junghomun.com";
-  envConfig.GOOGLE_CALLBACK_URL = "https://www.junghomun.com/api/google/callback";
+  envConfig.CLIENT_URL = "https://www.junghomun.com/PAJUKAESONG";
+  envConfig.GOOGLE_CALLBACK_URL = "https://www.junghomun.com/PAJUKAESONG/api/google/callback";
 
   // env 파일 쓰기
   const newEnvFile = Object.keys(envConfig).reduce((acc, key) => {
@@ -67,7 +67,7 @@ const gitPush = () => {
 // -------------------------------------------------------------------------------------------------
 // run script on server
 const runRemoteScript = () => {
-  const command = 'powershell -Command "ssh -i C:\\Users\\jungh\\.ssh\\JKEY junghomun00@34.23.233.23 \'sudo sh /sh/server.sh\'"';
+  const command = 'powershell -Command "ssh -i C:\\Users\\jungh\\.ssh\\JKEY junghomun00@34.23.233.23 \'sudo sh /sh/PAJUKAESONG/server.sh\'"';
   execSync(command, { stdio: 'inherit' });
 };
 
@@ -78,8 +78,8 @@ const restoreEnv = () => {
   const envConfig = dotenv.parse(envFile);
 
   // envConfig 수정
-  envConfig.CLIENT_URL = "http://localhost:3000";
-  envConfig.GOOGLE_CALLBACK_URL = "http://localhost:4000/api/google/callback";
+  envConfig.CLIENT_URL = "http://localhost:3000/PAJUKAESONG";
+  envConfig.GOOGLE_CALLBACK_URL = "http://localhost:4100/PAJUKAESONG/api/google/callback";
 
   // env 파일 쓰기
   const newEnvFile = Object.keys(envConfig).reduce((acc, key) => {

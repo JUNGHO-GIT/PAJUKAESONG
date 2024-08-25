@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /** 0. Media **************************************************************************************/
-* {
+.dynamic {
   transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease;
 }
 
