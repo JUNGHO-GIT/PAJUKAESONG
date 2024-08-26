@@ -1,9 +1,10 @@
 // Footer.tsx
 
 import { useState, useEffect } from "../../import/ImportReacts.tsx";
-import { Paper, Card, Grid } from "../../import/ImportMuis.tsx";
 import { useResponsive } from "../../import/ImportHooks.tsx";
+import { classNames } from "../../import/ImportLibs.tsx";
 import { Div, Img, Br20, Br5, Br10 } from "../../import/ImportComponents.tsx";
+import { Paper, Card, Grid } from "../../import/ImportMuis.tsx";
 import { logo1, logo2 } from "../../import/ImportImages.tsx";
 
 // -------------------------------------------------------------------------------------------------
@@ -13,6 +14,7 @@ export const Footer = () => {
   const { isXs, isSm, isMd, isLg, isXl } = useResponsive();
   const [width, setWidth] = useState("");
 
+  // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     if (isXs) {
       setWidth("w-100p");
@@ -33,60 +35,49 @@ export const Footer = () => {
 
   // 7. footer -------------------------------------------------------------------------------------
   const footerNode = () => {
-    const logoFragment = () => (
-      <Grid container className={"d-center"}>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={"d-center"}>
-          <Img
-            src={logo1}
-            className={`h-max50`}
-          />
-        </Grid>
-      </Grid>
+    const logoSection = () => (
+      <Img
+        src={logo1}
+        className={`h-max50`}
+      />
     );
-    const textFragment = () => (
-      <Grid container className={"d-center"}>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={"d-center"}>
-          <Div className={"fs-0-7rem"}>
-            (주)이코딩  |  주소: 서울특별시 강남구 역삼동
-          </Div>
-        </Grid>
-        {isSm && <Br5 />}
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={"d-center"}>
-          <Div className={"fs-0-7rem"}>
-            대표: 이코딩  |  사업자: 123-45-67890
-          </Div>
-        </Grid>
-        {isSm && <Br5 />}
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={"d-center"}>
-          <Div className={"fs-0-7rem"}>
-            전화: 02-123-4567  |  이메일: 123123@gmail.com
-          </Div>
-        </Grid>
-      </Grid>
+    const textSection = () => (
+      <Div className={"d-column"}>
+        <Div className={"fs-0-7rem"}>
+          (주)이코딩  |  주소: 서울특별시 강남구 역삼동
+        </Div>
+        <Br5 />
+        <Div className={"fs-0-7rem"}>
+          대표: 이코딩  |  사업자: 123-45-67890
+        </Div>
+        <Br5 />
+        <Div className={"fs-0-7rem"}>
+          전화: 02-123-4567  |  이메일: 123123@gmail.com
+        </Div>
+      </Div>
     );
     return (
-      <Paper className={"flex-wrapper bottom-0vh radius border shadow-none"}>
-        <Card className={`block-wrapper d-row shadow-none p-20 ${width}`}>
-          <Grid container className={"d-center"}>
-            {isXs ? (
-              <>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={`d-center`}>
-                  {logoFragment()}
-                </Grid>
-                <Br20 />
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={`d-center`}>
-                  {textFragment()}
-                </Grid>
-              </>
-            ) : (
-              <>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={`d-center`}>
-                  {logoFragment()}
-                  {textFragment()}
-                </Grid>
-              </>
-            )}
-          </Grid>
+      <Paper className={"flex-wrapper p-relative border-top p-30"}>
+        <Card className={`block-wrapper`}>
+          {isXs ? (
+            <Grid container>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={`d-center`}>
+                {logoSection()}
+              </Grid>
+              <Br20 />
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={`d-center`}>
+                {textSection()}
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid container>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={`d-center`}>
+                {logoSection()}
+                <Div className={`w-10p`} />
+                {textSection()}
+              </Grid>
+            </Grid>
+          )}
         </Card>
       </Paper>
     )

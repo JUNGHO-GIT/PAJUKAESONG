@@ -2,9 +2,11 @@
 
 import { ReactDOM, BrowserRouter, Routes, Route } from "./import/ImportReacts.tsx";
 import { CssBaseline, createTheme, ThemeProvider } from "./import/ImportMuis.tsx";
-import { useScrollTop, useEnhancedTouch, useRoot } from "./import/ImportHooks.tsx";
-import { useSessionStorage, LanguageProvider } from "./import/ImportHooks.tsx";
+import { useScrollTop, useEnhancedTouch, useSessionStorage } from "./import/ImportHooks.tsx";
+import { useRoot } from "./import/ImportHooks.tsx";
 
+import "swiper/css";
+import "./assets/css/Swiper.css";
 import "./assets/css/Mui.css";
 import "./assets/css/Components.css";
 import "./assets/css/Core.css";
@@ -14,7 +16,7 @@ import "./index.css";
 import { Header } from "./import/ImportLayouts.tsx";
 import { Footer } from "./import/ImportLayouts.tsx";
 
-import { MainPage } from "./page/main/Main.tsx";
+import { CommonMain } from "./page/common/CommonMain.tsx";
 import { AboutMain } from "./page/about/AboutMain.tsx";
 import { AboutGreeting } from "./page/about/AboutGreeting.tsx";
 import { AboutHistory } from "./page/about/AboutHistory.tsx";
@@ -29,56 +31,57 @@ import { ContactNotice } from "./page/contact/ContactNotice.tsx";
 import { ContactInquiry } from "./page/contact/ContactInquiry.tsx";
 
 // -------------------------------------------------------------------------------------------------
-const Main = () => (
+const Common = () => (
   <Routes>
-    <Route path="/main" element={<MainPage />} />
+    <Route path={"/main"} element={<CommonMain />} />
   </Routes>
 );
 
 // -------------------------------------------------------------------------------------------------
 const About = () => (
   <Routes>
-    <Route path="/main" element={<AboutMain />} />
-    <Route path="/greeting" element={<AboutGreeting />} />
-    <Route path="/history" element={<AboutHistory />} />
-    <Route path="/location" element={<AboutLocation />} />
+    <Route path={"/main"} element={<AboutMain />} />
+    <Route path={"/greeting"} element={<AboutGreeting />} />
+    <Route path={"/history"} element={<AboutHistory />} />
+    <Route path={"/location"} element={<AboutLocation />} />
   </Routes>
 );
 
 // -------------------------------------------------------------------------------------------------
 const Menu = () => (
   <Routes>
-    <Route path="/main" element={<MenuMain />} />
-    <Route path="/side" element={<MenuSide />} />
+    <Route path={"/main"} element={<MenuMain />} />
+    <Route path={"/side"} element={<MenuSide />} />
   </Routes>
 );
 
 // -------------------------------------------------------------------------------------------------
 const Product = () => (
   <Routes>
-    <Route path="/buy" element={<ProductBuy />} />
-    <Route path="/order" element={<ProductOrder />} />
+    <Route path={"/buy"} element={<ProductBuy />} />
+    <Route path={"/order"} element={<ProductOrder />} />
   </Routes>
 );
 
 // -------------------------------------------------------------------------------------------------
 const Franchise = () => (
   <Routes>
-    <Route path="/branch" element={<FranchiseBranch />} />
-    <Route path="/inquiry" element={<FranchiseInquiry />} />
+    <Route path={"/branch"} element={<FranchiseBranch />} />
+    <Route path={"/inquiry"} element={<FranchiseInquiry />} />
   </Routes>
 );
 
 // -------------------------------------------------------------------------------------------------
 const Contact = () => (
   <Routes>
-    <Route path="/notice" element={<ContactNotice />} />
-    <Route path="/inquiry" element={<ContactInquiry />} />
+    <Route path={"/notice"} element={<ContactNotice />} />
+    <Route path={"/inquiry"} element={<ContactInquiry />} />
   </Routes>
 );
 
 // -------------------------------------------------------------------------------------------------
 const App = () => {
+
   useRoot();
   useSessionStorage();
   useScrollTop();
@@ -88,12 +91,12 @@ const App = () => {
     <div className={"App"}>
       <Header />
       <Routes>
-        <Route path="/*" element={<Main />} />
-        <Route path="/about/*" element={<About />} />
-        <Route path="/menu/*" element={<Menu />} />
-        <Route path="/product/*" element={<Product />} />
-        <Route path="/franchise/*" element={<Franchise />} />
-        <Route path="/contact/*" element={<Contact />} />
+        <Route path={"/*"} element={<Common />} />
+        <Route path={"/about/*"} element={<About />} />
+        <Route path={"/menu/*"} element={<Menu />} />
+        <Route path={"/product/*"} element={<Product />} />
+        <Route path={"/franchise/*"} element={<Franchise />} />
+        <Route path={"/contact/*"} element={<Contact />} />
       </Routes>
       <Footer />
     </div>
@@ -114,11 +117,9 @@ if (rootElement === null) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <BrowserRouter basename={"/PAJUKAESONG"}>
-    <LanguageProvider>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </LanguageProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
   </BrowserRouter>
 );

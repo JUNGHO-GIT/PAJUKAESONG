@@ -5,9 +5,7 @@ import { useScrollTop } from "../assets/hooks/useScrollTop.tsx";
 import { useEnhancedTouch } from "../assets/hooks/useEnhancedTouch.tsx";
 import { useSessionStorage } from "../assets/hooks/useSessionStorage.tsx";
 import { useStorage } from "../assets/hooks/useStorage.tsx";
-import { useTranslate } from "../assets/hooks/useLanguageProvider.tsx";
 import { useResponsive } from "../assets/hooks/useResponsive.tsx";
-import { LanguageProvider } from "../assets/hooks/useLanguageProvider.tsx";
 import { useCommon } from "../assets/hooks/useCommon.tsx";
 
 // -------------------------------------------------------------------------------------------------
@@ -17,8 +15,6 @@ export {
   useEnhancedTouch,
   useSessionStorage,
   useStorage,
-  useTranslate,
   useResponsive,
   useCommon,
-  LanguageProvider,
 };

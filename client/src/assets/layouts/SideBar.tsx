@@ -4,7 +4,6 @@ import { useState, useEffect } from "../../import/ImportReacts.tsx";
 import { useCommon } from "../../import/ImportHooks.tsx";
 import { Drawer, List, ListItem, Collapse } from "../../import/ImportMuis.tsx";
 import { Icons, Div, Img, Br5, Hr30, Hr50 } from "../../import/ImportComponents.tsx";
-import { dataArray } from "../../import/ImportUtils.tsx";
 import { logo1 } from "../../import/ImportImages.tsx";
 
 // -------------------------------------------------------------------------------------------------
@@ -19,7 +18,7 @@ export const SideBar = (
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, PATH, firstStr, secondStr } = useCommon();
+  const { navigate, location, firstStr, secondStr, dataArray } = useCommon();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [selectedTab, setSelectedTab] = useState<string>("");
@@ -30,17 +29,101 @@ export const SideBar = (
   // 페이지 변경시 초기화
   useEffect(() => {
     const index = dataArray.findIndex((item) => (
-      item.title === firstStr
+      item.titleEn === firstStr
     ));
     if (index !== -1) {
       setSelectedTab(firstStr);
+      setSelectedTabVal(firstStr);
       setSelectedListItem(secondStr);
     }
-  }, [PATH]);
+  }, [navigate, location]);
 
-  // 5. sidebarNode --------------------------------------------------------------------------------
-  const sidebarNode = () => {
-    const sidebarFragment = () => (
+  // 7. sidebar ------------------------------------------------------------------------------------
+  const sideBarNode = () => {
+    const logoSection = () => (
+      <Img
+        src={logo1}
+        className={"pointer h-max50 m-10"}
+        onClick={() => {
+          navigate("/main");
+        }}
+      />
+    );
+    const mainSection = () => (
+      dataArray.map((item, idx) => (
+        <List
+          key={idx}
+          component={"nav"}
+        >
+          {/* 메인 항목 */}
+          <ListItem
+            onClick={() => {
+              if (selectedTab === item.titleEn) {
+                setSelectedTab("");
+              }
+              else {
+                setSelectedTab(item.titleEn);
+              }
+            }}
+          >
+            <Div className={`pointer-burgundy ${selectedTab === item.titleEn ? "burgundy fs-1-1rem fw-600" : "fs-1-0rem"}`}>
+              {item.titleKo}
+            </Div>
+            {selectedTab === item.titleEn
+              ? <Icons name={"TbChevronUp"} className={"w-12 h-12 black"} />
+              : <Icons name={"TbChevronDown"} className={"w-12 h-12 black"} />
+            }
+          </ListItem>
+          {/* 하위 항목 */}
+          <Collapse
+            in={selectedTab === item.titleEn}
+            timeout={"auto"}
+            unmountOnExit={true}
+          >
+            <List>
+              {item.sub.map((subItem, subIdx) => (
+                <ListItem
+                  key={subIdx}
+                  onClick={() => {
+                    setSelectedTab(item.titleEn);
+                    setSelectedTabVal(item.titleEn);
+                    setSelectedListItem(subItem.titleEn);
+                    navigate(subItem.url);
+                    toggleSidebar();
+                  }}
+                >
+                  <Div className={`pointer-burgundy ${selectedTabVal === item.titleEn && selectedListItem === subItem.titleEn ? "burgundy fs-1-0rem" : "fs-0-9rem"}`}>
+                    {subItem.titleKo}
+                  </Div>
+                </ListItem>
+              ))}
+            </List>
+          </Collapse>
+        </List>
+      ))
+    );
+    const textSection = () => (
+      <Div className={"w-100p mb-20"}>
+        <Div className={"d-center"}>
+          <Div className={"fs-0-8rem me-10"}>
+            &copy; Copyright
+          </Div>
+          <Div className={"fs-0-9rem fw-700"}>
+            PajuKaesong
+          </Div>
+        </Div>
+        <Br5 />
+        <Div className={"d-center"}>
+          <Div className={"fs-0-8rem me-10"}>
+            Designed by
+          </Div>
+          <Div className={"fs-0-9rem fw-700"}>
+            JUNGHO
+          </Div>
+        </Div>
+      </Div>
+    );
+    return (
       <Drawer
         anchor={"left"}
         open={isOpen}
@@ -51,101 +134,23 @@ export const SideBar = (
             padding: "15px",
             borderTopRightRadius: "10px",
             borderBottomRightRadius: "10px",
-            backgroundColor: "#f8f8f8",
+            backgroundColor: "#FFFFFF",
           },
         }}
       >
-        <Img
-          src={logo1}
-          className={"h-max50 m-10"}
-          onClick={() => {
-            navigate("/");
-          }}
-        />
+        {logoSection()}
         <Hr30 />
-        {dataArray.map((item, idx) => (
-          <List
-            key={idx}
-            component={"nav"}
-          >
-            {/* 메인 항목 */}
-            <ListItem
-              onClick={() => {
-                if (selectedTab === item.title) {
-                  setSelectedTab("");
-                }
-                else {
-                  setSelectedTab(item.title);
-                }
-              }}
-            >
-              <Div className={`pointer-burgundy ${selectedTab === item.title ? "burgundy fs-1-3rem fw-600" : "fs-1-0rem"}`}>
-                {item.title}
-              </Div>
-              {selectedTab === item.title
-                ? <Icons name={"TbChevronUp"} className={"w-12 h-12 black"} />
-                : <Icons name={"TbChevronDown"} className={"w-12 h-12 black"} />
-              }
-            </ListItem>
-            {/* 하위 항목 */}
-            <Collapse
-              in={selectedTab === item.title}
-              timeout={"auto"}
-              unmountOnExit={true}
-            >
-              <List>
-                {item.sub.map((subItem, subIdx) => (
-                  <ListItem
-                    key={subIdx}
-                    onClick={() => {
-                      setSelectedTabVal(item.title);
-                      setSelectedListItem(subItem.title);
-                      navigate(subItem.url);
-                      toggleSidebar();
-                    }}
-                  >
-                    <Div className={`pointer-burgundy ${selectedTabVal === item.title && selectedListItem === subItem.title ? "burgundy fs-1-0rem" : "fs-0-9rem"}`}>
-                      {subItem.title}
-                    </Div>
-                  </ListItem>
-                ))}
-              </List>
-            </Collapse>
-          </List>
-        ))}
+        {mainSection()}
         <Hr50 />
-        <Div className={"w-100p mb-20"}>
-          <Div className={"d-center"}>
-            <Div className={"fs-0-8rem me-10"}>
-              &copy; Copyright
-            </Div>
-            <Div className={"fs-0-9rem fw-700"}>
-              PajuKaesong
-            </Div>
-          </Div>
-          <Br5 />
-          <Div className={"d-center"}>
-            <Div className={"fs-0-8rem me-10"}>
-              Designed by
-            </Div>
-            <Div className={"fs-0-9rem fw-700"}>
-              JUNGHO
-            </Div>
-          </Div>
-        </Div>
+        {textSection()}
       </Drawer>
-    );
-    return (
-      <>
-        {sidebarFragment()}
-      </>
     );
   };
 
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {sidebarNode()}
+      {sideBarNode()}
     </>
   );
 };

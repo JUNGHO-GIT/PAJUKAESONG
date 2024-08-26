@@ -14,6 +14,11 @@
 .MuiButtonBase-root {
   min-width: 30px !important;
 }
+.MuiTabs-flexContainer {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
 .MuiTab-root {
   background-color: transparent !important;
   min-width: 0px !important;
@@ -49,18 +54,15 @@
 
 /** top *******************************************************************************************/
 .MuiTab-root.Mui-selected {
-  color: #c30104 !important;
-  font-weight: bold !important;
   text-decoration: none !important;
-  transform: scale(1.2) !important;
+  background-color: transparent !important;
+}
+.MuiMenuItem-root.Mui-selected {
+  text-decoration: none !important;
+  background-color: transparent !important;
 }
 .MuiTabs-indicator {
   background-color: #c30104 !important;
-}
-.MuiMenuItem-root.Mui-selected {
-  color: #c30104 !important;
-  text-decoration: none !important;
-  background-color: transparent !important;
 }
 
 /** bottom ****************************************************************************************/
@@ -85,26 +87,4 @@
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   font-size: 0.7rem !important;
-}
-
-/** typography ************************************************************************************/
-.MuiTypography-root {
-  text-overflow: clip !important;
-  font-size: 0.9rem !important;
-}
-/** 일반 **/
-.MuiTypography-root.MuiLink-root {
-  color: unset !important;
-  font-weight: bold !important;
-  text-decoration: none !important;
-}
-/** 호버 **/
-.MuiTypography-root.MuiLink-root:hover {
-  color: #c30104 !important;
-  transform: scale(1.1) !important;
-}
-/** 셀렉트, 엑티브 **/
-.MuiTypography-root.MuiLink-root:active {
-  color: #c30104 !important;
-  transform: scale(1.1) !important;
 }

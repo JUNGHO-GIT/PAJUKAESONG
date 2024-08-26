@@ -1,19 +1,18 @@
 // useRoot.tsx
 
 import { useEffect } from "../../import/ImportReacts.tsx";
-import { useNavigate, useLocation } from "../../import/ImportReacts.tsx";
+import { useCommon } from "../../import/ImportHooks.tsx";
 
 // -------------------------------------------------------------------------------------------------
 export const useRoot = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const navigate = useNavigate();
-  const location = useLocation();
+  const {navigate, location} = useCommon();
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
 
-    // 1. 리다리렉트 처리
+    // '/'경로로 진입했을때의 처리
     if (location.pathname === '/') {
       navigate("/main");
     }

@@ -1,9 +1,8 @@
 // Header.tsx
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "../../import/ImportReacts.tsx";
 import { useCommon, useResponsive } from "../../import/ImportHooks.tsx";
-import { dataArray } from "../../import/ImportUtils.tsx";
-import { Div, Img, Icons, Hr20} from "../../import/ImportComponents.tsx";
+import { Div, Img, Icons, Hr20, Br15} from "../../import/ImportComponents.tsx";
 import { Paper, Grid } from "../../import/ImportMuis.tsx";
 import { Tabs, Tab, Card, Menu, MenuItem, tabsClasses } from "../../import/ImportMuis.tsx";
 import { SideBar } from '../../import/ImportLayouts.tsx';
@@ -13,31 +12,30 @@ import { logo1 } from "../../import/ImportImages.tsx";
 export const Header = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, PATH, firstStr, secondStr } = useCommon();
+  const { navigate, PATH, firstStr, secondStr, dataArray } = useCommon();
   const { isXs, isSm, isMd, isLg, isXl } = useResponsive();
 
   // 2-2. useState ---------------------------------------------------------------------------------
-  const [width, setWidth] = useState("");
+  const [tabWidth, setTabWidth] = useState("");
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState<string>("");
+  const [selectedTabVal, setSelectedTabVal] = useState<string>("");
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>("");
   const [selectedAnchorEl, setSelectedAnchorEl] = useState<Record<string, HTMLElement | null>>({});
 
+  // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     if (isXs) {
-      setWidth("w-100p");
+      setTabWidth("");
     }
     else if (isSm) {
-      setWidth("w-15p");
+      setTabWidth("w-18p");
     }
     else if (isMd) {
-      setWidth("w-15p");
+      setTabWidth("w-15p");
     }
-    else if (isLg) {
-      setWidth("w-15p");
-    }
-    else if (isXl) {
-      setWidth("w-15p");
+    else if (isLg || isXl) {
+      setTabWidth("w-18p");
     }
   }, [isXs, isSm, isMd, isLg, isXl]);
 
@@ -45,10 +43,16 @@ export const Header = () => {
   // 페이지 변경시 초기화
   useEffect(() => {
     const index = dataArray.findIndex((item) => (
-      item.title === firstStr
+      item.titleEn === firstStr
     ));
+    if (firstStr === "main") {
+      setSelectedTab("");
+      setSelectedTabVal("");
+      setSelectedMenuItem("");
+    }
     if (index !== -1) {
       setSelectedTab(firstStr);
+      setSelectedTabVal(firstStr);
       setSelectedMenuItem(secondStr);
     }
   }, [PATH]);
@@ -58,20 +62,18 @@ export const Header = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
-  // 5. sidebar ------------------------------------------------------------------------------------
+  // 6. sidebar ------------------------------------------------------------------------------------
   const sidebarNode = () => {
-    const logoFragment = () => (
-      <Div className={"d-center"}>
-        <Img
-          src={logo1}
-          className={"h-max50"}
-          onClick={() => {
-            navigate("/");
-          }}
-        />
-      </Div>
+    const logoSection = () => (
+      <Img
+        src={logo1}
+        className={"pointer h-max50"}
+        onClick={() => {
+          navigate("/main");
+        }}
+      />
     );
-    const toggleFragment = () => (
+    const toggleSection = () => (
       <Div className={"d-center"}>
         <Icons
           name={"TbHamburger"}
@@ -85,10 +87,10 @@ export const Header = () => {
         <Card className={"block-wrapper d-row w-100p shadow-none"}>
           <Grid container>
             <Grid item xs={1} className={"d-left"}>
-              {toggleFragment()}
+              {toggleSection()}
             </Grid>
             <Grid item xs={11} className={"d-center"}>
-              {logoFragment()}
+              {logoSection()}
             </Grid>
           </Grid>
         </Card>
@@ -96,111 +98,118 @@ export const Header = () => {
     );
   };
 
-  // 7. topNav -------------------------------------------------------------------------------------
+  // 7. tobNav -------------------------------------------------------------------------------------
   const topNavNode = () => {
-    // 1. logo
-    const logoFragment = () => (
+    const logoSection = () => (
       <Img
         src={logo1}
-        className={"h-max50 ms-10"}
+        className={"pointer h-max50 ms-10"}
         onClick={() => {
-          navigate("/");
+          navigate("/main");
         }}
       />
     );
-    // 2. tabs
-    const tabsFragment = () => (
-      dataArray.map((item, idx) => (
-        <>
-          <Tabs
-            key={idx}
-            value={item.title === selectedTab ? selectedTab : false}
-            variant={"scrollable"}
-            selectionFollowsFocus={true}
-            scrollButtons={false}
-            className={width}
-            sx={{
-              [`& .${tabsClasses.scrollButtons}`]: {
-                '&.Mui-disabled': { opacity: 0.3 },
-              },
-            }}
-          >
+    const tabsSection = () => (
+      <>
+        <Tabs
+          value={selectedTab || false}
+          variant={"scrollable"}
+          selectionFollowsFocus={true}
+          scrollButtons={false}
+          className={"w-100p"}
+          sx={{
+            [`& .${tabsClasses.scrollButtons}`]: {
+              '&.Mui-disabled': { opacity: 0.3 },
+            },
+            "& .MuiTab-root": {
+              color: "black",
+            },
+          }}
+        >
+          {dataArray.map((item, idx) => (
             <Tab
-              label={item.title}
-              value={item.title}
-              className={`fs-1-0rem fw-700 pointer-burgundy`}
+              key={`tab-${idx}`}
+              label={item.titleKo}
+              value={item.titleEn}
+              className={`pointer-burgundy fs-1-1rem ${tabWidth} ${selectedTab === item.titleEn ? "burgundy fw-600" : ""}`}
               onClick={(e) => {
-                setSelectedAnchorEl((prev) => ({
-                  ...prev,
-                  [item.title]: e.currentTarget,
-                }));
+                setSelectedTab(item.titleEn);
+                setSelectedAnchorEl({
+                  [item.titleEn]: e.currentTarget,
+                });
               }}
             />
-          </Tabs>
-          <Menu
-            anchorEl={selectedAnchorEl[item.title]}
-            open={Boolean(selectedAnchorEl[item.title])}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "center",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "center",
-            }}
-            slotProps={{
-              paper: {
-                style: {
-                  padding: "12px",
-                },
-              },
-            }}
-            onClose={() => {
-              setSelectedAnchorEl((prev) => ({
-                ...prev,
-                [item.title]: null,
-              }));
-            }}
-          >
-            {item.sub.map((subItem, subIdx) => (
-              <>
-              {subIdx !== 0 && <Hr20 />}
-              <MenuItem
-                key={subIdx}
-                selected={
-                  selectedTab === item.title &&
-                  selectedMenuItem === subItem.title
-                }
-                className={"fs-1-0rem pointer-burgundy"}
-                onClick={() => {
-                  setSelectedAnchorEl((prev) => ({
-                    ...prev,
-                    [item.title]: null,
-                  }));
-                  setSelectedTab(item.title);
-                  setSelectedMenuItem(subItem.title);
-                  navigate(subItem.url);
-                }}
-              >
-                {subItem.title}
-              </MenuItem>
-              </>
-            ))}
-          </Menu>
-        </>
-      ))
+          ))}
+        </Tabs>
+        <Menu
+          anchorEl={selectedAnchorEl[selectedTab]}
+          open={Boolean(selectedAnchorEl[selectedTab])}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+          slotProps={{
+            paper: {
+              style: {
+                padding: "0px 5px",
+              }
+            }
+          }}
+          onClose={() => {
+            setSelectedAnchorEl((prev) => ({
+              ...prev,
+              [selectedTab]: null,
+            }));
+          }}
+        >
+          {dataArray.find((item) => item.titleEn === selectedTab)?.sub.map((subItem, subIdx) => (
+            <MenuItem
+              key={`menuItem-${subIdx}`}
+              selected={selectedMenuItem === subItem.titleEn}
+              className={`pointer-burgundy fs-1-1rem p-20 ${selectedTabVal === selectedTab && selectedMenuItem === subItem.titleEn ? "burgundy fw-600" : ""}`}
+              onClick={() => {
+                setSelectedTabVal(selectedTab);
+                setSelectedMenuItem(subItem.titleEn);
+                navigate(subItem.url);
+                setSelectedAnchorEl((prev) => ({
+                  ...prev,
+                  [selectedTab]: null,
+                }));
+              }}
+            >
+              {subItem.titleKo}
+            </MenuItem>
+          ))}
+        </Menu>
+      </>
     );
     return (
-      <Paper className={"flex-wrapper p-sticky top-0vh radius border shadow-none p-10"}>
-        <Card className={"block-wrapper d-row w-100p shadow-none"}>
-          <Grid container>
-            <Grid item xs={2} className={"d-left"}>
-              {logoFragment()}
+      <Paper className={"flex-wrapper p-sticky top-0vh border-bottom p-20"}>
+        <Card className={`block-wrapper`}>
+          {isSm ? (
+            <Grid container>
+              <Grid item xs={12} className={"d-center"}>
+                {logoSection()}
+              </Grid>
+              <Br15 />
+              <Grid item xs={12} className={"d-center"}>
+                {tabsSection()}
+              </Grid>
             </Grid>
-            <Grid item xs={10} className={"d-right"}>
-              {tabsFragment()}
+          ) : (
+            <Grid container>
+              <Grid item xs={2}>
+                {logoSection()}
+              </Grid>
+              <Grid item xs={10} className={"d-center"}>
+                {tabsSection()}
+              </Grid>
             </Grid>
-          </Grid>
+          )}
         </Card>
       </Paper>
     );
@@ -209,7 +218,7 @@ export const Header = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {isXs ? (
+      {(isXs) ? (
         <>
           <SideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
           {sidebarNode()}

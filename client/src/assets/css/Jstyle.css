@@ -10525,7 +10525,7 @@
 .pointer-primary:hover {
   cursor: pointer !important;
   color: #3B82F6 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .secondary {
@@ -10534,7 +10534,7 @@
 .pointer-secondary:hover {
   cursor: pointer !important;
   color: #6c757d !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .success {
@@ -10543,7 +10543,7 @@
 .pointer-success:hover {
   cursor: pointer !important;
   color: #10B981 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .burgundy {
@@ -10552,7 +10552,7 @@
 .pointer-burgundy:hover {
   cursor: pointer !important;
   color: #c30104 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .danger {
@@ -10561,7 +10561,7 @@
 .pointer-danger:hover {
   cursor: pointer !important;
   color: #EF4444 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .warning {
@@ -10570,7 +10570,7 @@
 .pointer-warning:hover {
   cursor: pointer !important;
   color: #F59E0B !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .info {
@@ -10579,7 +10579,7 @@
 .pointer-info:hover {
   cursor: pointer !important;
   color: #3B82F6 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .light {
@@ -10588,7 +10588,7 @@
 .pointer-light:hover {
   cursor: pointer !important;
   color: #e1e2e5 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .red {
@@ -10597,7 +10597,7 @@
 .pointer-red:hover {
   cursor: pointer !important;
   color: #EF4444 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .orange {
@@ -10606,7 +10606,7 @@
 .pointer-orange:hover {
   cursor: pointer !important;
   color: #F59E0B !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .yellow {
@@ -10615,7 +10615,7 @@
 .pointer-yellow:hover {
   cursor: pointer !important;
   color: #FBBF24 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .green {
@@ -10624,7 +10624,7 @@
 .pointer-green:hover {
   cursor: pointer !important;
   color: #10B981 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .blue {
@@ -10633,7 +10633,7 @@
 .pointer-blue:hover {
   cursor: pointer !important;
   color: #3B82F6 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .white {
@@ -10642,7 +10642,7 @@
 .pointer-white:hover {
   cursor: pointer !important;
   color: #FFFFFF !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .grey {
@@ -10651,7 +10651,7 @@
 .pointer-grey:hover {
   cursor: pointer !important;
   color: #9CA3AF !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .dark {
@@ -10660,7 +10660,7 @@
 .pointer-dark:hover {
   cursor: pointer !important;
   color: #5e5e5e !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .black {
@@ -10669,16 +10669,13 @@
 .pointer-black:hover {
   cursor: pointer !important;
   color: #111827 !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 /** 100. etc **************************************************************************************/
 .pointer {
   cursor: pointer !important;
   caret-color: transparent;
-}
-.pointer:hover {
-  transform: scale(1.2);
 }
 .drag {
   cursor: grab !important;

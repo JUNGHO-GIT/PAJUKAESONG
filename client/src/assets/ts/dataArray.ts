@@ -2,74 +2,91 @@
 
 export const dataArray = [
   {
-    title: "브랜드소개",
+    titleKo: "브랜드소개",
+    titleEn: "about",
     sub: [
       {
-        title: "파주개성면옥",
+        titleKo: "파주개성면옥",
+        titleEn: "main",
         url: "/about/main",
       },
       {
-        title: "대표 인사말",
+        titleKo: "대표 인사말",
+        titleEn: "greeting",
         url: "/about/greeting",
       },
       {
-        title: "연혁",
+        titleKo: "연혁",
+        titleEn: "history",
         url: "/about/history",
       },
       {
-        title: "오시는 길",
+        titleKo: "오시는 길",
+        titleEn: "location",
         url: "/about/location",
       },
     ],
   },
   {
-    title: "메뉴소개",
+    titleKo: "메뉴소개",
+    titleEn: "menu",
     sub: [
       {
-        title: "대표메뉴",
+        titleKo: "대표메뉴",
+        titleEn: "main",
         url: "/menu/main",
       },
       {
-        title: "사이드메뉴",
+        titleKo: "사이드메뉴",
+        titleEn: "side",
         url: "/menu/side",
       },
     ],
   },
   {
-    title: "선물세트",
+    titleKo: "선물세트",
+    titleEn: "product",
     sub: [
       {
-        title: "구매하기",
+        titleKo: "구매하기",
+        titleEn: "buy",
         url: "/product/buy",
       },
       {
-        title: "주문조회",
+        titleKo: "주문조회",
+        titleEn: "order",
         url: "/product/order",
       },
     ],
   },
   {
-    title: "가맹문의",
+    titleKo: "가맹문의",
+    titleEn: "franchise",
     sub: [
       {
-        title: "가맹 지점",
+        titleKo: "가맹 지점",
+        titleEn: "branch",
         url: "/franchise/branch",
       },
       {
-        title: "가맹 문의",
+        titleKo: "가맹 문의",
+        titleEn: "inquiry",
         url: "/franchise/inquiry",
       },
     ],
   },
   {
-    title: "고객문의",
+    titleKo: "고객문의",
+    titleEn: "contact",
     sub: [
       {
-        title: "공지사항",
+        titleKo: "공지사항",
+        titleEn: "notice",
         url: "/contact/notice",
       },
       {
-        title: "1:1 문의",
+        titleKo: "1:1 문의",
+        titleEn: "inquiry",
         url: "/contact/inquiry",
       },
 

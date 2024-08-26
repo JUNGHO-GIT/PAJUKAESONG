@@ -1,12 +1,13 @@
+// gcloud.js (server)
+
 const dotenv = require('dotenv');
 const { execSync } = require('child_process');
 const { readFileSync, writeFileSync } = require('fs');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const os = require('os');
 const fs = require('fs');
 
-// -------------------------------------------------------------------------------------------------
-// env 파일 수정하기
+// env 파일 수정 -----------------------------------------------------------------------------------
 const modifyEnv = () => {
   const envFile = readFileSync('.env', 'utf8');
   const envConfig = dotenv.parse(envFile);
@@ -23,12 +24,11 @@ const modifyEnv = () => {
   writeFileSync('.env', newEnvFile);
 };
 
-// -------------------------------------------------------------------------------------------------
-// modify changelog
+// changelog 수정 ----------------------------------------------------------------------------------
 const modifyChangelog = () => {
 
-  const currentDate = moment().format('YYYY-MM-DD');
-  const currentTime = moment().format('HH:mm:ss');
+  const currentDate = moment().tz("Asia/Seoul").format('YYYY-MM-DD');
+  const currentTime = moment().tz("Asia/Seoul").format('HH:mm:ss');
 
   const changelog = fs.readFileSync('changelog.md', 'utf8');
   const versionPattern = /\d+\.\d+\.\d+/g;
@@ -45,7 +45,7 @@ const modifyChangelog = () => {
   }
 
   // 세 번째 숫자에 +1
-  versionArray[2] = (parseInt(versionArray[2], 10) + 1).toString();
+  versionArray[2] = (parseFloat(versionArray[2]) + 1).toString();
 
   const newVersion = `\\[ ${versionArray.join('.')} \\]`;
   const newDateTime = `- ${currentDate} (${currentTime})`;
@@ -56,30 +56,39 @@ const modifyChangelog = () => {
   fs.writeFileSync('changelog.md', updatedChangelog, 'utf8');
 };
 
-// -------------------------------------------------------------------------------------------------
-// git push
+// git push ----------------------------------------------------------------------------------------
 const gitPush = () => {
   execSync('git add .', { stdio: 'inherit' });
   execSync('git commit -m "update"', { stdio: 'inherit' });
-  execSync('git push origin main', { stdio: 'inherit' });
+  execSync('git push origin master', { stdio: 'inherit' });
 };
 
-// -------------------------------------------------------------------------------------------------
-// run script on server
+// 원격 서버에서 스크립트 실행 ---------------------------------------------------------------------
 const runRemoteScript = () => {
-  const command = 'powershell -Command "ssh -i C:\\Users\\jungh\\.ssh\\JKEY junghomun00@34.23.233.23 \'sudo sh /sh/PAJUKAESONG/server.sh\'"';
-  execSync(command, { stdio: 'inherit' });
+  const privateKeyPath = 'C:\\Users\\jungh\\.ssh\\JKEY';
+  const serverAddr = 'junghomun00@34.23.233.23';
+  const cmdCd = 'cd /var/www/junghomun.com/PAJUKAESONG/server';
+  const cmdGitFetch = 'sudo git fetch --all';
+  const cmdGitReset = 'sudo git reset --hard origin/master';
+  const cmdRmClient = 'sudo rm -rf client';
+  const cmdNpm = 'sudo npm install';
+  const cmdRestart = 'sudo pm2 restart all';
+  const cmdSave = 'sudo pm2 save';
+
+  const sshCommand =
+    `powershell -Command "ssh -i ${privateKeyPath} ${serverAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'"`;
+
+  execSync(sshCommand, { stdio: 'inherit' });
 };
 
-// -------------------------------------------------------------------------------------------------
-// env 파일 복구하기
+// env 파일 복원 -----------------------------------------------------------------------------------
 const restoreEnv = () => {
   const envFile = readFileSync('.env', 'utf8');
   const envConfig = dotenv.parse(envFile);
 
   // envConfig 수정
   envConfig.CLIENT_URL = "http://localhost:3000/PAJUKAESONG";
-  envConfig.GOOGLE_CALLBACK_URL = "http://localhost:4100/PAJUKAESONG/api/google/callback";
+  envConfig.GOOGLE_CALLBACK_URL = "http://localhost:4000/PAJUKAESONG/api/google/callback";
 
   // env 파일 쓰기
   const newEnvFile = Object.keys(envConfig).reduce((acc, key) => {

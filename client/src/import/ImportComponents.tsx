@@ -1,4 +1,4 @@
-// ImportComponents.jsx
+// ImportComponents.tsx
 
 import { Div, Img } from "../assets/components/Element.tsx";
 import { Br5, Br10, Br15, Br20, Br25, Br30, Br35, Br40 } from "../assets/components/Element.tsx";

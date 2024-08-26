@@ -1,4 +1,4 @@
-// ImportMui.jsx
+// ImportMui.tsx
 
 import {
   // a

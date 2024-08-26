@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+
+  <!----------------------------------------------------------------------------------------------->
+  <head>
+    <title>Swiper Slider</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="http://sfonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script defer src="./script.js"></script>
+    <style>
+      :after, :before, *{
+          box-sizing: border-box;
+      }
+      .container {
+        width:1200px;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+      body {
+        margin: 0;
+        font-family: 'Rajdhani', sans-serif;
+      }
+      h2 {
+        line-height:1.1;
+      }
+      .hero-slider {
+        width: 100%;
+        height: 700px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        position: relative;
+        z-index: 0;
+      }
+
+      @media (max-width: 991px) {
+        .hero-slider {
+          height: 600px;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .hero-slider {
+          height: 500px;
+        }
+      }
+
+      .hero-slider .swiper-slide {
+        overflow: hidden;
+        color: #fff;
+      }
+
+      .hero-slider .swiper-container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .hero-slider .slide-inner {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: left;
+      }
+
+      .hero-slider .swiper-button-prev,
+      .hero-slider .swiper-button-next {
+        background: transparent;
+        width: 55px;
+        height: 55px;
+        line-height: 53px;
+        margin-top: -30px;
+        text-align: center;
+        border: 2px solid #d4d3d3;
+        border-radius: 55px;
+        opacity:0;
+        visibility:hidden;
+        transition:all .3s ease;
+      }
+      .hero-slider:hover .swiper-button-prev,
+      .hero-slider:hover .swiper-button-next {
+        transform:translateX(0);
+        opacity:1;
+        visibility:visible;
+      }
+
+      @media (max-width: 767px) {
+        .hero-slider .swiper-button-prev,
+        .hero-slider .swiper-button-next {
+          display: none;
+        }
+      }
+
+      .hero-slider .swiper-button-prev {
+        left: 25px;
+        transform:translateX(50px);
+      }
+
+      .hero-slider .swiper-button-prev:before {
+        font-family: "Font Awesome 5 Free";
+        content: "\f060";
+        font-size: 15px;
+        color: #d4d3d3;
+        font-style: normal;
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: 900;
+      }
+
+      .hero-slider .swiper-button-next {
+        right: 25px;
+        transform:translateX(-50px);
+      }
+
+      .hero-slider .swiper-button-next:before {
+        font-family: "Font Awesome 5 Free";
+        content: "\f061";
+        font-size: 15px;
+        color: #d4d3d3;
+        font-style: normal;
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: 900;
+      }
+
+      .hero-slider .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        text-align: left;
+        line-height: 12px;
+        font-size: 12px;
+        color: #000;
+        opacity: 0.3;
+        background:#fff;
+        transition:all .2s ease;
+      }
+
+      .hero-slider .swiper-pagination-bullet-active {
+        opacity:1;
+      }
+
+      .hero-slider .swiper-container-horizontal > .swiper-pagination-bullets,
+      .hero-slider .swiper-pagination-custom,
+      .hero-slider .swiper-pagination-fraction {
+        bottom: 30px;
+      }
+      .swiper-pagination {
+        text-align:left;
+      }
+
+      .hero-slider .swiper-container-horizontal > .swiper-pagination-bullets{
+        bottom:50px;
+        max-width: 1200px;
+        padding: 0 15px;
+        margin: 0 auto;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      @media (min-width: 767px) {
+        .hero-slider .swiper-container-horizontal > .swiper-pagination-bullets{
+          bottom:30px;
+        }
+      }
+      .hero-style {
+        height: 850px;
+        transition:all .4s ease;
+      }
+
+      @media (max-width: 991px) {
+        .hero-style {
+          height: 600px;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .hero-style{
+          height: 500px;
+        }
+      }
+
+      @media screen and (min-width: 992px) {
+        .hero-style .container {
+          padding-top: 95px;
+        }
+      }
+
+      .hero-style .slide-title,
+      .hero-style .slide-text,
+      .hero-style .slide-btns {
+        max-width: 690px;
+      }
+
+      .hero-style .slide-title h2 {
+        font-size: 100px;
+        font-weight: 600;
+        line-height: 1;
+        color: #ffffff;
+        margin: 0 0 40px;
+        text-transform: capitalize;
+        transition:all .4s ease;
+      }
+
+      @media (max-width: 1199px) {
+        .hero-style .slide-title h2 {
+          font-size: 75px;
+        }
+      }
+
+      @media (max-width: 991px) {
+        .hero-style .slide-title h2 {
+          font-size: 50px;
+          margin: 0 0 35px;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .hero-style .slide-title h2 {
+          font-size: 35px;
+          margin: 0 0 30px;
+        }
+      }
+
+      .hero-style .slide-text p {
+        opacity: 0.8;
+        font-family: Rajdhani;
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 1.25;
+        letter-spacing: normal;
+        color: #ffffff;
+        margin: 0 0 40px;
+        transition:all .4s ease;
+      }
+
+      @media (max-width: 767px) {
+        .hero-style .slide-text p {
+          font-size: 1rem;
+          font-weight: normal;
+          margin: 0 0 30px;
+        }
+      }
+
+      .hero-style .slide-btns > a:first-child {
+        margin-right: 10px;
+      }
+      .theme-btn, .theme-btn-s2{
+        background-color: #ffffff;
+        font-size: 20px;
+        font-weight: 500;
+        text-align: center;
+        color:#2b3b95;
+        padding: 9px 32px;
+        border: 0;
+        border-radius: 3px;
+        text-transform: uppercase;
+        display: inline-block;
+        line-height: initial;
+        transition:all .4s ease;
+      }
+      a {
+          text-decoration: none;
+          transition: all 0.2s ease;
+      }
+      .theme-btn-s2{
+          background-color: rgba(255, 255, 255, 0.9);
+          color: #131e4a;
+      }
+      .theme-btn:hover, .theme-btn-s2:hover, .theme-btn:focus, .theme-btn-s2:focus, .theme-btn:active, .theme-btn-s2:active {
+          background-color:#2b3b95 ;
+          color: #fff;
+      }
+      .theme-btn-s3{
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.5;
+        color: #ffffff;
+        text-transform: uppercase;
+      }
+      i.fa-chevron-circle-right{
+        height:22px;
+        width:22px;
+      }
+      a:hover {
+          text-decoration: none;
+      }
+      @media (max-width: 991px){
+        .theme-btn, .theme-btn-s2, .theme-btn-s3 {
+          font-size: 13px;
+          padding: 15px 25px;
+        }
+      }
+      @media (max-width: 767px){
+        .theme-btn, .theme-btn-s2{
+          padding: 13px 20px;
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+
+  <!----------------------------------------------------------------------------------------------->
+  <body>
+
+    <!--------------------------------------------------------------------------------------------->
+    <section class="hero-slider hero-style">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="slide-inner slide-bg-image" data-background="https://images.unsplash.com/photo-1578934191836-ff5f608c2228?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80">
+              <div class="container">
+                <div data-swiper-parallax="300" class="slide-title">
+                  <h2>GUITAR CLASSES FOR KIDS</h2>
+                </div>
+                <div data-swiper-parallax="400" class="slide-text">
+                  <p>Want to see your kid become more expressive?</p>
+                </div>
+                <div class="clearfix"></div>
+                <div data-swiper-parallax="500" class="slide-btns">
+                  <a href="#" class="theme-btn-s2">Register now</a>
+                  <a href="#" class="theme-btn-s3"><i class="fas fa-chevron-circle-right"></i> Get Info</a>
+                </div>
+              </div>
+            </div>
+            <!-- end slide-inner -->
+          </div>
+          <!-- end swiper-slide -->
+
+          <div class="swiper-slide">
+            <div class="slide-inner slide-bg-image" data-background="http://simages.unsplash.com/photo-1579003087287-997fd4d18771?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
+              <div class="container">
+                <div data-swiper-parallax="300" class="slide-title">
+                  <h2>GUITAR CLASSES FOR KIDS</h2>
+                </div>
+                <div data-swiper-parallax="400" class="slide-text">
+                  <p>Want to see your kid become more expressive?</p>
+                </div>
+                <div class="clearfix"></div>
+                <div data-swiper-parallax="500" class="slide-btns">
+                  <a href="#" class="theme-btn-s2">Register now</a>
+                  <a href="#" class="theme-btn-s3"><i class="fas fa-chevron-circle-right"></i>Get Info</a>
+                </div>
+              </div>
+            </div>
+            <!-- end slide-inner -->
+          </div>
+          <!-- end swiper-slide -->
+        </div>
+        <!-- end swiper-wrapper -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </section>
+    <!-- end of hero slider -->
+
+  </body>
+</html>
