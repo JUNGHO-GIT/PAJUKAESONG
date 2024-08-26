@@ -23,7 +23,11 @@ mongoose.connect(`mongodb://${id}:${pw}@${host}:${port}/${db}`);
 const httpPort = Number(process.env.HTTP_PORT) || 4100;
 const httpsPort = Number(process.env.HTTPS_PORT) || 443;
 
-function startServer(httpPort: number, httpsPort: number) {
+/**
+ * @param {number} httpPort
+ * @param {number} httpsPort
+ */
+function startServer(httpPort, httpsPort) {
   try {
     const httpServer = app.listen(httpPort, () => {
       console.log(`HTTP 서버가 포트 ${httpPort}에서 실행 중입니다.`);
@@ -39,7 +43,7 @@ function startServer(httpPort: number, httpsPort: number) {
       }
     });
   }
-  catch (error: any) {
+  catch (error) {
     console.error(`서버 실행 중 오류 발생: ${error}`);
   }
 }

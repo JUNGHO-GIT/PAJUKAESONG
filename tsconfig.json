@@ -63,6 +63,6 @@
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*", "index.ts"],
+  "include": ["src/**/*", "index.js"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
