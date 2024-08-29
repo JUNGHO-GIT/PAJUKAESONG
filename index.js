@@ -7,6 +7,8 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import morgan from "morgan";
 
+import { aboutRouter } from "./router/about/aboutRouter.ts";
+
 // -------------------------------------------------------------------------------------------------
 dotenv.config();
 const app = express();
@@ -64,3 +66,5 @@ app.use((req, res, next) => {
   res.set("Content-Type", "application/json; charset=utf-8");
   next();
 });
+
+app.use("/about", aboutRouter);

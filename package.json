@@ -46,6 +46,7 @@
     "@types/passport-google-oauth20": "^2.0.16",
     "jsdom": "^25.0.0",
     "nodemon": "^3.1.4",
+    "tslib": "^2.7.0",
     "typescript": "^5.5.4"
   }
 }
