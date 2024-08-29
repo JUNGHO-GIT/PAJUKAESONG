@@ -1,6 +1,6 @@
 // useResponsive.tsx
 
-import { useTheme, useMediaQuery } from "../../import/ImportMuis.tsx";
+import { useTheme, useMediaQuery } from "../../imports/ImportMuis.tsx";
 
 // -------------------------------------------------------------------------------------------------
 export const useResponsive = () => {

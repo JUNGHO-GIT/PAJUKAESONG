@@ -1,10 +1,10 @@
 // SideBar.tsx
 
-import { useState, useEffect } from "../../import/ImportReacts.tsx";
-import { useCommon } from "../../import/ImportHooks.tsx";
-import { Drawer, List, ListItem, Collapse } from "../../import/ImportMuis.tsx";
-import { Icons, Div, Img, Br5, Hr30, Hr50 } from "../../import/ImportComponents.tsx";
-import { logo1 } from "../../import/ImportImages.tsx";
+import { useState, useEffect } from "../../imports/ImportReacts.tsx";
+import { useCommon } from "../../imports/ImportHooks.tsx";
+import { Drawer, List, ListItem, Collapse, Grid } from "../../imports/ImportMuis.tsx";
+import { Icons, Div, Img, Hr } from "../../imports/ImportComponents.tsx";
+import { logo1 } from "../../imports/ImportImages.tsx";
 
 // -------------------------------------------------------------------------------------------------
 interface SideBarProps {
@@ -102,26 +102,31 @@ export const SideBar = (
         </List>
       ))
     );
-    const textSection = () => (
-      <Div className={"w-100p mb-20"}>
-        <Div className={"d-center"}>
-          <Div className={"fs-0-8rem me-10"}>
-            &copy; Copyright
-          </Div>
-          <Div className={"fs-0-9rem fw-700"}>
-            PajuKaesong
-          </Div>
-        </Div>
-        <Br5 />
-        <Div className={"d-center"}>
-          <Div className={"fs-0-8rem me-10"}>
-            Designed by
-          </Div>
-          <Div className={"fs-0-9rem fw-700"}>
-            JUNGHO
-          </Div>
-        </Div>
-      </Div>
+    const textSection1 = () => (
+      <Grid container columnSpacing={1} rowSpacing={1}>
+        <Grid size={12} className={"fs-0-7rem"}>
+          이코딩  |  주소: 서울특별시 강남구 역삼동
+        </Grid>
+        <Grid size={12} className={"fs-0-7rem"}>
+          대표: 이코딩  |  사업자: 123-45-67890
+        </Grid>
+        <Grid size={12} className={"fs-0-7rem"}>
+          전화: 02-123-4567
+        </Grid>
+        <Grid size={12} className={"fs-0-7rem"}>
+          이메일: 123123@gmail.com
+        </Grid>
+      </Grid>
+    );
+    const textSection2 = () => (
+      <Grid container columnSpacing={1} rowSpacing={1}>
+        <Grid size={12} className={"fs-0-8rem"}>
+          <span>&copy; 2024</span> <b>PajuKaesong</b>
+        </Grid>
+        <Grid size={12} className={"fs-0-8rem"}>
+          <span>Designed by</span> <b>JUNGHO</b>
+        </Grid>
+      </Grid>
     );
     return (
       <Drawer
@@ -132,17 +137,26 @@ export const SideBar = (
           "& .MuiDrawer-paper": {
             width: "240px",
             padding: "15px",
-            borderTopRightRadius: "10px",
-            borderBottomRightRadius: "10px",
             backgroundColor: "#FFFFFF",
           },
         }}
       >
-        {logoSection()}
-        <Hr30 />
-        {mainSection()}
-        <Hr50 />
-        {textSection()}
+        <Grid container columnSpacing={1} rowSpacing={1}>
+          <Grid size={12} className={"d-center"}>
+            {logoSection()}
+          </Grid>
+          <Grid size={12}>
+            {mainSection()}
+          </Grid>
+          <Hr px={10} />
+          <Grid size={12}>
+            {textSection1()}
+          </Grid>
+          <Hr px={10} />
+          <Grid size={12}>
+            {textSection2()}
+          </Grid>
+        </Grid>
       </Drawer>
     );
   };

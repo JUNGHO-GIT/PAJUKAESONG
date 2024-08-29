@@ -1,34 +1,34 @@
 // index.tsx
 
-import { ReactDOM, BrowserRouter, Routes, Route } from "./import/ImportReacts.tsx";
-import { CssBaseline, createTheme, ThemeProvider } from "./import/ImportMuis.tsx";
-import { useScrollTop, useEnhancedTouch, useSessionStorage } from "./import/ImportHooks.tsx";
-import { useRoot } from "./import/ImportHooks.tsx";
+import { ReactDOM, BrowserRouter, Routes, Route } from "./imports/ImportReacts.tsx";
+import { CssBaseline, createTheme, ThemeProvider } from "./imports/ImportMuis.tsx";
+import { useScrollTop, useEnhancedTouch } from "./imports/ImportHooks.tsx";
+import { useRoot } from "./imports/ImportHooks.tsx";
 
 import "swiper/css";
-import "./assets/css/Swiper.css";
-import "./assets/css/Mui.css";
-import "./assets/css/Components.css";
-import "./assets/css/Core.css";
-import "./assets/css/Jstyle.css";
+import "./assets/styles/Swiper.css";
+import "./assets/styles/Mui.css";
+import "./assets/styles/Components.css";
+import "./assets/styles/Core.css";
+import "./assets/styles/Jstyle.css";
 import "./index.css";
 
-import { Header } from "./import/ImportLayouts.tsx";
-import { Footer } from "./import/ImportLayouts.tsx";
+import { Header } from "./imports/ImportLayouts.tsx";
+import { Footer } from "./imports/ImportLayouts.tsx";
 
-import { CommonMain } from "./page/common/CommonMain.tsx";
-import { AboutMain } from "./page/about/AboutMain.tsx";
-import { AboutGreeting } from "./page/about/AboutGreeting.tsx";
-import { AboutHistory } from "./page/about/AboutHistory.tsx";
-import { AboutLocation } from "./page/about/AboutLocation.tsx";
-import { MenuMain } from "./page/menu/MenuMain.tsx";
-import { MenuSide } from "./page/menu/MenuSide.tsx";
-import { ProductBuy } from "./page/product/ProductBuy.tsx";
-import { ProductOrder } from "./page/product/ProductOrder.tsx";
-import { FranchiseBranch } from "./page/franchise/FranchiseBranch.tsx";
-import { FranchiseInquiry } from "./page/franchise/FranchiseInquiry.tsx";
-import { ContactNotice } from "./page/contact/ContactNotice.tsx";
-import { ContactInquiry } from "./page/contact/ContactInquiry.tsx";
+import { CommonMain } from "./pages/common/CommonMain.tsx";
+import { AboutMain } from "./pages/about/AboutMain.tsx";
+import { AboutGreeting } from "./pages/about/AboutGreeting.tsx";
+import { AboutHistory } from "./pages/about/AboutHistory.tsx";
+import { AboutLocation } from "./pages/about/AboutLocation.tsx";
+import { MenuMain } from "./pages/menu/MenuMain.tsx";
+import { MenuSide } from "./pages/menu/MenuSide.tsx";
+import { ProductBuy } from "./pages/product/ProductBuy.tsx";
+import { ProductOrder } from "./pages/product/ProductOrder.tsx";
+import { FranchiseBranch } from "./pages/franchise/FranchiseBranch.tsx";
+import { FranchiseInquiry } from "./pages/franchise/FranchiseInquiry.tsx";
+import { ContactNotice } from "./pages/contact/ContactNotice.tsx";
+import { ContactInquiry } from "./pages/contact/ContactInquiry.tsx";
 
 // -------------------------------------------------------------------------------------------------
 const Common = () => (
@@ -83,7 +83,6 @@ const Contact = () => (
 const App = () => {
 
   useRoot();
-  useSessionStorage();
   useScrollTop();
   useEnhancedTouch();
 

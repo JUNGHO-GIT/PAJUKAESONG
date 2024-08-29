@@ -1,7 +1,7 @@
 // useRoot.tsx
 
-import { useEffect } from "../../import/ImportReacts.tsx";
-import { useCommon } from "../../import/ImportHooks.tsx";
+import { useEffect } from "../../imports/ImportReacts.tsx";
+import { useCommon } from "../../imports/ImportHooks.tsx";
 
 // -------------------------------------------------------------------------------------------------
 export const useRoot = () => {

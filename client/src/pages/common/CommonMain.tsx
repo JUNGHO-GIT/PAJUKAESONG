@@ -1,0 +1,96 @@
+// CommonMain.tsx
+
+import { Swiper, SwiperSlide } from "../../imports/ImportLibs.tsx";
+import { SwiperPagination, SwiperNavigation, SwiperAutoplay } from "../../imports/ImportLibs.tsx";
+import { Div, Img } from "../../imports/ImportComponents.tsx";
+import { Grid, Card, Paper } from "../../imports/ImportMuis.tsx";
+
+// -------------------------------------------------------------------------------------------------
+export const CommonMain = () => {
+
+  // 7. main ---------------------------------------------------------------------------------------
+  const mainNode = () => {
+    // 7-1. swiperSection
+    const swiperSection = () => (
+      <Swiper
+        spaceBetween={0}
+        centeredSlides={true}
+        navigation={true}
+        loop={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[
+          SwiperPagination,
+          SwiperNavigation,
+        ]}
+        style={{
+          width: "100%",
+          height: 500,
+        }}
+      >
+        <SwiperSlide>
+          <Img
+            src={"https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=800"}
+            alt={"slide1"}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Img
+            src={"https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=800"}
+            alt={"slide2"}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Img
+            src={"https://images.unsplash.com/photo-1521747116042-5a810fda9664?w=800"}
+            alt={"slide3"}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Img
+            src={"https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800"}
+            alt={"slide4"}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </SwiperSlide>
+      </Swiper>
+    );
+    // 7-10. return
+    return (
+      <Paper className={"content-wrapper h-min75vh"}>
+        <Grid container spacing={1}>
+          <Grid size={12}>
+            {swiperSection()}
+          </Grid>
+        </Grid>
+      </Paper>
+    );
+  };
+
+  // 10. return ------------------------------------------------------------------------------------
+  return (
+    <>
+      {mainNode()}
+    </>
+  );
+};

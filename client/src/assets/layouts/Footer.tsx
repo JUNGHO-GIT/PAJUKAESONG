@@ -1,11 +1,10 @@
 // Footer.tsx
 
-import { useState, useEffect } from "../../import/ImportReacts.tsx";
-import { useResponsive } from "../../import/ImportHooks.tsx";
-import { classNames } from "../../import/ImportLibs.tsx";
-import { Div, Img, Br20, Br5, Br10 } from "../../import/ImportComponents.tsx";
-import { Paper, Card, Grid } from "../../import/ImportMuis.tsx";
-import { logo1, logo2 } from "../../import/ImportImages.tsx";
+import { useState, useEffect } from "../../imports/ImportReacts.tsx";
+import { useResponsive } from "../../imports/ImportHooks.tsx";
+import { Div, Img } from "../../imports/ImportComponents.tsx";
+import { Paper, Card, Grid } from "../../imports/ImportMuis.tsx";
+import { logo1, logo2 } from "../../imports/ImportImages.tsx";
 
 // -------------------------------------------------------------------------------------------------
 export const Footer = () => {
@@ -42,45 +41,39 @@ export const Footer = () => {
       />
     );
     const textSection = () => (
-      <Div className={"d-column"}>
-        <Div className={"fs-0-7rem"}>
-          (주)이코딩  |  주소: 서울특별시 강남구 역삼동
-        </Div>
-        <Br5 />
-        <Div className={"fs-0-7rem"}>
+      <Grid container spacing={1} className={"horizon-text"}>
+        <Grid size={12} className={"fs-0-7rem"}>
+          이코딩  |  주소: 서울특별시 강남구 역삼동
+        </Grid>
+        <Grid size={12} className={"fs-0-7rem"}>
           대표: 이코딩  |  사업자: 123-45-67890
-        </Div>
-        <Br5 />
-        <Div className={"fs-0-7rem"}>
+        </Grid>
+        <Grid size={12} className={"fs-0-7rem"}>
           전화: 02-123-4567  |  이메일: 123123@gmail.com
-        </Div>
-      </Div>
+        </Grid>
+        <Grid size={12} className={"fs-0-7rem"}>
+          © 2021 이코딩. All rights reserved.
+        </Grid>
+      </Grid>
     );
     return (
-      <Paper className={"flex-wrapper p-relative border-top p-30"}>
-        <Card className={`block-wrapper`}>
-          {isXs ? (
-            <Grid container>
-              <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={`d-center`}>
-                {logoSection()}
-              </Grid>
-              <Br20 />
-              <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={`d-center`}>
-                {textSection()}
-              </Grid>
-            </Grid>
-          ) : (
-            <Grid container>
-              <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={`d-center`}>
-                {logoSection()}
-                <Div className={`w-10p`} />
-                {textSection()}
-              </Grid>
-            </Grid>
-          )}
-        </Card>
+      <Paper className={"layout-wrapper border-top p-30"}>
+        <Grid container spacing={1}>
+          <Grid
+            size={{ xs: 12, sm: 6 }}
+            className={"d-center"}
+          >
+            {logoSection()}
+          </Grid>
+          <Grid
+            size={{ xs: 12, sm: 6 }}
+            className={"d-center"}
+          >
+            {textSection()}
+          </Grid>
+        </Grid>
       </Paper>
-    )
+    );
   };
 
   // 10. return ------------------------------------------------------------------------------------

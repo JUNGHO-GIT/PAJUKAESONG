@@ -1,23 +1,16 @@
 // Icons.tsx
 
+import { React } from "../../imports/ImportReacts.tsx";
 import { IconButton } from "@mui/material";
 
 // -------------------------------------------------------------------------------------------------
-interface IconsProps {
-  name: string;
-  onClick?: () => void;
-  className?: string;
-}
+export const Icons = ( {...props}: any ) => {
 
-// -------------------------------------------------------------------------------------------------
-export const Icons = (
-  {name, onClick, ...props}: IconsProps
-) => {
-  if (!name) {
+  if (!props.name) {
     return null;
   }
 
-  const icons = {
+  const icons: { [key: string]: JSX.Element } = {
     TbX: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -246,11 +239,11 @@ export const Icons = (
     ),
   };
 
-  const IconComponent = icons[name as keyof typeof icons] || null;
+  const IconComponent = icons[props.name] || React.Fragment;
 
   // ---------------------------------------------------------------------------------------------->
   return (
-    <IconButton className={"p-5"} onClick={onClick}>
+    <IconButton className={"p-5"} onClick={props.onClick}>
       {IconComponent}
     </IconButton>
   );

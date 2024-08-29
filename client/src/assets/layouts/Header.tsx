@@ -1,12 +1,12 @@
 // Header.tsx
 
-import { useState, useEffect } from "../../import/ImportReacts.tsx";
-import { useCommon, useResponsive } from "../../import/ImportHooks.tsx";
-import { Div, Img, Icons, Hr20, Br15} from "../../import/ImportComponents.tsx";
-import { Paper, Grid } from "../../import/ImportMuis.tsx";
-import { Tabs, Tab, Card, Menu, MenuItem, tabsClasses } from "../../import/ImportMuis.tsx";
-import { SideBar } from '../../import/ImportLayouts.tsx';
-import { logo1 } from "../../import/ImportImages.tsx";
+import { useState, useEffect } from "../../imports/ImportReacts.tsx";
+import { useCommon, useResponsive } from "../../imports/ImportHooks.tsx";
+import { Div, Img, Icons } from "../../imports/ImportComponents.tsx";
+import { Paper, Grid } from "../../imports/ImportMuis.tsx";
+import { Tabs, Tab, Card, Menu, MenuItem, tabsClasses } from "../../imports/ImportMuis.tsx";
+import { SideBar } from '../../imports/ImportLayouts.tsx';
+import { logo1 } from "../../imports/ImportImages.tsx";
 
 // -------------------------------------------------------------------------------------------------
 export const Header = () => {
@@ -28,14 +28,8 @@ export const Header = () => {
     if (isXs) {
       setTabWidth("");
     }
-    else if (isSm) {
-      setTabWidth("w-18p");
-    }
-    else if (isMd) {
-      setTabWidth("w-15p");
-    }
-    else if (isLg || isXl) {
-      setTabWidth("w-18p");
+    else if (isSm || isMd || isLg || isXl) {
+      setTabWidth("w-20p");
     }
   }, [isXs, isSm, isMd, isLg, isXl]);
 
@@ -62,48 +56,25 @@ export const Header = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
-  // 6. sidebar ------------------------------------------------------------------------------------
-  const sidebarNode = () => {
+  // 7. headerNode ---------------------------------------------------------------------------------
+  const headerNode = () => {
+    const toggleSection = () => (
+      <Icons
+        name={"TbHamburger"}
+        className={"w-24 h-24 black"}
+        onClick={() => toggleSidebar()}
+      />
+    );
+    const sidebarSection = () => (
+      <SideBar
+        isOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+      />
+    );
     const logoSection = () => (
       <Img
         src={logo1}
         className={"pointer h-max50"}
-        onClick={() => {
-          navigate("/main");
-        }}
-      />
-    );
-    const toggleSection = () => (
-      <Div className={"d-center"}>
-        <Icons
-          name={"TbHamburger"}
-          className={"w-24 h-24 black m-0"}
-          onClick={() => toggleSidebar()}
-        />
-      </Div>
-    );
-    return (
-      <Paper className={"flex-wrapper p-sticky top-0vh radius border shadow-none p-10"}>
-        <Card className={"block-wrapper d-row w-100p shadow-none"}>
-          <Grid container>
-            <Grid item xs={1} className={"d-left"}>
-              {toggleSection()}
-            </Grid>
-            <Grid item xs={11} className={"d-center"}>
-              {logoSection()}
-            </Grid>
-          </Grid>
-        </Card>
-      </Paper>
-    );
-  };
-
-  // 7. tobNav -------------------------------------------------------------------------------------
-  const topNavNode = () => {
-    const logoSection = () => (
-      <Img
-        src={logo1}
-        className={"pointer h-max50 ms-10"}
         onClick={() => {
           navigate("/main");
         }}
@@ -116,13 +87,17 @@ export const Header = () => {
           variant={"scrollable"}
           selectionFollowsFocus={true}
           scrollButtons={false}
-          className={"w-100p"}
+          className={`w-100p`}
           sx={{
             [`& .${tabsClasses.scrollButtons}`]: {
               '&.Mui-disabled': { opacity: 0.3 },
             },
             "& .MuiTab-root": {
               color: "black",
+            },
+            "& .MuiTabs-flexContainer": {
+              display: "flex",
+              justifyContent: "center",
             },
           }}
         >
@@ -131,7 +106,7 @@ export const Header = () => {
               key={`tab-${idx}`}
               label={item.titleKo}
               value={item.titleEn}
-              className={`pointer-burgundy fs-1-1rem ${tabWidth} ${selectedTab === item.titleEn ? "burgundy fw-600" : ""}`}
+              className={`pointer-burgundy fs-1-1rem horizon-text ${tabWidth} ${selectedTab === item.titleEn ? "burgundy fw-600" : ""}`}
               onClick={(e) => {
                 setSelectedTab(item.titleEn);
                 setSelectedAnchorEl({
@@ -188,29 +163,28 @@ export const Header = () => {
       </>
     );
     return (
-      <Paper className={"flex-wrapper p-sticky top-0vh border-bottom p-20"}>
-        <Card className={`block-wrapper`}>
-          {isSm ? (
-            <Grid container>
-              <Grid item xs={12} className={"d-center"}>
-                {logoSection()}
-              </Grid>
-              <Br15 />
-              <Grid item xs={12} className={"d-center"}>
-                {tabsSection()}
-              </Grid>
-            </Grid>
-          ) : (
-            <Grid container>
-              <Grid item xs={2}>
-                {logoSection()}
-              </Grid>
-              <Grid item xs={10} className={"d-center"}>
-                {tabsSection()}
-              </Grid>
-            </Grid>
-          )}
-        </Card>
+      <Paper className={"layout-wrapper p-sticky top-0vh border-bottom p-20"}>
+        <Grid container spacing={1}>
+          <Grid
+            size={{ xs: 2, sm: 0, md: 0 }}
+            className={`${isXs ? "d-left" : "d-none"}`}
+          >
+            {sidebarSection()}
+            {toggleSection()}
+          </Grid>
+          <Grid
+            size={{ xs: 10, sm: 12, md: 4 }}
+            className={`${isXs ? "d-left" : "d-center"}`}
+          >
+            {logoSection()}
+          </Grid>
+          <Grid
+            size={{ xs: 0, sm: 12, md: 8 }}
+            className={`${isXs ? "d-none" : "d-center"}`}
+          >
+            {tabsSection()}
+          </Grid>
+        </Grid>
       </Paper>
     );
   };
@@ -218,16 +192,7 @@ export const Header = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {(isXs) ? (
-        <>
-          <SideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-          {sidebarNode()}
-        </>
-      ) : (
-        <>
-          {topNavNode()}
-        </>
-      )}
+      {headerNode()}
     </>
   );
 };
