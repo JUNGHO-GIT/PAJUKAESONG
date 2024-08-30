@@ -4,17 +4,39 @@
     /** 기본 설정 *********************************************************************************/
     "target": "ESNext",
     "module": "CommonJS",
-    "lib": ["ESNext", "DOM", "WebWorker", "ScriptHost"],
+    "moduleResolution": "Node",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "allowJs": true,
     "checkJs": true,
     "jsx": "react-jsx",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": false,
-    "outDir": "./dist",
-    "rootDir": "./src",
     "composite": true,
     "incremental": true,
+
+    /** 경로 설정 *********************************************************************************/
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["src/imports/importComponents"],
+      "@containers/*": ["src/imports/importContainers"],
+      "@hooks/*": ["src/imports/importHooks"],
+      "@images/*": ["src/imports/importImages"],
+      "@layouts/*": ["src/imports/importLayouts"],
+      "@libs/*": ["src/imports/importLibs"],
+      "@muis/*": ["src/imports/importMuis"],
+      "@reacts/*": ["src/imports/importReacts"],
+      "@utils/*": ["src/imports/importUtils"],
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/assets/types"
+    ],
+    "types": [
+      "node",
+      "alias",
+      "extension",
+    ],
 
     /** 타입 체크 *********************************************************************************/
     "strict": true,
@@ -31,13 +53,10 @@
     "noUnusedParameters": false,
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": false,
+    "noLib": false,
+    "preserveValueImports": false,
 
     /** 모듈 해석 *********************************************************************************/
-    "baseUrl": "./",
-    "paths": {},
-    "rootDirs": [],
-    "typeRoots": ["./node_modules/@types"],
-    "types": ["node"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
 
@@ -63,6 +82,14 @@
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": [
+    "src/**/*",
+    "./index.tsx",
+    "**/*.ts",
+    "**/*.tsx",
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+  ],
 }

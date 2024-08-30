@@ -1,7 +1,7 @@
 // aboutRouter.ts
 
 import express from "express";
-import * as service from "../../service/about/aboutService.ts";
+import * as service from "@services/about/aboutService";
 export const router = express.Router();
 
 // 0. location -------------------------------------------------------------------------------------
@@ -26,7 +26,8 @@ router.get("/location", async (req, res) => {
         result: null,
       });
     }
-  } catch (err) {
+  }
+  catch (err: any) {
     console.error(err);
     res.status(500).json({
       status: "error",

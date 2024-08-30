@@ -1,9 +1,9 @@
 // aboutService.js
+
 import axios from 'axios';
 
-
 // 0.location -------------------------------------------------------------------------------------
-export const location = async (place_id_param) => {
+export const location = async (place_id_param: string) => {
   try {
     const NAVER_MAPS_CLIENT_ID = process.env.NAVER_MAPS_CLIENT_ID || 'piuod7gl89';
 
@@ -16,8 +16,9 @@ export const location = async (place_id_param) => {
 
     // 네이버 API로부터 받은 데이터를 반환
     return response.data;
-  } catch (error) {
+  }
+  catch (error: any) {
     console.error("Error fetching location data from Naver API:", error);
-    throw error; // 오류 발생 시 오류를 다시 던짐
+    throw error;
   }
 };

@@ -5,13 +5,12 @@ import mongoose from "mongoose";
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import morgan from "morgan";
-
-import { aboutRouter } from "./router/about/aboutRouter.ts";
+import { router as aboutRouter } from "@routers/about/aboutRouter";
 
 // -------------------------------------------------------------------------------------------------
 dotenv.config();
 const app = express();
+const preFix = process.env.HTTP_PREFIX || "";
 
 // MongoDB 설정 ------------------------------------------------------------------------------------
 const id = process.env.DB_USER;
@@ -25,17 +24,12 @@ mongoose.connect(`mongodb://${id}:${pw}@${host}:${port}/${db}`);
 const httpPort = Number(process.env.HTTP_PORT) || 4100;
 const httpsPort = Number(process.env.HTTPS_PORT) || 443;
 
-/**
- * @param {number} httpPort
- * @param {number} httpsPort
- */
-function startServer(httpPort, httpsPort) {
+function startServer(httpPort: number, httpsPort: number) {
   try {
     const httpServer = app.listen(httpPort, () => {
       console.log(`HTTP 서버가 포트 ${httpPort}에서 실행 중입니다.`);
     });
-    httpServer.on('error', (error) => {
-      // @ts-ignore
+    httpServer.on('error', (error: any) => {
       if (error?.code === 'EADDRINUSE') {
         console.log(`${httpPort} 포트가 이미 사용 중입니다. 다른 포트로 변경합니다.`);
         startServer(httpPort + 1, httpsPort);
@@ -52,7 +46,6 @@ function startServer(httpPort, httpsPort) {
 startServer(httpPort, httpsPort);
 
 // 미들웨어 설정 -----------------------------------------------------------------------------------
-// app.use(morgan('dev'));
 app.use(cors({
   origin: "*",
   methods: ["GET", "POST", "DELETE", "PUT"],
@@ -67,4 +60,5 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/about", aboutRouter);
+// 라우터 설정 -------------------------------------------------------------------------------------
+app.use(`${preFix}/about`, aboutRouter);

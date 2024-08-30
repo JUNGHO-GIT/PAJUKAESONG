@@ -10,6 +10,11 @@ declare global {
   }
 }
 
+const serverUrl = process.env.REACT_APP_SERVER_URL;
+const aboutUrl = process.env.REACT_APP_ABOUT_URL;
+
+const OBJECT_URL = `${serverUrl}${aboutUrl}`;
+
 const PLACE_NAME = "Your Store Name"; // 가게 이름을 지정
 const PLACE_ID = "1771196057"; // 네이버 지도에서 사용되는 가게 ID
 const NAVER_MAPS_CLIENT_ID = "piuod7gl89"; // 네이버 지도 API 클라이언트 ID
@@ -18,18 +23,17 @@ export const AboutLocation = () => {
   const [locationData, setLocationData] = useState<any>(null);
 
   useEffect(() => {
-    const fetchLocationData = async () => {
-      try {
-        const response = await axios.get(`/about/location`, {
-          params: { place_id: PLACE_ID },
-        });
-        setLocationData(response.data.result); // locationData 업데이트
-      } catch (error) {
-        console.error("Error fetching location data:", error);
-      }
-    };
-
-    fetchLocationData();
+    axios.get(`${OBJECT_URL}/location`, {
+      params: {
+        place_id: PLACE_ID,
+      },
+    })
+    .then((response) => {
+      setLocationData(response.data.result);
+    })
+    .catch((error) => {
+      console.error("Error fetching location data:", error);
+    });
   }, []);
 
   useEffect(() => {
