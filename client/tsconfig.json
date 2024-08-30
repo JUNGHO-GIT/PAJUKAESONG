@@ -1,7 +1,6 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-
-    /** 기본 설정 *********************************************************************************/
     "target": "ESNext",
     "module": "CommonJS",
     "moduleResolution": "Node",
@@ -14,20 +13,7 @@
     "sourceMap": false,
     "composite": true,
     "incremental": true,
-
-    /** 경로 설정 *********************************************************************************/
     "baseUrl": "./",
-    "paths": {
-      "@components/*": ["src/imports/importComponents"],
-      "@containers/*": ["src/imports/importContainers"],
-      "@hooks/*": ["src/imports/importHooks"],
-      "@images/*": ["src/imports/importImages"],
-      "@layouts/*": ["src/imports/importLayouts"],
-      "@libs/*": ["src/imports/importLibs"],
-      "@muis/*": ["src/imports/importMuis"],
-      "@reacts/*": ["src/imports/importReacts"],
-      "@utils/*": ["src/imports/importUtils"],
-    },
     "typeRoots": [
       "./node_modules/@types",
       "./src/assets/types"
@@ -35,10 +21,8 @@
     "types": [
       "node",
       "alias",
-      "extension",
+      "extension"
     ],
-
-    /** 타입 체크 *********************************************************************************/
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -47,8 +31,6 @@
     "strictPropertyInitialization": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
-
-    /** 추가 설정 *********************************************************************************/
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noImplicitReturns": false,
@@ -56,20 +38,16 @@
     "noLib": false,
     "preserveValueImports": false,
 
-    /** 모듈 해석 *********************************************************************************/
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
 
-    /** 소스 코드 관리 ****************************************************************************/
     "allowUmdGlobalAccess": false,
     "preserveSymlinks": true,
     "isolatedModules": false,
 
-    /** 컴파일러 경고 제어 ************************************************************************/
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
 
-    /** 고급 설정 *********************************************************************************/
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "downlevelIteration": true,
@@ -86,10 +64,10 @@
     "src/**/*",
     "./index.tsx",
     "**/*.ts",
-    "**/*.tsx",
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules",
-    "**/*.spec.ts",
-  ],
+    "**/*.spec.ts"
+  ]
 }

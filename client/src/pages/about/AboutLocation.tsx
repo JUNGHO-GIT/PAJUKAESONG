@@ -1,8 +1,8 @@
 // AboutLocation.tsx
 
-import { useEffect, useState } from "../../imports/ImportReacts.tsx";
-import { Paper, Grid } from "../../imports/ImportMuis.tsx";
-import { axios } from "../../imports/ImportLibs.tsx";
+import { useEffect } from "react";
+import { Paper, Grid } from "@imports/ImportMuis.tsx";
+import { Div } from "@imports/ImportComponents.tsx";
 
 declare global {
   interface Window {
@@ -10,62 +10,22 @@ declare global {
   }
 }
 
-const serverUrl = process.env.REACT_APP_SERVER_URL;
-const aboutUrl = process.env.REACT_APP_ABOUT_URL;
-
-const OBJECT_URL = `${serverUrl}${aboutUrl}`;
-
-const PLACE_NAME = "Your Store Name"; // 가게 이름을 지정
-const PLACE_ID = "1771196057"; // 네이버 지도에서 사용되는 가게 ID
-const NAVER_MAPS_CLIENT_ID = "piuod7gl89"; // 네이버 지도 API 클라이언트 ID
+const NAVER_MAPS_CLIENT_ID = "piuod7gl89";
 
 export const AboutLocation = () => {
-  const [locationData, setLocationData] = useState<any>(null);
-
   useEffect(() => {
-    axios.get(`${OBJECT_URL}/location`, {
-      params: {
-        place_id: PLACE_ID,
-      },
-    })
-    .then((response) => {
-      setLocationData(response.data.result);
-    })
-    .catch((error) => {
-      console.error("Error fetching location data:", error);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!locationData) return;
-
     const initMap = () => {
-      const location = new window.naver.maps.LatLng(locationData.latitude, locationData.longitude);
-
+      const location = new window.naver.maps.LatLng(37.5665, 126.9780);
       const mapOptions = {
         center: location,
         zoom: 17,
-        mapTypeControl: true,
-        zoomControl: true,
       };
 
       const map = new window.naver.maps.Map("map", mapOptions);
 
-      const marker = new window.naver.maps.Marker({
+      new window.naver.maps.Marker({
         position: location,
         map: map,
-      });
-
-      const infoWindow = new window.naver.maps.InfoWindow({
-        content: `<div style="padding:10px;">
-                    <h4>${PLACE_NAME}</h4>
-                    <p>${locationData.address}</p>
-                    <p>${locationData.tel}</p>
-                  </div>`,
-      });
-
-      window.naver.maps.Event.addListener(marker, "click", () => {
-        infoWindow.open(map, marker);
       });
     };
 
@@ -78,18 +38,18 @@ export const AboutLocation = () => {
     return () => {
       script.remove();
     };
-  }, [locationData]);
+  }, []);
 
   return (
-    <Paper className={"content-wrapper h-min75vh"}>
-      <Grid container spacing={1}>
-        <Grid size={12}>
-          <h2>가게 위치</h2>
+      <Paper className={"content-wrapper radius border h-min75vh"}>
+        <Grid container spacing={2}>
+          <Grid size={12}>
+            <h2>가게 위치</h2>
+          </Grid>
+          <Grid size={12}>
+            <Div id={"map"} className={"w-100p h-400"} />
+          </Grid>
         </Grid>
-        <Grid size={12}>
-          <div id="map" style={{ width: "100%", height: "400px" }} />
-        </Grid>
-      </Grid>
-    </Paper>
+      </Paper>
   );
 };

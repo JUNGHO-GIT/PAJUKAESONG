@@ -13,9 +13,9 @@ export const Input = (props: any) => {
       size={ props?.size || "small"}
       fullWidth={ props?.fullWidth || true}
       slotProps={{
-        ... props?.slotProps,
+        ...props?.slotProps,
         input: {
-          ... props?.slotProps?.input,
+          ...props?.slotProps?.input,
           className: (
             props?.inputclass || "fs-1-0rem d-left"
           ),

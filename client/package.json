@@ -29,9 +29,9 @@
     ]
   },
   "scripts": {
-    "start": "react-scripts start",
-    "cache-clean": "del /f node_modules\\.cache\\eslintcache",
-    "build": "react-scripts build",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "gcloud": "node gcloud.cjs"
   },
   "dependencies": {
@@ -40,6 +40,7 @@
     "@mui/material": "^6.0.0",
     "@mui/x-date-pickers": "^7.14.0",
     "@react-hooks-library/core": "^0.6.2",
+    "@types/navermaps": "^3.7.5",
     "ajv": "^8.17.1",
     "ajv-keywords": "^5.1.0",
     "axios": "^1.7.5",
@@ -56,11 +57,13 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@craco/craco": "^7.1.0",
     "@testing-library/react": "^16.0.0",
     "@types/numeral": "^2.0.5",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "cra-bundle-analyzer": "^0.1.1",
+    "react-app-alias": "^2.2.2",
     "tslib": "^2.7.0",
     "typescript": "^5.5.4"
   }

@@ -20,19 +20,20 @@ declare module "@layouts/*" {
   const value: any;
   export default value;
 }
-declare module "@libs/*" {
+declare module "@scripts/*" {
   const value: any;
   export default value;
 }
-declare module "@muis/*" {
+declare module "@styles/*" {
   const value: any;
   export default value;
 }
-declare module "@reacts/*" {
+
+declare module "@pages/*" {
   const value: any;
   export default value;
 }
-declare module "@utils/*" {
+declare module "@imports/*" {
   const value: any;
   export default value;
 }
