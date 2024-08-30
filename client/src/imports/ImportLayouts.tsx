@@ -1,9 +1,9 @@
 // ImportLayouts.tsx
 
-import { Header } from "../assets/layouts/Header.tsx";
-import { SideBar } from "../assets/layouts/SideBar.tsx";
-import { Footer } from "../assets/layouts/Footer.tsx";
-import { Loading } from "../assets/layouts/Loading.tsx";
+import { Header } from "@layouts/Header";
+import { SideBar } from "@layouts/SideBar";
+import { Footer } from "@layouts/Footer";
+import { Loading } from "@layouts/Loading";
 
 // -------------------------------------------------------------------------------------------------
 export {

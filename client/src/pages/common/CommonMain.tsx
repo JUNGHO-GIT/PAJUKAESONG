@@ -1,9 +1,9 @@
 // CommonMain.tsx
 
-import { Swiper, SwiperSlide } from "../../imports/ImportLibs.tsx";
-import { SwiperPagination, SwiperNavigation, SwiperAutoplay } from "../../imports/ImportLibs.tsx";
-import { Div, Img } from "../../imports/ImportComponents.tsx";
-import { Grid, Card, Paper } from "../../imports/ImportMuis.tsx";
+import { Swiper, SwiperSlide } from "@imports/ImportLibs";
+import { SwiperPagination, SwiperNavigation, SwiperAutoplay } from "@imports/ImportLibs";
+import { Div, Img } from "@imports/ImportComponents";
+import { Grid, Card, Paper } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const CommonMain = () => {

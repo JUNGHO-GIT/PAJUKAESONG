@@ -1,7 +1,7 @@
 // Loading.tsx
 
-import { useCommon } from "../../imports/ImportHooks.tsx";
-import { Div } from "../../imports/ImportComponents.tsx";
+import { useCommon } from "@imports/ImportHooks";
+import { Div } from "@imports/ImportComponents";
 
 // 14. loading -------------------------------------------------------------------------------------
 export const Loading = () => {

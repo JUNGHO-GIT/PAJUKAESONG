@@ -71,6 +71,9 @@ import {Grid2 as Grid} from '@mui/material';
 // textfield
 import TextField from '@mui/material/TextField';
 
+// usePopupState
+import { usePopupState } from 'material-ui-popup-state/hooks';
+
 // -------------------------------------------------------------------------------------------------
 export {
 
@@ -128,5 +131,8 @@ export {
   createTheme, ThemeProvider,
 
   // textfield
-  TextField
+  TextField,
+
+  // usePopupState
+  usePopupState,
 };

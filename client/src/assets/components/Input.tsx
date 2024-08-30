@@ -1,6 +1,6 @@
 // Input.tsx
 
-import { TextField } from "../../imports/ImportMuis.tsx";
+import { TextField } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Input = (props: any) => {

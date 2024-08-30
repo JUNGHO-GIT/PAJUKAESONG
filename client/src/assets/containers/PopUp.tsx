@@ -1,7 +1,6 @@
 // PopUp.tsx
 
-import { Popover, bindPopover } from "../../imports/ImportMuis.tsx";
-import { usePopupState} from 'material-ui-popup-state/hooks';
+import { Popover, bindPopover, usePopupState } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const PopUp = (props: any) => {

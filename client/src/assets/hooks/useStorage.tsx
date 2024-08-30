@@ -1,7 +1,7 @@
 // useStorage.tsx
 
-import { useState, useEffect } from "../../imports/ImportReacts.tsx";
-import { parseISO, formatISO } from "../../imports/ImportLibs.tsx";
+import { useState, useEffect } from "@imports/ImportReacts";
+import { parseISO, formatISO } from "@imports/ImportLibs";
 
 // -------------------------------------------------------------------------------------------------
 export const useStorage = (key: string, initialVal: any) => {

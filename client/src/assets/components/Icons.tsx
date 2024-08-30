@@ -1,7 +1,7 @@
 // Icons.tsx
 
-import { React } from "../../imports/ImportReacts.tsx";
-import { IconButton } from "@mui/material";
+import { React } from "@imports/ImportReacts";
+import { IconButton } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Icons = ( {...props}: any ) => {

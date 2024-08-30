@@ -1,7 +1,7 @@
 // ContactNotice.tsx
 
-import { Paper, Card } from "../../imports/ImportMuis.tsx";
-import { Div } from "../../imports/ImportComponents.tsx";
+import { Paper, Card } from "@imports/ImportMuis";
+import { Div } from "@imports/ImportComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const ContactNotice = () => {

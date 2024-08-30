@@ -1,6 +1,6 @@
 // Bg.tsx
 
-import { Badge } from "../../imports/ImportMuis.tsx";
+import { Badge } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Bg = (props: any) => {

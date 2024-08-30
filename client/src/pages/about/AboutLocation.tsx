@@ -1,8 +1,8 @@
 // AboutLocation.tsx
 
 import { useEffect } from "react";
-import { Paper, Grid } from "@imports/ImportMuis.tsx";
-import { Div } from "@imports/ImportComponents.tsx";
+import { Paper, Grid } from "@imports/ImportMuis";
+import { Div } from "@imports/ImportComponents";
 
 // -------------------------------------------------------------------------------------------------
 declare global {

@@ -1,6 +1,6 @@
 // useScrollTop.tsx
 
-import { React, useEffect, useLocation, useNavigate } from "../../imports/ImportReacts.tsx";
+import { React, useEffect, useLocation, useNavigate } from "@imports/ImportReacts";
 
 // -------------------------------------------------------------------------------------------------
 export const useScrollTop = () => {

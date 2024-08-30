@@ -1,7 +1,7 @@
 // AboutHistory.tsx
 
-import { Paper, Card } from "../../imports/ImportMuis";
-import { Div } from "../../imports/ImportComponents.tsx";
+import { Paper, Card } from "@imports/ImportMuis";
+import { Div } from "@imports/ImportComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutHistory = () => {

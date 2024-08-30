@@ -1,14 +1,14 @@
 // ImportElements.tsx
 
-import { Div } from "../assets/components/Div.tsx";
-import { Img } from "../assets/components/Img.tsx";
-import { Br } from "../assets/components/Br.tsx";
-import { Hr } from "../assets/components/Hr.tsx";
-import { Icons } from "../assets/components/Icons.tsx";
-import { Input } from "../assets/components/Input.tsx";
-import { Select } from "../assets/components/Select.tsx";
-import { Btn } from "../assets/components/Btn.tsx";
-import { Bg } from "../assets/components/Bg.tsx";
+import { Div } from "@components/Div";
+import { Img } from "@components/Img";
+import { Br } from "@components/Br";
+import { Hr } from "@components/Hr";
+import { Icons } from "@components/Icons";
+import { Input } from "@components/Input";
+import { Select } from "@components/Select";
+import { Btn } from "@components/Btn";
+import { Bg } from "@components/Bg";
 
 // -------------------------------------------------------------------------------------------------
 export {

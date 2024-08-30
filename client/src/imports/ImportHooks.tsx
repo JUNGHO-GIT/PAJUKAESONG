@@ -1,11 +1,11 @@
 // ImportHooks.tsx
 
-import { useRoot } from "../assets/hooks/useRoot.tsx";
-import { useScrollTop } from "../assets/hooks/useScrollTop.tsx";
-import { useEnhancedTouch } from "../assets/hooks/useEnhancedTouch.tsx";
-import { useStorage } from "../assets/hooks/useStorage.tsx";
-import { useResponsive } from "../assets/hooks/useResponsive.tsx";
-import { useCommon } from "../assets/hooks/useCommon.tsx";
+import { useRoot } from "@hooks/useRoot";
+import { useScrollTop } from "@hooks/useScrollTop";
+import { useEnhancedTouch } from "@hooks/useEnhancedTouch";
+import { useStorage } from "@hooks/useStorage";
+import { useResponsive } from "@hooks/useResponsive";
+import { useCommon } from "@hooks/useCommon";
 
 // -------------------------------------------------------------------------------------------------
 export {

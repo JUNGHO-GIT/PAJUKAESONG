@@ -1,10 +1,10 @@
 // SideBar.tsx
 
-import { useState, useEffect } from "../../imports/ImportReacts.tsx";
-import { useCommon } from "../../imports/ImportHooks.tsx";
-import { Drawer, List, ListItem, Collapse, Grid } from "../../imports/ImportMuis.tsx";
-import { Icons, Div, Img, Hr } from "../../imports/ImportComponents.tsx";
-import { logo1 } from "../../imports/ImportImages.tsx";
+import { useState, useEffect } from "@imports/ImportReacts";
+import { useCommon } from "@imports/ImportHooks";
+import { Drawer, List, ListItem, Collapse, Grid } from "@imports/ImportMuis";
+import { Icons, Div, Img, Hr } from "@imports/ImportComponents";
+import { logo1 } from "@imports/ImportImages";
 
 // -------------------------------------------------------------------------------------------------
 interface SideBarProps {

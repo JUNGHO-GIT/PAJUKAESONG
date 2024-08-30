@@ -1,6 +1,6 @@
 // ImportContainers.tsx
 
-import { PopUp } from "../assets/containers/PopUp.tsx";
+import { PopUp } from "@containers/PopUp";
 
 // -------------------------------------------------------------------------------------------------
 export {

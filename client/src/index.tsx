@@ -1,34 +1,37 @@
 // index.tsx
 
-import { ReactDOM, BrowserRouter, Routes, Route } from "./imports/ImportReacts.tsx";
-import { CssBaseline, createTheme, ThemeProvider } from "./imports/ImportMuis.tsx";
-import { useScrollTop, useEnhancedTouch } from "./imports/ImportHooks.tsx";
-import { useRoot } from "./imports/ImportHooks.tsx";
-
 import "swiper/css";
-import "./assets/styles/Swiper.css";
-import "./assets/styles/Mui.css";
-import "./assets/styles/Components.css";
-import "./assets/styles/Core.css";
-import "./assets/styles/Jstyle.css";
 import "./index.css";
+import "@styles/Swiper.css";
+import "@styles/Mui.css";
+import "@styles/Components.css";
+import "@styles/Core.css";
+import "@styles/Jstyle.css";
 
-import { Header } from "./imports/ImportLayouts.tsx";
-import { Footer } from "./imports/ImportLayouts.tsx";
+import {
+  ReactDOM, BrowserRouter, Routes, Route
+} from "@imports/ImportReacts";
 
-import { CommonMain } from "./pages/common/CommonMain.tsx";
-import { AboutMain } from "./pages/about/AboutMain.tsx";
-import { AboutGreeting } from "./pages/about/AboutGreeting.tsx";
-import { AboutHistory } from "./pages/about/AboutHistory.tsx";
-import { AboutLocation } from "./pages/about/AboutLocation.tsx";
-import { MenuMain } from "./pages/menu/MenuMain.tsx";
-import { MenuSide } from "./pages/menu/MenuSide.tsx";
-import { ProductBuy } from "./pages/product/ProductBuy.tsx";
-import { ProductOrder } from "./pages/product/ProductOrder.tsx";
-import { FranchiseBranch } from "./pages/franchise/FranchiseBranch.tsx";
-import { FranchiseInquiry } from "./pages/franchise/FranchiseInquiry.tsx";
-import { ContactNotice } from "./pages/contact/ContactNotice.tsx";
-import { ContactInquiry } from "./pages/contact/ContactInquiry.tsx";
+import {
+  CssBaseline, createTheme, ThemeProvider
+} from "@imports/ImportMuis";
+
+import {
+  useRoot, useScrollTop, useEnhancedTouch
+} from "@imports/ImportHooks";
+
+import {
+  Header, Footer
+} from "@imports/ImportLayouts";
+
+import {
+  CommonMain,
+  AboutMain, AboutGreeting, AboutHistory, AboutLocation,
+  MenuMain, MenuSide,
+  ProductBuy, ProductOrder,
+  FranchiseBranch, FranchiseInquiry,
+  ContactNotice, ContactInquiry,
+} from "@imports/ImportPages";
 
 // -------------------------------------------------------------------------------------------------
 const Common = () => (

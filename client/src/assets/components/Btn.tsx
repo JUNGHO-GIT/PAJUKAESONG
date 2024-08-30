@@ -1,6 +1,6 @@
 // Btn.tsx
 
-import { Button } from "../../imports/ImportMuis.tsx";
+import { Button } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Btn = (props: any) => {

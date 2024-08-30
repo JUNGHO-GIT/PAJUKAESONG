@@ -1,8 +1,8 @@
 // useCommon.tsx
 
-import { useLocation, useNavigate } from "../../imports/ImportReacts.tsx";
-import { moment } from "../../imports/ImportLibs.tsx";
-import { dataArray } from "../../imports/ImportUtils.tsx";
+import { useLocation, useNavigate } from "@imports/ImportReacts";
+import { moment } from "@imports/ImportLibs";
+import { dataArray } from "@imports/ImportUtils";
 
 // -------------------------------------------------------------------------------------------------
 export const useCommon = () => {

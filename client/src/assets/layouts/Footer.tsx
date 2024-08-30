@@ -1,10 +1,10 @@
 // Footer.tsx
 
-import { useState, useEffect } from "../../imports/ImportReacts.tsx";
-import { useResponsive } from "../../imports/ImportHooks.tsx";
-import { Div, Img } from "../../imports/ImportComponents.tsx";
-import { Paper, Card, Grid } from "../../imports/ImportMuis.tsx";
-import { logo1, logo2 } from "../../imports/ImportImages.tsx";
+import { useState, useEffect } from "@imports/ImportReacts";
+import { useResponsive } from "@imports/ImportHooks";
+import { Div, Img } from "@imports/ImportComponents";
+import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { logo1, logo2 } from "@imports/ImportImages";
 
 // -------------------------------------------------------------------------------------------------
 export const Footer = () => {

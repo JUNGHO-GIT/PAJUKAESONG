@@ -1,12 +1,12 @@
 // Header.tsx
 
-import { useState, useEffect } from "../../imports/ImportReacts.tsx";
-import { useCommon, useResponsive } from "../../imports/ImportHooks.tsx";
-import { Div, Img, Icons } from "../../imports/ImportComponents.tsx";
-import { Paper, Grid } from "../../imports/ImportMuis.tsx";
-import { Tabs, Tab, Card, Menu, MenuItem, tabsClasses } from "../../imports/ImportMuis.tsx";
+import { useState, useEffect } from "@imports/ImportReacts";
+import { useCommon, useResponsive } from "@imports/ImportHooks";
+import { Div, Img, Icons } from "@imports/ImportComponents";
+import { Paper, Grid } from "@imports/ImportMuis";
+import { Tabs, Tab, Card, Menu, MenuItem, tabsClasses } from "@imports/ImportMuis";
 import { SideBar } from '../../imports/ImportLayouts.tsx';
-import { logo1 } from "../../imports/ImportImages.tsx";
+import { logo1 } from "@imports/ImportImages";
 
 // -------------------------------------------------------------------------------------------------
 export const Header = () => {
