@@ -13,8 +13,8 @@ const modifyEnv = () => {
   const envConfig = dotenv.parse(envFile);
 
   // envConfig 수정
-  envConfig.CLIENT_URL = "https://www.junghomun.com/PAJUKAESONG";
-  envConfig.GOOGLE_CALLBACK_URL = "https://www.junghomun.com/PAJUKAESONG/api/google/callback";
+  envConfig.CLIENT_URL = "https://www.pajukaesong.com/PAJUKAESONG";
+  envConfig.GOOGLE_CALLBACK_URL = "https://www.pajukaesong.com/PAJUKAESONG/api/google/callback";
 
   // env 파일 쓰기
   const newEnvFile = Object.keys(envConfig).reduce((acc, key) => {
@@ -76,7 +76,8 @@ const runRemoteScript = () => {
   const cmdSave = 'sudo pm2 save';
 
   const sshCommand =
-    `powershell -Command "ssh -i ${privateKeyPath} ${serverAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'"`;
+    `powershell -Command "ssh -i ${privateKeyPath} ${serverAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'"
+  `;
 
   execSync(sshCommand, { stdio: 'inherit' });
 };
