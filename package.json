@@ -6,7 +6,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "tsx index.ts",
+    "start": "tsx watch index.ts",
     "fetch": "git fetch --all && git reset --hard origin/main",
     "push": "git add . && git commit -m 'update' && git push origin main",
     "gcloud": "node gcloud.cjs"

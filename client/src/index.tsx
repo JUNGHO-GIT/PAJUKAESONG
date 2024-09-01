@@ -1,12 +1,12 @@
 // index.tsx
 
 import "swiper/css";
-import "./index.css";
 import "@styles/Swiper.css";
 import "@styles/Mui.css";
 import "@styles/Components.css";
 import "@styles/Core.css";
 import "@styles/Jstyle.css";
+import "./index.css";
 
 import {
   ReactDOM, BrowserRouter, Routes, Route
@@ -17,7 +17,7 @@ import {
 } from "@imports/ImportMuis";
 
 import {
-  useRoot, useScrollTop, useEnhancedTouch
+  useRoot, useScrollTop,
 } from "@imports/ImportHooks";
 
 import {
@@ -26,7 +26,7 @@ import {
 
 import {
   CommonMain,
-  AboutMain, AboutGreeting, AboutHistory, AboutLocation,
+  AboutMain, AboutGreeting, AboutLocation,
   MenuMain, MenuSide,
   ProductBuy, ProductOrder,
   FranchiseBranch, FranchiseInquiry,
@@ -45,7 +45,6 @@ const About = () => (
   <Routes>
     <Route path={"/main"} element={<AboutMain />} />
     <Route path={"/greeting"} element={<AboutGreeting />} />
-    <Route path={"/history"} element={<AboutHistory />} />
     <Route path={"/location"} element={<AboutLocation />} />
   </Routes>
 );
@@ -87,7 +86,6 @@ const App = () => {
 
   useRoot();
   useScrollTop();
-  useEnhancedTouch();
 
   return (
     <div className={"App"}>
@@ -111,6 +109,7 @@ const theme = createTheme({
     fontFamily: '"Noto Sans KR", sans-serif',
   },
 });
+
 const rootElement = document.getElementById("root");
 if (rootElement === null) {
   throw new Error("root element is null");

@@ -1,17 +1,32 @@
 // Footer.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useResponsive } from "@imports/ImportHooks";
-import { Div, Img } from "@imports/ImportComponents";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
-import { logo1, logo2 } from "@imports/ImportImages";
+import { useResponsive, useCommon } from "@imports/ImportHooks";
+import { axios } from "@imports/ImportLibs";
+import { Div, Img, Icons, Input, Btn, Hr } from "@imports/ImportComponents";
+import { PopUp } from "@imports/ImportContainers";
+import { Loading } from "@imports/ImportLayouts";
+import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { logo1 } from "@imports/ImportImages";
 
 // -------------------------------------------------------------------------------------------------
 export const Footer = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { isXs, isSm, isMd, isLg, isXl } = useResponsive();
-  const [width, setWidth] = useState("");
+  const {
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
+  const {
+    URL, isAdmin, isAdminId, isAdminPw, navigate,
+  } = useCommon();
+
+  // 2-1. useState ---------------------------------------------------------------------------------
+  const [LOADING, setLOADING] = useState<boolean>(false);
+  const [width, setWidth] = useState<string>("");
+  const [OBJECT, setOBJECT] = useState<any>({
+    user_id: isAdminId || "",
+    user_pw: isAdminPw || "",
+  });
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -32,42 +47,180 @@ export const Footer = () => {
     }
   }, [isXs, isSm, isMd, isLg, isXl]);
 
+  // 3. flow ---------------------------------------------------------------------------------------
+  const flowSave = async () => {
+    setLOADING(true);
+    axios.post(`${URL}/api/user/login`, {
+      user_id: OBJECT.user_id,
+      user_pw: OBJECT.user_pw,
+    })
+    .then((res: any) => {
+      if (res.data.status === "success") {
+        alert(res.data.msg);
+        if (res.data.admin === "admin") {
+          localStorage.setItem("ADMIN_ID", OBJECT.user_id);
+          localStorage.setItem("ADMIN_PW", OBJECT.user_pw);
+          localStorage.setItem("ADMIN", "true");
+        }
+      }
+      else {
+        alert(res.data.msg);
+        localStorage.setItem("ADMIN", "false");
+      }
+    })
+    .catch((err: any) => {
+      console.error(err);
+    })
+    .finally(() => {
+      navigate(0);
+      setLOADING(false);
+    });
+  };
+
+  // 4. handler ------------------------------------------------------------------------------------
+  const handlerLogout = () => {
+    localStorage.setItem("ADMIN", "false");
+    navigate(0);
+  }
+
   // 7. footer -------------------------------------------------------------------------------------
   const footerNode = () => {
+    // 1. logo
     const logoSection = () => (
       <Img
         src={logo1}
         className={`h-max50`}
       />
     );
+    // 3. text
     const textSection = () => (
-      <Grid container spacing={1} className={"horizon-text"}>
-        <Grid size={12} className={"fs-0-7rem"}>
-          이코딩  |  주소: 서울특별시 강남구 역삼동
+      <Grid container columns={12} spacing={1} className={`d-center horizon-text`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
+          <Icons name={"Info"} className={"w-12 h-12"} />
+          <Div className={"fs-0-8rem"}>
+            파주개성면옥 | 대표: 강민서 | 사업자 등록번호: 883-03-03096
+          </Div>
         </Grid>
-        <Grid size={12} className={"fs-0-7rem"}>
-          대표: 이코딩  |  사업자: 123-45-67890
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
+          <Icons name={"Location"} className={"w-12 h-12"} />
+          <Div className={"fs-0-8rem"}>
+            주소: 경기 파주시 문산읍 방촌로 1675-34 1층
+          </Div>
         </Grid>
-        <Grid size={12} className={"fs-0-7rem"}>
-          전화: 02-123-4567  |  이메일: 123123@gmail.com
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
+          <Icons name={"Call"} className={"w-12 h-12"} />
+          <Div className={"fs-0-8rem"}>
+            전화: 031-952-8083
+          </Div>
         </Grid>
-        <Grid size={12} className={"fs-0-7rem"}>
-          © 2021 이코딩. All rights reserved.
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
+          <Icons name={"Mail"} className={"w-12 h-12"} />
+          <Div className={"fs-0-8rem"}>
+            이메일: sooookee@naver.com
+          </Div>
+        </Grid>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
+          <Icons name={"Copyright"} className={"w-12 h-12"} />
+          <PopUp
+            type={"innerCenter"}
+            position={"center"}
+            direction={"center"}
+            contents={({ closePopup }: any) => (
+              <Card className={"w-60vw border radius p-20"}>
+                <Grid container spacing={2}>
+                  <Grid size={12} className={"d-center"}>
+                    <Div className={"fs-1-2rem fw-600"}>
+                      관리자 로그인
+                    </Div>
+                  </Grid>
+                  <Hr px={10} />
+                  <Grid size={12} className={"d-center"}>
+                    <Input
+                      label={"아이디"}
+                      required={true}
+                      value={OBJECT.user_id}
+                      disabled={isAdmin}
+                      onChange={(e: any) => {
+                        setOBJECT((prev: any) => ({
+                          ...prev,
+                          user_id: e.target.value,
+                        }));
+                      }}
+                    />
+                  </Grid>
+                  <Grid size={12} className={"d-center"}>
+                    <Input
+                      label={"비밀번호"}
+                      required={true}
+                      value={OBJECT.user_pw}
+                      disabled={isAdmin}
+                      onChange={(e: any) => {
+                        setOBJECT((prev: any) => ({
+                          ...prev,
+                          user_pw: e.target.value,
+                        }));
+                      }}
+                    />
+                  </Grid>
+                  <Hr px={10} />
+                  <Grid size={12} className={"d-center"}>
+                    {isAdmin ? (
+                      <Btn
+                        color={"error"}
+                        size={"large"}
+                        className={"w-100p"}
+                        onClick={(e: any) => {
+                          handlerLogout();
+                          closePopup(e.currentTarget);
+                        }}
+                      >
+                        로그아웃
+                      </Btn>
+                    ) : (
+                      <Btn
+                        color={"primary"}
+                        size={"large"}
+                        className={"w-100p"}
+                        onClick={(e: any) => {
+                          flowSave();
+                          closePopup(e.currentTarget);
+                        }}
+                      >
+                        로그인
+                      </Btn>
+                    )}
+                  </Grid>
+                </Grid>
+              </Card>
+            )}
+          >
+            {(popTrigger: any) => (
+              <Div
+                className={"fs-0-8rem"}
+                onClick={(e: any) => {
+                  popTrigger.openPopup(e.currentTarget);
+                }}
+              >
+                2024 파주개성면옥. All rights reserved.
+              </Div>
+            )}
+          </PopUp>
         </Grid>
       </Grid>
     );
+    // 4. return
     return (
       <Paper className={"layout-wrapper border-top p-30"}>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} columns={24}>
           <Grid
-            size={{ xs: 12, sm: 6 }}
-            className={"d-center"}
+            size={{ xs: 24, sm: 10, md: 12 }}
+            className={`d-center ${isXs ? "mb-20" : ""}`}
           >
             {logoSection()}
           </Grid>
           <Grid
-            size={{ xs: 12, sm: 6 }}
-            className={"d-center"}
+            size={{ xs: 24, sm: 14, md: 12 }}
+            className={`d-center`}
           >
             {textSection()}
           </Grid>

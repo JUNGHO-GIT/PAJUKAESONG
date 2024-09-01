@@ -3,7 +3,7 @@
 import { Button } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const Btn = (props: any) => {
+export const Btn = ({...props}: any) => {
 
   return (
     <Button

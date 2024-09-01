@@ -12,7 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 99999;
 }
 
 /* 로딩 스타일 */
@@ -28,7 +28,7 @@
   border-top: 3px solid rgba(66, 154, 255, 0.9);
   border-right: 3px solid transparent;
   animation: loaderAnimation 0.7s linear infinite;
-  z-index: 10000;
+  z-index: 100000;
 }
 
 @keyframes loaderAnimation {

@@ -3,7 +3,7 @@
 import { Badge } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const Bg = (props: any) => {
+export const Bg = ({...props}: any) => {
 
   return (
     <Badge

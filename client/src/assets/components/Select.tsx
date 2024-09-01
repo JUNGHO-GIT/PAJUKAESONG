@@ -3,7 +3,7 @@
 import { TextField } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const Select = (props: any) => {
+export const Select = ({...props}: any) => {
   return (
     <TextField
       {...props}

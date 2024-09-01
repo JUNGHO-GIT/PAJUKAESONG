@@ -3,15 +3,15 @@
 import { TextField } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const Input = (props: any) => {
+export const Input = ({...props}: any) => {
   return (
     <TextField
       {...props}
-      select={ props?.select || false}
-      variant={ props?.variant || "outlined"}
-      type={ props?.type || "text"}
-      size={ props?.size || "small"}
-      fullWidth={ props?.fullWidth || true}
+      select={props?.select || false}
+      variant={props?.variant || "outlined"}
+      type={props?.type || "text"}
+      size={props?.size || "small"}
+      fullWidth={props?.fullWidth || true}
       slotProps={{
         ...props?.slotProps,
         input: {

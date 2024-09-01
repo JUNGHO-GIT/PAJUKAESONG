@@ -2,7 +2,6 @@
 
 import { AboutMain } from "@pages/about/AboutMain";
 import { AboutGreeting } from "@pages/about/AboutGreeting";
-import { AboutHistory } from "@pages/about/AboutHistory";
 import { AboutLocation } from "@pages/about/AboutLocation";
 import { MenuMain } from "@pages/menu/MenuMain";
 import { MenuSide } from "@pages/menu/MenuSide";
@@ -18,7 +17,6 @@ import { CommonMain } from "@pages/common/CommonMain";
 export {
   AboutMain,
   AboutGreeting,
-  AboutHistory,
   AboutLocation,
   MenuMain,
   MenuSide,

@@ -3,7 +3,7 @@
 import { Popover, bindPopover, usePopupState } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const PopUp = (props: any) => {
+export const PopUp = ({...props}: any) => {
 
   const popupState = usePopupState({
     variant: 'popover',

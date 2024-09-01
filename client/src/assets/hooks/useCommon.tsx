@@ -9,7 +9,6 @@ export const useCommon = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-
   const location_id = location?.state?.id;
   const location_dateType = location?.state?.dateType;
   const location_dateStart = location?.state?.dateStart;
@@ -21,14 +20,15 @@ export const useCommon = () => {
   const secondStr = PATH?.split("/")[2] || "";
   const thirdStr = PATH?.split("/")[3] || "";
 
-  const URL = process.env.REACT_APP_URL || "";
-  const SUBFIX = process.env[`REACT_APP_${firstStr.toUpperCase()}`] || "";
+  const URL = process.env.REACT_APP_SERVER_URL || "";
+  const SUBFIX = process.env[`REACT_APP_${firstStr.toUpperCase()}_URL`] || "";
 
-  const ADMIN_ID = process.env.REACT_APP_ADMIN_ID || "";
-  const ADMIN_PW = process.env.REACT_APP_ADMIN_PW || "";
-
-  const sessionId = sessionStorage.getItem("ID_SESSION") || "";
-  const session = sessionStorage.getItem("CATEGORY") || "{}";
+  const getSessionAdmin = localStorage.getItem("ADMIN") || "";
+  const getSessionAdminId = localStorage.getItem("ADMIN_ID") || "";
+  const getSessionAdminPw = localStorage.getItem("ADMIN_PW") || "";
+  const isAdmin = getSessionAdmin === "true" ? true : false;
+  const isAdminId = getSessionAdminId;
+  const isAdminPw = getSessionAdminPw;
 
   const newDate = moment().tz("Asia/Seoul");
   const koreanDate = moment().tz("Asia/Seoul").format("YYYY-MM-DD");
@@ -43,8 +43,8 @@ export const useCommon = () => {
     navigate, location,
     location_id, location_category, location_dateType, location_dateStart, location_dateEnd,
     PATH, firstStr, secondStr, thirdStr,
-    ADMIN_ID, ADMIN_PW,
-    sessionId, session, dataArray,
+    URL, SUBFIX,
+    isAdmin, isAdminId, isAdminPw, dataArray,
     newDate, koreanDate, curWeekStart, curWeekEnd, curMonthStart, curMonthEnd, curYearStart, curYearEnd,
   };
 };

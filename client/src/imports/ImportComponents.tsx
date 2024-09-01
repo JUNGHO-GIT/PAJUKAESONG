@@ -4,15 +4,23 @@ import { Div } from "@components/Div";
 import { Img } from "@components/Img";
 import { Br } from "@components/Br";
 import { Hr } from "@components/Hr";
+import { Btn } from "@components/Btn";
+import { Bg } from "@components/Bg";
 import { Icons } from "@components/Icons";
 import { Input } from "@components/Input";
 import { Select } from "@components/Select";
-import { Btn } from "@components/Btn";
-import { Bg } from "@components/Bg";
+import { TextArea } from "@components/TextArea";
 
 // -------------------------------------------------------------------------------------------------
 export {
-  Div, Img,
-  Br, Hr,
-  Icons, Input, Select, Btn, Bg,
+  Div,
+  Img,
+  Br,
+  Hr,
+  Btn,
+  Bg,
+  Icons,
+  Input,
+  Select,
+  TextArea,
 };

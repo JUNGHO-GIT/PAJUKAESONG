@@ -12,12 +12,16 @@ import { logo1 } from "@imports/ImportImages";
 export const Header = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, PATH, firstStr, secondStr, dataArray } = useCommon();
-  const { isXs, isSm, isMd, isLg, isXl } = useResponsive();
+  const {
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
+  const {
+    navigate, PATH, firstStr, secondStr, dataArray, isAdmin,
+  } = useCommon();
 
   // 2-2. useState ---------------------------------------------------------------------------------
-  const [tabWidth, setTabWidth] = useState("");
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [tabWidth, setTabWidth] = useState<string>("");
+  const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [selectedTab, setSelectedTab] = useState<string>("");
   const [selectedTabVal, setSelectedTabVal] = useState<string>("");
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>("");
@@ -60,7 +64,7 @@ export const Header = () => {
   const headerNode = () => {
     const toggleSection = () => (
       <Icons
-        name={"TbHamburger"}
+        name={"Hamburger"}
         className={"w-24 h-24 black"}
         onClick={() => toggleSidebar()}
       />
@@ -72,13 +76,18 @@ export const Header = () => {
       />
     );
     const logoSection = () => (
-      <Img
-        src={logo1}
-        className={"pointer h-max50"}
-        onClick={() => {
-          navigate("/main");
-        }}
-      />
+      <Div className={"d-center"}>
+        <Img
+          src={logo1}
+          className={"pointer h-max50"}
+          onClick={() => {
+            navigate("/main");
+          }}
+        />
+        <Div className={"fs-0-9rem fw-600 burgundy"}>
+          {isAdmin ? "관리자" : ""}
+        </Div>
+      </Div>
     );
     const tabsSection = () => (
       <>

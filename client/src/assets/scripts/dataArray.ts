@@ -16,11 +16,6 @@ export const dataArray = [
         url: "/about/greeting",
       },
       {
-        titleKo: "연혁",
-        titleEn: "history",
-        url: "/about/history",
-      },
-      {
         titleKo: "오시는 길",
         titleEn: "location",
         url: "/about/location",

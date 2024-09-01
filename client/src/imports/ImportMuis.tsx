@@ -34,7 +34,7 @@ import {
 
   // t
   Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton,  Toolbar, Tooltip, Tabs, Tab, tabsClasses,
-  TextareaAutosize as TextArea,
+  TextareaAutosize,
 
   // u
   useMediaQuery, useTheme,
@@ -110,7 +110,7 @@ export {
 
   // t
   Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton, Toolbar, Tooltip, Tabs, Tab, tabsClasses,
-  TextArea,
+  TextareaAutosize,
 
   // u
   useMediaQuery, useTheme,

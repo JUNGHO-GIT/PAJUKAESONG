@@ -1,2 +1,0 @@
-client id = piuod7gl89
-client secret = 9Qco6mg2N7WrKkPzBr7PIijp81tDsCqxet1RBmGz

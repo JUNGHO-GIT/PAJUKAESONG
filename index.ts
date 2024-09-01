@@ -7,7 +7,13 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import morgan from "morgan";
 
-import { router as aboutRouter } from "@routers/about/aboutRouter";
+import { commonRouter } from "@routers/commonRouter";
+import { aboutRouter } from "@routers/aboutRouter";
+import { contactRouter } from "@routers/contactRouter";
+import { franchiseRouter } from "@routers/franchiseRouter";
+import { menuRouter } from "@routers/menuRouter";
+import { productRouter } from "@routers/productRouter";
+import { userRouter } from "@routers/userRouter";
 
 // -------------------------------------------------------------------------------------------------
 dotenv.config();
@@ -77,4 +83,10 @@ app.use(morgan('dev', {
 }));
 
 // 라우터 설정 -------------------------------------------------------------------------------------
+app.use(`${preFix}/common`, commonRouter);
 app.use(`${preFix}/about`, aboutRouter);
+app.use(`${preFix}/contact`, contactRouter);
+app.use(`${preFix}/franchise`, franchiseRouter);
+app.use(`${preFix}/menu`, menuRouter);
+app.use(`${preFix}/product`, productRouter);
+app.use(`${preFix}/user`, userRouter);

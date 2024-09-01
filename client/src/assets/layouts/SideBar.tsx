@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommon } from "@imports/ImportHooks";
-import { Drawer, List, ListItem, Collapse, Grid } from "@imports/ImportMuis";
-import { Icons, Div, Img, Hr } from "@imports/ImportComponents";
+import { Icons, Div, Img, Hr, Br } from "@imports/ImportComponents";
+import { PopUp } from "@imports/ImportContainers";
+import { Drawer, List, ListItem, Collapse, Grid, Card } from "@imports/ImportMuis";
 import { logo1 } from "@imports/ImportImages";
 
 // -------------------------------------------------------------------------------------------------
@@ -18,25 +19,24 @@ export const SideBar = (
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, location, firstStr, secondStr, dataArray } = useCommon();
+  const {
+    navigate, firstStr, secondStr, dataArray, PATH
+  } = useCommon();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [selectedTab, setSelectedTab] = useState<string>("");
   const [selectedTabVal, setSelectedTabVal] = useState<string>("");
   const [selectedListItem, setSelectedListItem] = useState<string>("");
+  const [loginTrigger, setLoginTrigger] = useState<boolean>(false);
+  const [clickCount, setClickCount] = useState<number>(0);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화
   useEffect(() => {
-    const index = dataArray.findIndex((item) => (
-      item.titleEn === firstStr
-    ));
-    if (index !== -1) {
-      setSelectedTab(firstStr);
-      setSelectedTabVal(firstStr);
-      setSelectedListItem(secondStr);
-    }
-  }, [navigate, location]);
+    setSelectedTab(firstStr);
+    setSelectedTabVal(firstStr);
+    setSelectedListItem(secondStr);
+  }, [PATH]);
 
   // 7. sidebar ------------------------------------------------------------------------------------
   const sideBarNode = () => {
@@ -70,8 +70,8 @@ export const SideBar = (
               {item.titleKo}
             </Div>
             {selectedTab === item.titleEn
-              ? <Icons name={"TbChevronUp"} className={"w-12 h-12 black"} />
-              : <Icons name={"TbChevronDown"} className={"w-12 h-12 black"} />
+              ? <Icons name={"ChevronUp"} className={"w-12 h-12 black"} />
+              : <Icons name={"ChevronDown"} className={"w-12 h-12 black"} />
             }
           </ListItem>
           {/* 하위 항목 */}
@@ -103,28 +103,42 @@ export const SideBar = (
       ))
     );
     const textSection1 = () => (
-      <Grid container columnSpacing={1} rowSpacing={1}>
-        <Grid size={12} className={"fs-0-7rem"}>
-          이코딩  |  주소: 서울특별시 강남구 역삼동
+      <Grid container columns={12} spacing={1} className={`d-center horizon-text`}>
+        <Grid size={12} className={"d-left"}>
+          <Icons name={"Info"} className={"w-12 h-12"} />
+          <Div className={"fs-0-8rem"}>
+            사업자 등록번호: 883-03-03096
+          </Div>
         </Grid>
-        <Grid size={12} className={"fs-0-7rem"}>
-          대표: 이코딩  |  사업자: 123-45-67890
+        <Grid size={12} className={"d-left"}>
+          <Icons name={"Location"} className={"w-12 h-12"} />
+          <Div className={"fs-0-7rem"}>
+            경기 파주시 문산읍 방촌로 1675-34
+          </Div>
         </Grid>
-        <Grid size={12} className={"fs-0-7rem"}>
-          전화: 02-123-4567
+        <Grid size={12} className={"d-left"}>
+          <Icons name={"Call"} className={"w-12 h-12"} />
+          <Div className={"fs-0-8rem"}>
+            031-952-8083
+          </Div>
         </Grid>
-        <Grid size={12} className={"fs-0-7rem"}>
-          이메일: 123123@gmail.com
+        <Grid size={12} className={"d-left"}>
+          <Icons name={"Mail"} className={"w-12 h-12"} />
+          <Div className={"fs-0-8rem"}>
+            sooookee@naver.com
+          </Div>
         </Grid>
       </Grid>
     );
     const textSection2 = () => (
-      <Grid container columnSpacing={1} rowSpacing={1}>
-        <Grid size={12} className={"fs-0-8rem"}>
-          <span>&copy; 2024</span> <b>PajuKaesong</b>
+      <Grid container spacing={2} columns={12} className={"horizon-text fs-0-8rem"}>
+        <Grid size={12} className={"d-center"}>
+          <span>&copy; 2024&nbsp;&nbsp;</span>
+          <b>PajuKaesong</b>
         </Grid>
-        <Grid size={12} className={"fs-0-8rem"}>
-          <span>Designed by</span> <b>JUNGHO</b>
+        <Grid size={12} className={"d-center"}>
+          <span>Designed by&nbsp;&nbsp;</span>
+          <b>JUNGHO</b>
         </Grid>
       </Grid>
     );
@@ -141,7 +155,7 @@ export const SideBar = (
           },
         }}
       >
-        <Grid container columnSpacing={1} rowSpacing={1}>
+        <Grid container spacing={2}>
           <Grid size={12} className={"d-center"}>
             {logoSection()}
           </Grid>

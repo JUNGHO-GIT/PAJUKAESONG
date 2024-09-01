@@ -1,8 +1,8 @@
 // AboutLocation.tsx
 
 import { useEffect } from "react";
+import { Div, Img, Br } from "@imports/ImportComponents";
 import { Paper, Grid } from "@imports/ImportMuis";
-import { Div } from "@imports/ImportComponents";
 
 // -------------------------------------------------------------------------------------------------
 declare global {
@@ -14,15 +14,17 @@ declare global {
 // -------------------------------------------------------------------------------------------------
 export const AboutLocation = () => {
 
+  // 1. common -------------------------------------------------------------------------------------
   const NAVER_MAPS_CLIENT_ID = process.env.REACT_APP_NAVER_MAPS_CLIENT_ID;
   const srcPre = "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=";
   const scriptSrc = `${srcPre}${NAVER_MAPS_CLIENT_ID}`;
 
+  // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     const initMap = () => {
       if (window.naver && window.naver.maps) {
         const naverMaps = window.naver.maps;
-        const location = new naverMaps.LatLng(37.5666805, 126.9784147);
+        const location = new naverMaps.LatLng(37.864200, 126.780585);
         const mapOptions = {
           center: location,
           zoom: 17,
@@ -42,20 +44,21 @@ export const AboutLocation = () => {
           map: newMap,
         });
         const infoWindow = new naverMaps.InfoWindow({
-          content: `
-            <div style="padding: 20px;">
-              <h4>서울특별시청</h4>
-              <p>서울특별시 중구 서소문동 37-9</p>
-            </div>
-          `,
-          backgroundColor: "#fff",
-          borderColor: "#000",
-          borderWidth: 1,
-          anchorSize: new naverMaps.Size(0, 0),
-          anchorSkew: true,
-          anchorColor: "#fff",
+            pixelOffset: new naverMaps.Point(0, -10),
+            anchorSize: new naverMaps.Size(0, -5),
+            backgroundColor: "#ffffff",
+            borderColor: "#333333",
+            borderWidth: 0.5,
+            anchorSkew: false,
+            disableAnchor: false,
+            anchorColor: "#ffffff",
+            content: `
+              <div style="padding: 10px;">
+                <h3>파주개성면옥</h3>
+                <p>경기 파주시 문산읍 방촌로 1675-34</p>
+              </div>
+            `,
         });
-
         naverMaps.Event.addListener(marker, "click", function () {
           if (infoWindow.getMap()) {
             infoWindow.close();
@@ -83,18 +86,51 @@ export const AboutLocation = () => {
     };
   }, []);
 
+  // 7. locationNode -------------------------------------------------------------------------------
+  const locationNode = () => {
+    // 1. title
+    const titleSection = () => (
+      <Div
+        key={"title"}
+        className={"fs-2-0rem fw-700"}
+      >
+        오시는길
+      </Div>
+    );
+    // 2. location
+    const locationSection = () => (
+      <Div
+        key={"location"}
+        id={"map"}
+        className={"border radius"}
+        style={{
+          width: "100%",
+          height: "50vh",
+        }}
+      />
+    );
+    // 3. return
+    return (
+      <Paper className={"content-wrapper h-min75vh"}>
+        <Grid container spacing={2}>
+          <Br px={10} />
+          <Grid size={12} className={"d-center"}>
+            {titleSection()}
+          </Grid>
+          <Br px={10} />
+          <Grid size={12} className={"d-center"}>
+            {locationSection()}
+          </Grid>
+          <Br px={10} />
+        </Grid>
+      </Paper>
+    );
+  };
+
+  // 10. return ------------------------------------------------------------------------------------
   return (
-    <Paper className={"content-wrapper radius border h-min75vh"}>
-      <Grid container spacing={2}>
-        <Grid size={12} className={"d-center"}>
-          <Div className={"fs-1-4rem fw-700"}>
-            가게 위치
-          </Div>
-        </Grid>
-        <Grid size={12}>
-          <Div id={"map"} style={{ width: "100%", height: "400px" }} />
-        </Grid>
-      </Grid>
-    </Paper>
+    <>
+      {locationNode()}
+    </>
   );
 };

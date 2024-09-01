@@ -1,7 +1,7 @@
 // Img.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const Img = (props: any) => {
+export const Img = ({...props}: any) => {
 
   // src속성 찾기
   const srcProps = props.src;
