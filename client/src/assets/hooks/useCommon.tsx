@@ -20,12 +20,13 @@ export const useCommon = () => {
   const secondStr = PATH?.split("/")[2] || "";
   const thirdStr = PATH?.split("/")[3] || "";
 
+  const TITLE = process.env.REACT_APP_TITLE || "";
   const URL = process.env.REACT_APP_SERVER_URL || "";
   const SUBFIX = process.env[`REACT_APP_${firstStr.toUpperCase()}_URL`] || "";
 
-  const getSessionAdmin = localStorage.getItem("ADMIN") || "";
-  const getSessionAdminId = localStorage.getItem("ADMIN_ID") || "";
-  const getSessionAdminPw = localStorage.getItem("ADMIN_PW") || "";
+  const getSessionAdmin = localStorage.getItem(`${TITLE}_admin`) || "";
+  const getSessionAdminId = localStorage.getItem(`${TITLE}_adminId`) || "";
+  const getSessionAdminPw = localStorage.getItem(`${TITLE}_adminPw`) || "";
   const isAdmin = getSessionAdmin === "true" ? true : false;
   const isAdminId = getSessionAdminId;
   const isAdminPw = getSessionAdminPw;
@@ -43,7 +44,7 @@ export const useCommon = () => {
     navigate, location,
     location_id, location_category, location_dateType, location_dateStart, location_dateEnd,
     PATH, firstStr, secondStr, thirdStr,
-    URL, SUBFIX,
+    URL, SUBFIX, TITLE,
     isAdmin, isAdminId, isAdminPw, dataArray,
     newDate, koreanDate, curWeekStart, curWeekEnd, curMonthStart, curMonthEnd, curYearStart, curYearEnd,
   };

@@ -5,7 +5,6 @@ import { useResponsive, useCommon } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Div, Img, Icons, Input, Btn, Hr } from "@imports/ImportComponents";
 import { PopUp } from "@imports/ImportContainers";
-import { Loading } from "@imports/ImportLayouts";
 import { Paper, Grid, Card } from "@imports/ImportMuis";
 import { logo1 } from "@imports/ImportImages";
 
@@ -17,11 +16,10 @@ export const Footer = () => {
     isXs, isSm, isMd, isLg, isXl
   } = useResponsive();
   const {
-    URL, isAdmin, isAdminId, isAdminPw, navigate,
+    URL, isAdmin, isAdminId, isAdminPw, navigate, TITLE,
   } = useCommon();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [width, setWidth] = useState<string>("");
   const [OBJECT, setOBJECT] = useState<any>({
     user_id: isAdminId || "",
@@ -49,7 +47,6 @@ export const Footer = () => {
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async () => {
-    setLOADING(true);
     axios.post(`${URL}/api/user/login`, {
       user_id: OBJECT.user_id,
       user_pw: OBJECT.user_pw,
@@ -58,14 +55,14 @@ export const Footer = () => {
       if (res.data.status === "success") {
         alert(res.data.msg);
         if (res.data.admin === "admin") {
-          localStorage.setItem("ADMIN_ID", OBJECT.user_id);
-          localStorage.setItem("ADMIN_PW", OBJECT.user_pw);
-          localStorage.setItem("ADMIN", "true");
+          localStorage.setItem(`${TITLE}_adminId`, OBJECT.user_id);
+          localStorage.setItem(`${TITLE}_adminPw`, OBJECT.user_pw);
+          localStorage.setItem(`${TITLE}_admin`, "true");
         }
       }
       else {
         alert(res.data.msg);
-        localStorage.setItem("ADMIN", "false");
+        localStorage.setItem(`${TITLE}_admin`, "false");
       }
     })
     .catch((err: any) => {
@@ -73,13 +70,12 @@ export const Footer = () => {
     })
     .finally(() => {
       navigate(0);
-      setLOADING(false);
     });
   };
 
   // 4. handler ------------------------------------------------------------------------------------
   const handlerLogout = () => {
-    localStorage.setItem("ADMIN", "false");
+    localStorage.clear();
     navigate(0);
   }
 
