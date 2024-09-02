@@ -16,7 +16,7 @@ export const ProductOrder = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        주문 조회
+        구매하기
       </Div>
     );
     // 3. return

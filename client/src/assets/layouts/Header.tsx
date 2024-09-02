@@ -33,7 +33,7 @@ export const Header = () => {
       setTabWidth("");
     }
     else if (isSm || isMd || isLg || isXl) {
-      setTabWidth("w-20p");
+      setTabWidth("w-17p");
     }
   }, [isXs, isSm, isMd, isLg, isXl]);
 

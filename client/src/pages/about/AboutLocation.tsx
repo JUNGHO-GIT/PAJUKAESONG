@@ -102,7 +102,7 @@ export const AboutLocation = () => {
       <Div
         key={"location"}
         id={"map"}
-        className={"border radius"}
+        className={"border radius shadow"}
         style={{
           width: "100%",
           height: "50vh",

@@ -1,15 +1,15 @@
-// ContactNotice.tsx
+// NoticeList.tsx
 
 import { Div, Img, Hr, Br } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const ContactNotice = () => {
+export const NoticeList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
 
-  // 7. noticeNode -------------------------------------------------------------------------------
-  const noticeNode = () => {
+  // 7. listNode -----------------------------------------------------------------------------------
+  const listNode = () => {
     // 1. title
     const titleSection = () => (
       <Div
@@ -36,7 +36,7 @@ export const ContactNotice = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {noticeNode()}
+      {listNode()}
     </>
   );
 };

@@ -1,22 +1,22 @@
-// MenuMain.tsx
+// ProductLookup.tsx
 
 import { Div, Img, Hr, Br } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuMain = () => {
+export const ProductLookup = () => {
 
   // 1. common -------------------------------------------------------------------------------------
 
-  // 7. mainNode -----------------------------------------------------------------------------------
-  const mainNode = () => {
+  // 7. lookupNode ---------------------------------------------------------------------------------
+  const lookupNode = () => {
     // 1. title
     const titleSection = () => (
       <Div
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        대표 메뉴
+        주문 조회
       </Div>
     );
     // 3. return
@@ -36,7 +36,7 @@ export const MenuMain = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {mainNode()}
+      {lookupNode()}
     </>
   );
 };

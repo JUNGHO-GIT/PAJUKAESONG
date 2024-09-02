@@ -99,7 +99,7 @@ export const ContactInquiry = () => {
               style={{
                 color: "rgba(0, 0, 0, 0.6)",
                 fontWeight: 400,
-                fontSize: "1rem",
+                fontSize: "0.9rem",
                 lineHeight: "1.4375em",
               }}
             >
@@ -108,7 +108,7 @@ export const ContactInquiry = () => {
             <Br px={5} />
             <TextArea
               required={true}
-              className={"ms-n10 h-30vh"}
+              className={"ms-n10 h-35vh"}
               value={OBJECT.inquiry_content}
               onChange={(e: any) => {
                 setOBJECT({

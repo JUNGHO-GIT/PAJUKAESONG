@@ -28,9 +28,10 @@ import {
   CommonMain,
   AboutMain, AboutGreeting, AboutLocation,
   MenuMain, MenuSide,
-  ProductBuy, ProductOrder,
+  ProductOrder, ProductLookup,
   FranchiseBranch, FranchiseInquiry,
-  ContactNotice, ContactInquiry,
+  ContactInquiry, ContactLookup,
+  NoticeList, NoticeDetail,
 } from "@imports/ImportPages";
 
 // -------------------------------------------------------------------------------------------------
@@ -60,8 +61,8 @@ const Menu = () => (
 // -------------------------------------------------------------------------------------------------
 const Product = () => (
   <Routes>
-    <Route path={"/buy"} element={<ProductBuy />} />
     <Route path={"/order"} element={<ProductOrder />} />
+    <Route path={"/lookup"} element={<ProductLookup />} />
   </Routes>
 );
 
@@ -76,8 +77,16 @@ const Franchise = () => (
 // -------------------------------------------------------------------------------------------------
 const Contact = () => (
   <Routes>
-    <Route path={"/notice"} element={<ContactNotice />} />
     <Route path={"/inquiry"} element={<ContactInquiry />} />
+    <Route path={"/lookup"} element={<ContactLookup />} />
+  </Routes>
+);
+
+// -------------------------------------------------------------------------------------------------
+const Notice = () => (
+  <Routes>
+    <Route path={"/list"} element={<NoticeList />} />
+    <Route path={"/detail"} element={<NoticeDetail />} />
   </Routes>
 );
 
@@ -97,6 +106,7 @@ const App = () => {
         <Route path={"/product/*"} element={<Product />} />
         <Route path={"/franchise/*"} element={<Franchise />} />
         <Route path={"/contact/*"} element={<Contact />} />
+        <Route path={"/notice/*"} element={<Notice />} />
       </Routes>
       <Footer />
     </div>

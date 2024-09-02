@@ -65,7 +65,7 @@
     "./index.tsx",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/assets/hooks/.validate"  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"

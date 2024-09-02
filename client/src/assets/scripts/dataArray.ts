@@ -44,13 +44,13 @@ export const dataArray = [
     sub: [
       {
         titleKo: "구매하기",
-        titleEn: "buy",
-        url: "/product/buy",
+        titleEn: "order",
+        url: "/product/order",
       },
       {
         titleKo: "주문조회",
-        titleEn: "order",
-        url: "/product/order",
+        titleEn: "lookup",
+        url: "/product/lookup",
       },
     ],
   },
@@ -75,16 +75,26 @@ export const dataArray = [
     titleEn: "contact",
     sub: [
       {
-        titleKo: "공지사항",
-        titleEn: "notice",
-        url: "/contact/notice",
-      },
-      {
         titleKo: "1:1 문의",
         titleEn: "inquiry",
         url: "/contact/inquiry",
       },
-
+      {
+        titleKo: "문의 조회",
+        titleEn: "lookup",
+        url: "/contact/lookup",
+      },
+    ],
+  },
+  {
+    titleKo: "공지사항",
+    titleEn: "notice",
+    sub: [
+      {
+        titleKo: "공지사항",
+        titleEn: "list",
+        url: "/notice/list",
+      },
     ],
   },
 ];
