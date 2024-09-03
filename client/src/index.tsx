@@ -2,9 +2,9 @@
 
 import "swiper/css";
 import "@styles/Swiper.css";
-import "@styles/Mui.css";
 import "@styles/Components.css";
 import "@styles/Core.css";
+import "@styles/Mui.css";
 import "@styles/Jstyle.css";
 import "./index.css";
 
@@ -26,9 +26,9 @@ import {
 
 import {
   CommonMain,
-  AboutMain, AboutGreeting, AboutLocation,
+  AboutIntroduce, AboutGreeting, AboutLocation,
   MenuMain, MenuSide,
-  ProductOrder, ProductLookup,
+  OrderBuy, OrderLookup,
   FranchiseBranch, FranchiseInquiry,
   ContactInquiry, ContactLookup,
   NoticeList, NoticeDetail,
@@ -44,7 +44,7 @@ const Common = () => (
 // -------------------------------------------------------------------------------------------------
 const About = () => (
   <Routes>
-    <Route path={"/main"} element={<AboutMain />} />
+    <Route path={"/introduce"} element={<AboutIntroduce />} />
     <Route path={"/greeting"} element={<AboutGreeting />} />
     <Route path={"/location"} element={<AboutLocation />} />
   </Routes>
@@ -59,10 +59,10 @@ const Menu = () => (
 );
 
 // -------------------------------------------------------------------------------------------------
-const Product = () => (
+const Order = () => (
   <Routes>
-    <Route path={"/order"} element={<ProductOrder />} />
-    <Route path={"/lookup"} element={<ProductLookup />} />
+    <Route path={"/order"} element={<OrderBuy />} />
+    <Route path={"/lookup"} element={<OrderLookup />} />
   </Routes>
 );
 
@@ -103,7 +103,7 @@ const App = () => {
         <Route path={"/*"} element={<Common />} />
         <Route path={"/about/*"} element={<About />} />
         <Route path={"/menu/*"} element={<Menu />} />
-        <Route path={"/product/*"} element={<Product />} />
+        <Route path={"/order/*"} element={<Order />} />
         <Route path={"/franchise/*"} element={<Franchise />} />
         <Route path={"/contact/*"} element={<Contact />} />
         <Route path={"/notice/*"} element={<Notice />} />
@@ -116,7 +116,7 @@ const App = () => {
 // -------------------------------------------------------------------------------------------------
 const theme = createTheme({
   typography: {
-    fontFamily: '"Noto Sans KR", sans-serif',
+    fontFamily: "Pretendard, 'Noto Sans KR', sans-serif",
   },
 });
 

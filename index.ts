@@ -5,15 +5,13 @@ import mongoose from "mongoose";
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import morgan from "morgan";
 
-import { commonRouter } from "@routers/commonRouter";
-import { aboutRouter } from "@routers/aboutRouter";
-import { contactRouter } from "@routers/contactRouter";
-import { franchiseRouter } from "@routers/franchiseRouter";
-import { menuRouter } from "@routers/menuRouter";
-import { productRouter } from "@routers/productRouter";
-import { userRouter } from "@routers/userRouter";
+import { aboutRouter } from "@routers/about/aboutRouter";
+import { contactRouter } from "@routers/contact/contactRouter";
+import { franchiseRouter } from "@routers/franchise/franchiseRouter";
+import { menuRouter } from "@routers/menu/menuRouter";
+import { orderRouter } from "@routers/order/orderRouter";
+import { userRouter } from "@routers/user/userRouter";
 
 // -------------------------------------------------------------------------------------------------
 dotenv.config();
@@ -75,18 +73,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// 에러인 경우만 로그를 출력 -----------------------------------------------------------------------
-app.use(morgan('dev', {
-  skip: (req, res) => {
-    return res.statusCode < 400;
-  }
-}));
-
 // 라우터 설정 -------------------------------------------------------------------------------------
-app.use(`${preFix}/common`, commonRouter);
 app.use(`${preFix}/about`, aboutRouter);
 app.use(`${preFix}/contact`, contactRouter);
 app.use(`${preFix}/franchise`, franchiseRouter);
 app.use(`${preFix}/menu`, menuRouter);
-app.use(`${preFix}/product`, productRouter);
+app.use(`${preFix}/order`, orderRouter);
 app.use(`${preFix}/user`, userRouter);

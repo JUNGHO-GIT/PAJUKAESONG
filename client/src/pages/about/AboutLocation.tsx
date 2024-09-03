@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { Div, Img, Br } from "@imports/ImportComponents";
-import { Paper, Grid } from "@imports/ImportMuis";
+import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 declare global {
@@ -99,15 +99,16 @@ export const AboutLocation = () => {
     );
     // 2. location
     const locationSection = () => (
-      <Div
-        key={"location"}
-        id={"map"}
-        className={"border radius shadow"}
-        style={{
-          width: "100%",
-          height: "50vh",
-        }}
-      />
+      <Card className={"border radius shadow"}>
+        <Div
+          key={"location"}
+          id={"map"}
+          style={{
+            width: "100%",
+            height: "50vh",
+          }}
+        />
+      </Card>
     );
     // 3. return
     return (

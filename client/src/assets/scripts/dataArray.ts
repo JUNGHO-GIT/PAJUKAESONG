@@ -7,8 +7,8 @@ export const dataArray = [
     sub: [
       {
         titleKo: "파주개성면옥",
-        titleEn: "main",
-        url: "/about/main",
+        titleEn: "introduce",
+        url: "/about/introduce",
       },
       {
         titleKo: "대표 인사말",
@@ -39,18 +39,18 @@ export const dataArray = [
     ],
   },
   {
-    titleKo: "선물세트",
-    titleEn: "product",
+    titleKo: "제품구매",
+    titleEn: "order",
     sub: [
       {
         titleKo: "구매하기",
-        titleEn: "order",
-        url: "/product/order",
+        titleEn: "buy",
+        url: "/order/buy",
       },
       {
         titleKo: "주문조회",
         titleEn: "lookup",
-        url: "/product/lookup",
+        url: "/order/lookup",
       },
     ],
   },

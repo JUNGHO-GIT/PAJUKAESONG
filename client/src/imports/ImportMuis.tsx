@@ -34,7 +34,6 @@ import {
 
   // t
   Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton,  Toolbar, Tooltip, Tabs, Tab, tabsClasses,
-  TextareaAutosize,
 
   // u
   useMediaQuery, useTheme,
@@ -74,6 +73,9 @@ import TextField from '@mui/material/TextField';
 // usePopupState
 import { usePopupState } from 'material-ui-popup-state/hooks';
 
+// textarea
+import { TextareaAutosize } from "@mui/material";
+
 // -------------------------------------------------------------------------------------------------
 export {
 
@@ -110,7 +112,6 @@ export {
 
   // t
   Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton, Toolbar, Tooltip, Tabs, Tab, tabsClasses,
-  TextareaAutosize,
 
   // u
   useMediaQuery, useTheme,
@@ -135,4 +136,7 @@ export {
 
   // usePopupState
   usePopupState,
+
+  // textarea
+  TextareaAutosize,
 };

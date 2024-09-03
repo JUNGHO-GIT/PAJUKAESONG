@@ -7,7 +7,7 @@ const schema = new mongoose.Schema({
   _id: {
     type: String,
     default: "",
-    required: true
+    required: false
   },
   seq: {
     type: Number,
