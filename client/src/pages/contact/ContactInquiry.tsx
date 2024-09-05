@@ -108,7 +108,7 @@ export const ContactInquiry = () => {
             <Br px={5} />
             <TextArea
               required={true}
-              className={"ms-n10 h-35vh"}
+              className={"h-35vh"}
               value={OBJECT.inquiry_content}
               onChange={(e: any) => {
                 setOBJECT({
@@ -144,10 +144,7 @@ export const ContactInquiry = () => {
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid
-            size={{ xs: 12, sm: 10, md: 8, lg: 6 }}
-            className={"d-center"}
-          >
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {inquirySection()}
           </Grid>
           <Br px={10} />

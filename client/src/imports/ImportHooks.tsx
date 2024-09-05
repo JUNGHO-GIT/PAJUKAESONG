@@ -5,6 +5,7 @@ import { useScrollTop } from "@hooks/useScrollTop";
 import { useStorage } from "@hooks/useStorage";
 import { useResponsive } from "@hooks/useResponsive";
 import { useCommon } from "@hooks/useCommon";
+import { useValidateNotice } from "@hooks/validate/useValidateNotice";
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -13,4 +14,5 @@ export {
   useStorage,
   useResponsive,
   useCommon,
+  useValidateNotice,
 };

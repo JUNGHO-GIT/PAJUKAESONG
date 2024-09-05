@@ -3,20 +3,20 @@
 import express from "express";
 import { Request, Response } from "express";
 import * as service from "@services/user/userService";
-export const userRouter = express.Router();
+export const router = express.Router();
 
 // 2-3. userLogin ----------------------------------------------------------------------------------
-userRouter.post("/login", async (req: Request, res: Response) => {
+router.post("/login", async (req: Request, res: Response) => {
   try {
-    let result = await service.userLogin (
+    let finalResult = await service.userLogin (
       req.body.user_id as string,
-      req.body.user_pw as string,
+      req.body.user_pw as string
     );
     if (result.result === "success") {
       res.json({
         status: "success",
         msg: "로그인 성공",
-        result: result.result,
+        result: finalResult.result,
         admin: result.admin,
       });
     }
@@ -29,11 +29,10 @@ userRouter.post("/login", async (req: Request, res: Response) => {
     }
   }
   catch (err: any) {
+    console.error(err);
     res.status(500).json({
       status: "error",
-      msg: "loginFailed",
-      result: null,
-      error: err
+      error: err.toString()
     });
   }
 });

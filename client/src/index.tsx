@@ -27,11 +27,11 @@ import {
 import {
   CommonMain,
   AboutIntroduce, AboutGreeting, AboutLocation,
-  MenuMain, MenuSide,
-  OrderBuy, OrderLookup,
-  FranchiseBranch, FranchiseInquiry,
   ContactInquiry, ContactLookup,
-  NoticeList, NoticeDetail,
+  FranchiseBranch, FranchiseInquiry,
+  MenuMain, MenuSub,
+  NoticeList, NoticeDetail, NoticeSave,
+  OrderBuy, OrderLookup,
 } from "@imports/ImportPages";
 
 // -------------------------------------------------------------------------------------------------
@@ -54,14 +54,14 @@ const About = () => (
 const Menu = () => (
   <Routes>
     <Route path={"/main"} element={<MenuMain />} />
-    <Route path={"/side"} element={<MenuSide />} />
+    <Route path={"/sub"} element={<MenuSub />} />
   </Routes>
 );
 
 // -------------------------------------------------------------------------------------------------
 const Order = () => (
   <Routes>
-    <Route path={"/order"} element={<OrderBuy />} />
+    <Route path={"/buy"} element={<OrderBuy />} />
     <Route path={"/lookup"} element={<OrderLookup />} />
   </Routes>
 );
@@ -87,6 +87,7 @@ const Notice = () => (
   <Routes>
     <Route path={"/list"} element={<NoticeList />} />
     <Route path={"/detail"} element={<NoticeDetail />} />
+    <Route path={"/save"} element={<NoticeSave />} />
   </Routes>
 );
 

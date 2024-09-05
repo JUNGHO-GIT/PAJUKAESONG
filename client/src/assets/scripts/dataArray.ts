@@ -27,14 +27,14 @@ export const dataArray = [
     titleEn: "menu",
     sub: [
       {
-        titleKo: "대표메뉴",
+        titleKo: "대표 메뉴",
         titleEn: "main",
         url: "/menu/main",
       },
       {
-        titleKo: "사이드메뉴",
-        titleEn: "side",
-        url: "/menu/side",
+        titleKo: "사이드 메뉴",
+        titleEn: "sub",
+        url: "/menu/sub",
       },
     ],
   },

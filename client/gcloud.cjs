@@ -1,6 +1,10 @@
 // gcloud.cjs
 
 const { execSync } = require('child_process');
+const os = require('os');
+
+const winOrLinux = os.platform() === 'win32' ? "win" : "linux";
+console.log(`Activated OS is : ${winOrLinux}`);
 
 // 프로젝트 빌드 -----------------------------------------------------------------------------------
 const buildProject = () => {
@@ -16,28 +20,34 @@ const compressBuild = () => {
 
 // gcloud에 업로드 ---------------------------------------------------------------------------------
 const uploadToGCS = () => {
-  const command = 'gsutil cp build.tar.gz gs://jungho-bucket/PAJUKAESONG/SERVER/build.tar.gz';
+  const command = 'gcloud storage cp build.tar.gz gs://jungho-bucket/PAJUKAESONG/SERVER/build.tar.gz';
   execSync(command, { stdio: 'inherit' });
 };
 
 // 기존 build.tar.gz 삭제 --------------------------------------------------------------------------
 const deleteBuildTar = () => {
-  const command = 'del build.tar.gz';
+  const del = winOrLinux === "win" ? "del" : "rm -rf";
+  const command = `${del} build.tar.gz`
   execSync(command, { stdio: 'inherit' });
 };
 
 // 원격 서버에서 스크립트 실행 ---------------------------------------------------------------------
 const runRemoteScript = () => {
-  const privateKeyPath = 'C:\\Users\\jungh\\.ssh\\JKEY';
-  const serverAddr = 'junghomun00@34.23.233.23';
+  const keyPath = winOrLinux === "win" ? "C:\\Users\\jungh\\.ssh\\JKEY" : "~/ssh/JKEY";
+  const serviceId = winOrLinux === "win" ? 'junghomun00' : 'junghomun1234';
+  const ipAddr = "34.23.233.23";
   const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/client';
-  const cmdGs = 'sudo gsutil cp gs://jungho-bucket/PAJUKAESONG/SERVER/build.tar.gz .';
+  const cmdGs = 'sudo gcloud storage cp gs://jungho-bucket/PAJUKAESONG/SERVER/build.tar.gz .';
   const cmdTar = 'sudo tar -zvxf build.tar.gz --strip-components=1';
   const cmdRm = 'sudo rm build.tar.gz';
   const cmdRestart = 'sudo systemctl restart nginx';
 
-  const sshCommand =
-    `powershell -Command "ssh -i ${privateKeyPath} ${serverAddr} \'${cmdCd} && ${cmdGs} && ${cmdTar} && ${cmdRm} && ${cmdRestart}\'"`;
+  const winCommand = `powershell -Command "ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGs} && ${cmdTar} && ${cmdRm} && ${cmdRestart}\'"
+  `;
+
+  const linuxCommand = `ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGs} && ${cmdTar} && ${cmdRm} && ${cmdRestart}\'`;
+
+  const sshCommand = winOrLinux === "win" ? winCommand : linuxCommand;
 
   execSync(sshCommand, { stdio: 'inherit' });
 };

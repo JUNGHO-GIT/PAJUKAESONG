@@ -6,12 +6,25 @@ import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 
-import { aboutRouter } from "@routers/about/aboutRouter";
-import { contactRouter } from "@routers/contact/contactRouter";
-import { franchiseRouter } from "@routers/franchise/franchiseRouter";
-import { menuRouter } from "@routers/menu/menuRouter";
-import { orderRouter } from "@routers/order/orderRouter";
-import { userRouter } from "@routers/user/userRouter";
+import { router as aboutGreetingRouter } from "@routers/about/aboutGreetingRouter";
+import { router as aboutIntroduceRouter } from "@routers/about/aboutIntroduceRouter";
+import { router as aboutLocationRouter } from "@routers/about/aboutLocationRouter";
+
+import { router as contactInquiryRouter } from "@routers/contact/contactInquiryRouter";
+import { router as contactLookupRouter } from "@routers/contact/contactLookupRouter";
+
+import { router as franchiseBranchRouter } from "@routers/franchise/franchiseBranchRouter";
+import { router as franchiseInquiryRouter } from "@routers/franchise/franchiseInquiryRouter";
+
+import { router as menuMainRouter } from "@routers/menu/menuMainRouter";
+import { router as menuSubRouter } from "@routers/menu/menuSubRouter";
+
+import { router as noticeRouter } from "@routers/notice/noticeRouter";
+
+import { router as orderBuyRouter } from "@routers/order/orderBuyRouter";
+import { router as orderLookupRouter } from "@routers/order/orderLookupRouter";
+
+import { router as userRouter } from "@routers/user/userRouter";
 
 // -------------------------------------------------------------------------------------------------
 dotenv.config();
@@ -74,9 +87,22 @@ app.use((req, res, next) => {
 });
 
 // 라우터 설정 -------------------------------------------------------------------------------------
-app.use(`${preFix}/about`, aboutRouter);
-app.use(`${preFix}/contact`, contactRouter);
-app.use(`${preFix}/franchise`, franchiseRouter);
-app.use(`${preFix}/menu`, menuRouter);
-app.use(`${preFix}/order`, orderRouter);
+app.use(`${preFix}/about/greeting`, aboutGreetingRouter);
+app.use(`${preFix}/about/introduce`, aboutIntroduceRouter);
+app.use(`${preFix}/about/location`, aboutLocationRouter);
+
+app.use(`${preFix}/contact/inquiry`, contactInquiryRouter);
+app.use(`${preFix}/contact/lookup`, contactLookupRouter);
+
+app.use(`${preFix}/franchise/branch`, franchiseBranchRouter);
+app.use(`${preFix}/franchise/inquiry`, franchiseInquiryRouter);
+
+app.use(`${preFix}/menu/main`, menuMainRouter);
+app.use(`${preFix}/menu/sub`, menuSubRouter);
+
+app.use(`${preFix}/notice`, noticeRouter);
+
+app.use(`${preFix}/order/buy`, orderBuyRouter);
+app.use(`${preFix}/order/lookup`, orderLookupRouter);
+
 app.use(`${preFix}/user`, userRouter);

@@ -1,0 +1,68 @@
+// useValidateNotice.tsx
+
+import { useState, useEffect, createRef, useRef } from "@imports/ImportReacts";
+import { useCommon } from "@imports/ImportHooks";
+
+// -------------------------------------------------------------------------------------------------
+export const useValidateNotice = () => {
+
+  // 1. common -------------------------------------------------------------------------------------
+  const {
+    PATH,
+  } = useCommon();
+
+  // 2-2. useState ---------------------------------------------------------------------------------
+  const [ERRORS, setERRORS] = useState<any>({});
+  const REFS: any = useRef<any>({});
+  const validate = useRef<any>(() => {});
+  let returnValid = false;
+
+  // 에러 메시지 출력 및 포커스
+  const showAlertAndFocus = (field: string, msg: string) => {
+    alert(msg);
+    REFS?.current?.[field]?.current?.focus();
+    setERRORS({
+      [field]: true,
+    });
+    return returnValid;
+  };
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    // 1. save
+    if (PATH.includes("notice/save")) {
+      const target = [
+        "notice_title",
+        "notice_content",
+      ];
+      setERRORS(
+        target.reduce((acc: any, cur: string) => {
+          acc[cur] = false;
+          return acc;
+        }, {})
+      );
+      REFS.current = (
+        target.reduce((acc: any, cur: string) => {
+          acc[cur] = createRef();
+          return acc;
+        }, {})
+      );
+      validate.current = ( OBJECT: any ) => {
+        if (!OBJECT.notice_title) {
+          return showAlertAndFocus('notice_title', "제목을 입력해주세요.");
+        }
+        else if (!OBJECT.notice_content) {
+          return showAlertAndFocus('notice_content', "내용을 입력해주세요.");
+        }
+        return !returnValid;
+      }
+    }
+  }, [PATH]);
+
+  // 10. return ------------------------------------------------------------------------------------
+  return {
+    ERRORS,
+    REFS,
+    validate: validate.current,
+  };
+};

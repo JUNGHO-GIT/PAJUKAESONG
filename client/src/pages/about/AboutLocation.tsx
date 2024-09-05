@@ -105,7 +105,7 @@ export const AboutLocation = () => {
           id={"map"}
           style={{
             width: "100%",
-            height: "50vh",
+            height: "65vh",
           }}
         />
       </Card>
@@ -115,11 +115,11 @@ export const AboutLocation = () => {
       <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={2}>
           <Br px={10} />
-          <Grid size={12} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={12} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {locationSection()}
           </Grid>
           <Br px={10} />

@@ -14,15 +14,6 @@
     "composite": true,
     "incremental": true,
     "baseUrl": "./",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/assets/types"
-    ],
-    "types": [
-      "node",
-      "alias",
-      "extension"
-    ],
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -65,7 +56,7 @@
     "./index.tsx",
     "**/*.ts",
     "**/*.tsx"
-, "src/assets/hooks/.validate"  ],
+, "src/hooks/.validate"  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"

@@ -55,9 +55,11 @@
 }
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: #1976d2 !important;
+  border-width: 2px !important;
 }
 .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
   border-color: #d32f2f !important;
+  border-width: 2px !important;
 }
 .MuiInputLabel-root {
   font-size: 0.9rem !important;

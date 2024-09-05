@@ -1,25 +1,34 @@
-// gcloud.js (server)
+// gcloud.ts (server)
 
-const dotenv = require('dotenv');
 const { execSync } = require('child_process');
 const { readFileSync, writeFileSync } = require('fs');
 const moment = require('moment-timezone');
 const os = require('os');
 const fs = require('fs');
 
+const winOrLinux = os.platform() === 'win32' ? "win" : "linux";
+console.log(`Activated OS is : ${winOrLinux}`);
+
 // env 파일 수정 -----------------------------------------------------------------------------------
 const modifyEnv = () => {
+
+  // 파일을 줄 단위로 나눔
   const envFile = readFileSync('.env', 'utf8');
-  const envConfig = dotenv.parse(envFile);
+  const lines = envFile.split(/\r?\n/);
 
-  // envConfig 수정
-  envConfig.CLIENT_URL = "https://www.pajukaesong.com/PAJUKAESONG";
-  envConfig.GOOGLE_CALLBACK_URL = "https://www.pajukaesong.com/PAJUKAESONG/api/google/callback";
+  const updatedLines = lines.map(line => {
+    if (line.startsWith('CLIENT_URL=')) {
+      return `CLIENT_URL=https://www.pajukaesong.com/PAJUKAESONG`;
+    }
+    if (line.startsWith('GOOGLE_CALLBACK_URL=')) {
+      return `GOOGLE_CALLBACK_URL=https://www.pajukaesong.com/PAJUKAESONG/api/auth/google/callback`;
+    }
+    // 다른 줄은 그대로 유지
+    return line;
+  });
 
-  // env 파일 쓰기
-  const newEnvFile = Object.keys(envConfig).reduce((acc, key) => {
-    return `${acc}${key}=${envConfig[key]}${os.EOL}`;
-  }, '');
+  // 줄을 다시 합쳐서 저장
+  const newEnvFile = updatedLines.join(os.EOL);
 
   writeFileSync('.env', newEnvFile);
 };
@@ -60,41 +69,51 @@ const modifyChangelog = () => {
 const gitPush = () => {
   execSync('git add .', { stdio: 'inherit' });
   execSync('git commit -m "update"', { stdio: 'inherit' });
-  execSync('git push origin main', { stdio: 'inherit' });
+  execSync('git push origin master', { stdio: 'inherit' });
 };
 
 // 원격 서버에서 스크립트 실행 ---------------------------------------------------------------------
 const runRemoteScript = () => {
-  const privateKeyPath = 'C:\\Users\\jungh\\.ssh\\JKEY';
-  const serverAddr = 'junghomun00@34.23.233.23';
+  const keyPath = winOrLinux === "win" ? "C:\\Users\\jungh\\.ssh\\JKEY" : "~/ssh/JKEY";
+  const serviceId = winOrLinux === "win" ? 'pajukaesong00' : 'pajukaesong1234';
+  const ipAddr = "34.23.233.23";
   const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/server';
   const cmdGitFetch = 'sudo git fetch --all';
-  const cmdGitReset = 'sudo git reset --hard origin/main';
+  const cmdGitReset = 'sudo git reset --hard origin/master';
   const cmdRmClient = 'sudo rm -rf client';
   const cmdNpm = 'sudo npm install';
   const cmdRestart = 'sudo pm2 restart all';
   const cmdSave = 'sudo pm2 save';
 
-  const sshCommand =
-    `powershell -Command "ssh -i ${privateKeyPath} ${serverAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'"
+  const winCommand = `powershell -Command "ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'"
   `;
+  const linuxCommand = `ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'`;
+
+  const sshCommand = winOrLinux === "win" ? winCommand : linuxCommand;
 
   execSync(sshCommand, { stdio: 'inherit' });
 };
 
 // env 파일 복원 -----------------------------------------------------------------------------------
 const restoreEnv = () => {
+
+  // 파일을 줄 단위로 나눔
   const envFile = readFileSync('.env', 'utf8');
-  const envConfig = dotenv.parse(envFile);
+  const lines = envFile.split(/\r?\n/);
 
-  // envConfig 수정
-  envConfig.CLIENT_URL = "http://localhost:3000/PAJUKAESONG";
-  envConfig.GOOGLE_CALLBACK_URL = "http://localhost:4000/PAJUKAESONG/api/google/callback";
+  const updatedLines = lines.map(line => {
+    if (line.startsWith('CLIENT_URL=')) {
+      return `CLIENT_URL=http://localhost:3000/PAJUKAESONG`;
+    }
+    if (line.startsWith('GOOGLE_CALLBACK_URL=')) {
+      return `GOOGLE_CALLBACK_URL=http://localhost:4100/PAJUKAESONG/api/google/callback`;
+    }
+    // 다른 줄은 그대로 유지
+    return line;
+  });
 
-  // env 파일 쓰기
-  const newEnvFile = Object.keys(envConfig).reduce((acc, key) => {
-    return `${acc}${key}=${envConfig[key]}${os.EOL}`;
-  }, '');
+  // 줄을 다시 합쳐서 저장
+  const newEnvFile = updatedLines.join(os.EOL);
 
   writeFileSync('.env', newEnvFile);
 };

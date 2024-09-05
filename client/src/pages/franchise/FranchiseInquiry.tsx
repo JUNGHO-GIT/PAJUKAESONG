@@ -24,7 +24,7 @@ export const FranchiseInquiry = () => {
       <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={2}>
           <Br px={10} />
-          <Grid size={12} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Br px={10} />

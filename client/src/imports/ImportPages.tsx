@@ -11,10 +11,11 @@ import { FranchiseBranch } from "@pages/franchise/FranchiseBranch";
 import { FranchiseInquiry } from "@pages/franchise/FranchiseInquiry";
 
 import { MenuMain } from "@pages/menu/MenuMain";
-import { MenuSide } from "@pages/menu/MenuSide";
+import { MenuSub } from "@pages/menu/MenuSub";
 
 import { NoticeList } from "@pages/notice/NoticeList";
 import { NoticeDetail } from "@pages/notice/NoticeDetail";
+import { NoticeSave } from "@pages/notice/NoticeSave";
 
 import { OrderBuy } from "@pages/order/OrderBuy";
 import { OrderLookup } from "@pages/order/OrderLookup";
@@ -34,10 +35,11 @@ export {
   FranchiseInquiry,
 
   MenuMain,
-  MenuSide,
+  MenuSub,
 
   NoticeList,
   NoticeDetail,
+  NoticeSave,
 
   OrderBuy,
   OrderLookup,

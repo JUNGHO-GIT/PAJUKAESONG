@@ -71,7 +71,7 @@ export const AboutGreeting = () => {
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={{ xs:12 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {greetingSection()}
           </Grid>
           <Br px={10} />
