@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useResponsive, useCommon } from "@imports/ImportHooks";
-import { axios } from "@imports/ImportLibs";
 import { Div, Img, Icons, Input, Btn, Hr } from "@imports/ImportComponents";
 import { PopUp } from "@imports/ImportContainers";
 import { Paper, Grid, Card } from "@imports/ImportMuis";
@@ -45,40 +44,6 @@ export const Footer = () => {
     }
   }, [isXs, isSm, isMd, isLg, isXl]);
 
-  // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = async () => {
-    axios.post(`${URL}/api/user/login`, {
-      user_id: OBJECT.user_id,
-      user_pw: OBJECT.user_pw,
-    })
-    .then((res: any) => {
-      if (res.data.status === "success") {
-        alert(res.data.msg);
-        if (res.data.admin === "admin") {
-          localStorage.setItem(`${TITLE}_adminId`, OBJECT.user_id);
-          localStorage.setItem(`${TITLE}_adminPw`, OBJECT.user_pw);
-          localStorage.setItem(`${TITLE}_admin`, "true");
-        }
-      }
-      else {
-        alert(res.data.msg);
-        localStorage.setItem(`${TITLE}_admin`, "false");
-      }
-    })
-    .catch((err: any) => {
-      console.error(err);
-    })
-    .finally(() => {
-      navigate(0);
-    });
-  };
-
-  // 4. handler ------------------------------------------------------------------------------------
-  const handlerLogout = () => {
-    localStorage.clear();
-    navigate(0);
-  }
-
   // 7. footer -------------------------------------------------------------------------------------
   const footerNode = () => {
     // 1. logo
@@ -117,96 +82,20 @@ export const Footer = () => {
         </Grid>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
           <Icons name={"Copyright"} className={"w-12 h-12"} />
-          <PopUp
-            type={"innerCenter"}
-            position={"center"}
-            direction={"center"}
-            contents={({ closePopup }: any) => (
-              <Card className={"w-60vw border radius p-20"}>
-                <Grid container spacing={2}>
-                  <Grid size={12} className={"d-center"}>
-                    <Div className={"fs-1-2rem fw-600"}>
-                      관리자 로그인
-                    </Div>
-                  </Grid>
-                  <Hr px={10} />
-                  <Grid size={12} className={"d-center"}>
-                    <Input
-                      label={"아이디"}
-                      required={true}
-                      value={OBJECT.user_id}
-                      disabled={isAdmin}
-                      onChange={(e: any) => {
-                        setOBJECT((prev: any) => ({
-                          ...prev,
-                          user_id: e.target.value,
-                        }));
-                      }}
-                    />
-                  </Grid>
-                  <Grid size={12} className={"d-center"}>
-                    <Input
-                      label={"비밀번호"}
-                      required={true}
-                      value={OBJECT.user_pw}
-                      disabled={isAdmin}
-                      onChange={(e: any) => {
-                        setOBJECT((prev: any) => ({
-                          ...prev,
-                          user_pw: e.target.value,
-                        }));
-                      }}
-                    />
-                  </Grid>
-                  <Hr px={10} />
-                  <Grid size={12} className={"d-center"}>
-                    {isAdmin ? (
-                      <Btn
-                        color={"error"}
-                        size={"large"}
-                        className={"w-100p"}
-                        onClick={(e: any) => {
-                          handlerLogout();
-                          closePopup(e.currentTarget);
-                        }}
-                      >
-                        로그아웃
-                      </Btn>
-                    ) : (
-                      <Btn
-                        color={"primary"}
-                        size={"large"}
-                        className={"w-100p"}
-                        onClick={(e: any) => {
-                          flowSave();
-                          closePopup(e.currentTarget);
-                        }}
-                      >
-                        로그인
-                      </Btn>
-                    )}
-                  </Grid>
-                </Grid>
-              </Card>
-            )}
+          <Div
+            className={"fs-0-8rem pointer"}
+            onClick={() => {
+              navigate("/user/login");
+            }}
           >
-            {(popTrigger: any) => (
-              <Div
-                className={"fs-0-8rem"}
-                onClick={(e: any) => {
-                  popTrigger.openPopup(e.currentTarget);
-                }}
-              >
-                2024 파주개성면옥. All rights reserved.
-              </Div>
-            )}
-          </PopUp>
+            2024 파주개성면옥. All rights reserved.
+          </Div>
         </Grid>
       </Grid>
     );
     // 4. return
     return (
-      <Paper className={"layout-wrapper border-top p-30"}>
+      <Paper className={"layout-wrapper border-top p-30 mt-100"}>
         <Grid container spacing={1} columns={24}>
           <Grid
             size={{ xs: 24, sm: 10, md: 12 }}

@@ -20,9 +20,9 @@ export const Input = (props: any) => {
         input: {
           className: (
             props?.inputclass?.includes("fs-") ? (
-              `text-left ${props?.inputclass}`
+              `text-left ${props?.inputclass || ""}`
             ) : (
-              `fs-1-0rem text-left ${props?.inputclass}`
+              `fs-1-0rem text-left ${props?.inputclass || ""}`
             )
           ),
           readOnly: (
@@ -47,6 +47,9 @@ export const Input = (props: any) => {
             ) : null
           ),
         },
+        inputLabel: {
+          shrink: props?.readOnly && true,
+        }
       }}
     />
   );

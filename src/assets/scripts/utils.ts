@@ -2,6 +2,8 @@
 
 import dotenv from "dotenv";
 dotenv.config();
+import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 
 
 
@@ -77,7 +79,10 @@ export const decimalToStr = (time: number) => {
 
 
 
-// 4-1. adminCheck ---------------------------------------------------------------------------------
+// 4-1. token --------------------------------------------------------------------------------------
+export const token: string = crypto.randomBytes(20).toString('hex');
+
+// 4-2. adminCheck ---------------------------------------------------------------------------------
 export const adminCheck = (user_id: string) => {
   const adminId = process.env.ADMIN_ID;
 
@@ -85,8 +90,22 @@ export const adminCheck = (user_id: string) => {
     return true;
   }
   return false;
+};
+
+// 4-3. combinePw ----------------------------------------------------------------------------------
+export const combinePw = async (inputPw: string, token: string) => {
+  return `${inputPw}_${token}`;
+};
+
+// 4-4. hashPw -------------------------------------------------------------------------------------
+export const hashPw = async (combinedPw: string) => {
+  return await bcrypt.hash(combinedPw, 10);
 }
 
+// 4-5. comparePw ----------------------------------------------------------------------------------
+export const comparePw = async (inputPw: string, storedPw: string) => {
+  return await bcrypt.compare(inputPw, storedPw);
+}
 
 
 // 10-1. log ---------------------------------------------------------------------------------------

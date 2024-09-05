@@ -28,7 +28,6 @@
     "noFallthroughCasesInSwitch": false,
     "noLib": false,
     "preserveValueImports": false,
-
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
 
@@ -52,11 +51,14 @@
     "allowImportingTsExtensions": true
   },
   "include": [
+    "index.ts",
     "src/**/*",
-    "./index.tsx",
     "**/*.ts",
-    "**/*.tsx"
-, "src/hooks/.validate"  ],
+    "**/*.tsx",
+    "**/*.d.ts",
+    "**/*.js",
+    "**/*.jsx"
+  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"

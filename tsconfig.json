@@ -67,10 +67,10 @@
     "**/*.tsx",
     "**/*.d.ts",
     "**/*.js",
-    "**/*.jsx",
+    "**/*.jsx"
   ],
   "exclude": [
     "node_modules",
-    "**/*.spec.ts",
-  ],
+    "**/*.spec.ts"
+  ]
 }

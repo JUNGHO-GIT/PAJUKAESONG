@@ -24,9 +24,15 @@ export const useCommon = () => {
   const getSessionAdmin = localStorage.getItem(`${TITLE}_admin`) || "";
   const getSessionAdminId = localStorage.getItem(`${TITLE}_adminId`) || "";
   const getSessionAdminPw = localStorage.getItem(`${TITLE}_adminPw`) || "";
+  const getSessionUser = localStorage.getItem(`${TITLE}_user`) || "";
+  const getSessionUserId = localStorage.getItem(`${TITLE}_userId`) || "";
+  const getSessionUserPw = localStorage.getItem(`${TITLE}_userPw`) || "";
   const isAdmin = getSessionAdmin === "true" ? true : false;
   const adminId = getSessionAdminId;
   const adminPw = getSessionAdminPw;
+  const isUser = getSessionUser === "true" ? true : false;
+  const userId = getSessionUserId;
+  const userPw = getSessionUserPw;
 
   const newDate = moment().tz("Asia/Seoul");
   const koreanDate = moment().tz("Asia/Seoul").format("YYYY-MM-DD");
@@ -41,7 +47,7 @@ export const useCommon = () => {
     navigate, location,
     location_id, location_category, PATH, firstStr, secondStr, thirdStr,
     URL, SUBFIX, TITLE,
-    isAdmin, adminId, adminPw, dataArray,
+    isAdmin, adminId, adminPw, dataArray, isUser, userId, userPw,
     newDate, koreanDate, curWeekStart, curWeekEnd, curMonthStart, curMonthEnd, curYearStart, curYearEnd,
   };
 };

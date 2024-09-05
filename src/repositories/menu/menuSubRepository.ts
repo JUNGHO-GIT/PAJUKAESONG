@@ -21,6 +21,12 @@ export const save = async (
   return "Hello, World!";
 };
 
+// 4. update ---------------------------------------------------------------------------------------
+export const update = async (
+) => {
+  return "Hello, World!";
+};
+
 // 5. deletes --------------------------------------------------------------------------------------
 export const deletes = async (
 ) => {

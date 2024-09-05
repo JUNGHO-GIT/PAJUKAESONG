@@ -6,6 +6,7 @@ import { FRANCHISE } from "@bases/Franchise";
 import { MENU } from "@bases/Menu";
 import { NOTICE } from "@bases/Notice";
 import { ORDER } from "@bases/Order";
+import { USER } from "@bases/User";
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -15,4 +16,5 @@ export {
   MENU,
   NOTICE,
   ORDER,
+  USER,
 };

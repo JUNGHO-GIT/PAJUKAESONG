@@ -151,7 +151,7 @@ export const SideBar = (
           "& .MuiDrawer-paper": {
             width: "240px",
             padding: "15px",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#ffffff",
           },
         }}
       >

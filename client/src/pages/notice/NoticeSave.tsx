@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommon, useValidateNotice } from "@imports/ImportHooks";
-import { Loading } from "@imports/ImportLayouts";
 import { axios } from "@imports/ImportLibs";
 import { NOTICE } from "@imports/ImportBases";
 import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
@@ -63,8 +62,8 @@ export const NoticeSave = () => {
       </Div>
     );
     // 2. save
-    const saveSection = () => (
-      <Card className={"border radius shadow p-30"}>
+    const saveSection = () => {
+      const saveFragment = () => (
         <Grid container spacing={3} className={"text-left"}>
           <Grid size={12}>
             <Input
@@ -109,11 +108,14 @@ export const NoticeSave = () => {
               value={koreanDate}
             />
           </Grid>
-          <Br px={10} />
+        </Grid>
+      );
+      const btnFragment = () => (
+        <Grid container spacing={2}>
           <Grid size={12}>
             <Btn
               size={"large"}
-              className={"w-100p fs-1-2rem bg-burgundy"}
+              className={"w-50p fs-1-2rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}
@@ -122,21 +124,26 @@ export const NoticeSave = () => {
             </Btn>
           </Grid>
         </Grid>
-      </Card>
-    );
-    // 3. return
+      );
+      return (
+        <Card className={"border radius shadow p-40 fadeIn"}>
+          {saveFragment()}
+          <Br px={50} />
+          {btnFragment()}
+        </Card>
+      );
+    };
+    // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={2}>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {saveSection()}
           </Grid>
-          <Br px={10} />
         </Grid>
       </Paper>
     );
@@ -145,7 +152,7 @@ export const NoticeSave = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {LOADING ? <Loading /> : saveNode()}
+      {saveNode()}
     </>
   );
 };

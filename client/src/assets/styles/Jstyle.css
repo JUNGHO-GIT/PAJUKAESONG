@@ -10934,7 +10934,7 @@
   background-color: #FFFFFF !important;
 }
 .bg-grey {
-  background-color: #f3f4f6 !important;
+  background-color: #9CA3AF !important;
 }
 .bg-dark {
   background-color: #1f2937 !important;
@@ -10985,9 +10985,23 @@
 }
 .readonly {
   caret-color: transparent !important;
+  pointer-events: none !important;
+  outline: none !important;
 }
 .upper {
   text-transform: uppercase !important;
+}
+.horizon-text {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/** 101. transition ******************************************************************************/
+.dynamic {
+  transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease;
 }
 .animation-none {
   animation: none !important;
@@ -11003,20 +11017,11 @@
   position: relative !important;
 }
 .fadeIn {
-  animation: fadeIn 0.4s ease-in-out;
+  animation: fadeIn 0.6s ease-in-out forwards;
 }
-.dynamic {
-  transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease;
+.fadeOut {
+  animation: fadeOut 0.6s ease-in-out forwards;
 }
-.horizon-text {
-  writing-mode: horizontal-tb !important;
-  text-orientation: mixed !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-}
-
-/** 101. transition ******************************************************************************/
 @keyframes shimmer {
   0% {
     background-position: -468px 0 !important;
@@ -11033,5 +11038,15 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
   }
 }

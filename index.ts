@@ -9,21 +9,14 @@ import dotenv from "dotenv";
 import { router as aboutGreetingRouter } from "@routers/about/aboutGreetingRouter";
 import { router as aboutIntroduceRouter } from "@routers/about/aboutIntroduceRouter";
 import { router as aboutLocationRouter } from "@routers/about/aboutLocationRouter";
-
-import { router as contactInquiryRouter } from "@routers/contact/contactInquiryRouter";
-import { router as contactLookupRouter } from "@routers/contact/contactLookupRouter";
-
+import { router as contactRouter } from "@routers/contact/contactRouter";
 import { router as franchiseBranchRouter } from "@routers/franchise/franchiseBranchRouter";
 import { router as franchiseInquiryRouter } from "@routers/franchise/franchiseInquiryRouter";
-
 import { router as menuMainRouter } from "@routers/menu/menuMainRouter";
 import { router as menuSubRouter } from "@routers/menu/menuSubRouter";
-
 import { router as noticeRouter } from "@routers/notice/noticeRouter";
-
 import { router as orderBuyRouter } from "@routers/order/orderBuyRouter";
 import { router as orderLookupRouter } from "@routers/order/orderLookupRouter";
-
 import { router as userRouter } from "@routers/user/userRouter";
 
 // -------------------------------------------------------------------------------------------------
@@ -35,15 +28,15 @@ const preFix = process.env.HTTP_PREFIX || "";
 const id = process.env.DB_USER;
 const pw = process.env.DB_PASS;
 const host = process.env.DB_HOST;
-const port = process.env.DB_PORT || '27017';
+const port = process.env.DB_PORT;
 const db = process.env.DB_NAME;
 
 mongoose.connect(`mongodb://${id}:${pw}@${host}:${port}/${db}`)
   .then(() => {
-    console.log('MongoDB 연결 성공');
+    console.log(`${db} MongoDB 연결 성공`);
   })
   .catch((error) => {
-    console.error(`MongoDB 연결 실패: ${error}`);
+    console.error(`${db} MongoDB 연결 실패: ${error}`);
   });
 
 // 서버 포트 설정 ----------------------------------------------------------------------------------
@@ -90,19 +83,12 @@ app.use((req, res, next) => {
 app.use(`${preFix}/about/greeting`, aboutGreetingRouter);
 app.use(`${preFix}/about/introduce`, aboutIntroduceRouter);
 app.use(`${preFix}/about/location`, aboutLocationRouter);
-
-app.use(`${preFix}/contact/inquiry`, contactInquiryRouter);
-app.use(`${preFix}/contact/lookup`, contactLookupRouter);
-
+app.use(`${preFix}/contact`, contactRouter);
 app.use(`${preFix}/franchise/branch`, franchiseBranchRouter);
 app.use(`${preFix}/franchise/inquiry`, franchiseInquiryRouter);
-
 app.use(`${preFix}/menu/main`, menuMainRouter);
 app.use(`${preFix}/menu/sub`, menuSubRouter);
-
 app.use(`${preFix}/notice`, noticeRouter);
-
 app.use(`${preFix}/order/buy`, orderBuyRouter);
 app.use(`${preFix}/order/lookup`, orderLookupRouter);
-
 app.use(`${preFix}/user`, userRouter);

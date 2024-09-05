@@ -13,23 +13,26 @@ router.get("/list", async (req: Request, res: Response) => {
     );
     if (finalResult.status === "success") {
       res.json({
-        status: "success",
         msg: "조회 성공",
+        status: finalResult.status,
         result: finalResult.result,
+        totalCnt: finalResult.totalCnt,
       });
     }
     else if (finalResult.status === "fail") {
       res.json({
-        status: "fail",
         msg: "조회 실패",
+        status: finalResult.status,
         result: null,
+        totalCnt: null,
       });
     }
     else {
       res.json({
-        status: "error",
         msg: "조회 에러",
+        status: finalResult.status,
         result: null,
+        totalCnt: null,
       });
     }
   }
@@ -37,7 +40,8 @@ router.get("/list", async (req: Request, res: Response) => {
     console.error(err);
     res.status(500).json({
       status: "error",
-      error: err.toString()
+      msg: err.toString(),
+      error: err.toString(),
     });
   }
 });
@@ -46,19 +50,26 @@ router.get("/list", async (req: Request, res: Response) => {
 router.get("/detail", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.detail(
-      req.query.user_id as string,
+      req.query._id as string,
     );
-    if (finalResult) {
+    if (finalResult.status === "success") {
       res.json({
-        status: "success",
         msg: "조회 성공",
-        result: finalResult,
+        status: finalResult.status,
+        result: finalResult.result,
+      });
+    }
+    else if (finalResult.status === "fail") {
+      res.json({
+        msg: "조회 실패",
+        status: finalResult.status,
+        result: null,
       });
     }
     else {
       res.json({
-        status: "fail",
-        msg: "조회 실패",
+        msg: "조회 에러",
+        status: finalResult.status,
         result: null,
       });
     }
@@ -67,7 +78,8 @@ router.get("/detail", async (req: Request, res: Response) => {
     console.error(err);
     res.status(500).json({
       status: "error",
-      error: err.toString()
+      msg: err.toString(),
+      error: err.toString(),
     });
   }
 });
@@ -79,17 +91,24 @@ router.post("/save", async (req: Request, res: Response) => {
       req.body.user_id as string,
       req.body.OBJECT as any,
     );
-    if (finalResult) {
+    if (finalResult.status === "success") {
       res.json({
-        status: "success",
         msg: "저장 성공",
-        result: finalResult,
+        status: finalResult.status,
+        result: finalResult.result,
+      });
+    }
+    else if (finalResult.status === "fail") {
+      res.json({
+        msg: "저장 실패",
+        status: finalResult.status,
+        result: null,
       });
     }
     else {
       res.json({
-        status: "fail",
-        msg: "저장 실패",
+        msg: "저장 에러",
+        status: finalResult.status,
         result: null,
       });
     }
@@ -98,7 +117,8 @@ router.post("/save", async (req: Request, res: Response) => {
     console.error(err);
     res.status(500).json({
       status: "error",
-      error: err.toString()
+      msg: err.toString(),
+      error: err.toString(),
     });
   }
 });
@@ -111,17 +131,24 @@ router.put("/update", async (req: Request, res: Response) => {
       req.body._id as string,
       req.body.OBJECT as any,
     );
-    if (finalResult) {
+    if (finalResult.status === "success") {
       res.json({
-        status: "success",
         msg: "수정 성공",
-        result: finalResult,
+        status: finalResult.status,
+        result: finalResult.result,
+      });
+    }
+    else if (finalResult.status === "fail") {
+      res.json({
+        msg: "수정 실패",
+        status: finalResult.status,
+        result: null,
       });
     }
     else {
       res.json({
-        status: "fail",
-        msg: "수정 실패",
+        msg: "수정 에러",
+        status: finalResult.status,
         result: null,
       });
     }
@@ -130,7 +157,8 @@ router.put("/update", async (req: Request, res: Response) => {
     console.error(err);
     res.status(500).json({
       status: "error",
-      error: err.toString()
+      msg: err.toString(),
+      error: err.toString(),
     });
   }
 });
@@ -142,17 +170,24 @@ router.delete("/deletes", async (req: Request, res: Response) => {
       req.body.user_id as string,
       req.body._id as string,
     );
-    if (finalResult) {
+    if (finalResult.status === "success") {
       res.json({
-        status: "success",
         msg: "삭제 성공",
-        result: finalResult,
+        status: finalResult.status,
+        result: finalResult.result,
+      });
+    }
+    else if (finalResult.status === "fail") {
+      res.json({
+        msg: "삭제 실패",
+        status: finalResult.status,
+        result: null,
       });
     }
     else {
       res.json({
-        status: "fail",
-        msg: "삭제 실패",
+        msg: "삭제 에러",
+        status: finalResult.status,
         result: null,
       });
     }
@@ -161,7 +196,8 @@ router.delete("/deletes", async (req: Request, res: Response) => {
     console.error(err);
     res.status(500).json({
       status: "error",
-      error: err.toString()
+      msg: err.toString(),
+      error: err.toString(),
     });
   }
 });

@@ -4,6 +4,7 @@ import * as repository from "@repositories/notice/noticeRepository";
 import { adminCheck } from "@scripts/utils";
 
 // 1. list -----------------------------------------------------------------------------------------
+// page는 무조건 0부터 시작
 export const list = async (
   PAGING_param: any,
 ) => {
@@ -16,7 +17,7 @@ export const list = async (
 
   // sort, page 변수 선언
   const sort = PAGING_param.sort === "asc" ? 1 : -1;
-  const page = PAGING_param.page === 0 ? 1 : PAGING_param.page;
+  const page = PAGING_param.page || 0;
 
   totalCntResult = await repository.cnt(
   );
@@ -25,13 +26,13 @@ export const list = async (
     sort, page
   );
 
-  if (findResult) {
-    statusResult = "success";
-    finalResult = findResult;
-  }
-  else {
+  if (!findResult || findResult.length <= 0) {
     statusResult = "fail";
     finalResult = null;
+  }
+  else {
+    statusResult = "success";
+    finalResult = findResult;
   }
 
   return {

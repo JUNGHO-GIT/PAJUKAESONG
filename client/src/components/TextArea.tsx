@@ -8,7 +8,7 @@ export const TextArea = (props: any) => {
   return (
     <>
       <Div
-        className={"d-left"}
+        className={"d-left mt-20"}
         style={{
           color: "rgba(0, 0, 0, 0.6)",
           fontWeight: 400,
@@ -26,6 +26,8 @@ export const TextArea = (props: any) => {
         type={props?.type || "text"}
         size={props?.size || "small"}
         fullWidth={props?.fullWidth || true}
+        multiline={props?.multiline || true}
+        rows={props?.rows || 4}
         className={props?.className || ""}
         label={""}
         slotProps={{

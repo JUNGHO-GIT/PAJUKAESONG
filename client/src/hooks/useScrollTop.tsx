@@ -1,16 +1,20 @@
 // useScrollTop.tsx
 
-import { React, useEffect, useLocation, useNavigate } from "@imports/ImportReacts";
+import { useEffect } from "@imports/ImportReacts";
+import { useCommon } from "@imports/ImportHooks";
 
 // -------------------------------------------------------------------------------------------------
 export const useScrollTop = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const navigate = useNavigate();
-  const location = useLocation();
+  const {
+    PATH
+  } = useCommon();
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location, navigate]);
+
+  }, [PATH]);
+
 };

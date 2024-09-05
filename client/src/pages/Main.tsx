@@ -1,4 +1,4 @@
-// CommonMain.tsx
+// Main.tsx
 
 import { Swiper, SwiperSlide } from "@imports/ImportLibs";
 import { SwiperPagination, SwiperNavigation, SwiperAutoplay } from "@imports/ImportLibs";
@@ -6,7 +6,7 @@ import { Div, Img } from "@imports/ImportComponents";
 import { Grid, Card, Paper } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const CommonMain = () => {
+export const Main = () => {
 
   // 7. main ---------------------------------------------------------------------------------------
   const mainNode = () => {

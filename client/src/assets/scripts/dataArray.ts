@@ -76,13 +76,13 @@ export const dataArray = [
     sub: [
       {
         titleKo: "1:1 문의",
-        titleEn: "inquiry",
-        url: "/contact/inquiry",
+        titleEn: "save",
+        url: "/contact/save",
       },
       {
         titleKo: "문의 조회",
-        titleEn: "lookup",
-        url: "/contact/lookup",
+        titleEn: "find",
+        url: "/contact/find",
       },
     ],
   },

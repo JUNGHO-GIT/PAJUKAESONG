@@ -9,8 +9,7 @@
     "start": "tsx watch --clear-screen=false --ignore node_modules index.ts",
     "fetch": "git fetch --all && git reset --hard origin/main",
     "push": "git add . && git commit -m 'update' && git push origin main",
-    "gcloud": "node gcloud.cjs",
-    "test": "node test.cjs"
+    "gcloud": "node gcloud.cjs"
   },
   "dependencies": {
     "ajv": "^8.17.1",

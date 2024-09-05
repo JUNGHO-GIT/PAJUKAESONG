@@ -53,16 +53,27 @@
   border-radius: 10px !important;
   box-shadow: 0px 0px 0px 0px !important;
 }
-.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: #1976d2 !important;
-  border-width: 2px !important;
-}
-.MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
-  border-color: #d32f2f !important;
-  border-width: 2px !important;
-}
 .MuiInputLabel-root {
   font-size: 0.9rem !important;
+}
+
+[class*="MuiInput-root"]::after {
+  border-bottom: 2px solid rgb(255, 165, 166) !important;
+}
+[class*="MuiInputLabel-root"][class*="Mui-focused"] {
+  color: rgb(255, 81, 84) !important;
+}
+
+[class*="MuiInputLabel-root"][class*="Mui-error"] {
+  color: #ff0000 !important;
+}
+[class*="MuiInput-root"][class*="Mui-error"]::after {
+  border-bottom: 2px solid #ff0000 !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(255, 165, 166) !important;
+  border-width: 2px !important;
 }
 
 /** grid ******************************************************************************************/

@@ -25,21 +25,16 @@ import {
 } from "@imports/ImportLayouts";
 
 import {
-  CommonMain,
+  Main,
   AboutIntroduce, AboutGreeting, AboutLocation,
-  ContactInquiry, ContactLookup,
+  ContactFind, ContactList, ContactDetail, ContactSave,
   FranchiseBranch, FranchiseInquiry,
   MenuMain, MenuSub,
-  NoticeList, NoticeDetail, NoticeSave,
+  NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
   OrderBuy, OrderLookup,
+  UserLogin, UserSignup,
 } from "@imports/ImportPages";
 
-// -------------------------------------------------------------------------------------------------
-const Common = () => (
-  <Routes>
-    <Route path={"/main"} element={<CommonMain />} />
-  </Routes>
-);
 
 // -------------------------------------------------------------------------------------------------
 const About = () => (
@@ -51,18 +46,12 @@ const About = () => (
 );
 
 // -------------------------------------------------------------------------------------------------
-const Menu = () => (
+const Contact = () => (
   <Routes>
-    <Route path={"/main"} element={<MenuMain />} />
-    <Route path={"/sub"} element={<MenuSub />} />
-  </Routes>
-);
-
-// -------------------------------------------------------------------------------------------------
-const Order = () => (
-  <Routes>
-    <Route path={"/buy"} element={<OrderBuy />} />
-    <Route path={"/lookup"} element={<OrderLookup />} />
+    <Route path={"/find"} element={<ContactFind />} />
+    <Route path={"/list"} element={<ContactList />} />
+    <Route path={"/detail"} element={<ContactDetail />} />
+    <Route path={"/save"} element={<ContactSave />} />
   </Routes>
 );
 
@@ -75,10 +64,10 @@ const Franchise = () => (
 );
 
 // -------------------------------------------------------------------------------------------------
-const Contact = () => (
+const Menu = () => (
   <Routes>
-    <Route path={"/inquiry"} element={<ContactInquiry />} />
-    <Route path={"/lookup"} element={<ContactLookup />} />
+    <Route path={"/main"} element={<MenuMain />} />
+    <Route path={"/sub"} element={<MenuSub />} />
   </Routes>
 );
 
@@ -88,6 +77,23 @@ const Notice = () => (
     <Route path={"/list"} element={<NoticeList />} />
     <Route path={"/detail"} element={<NoticeDetail />} />
     <Route path={"/save"} element={<NoticeSave />} />
+    <Route path={"/update"} element={<NoticeUpdate />} />
+  </Routes>
+);
+
+// -------------------------------------------------------------------------------------------------
+const Order = () => (
+  <Routes>
+    <Route path={"/buy"} element={<OrderBuy />} />
+    <Route path={"/lookup"} element={<OrderLookup />} />
+  </Routes>
+);
+
+// -------------------------------------------------------------------------------------------------
+const User = () => (
+  <Routes>
+    <Route path={"/login"} element={<UserLogin />} />
+    <Route path={"/signup"} element={<UserSignup />} />
   </Routes>
 );
 
@@ -101,13 +107,14 @@ const App = () => {
     <div className={"App"}>
       <Header />
       <Routes>
-        <Route path={"/*"} element={<Common />} />
+        <Route path={"/*"} element={<Main />} />
         <Route path={"/about/*"} element={<About />} />
-        <Route path={"/menu/*"} element={<Menu />} />
-        <Route path={"/order/*"} element={<Order />} />
-        <Route path={"/franchise/*"} element={<Franchise />} />
         <Route path={"/contact/*"} element={<Contact />} />
+        <Route path={"/franchise/*"} element={<Franchise />} />
+        <Route path={"/menu/*"} element={<Menu />} />
         <Route path={"/notice/*"} element={<Notice />} />
+        <Route path={"/order/*"} element={<Order />} />
+        <Route path={"/user/*"} element={<User />} />
       </Routes>
       <Footer />
     </div>
@@ -129,8 +136,8 @@ if (rootElement === null) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <BrowserRouter basename={"/PAJUKAESONG"}>
+    <CssBaseline />
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <App />
     </ThemeProvider>
   </BrowserRouter>

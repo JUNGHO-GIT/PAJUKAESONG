@@ -29,33 +29,67 @@ export const useValidateNotice = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    // 1. save
-    if (PATH.includes("notice/save")) {
-      const target = [
-        "notice_title",
-        "notice_content",
-      ];
-      setERRORS(
-        target.reduce((acc: any, cur: string) => {
-          acc[cur] = false;
-          return acc;
-        }, {})
-      );
-      REFS.current = (
-        target.reduce((acc: any, cur: string) => {
-          acc[cur] = createRef();
-          return acc;
-        }, {})
-      );
-      validate.current = (OBJECT: any) => {
-        if (!OBJECT.notice_title) {
-          return showAlertAndFocus('notice_title', "제목을 입력해주세요.");
+    try {
+      // 1. save
+      if (PATH.includes("/notice/save")) {
+        const target = [
+          "notice_title",
+          "notice_content",
+        ];
+        setERRORS(
+          target.reduce((acc: any, cur: string) => {
+            acc[cur] = false;
+            return acc;
+          }, {})
+        );
+        REFS.current = (
+          target.reduce((acc: any, cur: string) => {
+            acc[cur] = createRef();
+            return acc;
+          }, {})
+        );
+        validate.current = (OBJECT: any) => {
+          if (!OBJECT.notice_title) {
+            return showAlertAndFocus('notice_title', "제목을 입력해주세요.");
+          }
+          else if (!OBJECT.notice_content) {
+            return showAlertAndFocus('notice_content', "내용을 입력해주세요.");
+          }
+          return !returnValid;
         }
-        else if (!OBJECT.notice_content) {
-          return showAlertAndFocus('notice_content', "내용을 입력해주세요.");
-        }
-        return !returnValid;
       }
+
+      // 2. update
+      else if (PATH.includes("/notice/update")) {
+        const target = [
+          "notice_title",
+          "notice_content",
+        ];
+        setERRORS(
+          target.reduce((acc: any, cur: string) => {
+            acc[cur] = false;
+            return acc;
+          }, {})
+        );
+        REFS.current = (
+          target.reduce((acc: any, cur: string) => {
+            acc[cur] = createRef();
+            return acc;
+          }, {})
+        );
+        validate.current = (OBJECT: any) => {
+          if (!OBJECT.notice_title) {
+            return showAlertAndFocus('notice_title', "제목을 입력해주세요.");
+          }
+          else if (!OBJECT.notice_content) {
+            return showAlertAndFocus('notice_content', "내용을 입력해주세요.");
+          }
+          return !returnValid;
+        }
+      }
+    }
+    catch (err: any) {
+      console.error(err);
     }
   }, [PATH]);
 

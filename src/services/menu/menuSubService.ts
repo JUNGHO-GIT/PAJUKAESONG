@@ -1,6 +1,7 @@
 // menuSubService.ts
 
 // 1. list -----------------------------------------------------------------------------------------
+// page는 무조건 0부터 시작
 export const list = async (
 ) => {
   return "Hello, World!";

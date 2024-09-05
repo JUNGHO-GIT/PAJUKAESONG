@@ -2,7 +2,7 @@
 
 import mongoose from "mongoose";
 import { Notice } from "@schemas/notice/Notice";
-import { newDate } from "@assets/scripts/date";
+import { newDate } from "@scripts/date";
 
 // 0. cnt ------------------------------------------------------------------------------------------
 export const cnt = async (
@@ -36,9 +36,12 @@ export const list = async (
       }
     },
     {
-      $skip: (Number(page_param) - 1)
+      $skip: (page_param) * 10
+    },
+    {
+      $limit: 10
     }
-  ])
+  ]);
 
   return finalResult;
 };
@@ -47,9 +50,31 @@ export const list = async (
 export const detail = async (
   _id_param: string,
 ) => {
-  const finalResult = await Notice.findOne(
+
+  // notice_view 조회
+  const findView:any = await Notice.findOne(
     {
-      _id: _id_param,
+      _id: _id_param
+    }
+  )
+  .lean();
+
+  // notice_view 형변환
+  const viewResult = !findView.notice_view ? 0 : parseInt(findView.notice_view);
+
+  // notice_view + 1
+  const finalResult:any = await Notice.findOneAndUpdate(
+    {
+      _id: _id_param
+    },
+    {
+      $set: {
+        notice_view: viewResult + 1
+      }
+    },
+    {
+      upsert: true,
+      new: true
     }
   )
   .lean();
@@ -67,8 +92,8 @@ export const save = async (
       notice_title: OBJECT_param.notice_title,
       notice_content: OBJECT_param.notice_content,
       notice_regDt: newDate,
-      notice_updateDt: "",
-    }
+      notice_updateDt: null,
+    },
   );
 
   return finalResult;
@@ -79,7 +104,7 @@ export const update = async (
   _id_param: string,
   OBJECT_param: any,
 ) => {
-  const finalResult = await Notice.updateOne(
+  const finalResult = await Notice.findOneAndUpdate(
     {
       _id: _id_param
     },
@@ -104,7 +129,7 @@ export const update = async (
 export const deletes = async (
   _id_param: string,
 ) => {
-  const finalResult = await Notice.deleteOne(
+  const finalResult = await Notice.findOneAndDelete(
     {
       _id: _id_param
     }

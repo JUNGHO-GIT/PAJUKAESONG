@@ -19,15 +19,13 @@ export const FranchiseBranch = () => {
         가맹 지점
       </Div>
     );
-    // 3. return
+    // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={2}>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Br px={10} />
         </Grid>
       </Paper>
     );
