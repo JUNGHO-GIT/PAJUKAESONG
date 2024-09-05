@@ -13,6 +13,8 @@ export const Input = (props: any) => {
       size={props?.size || "small"}
       fullWidth={props?.fullWidth || true}
       className={props?.className || ""}
+      inputRef={props?.inputRef || null}
+      error={props?.error || false}
       slotProps={{
         ...props?.slotProps,
         input: {

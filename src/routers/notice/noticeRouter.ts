@@ -9,7 +9,6 @@ export const router = express.Router();
 router.get("/list", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.list(
-      req.query.user_id as string,
       req.query.PAGING as any,
     );
     if (finalResult.status === "success") {
@@ -77,6 +76,8 @@ router.get("/detail", async (req: Request, res: Response) => {
 router.post("/save", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.save(
+      req.body.user_id as string,
+      req.body.OBJECT as any,
     );
     if (finalResult) {
       res.json({
@@ -106,6 +107,9 @@ router.post("/save", async (req: Request, res: Response) => {
 router.put("/update", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.update(
+      req.body.user_id as string,
+      req.body._id as string,
+      req.body.OBJECT as any,
     );
     if (finalResult) {
       res.json({
@@ -135,6 +139,8 @@ router.put("/update", async (req: Request, res: Response) => {
 router.delete("/deletes", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.deletes(
+      req.body.user_id as string,
+      req.body._id as string,
     );
     if (finalResult) {
       res.json({

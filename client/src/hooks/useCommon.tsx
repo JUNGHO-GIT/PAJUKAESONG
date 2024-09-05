@@ -25,8 +25,8 @@ export const useCommon = () => {
   const getSessionAdminId = localStorage.getItem(`${TITLE}_adminId`) || "";
   const getSessionAdminPw = localStorage.getItem(`${TITLE}_adminPw`) || "";
   const isAdmin = getSessionAdmin === "true" ? true : false;
-  const isAdminId = getSessionAdminId;
-  const isAdminPw = getSessionAdminPw;
+  const adminId = getSessionAdminId;
+  const adminPw = getSessionAdminPw;
 
   const newDate = moment().tz("Asia/Seoul");
   const koreanDate = moment().tz("Asia/Seoul").format("YYYY-MM-DD");
@@ -41,7 +41,7 @@ export const useCommon = () => {
     navigate, location,
     location_id, location_category, PATH, firstStr, secondStr, thirdStr,
     URL, SUBFIX, TITLE,
-    isAdmin, isAdminId, isAdminPw, dataArray,
+    isAdmin, adminId, adminPw, dataArray,
     newDate, koreanDate, curWeekStart, curWeekEnd, curMonthStart, curMonthEnd, curYearStart, curYearEnd,
   };
 };

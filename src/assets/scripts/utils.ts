@@ -81,9 +81,11 @@ export const decimalToStr = (time: number) => {
 export const adminCheck = (user_id: string) => {
   const adminId = process.env.ADMIN_ID;
 
-
-
-
+  if (user_id === adminId) {
+    return true;
+  }
+  return false;
+}
 
 
 

@@ -16,14 +16,14 @@ export const Footer = () => {
     isXs, isSm, isMd, isLg, isXl
   } = useResponsive();
   const {
-    URL, isAdmin, isAdminId, isAdminPw, navigate, TITLE,
+    URL, isAdmin, adminId, adminPw, navigate, TITLE,
   } = useCommon();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [width, setWidth] = useState<string>("");
   const [OBJECT, setOBJECT] = useState<any>({
-    user_id: isAdminId || "",
-    user_pw: isAdminPw || "",
+    user_id: adminId || "",
+    user_pw: adminPw || "",
   });
 
   // 2-3. useEffect --------------------------------------------------------------------------------

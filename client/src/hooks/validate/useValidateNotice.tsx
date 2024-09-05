@@ -13,14 +13,14 @@ export const useValidateNotice = () => {
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [ERRORS, setERRORS] = useState<any>({});
-  const REFS: any = useRef<any>({});
+  const REFS = useRef<any>({});
   const validate = useRef<any>(() => {});
   let returnValid = false;
 
   // 에러 메시지 출력 및 포커스
   const showAlertAndFocus = (field: string, msg: string) => {
     alert(msg);
-    REFS?.current?.[field]?.current?.focus();
+    REFS.current[field].current.focus();
     setERRORS({
       [field]: true,
     });
@@ -47,7 +47,7 @@ export const useValidateNotice = () => {
           return acc;
         }, {})
       );
-      validate.current = ( OBJECT: any ) => {
+      validate.current = (OBJECT: any) => {
         if (!OBJECT.notice_title) {
           return showAlertAndFocus('notice_title', "제목을 입력해주세요.");
         }

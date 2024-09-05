@@ -13,7 +13,7 @@ export const NoticeSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, koreanDate, URL, SUBFIX,
+    navigate, koreanDate, URL, SUBFIX, adminId
   } = useCommon();
   const {
     REFS, ERRORS, validate,
@@ -30,9 +30,9 @@ export const NoticeSave = () => {
       setLOADING(false);
       return;
     }
-    axios.post(`${URL}${SUBFIX}/notice/save`, {
-      notice_title: OBJECT.notice_title,
-      notice_content: OBJECT.notice_content,
+    axios.post(`${URL}${SUBFIX}/save`, {
+      user_id: adminId,
+      OBJECT: OBJECT,
     })
     .then((res: any) => {
       if (res.data.status === "success") {
@@ -73,7 +73,7 @@ export const NoticeSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.notice_title}
-              inputRef={REFS.current?.notice_title}
+              inputRef={REFS?.current?.notice_title}
               error={ERRORS?.notice_title}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -89,7 +89,7 @@ export const NoticeSave = () => {
               label={"공지사항 내용"}
               inputclass={"h-35vh"}
               value={OBJECT.notice_content}
-              itemRef={REFS.current?.notice_content}
+              itemRef={REFS?.current?.notice_content}
               error={ERRORS?.notice_content}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({

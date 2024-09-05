@@ -1,10 +1,10 @@
 // noticeService.ts
 
 import * as repository from "@repositories/notice/noticeRepository";
+import { adminCheck } from "@scripts/utils";
 
 // 1. list -----------------------------------------------------------------------------------------
 export const list = async (
-  user_id_param: string,
   PAGING_param: any,
 ) => {
 
@@ -43,7 +43,6 @@ export const list = async (
 
 // 2. detail ---------------------------------------------------------------------------------------
 export const detail = async (
-  user_id_param: string,
   _id_param: string,
 ) => {
 
@@ -82,6 +81,14 @@ export const save = async (
   let finalResult: any = null;
   let statusResult: string = "";
 
+  // adminCheck
+  if (!adminCheck(user_id_param)) {
+    return {
+      status: "fail",
+      result: null,
+    };
+  }
+
   findResult = await repository.save(
     OBJECT_param
   );
@@ -113,6 +120,14 @@ export const update = async (
   let finalResult: any = null;
   let statusResult: string = "";
 
+  // adminCheck
+  if (!adminCheck(user_id_param)) {
+    return {
+      status: "fail",
+      result: null,
+    };
+  }
+
   findResult = await repository.update(
     _id_param, OBJECT_param
   );
@@ -142,6 +157,14 @@ export const deletes = async (
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
+
+  // adminCheck
+  if (!adminCheck(user_id_param)) {
+    return {
+      status: "fail",
+      result: null,
+    };
+  }
 
   findResult = await repository.deletes(
     _id_param
