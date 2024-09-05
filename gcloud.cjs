@@ -69,7 +69,7 @@ const modifyChangelog = () => {
 const gitPush = () => {
   execSync('git add .', { stdio: 'inherit' });
   execSync('git commit -m "update"', { stdio: 'inherit' });
-  execSync('git push origin master', { stdio: 'inherit' });
+  execSync('git push origin main', { stdio: 'inherit' });
 };
 
 // 원격 서버에서 스크립트 실행 ---------------------------------------------------------------------
@@ -79,7 +79,7 @@ const runRemoteScript = () => {
   const ipAddr = "34.23.233.23";
   const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/server';
   const cmdGitFetch = 'sudo git fetch --all';
-  const cmdGitReset = 'sudo git reset --hard origin/master';
+  const cmdGitReset = 'sudo git reset --hard origin/main';
   const cmdRmClient = 'sudo rm -rf client';
   const cmdNpm = 'sudo npm install';
   const cmdRestart = 'sudo pm2 restart all';
