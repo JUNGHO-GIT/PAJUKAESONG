@@ -53,6 +53,7 @@ export const list = async (
       $project: {
         _id: 1,
         contact_number: 1,
+        contact_category: 1,
         contact_name: 1,
         contact_email: 1,
         contact_phone: 1,
@@ -99,6 +100,7 @@ export const save = async (
   const finalResult = await Contact.create(
     {
       _id: new mongoose.Types.ObjectId(),
+      contact_category: OBJECT_param.contact_category,
       contact_name: OBJECT_param.contact_name,
       contact_email: OBJECT_param.contact_email,
       contact_phone: OBJECT_param.contact_phone,
@@ -123,6 +125,7 @@ export const update = async (
     },
     {
       $set: {
+        contact_category: OBJECT_param.contact_category,
         contact_name: OBJECT_param.contact_name,
         contact_email: OBJECT_param.contact_email,
         contact_phone: OBJECT_param.contact_phone,

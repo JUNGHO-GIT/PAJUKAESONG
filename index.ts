@@ -9,11 +9,9 @@ import dotenv from "dotenv";
 import { router as aboutRouter } from "@routers/aboutRouter";
 import { router as contactRouter } from "@routers/contactRouter";
 import { router as franchiseRouter } from "@routers/franchiseRouter";
-import { router as menuMainRouter } from "@routers/menuMainRouter";
-import { router as menuSubRouter } from "@routers/menuSubRouter";
+import { router as menuRouter } from "@routers/menuRouter";
 import { router as noticeRouter } from "@routers/noticeRouter";
-import { router as orderBuyRouter } from "@routers/orderBuyRouter";
-import { router as orderLookupRouter } from "@routers/orderLookupRouter";
+import { router as orderRouter } from "@routers/orderRouter";
 import { router as userRouter } from "@routers/userRouter";
 
 // -------------------------------------------------------------------------------------------------
@@ -80,9 +78,7 @@ app.use((req, res, next) => {
 app.use(`${preFix}/about`, aboutRouter);
 app.use(`${preFix}/contact`, contactRouter);
 app.use(`${preFix}/franchise`, franchiseRouter);
-app.use(`${preFix}/main`, menuMainRouter);
-app.use(`${preFix}/sub`, menuSubRouter);
+app.use(`${preFix}/menu`, menuRouter);
 app.use(`${preFix}/notice`, noticeRouter);
-app.use(`${preFix}/buy`, orderBuyRouter);
-app.use(`${preFix}/lookup`, orderLookupRouter);
+app.use(`${preFix}/order`, orderRouter);
 app.use(`${preFix}/user`, userRouter);

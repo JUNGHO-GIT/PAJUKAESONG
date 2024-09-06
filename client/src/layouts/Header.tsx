@@ -115,7 +115,7 @@ export const Header = () => {
               key={`tab-${idx}`}
               label={item.titleKo}
               value={item.titleEn}
-              className={`pointer-burgundy fs-1-1rem horizon-text ${tabWidth} ${selectedTab === item.titleEn ? "burgundy fw-600" : ""}`}
+              className={`pointer-burgundy fs-1-1rem horizontal-text ${tabWidth} ${selectedTab === item.titleEn ? "burgundy fw-600" : ""}`}
               onClick={(e) => {
                 setSelectedTab(item.titleEn);
                 setSelectedAnchorEl({

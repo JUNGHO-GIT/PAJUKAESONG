@@ -8,6 +8,7 @@ import { Btn } from "@components/Btn";
 import { Bg } from "@components/Bg";
 import { Icons } from "@components/Icons";
 import { Input } from "@components/Input";
+import { FileInput } from "@components/FileInput";
 import { Select } from "@components/Select";
 import { TextArea } from "@components/TextArea";
 
@@ -21,6 +22,7 @@ export {
   Bg,
   Icons,
   Input,
+  FileInput,
   Select,
   TextArea,
 };

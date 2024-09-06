@@ -55,13 +55,13 @@ export const NoticeDetail = () => {
     // 2. detail
     const detailSection = () => {
       const detailFragment = () => (
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           <Grid size={12}>
             <Div className={"fs-1-8rem fw-700"}>
               {OBJECT.notice_title}
             </Div>
           </Grid>
-          <Hr px={10} className={"bg-burgundy h-2"} />
+          <Hr px={10} className={"bg-burgundy"} />
           <Grid size={12}>
             <TextArea
               label={""}
@@ -75,7 +75,8 @@ export const NoticeDetail = () => {
       const filterFragment = () => (
         <Grid container spacing={1}>
           <Grid size={6} className={"d-left"}>
-            <Icons name={"Calendar"} className={"w-20 h-20"} />
+            <Icons
+            name={"Calendar"} className={"w-20 h-20"} />
             <Div className={"fs-1-0rem fw-500"}>
               {moment(OBJECT.notice_regDt).format("YYYY-MM-DD")}
             </Div>
@@ -91,7 +92,8 @@ export const NoticeDetail = () => {
             </Div>
           </Grid>
           <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
-            <Icons name={"View"} className={"w-20 h-20"} />
+            <Icons
+            name={"View"} className={"w-20 h-20"} />
             <Div className={"fs-1-0rem fw-500"}>
               {OBJECT.notice_view || "0"}
             </Div>
@@ -116,7 +118,7 @@ export const NoticeDetail = () => {
         <Card className={"border radius shadow p-40 fadeIn"}>
           {detailFragment()}
           <Br px={50} />
-          <Hr px={30} className={"bg-grey h-2"} />
+          <Hr px={30} className={"bg-grey"} />
           {filterFragment()}
         </Card>
       );
@@ -129,7 +131,7 @@ export const NoticeDetail = () => {
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {detailSection()}
           </Grid>
         </Grid>

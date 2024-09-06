@@ -4,15 +4,15 @@ import { useState } from "@imports/ImportReacts";
 import { useCommon, useValidateContact } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { CONTACT } from "@imports/ImportBases";
-import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Div, Select, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
+import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ContactSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, koreanDate, URL, SUBFIX, adminId
+    navigate, URL, SUBFIX, PATH,
   } = useCommon();
   const {
     REFS, ERRORS, validate,
@@ -62,13 +62,37 @@ export const ContactSave = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        1:1 문의
+        문의 하기
       </Div>
     );
     // 2. save
     const saveSection = () => {
       const saveFragment = () => (
         <Grid container spacing={3}>
+          <Grid size={12}>
+            <Select
+              variant={"standard"}
+              label={"문의 유형"}
+              required={true}
+              className={"border-bottom"}
+              value={OBJECT.contact_category}
+              inputRef={REFS?.current?.contact_category}
+              error={ERRORS?.contact_category}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  contact_category: e.target.value,
+                }));
+              }}
+            >
+              {["franchise", "personal"].map((item: any, idx: number) => (
+                <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
+                  {item === "franchise" && "가맹 문의"}
+                  {item === "personal" && "1:1 문의"}
+                </MenuItem>
+              ))}
+            </Select>
+          </Grid>
           <Grid size={12}>
             <Input
               variant={"standard"}
@@ -186,7 +210,7 @@ export const ContactSave = () => {
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {saveSection()}
           </Grid>
         </Grid>

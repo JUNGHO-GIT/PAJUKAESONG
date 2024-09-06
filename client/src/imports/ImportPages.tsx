@@ -2,15 +2,14 @@
 
 import { Main } from "@pages/Main";
 
-import { AboutIntroduce } from "@pages/about/AboutIntroduce";
 import { AboutGreeting } from "@pages/about/AboutGreeting";
 import { AboutLocation } from "@pages/about/AboutLocation";
 import { ContactFind } from "@pages/contact/ContactFind";
 import { ContactList } from "@pages/contact/ContactList";
 import { ContactDetail } from "@pages/contact/ContactDetail";
 import { ContactSave } from "@pages/contact/ContactSave";
+import { FranchiseInfo } from "@pages/franchise/FranchiseInfo";
 import { FranchiseList } from "@pages/franchise/FranchiseList";
-import { FranchiseInquiry } from "@pages/franchise/FranchiseInquiry";
 import { FranchiseSave } from "@pages/franchise/FranchiseSave";
 import { FranchiseDetail } from "@pages/franchise/FranchiseDetail";
 import { MenuMain } from "@pages/menu/MenuMain";
@@ -27,9 +26,9 @@ import { UserSignup } from "@pages/user/UserSignup";
 // -------------------------------------------------------------------------------------------------
 export {
   Main,
-  AboutIntroduce, AboutGreeting, AboutLocation,
+  AboutGreeting, AboutLocation,
   ContactFind, ContactList, ContactDetail, ContactSave,
-  FranchiseList, FranchiseInquiry, FranchiseSave, FranchiseDetail,
+  FranchiseInfo, FranchiseList, FranchiseSave, FranchiseDetail,
   MenuMain, MenuSub,
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
   OrderBuy, OrderLookup,

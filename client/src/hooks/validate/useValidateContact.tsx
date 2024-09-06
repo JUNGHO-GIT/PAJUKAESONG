@@ -36,9 +36,43 @@ export const useValidateContact = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     try {
-      // 1. save
+
+      // 1. find
+      if (PATH.includes("/contact/find")) {
+        const target = [
+          "contact_name",
+          "contact_email",
+        ];
+        setERRORS(
+          target.reduce((acc: any, cur: string) => {
+            acc[cur] = false;
+            return acc;
+          }, {})
+        );
+        REFS.current = (
+          target.reduce((acc: any, cur: string) => {
+            acc[cur] = createRef();
+            return acc;
+          }, {})
+        );
+        validate.current = (OBJECT: any) => {
+          if (!OBJECT.contact_name) {
+            return showAlertAndFocus('contact_name', "이름을 입력해주세요.");
+          }
+          else if (!OBJECT.contact_email) {
+            return showAlertAndFocus('contact_email', "이메일을 입력해주세요.");
+          }
+          else if (!validateEmail(OBJECT.contact_email)) {
+            return showAlertAndFocus('contact_email', "이메일 형식으로 입력해주세요.");
+          }
+          return !returnValid;
+        }
+      }
+
+      // 2. save
       if (PATH.includes("/contact/save")) {
         const target = [
+          "contact_category",
           "contact_name",
           "contact_email",
           "contact_phone",
@@ -58,7 +92,10 @@ export const useValidateContact = () => {
           }, {})
         );
         validate.current = (OBJECT: any) => {
-          if (!OBJECT.contact_name) {
+          if (!OBJECT.contact_category) {
+            return showAlertAndFocus('contact_category', "문의 유형을 선택해주세요.");
+          }
+          else if (!OBJECT.contact_name) {
             return showAlertAndFocus('contact_name', "이름을 입력해주세요.");
           }
           else if (!OBJECT.contact_email) {
@@ -75,38 +112,6 @@ export const useValidateContact = () => {
           }
           else if (!OBJECT.contact_content) {
             return showAlertAndFocus('contact_content', "내용을 입력해주세요.");
-          }
-          return !returnValid;
-        }
-      }
-
-      // 2. find
-      else if (PATH.includes("/contact/find")) {
-        const target = [
-          "contact_name",
-          "contact_email",
-        ];
-        setERRORS(
-          target.reduce((acc: any, cur: string) => {
-            acc[cur] = false;
-            return acc;
-          }, {})
-        );
-        REFS.current = (
-          target.reduce((acc: any, cur: string) => {
-            acc[cur] = createRef();
-            return acc;
-          }, {})
-        );
-        validate.current = (OBJECT: any) => {
-          if (!OBJECT.contact_name) {
-            return showAlertAndFocus('contact_name', "이름을 입력해주세요.");
-          }
-          else if (!OBJECT.contact_email) {
-            return showAlertAndFocus('contact_email', "이메일을 입력해주세요.");
-          }
-          else if (!validateEmail(OBJECT.contact_email)) {
-            return showAlertAndFocus('contact_email', "이메일 형식으로 입력해주세요.");
           }
           return !returnValid;
         }

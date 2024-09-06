@@ -70,8 +70,8 @@ export const ContactFind = () => {
     );
     // 2. find
     const findSection = () => {
-      const findFragment = (i: number) => (
-        <Grid container spacing={3} key={i}>
+      const findFragment = () => (
+        <Grid container spacing={3}>
           <Grid size={12}>
             <Input
               variant={"standard"}
@@ -125,7 +125,7 @@ export const ContactFind = () => {
       );
       return (
         <Card className={"border radius shadow p-40 fadeIn"}>
-          {findFragment(0)}
+          {findFragment()}
           <Br px={50} />
           {btnFragment()}
         </Card>
@@ -139,7 +139,7 @@ export const ContactFind = () => {
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {findSection()}
           </Grid>
         </Grid>

@@ -12,6 +12,11 @@ const schema = new mongoose.Schema(
       unique : true
     },
 
+    contact_category: {
+      type: String,
+      default: "",
+      required: false
+    },
     contact_name: {
       type: String,
       default: "",

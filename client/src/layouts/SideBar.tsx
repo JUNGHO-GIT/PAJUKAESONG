@@ -27,8 +27,6 @@ export const SideBar = (
   const [selectedTab, setSelectedTab] = useState<string>("");
   const [selectedTabVal, setSelectedTabVal] = useState<string>("");
   const [selectedListItem, setSelectedListItem] = useState<string>("");
-  const [loginTrigger, setLoginTrigger] = useState<boolean>(false);
-  const [clickCount, setClickCount] = useState<number>(0);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화
@@ -70,8 +68,10 @@ export const SideBar = (
               {item.titleKo}
             </Div>
             {selectedTab === item.titleEn
-              ? <Icons name={"ChevronUp"} className={"w-12 h-12 black"} />
-              : <Icons name={"ChevronDown"} className={"w-12 h-12 black"} />
+              ? <Icons
+            name={"ChevronUp"} className={"w-12 h-12 black"} />
+              : <Icons
+            name={"ChevronDown"} className={"w-12 h-12 black"} />
             }
           </ListItem>
           {/* 하위 항목 */}
@@ -103,27 +103,31 @@ export const SideBar = (
       ))
     );
     const textSection1 = () => (
-      <Grid container columns={12} spacing={1} className={`d-center horizon-text`}>
+      <Grid container columns={12} spacing={1} className={`d-center horizontal-text`}>
         <Grid size={12} className={"d-left"}>
-          <Icons name={"Info"} className={"w-12 h-12"} />
+          <Icons
+            name={"Info"} className={"w-12 h-12"} />
           <Div className={"fs-0-8rem"}>
             사업자 등록번호: 883-03-03096
           </Div>
         </Grid>
         <Grid size={12} className={"d-left"}>
-          <Icons name={"Location"} className={"w-12 h-12"} />
+          <Icons
+            name={"Location"} className={"w-12 h-12"} />
           <Div className={"fs-0-7rem"}>
             경기 파주시 문산읍 방촌로 1675-34
           </Div>
         </Grid>
         <Grid size={12} className={"d-left"}>
-          <Icons name={"Call"} className={"w-12 h-12"} />
+          <Icons
+            name={"Call"} className={"w-12 h-12"} />
           <Div className={"fs-0-8rem"}>
             031-952-8083
           </Div>
         </Grid>
         <Grid size={12} className={"d-left"}>
-          <Icons name={"Mail"} className={"w-12 h-12"} />
+          <Icons
+            name={"Mail"} className={"w-12 h-12"} />
           <Div className={"fs-0-8rem"}>
             sooookee@naver.com
           </Div>
@@ -131,7 +135,7 @@ export const SideBar = (
       </Grid>
     );
     const textSection2 = () => (
-      <Grid container spacing={2} columns={12} className={"horizon-text fs-0-8rem"}>
+      <Grid container spacing={2} columns={12} className={"horizontal-text fs-0-8rem"}>
         <Grid size={12} className={"d-center"}>
           <span>&copy; 2024&nbsp;&nbsp;</span>
           <b>PajuKaesong</b>

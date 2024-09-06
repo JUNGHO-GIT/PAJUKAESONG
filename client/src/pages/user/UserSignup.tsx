@@ -63,8 +63,8 @@ export const UserSignup = () => {
     );
     // 2. signup
     const signupSection = () => {
-      const signupFragment = (i: number) => (
-        <Grid container spacing={3} key={i}>
+      const signupFragment = () => (
+        <Grid container spacing={3}>
           <Grid size={12} className={"d-center"}>
             <Input
               label={"아이디"}
@@ -155,7 +155,7 @@ export const UserSignup = () => {
       );
       return (
         <Card className={"border radius shadow p-40 fadeIn"}>
-          {signupFragment(0)}
+          {signupFragment()}
           <Hr px={50} />
           {btnFragment()}
           <Hr px={50} />
@@ -171,7 +171,7 @@ export const UserSignup = () => {
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {signupSection()}
           </Grid>
         </Grid>

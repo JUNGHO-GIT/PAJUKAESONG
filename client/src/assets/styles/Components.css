@@ -40,6 +40,12 @@
   }
 }
 
+/** input file ************************************************************************************/
+/* input[type="file" i]::-webkit-file-upload-button {
+  display: none !important;
+  cursor: pointer !important;
+} */
+
 /** scrollbar *************************************************************************************/
 ::-webkit-scrollbar {
   width: 5px !important;

@@ -36,14 +36,14 @@ export const useValidateFranchise = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     try {
-      // 1. inquiry
-      if (PATH.includes("/franchise/inquiry")) {
+      // 1. save
+      if (PATH.includes("/franchise/save")) {
         const target = [
-          "franchise_inquiry_name",
-          "franchise_inquiry_email",
-          "franchise_inquiry_phone",
-          "franchise_inquiry_title",
-          "franchise_inquiry_content",
+          "franchise_name",
+          "franchise_address_main",
+          "franchise_address_detail",
+          "franchise_phone",
+          "franchise_image",
         ];
         setERRORS(
           target.reduce((acc: any, cur: string) => {
@@ -58,23 +58,20 @@ export const useValidateFranchise = () => {
           }, {})
         );
         validate.current = (OBJECT: any) => {
-          if (!OBJECT.franchise_inquiry_name) {
-            return showAlertAndFocus('franchise_inquiry_name', "이름을 입력해주세요.");
+          if (!OBJECT.franchise_name) {
+            return showAlertAndFocus('franchise_name', "가맹점 이름을 입력해주세요.");
           }
-          else if (!OBJECT.franchise_inquiry_email) {
-            return showAlertAndFocus('franchise_inquiry_email', "이메일을 입력해주세요.");
+          else if (!OBJECT.franchise_address_main) {
+            return showAlertAndFocus('franchise_address_main', "가맹점 주소를 입력해주세요.");
           }
-          else if (!validateEmail(OBJECT.franchise_inquiry_email)) {
-            return showAlertAndFocus('franchise_inquiry_email', "이메일 형식으로 입력해주세요.");
+          else if (!OBJECT.franchise_address_detail) {
+            return showAlertAndFocus('franchise_address_detail', "가맹점 상세주소를 입력해주세요.");
           }
-          else if (!OBJECT.franchise_inquiry_phone) {
-            return showAlertAndFocus('franchise_inquiry_phone', "전화번호를 입력해주세요.");
+          else if (!OBJECT.franchise_phone) {
+            return showAlertAndFocus('franchise_phone', "가맹점 전화번호를 입력해주세요.");
           }
-          else if (!OBJECT.franchise_inquiry_title) {
-            return showAlertAndFocus('franchise_inquiry_title', "제목을 입력해주세요.");
-          }
-          else if (!OBJECT.franchise_inquiry_content) {
-            return showAlertAndFocus('franchise_inquiry_content', "내용을 입력해주세요.");
+          else if (!OBJECT.franchise_image) {
+            return showAlertAndFocus('franchise_image', "가맹점 이미지를 등록해주세요.");
           }
           return !returnValid;
         }

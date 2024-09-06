@@ -86,12 +86,15 @@ export const ContactDetail = () => {
     const detailSection = () => {
       const detailFragment = () => (
         <Grid container spacing={4}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-1-8rem fw-500 me-10 grey"}>
+              {`[ ${OBJECT.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"} ]`}
+            </Div>
             <Div className={"fs-1-8rem fw-700"}>
               {OBJECT.contact_title}
             </Div>
           </Grid>
-          <Hr px={10} className={"bg-burgundy h-2"} />
+          <Hr px={10} className={"bg-burgundy"} />
           <Grid size={12}>
             <TextArea
               label={""}
@@ -105,7 +108,8 @@ export const ContactDetail = () => {
       const filterFragment = () => (
         <Grid container spacing={1}>
           <Grid size={6} className={"d-left"}>
-            <Icons name={"Calendar"} className={"w-20 h-20"} />
+            <Icons
+            name={"Calendar"} className={"w-20 h-20"} />
             <Div className={"fs-1-0rem fw-500"}>
               {moment(OBJECT.contact_regDt).format("YYYY-MM-DD")}
             </Div>
@@ -126,7 +130,8 @@ export const ContactDetail = () => {
             </Div>
           </Grid>
           <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
-            <Icons name={"Person"} className={"w-20 h-20"} />
+            <Icons
+            name={"Person"} className={"w-20 h-20"} />
             <Div className={"fs-1-0rem fw-500"}>
               {OBJECT.contact_name}
             </Div>
@@ -147,7 +152,7 @@ export const ContactDetail = () => {
         <Card className={"border radius shadow p-40 fadeIn"}>
           {detailFragment()}
           <Br px={50} />
-          <Hr px={30} className={"bg-grey h-2"} />
+          <Hr px={30} className={"bg-grey"} />
           {filterFragment()}
         </Card>
       );
@@ -160,7 +165,7 @@ export const ContactDetail = () => {
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {detailSection()}
           </Grid>
         </Grid>

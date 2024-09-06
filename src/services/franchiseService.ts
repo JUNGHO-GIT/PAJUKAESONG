@@ -2,8 +2,9 @@
 
 import * as repository from "@repositories/franchiseRepository";
 
-// 1-1. listBranch ---------------------------------------------------------------------------------
-export const listBranch = async (
+// 1. list -----------------------------------------------------------------------------------------
+// page는 무조건 0부터 시작
+export const list = async (
   PAGING_param: any,
 ) => {
 
@@ -17,10 +18,10 @@ export const listBranch = async (
   const sort = PAGING_param.sort === "asc" ? 1 : -1;
   const page = PAGING_param.page || 0;
 
-  totalCntResult = await repository.cntBranch(
+  totalCntResult = await repository.cnt(
   );
 
-  findResult = await repository.listBranch(
+  findResult = await repository.list(
     sort, page
   );
 
@@ -40,49 +41,8 @@ export const listBranch = async (
   };
 };
 
-// 1-2. listInquiry --------------------------------------------------------------------------------
-export const listInquiry = async (
-  franchise_inquiry_name_param: string,
-  franchise_inquiry_email_param: string,
-  PAGING_param: any,
-) => {
-
-  // findResult, finalResult 변수 선언
-  let findResult: any = null;
-  let finalResult: any = null;
-  let statusResult: string = "";
-  let totalCntResult: any = null;
-
-  // sort, page 변수 선언
-  const sort = PAGING_param.sort === "asc" ? 1 : -1;
-  const page = PAGING_param.page || 0;
-
-  totalCntResult = await repository.cntInquiry(
-    franchise_inquiry_name_param, franchise_inquiry_email_param
-  );
-
-  findResult = await repository.listInquiry(
-    franchise_inquiry_name_param, franchise_inquiry_email_param, sort, page
-  );
-
-  if (!findResult || findResult.length <= 0) {
-    statusResult = "fail";
-    finalResult = null;
-  }
-  else {
-    statusResult = "success";
-    finalResult = findResult;
-  }
-
-  return {
-    status: statusResult,
-    totalCnt: totalCntResult,
-    result: finalResult,
-  };
-};
-
-// 1-2. detailBranch -------------------------------------------------------------------------------
-export const detailBranch = async (
+// 2. detail ---------------------------------------------------------------------------------------
+export const detail = async (
   _id_param: string,
 ) => {
 
@@ -91,7 +51,7 @@ export const detailBranch = async (
   let finalResult: any = null;
   let statusResult: string = "";
 
-  findResult = await repository.detailBranch(
+  findResult = await repository.detail(
     _id_param
   );
 
@@ -110,37 +70,8 @@ export const detailBranch = async (
   };
 };
 
-// 2-1. detailInquiry ------------------------------------------------------------------------------
-export const detailInquiry = async (
-  _id_param: string,
-) => {
-
-  // findResult, finalResult 변수 선언
-  let findResult: any = null;
-  let finalResult: any = null;
-  let statusResult: string = "";
-
-  findResult = await repository.detailInquiry(
-    _id_param
-  );
-
-  if (!findResult) {
-    statusResult = "fail";
-    finalResult = null;
-  }
-  else {
-    statusResult = "success";
-    finalResult = findResult;
-  }
-
-  return {
-    status: statusResult,
-    result: finalResult,
-  };
-};
-
-// 3-1. saveBranch ---------------------------------------------------------------------------------
-export const saveBranch = async (
+// 3. save -----------------------------------------------------------------------------------------
+export const save = async (
   OBJECT_param: any,
 ) => {
 
@@ -149,7 +80,7 @@ export const saveBranch = async (
   let finalResult: any = null;
   let statusResult: string = "";
 
-  findResult = await repository.saveBranch(
+  findResult = await repository.save(
     OBJECT_param
   );
 
@@ -168,37 +99,8 @@ export const saveBranch = async (
   };
 };
 
-// 3-2. saveInquiry -------------------------------------------------------------------------------
-export const saveInquiry = async (
-  OBJECT_param: any,
-) => {
-
-  // findResult, finalResult 변수 선언
-  let findResult: any = null;
-  let finalResult: any = null;
-  let statusResult: string = "";
-
-  findResult = await repository.saveInquiry(
-    OBJECT_param
-  );
-
-  if (!findResult) {
-    statusResult = "fail";
-    finalResult = null;
-  }
-  else {
-    statusResult = "success";
-    finalResult = findResult;
-  }
-
-  return {
-    status: statusResult,
-    result: finalResult,
-  };
-};
-
-// 4-1. updateBranch ------------------------------------------------------------------------------
-export const updateBranch = async (
+// 4. update ---------------------------------------------------------------------------------------
+export const update = async (
   _id_param: string,
   OBJECT_param: any,
 ) => {
@@ -208,7 +110,7 @@ export const updateBranch = async (
   let finalResult: any = null;
   let statusResult: string = "";
 
-  findResult = await repository.updateBranch(
+  findResult = await repository.update(
     _id_param, OBJECT_param
   );
 
@@ -227,38 +129,8 @@ export const updateBranch = async (
   };
 };
 
-// 4-2. updateInquiry -----------------------------------------------------------------------------
-export const updateInquiry = async (
-  _id_param: string,
-  OBJECT_param: any,
-) => {
-
-  // findResult, finalResult 변수 선언
-  let findResult: any = null;
-  let finalResult: any = null;
-  let statusResult: string = "";
-
-  findResult = await repository.updateInquiry(
-    _id_param, OBJECT_param
-  );
-
-  if (!findResult) {
-    statusResult = "fail";
-    finalResult = null;
-  }
-  else {
-    statusResult = "success";
-    finalResult = findResult;
-  }
-
-  return {
-    status: statusResult,
-    result: finalResult,
-  };
-};
-
-// 5-1. deletesBranch ------------------------------------------------------------------------------
-export const deletesBranch = async (
+// 5. deletes --------------------------------------------------------------------------------------
+export const deletes = async (
   _id_param: string,
 ) => {
 
@@ -267,36 +139,7 @@ export const deletesBranch = async (
   let finalResult: any = null;
   let statusResult: string = "";
 
-  findResult = await repository.deletesBranch(
-    _id_param
-  );
-
-  if (!findResult) {
-    statusResult = "fail";
-    finalResult = null;
-  }
-  else {
-    statusResult = "success";
-    finalResult = findResult;
-  }
-
-  return {
-    status: statusResult,
-    result: finalResult,
-  };
-};
-
-// 5-2. deletesInquiry -----------------------------------------------------------------------------
-export const deletesInquiry = async (
-  _id_param: string,
-) => {
-
-  // findResult, finalResult 변수 선언
-  let findResult: any = null;
-  let finalResult: any = null;
-  let statusResult: string = "";
-
-  findResult = await repository.deletesInquiry(
+  findResult = await repository.deletes(
     _id_param
   );
 

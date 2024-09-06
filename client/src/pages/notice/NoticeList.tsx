@@ -65,9 +65,9 @@ export const NoticeList = () => {
     );
     // 2. list
     const listSection = () => {
-      const listFragment =  (i: number) => (
-        <Grid container spacing={2} key={i}>
-          <Grid size={2}>
+      const headerFragment = () => (
+        <Grid container spacing={2}>
+          <Grid size={{ xs: 2, sm: 2 }}>
             <Div className={"fs-0-8rem fw-500"}>
               번호
             </Div>
@@ -82,35 +82,34 @@ export const NoticeList = () => {
               작성일
             </Div>
           </Grid>
-          <Hr px={10} className={"bg-burgundy h-2"} />
-          {OBJECT?.map((item: any, index: number) => (
-            <Grid container spacing={2} key={index}>
-              <Grid size={2}>
-                <Div className={"fs-1-0rem"}>
-                  {item.notice_number}
-                </Div>
-              </Grid>
-              <Grid size={{ xs: 10, sm: 7 }}>
-                <Div
-                  className={"fs-1-0rem pointer-burgundy"}
-                  onClick={() => {
-                    navigate('/notice/detail', {
-                      state: {
-                        id: item._id
-                      },
-                    });
-                  }}
-                >
-                  {item.notice_title}
-                </Div>
-              </Grid>
-              <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
-                <Div className={"fs-1-0rem"}>
-                  {moment(item.notice_regDt).format("YYYY-MM-DD")}
-                </Div>
-              </Grid>
-            </Grid>
-          ))}
+        </Grid>
+      );
+      const listFragment = (item: any, index: number) => (
+        <Grid container spacing={2} key={index} className={"mb-20"}>
+          <Grid size={2}>
+            <Div className={"fs-1-0rem"}>
+              {item.notice_number}
+            </Div>
+          </Grid>
+          <Grid size={{ xs: 10, sm: 7 }}>
+            <Div
+              className={"fs-1-0rem pointer-burgundy"}
+              onClick={() => {
+                navigate('/notice/detail', {
+                  state: {
+                    id: item._id
+                  },
+                });
+              }}
+            >
+              {item.notice_title}
+            </Div>
+          </Grid>
+          <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
+            <Div className={"fs-1-0rem"}>
+              {moment(item.notice_regDt).format("YYYY-MM-DD")}
+            </Div>
+          </Grid>
         </Grid>
       );
       const filterFragment = () => (
@@ -190,9 +189,10 @@ export const NoticeList = () => {
       );
       return (
         <Card className={"border radius shadow p-40 fadeIn"}>
-          {listFragment(0)}
-          <Br px={10} />
-          <Hr px={30} className={"bg-grey h-2"} />
+          {headerFragment()}
+          <Hr px={40} className={"bg-burgundy"} />
+          {OBJECT?.map((item: any, index: number) => listFragment(item, index))}
+          <Hr px={40} className={"bg-grey"} />
           {filterFragment()}
         </Card>
       );
@@ -205,7 +205,7 @@ export const NoticeList = () => {
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {listSection()}
           </Grid>
         </Grid>

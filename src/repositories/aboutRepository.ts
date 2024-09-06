@@ -20,23 +20,7 @@ export const greeting = async (
   return finalResult;
 }
 
-// 2-2. introduce ----------------------------------------------------------------------------------
-export const introduce = async (
-) => {
-  const finalResult = await Contact.aggregate([
-    {
-      $project: {
-        _id: 1,
-        about_introduce_content: 1,
-        about_introduce_image: 1,
-      }
-    }
-  ]);
-
-  return finalResult;
-};
-
-// 3-2. location -----------------------------------------------------------------------------------
+// 2-2. location -----------------------------------------------------------------------------------
 export const location = async (
 ) => {
   const finalResult = await Contact.aggregate([

@@ -64,3 +64,19 @@ export const log = (name: string, data: any) => {
   // 캐시 클리어
   cache.clear();
 };
+
+// 3. makeFormData ---------------------------------------------------------------------------------
+export const makeFormData = (data: any) => {
+  const formData = new FormData();
+  for (const key in data) {
+    if (data[key] instanceof Array) {
+      data[key].forEach((element: any) => {
+        formData.append(key, element);
+      });
+    }
+    else {
+      formData.append(key, data[key]);
+    }
+  }
+  return formData;
+};

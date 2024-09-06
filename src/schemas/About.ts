@@ -25,12 +25,12 @@ const schema = new mongoose.Schema(
     },
 
     // 소개
-    about_introduce_content: {
+    about_info_content: {
       type: String,
       default: "",
       required: false
     },
-    about_introduce_image: {
+    about_info_image: {
       type: String,
       default: "",
       required: false

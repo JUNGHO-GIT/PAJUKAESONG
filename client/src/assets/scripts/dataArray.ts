@@ -6,11 +6,6 @@ export const dataArray = [
     titleEn: "about",
     sub: [
       {
-        titleKo: "파주개성면옥",
-        titleEn: "introduce",
-        url: "/about/introduce",
-      },
-      {
         titleKo: "대표 인사말",
         titleEn: "greeting",
         url: "/about/greeting",
@@ -43,25 +38,25 @@ export const dataArray = [
     titleEn: "order",
     sub: [
       {
-        titleKo: "구매하기",
+        titleKo: "구매 하기",
         titleEn: "buy",
         url: "/order/buy",
       },
       {
-        titleKo: "주문조회",
+        titleKo: "주문 조회",
         titleEn: "lookup",
         url: "/order/lookup",
       },
     ],
   },
   {
-    titleKo: "가맹문의",
+    titleKo: "가맹점",
     titleEn: "franchise",
     sub: [
       {
-        titleKo: "가맹 문의",
-        titleEn: "inquiry",
-        url: "/franchise/inquiry",
+        titleKo: "가맹 안내",
+        titleEn: "info",
+        url: "/franchise/info",
       },
       {
         titleKo: "가맹 지점",
@@ -75,7 +70,7 @@ export const dataArray = [
     titleEn: "contact",
     sub: [
       {
-        titleKo: "1:1 문의",
+        titleKo: "문의 하기",
         titleEn: "save",
         url: "/contact/save",
       },

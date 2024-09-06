@@ -5,13 +5,6 @@ import { Div, Img, Br, Hr } from "@imports/ImportComponents";
 import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-declare global {
-  interface Window {
-    naver: any;
-  }
-}
-
-// -------------------------------------------------------------------------------------------------
 export const AboutLocation = () => {
 
   // 1. common -------------------------------------------------------------------------------------

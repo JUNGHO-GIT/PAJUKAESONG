@@ -84,8 +84,8 @@ export const UserLogin = () => {
     });
   };
 
-  // 4. handler ------------------------------------------------------------------------------------
-  const handlerLogout = () => {
+  // 4. handle ------------------------------------------------------------------------------------
+  const handleLogout = () => {
     localStorage.clear();
     alert("로그아웃 되었습니다.");
     navigate("/main");
@@ -104,8 +104,8 @@ export const UserLogin = () => {
     );
     // 2. login
     const loginSection = () => {
-      const loginFragment = (i: number) => (
-        <Grid container spacing={3} key={i}>
+      const loginFragment = () => (
+        <Grid container spacing={3}>
           <Grid size={12} className={"d-center"}>
             <Input
               label={"아이디"}
@@ -149,7 +149,7 @@ export const UserLogin = () => {
                 color={"error"}
                 className={"w-100p fs-1-0rem"}
                 onClick={() => {
-                  handlerLogout();
+                  handleLogout();
                 }}
               >
                 로그아웃
@@ -207,7 +207,7 @@ export const UserLogin = () => {
       );
       return (
         <Card className={"border radius shadow p-40 fadeIn"}>
-          {loginFragment(0)}
+          {loginFragment()}
           <Hr px={50} />
           {btnFragment()}
           <Hr px={50} />
@@ -223,7 +223,7 @@ export const UserLogin = () => {
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {loginSection()}
           </Grid>
         </Grid>

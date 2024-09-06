@@ -55,33 +55,53 @@ export const Footer = () => {
     );
     // 3. text
     const textSection = () => (
-      <Grid container columns={12} spacing={1} className={`d-center horizon-text`}>
+      <Grid container columns={12} spacing={1} className={`d-center horizontal-text`}>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
-          <Icons name={"Info"} className={"w-12 h-12"} />
+          <Icons
+            key={"Info"}
+            name={"Info"}
+            className={"w-12 h-12"}
+          />
           <Div className={"fs-0-8rem"}>
             파주개성면옥 | 대표: 강민서 | 사업자 등록번호: 883-03-03096
           </Div>
         </Grid>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
-          <Icons name={"Location"} className={"w-12 h-12"} />
+          <Icons
+            key={"Location"}
+            name={"Location"}
+            className={"w-12 h-12"}
+          />
           <Div className={"fs-0-8rem"}>
             주소: 경기 파주시 문산읍 방촌로 1675-34 1층
           </Div>
         </Grid>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
-          <Icons name={"Call"} className={"w-12 h-12"} />
+          <Icons
+            key={"Call"}
+            name={"Call"}
+            className={"w-12 h-12"}
+          />
           <Div className={"fs-0-8rem"}>
             전화: 031-952-8083
           </Div>
         </Grid>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
-          <Icons name={"Mail"} className={"w-12 h-12"} />
+          <Icons
+            key={"Mail"}
+            name={"Mail"}
+            className={"w-12 h-12"}
+          />
           <Div className={"fs-0-8rem"}>
             이메일: sooookee@naver.com
           </Div>
         </Grid>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
-          <Icons name={"Copyright"} className={"w-12 h-12"} />
+          <Icons
+            key={"Copyright"}
+            name={"Copyright"}
+            className={"w-12 h-12"}
+          />
           <Div
             className={"fs-0-8rem pointer"}
             onClick={() => {

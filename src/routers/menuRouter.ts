@@ -2,7 +2,7 @@
 
 import express from "express";
 import { Request, Response } from "express";
-import * as service from "@services/menuMainService";
+import * as service from "@services/menuService";
 export const router = express.Router();
 
 // 1. list -----------------------------------------------------------------------------------------

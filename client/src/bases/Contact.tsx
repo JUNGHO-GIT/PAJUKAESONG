@@ -4,6 +4,7 @@
 export const CONTACT: any = {
   _id: "",
   contact_number: 0,
+  contact_category: "",
   contact_name: "",
   contact_email: "",
   contact_phone: "",

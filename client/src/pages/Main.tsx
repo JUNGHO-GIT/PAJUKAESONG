@@ -75,12 +75,39 @@ export const Main = () => {
         </SwiperSlide>
       </Swiper>
     );
+    // 7-2. testSection
+    const testSection = () => (
+      <Grid container spacing={2} columns={24}>
+        <Grid size={8}>
+          <Div className={"border bg-dark white"}>size=8/24</Div>
+        </Grid>
+        <Grid container size={16}>
+          <Grid size={12}>
+            <Div className={"border bg-dark white"}>nested size=12/24</Div>
+          </Grid>
+          <Grid size={12}>
+            <Div className={"border bg-dark white"}>nested size=12/24</Div>
+          </Grid>
+        </Grid>
+        <Grid size={8}>
+          <Div className={"border bg-dark white"}>size=8/24</Div>
+        </Grid>
+        <Grid container columns={12} size={16}>
+          <Grid size={6}>
+            <Div className={"border bg-dark white"}>nested size=6/12</Div>
+          </Grid>
+          <Grid size={6}>
+            <Div className={"border bg-dark white"}>nested size=6/12</Div>
+          </Grid>
+        </Grid>
+      </Grid>
+    );
     // 7-10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={1}>
           <Grid size={12}>
-            {swiperSection()}
+            {testSection()}
           </Grid>
         </Grid>
       </Paper>

@@ -26,9 +26,9 @@ import {
 
 import {
   Main,
-  AboutIntroduce, AboutGreeting, AboutLocation,
+  AboutGreeting, AboutLocation,
   ContactFind, ContactList, ContactDetail, ContactSave,
-  FranchiseList, FranchiseInquiry, FranchiseSave, FranchiseDetail,
+  FranchiseInfo, FranchiseList, FranchiseSave, FranchiseDetail,
   MenuMain, MenuSub,
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
   OrderBuy, OrderLookup,
@@ -39,7 +39,6 @@ import {
 // -------------------------------------------------------------------------------------------------
 const About = () => (
   <Routes>
-    <Route path={"/introduce"} element={<AboutIntroduce />} />
     <Route path={"/greeting"} element={<AboutGreeting />} />
     <Route path={"/location"} element={<AboutLocation />} />
   </Routes>
@@ -58,10 +57,10 @@ const Contact = () => (
 // -------------------------------------------------------------------------------------------------
 const Franchise = () => (
   <Routes>
+    <Route path={"/info"} element={<FranchiseInfo />} />
     <Route path={"/list"} element={<FranchiseList />} />
-    <Route path={"/inquiry"} element={<FranchiseInquiry />} />
-    <Route path={"/save"} element={<FranchiseSave />} />
     <Route path={"/detail"} element={<FranchiseDetail />} />
+    <Route path={"/save"} element={<FranchiseSave />} />
   </Routes>
 );
 

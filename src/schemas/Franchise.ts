@@ -12,50 +12,27 @@ const schema = new mongoose.Schema(
       unique : true
     },
 
-    // 가맹점
-    franchise_branch_name: {
+    franchise_name: {
       type: String,
       default: "",
       required: false
     },
-    franchise_branch_address: {
+    franchise_address_main: {
       type: String,
       default: "",
       required: false
     },
-    franchise_branch_phone: {
+    franchise_address_detail: {
       type: String,
       default: "",
       required: false
     },
-    franchise_branch_image: {
+    franchise_phone: {
       type: String,
       default: "",
       required: false
     },
-
-    // 가맹문의
-    franchise_inquiry_name: {
-      type: String,
-      default: "",
-      required: false
-    },
-    franchise_inquiry_email: {
-      type: String,
-      default: "",
-      required: false
-    },
-    franchise_inquiry_phone: {
-      type: String,
-      default: "",
-      required: false
-    },
-    franchise_inquiry_title: {
-      type: String,
-      default: "",
-      required: false
-    },
-    franchise_inquiry_content: {
+    franchise_image: {
       type: String,
       default: "",
       required: false

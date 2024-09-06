@@ -23,7 +23,8 @@
     "types": [
       "node",
       "alias",
-      "extension"
+      "extension",
+      "global",
     ]
   }
 }

@@ -67,11 +67,11 @@ export const ContactList = () => {
     );
     // 2. list
     const listSection = () => {
-      const listFragment =  (i: number) => (
-        <Grid container spacing={2} key={i}>
+      const headFragment = () => (
+        <Grid container spacing={2}>
           <Grid size={2}>
             <Div className={"fs-0-8rem fw-500"}>
-              번호
+              유형
             </Div>
           </Grid>
           <Grid size={{ xs: 10, sm: 7 }}>
@@ -84,12 +84,15 @@ export const ContactList = () => {
               작성일
             </Div>
           </Grid>
-          <Hr px={10} className={"bg-burgundy h-2"} />
+        </Grid>
+      );
+      const listFragment = () => (
+        <Grid container spacing={2}>
           {OBJECT?.map((item: any, index: number) => (
             <Grid container spacing={2} key={index}>
-              <Grid size={2}>
+              <Grid size={{ xs: 2, sm: 2 }}>
                 <Div className={"fs-1-0rem"}>
-                  {item.contact_number}
+                  {item.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"}
                 </Div>
               </Grid>
               <Grid size={{ xs: 10, sm: 7 }}>
@@ -117,7 +120,9 @@ export const ContactList = () => {
       );
       return (
         <Card className={"border radius shadow p-40 fadeIn"}>
-          {listFragment(0)}
+          {headFragment()}
+          <Hr px={40} className={"bg-burgundy"} />
+          {listFragment()}
         </Card>
       );
     };
@@ -129,7 +134,7 @@ export const ContactList = () => {
             {titleSection()}
           </Grid>
           <Br px={10} />
-          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {listSection()}
           </Grid>
         </Grid>
