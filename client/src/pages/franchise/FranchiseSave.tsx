@@ -31,14 +31,13 @@ export const FranchiseSave = () => {
       setLOADING(false);
       return;
     }
-    await axios.post(`${URL}${SUBFIX}/save`, {
-      user_id: adminId,
-      OBJECT: makeFormData(OBJECT),
-    }, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    await axios.post(`${URL}${SUBFIX}/save`, makeFormData(OBJECT, { use_id: adminId }),
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
@@ -198,11 +197,10 @@ export const FranchiseSave = () => {
         </Grid>
       );
       const btnFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Btn
-              size={"large"}
-              className={"w-50p fs-1-2rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}
@@ -213,7 +211,7 @@ export const FranchiseSave = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {saveFragment()}
           <Br px={50} />
           {btnFragment()}
@@ -223,11 +221,10 @@ export const FranchiseSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {saveSection()}
           </Grid>

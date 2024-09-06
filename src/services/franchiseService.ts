@@ -72,7 +72,7 @@ export const detail = async (
 
 // 3. save -----------------------------------------------------------------------------------------
 export const save = async (
-  OBJECT_param: any,
+  body_param: any,
 ) => {
 
   // findResult, finalResult 변수 선언
@@ -81,7 +81,7 @@ export const save = async (
   let statusResult: string = "";
 
   findResult = await repository.save(
-    OBJECT_param
+    body_param
   );
 
   if (!findResult) {

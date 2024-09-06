@@ -66,50 +66,58 @@ export const NoticeList = () => {
     // 2. list
     const listSection = () => {
       const headerFragment = () => (
-        <Grid container spacing={2}>
-          <Grid size={{ xs: 2, sm: 2 }}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={2}>
             <Div className={"fs-0-8rem fw-500"}>
               번호
             </Div>
           </Grid>
-          <Grid size={{ xs: 10, sm: 7 }}>
+          <Grid size={7}>
             <Div className={"fs-0-8rem fw-500"}>
               제목
             </Div>
           </Grid>
-          <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
+          <Grid size={3}>
             <Div className={"fs-0-8rem fw-500"}>
               작성일
             </Div>
           </Grid>
         </Grid>
       );
-      const listFragment = (item: any, index: number) => (
-        <Grid container spacing={2} key={index} className={"mb-20"}>
-          <Grid size={2}>
-            <Div className={"fs-1-0rem"}>
-              {item.notice_number}
-            </Div>
-          </Grid>
-          <Grid size={{ xs: 10, sm: 7 }}>
-            <Div
-              className={"fs-1-0rem pointer-burgundy"}
-              onClick={() => {
-                navigate('/notice/detail', {
-                  state: {
-                    id: item._id
-                  },
-                });
-              }}
-            >
-              {item.notice_title}
-            </Div>
-          </Grid>
-          <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
-            <Div className={"fs-1-0rem"}>
-              {moment(item.notice_regDt).format("YYYY-MM-DD")}
-            </Div>
-          </Grid>
+      const listFragment = () => (
+        <Grid container spacing={2} columns={12}>
+          {OBJECT?.map((item: any, index: number) => (
+            <Grid container spacing={2} key={index}>
+              <Grid size={2}>
+                <Div className={"fs-0-8rem"}>
+                  {item.notice_number}
+                </Div>
+              </Grid>
+              <Grid size={7}>
+                <Div
+                  className={"fs-1-0rem pointer-burgundy"}
+                  onClick={() => {
+                    navigate('/notice/detail', {
+                      state: {
+                        id: item._id
+                      },
+                    });
+                  }}
+                >
+                  {item.notice_title}
+                </Div>
+              </Grid>
+              <Grid size={3}>
+                <Div className={"fs-0-8rem"}>
+                  {isXs ? (
+                    moment(item.notice_regDt).format("MM-DD")
+                  ) : (
+                    moment(item.notice_regDt).format("YYYY-MM-DD")
+                  )}
+                </Div>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       const filterFragment = () => (
@@ -177,21 +185,21 @@ export const NoticeList = () => {
           </Grid>
           <Grid size={isAdmin ? 2 : 0} className={`${isAdmin ? "" : "d-none"}`}>
             <Btn
-              color={"error"}
+              className={"bg-burgundy"}
               onClick={() => {
                 navigate("/notice/save");
               }}
             >
-              작성하기
+              작성
             </Btn>
           </Grid>
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {headerFragment()}
           <Hr px={40} className={"bg-burgundy"} />
-          {OBJECT?.map((item: any, index: number) => listFragment(item, index))}
+          {listFragment()}
           <Hr px={40} className={"bg-grey"} />
           {filterFragment()}
         </Card>
@@ -199,12 +207,11 @@ export const NoticeList = () => {
     };
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min75vh"}>
-        <Grid container spacing={2}>
+      <Paper className={"content-wrapper h-min85vh"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {listSection()}
           </Grid>

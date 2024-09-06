@@ -66,17 +66,30 @@ export const log = (name: string, data: any) => {
 };
 
 // 3. makeFormData ---------------------------------------------------------------------------------
-export const makeFormData = (data: any) => {
+export const makeFormData = (object: Record<string, any>, extra: Record<string, any>) => {
   const formData = new FormData();
-  for (const key in data) {
-    if (data[key] instanceof Array) {
-      data[key].forEach((element: any) => {
+
+  // object에 있는 데이터 추가
+  for (const key in object) {
+    if (Array.isArray(object[key])) {
+      object[key].forEach((element: any) => {
         formData.append(key, element);
       });
-    }
-    else {
-      formData.append(key, data[key]);
+    } else {
+      formData.append(key, object[key]);
     }
   }
+
+  // extra에 있는 추가 데이터도 FormData에 추가
+  for (const key in extra) {
+    if (Array.isArray(extra[key])) {
+      extra[key].forEach((element: any) => {
+        formData.append(key, element);
+      });
+    } else {
+      formData.append(key, extra[key]);
+    }
+  }
+
   return formData;
 };

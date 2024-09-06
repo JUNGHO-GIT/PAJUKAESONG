@@ -21,7 +21,7 @@ export const AboutGreeting = () => {
     // 2. greeting
     const greetingSection = () => {
       const greetingFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-left"}>
             <Div className={"fs-1-8rem fw-700"}>
               여러분 반갑습니다.
@@ -62,7 +62,7 @@ export const AboutGreeting = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {greetingFragment()}
         </Card>
       );
@@ -70,11 +70,10 @@ export const AboutGreeting = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs:12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {greetingSection()}
           </Grid>

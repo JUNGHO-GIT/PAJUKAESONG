@@ -83,7 +83,7 @@ export const FranchiseList = () => {
         >
           {OBJECT?.map((item: any, index: number) => (
             <SwiperSlide key={index}>
-              <Grid container spacing={2}>
+              <Grid container spacing={2} columns={12}>
                 <Grid size={12} key={index} className={"d-center"}>
                   <Div className={"fs-1-8rem fw-700"}>
                     {item.franchise_name}
@@ -101,7 +101,6 @@ export const FranchiseList = () => {
                   <Icons
                     key={"Location"}
                     name={"Location"}
-                    fill={"#a2ff99"}
                     className={"w-20 h-20"}
                   />
                   <Div className={"fs-0-9rem ms-5"}>
@@ -115,7 +114,6 @@ export const FranchiseList = () => {
                   <Icons
                     key={"Call"}
                     name={"Call"}
-                    fill={"#8be4ff"}
                     className={"w-20 h-20"}
                   />
                   <Div className={"fs-0-9rem ms-5"}>
@@ -126,7 +124,6 @@ export const FranchiseList = () => {
                   <Icons
                     key={"Calendar"}
                     name={"Calendar"}
-                    fill={"#ffacac"}
                     className={"w-20 h-20"}
                   />
                   <Div className={"fs-0-9rem ms-5"}>
@@ -203,18 +200,18 @@ export const FranchiseList = () => {
           </Grid>
           <Grid size={isAdmin ? 2 : 0} className={`${isAdmin ? "" : "d-none"}`}>
             <Btn
-              color={"error"}
+              className={"bg-burgundy"}
               onClick={() => {
                 navigate("/franchise/save");
               }}
             >
-              등록하기
+              등록
             </Btn>
           </Grid>
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {listFragment()}
           <Hr px={40} className={"bg-grey"} />
           {filterFragment()}
@@ -224,11 +221,10 @@ export const FranchiseList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {listSection()}
           </Grid>

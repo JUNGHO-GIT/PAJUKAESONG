@@ -22,7 +22,7 @@ export const OrderBuy = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>

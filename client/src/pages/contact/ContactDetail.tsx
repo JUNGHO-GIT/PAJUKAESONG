@@ -149,7 +149,7 @@ export const ContactDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {detailFragment()}
           <Br px={50} />
           <Hr px={30} className={"bg-grey"} />
@@ -160,11 +160,10 @@ export const ContactDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {detailSection()}
           </Grid>

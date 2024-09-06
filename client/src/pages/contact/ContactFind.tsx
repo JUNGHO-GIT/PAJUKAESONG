@@ -109,11 +109,10 @@ export const ContactFind = () => {
         </Grid>
       );
       const btnFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Btn
-              size={"large"}
-              className={"w-100p bg-burgundy fs-1-2rem"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSearch();
               }}
@@ -124,7 +123,7 @@ export const ContactFind = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {findFragment()}
           <Br px={50} />
           {btnFragment()}
@@ -134,11 +133,10 @@ export const ContactFind = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs:12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {findSection()}
           </Grid>

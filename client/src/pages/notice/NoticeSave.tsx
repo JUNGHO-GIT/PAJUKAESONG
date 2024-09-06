@@ -111,11 +111,10 @@ export const NoticeSave = () => {
         </Grid>
       );
       const btnFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Btn
-              size={"large"}
-              className={"w-50p fs-1-2rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}
@@ -126,7 +125,7 @@ export const NoticeSave = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {saveFragment()}
           <Br px={50} />
           {btnFragment()}
@@ -136,11 +135,10 @@ export const NoticeSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {saveSection()}
           </Grid>

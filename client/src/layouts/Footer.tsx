@@ -115,7 +115,7 @@ export const Footer = () => {
     );
     // 4. return
     return (
-      <Paper className={"layout-wrapper border-top p-30 mt-100"}>
+      <Paper className={"layout-wrapper border-top p-30 mt-20"}>
         <Grid container spacing={1} columns={24}>
           <Grid
             size={{ xs: 24, sm: 10, md: 12 }}

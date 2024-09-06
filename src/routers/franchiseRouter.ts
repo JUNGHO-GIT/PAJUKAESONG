@@ -88,7 +88,7 @@ router.get("/detail", async (req: Request, res: Response) => {
 router.post("/save", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.save(
-      req.body.OBJECT as any,
+      req.body as any,
     );
     if (finalResult.status === "success") {
       res.json({

@@ -43,7 +43,7 @@ export const FranchiseInfo = () => {
     // 2. info
     const infoSection = () => {
       const titleFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹점 창업 안내
@@ -52,7 +52,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       const infoFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-0rem"}>
               1995년 개인 창업하였을 때부터, 프랜차이즈 회사를 운영하는 현재까지 ‘장사는 제 양심을 파는 것’이라고 생각하였기에 동기와 과정을 중요시하고, ‘성실, 공의, 정직’의 원칙 아래 공동선의식 동행(나에게도 남에게도 유익하게)을 (주)이삭의 사명으로 삼고, ‘정당하고 바른 기업’이 되고자 노력하며 ‘이삭’을 운영하고 있습니다.
@@ -71,7 +71,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {titleFragment()}
           <Br px={30} />
           {infoFragment()}
@@ -81,7 +81,7 @@ export const FranchiseInfo = () => {
     // 3. step
     const stepSection = () => {
       const titleFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹점 창업 절차
@@ -90,7 +90,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       const stepFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           {isXs ? (
             <Grid size={12}>
               <Stepper
@@ -179,7 +179,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {titleFragment()}
           <Br px={30} />
           {stepFragment()}
@@ -189,7 +189,7 @@ export const FranchiseInfo = () => {
     // 4. cost
     const costSection = () => {
       const titleFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹비 및 창업비용
@@ -198,7 +198,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       const headFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem fw-500"}>
               구분
@@ -217,7 +217,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       const costFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           {/** row 1 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -331,7 +331,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {titleFragment()}
           <Br px={30} />
           {headFragment()}
@@ -343,11 +343,10 @@ export const FranchiseInfo = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs:12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {infoSection()}
           </Grid>

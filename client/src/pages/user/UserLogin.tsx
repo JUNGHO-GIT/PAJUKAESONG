@@ -142,7 +142,7 @@ export const UserLogin = () => {
         </Grid>
       );
       const btnFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             {(isAdmin || isUser) ? (
               <Btn
@@ -178,7 +178,7 @@ export const UserLogin = () => {
         </Grid>
       );
       const linkFragment = () => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"d-center"}>
               <Div className={"fs-0-8rem"}>
@@ -206,7 +206,7 @@ export const UserLogin = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-40 fadeIn"}>
+        <Card className={"border radius shadow p-30 fadeIn"}>
           {loginFragment()}
           <Hr px={50} />
           {btnFragment()}
@@ -217,12 +217,11 @@ export const UserLogin = () => {
     };
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min75vh"}>
-        <Grid container spacing={2}>
+      <Paper className={"content-wrapper d-center"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {loginSection()}
           </Grid>

@@ -159,7 +159,7 @@ export const SideBar = (
           },
         }}
       >
-        <Grid container spacing={2}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             {logoSection()}
           </Grid>
