@@ -59,14 +59,14 @@ export const dataArray = [
     titleEn: "franchise",
     sub: [
       {
-        titleKo: "가맹 지점",
-        titleEn: "branch",
-        url: "/franchise/branch",
-      },
-      {
         titleKo: "가맹 문의",
         titleEn: "inquiry",
         url: "/franchise/inquiry",
+      },
+      {
+        titleKo: "가맹 지점",
+        titleEn: "list",
+        url: "/franchise/list",
       },
     ],
   },

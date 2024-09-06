@@ -6,18 +6,15 @@ import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 
-import { router as aboutGreetingRouter } from "@routers/about/aboutGreetingRouter";
-import { router as aboutIntroduceRouter } from "@routers/about/aboutIntroduceRouter";
-import { router as aboutLocationRouter } from "@routers/about/aboutLocationRouter";
-import { router as contactRouter } from "@routers/contact/contactRouter";
-import { router as franchiseBranchRouter } from "@routers/franchise/franchiseBranchRouter";
-import { router as franchiseInquiryRouter } from "@routers/franchise/franchiseInquiryRouter";
-import { router as menuMainRouter } from "@routers/menu/menuMainRouter";
-import { router as menuSubRouter } from "@routers/menu/menuSubRouter";
-import { router as noticeRouter } from "@routers/notice/noticeRouter";
-import { router as orderBuyRouter } from "@routers/order/orderBuyRouter";
-import { router as orderLookupRouter } from "@routers/order/orderLookupRouter";
-import { router as userRouter } from "@routers/user/userRouter";
+import { router as aboutRouter } from "@routers/aboutRouter";
+import { router as contactRouter } from "@routers/contactRouter";
+import { router as franchiseRouter } from "@routers/franchiseRouter";
+import { router as menuMainRouter } from "@routers/menuMainRouter";
+import { router as menuSubRouter } from "@routers/menuSubRouter";
+import { router as noticeRouter } from "@routers/noticeRouter";
+import { router as orderBuyRouter } from "@routers/orderBuyRouter";
+import { router as orderLookupRouter } from "@routers/orderLookupRouter";
+import { router as userRouter } from "@routers/userRouter";
 
 // -------------------------------------------------------------------------------------------------
 dotenv.config();
@@ -80,15 +77,12 @@ app.use((req, res, next) => {
 });
 
 // 라우터 설정 -------------------------------------------------------------------------------------
-app.use(`${preFix}/about/greeting`, aboutGreetingRouter);
-app.use(`${preFix}/about/introduce`, aboutIntroduceRouter);
-app.use(`${preFix}/about/location`, aboutLocationRouter);
+app.use(`${preFix}/about`, aboutRouter);
 app.use(`${preFix}/contact`, contactRouter);
-app.use(`${preFix}/franchise/branch`, franchiseBranchRouter);
-app.use(`${preFix}/franchise/inquiry`, franchiseInquiryRouter);
-app.use(`${preFix}/menu/main`, menuMainRouter);
-app.use(`${preFix}/menu/sub`, menuSubRouter);
+app.use(`${preFix}/franchise`, franchiseRouter);
+app.use(`${preFix}/main`, menuMainRouter);
+app.use(`${preFix}/sub`, menuSubRouter);
 app.use(`${preFix}/notice`, noticeRouter);
-app.use(`${preFix}/order/buy`, orderBuyRouter);
-app.use(`${preFix}/order/lookup`, orderLookupRouter);
+app.use(`${preFix}/buy`, orderBuyRouter);
+app.use(`${preFix}/lookup`, orderLookupRouter);
 app.use(`${preFix}/user`, userRouter);

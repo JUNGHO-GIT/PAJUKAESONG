@@ -28,7 +28,7 @@ import {
   Main,
   AboutIntroduce, AboutGreeting, AboutLocation,
   ContactFind, ContactList, ContactDetail, ContactSave,
-  FranchiseBranch, FranchiseInquiry,
+  FranchiseList, FranchiseInquiry, FranchiseSave, FranchiseDetail,
   MenuMain, MenuSub,
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
   OrderBuy, OrderLookup,
@@ -58,8 +58,10 @@ const Contact = () => (
 // -------------------------------------------------------------------------------------------------
 const Franchise = () => (
   <Routes>
-    <Route path={"/branch"} element={<FranchiseBranch />} />
+    <Route path={"/list"} element={<FranchiseList />} />
     <Route path={"/inquiry"} element={<FranchiseInquiry />} />
+    <Route path={"/save"} element={<FranchiseSave />} />
+    <Route path={"/detail"} element={<FranchiseDetail />} />
   </Routes>
 );
 

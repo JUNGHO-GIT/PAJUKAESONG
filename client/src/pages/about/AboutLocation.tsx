@@ -1,6 +1,6 @@
 // AboutLocation.tsx
 
-import { useEffect } from "react";
+import { useEffect } from "@imports/ImportReacts";
 import { Div, Img, Br, Hr } from "@imports/ImportComponents";
 import { Paper, Grid, Card } from "@imports/ImportMuis";
 

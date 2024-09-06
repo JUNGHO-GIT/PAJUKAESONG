@@ -8,7 +8,7 @@ import { useCommon } from "@hooks/useCommon";
 
 // import { useValidateAbout } from "@hooks/validate/useValidateAbout";
 import { useValidateContact } from "@hooks/validate/useValidateContact";
-// import { useValidateFranchise } from "@hooks/validate/useValidateFranchise";
+import { useValidateFranchise } from "@hooks/validate/useValidateFranchise";
 // import { useValidateMenu } from "@hooks/validate/useValidateMenu";
 import { useValidateNotice } from "@hooks/validate/useValidateNotice";
 // import { useValidateOrder } from "@hooks/validate/useValidateOrder";
@@ -24,7 +24,7 @@ export {
 
   // useValidateAbout,
   useValidateContact,
-  // useValidateFranchise,
+  useValidateFranchise,
   // useValidateMenu,
   useValidateNotice,
   // useValidateOrder,

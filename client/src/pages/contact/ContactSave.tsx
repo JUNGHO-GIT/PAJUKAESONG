@@ -54,8 +54,8 @@ export const ContactSave = () => {
     });
   };
 
-  // 7. inquiryNode --------------------------------------------------------------------------------
-  const inquiryNode = () => {
+  // 7. saveNode -----------------------------------------------------------------------------------
+  const saveNode = () => {
     // 1. title
     const titleSection = () => (
       <Div
@@ -65,9 +65,9 @@ export const ContactSave = () => {
         1:1 문의
       </Div>
     );
-    // 2. inquiry
-    const inquirySection = () => {
-      const inquiryFragment = () => (
+    // 2. save
+    const saveSection = () => {
+      const saveFragment = () => (
         <Grid container spacing={3}>
           <Grid size={12}>
             <Input
@@ -89,23 +89,6 @@ export const ContactSave = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"전화번호"}
-              required={true}
-              className={"border-bottom"}
-              value={OBJECT.contact_phone}
-              inputRef={REFS?.current?.contact_phone}
-              error={ERRORS?.contact_phone}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  contact_phone: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
               label={"이메일"}
               required={true}
               className={"border-bottom"}
@@ -116,6 +99,23 @@ export const ContactSave = () => {
                 setOBJECT((prev: any) => ({
                   ...prev,
                   contact_email: e.target.value,
+                }));
+              }}
+            />
+          </Grid>
+          <Grid size={12}>
+            <Input
+              variant={"standard"}
+              label={"전화번호"}
+              required={true}
+              className={"border-bottom"}
+              value={OBJECT.contact_phone}
+              inputRef={REFS?.current?.contact_phone}
+              error={ERRORS?.contact_phone}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  contact_phone: e.target.value,
                 }));
               }}
             />
@@ -172,7 +172,7 @@ export const ContactSave = () => {
       );
       return (
         <Card className={"border radius shadow p-40 fadeIn"}>
-          {inquiryFragment()}
+          {saveFragment()}
           <Br px={50} />
           {btnFragment()}
         </Card>
@@ -187,7 +187,7 @@ export const ContactSave = () => {
           </Grid>
           <Br px={10} />
           <Grid size={{ xs: 11, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {inquirySection()}
+            {saveSection()}
           </Grid>
         </Grid>
       </Paper>
@@ -197,7 +197,7 @@ export const ContactSave = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {inquiryNode()}
+      {saveNode()}
     </>
   );
 };

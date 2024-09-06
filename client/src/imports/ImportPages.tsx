@@ -9,8 +9,10 @@ import { ContactFind } from "@pages/contact/ContactFind";
 import { ContactList } from "@pages/contact/ContactList";
 import { ContactDetail } from "@pages/contact/ContactDetail";
 import { ContactSave } from "@pages/contact/ContactSave";
-import { FranchiseBranch } from "@pages/franchise/FranchiseBranch";
+import { FranchiseList } from "@pages/franchise/FranchiseList";
 import { FranchiseInquiry } from "@pages/franchise/FranchiseInquiry";
+import { FranchiseSave } from "@pages/franchise/FranchiseSave";
+import { FranchiseDetail } from "@pages/franchise/FranchiseDetail";
 import { MenuMain } from "@pages/menu/MenuMain";
 import { MenuSub } from "@pages/menu/MenuSub";
 import { NoticeList } from "@pages/notice/NoticeList";
@@ -27,7 +29,7 @@ export {
   Main,
   AboutIntroduce, AboutGreeting, AboutLocation,
   ContactFind, ContactList, ContactDetail, ContactSave,
-  FranchiseBranch, FranchiseInquiry,
+  FranchiseList, FranchiseInquiry, FranchiseSave, FranchiseDetail,
   MenuMain, MenuSub,
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
   OrderBuy, OrderLookup,
