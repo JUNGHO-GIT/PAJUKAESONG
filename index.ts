@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import { Request, Response, NextFunction } from "express";
 
 import { router as aboutRouter } from "@routers/aboutRouter";
 import { router as contactRouter } from "@routers/contactRouter";
@@ -72,6 +73,13 @@ app.use(bodyParser.urlencoded({
 app.use((req, res, next) => {
   res.set("Content-Type", "application/json; charset=utf-8");
   next();
+});
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).send({
+    status: "error",
+    message: "서버 오류가 발생했습니다.",
+  });
 });
 
 // 라우터 설정 -------------------------------------------------------------------------------------

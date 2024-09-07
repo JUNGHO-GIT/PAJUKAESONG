@@ -34,6 +34,7 @@ export const NoticeDetail = () => {
       setOBJECT(res.data.result);
     })
     .catch((err: any) => {
+      alert("오류가 발생했습니다.");
       console.error(err);
     })
     .finally(() => {
@@ -76,7 +77,11 @@ export const NoticeDetail = () => {
         <Grid container spacing={1}>
           <Grid size={6} className={"d-left"}>
             <Icons
-            name={"Calendar"} className={"w-20 h-20"} />
+              key={"Calendar"}
+              name={"Calendar"}
+              fill={"#ffd700"}
+              className={"w-20 h-20"}
+            />
             <Div className={"fs-1-0rem fw-500"}>
               {moment(OBJECT.notice_regDt).format("YYYY-MM-DD")}
             </Div>
@@ -93,7 +98,11 @@ export const NoticeDetail = () => {
           </Grid>
           <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
             <Icons
-            name={"View"} className={"w-20 h-20"} />
+              key={"View"}
+              name={"View"}
+              fill={"#55beff"}
+              className={"w-20 h-20"}
+            />
             <Div className={"fs-1-0rem fw-500"}>
               {OBJECT.notice_view || "0"}
             </Div>

@@ -31,12 +31,8 @@ export const FranchiseSave = () => {
       setLOADING(false);
       return;
     }
-    await axios.post(`${URL}${SUBFIX}/save`, makeFormData(OBJECT, { use_id: adminId }),
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
+    await axios.post(`${URL}${SUBFIX}/save`,
+      makeFormData(OBJECT, { use_id: adminId }),
     )
     .then((res: any) => {
       if (res.data.status === "success") {
@@ -48,6 +44,7 @@ export const FranchiseSave = () => {
       }
     })
     .catch((err: any) => {
+      alert("오류가 발생했습니다.");
       console.error(err);
     })
     .finally(() => {

@@ -8,7 +8,7 @@ export const FRANCHISE: Record<string, any> = {
   franchise_address_main: "",
   franchise_address_detail: "",
   franchise_phone: "",
-  franchise_image: "",
+  franchise_image: [""],
   franchise_regDt: "",
   franchise_updateDt: "",
 };

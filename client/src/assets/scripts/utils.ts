@@ -72,24 +72,43 @@ export const makeFormData = (object: Record<string, any>, extra: Record<string, 
   // object에 있는 데이터 추가
   for (const key in object) {
     if (Array.isArray(object[key])) {
-      object[key].forEach((element: any) => {
-        formData.append(key, element);
+      object[key].forEach((element: any, index: number) => {
+        if (element instanceof File) {
+          // 파일인 경우 파일의 이름을 포함해서 FormData에 추가
+          formData.append(`${key}[${index}]`, element, element.name);
+        } else {
+          // 파일이 아닌 경우 일반 데이터로 추가
+          formData.append(`${key}[${index}]`, element);
+        }
       });
     } else {
-      formData.append(key, object[key]);
+      if (object[key] instanceof File) {
+        formData.append(key, object[key], object[key].name);
+      } else {
+        formData.append(key, object[key]);
+      }
     }
   }
 
   // extra에 있는 추가 데이터도 FormData에 추가
   for (const key in extra) {
     if (Array.isArray(extra[key])) {
-      extra[key].forEach((element: any) => {
-        formData.append(key, element);
+      extra[key].forEach((element: any, index: number) => {
+        if (element instanceof File) {
+          formData.append(`${key}[${index}]`, element, element.name);
+        } else {
+          formData.append(`${key}[${index}]`, element);
+        }
       });
     } else {
-      formData.append(key, extra[key]);
+      if (extra[key] instanceof File) {
+        formData.append(key, extra[key], extra[key].name);
+      } else {
+        formData.append(key, extra[key]);
+      }
     }
   }
 
   return formData;
 };
+

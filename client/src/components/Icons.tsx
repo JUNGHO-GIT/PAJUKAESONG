@@ -17,7 +17,7 @@ export const Icons = (props: any) => {
     strokeWidth: "2",
     strokeLinecap: "round",
     strokeLinejoin: "round",
-    fill: props?.fill || "none",
+    fill: props?.fill || "#dadada",
   };
 
   const icons: { [key: string]: JSX.Element } = {
@@ -235,7 +235,6 @@ export const Icons = (props: any) => {
     Call: (
       <svg
         {...commonValues}
-        fill={"#8be4ff"}
         className={
           props.className +
           " black" +
@@ -249,7 +248,6 @@ export const Icons = (props: any) => {
     Mail: (
       <svg
         {...commonValues}
-        fill={"#adff2f"}
         className={
           props.className +
           " black" +
@@ -264,7 +262,6 @@ export const Icons = (props: any) => {
     Copyright: (
       <svg
         {...commonValues}
-        fill = {"#ffa500"}
         className={
           props.className +
           " black" +
@@ -278,7 +275,6 @@ export const Icons = (props: any) => {
     Location: (
       <svg
         {...commonValues}
-        fill={props?.fill || "#a2ff99"}
         className={
           props.className +
           " black" +
@@ -292,7 +288,6 @@ export const Icons = (props: any) => {
     Info: (
       <svg
         {...commonValues}
-        fill={"#EF4444"}
         className={
           props.className +
           " black" +
@@ -324,7 +319,6 @@ export const Icons = (props: any) => {
     Calendar: (
       <svg
         {...commonValues}
-        fill={"#eee8aa"}
         className={
           props.className +
           " black" +
@@ -342,7 +336,6 @@ export const Icons = (props: any) => {
     View: (
       <svg
         {...commonValues}
-        fill={"#ffebcd"}
         className={
           props.className +
           " black" +

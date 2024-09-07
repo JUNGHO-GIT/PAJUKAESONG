@@ -84,6 +84,8 @@ export const save = async (
     body_param
   );
 
+  console.log("body_param", body_param);
+
   if (!findResult) {
     statusResult = "fail";
     finalResult = null;

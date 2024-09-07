@@ -1,9 +1,11 @@
 // franchiseRouter.ts
 
 import express from "express";
+import multer from 'multer';
 import { Request, Response } from "express";
 import * as service from "@services/franchiseService";
 export const router = express.Router();
+const upload = multer();
 
 // 1. list -----------------------------------------------------------------------------------------
 router.get("/list", async (req: Request, res: Response) => {
@@ -85,8 +87,9 @@ router.get("/detail", async (req: Request, res: Response) => {
 });
 
 // 3. save -----------------------------------------------------------------------------------------
-router.post("/save", async (req: Request, res: Response) => {
+router.post("/save", upload.none(), async (req: Request, res: Response) => {
   try {
+    console.log("req.body", req.body);
     let finalResult = await service.save(
       req.body as any,
     );

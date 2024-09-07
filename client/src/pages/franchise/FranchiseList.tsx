@@ -47,6 +47,7 @@ export const FranchiseList = () => {
       }));
     })
     .catch((err: any) => {
+      alert("오류가 발생했습니다.");
       console.error(err);
     })
     .finally(() => {
@@ -97,37 +98,42 @@ export const FranchiseList = () => {
                     className={"w-100p h-300"}
                   />
                 </Grid>
-                <Grid size={12} className={"d-left"}>
-                  <Icons
-                    key={"Location"}
-                    name={"Location"}
-                    className={"w-20 h-20"}
-                  />
-                  <Div className={"fs-0-9rem ms-5"}>
-                    {item.franchise_address_main}
+                <Grid size={12} className={"d-column"}>
+                  <Div className={"d-left"}>
+                    <Icons
+                      key={"Location"}
+                      name={"Location"}
+                      fill={"#22ff00"}
+                      className={"w-20 h-20"}
+                    />
+                    <Div className={"fs-0-9rem ms-5"}>
+                      {item.franchise_address_main}
+                    </Div>
+                    <Div className={"fs-0-9rem ms-10"}>
+                      {`(${item.franchise_address_detail})`}
+                    </Div>
                   </Div>
-                  <Div className={"fs-0-9rem ms-10"}>
-                    {`(${item.franchise_address_detail})`}
+                  <Div className={"d-left"}>
+                    <Icons
+                      key={"Call"}
+                      name={"Call"}
+                      fill={"#40e0d0"}
+                      className={"w-20 h-20"}
+                    />
+                    <Div className={"fs-0-9rem ms-5"}>
+                      {item.franchise_phone}
+                    </Div>
                   </Div>
-                </Grid>
-                <Grid size={12} className={"d-left"}>
-                  <Icons
-                    key={"Call"}
-                    name={"Call"}
-                    className={"w-20 h-20"}
-                  />
-                  <Div className={"fs-0-9rem ms-5"}>
-                    {item.franchise_phone}
-                  </Div>
-                </Grid>
-                <Grid size={12} className={"d-left"}>
-                  <Icons
-                    key={"Calendar"}
-                    name={"Calendar"}
-                    className={"w-20 h-20"}
-                  />
-                  <Div className={"fs-0-9rem ms-5"}>
-                    {moment(item.franchise_regDt).format("YYYY-MM-DD")}
+                  <Div className={"d-left"}>
+                    <Icons
+                      key={"Calendar"}
+                      name={"Calendar"}
+                      fill={"#ffd700"}
+                      className={"w-20 h-20"}
+                    />
+                    <Div className={"fs-0-9rem ms-5"}>
+                      {moment(item.franchise_regDt).format("YYYY-MM-DD")}
+                    </Div>
                   </Div>
                 </Grid>
               </Grid>

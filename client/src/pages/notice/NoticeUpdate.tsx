@@ -37,6 +37,7 @@ export const NoticeUpdate = () => {
       setOBJECT(res.data.result);
     })
     .catch((err: any) => {
+      alert("오류가 발생했습니다.");
       console.error(err);
     })
     .finally(() => {
@@ -66,6 +67,7 @@ export const NoticeUpdate = () => {
       }
     })
     .catch((err: any) => {
+      alert("오류가 발생했습니다.");
       console.error(err);
     })
     .finally(() => {

@@ -77,6 +77,7 @@ export const UserLogin = () => {
       }
     })
     .catch((err: any) => {
+      alert("오류가 발생했습니다.");
       console.error(err);
     })
     .finally(() => {
