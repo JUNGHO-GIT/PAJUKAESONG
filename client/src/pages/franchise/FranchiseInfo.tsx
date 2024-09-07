@@ -335,7 +335,7 @@ export const FranchiseInfo = () => {
           {titleFragment()}
           <Br px={30} />
           {headFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr px={40} h={10} className={"bg-burgundy"} />
           {costFragment()}
         </Card>
       );

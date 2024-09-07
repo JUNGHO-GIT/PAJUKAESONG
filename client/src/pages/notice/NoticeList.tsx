@@ -117,6 +117,7 @@ export const NoticeList = () => {
                   )}
                 </Div>
               </Grid>
+              <Hr px={5} h={1} />
             </Grid>
           ))}
         </Grid>
@@ -199,16 +200,16 @@ export const NoticeList = () => {
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
           {headerFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr px={40} h={10} className={"bg-burgundy"} />
           {listFragment()}
-          <Hr px={40} className={"bg-grey"} />
+          <Hr px={40} h={10} className={"bg-grey"} />
           {filterFragment()}
         </Card>
       );
     };
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min85vh"}>
+      <Paper className={"content-wrapper h-min80vh"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}

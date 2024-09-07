@@ -87,12 +87,13 @@ router.get("/detail", async (req: Request, res: Response) => {
 });
 
 // 3. save -----------------------------------------------------------------------------------------
-router.post("/save", upload.none(), async (req: Request, res: Response) => {
+router.post("/save", async (req: Request, res: Response) => {
   try {
-    console.log("req.body", req.body);
-    let finalResult = await service.save(
+    console.log(req.body);
+    /**let finalResult = await service.save(
       req.body as any,
-    );
+    );**/
+    let finalResult = {};
     if (finalResult.status === "success") {
       res.json({
         msg: "저장 성공",

@@ -62,7 +62,7 @@ export const NoticeDetail = () => {
               {OBJECT.notice_title}
             </Div>
           </Grid>
-          <Hr px={10} className={"bg-burgundy"} />
+          <Hr px={10} h={10} className={"bg-burgundy"} />
           <Grid size={12}>
             <TextArea
               label={""}
@@ -127,7 +127,7 @@ export const NoticeDetail = () => {
         <Card className={"border radius shadow p-30 fadeIn"}>
           {detailFragment()}
           <Br px={50} />
-          <Hr px={30} className={"bg-grey"} />
+          <Hr px={30} h={10} className={"bg-grey"} />
           {filterFragment()}
         </Card>
       );

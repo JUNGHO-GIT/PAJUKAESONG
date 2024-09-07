@@ -17,7 +17,7 @@ export const Icons = (props: any) => {
     strokeWidth: "2",
     strokeLinecap: "round",
     strokeLinejoin: "round",
-    fill: props?.fill || "#dadada",
+    fill: props?.fill || "#f5f5f5",
   };
 
   const icons: { [key: string]: JSX.Element } = {
@@ -366,7 +366,7 @@ export const Icons = (props: any) => {
 
   // ---------------------------------------------------------------------------------------------->
   return (
-    <IconButton className={"p-5"} onClick={props.onClick}>
+    <IconButton className={""} onClick={props.onClick}>
       {IconComponent}
     </IconButton>
   );

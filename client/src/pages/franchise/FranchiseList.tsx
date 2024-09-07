@@ -90,7 +90,7 @@ export const FranchiseList = () => {
                     {item.franchise_name}
                   </Div>
                 </Grid>
-                <Hr px={40} className={"bg-burgundy"} />
+                <Hr px={40} h={10} className={"bg-burgundy"} />
                 <Grid size={12} className={"d-center"}>
                   <Img
                     src={item.franchise_image}
@@ -219,7 +219,7 @@ export const FranchiseList = () => {
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
           {listFragment()}
-          <Hr px={40} className={"bg-grey"} />
+          <Hr px={40} h={10} className={"bg-grey"} />
           {filterFragment()}
         </Card>
       );

@@ -169,7 +169,7 @@ export const FileInput = (props: any) => {
                       className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
                       onClick={() => handleFileDelete(index)}
                     >
-                      x
+                      {!file?.name ? "" : "x"}
                     </Div>
                   </Grid>
                 ))}

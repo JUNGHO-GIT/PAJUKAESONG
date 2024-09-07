@@ -157,16 +157,16 @@ export const UserSignup = () => {
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
           {signupFragment()}
-          <Hr px={50} />
+          <Hr px={50} h={1} />
           {btnFragment()}
-          <Hr px={50} />
+          <Hr px={50} h={1} />
           {linkFragment()}
         </Card>
       );
     };
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center"}>
+      <Paper className={"content-wrapper d-center h-min80vh"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {titleSection()}

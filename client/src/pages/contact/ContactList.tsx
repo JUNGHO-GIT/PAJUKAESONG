@@ -122,7 +122,7 @@ export const ContactList = () => {
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
           {headFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr px={40} h={10} className={"bg-burgundy"} />
           {listFragment()}
         </Card>
       );

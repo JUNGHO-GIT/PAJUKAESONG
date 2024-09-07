@@ -133,7 +133,7 @@ export const ContactFind = () => {
     };
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min75vh"}>
+      <Paper className={"content-wrapper d-center h-min80vh"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs:12 }} className={"d-center"}>
             {titleSection()}

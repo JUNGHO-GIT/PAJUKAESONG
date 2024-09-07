@@ -38,6 +38,7 @@ export const SideBar = (
 
   // 7. sidebar ------------------------------------------------------------------------------------
   const sideBarNode = () => {
+    // 1. logo
     const logoSection = () => (
       <Img
         src={logo1}
@@ -47,6 +48,7 @@ export const SideBar = (
         }}
       />
     );
+    // 2. sidebar
     const mainSection = () => (
       dataArray.map((item, idx) => (
         <List
@@ -64,15 +66,26 @@ export const SideBar = (
               }
             }}
           >
-            <Div className={`pointer-burgundy ${selectedTab === item.titleEn ? "burgundy fs-1-1rem fw-600" : "fs-1-0rem"}`}>
-              {item.titleKo}
+            <Div className={"d-center"}>
+              <Div className={`pointer-burgundy ${selectedTab === item.titleEn ? "burgundy fs-1-1rem fw-600" : "fs-1-0rem"}`}>
+                {item.titleKo}
+              </Div>
+              <Div className={"ms-2"}>
+                {selectedTab === item.titleEn ? (
+                  <Icons
+                    key={"ChevronUp"}
+                    name={"ChevronUp"}
+                    className={"w-12 h-12 black"}
+                  />
+                ) : (
+                  <Icons
+                    key={"ChevronDown"}
+                    name={"ChevronDown"}
+                    className={"w-12 h-12 black"}
+                  />
+                )}
+              </Div>
             </Div>
-            {selectedTab === item.titleEn
-              ? <Icons
-            name={"ChevronUp"} className={"w-12 h-12 black"} />
-              : <Icons
-            name={"ChevronDown"} className={"w-12 h-12 black"} />
-            }
           </ListItem>
           {/* 하위 항목 */}
           <Collapse
@@ -166,11 +179,11 @@ export const SideBar = (
           <Grid size={12}>
             {mainSection()}
           </Grid>
-          <Hr px={10} />
+          <Hr px={10} h={2} />
           <Grid size={12}>
             {textSection1()}
           </Grid>
-          <Hr px={10} />
+          <Hr px={10} h={2} />
           <Grid size={12}>
             {textSection2()}
           </Grid>

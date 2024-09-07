@@ -31,9 +31,10 @@ export const FranchiseSave = () => {
       setLOADING(false);
       return;
     }
-    await axios.post(`${URL}${SUBFIX}/save`,
-      makeFormData(OBJECT, { use_id: adminId }),
-    )
+    const formData = new FormData(OBJECT)
+    await axios.post(`${URL}${SUBFIX}/save`, {
+      formData
+    })
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
