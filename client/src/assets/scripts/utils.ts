@@ -68,43 +68,42 @@ export const log = (name: string, data: any) => {
 // 3. makeFormData ---------------------------------------------------------------------------------
 export const makeFormData = (
   object: Record<string, any>,
-  extra: Record<string, any>
+  fileList: any[],
+  extra?: Record<string, any>
 ) => {
-  
-  // formdata 생성
-  const formData = new FormData();
 
-  // object에 있는 데이터 추가
-  for (const key in object) {
-    if (Array.isArray(object[key])) {
-      object[key].forEach((element: any, index: number) => {
-        // 파일인 경우
-        if (element instanceof File) {
-          formData.append(key, element, element.name);
-        }
-        // 파일이 아닌 경우
-        else {
-          formData.append(key, element);
-        }
-      });
-    }
+  const form = new FormData();
+
+  // object 데이터 추가 (json)
+  if (object) {
+    Object.keys(object).forEach((key: string) => {
+
+      // 배열인 경우 빈배열로
+      // 서버에서 새로 추가할거임
+      if (Array.isArray(object[key])) {
+        form.append(key, '[]');
+      }
+
+      // 객체인 경우
+      else {
+        form.append(key, object[key]);
+      }
+    });
   }
 
-  // extra에 있는 추가
-  for (const key in extra) {
-    if (Array.isArray(extra[key])) {
-      extra[key].forEach((element: any, index: number) => {
-        // 파일인 경우
-        if (element instanceof File) {
-          formData.append("files", element, element.name);
-        }
-        // 파일이 아닌 경우
-        else {
-          formData.append("files", element);
-        }
-      });
-    }
+  // 파일 추가
+  if (fileList) {
+    fileList.forEach((file: any, index: number) => {
+      form.append("fileList", file);
+    });
   }
 
-  return formData;
+  // 추가 데이터 추가
+  if (extra) {
+    Object.keys(extra).forEach((key: string) => {
+      form.append(key, extra[key]);
+    });
+  }
+
+  return form;
 };

@@ -23,6 +23,7 @@ export const FranchiseSave = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [mapAddress, setMapAddress] = useState<string>("");
   const [OBJECT, setOBJECT] = useState<any>(FRANCHISE);
+  const [fileList, setFileList] = useState<any>([]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async () => {
@@ -31,10 +32,14 @@ export const FranchiseSave = () => {
       setLOADING(false);
       return;
     }
-    const formData = new FormData(OBJECT)
-    await axios.post(`${URL}${SUBFIX}/save`, {
-      formData
-    })
+    await axios.post(`${URL}${SUBFIX}/save`,
+      makeFormData(OBJECT, fileList),
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
@@ -111,7 +116,7 @@ export const FranchiseSave = () => {
             />
           </Grid>
           <Grid size={12}>
-            <Input
+            {/* <Input
               variant={"standard"}
               label={"가맹점 주소"}
               required={true}
@@ -123,6 +128,21 @@ export const FranchiseSave = () => {
               onClick={() => {
                 handleMap();
               }}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  franchise_address_main: e.target.value,
+                }));
+              }}
+            /> */}
+            <Input
+              variant={"standard"}
+              label={"가맹점 주소"}
+              required={true}
+              className={"border-bottom"}
+              value={OBJECT.franchise_address_main}
+              inputRef={REFS?.current?.franchise_address_main}
+              error={ERRORS?.franchise_address_main}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -177,18 +197,33 @@ export const FranchiseSave = () => {
             />
           </Grid>
           <Grid size={12}>
+            <Input
+              variant={"standard"}
+              required={true}
+              label={"가맹점 사진"}
+              shrink={"shrink"}
+              className={"border-bottom"}
+              value={OBJECT.franchise_image}
+              inputRef={REFS?.current?.franchise_image}
+              error={ERRORS?.franchise_image}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  franchise_image: e.target.value,
+                }));
+              }}
+            />
+          </Grid>
+          <Grid size={12}>
             <FileInput
               variant={"outlined"}
               label={"가맹점 사진"}
               required={true}
-              value={OBJECT.franchise_image}
-              inputRef={REFS?.current?.franchise_image}
-              error={ERRORS?.franchise_image}
+              id={"franchise_image"}
+              limit={3}
+              value={fileList}
               onChange={(updatedFiles: File[] | null) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  franchise_image: updatedFiles,
-                }));
+                setFileList(updatedFiles);
               }}
             />
           </Grid>

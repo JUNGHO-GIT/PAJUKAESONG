@@ -2,23 +2,19 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { Div, Br } from "@imports/ImportComponents";
-import { MuiFileInput, Grid, Container } from "@imports/ImportMuis";
+import { MuiFileInput, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FileInput = (props: any) => {
 
   // 2-1. useState ---------------------------------------------------------------------------------
   // 컴포넌트 내부에서 파일 상태 관리
-  const [fileList, setFileList] = useState<any[]>(props?.value || []);
-
-  // 2-2. useEffect --------------------------------------------------------------------------------
-  // 최초 로드 시 파일 배열 초기화
-  useEffect(() => {
-    setFileList(props?.value || []);
-  }, [props?.value]);
+  const [fileList, setFileList] = useState<any>(props?.value || []);
+  const [fileHeight, setFileHeight] = useState<string>("100px");
+  const [fileLimit, setFileLimit] = useState<number>(3);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
-  // 기존 요소 삭제하기
+  // 기존 인풋 요소 삭제하기 (모양 커스텀)
   useEffect(() => {
     const defaultInput = props?.inputRef?.current;
     const existAdornment = document.querySelector(`.MuiInputAdornment-root.MuiInputAdornment-positionEnd.MuiInputAdornment-outlined.MuiInputAdornment-sizeSmall`);
@@ -47,35 +43,40 @@ export const FileInput = (props: any) => {
 
   }, [props]);
 
-  // 4. handle -------------------------------------------------------------------------------------
-  // 파일 높이 계산
-  const handleCalcHeight = (files: any[]) => {
+  // 2-2. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+
+    // 최초 로드 시 파일 배열 초기화
+    setFileList(props?.value || []);
+
+    // 파일 높이 계산
     const heightPerFile = 30;
     const minHeight = 100;
-    return `${Math.max(minHeight, files.length * heightPerFile)}px`;
-  };
+    setFileHeight(`${Math.max(minHeight, (props?.value || []).length * heightPerFile)}px`);
 
-  // 4. handle -------------------------------------------------------------------------------------
-  // 파일 추가 로직
-  const handleFileAdd = (e: any) => {
-    e.preventDefault();
-    const input = document.createElement("input");
-    input.type = "file";
-    input.multiple = true;
-    input.accept = "image/*";
-    input.style.display = "none";
-    input.onchange = (e: any) => {
-      handleFileChange(Array.from(e.target.files));
-    };
-    document.body.appendChild(input);
-    input.click();
-  };
+    // 파일 제한 설정
+    setFileLimit(props?.limit || 3);
 
-  // 4. handle -------------------------------------------------------------------------------------
+  }, [props?.value]);
+
+  // 3. flow ---------------------------------------------------------------------------------------
   // 파일 변경 로직
-  const handleFileChange = (newFiles: File[] | null) => {
+  const flowFileChange = (newFiles: File[] | null) => {
+
+    // 파일이 이미지가 아닌 경우
+    if (newFiles && newFiles.some((file: File) => !file.type.startsWith("image/"))) {
+      alert("이미지 파일만 업로드 가능합니다.");
+      return;
+    }
+
+    // 파일이 5개 이상인 경우
+    if (newFiles && newFiles.length + fileList.length > fileLimit) {
+      alert(`파일은 최대 ${fileLimit}개까지 업로드 가능합니다.`);
+      return;
+    }
+
     if (newFiles) {
-      setFileList((prevFiles) => {
+      setFileList((prevFiles: any) => {
         const existingFiles = prevFiles || [];
 
         // 중복 파일 필터링
@@ -95,28 +96,41 @@ export const FileInput = (props: any) => {
   };
 
   // 4. handle -------------------------------------------------------------------------------------
-  // 파일 삭제 로직
-  const handleFileDelete = (index: number) => {
-    setFileList((prevFiles) => {
-
-      // 부모 컴포넌트에 변경 사항 전달
-      const updatedFiles = prevFiles.filter((_, i) => i !== index);
-      props?.onChange(updatedFiles);
-
-      return updatedFiles;
-    });
+  // 파일 추가 로직
+  const handleFileAdd = (e: any) => {
+    e.preventDefault();
+    const input = document.createElement("input");
+    input.type = "file";
+    input.multiple = true;
+    input.accept = "image/*";
+    input.style.display = "none";
+    input.onchange = (e: any) => {
+      flowFileChange(Array.from(e.target.files));
+    };
+    document.body.appendChild(input);
+    input.click();
   };
 
   // 4. handle -------------------------------------------------------------------------------------
-  // 파일 전체 삭제 로직
-  const handleFileDeleteAll = () => {
-    if (fileList.length === 0) {
-      return;
+  // 파일 삭제 로직
+  const handleFileDelete = (index: number, extra?: string) => {
+
+    if (extra === "single") {
+      setFileList((prevFiles: any) => {
+
+        // 부모 컴포넌트에 변경 사항 전달
+        const updatedFiles = prevFiles.filter((_file: any, i: number) => i !== index);
+        props?.onChange(updatedFiles);
+
+        return updatedFiles;
+      });
     }
-    setFileList((prevFiles) => {
-      props?.onChange([]);
-      return [];
-    });
+    else if (extra === "all") {
+      setFileList((prevFiles: any) => {
+        props?.onChange([]);
+        return [];
+      });
+    }
   };
 
   // 10. return ------------------------------------------------------------------------------------
@@ -145,7 +159,7 @@ export const FileInput = (props: any) => {
             props?.readOnly || false
           ),
           style: {
-            height: handleCalcHeight(fileList),
+            height: fileHeight,
           },
           className: (
             props?.inputclass?.includes("fs-") ? (
@@ -167,7 +181,7 @@ export const FileInput = (props: any) => {
                     </Div>
                     <Div
                       className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
-                      onClick={() => handleFileDelete(index)}
+                      onClick={() => handleFileDelete(index, "single")}
                     >
                       {!file?.name ? "" : "x"}
                     </Div>
@@ -187,7 +201,7 @@ export const FileInput = (props: any) => {
                 <Grid size={12} className={"d-right"}>
                   <Div
                     className={"fs-1-0rem fw-600 pointer-burgundy"}
-                    onClick={() => handleFileDeleteAll()}
+                    onClick={() => handleFileDelete(0, "all")}
                   >
                     전체 삭제
                   </Div>

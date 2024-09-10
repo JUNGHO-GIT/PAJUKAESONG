@@ -1,7 +1,5 @@
 // userRouter.ts
-
-import express from "express";
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
 import * as service from "@services/userService";
 export const router = express.Router();
 
@@ -24,7 +22,7 @@ router.post("/login", async (req: Request, res: Response) => {
       res.json({
         msg: "아이디가 존재하지 않습니다.",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
         admin: null,
       });
     }
@@ -32,7 +30,7 @@ router.post("/login", async (req: Request, res: Response) => {
       res.json({
         msg: "아이디 또는 비밀번호가 일치하지 않습니다.",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
         admin: null,
       });
     }
@@ -40,7 +38,7 @@ router.post("/login", async (req: Request, res: Response) => {
       res.json({
         msg: "로그인 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
         admin: null,
       });
     }
@@ -72,21 +70,21 @@ router.post("/signup", async (req: Request, res: Response) => {
       res.json({
         msg: "이미 존재하는 아이디입니다.",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else if (finalResult.status === "fail") {
       res.json({
         msg: "회원가입 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
         msg: "회원가입 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }

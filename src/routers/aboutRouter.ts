@@ -1,7 +1,5 @@
 // aboutRouter.ts
-
-import express from "express";
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
 import * as service from "@services/aboutService";
 export const router = express.Router();
 
@@ -21,14 +19,14 @@ router.get("/greeting", async (req: Request, res: Response) => {
       res.json({
         msg: "조회 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
         msg: "조회 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }
@@ -58,14 +56,14 @@ router.get("/location", async (req: Request, res: Response) => {
       res.json({
         msg: "조회 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
         msg: "조회 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }

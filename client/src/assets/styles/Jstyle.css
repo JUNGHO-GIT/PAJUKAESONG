@@ -10338,64 +10338,25 @@
 
 /** 7-2. font (rem) *******************************************************************************/
 .fs-0-1rem {font-size: 0.1rem !important;}
-.fs-0-15rem {font-size: 0.15rem !important;}
 .fs-0-2rem {font-size: 0.2rem !important;}
-.fs-0-25rem {font-size: 0.25rem !important;}
 .fs-0-3rem {font-size: 0.3rem !important;}
-.fs-0-35rem {font-size: 0.35rem !important;}
 .fs-0-4rem {font-size: 0.4rem !important;}
-.fs-0-45rem {font-size: 0.45rem !important;}
 .fs-0-5rem {font-size: 0.5rem !important;}
-.fs-0-55rem {font-size: 0.55rem !important;}
 .fs-0-6rem {font-size: 0.6rem !important;}
-.fs-0-65rem {font-size: 0.65rem !important;}
 .fs-0-7rem {font-size: 0.7rem !important;}
-.fs-0-75rem {font-size: 0.75rem !important;}
 .fs-0-8rem {font-size: 0.8rem !important;}
-.fs-0-85rem {font-size: 0.85rem !important;}
 .fs-0-9rem {font-size: 0.9rem !important;}
-.fs-0-95rem {font-size: 0.95rem !important;}
 .fs-1-0rem {font-size: 1.0rem !important;}
-.fs-1-05rem {font-size: 1.05rem !important;}
 .fs-1-1rem {font-size: 1.1rem !important;}
-.fs-1-15rem {font-size: 1.15rem !important;}
 .fs-1-2rem {font-size: 1.2rem !important;}
-.fs-1-25rem {font-size: 1.25rem !important;}
 .fs-1-3rem {font-size: 1.3rem !important;}
-.fs-1-35rem {font-size: 1.35rem !important;}
 .fs-1-4rem {font-size: 1.4rem !important;}
-.fs-1-45rem {font-size: 1.45rem !important;}
 .fs-1-5rem {font-size: 1.5rem !important;}
-.fs-1-55rem {font-size: 1.55rem !important;}
 .fs-1-6rem {font-size: 1.6rem !important;}
-.fs-1-65rem {font-size: 1.65rem !important;}
 .fs-1-7rem {font-size: 1.7rem !important;}
-.fs-1-75rem {font-size: 1.75rem !important;}
 .fs-1-8rem {font-size: 1.8rem !important;}
-.fs-1-85rem {font-size: 1.85rem !important;}
 .fs-1-9rem {font-size: 1.9rem !important;}
-.fs-1-95rem {font-size: 1.95rem !important;}
 .fs-2-0rem {font-size: 2.0rem !important;}
-.fs-2-05rem {font-size: 2.05rem !important;}
-.fs-2-1rem {font-size: 2.1rem !important;}
-.fs-2-15rem {font-size: 2.15rem !important;}
-.fs-2-2rem {font-size: 2.2rem !important;}
-.fs-2-25rem {font-size: 2.25rem !important;}
-.fs-2-3rem {font-size: 2.3rem !important;}
-.fs-2-35rem {font-size: 2.35rem !important;}
-.fs-2-4rem {font-size: 2.4rem !important;}
-.fs-2-45rem {font-size: 2.45rem !important;}
-.fs-2-5rem {font-size: 2.5rem !important;}
-.fs-2-55rem {font-size: 2.55rem !important;}
-.fs-2-6rem {font-size: 2.6rem !important;}
-.fs-2-65rem {font-size: 2.65rem !important;}
-.fs-2-7rem {font-size: 2.7rem !important;}
-.fs-2-75rem {font-size: 2.75rem !important;}
-.fs-2-8rem {font-size: 2.8rem !important;}
-.fs-2-85rem {font-size: 2.85rem !important;}
-.fs-2-9rem {font-size: 2.9rem !important;}
-.fs-2-95rem {font-size: 2.95rem !important;}
-.fs-3-0rem {font-size: 3.0rem !important;}
 
 /** 7-3. font (weight) ****************************************************************************/
 .fw-100 {font-weight: 100 !important;}
@@ -10407,6 +10368,9 @@
 .fw-700 {font-weight: 700 !important;}
 .fw-800 {font-weight: 800 !important;}
 .fw-900 {font-weight: 900 !important;}
+.fw-normal {font-weight: normal !important;}
+.fw-bold   {font-weight: bold !important;}
+.fw-bolder {font-weight: bolder !important;}
 
 /** 7-4. font (line height) **********************************************************************/
 .lh-1-0 {line-height: 1.0 !important;}
@@ -10736,30 +10700,30 @@
 
 /** 97. radius ************************************************************************************/
 .radius {
-  border-radius: 6px !important;
+  border-radius: 5px !important;
 }
 .radius-top {
-  border-top-left-radius: 6px !important;
-  border-top-right-radius: 6px !important;
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
   border-bottom-left-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
 }
 .radius-right {
   border-top-left-radius: 0px !important;
-  border-top-right-radius: 6px !important;
+  border-top-right-radius: 5px !important;
   border-bottom-left-radius: 0px !important;
-  border-bottom-right-radius: 6px !important;
+  border-bottom-right-radius: 5px !important;
 }
 .radius-bottom {
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
-  border-bottom-left-radius: 6px !important;
-  border-bottom-right-radius: 6px !important;
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
 }
 .radius-left {
-  border-top-left-radius: 6px !important;
+  border-top-left-radius: 5px !important;
   border-top-right-radius: 0px !important;
-  border-bottom-left-radius: 6px !important;
+  border-bottom-left-radius: 5px !important;
   border-bottom-right-radius: 0px !important;
 }
 .radius-none {
@@ -10916,6 +10880,15 @@
   transform: scale(1.1);
 }
 
+.navy {
+  color: #0f2f74 !important;
+}
+.pointer-navy:hover {
+  cursor: pointer !important;
+  color: #0f2f74 !important;
+  transform: scale(1.1);
+}
+
 .white {
   color: #FFFFFF !important;
 }
@@ -10952,16 +10925,6 @@
   transform: scale(1.1);
 }
 
-.black-50 {
-  color: #00000099 !important;
-}
-.pointer-black-50:hover {
-  cursor: pointer !important;
-  color: #00000099 !important;
-  transform: scale(1.1);
-}
-
-/** 99. color *************************************************************************************/
 .firstScore {
   color: #3B82F6 !important;
 }
@@ -10986,7 +10949,7 @@
   background-color: #FFFFFF !important;
 }
 .bg-grey {
-  background-color: #9CA3AF !important;
+  background-color: #f3f4f6 !important;
 }
 .bg-dark {
   background-color: #1f2937 !important;
@@ -11019,53 +10982,6 @@
   background-color: #e1e2e5 !important;
 }
 
-/** 99. color *************************************************************************************/
-.fill-beige {
-  fill: #fff7ed !important
-}
-.fill-white {
-  fill: #FFFFFF !important;
-}
-.fill-grey {
-  fill: #9CA3AF !important;
-}
-.fill-dark {
-  fill: #1f2937 !important;
-}
-.fill-black {
-  fill: #111827 !important;
-}
-.fill-primary {
-  fill: #3B82F6 !important;
-}
-.fill-secondary {
-  fill: #6c757d !important;
-}
-.fill-success {
-  fill: #10B981 !important;
-}
-.fill-burgundy {
-  fill: #c30104 !important;
-}
-.fill-danger {
-  fill: #EF4444 !important;
-}
-.fill-warning {
-  fill: #F59E0B !important;
-}
-.fill-yellow {
-  fill: #FBBF24 !important;
-}
-.fill-info {
-  fill: #3B82F6 !important;
-}
-.fill-light {
-  fill: #e1e2e5 !important;
-}
-.fill-pink {
-  fill: #FFACAC !important;
-}
-
 /** 100. etc **************************************************************************************/
 .pointer {
   cursor: pointer !important;
@@ -11084,13 +11000,11 @@
 }
 .readonly {
   caret-color: transparent !important;
-  pointer-events: none !important;
-  outline: none !important;
 }
 .upper {
   text-transform: uppercase !important;
 }
-.horizontal-text {
+.horizon-text {
   writing-mode: horizontal-tb !important;
   text-orientation: mixed !important;
   white-space: nowrap !important;
@@ -11098,10 +11012,7 @@
   text-overflow: ellipsis !important;
 }
 
-/** 101. transition ******************************************************************************/
-.dynamic {
-  transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease;
-}
+/** 100. animation ********************************************************************************/
 .animation-none {
   animation: none !important;
 }
@@ -11115,12 +11026,14 @@
   background-size: 800px 104px !important;
   position: relative !important;
 }
+.dynamic {
+  transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease;
+}
 .fadeIn {
-  animation: fadeIn 0.6s ease-in-out forwards;
+  animation: fadeIn 1s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-.fadeOut {
-  animation: fadeOut 0.6s ease-in-out forwards;
-}
+
+/** 101. transition ******************************************************************************/
 @keyframes shimmer {
   0% {
     background-position: -468px 0 !important;
@@ -11132,20 +11045,14 @@
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-3px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(20px);
   }
 }

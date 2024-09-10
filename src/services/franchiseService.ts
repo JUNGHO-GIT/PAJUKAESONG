@@ -72,7 +72,8 @@ export const detail = async (
 
 // 3. save -----------------------------------------------------------------------------------------
 export const save = async (
-  body_param: any,
+  OBJECT_param: any,
+  fileList_param: any,
 ) => {
 
   // findResult, finalResult 변수 선언
@@ -80,11 +81,15 @@ export const save = async (
   let finalResult: any = null;
   let statusResult: string = "";
 
-  findResult = await repository.save(
-    body_param
-  );
+  // 이미지 파일명 삽입
+  OBJECT_param.franchise_image = [];
+  fileList_param.forEach((file: any, index: number) => {
+    OBJECT_param.franchise_image.push(file.filename);
+  });
 
-  console.log("body_param", body_param);
+  findResult = await repository.save(
+    OBJECT_param
+  );
 
   if (!findResult) {
     statusResult = "fail";

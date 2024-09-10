@@ -79,7 +79,7 @@ export const NoticeDetail = () => {
             <Icons
               key={"Calendar"}
               name={"Calendar"}
-              fill={"#ffd700"}
+              fill={"#dedede"}
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>
@@ -100,7 +100,7 @@ export const NoticeDetail = () => {
             <Icons
               key={"View"}
               name={"View"}
-              fill={"#55beff"}
+              fill={"#dedede"}
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>

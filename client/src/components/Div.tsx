@@ -1,7 +1,7 @@
 // Div.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const Div = ({...props}: any) => {
+export const Div = (props: any) => {
   return (
     <div {...props} />
   );

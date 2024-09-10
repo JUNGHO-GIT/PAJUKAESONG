@@ -34,7 +34,7 @@ const schema = new mongoose.Schema(
     },
     franchise_image: {
       type: Array,
-      default: [""],
+      default: [],
       required: false
     },
 

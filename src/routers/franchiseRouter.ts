@@ -1,11 +1,9 @@
 // franchiseRouter.ts
 
-import express from "express";
-import multer from 'multer';
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
+import { uploadFile, deleteFile } from "@scripts/upload";
 import * as service from "@services/franchiseService";
 export const router = express.Router();
-const upload = multer();
 
 // 1. list -----------------------------------------------------------------------------------------
 router.get("/list", async (req: Request, res: Response) => {
@@ -25,7 +23,7 @@ router.get("/list", async (req: Request, res: Response) => {
       res.json({
         msg: "조회 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
         totalCnt: null,
       });
     }
@@ -33,7 +31,7 @@ router.get("/list", async (req: Request, res: Response) => {
       res.json({
         msg: "조회 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
         totalCnt: null,
       });
     }
@@ -65,14 +63,14 @@ router.get("/detail", async (req: Request, res: Response) => {
       res.json({
         msg: "조회 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
         msg: "조회 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }
@@ -87,13 +85,12 @@ router.get("/detail", async (req: Request, res: Response) => {
 });
 
 // 3. save -----------------------------------------------------------------------------------------
-router.post("/save", async (req: Request, res: Response) => {
+router.post("/save", uploadFile("fileList", "array", 5), async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
-    /**let finalResult = await service.save(
+    let finalResult = await service.save(
       req.body as any,
-    );**/
-    let finalResult = {};
+      req.files as Express.Multer.File[]
+    );
     if (finalResult.status === "success") {
       res.json({
         msg: "저장 성공",
@@ -102,17 +99,29 @@ router.post("/save", async (req: Request, res: Response) => {
       });
     }
     else if (finalResult.status === "fail") {
+      // 파일 삭제
+      if (req.files) {
+        for (let file of req.files as Express.Multer.File[]) {
+          deleteFile(file.path);
+        }
+      }
       res.json({
         msg: "저장 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
+      // 파일 삭제
+      if (req.files) {
+        for (let file of req.files as Express.Multer.File[]) {
+          deleteFile(file.path);
+        }
+      }
       res.json({
         msg: "저장 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }
@@ -141,17 +150,23 @@ router.put("/update", async (req: Request, res: Response) => {
       });
     }
     else if (finalResult.status === "fail") {
+      // 파일 삭제
+      if (req.files) {
+        for (let file of req.files as Express.Multer.File[]) {
+          deleteFile(file.path);
+        }
+      }
       res.json({
         msg: "수정 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
         msg: "수정 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }
@@ -182,14 +197,14 @@ router.delete("/deletes", async (req: Request, res: Response) => {
       res.json({
         msg: "삭제 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
         msg: "삭제 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }

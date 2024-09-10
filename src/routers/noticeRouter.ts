@@ -1,7 +1,5 @@
 // router.ts
-
-import express from "express";
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
 import * as service from "@services/noticeService";
 export const router = express.Router();
 
@@ -23,7 +21,7 @@ router.get("/list", async (req: Request, res: Response) => {
       res.json({
         msg: "조회 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
         totalCnt: null,
       });
     }
@@ -31,7 +29,7 @@ router.get("/list", async (req: Request, res: Response) => {
       res.json({
         msg: "조회 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
         totalCnt: null,
       });
     }
@@ -63,14 +61,14 @@ router.get("/detail", async (req: Request, res: Response) => {
       res.json({
         msg: "조회 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
         msg: "조회 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }
@@ -102,14 +100,14 @@ router.post("/save", async (req: Request, res: Response) => {
       res.json({
         msg: "저장 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
         msg: "저장 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }
@@ -142,14 +140,14 @@ router.put("/update", async (req: Request, res: Response) => {
       res.json({
         msg: "수정 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
         msg: "수정 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }
@@ -181,14 +179,14 @@ router.delete("/deletes", async (req: Request, res: Response) => {
       res.json({
         msg: "삭제 실패",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
         msg: "삭제 에러",
         status: finalResult.status,
-        result: null,
+        result: finalResult.result,
       });
     }
   }

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": "./",
     "baseUrl": "./",
     "paths": {
       "@assets/*": ["src/assets/*"],
@@ -23,5 +24,19 @@
       "alias",
       "extension"
     ]
-  }
+  },
+  "include": [
+    "index.ts",
+    "src/**/*",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.d.ts",
+    "**/*.js",
+    "**/*.jsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "client/**/*",
+  ]
 }

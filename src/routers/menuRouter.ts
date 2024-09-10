@@ -1,7 +1,5 @@
 // menuMainRouter.ts
-
-import express from "express";
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
 import * as service from "@services/menuService";
 export const router = express.Router();
 

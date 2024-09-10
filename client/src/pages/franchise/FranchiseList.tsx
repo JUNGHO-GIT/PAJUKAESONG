@@ -93,7 +93,7 @@ export const FranchiseList = () => {
                 <Hr px={40} h={10} className={"bg-burgundy"} />
                 <Grid size={12} className={"d-center"}>
                   <Img
-                    src={item.franchise_image}
+                    src={item.franchise_image[0]}
                     alt={item.franchise_name}
                     className={"w-100p h-300"}
                   />
@@ -103,7 +103,6 @@ export const FranchiseList = () => {
                     <Icons
                       key={"Location"}
                       name={"Location"}
-                      fill={"#22ff00"}
                       className={"w-20 h-20"}
                     />
                     <Div className={"fs-0-9rem ms-5"}>
@@ -117,7 +116,6 @@ export const FranchiseList = () => {
                     <Icons
                       key={"Call"}
                       name={"Call"}
-                      fill={"#40e0d0"}
                       className={"w-20 h-20"}
                     />
                     <Div className={"fs-0-9rem ms-5"}>
@@ -128,7 +126,6 @@ export const FranchiseList = () => {
                     <Icons
                       key={"Calendar"}
                       name={"Calendar"}
-                      fill={"#ffd700"}
                       className={"w-20 h-20"}
                     />
                     <Div className={"fs-0-9rem ms-5"}>
