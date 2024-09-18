@@ -1,9 +1,10 @@
 // NoticeSave.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommon, useValidateNotice } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useValidateNotice } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
-import { NOTICE } from "@imports/ImportBases";
+import { Notice } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -12,15 +13,18 @@ export const NoticeSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, koreanDate, URL, SUBFIX, adminId
-  } = useCommon();
+    navigate, URL, SUBFIX, adminId
+  } = useCommonValue();
+  const {
+    dayFmt,
+  } = useCommonDate();
   const {
     REFS, ERRORS, validate,
   } = useValidateNotice();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(NOTICE);
+  const [OBJECT, setOBJECT] = useState<any>(Notice);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async () => {
@@ -43,7 +47,7 @@ export const NoticeSave = () => {
       }
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {
@@ -73,7 +77,7 @@ export const NoticeSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.notice_title}
-              inputRef={REFS?.current?.notice_title}
+              inputRef={REFS?.notice_title}
               error={ERRORS?.notice_title}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -89,7 +93,7 @@ export const NoticeSave = () => {
               label={"공지사항 내용"}
               inputclass={"h-35vh"}
               value={OBJECT.notice_content}
-              itemRef={REFS?.current?.notice_content}
+              itemRef={REFS?.notice_content}
               error={ERRORS?.notice_content}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -106,7 +110,7 @@ export const NoticeSave = () => {
               label={"작성일"}
               className={"border-bottom"}
               disabled={true}
-              value={koreanDate}
+              value={dayFmt}
             />
           </Grid>
         </Grid>

@@ -1,7 +1,7 @@
 // Order.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const ORDER: any = {
+export const Order: any = {
   _id: "",
   order_number: 0,
   order_buy_name: "",

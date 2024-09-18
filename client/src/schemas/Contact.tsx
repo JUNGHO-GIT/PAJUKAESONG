@@ -1,7 +1,7 @@
 // Contact.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const CONTACT: any = {
+export const Contact: any = {
   _id: "",
   contact_number: 0,
   contact_category: "",

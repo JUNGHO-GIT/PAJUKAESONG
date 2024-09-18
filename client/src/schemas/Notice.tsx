@@ -1,7 +1,7 @@
 // Notice.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const NOTICE: any = {
+export const Notice: any = {
   _id: "",
   notice_number: 0,
   notice_title: "",

@@ -1,9 +1,9 @@
 // ContactList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommon, useResponsive, useValidateContact } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios, moment } from "@imports/ImportLibs";
-import { CONTACT } from "@imports/ImportBases";
+import { Contact } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -12,15 +12,15 @@ export const ContactList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, koreanDate, URL, SUBFIX, adminId, location,
-  } = useCommon();
+    navigate, URL, SUBFIX, adminId, location,
+  } = useCommonValue();
   const {
     isXs, isSm, isMd, isLg, isXl
   } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>([CONTACT]);
+  const [OBJECT, setOBJECT] = useState<any>([Contact]);
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
     page: 0,
@@ -47,7 +47,7 @@ export const ContactList = () => {
       }));
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {

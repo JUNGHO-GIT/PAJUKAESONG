@@ -1,11 +1,11 @@
 // FranchiseList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommon, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios, moment } from "@imports/ImportLibs";
 import { Swiper, SwiperSlide } from "@imports/ImportLibs";
 import { SwiperPagination, SwiperNavigation, SwiperAutoplay } from "@imports/ImportLibs";
-import { FRANCHISE } from "@imports/ImportBases";
+import { Franchise } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Input, Select, Btn, Icons } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
@@ -15,14 +15,12 @@ export const FranchiseList = () => {
   // 1. common -------------------------------------------------------------------------------------
   const {
     URL, SUBFIX, navigate, isAdmin,
-  } = useCommon();
-  const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
+  } = useCommonValue();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>([FRANCHISE]);
+  const [currIdx, setCurrIdx] = useState<number>(0);
+  const [OBJECT, setOBJECT] = useState<any>([Franchise]);
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
     page: 0,
@@ -40,14 +38,14 @@ export const FranchiseList = () => {
       }
     })
     .then((res: any) => {
-      setOBJECT(res.data.result);
+      setOBJECT(res.data.result.length > 0 ? res.data.result : [Franchise]);
       setCOUNT((prev: any) => ({
         ...prev,
         totalCnt: res.data.totalCnt || 0,
       }));
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {
@@ -81,10 +79,13 @@ export const FranchiseList = () => {
             SwiperPagination,
             SwiperNavigation,
           ]}
+          onSlideChange={(swiper) => {
+            setCurrIdx(swiper.realIndex);
+          }}
         >
           {OBJECT?.map((item: any, index: number) => (
             <SwiperSlide key={index}>
-              <Grid container spacing={2} columns={12}>
+              <Grid container spacing={2}>
                 <Grid size={12} key={index} className={"d-center"}>
                   <Div className={"fs-1-8rem fw-700"}>
                     {item.franchise_name}
@@ -93,11 +94,13 @@ export const FranchiseList = () => {
                 <Hr px={40} h={10} className={"bg-burgundy"} />
                 <Grid size={12} className={"d-center"}>
                   <Img
+                    key={item.franchise_image[0]}
+                    group={"franchise"}
                     src={item.franchise_image[0]}
-                    alt={item.franchise_name}
                     className={"w-100p h-300"}
                   />
                 </Grid>
+                <Hr px={40} h={10} className={"bg-grey"} />
                 <Grid size={12} className={"d-column"}>
                   <Div className={"d-left"}>
                     <Icons
@@ -172,7 +175,7 @@ export const FranchiseList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={isAdmin ? 7 : 9}>
+          <Grid size={isAdmin ? 5 : 9}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -205,10 +208,24 @@ export const FranchiseList = () => {
             <Btn
               className={"bg-burgundy"}
               onClick={() => {
+                navigate("/franchise/detail", {
+                  state: {
+                    _id: OBJECT[currIdx]._id,
+                  },
+                });
+              }}
+            >
+              {"수정"}
+            </Btn>
+          </Grid>
+          <Grid size={isAdmin ? 2 : 0} className={`${isAdmin ? "" : "d-none"}`}>
+            <Btn
+              className={"bg-burgundy"}
+              onClick={() => {
                 navigate("/franchise/save");
               }}
             >
-              등록
+              {"등록"}
             </Btn>
           </Grid>
         </Grid>

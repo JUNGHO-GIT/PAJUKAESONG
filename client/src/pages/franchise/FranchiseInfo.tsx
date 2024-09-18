@@ -1,7 +1,7 @@
 // FranchiseInfo.tsx
 
 import { useState } from "@imports/ImportReacts";
-import { useCommon, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { Div, Img, Hr, Br } from "@imports/ImportComponents";
 import { Paper, Card, Grid, Stepper, Step, StepLabel } from "@imports/ImportMuis";
 
@@ -11,7 +11,7 @@ export const FranchiseInfo = () => {
   // 1. common -------------------------------------------------------------------------------------
   const {
     URL, SUBFIX, navigate, isAdmin,
-  } = useCommon();
+  } = useCommonValue();
   const {
     isXs, isSm, isMd, isLg, isXl
   } = useResponsive();

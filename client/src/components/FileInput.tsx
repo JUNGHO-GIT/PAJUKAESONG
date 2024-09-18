@@ -1,20 +1,31 @@
 // FileInput.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
+import { useCommonValue } from "@imports/ImportHooks";
+import { axios } from "@imports/ImportLibs";
 import { Div, Br } from "@imports/ImportComponents";
 import { MuiFileInput, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FileInput = (props: any) => {
 
+  // 1. common -------------------------------------------------------------------------------------
+  const {
+    GCLOUD_URL,
+  } = useCommonValue();
+
   // 2-1. useState ---------------------------------------------------------------------------------
-  // 컴포넌트 내부에서 파일 상태 관리
-  const [fileList, setFileList] = useState<any>(props?.value || []);
+  const [fileExisting, setFileExisting] = useState<any>([]);
+  const [fileList, setFileList] = useState<any>([]);
   const [fileHeight, setFileHeight] = useState<string>("100px");
   const [fileLimit, setFileLimit] = useState<number>(3);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
-  // 기존 인풋 요소 삭제하기 (모양 커스텀)
+  useEffect(() => {
+    setFileExisting(props?.existing || []);
+  }, [props?.existing]);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     const defaultInput = props?.inputRef?.current;
     const existAdornment = document.querySelector(`.MuiInputAdornment-root.MuiInputAdornment-positionEnd.MuiInputAdornment-outlined.MuiInputAdornment-sizeSmall`);
@@ -41,7 +52,7 @@ export const FileInput = (props: any) => {
       adornmentRoot.setAttribute("style", "width: 100%;");
     }
 
-  }, [props]);
+  }, []);
 
   // 2-2. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -59,7 +70,7 @@ export const FileInput = (props: any) => {
 
   }, [props?.value]);
 
-  // 3. flow ---------------------------------------------------------------------------------------
+  // 4. flow ---------------------------------------------------------------------------------------
   // 파일 변경 로직
   const flowFileChange = (newFiles: File[] | null) => {
 
@@ -69,7 +80,7 @@ export const FileInput = (props: any) => {
       return;
     }
 
-    // 파일이 5개 이상인 경우
+    // 파일이 제한 개수 이상인 경우
     if (newFiles && newFiles.length + fileList.length > fileLimit) {
       alert(`파일은 최대 ${fileLimit}개까지 업로드 가능합니다.`);
       return;
@@ -86,16 +97,15 @@ export const FileInput = (props: any) => {
           )
         ));
 
-        // 부모로 변경된 파일 리스트 전달
+        // Return updated files
         const updatedFiles = [...existingFiles, ...nonDuplicateFiles];
-        props?.onChange(updatedFiles);
 
         return updatedFiles;
       });
     }
   };
 
-  // 4. handle -------------------------------------------------------------------------------------
+  // 5. handle -------------------------------------------------------------------------------------
   // 파일 추가 로직
   const handleFileAdd = (e: any) => {
     e.preventDefault();
@@ -111,27 +121,84 @@ export const FileInput = (props: any) => {
     input.click();
   };
 
-  // 4. handle -------------------------------------------------------------------------------------
+  // 6. handle -------------------------------------------------------------------------------------
   // 파일 삭제 로직
   const handleFileDelete = (index: number, extra?: string) => {
 
     if (extra === "single") {
       setFileList((prevFiles: any) => {
-
-        // 부모 컴포넌트에 변경 사항 전달
         const updatedFiles = prevFiles.filter((_file: any, i: number) => i !== index);
-        props?.onChange(updatedFiles);
-
         return updatedFiles;
       });
     }
     else if (extra === "all") {
-      setFileList((prevFiles: any) => {
-        props?.onChange([]);
-        return [];
-      });
+      setFileList([]);
     }
   };
+
+  // 7. node ---------------------------------------------------------------------------------------
+  const adornmentNode = (
+    <Grid container spacing={2} columns={12}>
+      <Grid size={4}>
+        {fileList.length > 0 && fileList.map((file: any, index: number) => (
+          <Grid size={12} className={"d-left"} key={index}>
+            <Div
+              className={"black-50 fs-0-9rem fw-500"}
+              onClick={() => {}}
+            >
+              {file?.name}
+            </Div>
+            <Div
+              className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
+              onClick={() => handleFileDelete(index, "single")}
+            >
+              {!file?.name ? "" : "x"}
+            </Div>
+          </Grid>
+        ))}
+      </Grid>
+      <Grid size={8}>
+        <Grid size={12} className={"d-right"}>
+          <Div
+            className={"fs-1-0rem fw-600 pointer-burgundy"}
+            onClick={(e: any) => handleFileAdd(e)}
+          >
+            파일 추가
+          </Div>
+        </Grid>
+        <Br px={10} />
+        <Grid size={12} className={"d-right"}>
+          <Div
+            className={"fs-1-0rem fw-600 pointer-burgundy"}
+            onClick={() => handleFileDelete(0, "all")}
+          >
+            전체 삭제
+          </Div>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+
+  // 7. node ---------------------------------------------------------------------------------------
+  const existingNode = () => (
+    <Grid container spacing={2} columns={12}>
+      {fileExisting.map((file: any, index: number) => (
+        <Grid size={12} key={index} className={"d-left"}>
+          <Div className={"black-50 fs-0-9rem fw-500"}>
+            {file}
+          </Div>
+          <Div
+            className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
+            onClick={() => {
+              setFileExisting((prev: any) => prev.filter((_: any, i: number) => i !== index));
+            }}
+          >
+            {!file ? "" : "x"}
+          </Div>
+        </Grid>
+      ))}
+    </Grid>
+  );
 
   // 10. return ------------------------------------------------------------------------------------
   return (
@@ -168,49 +235,12 @@ export const FileInput = (props: any) => {
               `text-left fs-1-0rem ${props?.inputclass || ""}`
             )
           ),
-          startAdornment: (
-            <Grid container spacing={2} columns={12}>
-              <Grid size={4}>
-                {fileList.length > 0 && fileList.map((file: any, index: number) => (
-                  <Grid size={12} className={"d-left"} key={index}>
-                    <Div
-                      className={"black-50 fs-0-9rem fw-500"}
-                      onClick={() => {}}
-                    >
-                      {file?.name}
-                    </Div>
-                    <Div
-                      className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
-                      onClick={() => handleFileDelete(index, "single")}
-                    >
-                      {!file?.name ? "" : "x"}
-                    </Div>
-                  </Grid>
-                ))}
-              </Grid>
-              <Grid size={8}>
-                <Grid size={12} className={"d-right"}>
-                  <Div
-                    className={"fs-1-0rem fw-600 pointer-burgundy"}
-                    onClick={(e: any) => handleFileAdd(e)}
-                  >
-                    파일 추가
-                  </Div>
-                </Grid>
-                <Br px={10} />
-                <Grid size={12} className={"d-right"}>
-                  <Div
-                    className={"fs-1-0rem fw-600 pointer-burgundy"}
-                    onClick={() => handleFileDelete(0, "all")}
-                  >
-                    전체 삭제
-                  </Div>
-                </Grid>
-              </Grid>
-            </Grid>
-          )
+          startAdornment: adornmentNode,
         }}
       />
+      <Br px={10} />
+      {/** 기존 이미지 표시하기 **/}
+      {fileExisting.length > 0 && existingNode()}
     </>
   );
 };

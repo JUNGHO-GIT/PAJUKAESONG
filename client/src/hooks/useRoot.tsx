@@ -1,13 +1,13 @@
 // useRoot.tsx
 
 import { useEffect } from "@imports/ImportReacts";
-import { useCommon } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 
 // -------------------------------------------------------------------------------------------------
 export const useRoot = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {navigate, location} = useCommon();
+  const {navigate, location} = useCommonValue();
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {

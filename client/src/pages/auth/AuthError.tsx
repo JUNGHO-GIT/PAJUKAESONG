@@ -1,7 +1,7 @@
 // AuthError.tsx
 // Node -> Section -> Fragment
 
-import { useCommon } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 import { Div, Btn } from "@imports/ImportComponents";
 import { Grid, Paper } from "@imports/ImportMuis";
 
@@ -11,7 +11,7 @@ export const AuthError = () => {
   // 1. common -------------------------------------------------------------------------------------
   const {
     navigate
-  } = useCommon();
+  } = useCommonValue();
 
   // 7. errorNode ----------------------------------------------------------------------------------
   const errorNode = () => {

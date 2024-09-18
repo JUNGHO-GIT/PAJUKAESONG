@@ -1,7 +1,7 @@
 // Franchise.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const FRANCHISE: Record<string, any> = {
+export const Franchise: any = {
   _id: "",
   franchise_number: 0,
   franchise_name: "",

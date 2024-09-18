@@ -17,7 +17,7 @@ import {
 } from "@imports/ImportMuis";
 
 import {
-  useRoot, useScrollTop,
+  useRoot, useScrollTop, useTimeZone
 } from "@imports/ImportHooks";
 
 import {
@@ -59,8 +59,8 @@ const Franchise = () => (
   <Routes>
     <Route path={"/info"} element={<FranchiseInfo />} />
     <Route path={"/list"} element={<FranchiseList />} />
-    <Route path={"/detail"} element={<FranchiseDetail />} />
     <Route path={"/save"} element={<FranchiseSave />} />
+    <Route path={"/detail"} element={<FranchiseDetail />} />
   </Routes>
 );
 
@@ -102,6 +102,7 @@ const User = () => (
 const App = () => {
 
   useRoot();
+  useTimeZone();
   useScrollTop();
 
   return (

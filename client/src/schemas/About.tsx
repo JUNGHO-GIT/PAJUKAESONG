@@ -1,7 +1,7 @@
 // About.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const ABOUT: any = {
+export const About: any = {
   _id: "",
   about_number: 0,
   about_info_content: "",

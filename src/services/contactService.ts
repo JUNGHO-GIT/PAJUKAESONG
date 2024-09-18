@@ -8,7 +8,7 @@ export const find = async (
   contact_email_param: string,
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
@@ -40,7 +40,7 @@ export const list = async (
   PAGING_param: any,
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
@@ -79,7 +79,7 @@ export const detail = async (
   _id_param: string,
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
@@ -108,7 +108,7 @@ export const save = async (
   OBJECT_param: any,
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
@@ -138,7 +138,7 @@ export const update = async (
   OBJECT_param: any,
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
@@ -167,7 +167,7 @@ export const deletes = async (
   _id_param: string,
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";

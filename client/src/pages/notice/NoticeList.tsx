@@ -1,9 +1,9 @@
 // NoticeList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommon, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios, moment } from "@imports/ImportLibs";
-import { NOTICE } from "@imports/ImportBases";
+import { Notice } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Input, Select, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
@@ -13,14 +13,14 @@ export const NoticeList = () => {
   // 1. common -------------------------------------------------------------------------------------
   const {
     URL, SUBFIX, navigate, isAdmin,
-  } = useCommon();
+  } = useCommonValue();
   const {
     isXs, isSm, isMd, isLg, isXl
   } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>([NOTICE]);
+  const [OBJECT, setOBJECT] = useState<any>([Notice]);
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
     page: 0,
@@ -45,7 +45,7 @@ export const NoticeList = () => {
       }));
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {

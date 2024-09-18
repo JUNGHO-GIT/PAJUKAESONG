@@ -1,9 +1,9 @@
 // NoticeDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommon } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 import { axios, moment } from "@imports/ImportLibs";
-import { NOTICE } from "@imports/ImportBases";
+import { Notice } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Icons, Btn, TextArea } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -13,11 +13,11 @@ export const NoticeDetail = () => {
   // 1. common -------------------------------------------------------------------------------------
   const {
     navigate, location_id, isAdmin, URL, SUBFIX
-  } = useCommon();
+  } = useCommonValue();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(NOTICE);
+  const [OBJECT, setOBJECT] = useState<any>(Notice);
   const [STATE, setSTATE] = useState<any>({
     _id: location_id
   });
@@ -34,7 +34,7 @@ export const NoticeDetail = () => {
       setOBJECT(res.data.result);
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {

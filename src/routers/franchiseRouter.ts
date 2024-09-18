@@ -1,7 +1,7 @@
 // franchiseRouter.ts
 
 import express, { Request, Response } from "express";
-import { uploadFile, deleteFile } from "@scripts/upload";
+import { uploadMemory } from "@scripts/upload";
 import * as service from "@services/franchiseService";
 export const router = express.Router();
 
@@ -85,10 +85,11 @@ router.get("/detail", async (req: Request, res: Response) => {
 });
 
 // 3. save -----------------------------------------------------------------------------------------
-router.post("/save", uploadFile("fileList", "array", 5), async (req: Request, res: Response) => {
+router.post("/save", uploadMemory("fileList", "array", 5), async (req: Request, res: Response) => {
   try {
     let finalResult = await service.save(
-      req.body as any,
+      req.body.OBJECT as any,
+      req.body.user_id as string,
       req.files as Express.Multer.File[]
     );
     if (finalResult.status === "success") {
@@ -99,12 +100,6 @@ router.post("/save", uploadFile("fileList", "array", 5), async (req: Request, re
       });
     }
     else if (finalResult.status === "fail") {
-      // 파일 삭제
-      if (req.files) {
-        for (let file of req.files as Express.Multer.File[]) {
-          deleteFile(file.path);
-        }
-      }
       res.json({
         msg: "저장 실패",
         status: finalResult.status,
@@ -112,12 +107,6 @@ router.post("/save", uploadFile("fileList", "array", 5), async (req: Request, re
       });
     }
     else {
-      // 파일 삭제
-      if (req.files) {
-        for (let file of req.files as Express.Multer.File[]) {
-          deleteFile(file.path);
-        }
-      }
       res.json({
         msg: "저장 에러",
         status: finalResult.status,
@@ -136,11 +125,13 @@ router.post("/save", uploadFile("fileList", "array", 5), async (req: Request, re
 });
 
 // 4. update ---------------------------------------------------------------------------------------
-router.put("/update", async (req: Request, res: Response) => {
+router.post("/update", uploadMemory("fileList","array", 5), async (req: Request, res: Response) => {
   try {
     let finalResult = await service.update(
       req.body._id as string,
       req.body.OBJECT as any,
+      req.body.user_id as string,
+      req.files as Express.Multer.File[]
     );
     if (finalResult.status === "success") {
       res.json({
@@ -150,12 +141,6 @@ router.put("/update", async (req: Request, res: Response) => {
       });
     }
     else if (finalResult.status === "fail") {
-      // 파일 삭제
-      if (req.files) {
-        for (let file of req.files as Express.Multer.File[]) {
-          deleteFile(file.path);
-        }
-      }
       res.json({
         msg: "수정 실패",
         status: finalResult.status,

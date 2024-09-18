@@ -1,9 +1,9 @@
 // ContactDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommon } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 import { axios, moment } from "@imports/ImportLibs";
-import { CONTACT } from "@imports/ImportBases";
+import { Contact } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Icons, Btn, TextArea } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -13,11 +13,11 @@ export const ContactDetail = () => {
   // 1. common -------------------------------------------------------------------------------------
   const {
     navigate, location_id, isAdmin, URL, SUBFIX
-  } = useCommon();
+  } = useCommonValue();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(CONTACT);
+  const [OBJECT, setOBJECT] = useState<any>(Contact);
   const [STATE, setSTATE] = useState<any>({
     _id: location_id
   });
@@ -34,7 +34,7 @@ export const ContactDetail = () => {
       setOBJECT(res.data.result);
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {
@@ -65,7 +65,7 @@ export const ContactDetail = () => {
       }
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {

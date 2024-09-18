@@ -1,7 +1,7 @@
 // useValidateFranchise.tsx
 
 import { useState, useEffect, createRef, useRef } from "@imports/ImportReacts";
-import { useCommon } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 
 // -------------------------------------------------------------------------------------------------
 export const useValidateFranchise = () => {
@@ -9,35 +9,30 @@ export const useValidateFranchise = () => {
   // 1. common -------------------------------------------------------------------------------------
   const {
     PATH,
-  } = useCommon();
+  } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
+  const REFS: any = useRef<any>({});
   const [ERRORS, setERRORS] = useState<any>({});
-  const REFS = useRef<any>({});
   const validate = useRef<any>(() => {});
-  let returnValid = false;
 
-  // 에러 메시지 출력 및 포커스
-  const showAlertAndFocus = (field: string, msg: string) => {
+  // alert 표시 및 focus ---------------------------------------------------------------------------
+  const showAlertAndFocus = (field: string, msg: string, idx: number) => {
     alert(msg);
-    REFS.current[field].current.focus();
+    REFS.current?.[idx]?.[field]?.current?.focus();
     setERRORS({
-      [field]: true,
+      [idx]: {
+        [field]: true,
+      },
     });
-    return returnValid;
-  };
-
-  // 이메일 형식
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
+    return false;
   };
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     try {
       // 1. save
-      if (PATH.includes("/franchise/save")) {
+      if (PATH.includes("/franchise/save") || PATH.includes("/franchise/detail")) {
         const target = [
           "franchise_name",
           "franchise_address_main",
@@ -45,35 +40,37 @@ export const useValidateFranchise = () => {
           "franchise_phone",
           "franchise_image",
         ];
-        setERRORS(
-          target.reduce((acc: any, cur: string) => {
-            acc[cur] = false;
-            return acc;
-          }, {})
-        );
-        REFS.current = (
-          target.reduce((acc: any, cur: string) => {
-            acc[cur] = createRef();
-            return acc;
-          }, {})
-        );
+        setERRORS(target.reduce((acc: any[], cur: string) => {
+          acc.push({
+            [cur]: false
+          });
+          return acc;
+        }, []));
+        REFS.current = (target.reduce((acc: any[], cur: string) => {
+          acc.push({
+            [cur]: createRef()
+          });
+          return acc;
+        }, []));
         validate.current = (OBJECT: any) => {
           if (!OBJECT.franchise_name) {
-            return showAlertAndFocus('franchise_name', "가맹점 이름을 입력해주세요.");
+            return showAlertAndFocus('franchise_name', "가맹점 이름을 입력해주세요.", 0);
           }
           else if (!OBJECT.franchise_address_main) {
-            return showAlertAndFocus('franchise_address_main', "가맹점 주소를 입력해주세요.");
+            return showAlertAndFocus('franchise_address_main', "가맹점 주소를 입력해주세요.", 0);
           }
           else if (!OBJECT.franchise_address_detail) {
-            return showAlertAndFocus('franchise_address_detail', "가맹점 상세주소를 입력해주세요.");
+            return showAlertAndFocus('franchise_address_detail', "가맹점 상세주소를 입력해주세요.", 0);
           }
           else if (!OBJECT.franchise_phone) {
-            return showAlertAndFocus('franchise_phone', "가맹점 전화번호를 입력해주세요.");
+            return showAlertAndFocus('franchise_phone', "가맹점 전화번호를 입력해주세요.", 0);
           }
           else if (!OBJECT.franchise_image) {
-            return showAlertAndFocus('franchise_image', "가맹점 이미지를 등록해주세요.");
+            return showAlertAndFocus('franchise_image', "가맹점 이미지를 등록해주세요.", 0);
           }
-          return !returnValid;
+          else {
+            return true;
+          }
         }
       }
     }
@@ -84,8 +81,8 @@ export const useValidateFranchise = () => {
 
   // 10. return ------------------------------------------------------------------------------------
   return {
-    ERRORS,
-    REFS,
+    ERRORS: ERRORS,
+    REFS: REFS.current,
     validate: validate.current,
   };
 };

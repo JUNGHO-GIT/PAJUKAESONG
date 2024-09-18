@@ -1,52 +1,99 @@
 // upload.ts
 
-import { Request, Response, NextFunction } from "express";
-import fs from "fs";
-import path from "path";
 import multer from 'multer';
-import { fileURLToPath } from "url";
-
-// uploads 폴더 경로 설정 --------------------------------------------------------------------------
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const uploadDir = path.join(__dirname, "../uploads/");
-
-// multer 설정 -------------------------------------------------------------------------------------
-const storage = multer.diskStorage({
-
-  // 파일 저장 경로 설정
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
-  },
-
-  // 파일명 설정
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  }
-});
+import { Storage } from '@google-cloud/storage';
+import { Request, Response, NextFunction } from 'express';
+import dotenv from "dotenv";
+dotenv.config();
 
 // 1. upload ---------------------------------------------------------------------------------------
 // upload 오버라이드 해서 함수화하기
-export const uploadFile = (fileName: string, type: string, limit: number) => {
+export const uploadMemory = (fieldName: string, type: string, limit: number) => {
 
-  // multer 설정
+  // 메모리에만 저장
+  const storage = multer.memoryStorage();
+
+  const upload = multer({
+    storage: storage,
+  });
+
+  // multer 설정 [Object: null prototype] 문제 해결
   if (type === "single") {
-    return multer({ storage: storage }).single(fileName);
+    return (req: Request, res: Response, next: NextFunction) => {
+      upload.single(fieldName)(req, res, (err) => {
+        if (err) {
+          return next(err);
+        }
+        else {
+          req.body = JSON.parse(JSON.stringify(req.body));
+        }
+        next();
+      });
+    };
   }
   else if (type === "array") {
-    return multer({ storage: storage }).array(fileName, limit);
+    return (req: Request, res: Response, next: NextFunction) => {
+      upload.array(fieldName, limit)(req, res, (err) => {
+        if (err) {
+          return next(err);
+        }
+        else {
+          req.body = JSON.parse(JSON.stringify(req.body));
+        }
+        next();
+      });
+    };
   }
   else {
     throw new Error("Invalid upload type");
   }
 };
 
-// 2. delete ---------------------------------------------------------------------------------------
-export const deleteFile = (filePath: string) => {
-  // 파일 삭제
-  fs.unlink(filePath, (err) => {
-    if (err) {
-      console.error(err);
-    }
+// 2. gcloud ---------------------------------------------------------------------------------------
+export const uploadCloud = (groupName:string, fileList: any[]) => {
+
+  const projectId = process.env.GCLOUD_PROJECT_ID;
+  const bucketName = process.env.GCLOUD_BUCKET_NAME;
+  const destination = process.env.GCLOUD_DESTINATION;
+
+  // 스토리지 인스턴스 생성
+  const storage = new Storage({ projectId });
+  const bucket = storage.bucket(bucketName as string);
+
+  fileList.forEach(async (file: any, _index: number) => {
+    const fileUpload = bucket.file(`${destination}/${groupName}/${file.filename}`);
+
+    // Create a stream and pipe buffer content
+    const stream = fileUpload.createWriteStream({
+      resumable: false,
+      public: true,
+    });
+
+    // Stream error handling
+    stream.on('error', (err) => {
+      console.error('Stream error:', err);
+    });
+
+    // Write file buffer content to stream
+    stream.end(file.buffer);
   });
+};
+
+// 3. gcloud ---------------------------------------------------------------------------------------
+export const getUploadedFiles = async (groupName: string) => {
+
+  const projectId = process.env.GCLOUD_PROJECT_ID;
+  const bucketName = process.env.GCLOUD_BUCKET_NAME;
+  const destination = process.env.GCLOUD_DESTINATION;
+
+  // 스토리지 인스턴스 생성
+  const storage = new Storage({ projectId });
+  const bucket = storage.bucket(bucketName as string);
+
+  // 폴더 내 파일 리스트
+  const [files] = await bucket.getFiles({
+    prefix: `${destination}/${groupName}/`,
+  });
+
+  return files;
 };

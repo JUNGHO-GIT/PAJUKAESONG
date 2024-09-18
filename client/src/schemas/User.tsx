@@ -1,7 +1,7 @@
 // User.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const USER: any = {
+export const User: any = {
   _id: "",
   user_number: 0,
   user_id: "",

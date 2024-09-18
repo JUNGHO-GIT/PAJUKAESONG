@@ -1,11 +1,9 @@
 // Footer.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useResponsive, useCommon } from "@imports/ImportHooks";
+import { useResponsive, useCommonValue } from "@imports/ImportHooks";
 import { Div, Img, Icons, Input, Btn, Hr } from "@imports/ImportComponents";
-import { PopUp } from "@imports/ImportContainers";
 import { Paper, Grid, Card } from "@imports/ImportMuis";
-import { logo1 } from "@imports/ImportImages";
 
 // -------------------------------------------------------------------------------------------------
 export const Footer = () => {
@@ -16,7 +14,7 @@ export const Footer = () => {
   } = useResponsive();
   const {
     URL, isAdmin, adminId, adminPw, navigate, TITLE,
-  } = useCommon();
+  } = useCommonValue();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [width, setWidth] = useState<string>("");
@@ -49,7 +47,9 @@ export const Footer = () => {
     // 1. logo
     const logoSection = () => (
       <Img
-        src={logo1}
+        key={"logo1"}
+        group={"main"}
+        src={"logo1.webp"}
         className={`h-max50`}
       />
     );

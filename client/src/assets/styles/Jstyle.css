@@ -10949,7 +10949,7 @@
   background-color: #FFFFFF !important;
 }
 .bg-grey {
-  background-color: #f3f4f6 !important;
+  background-color: #9CA3AF !important;
 }
 .bg-dark {
   background-color: #1f2937 !important;
@@ -11011,6 +11011,12 @@
   overflow: hidden !important;
   text-overflow: ellipsis !important;
 }
+.pre-line {
+  white-space: pre-line !important;
+}
+.locked {
+  border: 2px solid #bdbdbd !important;
+}
 
 /** 100. animation ********************************************************************************/
 .animation-none {
@@ -11027,13 +11033,16 @@
   position: relative !important;
 }
 .dynamic {
-  transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease;
+  transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease !important;
 }
 .fadeIn {
-  animation: fadeIn 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: fadeIn 1s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+.shake {
+  animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) both !important;
 }
 
-/** 101. transition ******************************************************************************/
+/** 101. keyframes ********************************************************************************/
 @keyframes shimmer {
   0% {
     background-position: -468px 0 !important;
@@ -11054,5 +11063,22 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 90% {
+    transform: translateX(-1px);
+  }
+  20%, 80% {
+    transform: translateX(2px);
+  }
+  30%, 50%, 70% {
+    transform: translateX(-4px);
+  }
+  40%, 60% {
+    transform: translateX(4px);
   }
 }

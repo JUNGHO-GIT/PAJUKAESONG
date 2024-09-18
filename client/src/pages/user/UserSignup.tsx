@@ -1,27 +1,27 @@
 // UserSignup.tsx
 
 import { useState } from "@imports/ImportReacts";
-import { useCommon, useValidateUser } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
+import { useValidateUser } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
-import { USER } from "@imports/ImportBases";
+import { User } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
-import { google } from "@imports/ImportImages";
 
 // -------------------------------------------------------------------------------------------------
 export const UserSignup = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, koreanDate, URL, SUBFIX, adminId
-  } = useCommon();
+    navigate, URL, SUBFIX
+  } = useCommonValue();
   const {
     REFS, ERRORS, validate,
   } = useValidateUser();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(USER);
+  const [OBJECT, setOBJECT] = useState<any>(User);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSignup = async () => {
@@ -43,7 +43,7 @@ export const UserSignup = () => {
       }
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {
@@ -71,7 +71,7 @@ export const UserSignup = () => {
               label={"아이디"}
               required={true}
               value={OBJECT.user_id}
-              inputRef={REFS.current.user_id}
+              inputRef={REFS.user_id}
               error={ERRORS.user_id}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -87,7 +87,7 @@ export const UserSignup = () => {
               label={"비밀번호"}
               required={true}
               value={OBJECT.user_pw}
-              inputRef={REFS.current.user_pw}
+              inputRef={REFS.user_pw}
               error={ERRORS.user_pw}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -117,7 +117,12 @@ export const UserSignup = () => {
               color={"primary"}
               className={"w-100p fs-1-0rem bg-white black"}
             >
-              <Img src={google} className={"w-15 h-15 me-10"} />
+              <Img
+                key={"google"}
+                group={"main"}
+                src={"google.webp"}
+                className={"w-15 h-15 me-10"}
+              />
               구글 아이디로 로그인
             </Btn>
           </Grid>

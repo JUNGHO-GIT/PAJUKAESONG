@@ -1,10 +1,11 @@
 // FranchiseSave.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommon, useValidateFranchise } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useValidateFranchise } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
-import { FRANCHISE } from "@imports/ImportBases";
+import { Franchise } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Input, FileInput, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -13,8 +14,11 @@ export const FranchiseSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, koreanDate, URL, SUBFIX, adminId
-  } = useCommon();
+    navigate, URL, SUBFIX, adminId,
+  } = useCommonValue();
+  const {
+    dayFmt
+  } = useCommonDate();
   const {
     REFS, ERRORS, validate,
   } = useValidateFranchise();
@@ -22,7 +26,7 @@ export const FranchiseSave = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [mapAddress, setMapAddress] = useState<string>("");
-  const [OBJECT, setOBJECT] = useState<any>(FRANCHISE);
+  const [OBJECT, setOBJECT] = useState<any>(Franchise);
   const [fileList, setFileList] = useState<any>([]);
 
   // 3. flow ---------------------------------------------------------------------------------------
@@ -33,7 +37,7 @@ export const FranchiseSave = () => {
       return;
     }
     await axios.post(`${URL}${SUBFIX}/save`,
-      makeFormData(OBJECT, fileList),
+      makeFormData(OBJECT, fileList, {user_id: adminId}),
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -50,7 +54,7 @@ export const FranchiseSave = () => {
       }
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {
@@ -105,7 +109,7 @@ export const FranchiseSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.franchise_name}
-              inputRef={REFS?.current?.franchise_name}
+              inputRef={REFS?.franchise_name}
               error={ERRORS?.franchise_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -116,33 +120,18 @@ export const FranchiseSave = () => {
             />
           </Grid>
           <Grid size={12}>
-            {/* <Input
+            <Input
               variant={"standard"}
               label={"가맹점 주소"}
               required={true}
               readOnly={true}
               className={"border-bottom pointer"}
               value={OBJECT.franchise_address_main}
-              inputRef={REFS?.current?.franchise_address_main}
+              inputRef={REFS?.franchise_address_main}
               error={ERRORS?.franchise_address_main}
               onClick={() => {
                 handleMap();
               }}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  franchise_address_main: e.target.value,
-                }));
-              }}
-            /> */}
-            <Input
-              variant={"standard"}
-              label={"가맹점 주소"}
-              required={true}
-              className={"border-bottom"}
-              value={OBJECT.franchise_address_main}
-              inputRef={REFS?.current?.franchise_address_main}
-              error={ERRORS?.franchise_address_main}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -158,7 +147,7 @@ export const FranchiseSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.franchise_address_detail}
-              inputRef={REFS?.current?.franchise_address_detail}
+              inputRef={REFS?.franchise_address_detail}
               error={ERRORS?.franchise_address_detail}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -175,7 +164,7 @@ export const FranchiseSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.franchise_phone}
-              inputRef={REFS?.current?.franchise_phone}
+              inputRef={REFS?.franchise_phone}
               error={ERRORS?.franchise_phone}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -193,25 +182,7 @@ export const FranchiseSave = () => {
               shrink={"shrink"}
               className={"border-bottom"}
               readOnly={true}
-              value={koreanDate}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              required={true}
-              label={"가맹점 사진"}
-              shrink={"shrink"}
-              className={"border-bottom"}
-              value={OBJECT.franchise_image}
-              inputRef={REFS?.current?.franchise_image}
-              error={ERRORS?.franchise_image}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  franchise_image: e.target.value,
-                }));
-              }}
+              value={dayFmt}
             />
           </Grid>
           <Grid size={12}>
@@ -220,8 +191,8 @@ export const FranchiseSave = () => {
               label={"가맹점 사진"}
               required={true}
               id={"franchise_image"}
-              limit={3}
-              value={fileList}
+              limit={1}
+              existing={OBJECT.franchise_image}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}

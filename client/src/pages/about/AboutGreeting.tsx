@@ -2,7 +2,6 @@
 
 import { Div, Img, Hr, Br } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
-import { stamp } from "@imports/ImportImages";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutGreeting = () => {
@@ -53,8 +52,9 @@ export const AboutGreeting = () => {
             </Div>
             <Div className={"fs-1-5rem fw-500"}>
               <Img
-                src={stamp}
-                alt={"stamp"}
+                key={"stamp"}
+                group={"main"}
+                src={"stamp.webp"}
                 className={"w-30 h-30"}
               />
             </Div>

@@ -1,9 +1,10 @@
 // ContactSave.tsx
 
 import { useState } from "@imports/ImportReacts";
-import { useCommon, useValidateContact } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
+import { useValidateContact } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
-import { CONTACT } from "@imports/ImportBases";
+import { Contact } from "@imports/ImportSchemas";
 import { Div, Select, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
@@ -13,14 +14,14 @@ export const ContactSave = () => {
   // 1. common -------------------------------------------------------------------------------------
   const {
     navigate, URL, SUBFIX, PATH,
-  } = useCommon();
+  } = useCommonValue();
   const {
     REFS, ERRORS, validate,
   } = useValidateContact();
 
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(CONTACT);
+  const [OBJECT, setOBJECT] = useState<any>(Contact);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async () => {
@@ -47,7 +48,7 @@ export const ContactSave = () => {
       }
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {
@@ -77,7 +78,7 @@ export const ContactSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_category}
-              inputRef={REFS?.current?.contact_category}
+              inputRef={REFS?.contact_category}
               error={ERRORS?.contact_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -101,7 +102,7 @@ export const ContactSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_name}
-              inputRef={REFS?.current?.contact_name}
+              inputRef={REFS?.contact_name}
               error={ERRORS?.contact_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -118,7 +119,7 @@ export const ContactSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_email}
-              inputRef={REFS?.current?.contact_email}
+              inputRef={REFS?.contact_email}
               error={ERRORS?.contact_email}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -135,7 +136,7 @@ export const ContactSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_phone}
-              inputRef={REFS?.current?.contact_phone}
+              inputRef={REFS?.contact_phone}
               error={ERRORS?.contact_phone}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -152,7 +153,7 @@ export const ContactSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_title}
-              inputRef={REFS?.current?.contact_title}
+              inputRef={REFS?.contact_title}
               error={ERRORS?.contact_title}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -168,7 +169,7 @@ export const ContactSave = () => {
               required={true}
               inputclass={"h-35vh"}
               value={OBJECT.contact_content}
-              inputRef={REFS?.current?.contact_content}
+              inputRef={REFS?.contact_content}
               error={ERRORS?.contact_content}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({

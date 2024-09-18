@@ -1,7 +1,7 @@
 // Menu.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const MENU: any = {
+export const Menu: any = {
   _id: "",
   menu_number: 0,
   menu_category: "",

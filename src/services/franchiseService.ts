@@ -1,6 +1,7 @@
 // franchiseService.ts
 
 import * as repository from "@repositories/franchiseRepository";
+import { uploadCloud } from "@scripts/upload";
 
 // 1. list -----------------------------------------------------------------------------------------
 // page는 무조건 0부터 시작
@@ -8,7 +9,7 @@ export const list = async (
   PAGING_param: any,
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
@@ -46,7 +47,7 @@ export const detail = async (
   _id_param: string,
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
@@ -73,31 +74,37 @@ export const detail = async (
 // 3. save -----------------------------------------------------------------------------------------
 export const save = async (
   OBJECT_param: any,
+  user_id_param: string,
   fileList_param: any,
 ) => {
 
-  // findResult, finalResult 변수 선언
-  let findResult: any = null;
+  // result 변수 선언
+  let saveResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
 
   // 이미지 파일명 삽입
   OBJECT_param.franchise_image = [];
-  fileList_param.forEach((file: any, index: number) => {
-    OBJECT_param.franchise_image.push(file.filename);
+  fileList_param.forEach((file: any, _index: number) => {
+    const newFileName = `${user_id_param}_${new Date().getTime()}_${file.originalname}`;
+    file.filename = newFileName;
+    OBJECT_param.franchise_image.push(newFileName);
   });
 
-  findResult = await repository.save(
+  saveResult = await repository.save(
     OBJECT_param
   );
 
-  if (!findResult) {
+  if (!saveResult) {
     statusResult = "fail";
     finalResult = null;
   }
   else {
     statusResult = "success";
-    finalResult = findResult;
+    finalResult = saveResult;
+
+    // 클라우드에 이미지 업로드
+    uploadCloud("franchise", fileList_param);
   }
 
   return {
@@ -110,24 +117,37 @@ export const save = async (
 export const update = async (
   _id_param: string,
   OBJECT_param: any,
+  user_id_param: string,
+  fileList_param: any,
 ) => {
 
-  // findResult, finalResult 변수 선언
-  let findResult: any = null;
+  // result 변수 선언
+  let updateResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
 
-  findResult = await repository.update(
+  // 이미지 파일명 삽입
+  OBJECT_param.franchise_image = [];
+  fileList_param.forEach((file: any, _index: number) => {
+    const newFileName = `${user_id_param}_${new Date().getTime()}_${file.originalname}`;
+    file.filename = newFileName;
+    OBJECT_param.franchise_image.push(newFileName);
+  });
+
+  updateResult = await repository.update(
     _id_param, OBJECT_param
   );
 
-  if (!findResult) {
+  if (!updateResult) {
     statusResult = "fail";
     finalResult = null;
   }
   else {
     statusResult = "success";
-    finalResult = findResult;
+    finalResult = updateResult;
+
+    // 클라우드에 이미지 업로드
+    uploadCloud("franchise", fileList_param);
   }
 
   return {
@@ -141,22 +161,22 @@ export const deletes = async (
   _id_param: string,
 ) => {
 
-  // findResult, finalResult 변수 선언
-  let findResult: any = null;
+  // result 변수 선언
+  let deleteResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
 
-  findResult = await repository.deletes(
+  deleteResult = await repository.deletes(
     _id_param
   );
 
-  if (!findResult) {
+  if (!deleteResult) {
     statusResult = "fail";
     finalResult = null;
   }
   else {
     statusResult = "success";
-    finalResult = findResult;
+    finalResult = deleteResult;
   }
 
   return {

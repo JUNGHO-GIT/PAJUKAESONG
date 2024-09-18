@@ -1,9 +1,10 @@
 // ContactFind.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommon, useResponsive, useValidateContact } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useValidateContact } from "@imports/ImportValidates";
 import { axios, moment } from "@imports/ImportLibs";
-import { CONTACT } from "@imports/ImportBases";
+import { Contact } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -12,15 +13,15 @@ export const ContactFind = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, koreanDate, URL, SUBFIX, adminId
-  } = useCommon();
+    navigate, URL, SUBFIX, adminId
+  } = useCommonValue();
   const {
     REFS, ERRORS, validate,
   } = useValidateContact();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(CONTACT);
+  const [OBJECT, setOBJECT] = useState<any>(Contact);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSearch = async () => {
@@ -50,7 +51,7 @@ export const ContactFind = () => {
       }
     })
     .catch((err: any) => {
-      alert("오류가 발생했습니다.");
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {
@@ -80,7 +81,7 @@ export const ContactFind = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_name}
-              inputRef={REFS?.current?.contact_name}
+              inputRef={REFS?.contact_name}
               error={ERRORS?.contact_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -97,7 +98,7 @@ export const ContactFind = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_email}
-              inputRef={REFS?.current?.contact_email}
+              inputRef={REFS?.contact_email}
               error={ERRORS?.contact_email}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({

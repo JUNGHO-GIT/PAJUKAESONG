@@ -6,7 +6,7 @@ import * as repository from "@repositories/aboutRepository";
 export const greeting = async (
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
@@ -33,7 +33,7 @@ export const greeting = async (
 export const location = async (
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";

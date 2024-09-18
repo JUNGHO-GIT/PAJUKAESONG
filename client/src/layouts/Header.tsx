@@ -1,12 +1,11 @@
 // Header.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommon, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { Div, Img, Icons } from "@imports/ImportComponents";
 import { Paper, Grid } from "@imports/ImportMuis";
 import { Tabs, Tab, Card, Menu, MenuItem, tabsClasses } from "@imports/ImportMuis";
 import { SideBar } from '@imports/ImportLayouts';
-import { logo1 } from "@imports/ImportImages";
 
 // -------------------------------------------------------------------------------------------------
 export const Header = () => {
@@ -17,7 +16,7 @@ export const Header = () => {
   } = useResponsive();
   const {
     navigate, PATH, firstStr, secondStr, dataArray, isAdmin,
-  } = useCommon();
+  } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [tabWidth, setTabWidth] = useState<string>("");
@@ -78,7 +77,9 @@ export const Header = () => {
     const logoSection = () => (
       <Div className={"d-center"}>
         <Img
-          src={logo1}
+          key={"logo1"}
+          group={"main"}
+          src={"logo1.webp"}
           className={"pointer h-max50"}
           onClick={() => {
             navigate("/main");

@@ -1,7 +1,7 @@
 // useValidateNotice.tsx
 
 import { useState, useEffect, createRef, useRef } from "@imports/ImportReacts";
-import { useCommon } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 
 // -------------------------------------------------------------------------------------------------
 export const useValidateNotice = () => {
@@ -9,22 +9,23 @@ export const useValidateNotice = () => {
   // 1. common -------------------------------------------------------------------------------------
   const {
     PATH,
-  } = useCommon();
+  } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
+  const REFS: any = useRef<any>({});
   const [ERRORS, setERRORS] = useState<any>({});
-  const REFS = useRef<any>({});
   const validate = useRef<any>(() => {});
-  let returnValid = false;
 
-  // 에러 메시지 출력 및 포커스
-  const showAlertAndFocus = (field: string, msg: string) => {
+  // alert 표시 및 focus ---------------------------------------------------------------------------
+  const showAlertAndFocus = (field: string, msg: string, idx: number) => {
     alert(msg);
-    REFS.current[field].current.focus();
+    REFS.current?.[idx]?.[field]?.current?.focus();
     setERRORS({
-      [field]: true,
+      [idx]: {
+        [field]: true,
+      },
     });
-    return returnValid;
+    return false;
   };
 
   // 2-3. useEffect --------------------------------------------------------------------------------
@@ -36,26 +37,28 @@ export const useValidateNotice = () => {
           "notice_title",
           "notice_content",
         ];
-        setERRORS(
-          target.reduce((acc: any, cur: string) => {
-            acc[cur] = false;
-            return acc;
-          }, {})
-        );
-        REFS.current = (
-          target.reduce((acc: any, cur: string) => {
-            acc[cur] = createRef();
-            return acc;
-          }, {})
-        );
+        setERRORS(target.reduce((acc: any[], cur: string) => {
+          acc.push({
+            [cur]: false
+          });
+          return acc;
+        }, []));
+        REFS.current = (target.reduce((acc: any[], cur: string) => {
+          acc.push({
+            [cur]: createRef()
+          });
+          return acc;
+        }, []));
         validate.current = (OBJECT: any) => {
           if (!OBJECT.notice_title) {
-            return showAlertAndFocus('notice_title', "제목을 입력해주세요.");
+            return showAlertAndFocus('notice_title', "제목을 입력해주세요.", 0);
           }
           else if (!OBJECT.notice_content) {
-            return showAlertAndFocus('notice_content', "내용을 입력해주세요.");
+            return showAlertAndFocus('notice_content', "내용을 입력해주세요.", 0);
           }
-          return !returnValid;
+          else {
+            return true;
+          }
         }
       }
 
@@ -65,26 +68,28 @@ export const useValidateNotice = () => {
           "notice_title",
           "notice_content",
         ];
-        setERRORS(
-          target.reduce((acc: any, cur: string) => {
-            acc[cur] = false;
-            return acc;
-          }, {})
-        );
-        REFS.current = (
-          target.reduce((acc: any, cur: string) => {
-            acc[cur] = createRef();
-            return acc;
-          }, {})
-        );
+        setERRORS(target.reduce((acc: any[], cur: string) => {
+          acc.push({
+            [cur]: false
+          });
+          return acc;
+        }, []));
+        REFS.current = (target.reduce((acc: any[], cur: string) => {
+          acc.push({
+            [cur]: createRef()
+          });
+          return acc;
+        }, []));
         validate.current = (OBJECT: any) => {
           if (!OBJECT.notice_title) {
-            return showAlertAndFocus('notice_title', "제목을 입력해주세요.");
+            return showAlertAndFocus('notice_title', "제목을 입력해주세요.", 0);
           }
           else if (!OBJECT.notice_content) {
-            return showAlertAndFocus('notice_content', "내용을 입력해주세요.");
+            return showAlertAndFocus('notice_content', "내용을 입력해주세요.", 0);
           }
-          return !returnValid;
+          else {
+            return true;
+          }
         }
       }
     }
@@ -95,8 +100,8 @@ export const useValidateNotice = () => {
 
   // 10. return ------------------------------------------------------------------------------------
   return {
-    ERRORS,
-    REFS,
+    ERRORS: ERRORS,
+    REFS: REFS.current,
     validate: validate.current,
   };
 };

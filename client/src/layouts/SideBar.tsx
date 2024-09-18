@@ -1,11 +1,9 @@
 // SideBar.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommon } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 import { Icons, Div, Img, Hr, Br } from "@imports/ImportComponents";
-import { PopUp } from "@imports/ImportContainers";
 import { Drawer, List, ListItem, Collapse, Grid, Card } from "@imports/ImportMuis";
-import { logo1 } from "@imports/ImportImages";
 
 // -------------------------------------------------------------------------------------------------
 interface SideBarProps {
@@ -21,7 +19,7 @@ export const SideBar = (
   // 1. common -------------------------------------------------------------------------------------
   const {
     navigate, firstStr, secondStr, dataArray, PATH
-  } = useCommon();
+  } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [selectedTab, setSelectedTab] = useState<string>("");
@@ -41,7 +39,9 @@ export const SideBar = (
     // 1. logo
     const logoSection = () => (
       <Img
-        src={logo1}
+        key={"logo1"}
+        group={"main"}
+        src={"logo1.webp"}
         className={"pointer h-max50 m-10"}
         onClick={() => {
           navigate("/main");

@@ -9,7 +9,7 @@ export const login = async (
   user_pw_param: string,
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let loginResult: any = null;
@@ -61,7 +61,7 @@ export const signup = async (
   OBJECT_param: any,
 ) => {
 
-  // findResult, finalResult 변수 선언
+  // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
