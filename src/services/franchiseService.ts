@@ -122,20 +122,29 @@ export const update = async (
 ) => {
 
   // result 변수 선언
+  let findResult: any = null;
   let updateResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "";
 
-  console.log("OBJECT_param", OBJECT_param);
-  console.log("fileList_param", fileList_param);
+  if (fileList_param.length > 0) {
+    // 이미지 파일명 삽입
+    OBJECT_param.franchise_image = [];
+    fileList_param.forEach((file: any, _index: number) => {
+      const newFileName = `${user_id_param}_${new Date().getTime()}_${file.originalname}`;
+      file.filename = newFileName;
+      OBJECT_param.franchise_image.push(newFileName);
+    });
 
-  // 이미지 파일명 삽입
-  OBJECT_param.franchise_image = [];
-  fileList_param.forEach((file: any, _index: number) => {
-    const newFileName = `${user_id_param}_${new Date().getTime()}_${file.originalname}`;
-    file.filename = newFileName;
-    OBJECT_param.franchise_image.push(newFileName);
-  });
+    // 클라우드에 이미지 업로드
+    uploadCloud("franchise", fileList_param);
+  }
+  else {
+    findResult = await repository.detail(
+      _id_param
+    );
+    OBJECT_param.franchise_image = findResult.franchise_image;
+  }
 
   updateResult = await repository.update(
     _id_param, OBJECT_param
@@ -148,9 +157,6 @@ export const update = async (
   else {
     statusResult = "success";
     finalResult = updateResult;
-
-    // 클라우드에 이미지 업로드
-    uploadCloud("franchise", fileList_param);
   }
 
   return {

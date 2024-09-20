@@ -10,13 +10,16 @@ export const FileInput = (props: any) => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [fileExisting, setFileExisting] = useState<any>([]);
   const [fileList, setFileList] = useState<any>([]);
+  const [fileCount, setFileCount] = useState<number>(0);
   const [fileHeight, setFileHeight] = useState<string>("100px");
-  const [fileLimit, setFileLimit] = useState<number>(3);
+  const [fileLimit, setFileLimit] = useState<number>(1);
 
+  // 2-2. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     console.log("===================================");
     console.log("fileList", fileList);
-  }, [fileList]);
+    console.log("fileCount", fileCount);
+  }, [fileList, fileCount]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -62,10 +65,22 @@ export const FileInput = (props: any) => {
     const minHeight = 100;
     setFileHeight(`${Math.max(minHeight, (props?.value || []).length * heightPerFile)}px`);
 
-    // 파일 제한 설정
     setFileLimit(props?.limit);
 
   }, [props?.value]);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    const newCount = fileList.length;
+    const existingCount = fileExisting.length;
+
+    if (newCount + existingCount > 0) {
+      setFileCount(newCount + existingCount);
+    }
+    else {
+      setFileCount(0);
+    }
+  }, [fileList, fileExisting]);
 
   // 6. handle (파일 추가) -------------------------------------------------------------------------
   const flowFileChange = (newFiles: File[]) => {
@@ -77,7 +92,7 @@ export const FileInput = (props: any) => {
     }
 
     // 파일이 제한 개수 이상인 경우
-    else if (newFiles && newFiles.length + fileList.length > fileLimit) {
+    else if (newFiles && newFiles.length + fileCount > fileLimit) {
       alert(`파일은 최대 ${fileLimit}개까지 업로드 가능합니다.`);
       return;
     }

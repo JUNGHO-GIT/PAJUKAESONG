@@ -8,7 +8,7 @@
   "scripts": {
     "start": "tsx watch --clear-screen=false --ignore node_modules index.ts",
     "fetch": "git fetch --all && git reset --hard origin/main",
-    "push": "git add . && git commit -m 'update' && git push origin main --force",
+    "push": "git add . && git commit -m 'update' && git push origin main",
     "gcloud": "node gcloud.cjs"
   },
   "dependencies": {
