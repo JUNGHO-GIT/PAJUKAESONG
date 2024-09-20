@@ -89,7 +89,7 @@ export const makeFormData = (
 
   // 파일 추가
   if (fileList) {
-    fileList.forEach((file: any, index: number) => {
+    fileList.forEach((file: File, index: number) => {
       form.append("fileList", file);
     });
   }

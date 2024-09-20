@@ -32,7 +32,7 @@ export const Main = () => {
         <SwiperSlide>
           <Img
             src={"https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=800"}
-            alt={"slide1"}
+            group={"new"}
             style={{
               width: "100%",
               height: "100%",
@@ -43,7 +43,7 @@ export const Main = () => {
         <SwiperSlide>
           <Img
             src={"https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=800"}
-            alt={"slide2"}
+            group={"new"}
             style={{
               width: "100%",
               height: "100%",
@@ -54,7 +54,7 @@ export const Main = () => {
         <SwiperSlide>
           <Img
             src={"https://images.unsplash.com/photo-1521747116042-5a810fda9664?w=800"}
-            alt={"slide3"}
+            group={"new"}
             style={{
               width: "100%",
               height: "100%",
@@ -65,7 +65,7 @@ export const Main = () => {
         <SwiperSlide>
           <Img
             src={"https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800"}
-            alt={"slide4"}
+            group={"new"}
             style={{
               width: "100%",
               height: "100%",

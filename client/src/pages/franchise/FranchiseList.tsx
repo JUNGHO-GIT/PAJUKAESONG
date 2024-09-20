@@ -204,11 +204,11 @@ export const FranchiseList = () => {
               }}
             />
           </Grid>
-          <Grid size={isAdmin ? 2 : 0} className={`${isAdmin ? "" : "d-none"}`}>
+          <Grid size={isAdmin ? 3 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
             <Btn
-              className={"bg-burgundy"}
+              className={"bg-burgundy me-1vw"}
               onClick={() => {
-                navigate("/franchise/detail", {
+                navigate("/franchise/update", {
                   state: {
                     _id: OBJECT[currIdx]._id,
                   },
@@ -217,10 +217,8 @@ export const FranchiseList = () => {
             >
               {"수정"}
             </Btn>
-          </Grid>
-          <Grid size={isAdmin ? 2 : 0} className={`${isAdmin ? "" : "d-none"}`}>
             <Btn
-              className={"bg-burgundy"}
+              className={"bg-burgundy ms-1vw"}
               onClick={() => {
                 navigate("/franchise/save");
               }}

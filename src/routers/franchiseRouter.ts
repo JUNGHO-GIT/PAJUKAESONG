@@ -125,7 +125,7 @@ router.post("/save", uploadMemory("fileList", "array", 5), async (req: Request, 
 });
 
 // 4. update ---------------------------------------------------------------------------------------
-router.post("/update", uploadMemory("fileList","array", 5), async (req: Request, res: Response) => {
+router.put("/update", uploadMemory("fileList", "array", 5), async (req: Request, res: Response) => {
   try {
     let finalResult = await service.update(
       req.body._id as string,

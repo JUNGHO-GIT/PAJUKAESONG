@@ -37,7 +37,13 @@ export const FranchiseSave = () => {
       return;
     }
     await axios.post(`${URL}${SUBFIX}/save`,
-      makeFormData(OBJECT, fileList, {user_id: adminId}),
+      makeFormData(
+        OBJECT,
+        fileList,
+        {
+          user_id: adminId
+        }
+      ),
       {
         headers: {
           "Content-Type": "multipart/form-data",

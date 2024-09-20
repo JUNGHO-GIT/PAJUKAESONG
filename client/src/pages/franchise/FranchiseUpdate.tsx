@@ -1,4 +1,4 @@
-// FranchiseDetail.tsx
+// FranchiseUpdate.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
@@ -10,7 +10,7 @@ import { Div, Img, Hr, Br, Input, FileInput, Btn } from "@imports/ImportComponen
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const FranchiseDetail = () => {
+export const FranchiseUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
@@ -55,7 +55,7 @@ export const FranchiseDetail = () => {
       setLOADING(false);
       return;
     }
-    await axios.post(`${URL}${SUBFIX}/update`,
+    await axios.put(`${URL}${SUBFIX}/update`,
       makeFormData(
         OBJECT,
         fileList,
@@ -113,20 +113,20 @@ export const FranchiseDetail = () => {
     }).open();
   };
 
-  // 7. detailNode ---------------------------------------------------------------------------------
-  const detailNode = () => {
+  // 7. updateNode ---------------------------------------------------------------------------------
+  const updateNode = () => {
     // 1. title
     const titleSection = () => (
       <Div
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        가맹점 상세
+        가맹점 수정
       </Div>
     );
-    // 2. detail
-    const detailSection = () => {
-      const detailFragment = () => (
+    // 2. update
+    const updateSection = () => {
+      const updateFragment = () => (
         <Grid container spacing={3} className={"text-left"}>
           <Grid size={12}>
             <Input
@@ -219,6 +219,8 @@ export const FranchiseDetail = () => {
               id={"franchise_image"}
               limit={1}
               existing={OBJECT.franchise_image}
+              group={"franchise"}
+              value={fileList}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
@@ -242,7 +244,7 @@ export const FranchiseDetail = () => {
       );
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
-          {detailFragment()}
+          {updateFragment()}
           <Br px={50} />
           {btnFragment()}
         </Card>
@@ -256,7 +258,7 @@ export const FranchiseDetail = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {detailSection()}
+            {updateSection()}
           </Grid>
         </Grid>
       </Paper>
@@ -266,7 +268,7 @@ export const FranchiseDetail = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {detailNode()}
+      {updateNode()}
     </>
   );
 };

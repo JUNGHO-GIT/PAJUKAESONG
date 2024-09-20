@@ -32,7 +32,7 @@ export const useValidateFranchise = () => {
   useEffect(() => {
     try {
       // 1. save
-      if (PATH.includes("/franchise/save") || PATH.includes("/franchise/detail")) {
+      if (PATH.includes("/franchise/save") || PATH.includes("/franchise/update")) {
         const target = [
           "franchise_name",
           "franchise_address_main",

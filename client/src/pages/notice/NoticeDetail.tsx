@@ -31,7 +31,7 @@ export const NoticeDetail = () => {
       }
     })
     .then((res: any) => {
-      setOBJECT(res.data.result);
+      setOBJECT(res.data.result || Notice);
     })
     .catch((err: any) => {
       alert(err.response.data.msg);
@@ -113,7 +113,7 @@ export const NoticeDetail = () => {
               onClick={() => {
                 navigate("/notice/update", {
                   state: {
-                    id: OBJECT._id
+                    _id: OBJECT._id
                   }
                 });
               }}

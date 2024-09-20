@@ -126,6 +126,9 @@ export const update = async (
   let finalResult: any = null;
   let statusResult: string = "";
 
+  console.log("OBJECT_param", OBJECT_param);
+  console.log("fileList_param", fileList_param);
+
   // 이미지 파일명 삽입
   OBJECT_param.franchise_image = [];
   fileList_param.forEach((file: any, _index: number) => {

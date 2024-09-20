@@ -100,7 +100,7 @@ export const NoticeList = () => {
                   onClick={() => {
                     navigate('/notice/detail', {
                       state: {
-                        id: item._id
+                        _id: item._id
                       },
                     });
                   }}

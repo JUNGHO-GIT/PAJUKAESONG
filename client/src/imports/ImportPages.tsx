@@ -11,7 +11,7 @@ import { ContactSave } from "@pages/contact/ContactSave";
 import { FranchiseInfo } from "@pages/franchise/FranchiseInfo";
 import { FranchiseList } from "@pages/franchise/FranchiseList";
 import { FranchiseSave } from "@pages/franchise/FranchiseSave";
-import { FranchiseDetail } from "@pages/franchise/FranchiseDetail";
+import { FranchiseUpdate } from "@pages/franchise/FranchiseUpdate";
 import { MenuMain } from "@pages/menu/MenuMain";
 import { MenuSub } from "@pages/menu/MenuSub";
 import { NoticeList } from "@pages/notice/NoticeList";
@@ -28,7 +28,7 @@ export {
   Main,
   AboutGreeting, AboutLocation,
   ContactFind, ContactList, ContactDetail, ContactSave,
-  FranchiseInfo, FranchiseList, FranchiseSave, FranchiseDetail,
+  FranchiseInfo, FranchiseList, FranchiseSave, FranchiseUpdate,
   MenuMain, MenuSub,
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
   OrderBuy, OrderLookup,

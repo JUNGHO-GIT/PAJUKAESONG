@@ -63,11 +63,6 @@ export const dataArray = [
         titleEn: "list",
         url: "/franchise/list",
       },
-      {
-        titleKo: "가맹 저장",
-        titleEn: "save",
-        url: "/franchise/save",
-      },
     ],
   },
   {

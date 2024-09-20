@@ -1,24 +1,22 @@
 // FileInput.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
-import { axios } from "@imports/ImportLibs";
-import { Div, Br } from "@imports/ImportComponents";
+import { Div, Br, Img } from "@imports/ImportComponents";
 import { MuiFileInput, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FileInput = (props: any) => {
-
-  // 1. common -------------------------------------------------------------------------------------
-  const {
-    GCLOUD_URL,
-  } = useCommonValue();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [fileExisting, setFileExisting] = useState<any>([]);
   const [fileList, setFileList] = useState<any>([]);
   const [fileHeight, setFileHeight] = useState<string>("100px");
   const [fileLimit, setFileLimit] = useState<number>(3);
+
+  useEffect(() => {
+    console.log("===================================");
+    console.log("fileList", fileList);
+  }, [fileList]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -51,10 +49,9 @@ export const FileInput = (props: any) => {
     if (adornmentRoot) {
       adornmentRoot.setAttribute("style", "width: 100%;");
     }
-
   }, []);
 
-  // 2-2. useEffect --------------------------------------------------------------------------------
+  // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
 
     // 최초 로드 시 파일 배열 초기화
@@ -66,13 +63,12 @@ export const FileInput = (props: any) => {
     setFileHeight(`${Math.max(minHeight, (props?.value || []).length * heightPerFile)}px`);
 
     // 파일 제한 설정
-    setFileLimit(props?.limit || 3);
+    setFileLimit(props?.limit);
 
   }, [props?.value]);
 
-  // 4. flow ---------------------------------------------------------------------------------------
-  // 파일 변경 로직
-  const flowFileChange = (newFiles: File[] | null) => {
+  // 6. handle (파일 추가) -------------------------------------------------------------------------
+  const flowFileChange = (newFiles: File[]) => {
 
     // 파일이 이미지가 아닌 경우
     if (newFiles && newFiles.some((file: File) => !file.type.startsWith("image/"))) {
@@ -81,7 +77,7 @@ export const FileInput = (props: any) => {
     }
 
     // 파일이 제한 개수 이상인 경우
-    if (newFiles && newFiles.length + fileList.length > fileLimit) {
+    else if (newFiles && newFiles.length + fileList.length > fileLimit) {
       alert(`파일은 최대 ${fileLimit}개까지 업로드 가능합니다.`);
       return;
     }
@@ -97,8 +93,9 @@ export const FileInput = (props: any) => {
           )
         ));
 
-        // Return updated files
+        // 부모로 변경된 파일 리스트 전달
         const updatedFiles = [...existingFiles, ...nonDuplicateFiles];
+        props?.onChange(updatedFiles);
 
         return updatedFiles;
       });
@@ -121,32 +118,42 @@ export const FileInput = (props: any) => {
     input.click();
   };
 
-  // 6. handle -------------------------------------------------------------------------------------
-  // 파일 삭제 로직
+  // 6. handle (파일 삭제) -------------------------------------------------------------------------
   const handleFileDelete = (index: number, extra?: string) => {
-
     if (extra === "single") {
       setFileList((prevFiles: any) => {
+
+        // 부모 컴포넌트에 변경 사항 전달
         const updatedFiles = prevFiles.filter((_file: any, i: number) => i !== index);
+        props?.onChange(updatedFiles);
+
         return updatedFiles;
       });
     }
     else if (extra === "all") {
-      setFileList([]);
+      setFileList((prevFiles: any) => {
+        props?.onChange([]);
+        return [];
+      });
     }
   };
 
   // 7. node ---------------------------------------------------------------------------------------
   const adornmentNode = (
     <Grid container spacing={2} columns={12}>
-      <Grid size={4}>
+      <Grid size={8}>
         {fileList.length > 0 && fileList.map((file: any, index: number) => (
           <Grid size={12} className={"d-left"} key={index}>
-            <Div
-              className={"black-50 fs-0-9rem fw-500"}
-              onClick={() => {}}
-            >
-              {file?.name}
+            <Div className={"d-center"}>
+              <Img
+                key={file?.name}
+                group={"new"}
+                src={URL.createObjectURL(file)}
+                className={"w-25 h-25 me-10"}
+              />
+            </Div>
+            <Div className={"black fs-0-9rem fw-500"}>
+              {file?.name.length > 20 ? `${file?.name.slice(0, 20)}...` : file?.name}
             </Div>
             <Div
               className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
@@ -157,7 +164,7 @@ export const FileInput = (props: any) => {
           </Grid>
         ))}
       </Grid>
-      <Grid size={8}>
+      <Grid size={4}>
         <Grid size={12} className={"d-right"}>
           <Div
             className={"fs-1-0rem fw-600 pointer-burgundy"}
@@ -184,8 +191,14 @@ export const FileInput = (props: any) => {
     <Grid container spacing={2} columns={12}>
       {fileExisting.map((file: any, index: number) => (
         <Grid size={12} key={index} className={"d-left"}>
-          <Div className={"black-50 fs-0-9rem fw-500"}>
-            {file}
+          <Img
+            key={file}
+            group={props?.group}
+            src={file}
+            className={"w-25 h-25 me-10"}
+          />
+          <Div className={"black fs-0-9rem fw-500"}>
+            {file.length > 20 ? `${file.slice(0, 20)}...` : file}
           </Div>
           <Div
             className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
@@ -203,7 +216,7 @@ export const FileInput = (props: any) => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      <Div className={"d-left black-50 fs-0-9rem fw-400 mt-15"}>
+      <Div className={"d-left black fs-0-9rem fw-400 mt-15"}>
         {props?.required ? `${props?.label} *` : props?.label}
       </Div>
       <Br px={10} />

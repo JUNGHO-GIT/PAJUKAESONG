@@ -94,7 +94,7 @@ router.post("/save", async (req: Request, res: Response) => {
 });
 
 // 4. update ---------------------------------------------------------------------------------------
-router.post("/update", async (req: Request, res: Response) => {
+router.put("/update", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.update(
     );

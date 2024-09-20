@@ -102,7 +102,7 @@ export const ContactList = () => {
                   onClick={() => {
                     navigate('/contact/detail', {
                       state: {
-                        id: item._id
+                        _id: item._id
                       },
                     });
                   }}
