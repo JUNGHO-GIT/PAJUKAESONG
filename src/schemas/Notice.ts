@@ -28,8 +28,8 @@ const schema = new mongoose.Schema(
       required: false
     },
     notice_image: {
-      type: String,
-      default: "",
+      type: Array,
+      default: [],
       required: false
     },
 

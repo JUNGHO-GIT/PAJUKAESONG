@@ -1,52 +1,38 @@
-// FranchiseUpdate.tsx
+// MenuSave.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useValidateFranchise } from "@imports/ImportValidates";
+import { useValidateMenu } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
-import { Franchise } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Input, FileInput, Btn } from "@imports/ImportComponents";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Menu } from "@imports/ImportSchemas";
+import { Div, Select, Br, Input, FileInput, Btn } from "@imports/ImportComponents";
+import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const FranchiseUpdate = () => {
+export const MenuSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, adminId, location_id,
+    navigate, URL, SUBFIX, adminId,
   } = useCommonValue();
   const {
     dayFmt
   } = useCommonDate();
   const {
     REFS, ERRORS, validate,
-  } = useValidateFranchise();
+  } = useValidateMenu();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [mapAddress, setMapAddress] = useState<string>("");
-  const [OBJECT, setOBJECT] = useState<any>(Franchise);
+  const [OBJECT, setOBJECT] = useState<any>(Menu);
   const [fileList, setFileList] = useState<any>([]);
 
-  // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    setLOADING(true);
-    axios.get(`${URL}${SUBFIX}/detail`, {
-      params: {
-        _id: location_id
-      },
-    })
-    .then((res: any) => {
-      setOBJECT(res.data.result || Franchise);
-    })
-    .catch((err: any) => {
-      console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
-    });
-  }, [URL, SUBFIX]);
+    console.log("===================================");
+    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
+  }, [OBJECT]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async () => {
@@ -55,13 +41,12 @@ export const FranchiseUpdate = () => {
       setLOADING(false);
       return;
     }
-    await axios.put(`${URL}${SUBFIX}/update`,
+    await axios.post(`${URL}${SUBFIX}/save`,
       makeFormData(
         OBJECT,
         fileList,
         {
-          user_id: adminId,
-          _id: location_id
+          user_id: adminId
         }
       ),
       {
@@ -73,7 +58,7 @@ export const FranchiseUpdate = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        navigate("/franchise/list");
+        navigate("/menu/list");
       }
       else {
         alert(res.data.msg);
@@ -88,59 +73,57 @@ export const FranchiseUpdate = () => {
     });
   };
 
-  // 4. handle ------------------------------------------------------------------------------------
-  const handleMap = () => {
-    new window.daum.Postcode({
-      oncomplete: (data: any) => {
-        let fullAddress: string = data.address;
-        let extraAddress: string = "";
-
-        if (data.addressType === "R") {
-          if (data.bname !== "") {
-            extraAddress += data.bname;
-          }
-          if (data.buildingName !== "") {
-            extraAddress += extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
-          }
-          fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
-        }
-        setOBJECT((prev: any) => ({
-          ...prev,
-          franchise_address_main: data.address,
-        }));
-        setMapAddress(fullAddress);
-      },
-    }).open();
-  };
-
-  // 7. updateNode ---------------------------------------------------------------------------------
-  const updateNode = () => {
+  // 7. saveNode -----------------------------------------------------------------------------------
+  const saveNode = () => {
     // 1. title
     const titleSection = () => (
       <Div
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        가맹점 수정
+        메뉴 등록
       </Div>
     );
-    // 2. update
-    const updateSection = () => {
-      const updateFragment = (i: number) => (
+    // 2. save
+    const saveSection = () => {
+      const saveFragment = (i: number) => (
         <Grid container spacing={3} className={"text-left"}>
           <Grid size={12}>
-            <Input
+            <Select
               variant={"standard"}
-              label={"가맹점 이름"}
+              label={"메뉴 카테고리"}
               required={true}
               className={"border-bottom"}
-              value={OBJECT.franchise_name}
-              inputRef={REFS[i]?.franchise_name}
-              error={ERRORS[i]?.franchise_name}
+              value={OBJECT.menu_category || ""}
+              inputRef={REFS[i]?.menu_category}
+              error={ERRORS[i]?.menu_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  franchise_name: e.target.value,
+                  menu_category: e.target.value,
+                }));
+              }}
+            >
+              {["main", "side"].map((item: string, idx: number) => (
+                <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>
+          </Grid>
+          <Grid size={12}>
+            <Input
+              variant={"standard"}
+              label={"메뉴 이름"}
+              required={true}
+              className={"border-bottom"}
+              value={OBJECT.menu_title}
+              inputRef={REFS[i]?.menu_title}
+              error={ERRORS[i]?.menu_title}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  menu_title: e.target.value,
                 }));
               }}
             />
@@ -148,20 +131,16 @@ export const FranchiseUpdate = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"가맹점 주소"}
+              label={"메뉴 설명"}
               required={true}
-              readOnly={true}
-              className={"border-bottom pointer"}
-              value={OBJECT.franchise_address_main}
-              inputRef={REFS[i]?.franchise_address_main}
-              error={ERRORS[i]?.franchise_address_main}
-              onClick={() => {
-                handleMap();
-              }}
+              className={"border-bottom"}
+              value={OBJECT.menu_content}
+              inputRef={REFS[i]?.menu_content}
+              error={ERRORS[i]?.menu_content}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  franchise_address_main: e.target.value,
+                  menu_content: e.target.value,
                 }));
               }}
             />
@@ -169,33 +148,16 @@ export const FranchiseUpdate = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"상세주소"}
+              label={"메뉴 가격"}
               required={true}
               className={"border-bottom"}
-              value={OBJECT.franchise_address_detail}
-              inputRef={REFS[i]?.franchise_address_detail}
-              error={ERRORS[i]?.franchise_address_detail}
+              value={OBJECT.menu_price}
+              inputRef={REFS[i]?.menu_price}
+              error={ERRORS[i]?.menu_price}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  franchise_address_detail: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"가맹점 전화번호"}
-              required={true}
-              className={"border-bottom"}
-              value={OBJECT.franchise_phone}
-              inputRef={REFS[i]?.franchise_phone}
-              error={ERRORS[i]?.franchise_phone}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  franchise_phone: e.target.value,
+                  menu_price: e.target.value,
                 }));
               }}
             />
@@ -216,11 +178,9 @@ export const FranchiseUpdate = () => {
               variant={"outlined"}
               label={"가맹점 사진"}
               required={true}
-              id={"franchise_image"}
+              id={"menu_image"}
               limit={1}
-              existing={OBJECT.franchise_image}
-              group={"franchise"}
-              value={fileList}
+              existing={OBJECT.menu_image}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
@@ -237,14 +197,14 @@ export const FranchiseUpdate = () => {
                 flowSave();
               }}
             >
-              수정하기
+              저장하기
             </Btn>
           </Grid>
         </Grid>
       );
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
-          {updateFragment(0)}
+          {saveFragment(0)}
           <Br px={50} />
           {btnFragment()}
         </Card>
@@ -258,7 +218,7 @@ export const FranchiseUpdate = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {updateSection()}
+            {saveSection()}
           </Grid>
         </Grid>
       </Paper>
@@ -268,7 +228,7 @@ export const FranchiseUpdate = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {updateNode()}
+      {saveNode()}
     </>
   );
 };

@@ -29,7 +29,7 @@ import {
   AboutGreeting, AboutLocation,
   ContactFind, ContactList, ContactDetail, ContactSave,
   FranchiseInfo, FranchiseList, FranchiseSave, FranchiseUpdate,
-  MenuMain, MenuSub,
+  MenuList, MenuSide, MenuSave,
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
   OrderBuy, OrderLookup,
   UserLogin, UserSignup,
@@ -67,8 +67,9 @@ const Franchise = () => (
 // -------------------------------------------------------------------------------------------------
 const Menu = () => (
   <Routes>
-    <Route path={"/main"} element={<MenuMain />} />
-    <Route path={"/sub"} element={<MenuSub />} />
+    <Route path={"/list"} element={<MenuList />} />
+    <Route path={"/side"} element={<MenuSide />} />
+    <Route path={"/save"} element={<MenuSave />} />
   </Routes>
 );
 

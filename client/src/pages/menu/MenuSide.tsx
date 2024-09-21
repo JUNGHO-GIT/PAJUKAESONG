@@ -1,22 +1,22 @@
-// MenuMain.tsx
+// MenuSide.tsx
 
 import { Div, Img, Hr, Br } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuMain = () => {
+export const MenuSide = () => {
 
   // 1. common -------------------------------------------------------------------------------------
 
-  // 7. mainNode -----------------------------------------------------------------------------------
-  const mainNode = () => {
+  // 7. subNode ------------------------------------------------------------------------------------
+  const subNode = () => {
     // 1. title
     const titleSection = () => (
       <Div
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        대표 메뉴
+        사이드 메뉴
       </Div>
     );
     // 10. return
@@ -34,7 +34,7 @@ export const MenuMain = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {mainNode()}
+      {subNode()}
     </>
   );
 };

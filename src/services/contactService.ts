@@ -2,7 +2,50 @@
 
 import * as repository from "@repositories/contactRepository";
 
-// 0. find -----------------------------------------------------------------------------------------
+// 1. list -----------------------------------------------------------------------------------------
+// page는 무조건 0부터 시작
+// 빈값은 [] 리턴
+export const list = async (
+  contact_name_param: string,
+  contact_email_param: string,
+  PAGING_param: any,
+) => {
+
+  // result 변수 선언
+  let findResult: any = null;
+  let finalResult: any[] = [];
+  let statusResult: string = "";
+  let totalCntResult: any = null;
+
+  // sort, page 변수 선언
+  const sort = PAGING_param.sort === "asc" ? 1 : -1;
+  const page = PAGING_param.page || 0;
+
+  totalCntResult = await repository.cnt(
+    contact_name_param, contact_email_param
+  );
+
+  findResult = await repository.list(
+    contact_name_param, contact_email_param, sort, page
+  );
+
+  if (!findResult || findResult.length <= 0) {
+    statusResult = "fail";
+    finalResult = [];
+  }
+  else {
+    statusResult = "success";
+    finalResult = findResult;
+  }
+
+  return {
+    status: statusResult,
+    totalCnt: totalCntResult,
+    result: finalResult,
+  };
+};
+
+// 2-1. find ---------------------------------------------------------------------------------------
 export const find = async (
   contact_name_param: string,
   contact_email_param: string,
@@ -32,49 +75,7 @@ export const find = async (
   };
 };
 
-// 1. list -----------------------------------------------------------------------------------------
-// page는 무조건 0부터 시작
-export const list = async (
-  contact_name_param: string,
-  contact_email_param: string,
-  PAGING_param: any,
-) => {
-
-  // result 변수 선언
-  let findResult: any = null;
-  let finalResult: any = null;
-  let statusResult: string = "";
-  let totalCntResult: any = null;
-
-  // sort, page 변수 선언
-  const sort = PAGING_param.sort === "asc" ? 1 : -1;
-  const page = PAGING_param.page || 0;
-
-  totalCntResult = await repository.cnt(
-    contact_name_param, contact_email_param
-  );
-
-  findResult = await repository.list(
-    contact_name_param, contact_email_param, sort, page
-  );
-
-  if (!findResult || findResult.length <= 0) {
-    statusResult = "fail";
-    finalResult = null;
-  }
-  else {
-    statusResult = "success";
-    finalResult = findResult;
-  }
-
-  return {
-    status: statusResult,
-    totalCnt: totalCntResult,
-    result: finalResult,
-  };
-};
-
-// 2. detail ---------------------------------------------------------------------------------------
+// 2-2. detail -------------------------------------------------------------------------------------
 export const detail = async (
   _id_param: string,
 ) => {

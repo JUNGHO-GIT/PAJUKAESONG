@@ -7,23 +7,26 @@ import { useCommonValue } from "@imports/ImportHooks";
 export const useValidateUser = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    PATH,
-  } = useCommonValue();
+  const { PATH } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
-  const REFS: any = useRef<any>({});
-  const [ERRORS, setERRORS] = useState<any>({});
-  const validate = useRef<any>(() => {});
+  const REFS = useRef<any[]>([]);
+  const [ERRORS, setERRORS] = useState<any[]>([]);
+  const validate = useRef<Function>(() => {});
 
   // alert 표시 및 focus ---------------------------------------------------------------------------
   const showAlertAndFocus = (field: string, msg: string, idx: number) => {
     alert(msg);
-    REFS.current?.[idx]?.[field]?.current?.focus();
-    setERRORS({
-      [idx]: {
+    setTimeout(() => {
+      REFS?.current?.[idx]?.[field]?.current?.focus();
+    }, 10);
+    setERRORS((prev) => {
+      const updatedErrors = [...prev];
+      updatedErrors[idx] = {
+        ...updatedErrors[idx],
         [field]: true,
-      },
+      };
+      return updatedErrors;
     });
     return false;
   };
@@ -42,61 +45,65 @@ export const useValidateUser = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    try {
-      // 1. save
-      if (PATH.includes("/user/login")) {
-        const target = [
-          "user_id",
-          "user_pw",
-        ];
-        setERRORS(target.reduce((acc: any[], cur: string) => {
-          acc.push({
-            [cur]: false
-          });
-          return acc;
-        }, []));
-        REFS.current = (target.reduce((acc: any[], cur: string) => {
-          acc.push({
-            [cur]: createRef()
-          });
-          return acc;
-        }, []));
-        validate.current = (OBJECT: any) => {
+    validate.current = (OBJECT: any) => {
+      try {
+        // 1. login
+        if (PATH.includes("/user/login")) {
+          const target = [
+            "user_id",
+            "user_pw",
+          ];
+          REFS.current = (
+            Array.from({ length: 0 }, (_, _idx) => (
+              target.reduce((acc, cur) => ({
+                ...acc,
+                [cur]: createRef()
+              }), {})
+            ))
+          );
+          setERRORS (
+            Array.from({ length: 0 }, (_, _idx) => (
+              target.reduce((acc, cur) => ({
+                ...acc,
+                [cur]: false
+              }), {})
+            ))
+          );
           if (!OBJECT.user_id) {
             return showAlertAndFocus('user_id', "아이디를 입력해주세요.", 0);
           }
           else if (!OBJECT.user_pw) {
             return showAlertAndFocus('user_pw', "비밀번호를 입력해주세요.", 0);
           }
-          else {
-            return true;
-          }
+          return true;
         }
-      }
-      // 2. signup
-      else if (PATH.includes("/user/signup")) {
-        const target = [
-          "user_id",
-          "user_pw",
-          /* "user_pw_confirm",
-          "user_name",
-          "user_email",
-          "user_phone",
-          "user_address", */
-        ];
-        setERRORS(target.reduce((acc: any[], cur: string) => {
-          acc.push({
-            [cur]: false
-          });
-          return acc;
-        }, []));
-        REFS.current = (target.reduce((acc: any[], cur: string) => {
-          acc.push({
-            [cur]: createRef()
-          });
-          return acc;
-        }, []));
-        validate.current = (OBJECT: any) => {
+        // 2. signup
+        else if (PATH.includes("/user/signup")) {
+          const target = [
+            "user_id",
+            "user_pw",
+            /* "user_pw_confirm",
+            "user_name",
+            "user_email",
+            "user_phone",
+            "user_address", */
+          ];
+          REFS.current = (
+            Array.from({ length: 0 }, (_, _idx) => (
+              target.reduce((acc, cur) => ({
+                ...acc,
+                [cur]: createRef()
+              }), {})
+            ))
+          );
+          setERRORS (
+            Array.from({ length: 0 }, (_, _idx) => (
+              target.reduce((acc, cur) => ({
+                ...acc,
+                [cur]: false
+              }), {})
+            ))
+          );
           if (!OBJECT.user_id) {
             return showAlertAndFocus('user_id', "아이디를 입력해주세요.", 0);
           }
@@ -121,14 +128,12 @@ export const useValidateUser = () => {
           else if (!OBJECT.user_address) {
             return showAlertAndFocus('user_address', "주소를 입력해주세요.", 0);
           } */
-          else {
-            return true;
-          }
+          return true;
         }
       }
-    }
-    catch (err: any) {
-      console.error(err);
+      catch (err: any) {
+        console.error(err);
+      }
     }
   }, [PATH]);
 

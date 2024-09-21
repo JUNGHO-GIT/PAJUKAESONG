@@ -64,15 +64,15 @@ export const UserSignup = () => {
     );
     // 2. signup
     const signupSection = () => {
-      const signupFragment = () => (
+      const signupFragment = (i: number) => (
         <Grid container spacing={3}>
           <Grid size={12} className={"d-center"}>
             <Input
               label={"아이디"}
               required={true}
               value={OBJECT.user_id}
-              inputRef={REFS.user_id}
-              error={ERRORS.user_id}
+              inputRef={REFS[i].user_id}
+              error={ERRORS[i].user_id}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -87,8 +87,8 @@ export const UserSignup = () => {
               label={"비밀번호"}
               required={true}
               value={OBJECT.user_pw}
-              inputRef={REFS.user_pw}
-              error={ERRORS.user_pw}
+              inputRef={REFS[i].user_pw}
+              error={ERRORS[i].user_pw}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -161,7 +161,7 @@ export const UserSignup = () => {
       );
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
-          {signupFragment()}
+          {signupFragment(0)}
           <Hr px={50} h={1} />
           {btnFragment()}
           <Hr px={50} h={1} />

@@ -1,4 +1,5 @@
 // aboutRouter.ts
+
 import express, { Request, Response } from "express";
 import * as service from "@services/aboutService";
 export const router = express.Router();

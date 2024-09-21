@@ -35,7 +35,7 @@ export const NoticeUpdate = () => {
       }
     })
     .then((res: any) => {
-      setOBJECT(res.data.result);
+      setOBJECT(res.data.result || Notice);
     })
     .catch((err: any) => {
       alert(err.response.data.msg);
@@ -89,7 +89,7 @@ export const NoticeUpdate = () => {
     );
     // 2. update
     const updateSection = () => {
-      const updateFragment = () => (
+      const updateFragment = (i: number) => (
         <Grid container spacing={3} className={"text-left"}>
           <Grid size={12}>
             <Input
@@ -98,8 +98,8 @@ export const NoticeUpdate = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.notice_title}
-              inputRef={REFS?.notice_title}
-              error={ERRORS?.notice_title}
+              inputRef={REFS[i]?.notice_title}
+              error={ERRORS[i]?.notice_title}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -114,8 +114,8 @@ export const NoticeUpdate = () => {
               label={"공지사항 내용"}
               inputclass={"h-35vh"}
               value={OBJECT.notice_content}
-              itemRef={REFS?.notice_content}
-              error={ERRORS?.notice_content}
+              itemRef={REFS[i]?.notice_content}
+              error={ERRORS[i]?.notice_content}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -152,7 +152,7 @@ export const NoticeUpdate = () => {
       );
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
-          {updateFragment()}
+          {updateFragment(0)}
           <Br px={50} />
           {btnFragment()}
         </Card>

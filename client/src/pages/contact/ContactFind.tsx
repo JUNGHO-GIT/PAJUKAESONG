@@ -72,7 +72,7 @@ export const ContactFind = () => {
     );
     // 2. find
     const findSection = () => {
-      const findFragment = () => (
+      const findFragment = (i: number) => (
         <Grid container spacing={3}>
           <Grid size={12}>
             <Input
@@ -81,8 +81,8 @@ export const ContactFind = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_name}
-              inputRef={REFS?.contact_name}
-              error={ERRORS?.contact_name}
+              inputRef={REFS[i]?.contact_name}
+              error={ERRORS[i]?.contact_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -98,8 +98,8 @@ export const ContactFind = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_email}
-              inputRef={REFS?.contact_email}
-              error={ERRORS?.contact_email}
+              inputRef={REFS[i]?.contact_email}
+              error={ERRORS[i]?.contact_email}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -126,7 +126,7 @@ export const ContactFind = () => {
       );
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
-          {findFragment()}
+          {findFragment(0)}
           <Br px={50} />
           {btnFragment()}
         </Card>

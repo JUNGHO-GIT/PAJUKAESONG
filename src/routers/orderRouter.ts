@@ -1,4 +1,5 @@
-// orderBuyRouter.ts
+// orderRouter.ts
+
 import express, { Request, Response } from "express";
 import * as service from "@services/orderService";
 export const router = express.Router();

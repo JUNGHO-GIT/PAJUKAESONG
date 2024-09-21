@@ -7,52 +7,59 @@ import { useCommonValue } from "@imports/ImportHooks";
 export const useValidateFranchise = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    PATH,
-  } = useCommonValue();
+  const { PATH } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
-  const REFS: any = useRef<any>({});
-  const [ERRORS, setERRORS] = useState<any>({});
-  const validate = useRef<any>(() => {});
+  const REFS = useRef<any[]>([]);
+  const [ERRORS, setERRORS] = useState<any[]>([]);
+  const validate = useRef<Function>(() => {});
 
   // alert 표시 및 focus ---------------------------------------------------------------------------
   const showAlertAndFocus = (field: string, msg: string, idx: number) => {
     alert(msg);
-    REFS.current?.[idx]?.[field]?.current?.focus();
-    setERRORS({
-      [idx]: {
+    setTimeout(() => {
+      REFS?.current?.[idx]?.[field]?.current?.focus();
+    }, 10);
+    setERRORS((prev) => {
+      const updatedErrors = [...prev];
+      updatedErrors[idx] = {
+        ...updatedErrors[idx],
         [field]: true,
-      },
+      };
+      return updatedErrors;
     });
     return false;
   };
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    try {
-      // 1. save
-      if (PATH.includes("/franchise/save") || PATH.includes("/franchise/update")) {
-        const target = [
-          "franchise_name",
-          "franchise_address_main",
-          "franchise_address_detail",
-          "franchise_phone",
-          "franchise_image",
-        ];
-        setERRORS(target.reduce((acc: any[], cur: string) => {
-          acc.push({
-            [cur]: false
-          });
-          return acc;
-        }, []));
-        REFS.current = (target.reduce((acc: any[], cur: string) => {
-          acc.push({
-            [cur]: createRef()
-          });
-          return acc;
-        }, []));
-        validate.current = (OBJECT: any) => {
+    validate.current = (OBJECT: any) => {
+      try {
+        // 1. save
+        if (PATH.includes("/franchise/save") || PATH.includes("/franchise/update")) {
+          const target = [
+            "franchise_name",
+            "franchise_address_main",
+            "franchise_address_detail",
+            "franchise_phone",
+            "franchise_image",
+          ];
+          REFS.current = (
+            Array.from({ length: 0 }, (_, _idx) => (
+              target.reduce((acc, cur) => ({
+                ...acc,
+                [cur]: createRef()
+              }), {})
+            ))
+          );
+          setERRORS (
+            Array.from({ length: 0 }, (_, _idx) => (
+              target.reduce((acc, cur) => ({
+                ...acc,
+                [cur]: false
+              }), {})
+            ))
+          );
           if (!OBJECT.franchise_name) {
             return showAlertAndFocus('franchise_name', "가맹점 이름을 입력해주세요.", 0);
           }
@@ -68,14 +75,12 @@ export const useValidateFranchise = () => {
           else if (!OBJECT.franchise_image) {
             return showAlertAndFocus('franchise_image', "가맹점 이미지를 등록해주세요.", 0);
           }
-          else {
-            return true;
-          }
+          return true;
         }
       }
-    }
-    catch (err: any) {
-      console.error(err);
+      catch (err: any) {
+        console.error(err);
+      }
     }
   }, [PATH]);
 

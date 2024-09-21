@@ -10,6 +10,6 @@ export const Contact: any = {
   contact_phone: "",
   contact_title: "",
   contact_content: "",
-  contact_regDt: "",
-  contact_updateDt: "",
+  contact_regDt: null,
+  contact_updateDt: null,
 };

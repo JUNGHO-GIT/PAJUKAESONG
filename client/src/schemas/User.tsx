@@ -11,6 +11,6 @@ export const User: any = {
   user_email: "",
   user_phone: "",
   user_address: "",
-  user_regDt: "",
-  user_updateDt: "",
+  user_regDt: null,
+  user_updateDt: null,
 };

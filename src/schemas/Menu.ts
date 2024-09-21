@@ -11,7 +11,6 @@ const schema = new mongoose.Schema(
       default: 0,
       unique : true
     },
-
     menu_category: {
       type: String,
       default: "",
@@ -33,8 +32,8 @@ const schema = new mongoose.Schema(
       required: false
     },
     menu_image: {
-      type: String,
-      default: "",
+      type: Array,
+      default: [],
       required: false
     },
 

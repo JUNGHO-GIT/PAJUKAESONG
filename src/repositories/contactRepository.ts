@@ -19,22 +19,6 @@ export const cnt = async (
   return finalResult;
 };
 
-// 0. find -----------------------------------------------------------------------------------------
-export const find = async (
-  contact_name_param: string,
-  contact_email_param: string,
-) => {
-  const finalResult = await Contact.findOne(
-    {
-      contact_name: contact_name_param,
-      contact_email: contact_email_param,
-    }
-  )
-  .lean();
-
-  return finalResult;
-};
-
 // 1. list -----------------------------------------------------------------------------------------
 export const list = async (
   contact_name_param: string,
@@ -79,7 +63,23 @@ export const list = async (
   return finalResult;
 };
 
-// 2. detail ---------------------------------------------------------------------------------------
+// 2-1. find ---------------------------------------------------------------------------------------
+export const find = async (
+  contact_name_param: string,
+  contact_email_param: string,
+) => {
+  const finalResult = await Contact.findOne(
+    {
+      contact_name: contact_name_param,
+      contact_email: contact_email_param,
+    }
+  )
+  .lean();
+
+  return finalResult;
+};
+
+// 2-2. detail -------------------------------------------------------------------------------------
 export const detail = async (
   _id_param: string,
 ) => {

@@ -8,7 +8,7 @@ export const Menu: any = {
   menu_title: "",
   menu_content: "",
   menu_price: "",
-  menu_image: "",
-  menu_regDt: "",
-  menu_updateDt: "",
+  menu_image: [""],
+  menu_regDt: null,
+  menu_updateDt: null,
 };

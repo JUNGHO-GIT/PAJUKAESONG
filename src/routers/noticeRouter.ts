@@ -1,4 +1,5 @@
-// router.ts
+// noticeRouter.ts
+
 import express, { Request, Response } from "express";
 import * as service from "@services/noticeService";
 export const router = express.Router();

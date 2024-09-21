@@ -106,7 +106,7 @@ export const FranchiseSave = () => {
     );
     // 2. save
     const saveSection = () => {
-      const saveFragment = () => (
+      const saveFragment = (i: number) => (
         <Grid container spacing={3} className={"text-left"}>
           <Grid size={12}>
             <Input
@@ -115,8 +115,8 @@ export const FranchiseSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.franchise_name}
-              inputRef={REFS?.franchise_name}
-              error={ERRORS?.franchise_name}
+              inputRef={REFS[i]?.franchise_name}
+              error={ERRORS[i]?.franchise_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -133,8 +133,8 @@ export const FranchiseSave = () => {
               readOnly={true}
               className={"border-bottom pointer"}
               value={OBJECT.franchise_address_main}
-              inputRef={REFS?.franchise_address_main}
-              error={ERRORS?.franchise_address_main}
+              inputRef={REFS[i]?.franchise_address_main}
+              error={ERRORS[i]?.franchise_address_main}
               onClick={() => {
                 handleMap();
               }}
@@ -153,8 +153,8 @@ export const FranchiseSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.franchise_address_detail}
-              inputRef={REFS?.franchise_address_detail}
-              error={ERRORS?.franchise_address_detail}
+              inputRef={REFS[i]?.franchise_address_detail}
+              error={ERRORS[i]?.franchise_address_detail}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -170,8 +170,8 @@ export const FranchiseSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.franchise_phone}
-              inputRef={REFS?.franchise_phone}
-              error={ERRORS?.franchise_phone}
+              inputRef={REFS[i]?.franchise_phone}
+              error={ERRORS[i]?.franchise_phone}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -222,7 +222,7 @@ export const FranchiseSave = () => {
       );
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
-          {saveFragment()}
+          {saveFragment(0)}
           <Br px={50} />
           {btnFragment()}
         </Card>

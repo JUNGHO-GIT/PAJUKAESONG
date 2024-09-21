@@ -59,7 +59,7 @@ export const save = async (
       user_token: OBJECT_param.user_token,
       user_pw: OBJECT_param.user_pw,
       user_regDt: newDate,
-      user_updateDt: ""
+      user_updateDt: null
     }
   );
 

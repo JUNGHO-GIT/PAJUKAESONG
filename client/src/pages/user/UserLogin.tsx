@@ -105,15 +105,15 @@ export const UserLogin = () => {
     );
     // 2. login
     const loginSection = () => {
-      const loginFragment = () => (
+      const loginFragment = (i: number) => (
         <Grid container spacing={3}>
           <Grid size={12} className={"d-center"}>
             <Input
               label={"아이디"}
               required={true}
               value={OBJECT.user_id}
-              inputRef={REFS.user_id}
-              error={ERRORS.user_id}
+              inputRef={REFS[i].user_id}
+              error={ERRORS[i].user_id}
               disabled={isAdmin || isUser}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -129,8 +129,8 @@ export const UserLogin = () => {
               label={"비밀번호"}
               required={true}
               value={OBJECT.user_pw}
-              inputRef={REFS.user_pw}
-              error={ERRORS.user_pw}
+              inputRef={REFS[i].user_pw}
+              error={ERRORS[i].user_pw}
               disabled={isAdmin || isUser}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -212,7 +212,7 @@ export const UserLogin = () => {
       );
       return (
         <Card className={"border radius p-30 fadeIn"}>
-          {loginFragment()}
+          {loginFragment(0)}
           <Hr px={50} h={1} />
           {btnFragment()}
           <Hr px={50} h={1} />

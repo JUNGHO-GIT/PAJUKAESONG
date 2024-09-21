@@ -1,8 +1,21 @@
 // aboutRepository.ts
 
-import mongoose from "mongoose";
 import { Contact } from "@schemas/Contact";
-import { newDate } from "@scripts/date";
+
+// 1-1. info ---------------------------------------------------------------------------------------
+export const info = async (
+) => {
+  const finalResult = await Contact.aggregate([
+    {
+      $project: {
+        _id: 1,
+        about_info: 1,
+      }
+    }
+  ]);
+
+  return finalResult;
+};
 
 // 1-2. greeting -----------------------------------------------------------------------------------
 export const greeting = async (
@@ -11,8 +24,7 @@ export const greeting = async (
     {
       $project: {
         _id: 1,
-        about_greeting_content: 1,
-        about_greeting_image: 1,
+        about_greeting: 1,
       }
     }
   ]);
@@ -27,8 +39,7 @@ export const location = async (
     {
       $project: {
         _id: 1,
-        about_location_coordinate: 1,
-        about_location_image: 1,
+        about_location: 1,
       }
     }
   ]);

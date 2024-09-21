@@ -7,23 +7,26 @@ import { useCommonValue } from "@imports/ImportHooks";
 export const useValidateContact = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    PATH,
-  } = useCommonValue();
+  const { PATH } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
-  const REFS: any = useRef<any>({});
-  const [ERRORS, setERRORS] = useState<any>({});
-  const validate = useRef<any>(() => {});
+  const REFS = useRef<any[]>([]);
+  const [ERRORS, setERRORS] = useState<any[]>([]);
+  const validate = useRef<Function>(() => {});
 
   // alert 표시 및 focus ---------------------------------------------------------------------------
   const showAlertAndFocus = (field: string, msg: string, idx: number) => {
     alert(msg);
-    REFS.current?.[idx]?.[field]?.current?.focus();
-    setERRORS({
-      [idx]: {
+    setTimeout(() => {
+      REFS?.current?.[idx]?.[field]?.current?.focus();
+    }, 10);
+    setERRORS((prev) => {
+      const updatedErrors = [...prev];
+      updatedErrors[idx] = {
+        ...updatedErrors[idx],
         [field]: true,
-      },
+      };
+      return updatedErrors;
     });
     return false;
   };
@@ -36,26 +39,30 @@ export const useValidateContact = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    try {
-      // 1. find
-      if (PATH.includes("/contact/find")) {
-        const target = [
-          "contact_name",
-          "contact_email",
-        ];
-        setERRORS(target.reduce((acc: any[], cur: string) => {
-          acc.push({
-            [cur]: false
-          });
-          return acc;
-        }, []));
-        REFS.current = (target.reduce((acc: any[], cur: string) => {
-          acc.push({
-            [cur]: createRef()
-          });
-          return acc;
-        }, []));
-        validate.current = (OBJECT: any) => {
+    validate.current = (OBJECT: any) => {
+      try {
+        // 1. find
+        if (PATH.includes("/contact/find")) {
+          const target = [
+            "contact_name",
+            "contact_email",
+          ];
+          REFS.current = (
+            Array.from({ length: 0 }, (_, _idx) => (
+              target.reduce((acc, cur) => ({
+                ...acc,
+                [cur]: createRef()
+              }), {})
+            ))
+          );
+          setERRORS (
+            Array.from({ length: 0 }, (_, _idx) => (
+              target.reduce((acc, cur) => ({
+                ...acc,
+                [cur]: false
+              }), {})
+            ))
+          );
           if (!OBJECT.contact_name) {
             return showAlertAndFocus('contact_name', "이름을 입력해주세요.", 0);
           }
@@ -65,35 +72,35 @@ export const useValidateContact = () => {
           else if (!validateEmail(OBJECT.contact_email)) {
             return showAlertAndFocus('contact_email', "이메일 형식으로 입력해주세요.", 0);
           }
-          else {
-            return true;
-          }
+          return true;
         }
-      }
 
-      // 2. save
-      if (PATH.includes("/contact/save")) {
-        const target = [
-          "contact_category",
-          "contact_name",
-          "contact_email",
-          "contact_phone",
-          "contact_title",
-          "contact_content",
-        ];
-        setERRORS(target.reduce((acc: any[], cur: string) => {
-          acc.push({
-            [cur]: false
-          });
-          return acc;
-        }, []));
-        REFS.current = (target.reduce((acc: any[], cur: string) => {
-          acc.push({
-            [cur]: createRef()
-          });
-          return acc;
-        }, []));
-        validate.current = (OBJECT: any) => {
+        // 2. save
+        if (PATH.includes("/contact/save")) {
+          const target = [
+            "contact_category",
+            "contact_name",
+            "contact_email",
+            "contact_phone",
+            "contact_title",
+            "contact_content",
+          ];
+          REFS.current = (
+            Array.from({ length: 0 }, (_, _idx) => (
+              target.reduce((acc, cur) => ({
+                ...acc,
+                [cur]: createRef()
+              }), {})
+            ))
+          );
+          setERRORS (
+            Array.from({ length: 0 }, (_, _idx) => (
+              target.reduce((acc, cur) => ({
+                ...acc,
+                [cur]: false
+              }), {})
+            ))
+          );
           if (!OBJECT.contact_category) {
             return showAlertAndFocus('contact_category', "문의 유형을 선택해주세요.", 0);
           }
@@ -115,14 +122,12 @@ export const useValidateContact = () => {
           else if (!OBJECT.contact_content) {
             return showAlertAndFocus('contact_content', "내용을 입력해주세요.", 0);
           }
-          else {
-            return true;
-          }
+          return true;
         }
       }
-    }
-    catch (err: any) {
-      console.error(err);
+      catch (err: any) {
+        console.error(err);
+      }
     }
   }, [PATH]);
 

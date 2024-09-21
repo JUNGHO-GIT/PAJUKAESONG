@@ -68,7 +68,7 @@ export const NoticeSave = () => {
     );
     // 2. save
     const saveSection = () => {
-      const saveFragment = () => (
+      const saveFragment = (i: number) => (
         <Grid container spacing={3} className={"text-left"}>
           <Grid size={12}>
             <Input
@@ -77,8 +77,8 @@ export const NoticeSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.notice_title}
-              inputRef={REFS?.notice_title}
-              error={ERRORS?.notice_title}
+              inputRef={REFS[i]?.notice_title}
+              error={ERRORS[i]?.notice_title}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -93,8 +93,8 @@ export const NoticeSave = () => {
               label={"공지사항 내용"}
               inputclass={"h-35vh"}
               value={OBJECT.notice_content}
-              itemRef={REFS?.notice_content}
-              error={ERRORS?.notice_content}
+              itemRef={REFS[i]?.notice_content}
+              error={ERRORS[i]?.notice_content}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -131,7 +131,7 @@ export const NoticeSave = () => {
       );
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
-          {saveFragment()}
+          {saveFragment(0)}
           <Br px={50} />
           {btnFragment()}
         </Card>

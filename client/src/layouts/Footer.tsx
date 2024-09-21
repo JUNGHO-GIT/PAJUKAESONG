@@ -63,7 +63,7 @@ export const Footer = () => {
             className={"w-12 h-12"}
           />
           <Div className={"fs-0-8rem"}>
-            파주개성면옥 | 대표: 강민서 | 사업자 등록번호: 883-03-03096
+            대표: 강민서 | 사업자 등록번호: 883-03-03096
           </Div>
         </Grid>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>

@@ -11,38 +11,17 @@ const schema = new mongoose.Schema(
       default: 0,
       unique : true
     },
-
-    // 인사말
-    about_greeting_content: {
+    about_greeting: {
       type: String,
       default: "",
       required: false
     },
-    about_greeting_image: {
+    about_info: {
       type: String,
       default: "",
       required: false
     },
-
-    // 소개
-    about_info_content: {
-      type: String,
-      default: "",
-      required: false
-    },
-    about_info_image: {
-      type: String,
-      default: "",
-      required: false
-    },
-
-    // 위치
-    about_location_coordinate: {
-      type: String,
-      default: "",
-      required: false
-    },
-    about_location_image: {
+    about_location: {
       type: String,
       default: "",
       required: false

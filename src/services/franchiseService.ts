@@ -5,13 +5,14 @@ import { uploadCloud } from "@scripts/upload";
 
 // 1. list -----------------------------------------------------------------------------------------
 // page는 무조건 0부터 시작
+// 빈값은 [] 리턴
 export const list = async (
   PAGING_param: any,
 ) => {
 
   // result 변수 선언
   let findResult: any = null;
-  let finalResult: any = null;
+  let finalResult: any[] = [];
   let statusResult: string = "";
   let totalCntResult: any = null;
 
@@ -28,7 +29,7 @@ export const list = async (
 
   if (!findResult || findResult.length <= 0) {
     statusResult = "fail";
-    finalResult = null;
+    finalResult = [];
   }
   else {
     statusResult = "success";

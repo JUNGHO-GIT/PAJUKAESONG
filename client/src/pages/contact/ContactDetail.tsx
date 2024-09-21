@@ -31,7 +31,7 @@ export const ContactDetail = () => {
       }
     })
     .then((res: any) => {
-      setOBJECT(res.data.result);
+      setOBJECT(res.data.result || Contact);
     })
     .catch((err: any) => {
       alert(err.response.data.msg);

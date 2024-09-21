@@ -1,5 +1,7 @@
-// menuMainRouter.ts
+// menuRouter.ts
+
 import express, { Request, Response } from "express";
+import { uploadMemory } from "@scripts/upload";
 import * as service from "@services/menuService";
 export const router = express.Router();
 
@@ -7,19 +9,30 @@ export const router = express.Router();
 router.get("/list", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.list(
+      req.query.PAGING as any,
     );
-    if (finalResult) {
+    if (finalResult.status === "success") {
       res.json({
-        status: "success",
         msg: "조회 성공",
-        result: finalResult,
+        status: finalResult.status,
+        result: finalResult.result,
+        totalCnt: finalResult.totalCnt,
+      });
+    }
+    else if (finalResult.status === "fail") {
+      res.json({
+        msg: "조회 실패",
+        status: finalResult.status,
+        result: finalResult.result,
+        totalCnt: null,
       });
     }
     else {
       res.json({
-        status: "fail",
-        msg: "조회 실패",
-        result: null,
+        msg: "조회 에러",
+        status: finalResult.status,
+        result: finalResult.result,
+        totalCnt: null,
       });
     }
   }
@@ -37,19 +50,27 @@ router.get("/list", async (req: Request, res: Response) => {
 router.get("/detail", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.detail(
+      req.query._id as string
     );
-    if (finalResult) {
+    if (finalResult.status === "success") {
       res.json({
-        status: "success",
         msg: "조회 성공",
-        result: finalResult,
+        status: finalResult.status,
+        result: finalResult.result,
+      });
+    }
+    else if (finalResult.status === "fail") {
+      res.json({
+        msg: "조회 실패",
+        status: finalResult.status,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
-        status: "fail",
-        msg: "조회 실패",
-        result: null,
+        msg: "조회 에러",
+        status: finalResult.status,
+        result: finalResult.result,
       });
     }
   }
@@ -64,22 +85,32 @@ router.get("/detail", async (req: Request, res: Response) => {
 });
 
 // 3. save -----------------------------------------------------------------------------------------
-router.post("/save", async (req: Request, res: Response) => {
+router.post("/save", uploadMemory("fileList", "array", 5), async (req: Request, res: Response) => {
   try {
     let finalResult = await service.save(
+      req.body.user_id as string,
+      req.body.OBJECT as any,
+      req.files as Express.Multer.File[]
     );
-    if (finalResult) {
+    if (finalResult.status === "success") {
       res.json({
-        status: "success",
         msg: "저장 성공",
-        result: finalResult,
+        status: finalResult.status,
+        result: finalResult.result,
+      });
+    }
+    else if (finalResult.status === "fail") {
+      res.json({
+        msg: "저장 실패",
+        status: finalResult.status,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
-        status: "fail",
-        msg: "저장 실패",
-        result: null,
+        msg: "저장 에러",
+        status: finalResult.status,
+        result: finalResult.result,
       });
     }
   }
@@ -94,22 +125,33 @@ router.post("/save", async (req: Request, res: Response) => {
 });
 
 // 4. update ---------------------------------------------------------------------------------------
-router.put("/update", async (req: Request, res: Response) => {
+router.put("/update", uploadMemory("fileList", "array", 5), async (req: Request, res: Response) => {
   try {
     let finalResult = await service.update(
+      req.body.user_id as string,
+      req.body._id as string,
+      req.body.OBJECT as any,
+      req.files as Express.Multer.File[]
     );
-    if (finalResult) {
+    if (finalResult.status === "success") {
       res.json({
-        status: "success",
         msg: "수정 성공",
-        result: finalResult,
+        status: finalResult.status,
+        result: finalResult.result,
+      });
+    }
+    else if (finalResult.status === "fail") {
+      res.json({
+        msg: "수정 실패",
+        status: finalResult.status,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
-        status: "fail",
-        msg: "수정 실패",
-        result: null,
+        msg: "수정 에러",
+        status: finalResult.status,
+        result: finalResult.result,
       });
     }
   }
@@ -127,19 +169,27 @@ router.put("/update", async (req: Request, res: Response) => {
 router.delete("/deletes", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.deletes(
+      req.body._id as string
     );
-    if (finalResult) {
+    if (finalResult.status === "success") {
       res.json({
-        status: "success",
         msg: "삭제 성공",
-        result: finalResult,
+        status: finalResult.status,
+        result: finalResult.result,
+      });
+    }
+    else if (finalResult.status === "fail") {
+      res.json({
+        msg: "삭제 실패",
+        status: finalResult.status,
+        result: finalResult.result,
       });
     }
     else {
       res.json({
-        status: "fail",
-        msg: "삭제 실패",
-        result: null,
+        msg: "삭제 에러",
+        status: finalResult.status,
+        result: finalResult.result,
       });
     }
   }

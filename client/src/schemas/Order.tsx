@@ -11,6 +11,6 @@ export const Order: any = {
   order_lookup_email: "",
   order_lookup_phone: "",
   order_lookup_account: "",
-  order_regDt: "",
-  order_updateDt: "",
+  order_regDt: null,
+  order_updateDt: null,
 };

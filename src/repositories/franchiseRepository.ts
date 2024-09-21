@@ -15,6 +15,7 @@ export const cnt = async (
 
 // 1. list -----------------------------------------------------------------------------------------
 // page는 무조건 0부터 시작
+// 빈값은 [] 리턴
 export const list = async (
   sort_param: 1 | -1,
   page_param: number,

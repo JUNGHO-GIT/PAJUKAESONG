@@ -14,13 +14,6 @@ export const FileInput = (props: any) => {
   const [fileHeight, setFileHeight] = useState<string>("100px");
   const [fileLimit, setFileLimit] = useState<number>(1);
 
-  // 2-2. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    console.log("===================================");
-    console.log("fileList", fileList);
-    console.log("fileCount", fileCount);
-  }, [fileList, fileCount]);
-
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setFileExisting(props?.existing || []);

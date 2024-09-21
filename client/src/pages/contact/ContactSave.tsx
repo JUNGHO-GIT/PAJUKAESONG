@@ -5,7 +5,7 @@ import { useCommonValue } from "@imports/ImportHooks";
 import { useValidateContact } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
 import { Contact } from "@imports/ImportSchemas";
-import { Div, Select, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
+import { Div, Select, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ export const ContactSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, PATH,
+    navigate, URL, SUBFIX
   } = useCommonValue();
   const {
     REFS, ERRORS, validate,
@@ -69,7 +69,7 @@ export const ContactSave = () => {
     );
     // 2. save
     const saveSection = () => {
-      const saveFragment = () => (
+      const saveFragment = (i: number) => (
         <Grid container spacing={3}>
           <Grid size={12}>
             <Select
@@ -78,8 +78,8 @@ export const ContactSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_category}
-              inputRef={REFS?.contact_category}
-              error={ERRORS?.contact_category}
+              inputRef={REFS[i]?.contact_category}
+              error={ERRORS[i]?.contact_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -102,8 +102,8 @@ export const ContactSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_name}
-              inputRef={REFS?.contact_name}
-              error={ERRORS?.contact_name}
+              inputRef={REFS[i]?.contact_name}
+              error={ERRORS[i]?.contact_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -119,8 +119,8 @@ export const ContactSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_email}
-              inputRef={REFS?.contact_email}
-              error={ERRORS?.contact_email}
+              inputRef={REFS[i]?.contact_email}
+              error={ERRORS[i]?.contact_email}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -136,8 +136,8 @@ export const ContactSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_phone}
-              inputRef={REFS?.contact_phone}
-              error={ERRORS?.contact_phone}
+              inputRef={REFS[i]?.contact_phone}
+              error={ERRORS[i]?.contact_phone}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -153,8 +153,8 @@ export const ContactSave = () => {
               required={true}
               className={"border-bottom"}
               value={OBJECT.contact_title}
-              inputRef={REFS?.contact_title}
-              error={ERRORS?.contact_title}
+              inputRef={REFS[i]?.contact_title}
+              error={ERRORS[i]?.contact_title}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -169,8 +169,8 @@ export const ContactSave = () => {
               required={true}
               inputclass={"h-35vh"}
               value={OBJECT.contact_content}
-              inputRef={REFS?.contact_content}
-              error={ERRORS?.contact_content}
+              inputRef={REFS[i]?.contact_content}
+              error={ERRORS[i]?.contact_content}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -197,7 +197,7 @@ export const ContactSave = () => {
       );
       return (
         <Card className={"border radius shadow p-30 fadeIn"}>
-          {saveFragment()}
+          {saveFragment(0)}
           <Br px={50} />
           {btnFragment()}
         </Card>

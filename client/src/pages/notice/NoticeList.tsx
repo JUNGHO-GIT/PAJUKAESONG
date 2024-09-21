@@ -38,7 +38,7 @@ export const NoticeList = () => {
       }
     })
     .then((res: any) => {
-      setOBJECT(res.data.result);
+      setOBJECT(res.data.result.length > 0 ? res.data.result : [Notice]);
       setCOUNT((prev: any) => ({
         ...prev,
         totalCnt: res.data.totalCnt || 0,
