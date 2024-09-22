@@ -5,7 +5,7 @@ import { useCommonValue } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Icons, Btn, TextArea } from "@imports/ImportComponents";
+import { Div, Img, Hr } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -22,11 +22,6 @@ export const MenuDetail = () => {
   const [STATE, setSTATE] = useState<any>({
     _id: location_id
   });
-
-  useEffect(() => {
-    console.log("===================================");
-    console.log("STATE", JSON.stringify(STATE, null, 2));
-  }, [STATE]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -59,7 +54,7 @@ export const MenuDetail = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        navigate("/menu/list");
+        navigate(`/menu/list/${OBJECT.menu_category}`);
       }
       else {
         alert(res.data.msg);
@@ -124,7 +119,7 @@ export const MenuDetail = () => {
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
               onClick={() => {
-                navigate("/menu/list");
+                navigate(`/menu/list/${OBJECT.menu_category}`);
               }}
             >
               목록으로
@@ -165,7 +160,7 @@ export const MenuDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : detailSection(0)}
           </Grid>
-          <Hr px={20} h={15} w={90} className={"bg-grey"} />
+          <Hr px={20} h={10} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

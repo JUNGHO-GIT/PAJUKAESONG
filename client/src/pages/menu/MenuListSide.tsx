@@ -1,15 +1,16 @@
-// MenuList.tsx
+// MenuListSide.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
+import { Empty } from "@imports/ImportContainers";
 import { Div, Img, Hr, Br, Input, Select, Btn, Icons } from "@imports/ImportComponents";
-import { Paper, Card, Grid, MenuItem, TablePagination, Backdrop } from "@imports/ImportMuis";
+import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuList = () => {
+export const MenuListSide = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
@@ -32,7 +33,8 @@ export const MenuList = () => {
     setLOADING(true);
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
-        PAGING: PAGING
+        PAGING: PAGING,
+        category: "side"
       }
     })
     .then((res: any) => {
@@ -59,7 +61,7 @@ export const MenuList = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        대표 메뉴
+        사이드 메뉴
       </Div>
     );
     // 2. list
@@ -67,11 +69,12 @@ export const MenuList = () => {
       <Grid container spacing={2} columns={12} key={i}>
         {OBJECT?.map((item: any, index: number) => (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4, xl: 4 }} key={index}>
-            <Paper className={"border radius shadow p-30 fadeIn"} key={index}>
-              <Icons
-                key={"Search"}
-                name={"Search"}
-                className={"w-20 h-20 d-right"}
+            <Paper className={"border radius shadow p-50 fadeIn"} key={index}>
+              <Img
+                key={item.menu_images[0]}
+                src={item.menu_images[0]}
+                group={"menu"}
+                className={"w-180 h-180 hover"}
                 onClick={() => {
                   navigate("/menu/detail", {
                     state: {
@@ -80,13 +83,8 @@ export const MenuList = () => {
                   });
                 }}
               />
-              <Img
-                key={item.menu_images[0]}
-                src={item.menu_images[0]}
-                group={"menu"}
-                className={"w-200 h-200"}
-              />
-              <Div className={"fs-1-2rem"}>
+              <Br px={30} />
+              <Div className={"fs-1-4rem fw-600"}>
                 {item.menu_name}
               </Div>
               <Div className={"fs-1-0rem"}>
@@ -101,7 +99,7 @@ export const MenuList = () => {
     const filterSection = (i: number) => (
       <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={3} className={"d-center"}>
+          <Grid size={4} className={"d-center"}>
             <Select
               label={"정렬"}
               value={PAGING?.sort}
@@ -133,7 +131,7 @@ export const MenuList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={7} className={"d-center"}>
+          <Grid size={6} className={"d-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -178,9 +176,11 @@ export const MenuList = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {LOADING ? <Loading /> : listSection(0)}
+            {LOADING ? <Loading /> : (
+              COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
+            )}
           </Grid>
-          <Hr px={20} h={15} w={90} className={"bg-grey"} />
+          <Hr px={20} h={10} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

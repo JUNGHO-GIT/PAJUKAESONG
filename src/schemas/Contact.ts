@@ -56,13 +56,17 @@ const schema = new mongoose.Schema(
   },
   {
     collection: "Contact",
+    timestamps: {
+      createdAt: "contact_regDt",
+      updatedAt: "contact_updateDt"
+    },
   }
 );
 
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre("save", async function(next) {
   if (this.isNew) {
-    this.contact_number = await incrementSeq("contact_number", "Contact");
+    this.contact_number = await incrementSeq("contact_number", "Contact") ?? 0;
   }
   next();
 });

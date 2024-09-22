@@ -49,7 +49,7 @@ export const MenuUpdate = () => {
   }, [URL, SUBFIX]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = () => {
+  const flowUpdate = () => {
     setLOADING(true);
     if (!validate(OBJECT)) {
       setLOADING(false);
@@ -72,7 +72,8 @@ export const MenuUpdate = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        navigate("/menu/list");
+        document.querySelector("input[type=file]")?.remove();
+        navigate(`/menu/list/${OBJECT.menu_category}`);
       }
       else {
         alert(res.data.msg);
@@ -95,7 +96,7 @@ export const MenuUpdate = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        가맹점 수정
+        메뉴 수정
       </Div>
     );
     // 2. update
@@ -220,15 +221,15 @@ export const MenuUpdate = () => {
         </Grid>
       </Card>
     );
-    // 3. btn
-    const btnSection = (i: number) => (
+    // 3. filter
+    const filterSection = (i: number) => (
       <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-right"}>
             <Btn
               className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {
-                flowSave();
+                flowUpdate();
               }}
             >
               수정하기
@@ -238,7 +239,7 @@ export const MenuUpdate = () => {
             <Btn
               className={"w-70p fs-1-0rem bg-light black"}
               onClick={() => {
-                navigate("/menu/list");
+                navigate(`/menu/list/${OBJECT.menu_category}`);
               }}
             >
               목록으로
@@ -259,7 +260,7 @@ export const MenuUpdate = () => {
           </Grid>
           <Br px={5} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {btnSection(0)}
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>

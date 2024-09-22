@@ -50,13 +50,17 @@ const schema = new mongoose.Schema(
   },
   {
     collection: "Menu",
+    timestamps: {
+      createdAt: "menu_regDt",
+      updatedAt: "menu_updateDt"
+    },
   }
 );
 
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre("save", async function(next) {
   if (this.isNew) {
-    this.menu_number = await incrementSeq("menu_number", "Menu");
+    this.menu_number = await incrementSeq("menu_number", "Menu") ?? 0;
   }
   next();
 });

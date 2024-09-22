@@ -3,8 +3,9 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { axios, moment } from "@imports/ImportLibs";
+import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Icons, Btn, TextArea } from "@imports/ImportComponents";
+import { Div, Hr, Icons, TextArea } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -43,10 +44,10 @@ export const ContactDetail = () => {
   }, [URL, SUBFIX]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowDeletes = async () => {
+  const flowDelete = () => {
     setLOADING(true);
     axios.delete(`${URL}${SUBFIX}/delete`, {
-      data: {
+      params: {
         _id: STATE._id
       }
     })
@@ -81,19 +82,19 @@ export const ContactDetail = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        문의사항 상세
+        문의 상세
       </Div>
     );
     // 2. detail
-    const detailSection = () => {
-      const detailFragment = () => (
-        <Grid container spacing={4}>
+    const detailSection = (i: number) => (
+      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-8rem fw-500 me-10 grey"}>
-              {`[ ${OBJECT.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"} ]`}
-            </Div>
             <Div className={"fs-1-8rem fw-700"}>
               {OBJECT.contact_title}
+            </Div>
+            <Div className={"fs-1-8rem fw-500 ms-10 grey"}>
+              {`[ ${OBJECT.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"} ]`}
             </Div>
           </Grid>
           <Hr px={10} h={10} className={"bg-burgundy"} />
@@ -106,12 +107,18 @@ export const ContactDetail = () => {
             />
           </Grid>
         </Grid>
-      );
-      const filterFragment = () => (
-        <Grid container spacing={1}>
+      </Card>
+    );
+    // 3. filter
+    const filterSection = (i: number) => (
+      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-left"}>
             <Icons
-            name={"Calendar"} className={"w-20 h-20"} />
+              key={"Calendar"}
+              name={"Calendar"}
+              className={"w-20 h-20"}
+            />
             <Div className={"fs-1-0rem fw-500"}>
               {moment(OBJECT.contact_regDt).format("YYYY-MM-DD")}
             </Div>
@@ -133,7 +140,10 @@ export const ContactDetail = () => {
           </Grid>
           <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
             <Icons
-            name={"Person"} className={"w-20 h-20"} />
+              key={"Person"}
+              name={"Person"}
+              className={"w-20 h-20"}
+            />
             <Div className={"fs-1-0rem fw-500"}>
               {OBJECT.contact_name}
             </Div>
@@ -142,23 +152,15 @@ export const ContactDetail = () => {
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {
-                flowDeletes();
+                flowDelete();
               }}
             >
               삭제하기
             </Div>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border radius shadow p-30 fadeIn"}>
-          {detailFragment()}
-          <Br px={50} />
-          <Hr px={30} h={10} className={"bg-grey"} />
-          {filterFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
@@ -167,7 +169,11 @@ export const ContactDetail = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {detailSection()}
+            {LOADING ? <Loading /> : detailSection(0)}
+          </Grid>
+          <Hr px={20} h={10} w={90} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>

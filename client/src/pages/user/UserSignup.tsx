@@ -24,7 +24,7 @@ export const UserSignup = () => {
   const [OBJECT, setOBJECT] = useState<any>(User);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSignup = async () => {
+  const flowSignup = () => {
     setLOADING(true);
     if (!validate(OBJECT)) {
       setLOADING(false);

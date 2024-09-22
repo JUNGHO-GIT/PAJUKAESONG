@@ -1,6 +1,6 @@
 // MenuSave.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
+import { useState } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateMenu } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportLibs";
@@ -53,7 +53,8 @@ export const MenuSave = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        navigate("/menu/list");
+        document.querySelector("input[type=file]")?.remove();
+        navigate(`/menu/list/${OBJECT.menu_category}`);
       }
       else {
         alert(res.data.msg);
@@ -190,13 +191,19 @@ export const MenuSave = () => {
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
+              onExistingChange={(updatedExistingFiles: string[]) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  menu_images: updatedExistingFiles,
+                }));
+              }}
             />
           </Grid>
         </Grid>
       </Card>
     );
-    // 3. btn
-    const btnSection = (i: number) => (
+    // 3. filter
+    const filterSection = (i: number) => (
       <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-right"}>
@@ -213,7 +220,7 @@ export const MenuSave = () => {
             <Btn
               className={"w-70p fs-1-0rem bg-light black"}
               onClick={() => {
-                navigate("/menu/list");
+                navigate(`/menu/list/${OBJECT.menu_category}`);
               }}
             >
               {"목록으로"}
@@ -234,7 +241,7 @@ export const MenuSave = () => {
           </Grid>
           <Br px={5} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {btnSection(0)}
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>

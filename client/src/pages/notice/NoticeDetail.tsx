@@ -3,8 +3,9 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { axios, moment } from "@imports/ImportLibs";
+import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Icons, Btn, TextArea } from "@imports/ImportComponents";
+import { Div, Hr, Icons, TextArea } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -80,10 +81,10 @@ export const NoticeDetail = () => {
       </Div>
     );
     // 2. detail
-    const detailSection = () => {
-      const detailFragment = () => (
+    const detailSection = (i: number) => (
+      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               {OBJECT.notice_title}
             </Div>
@@ -98,9 +99,12 @@ export const NoticeDetail = () => {
             />
           </Grid>
         </Grid>
-      );
-      const filterFragment = () => (
-        <Grid container spacing={1}>
+      </Card>
+    );
+    // 3. filter
+    const filterSection = (i: number) => (
+      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-left"}>
             <Icons
               key={"Calendar"}
@@ -128,7 +132,7 @@ export const NoticeDetail = () => {
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>
-              {OBJECT.notice_view || "0"}
+              {OBJECT.notice_view}
             </Div>
           </Grid>
           <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
@@ -154,16 +158,8 @@ export const NoticeDetail = () => {
             </Div>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border radius shadow p-30 fadeIn"}>
-          {detailFragment()}
-          <Br px={50} />
-          <Hr px={30} h={10} className={"bg-grey"} />
-          {filterFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
@@ -172,7 +168,11 @@ export const NoticeDetail = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {detailSection()}
+            {LOADING ? <Loading /> : detailSection(0)}
+          </Grid>
+          <Hr px={20} h={10} w={90} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>

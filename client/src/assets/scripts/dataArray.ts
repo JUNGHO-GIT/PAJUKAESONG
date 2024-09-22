@@ -24,12 +24,12 @@ export const dataArray = [
       {
         titleKo: "대표 메뉴",
         titleEn: "main",
-        url: "/menu/list",
+        url: "/menu/list/main",
       },
       {
         titleKo: "사이드 메뉴",
         titleEn: "side",
-        url: "/menu/side",
+        url: "/menu/list/side",
       },
     ],
   },

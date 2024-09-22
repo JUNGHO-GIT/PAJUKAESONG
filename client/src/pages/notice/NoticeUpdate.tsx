@@ -4,6 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { useValidateNotice } from "@imports/ImportValidates";
 import { axios, moment } from "@imports/ImportLibs";
+import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
@@ -47,7 +48,7 @@ export const NoticeUpdate = () => {
   }, [URL, SUBFIX]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = () => {
+  const flowUpdate = () => {
     setLOADING(true);
     if (!validate(OBJECT)) {
       setLOADING(false);
@@ -87,9 +88,19 @@ export const NoticeUpdate = () => {
       </Div>
     );
     // 2. update
-    const updateSection = () => {
-      const updateFragment = (i: number) => (
-        <Grid container spacing={3} className={"text-left"}>
+    const updateSection = (i: number) => (
+      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12}>
+            <Input
+              variant={"standard"}
+              required={true}
+              label={"작성일"}
+              className={"border-bottom"}
+              disabled={true}
+              value={moment(OBJECT.regDt).format("YYYY-MM-DD")}
+            />
+          </Grid>
           <Grid size={12}>
             <Input
               variant={"standard"}
@@ -123,40 +134,26 @@ export const NoticeUpdate = () => {
               }}
             />
           </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              required={true}
-              label={"작성일"}
-              className={"border-bottom"}
-              disabled={true}
-              value={moment(OBJECT.regDt).format("YYYY-MM-DD")}
-            />
-          </Grid>
         </Grid>
-      );
-      const btnFragment = () => (
-        <Grid container spacing={2} columns={12}>
+      </Card>
+    );
+    // 3. filter
+    const filterSection = (i: number) => (
+      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
-                flowSave();
+                flowUpdate();
               }}
             >
               수정하기
             </Btn>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border radius shadow p-30 fadeIn"}>
-          {updateFragment(0)}
-          <Br px={50} />
-          {btnFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
@@ -165,7 +162,11 @@ export const NoticeUpdate = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {updateSection()}
+            {LOADING ? <Loading /> : updateSection(0)}
+          </Grid>
+          <Br px={5} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>

@@ -2,18 +2,17 @@
 
 import mongoose from "mongoose";
 
-// 1. schema ---------------------------------------------------------------------------------------
+// Counter model schema
 const schema = new mongoose.Schema(
   {
-    _id: {
+    seq_collection: {
       type: String,
-      default: "",
-      required: false,
+      required: true,
+      unique: true,
     },
-    seq: {
+    seq_number: {
       type: Number,
       default: 0,
-      unique: false,
     },
   },
   {
@@ -25,24 +24,28 @@ const Counter = mongoose.model("Counter", schema);
 
 export const incrementSeq = async (sequenceName: string, modelName: string) => {
   const Model = mongoose.model(modelName);
-  const latestDoc = await Model.findOne().sort({ [sequenceName]: -1 }).exec();
+
+  const latestDoc = await Model.findOne().sort({ [sequenceName]: -1 })
   const latestSeq = latestDoc ? latestDoc[sequenceName] : 0;
 
-  const updateDt = await Counter.findOneAndUpdate(
-    { _id: sequenceName },
-    { $inc: { seq: 1 } },
+  const updateSeq = await Counter.findOneAndUpdate(
+    { seq_collection: modelName },
+    { $inc: { seq_number: 1 } },
     { new: true, upsert: true }
-  ).exec();
+  )
+  .lean()
 
-  if (updateDt.seq <= latestSeq) {
-    const updatedCounter:any = await Counter.findOneAndUpdate(
-      { _id: sequenceName },
-      { seq: latestSeq + 1 },
+  if (updateSeq.seq_number <= latestSeq) {
+    const correctedSeq = await Counter.findOneAndUpdate(
+      { seq_collection: modelName },
+      { seq_number: latestSeq + 1 },
       { new: true }
-    ).exec();
+    )
+    .lean()
 
-    return updatedCounter.seq;
+    return correctedSeq && correctedSeq.seq_number;
   }
 
-  return updateDt.seq;
+  // Return the updated sequence number
+  return updateSeq && updateSeq.seq_number;
 };

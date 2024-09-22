@@ -1,6 +1,6 @@
 // AboutGreeting.tsx
 
-import { Div, Img, Hr, Br } from "@imports/ImportComponents";
+import { Div, Img, Br } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -18,8 +18,8 @@ export const AboutGreeting = () => {
       </Div>
     );
     // 2. greeting
-    const greetingSection = () => {
-      const greetingFragment = () => (
+    const greetingSection = (i: number) => (
+      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-left"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -60,22 +60,17 @@ export const AboutGreeting = () => {
             </Div>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border radius shadow p-30 fadeIn"}>
-          {greetingFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs:12 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {greetingSection()}
+            {greetingSection(0)}
           </Grid>
         </Grid>
       </Paper>

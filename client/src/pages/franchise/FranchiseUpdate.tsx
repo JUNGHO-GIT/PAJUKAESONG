@@ -49,7 +49,7 @@ export const FranchiseUpdate = () => {
   }, [URL, SUBFIX]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = () => {
+  const flowUpdate = () => {
     setLOADING(true);
     if (!validate(OBJECT)) {
       setLOADING(false);
@@ -232,7 +232,7 @@ export const FranchiseUpdate = () => {
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
-                flowSave();
+                flowUpdate();
               }}
             >
               수정하기

@@ -1,9 +1,10 @@
 // ContactSave.tsx
 
 import { useState } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateContact } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
+import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
 import { Div, Select, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
@@ -15,6 +16,9 @@ export const ContactSave = () => {
   const {
     navigate, URL, SUBFIX
   } = useCommonValue();
+  const {
+    dayFmt,
+  } = useCommonDate();
   const {
     REFS, ERRORS, validate,
   } = useValidateContact();
@@ -36,12 +40,7 @@ export const ContactSave = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        navigate('/contact/list', {
-          state: {
-            contact_name: OBJECT.contact_name,
-            contact_email: OBJECT.contact_email,
-          },
-        });
+        navigate("/contact/find");
       }
       else {
         alert(res.data.msg);
@@ -68,9 +67,19 @@ export const ContactSave = () => {
       </Div>
     );
     // 2. save
-    const saveSection = () => {
-      const saveFragment = (i: number) => (
-        <Grid container spacing={3}>
+    const saveSection = (i: number) => (
+      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12}>
+            <Input
+              variant={"standard"}
+              required={true}
+              label={"작성일"}
+              className={"border-bottom"}
+              disabled={true}
+              value={dayFmt}
+            />
+          </Grid>
           <Grid size={12}>
             <Select
               variant={"standard"}
@@ -180,38 +189,38 @@ export const ContactSave = () => {
             />
           </Grid>
         </Grid>
-      );
-      const btnFragment = () => (
+      </Card>
+    );
+    // 3. filter
+    const filterSection = (i: number) => (
+      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}
             >
-              문의하기
+              {"문의하기"}
             </Btn>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border radius shadow p-30 fadeIn"}>
-          {saveFragment(0)}
-          <Br px={50} />
-          {btnFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
       <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs:12 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {saveSection()}
+            {LOADING ? <Loading /> : saveSection(0)}
+          </Grid>
+          <Br px={5} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>

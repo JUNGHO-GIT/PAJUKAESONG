@@ -3,8 +3,10 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios, moment } from "@imports/ImportLibs";
+import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Input, Select, Btn } from "@imports/ImportComponents";
+import { Empty } from "@imports/ImportContainers";
+import { Div, Hr, Select, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -15,7 +17,7 @@ export const NoticeList = () => {
     URL, SUBFIX, navigate, isAdmin,
   } = useCommonValue();
   const {
-    isXs, isSm, isMd, isLg, isXl
+    isXs
   } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -65,8 +67,8 @@ export const NoticeList = () => {
       </Div>
     );
     // 2. list
-    const listSection = () => {
-      const headerFragment = () => (
+    const listSection = (i: number) => (
+      <Card className={"border radius shadow p-30 fadeIn"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={2}>
             <Div className={"fs-0-8rem fw-500"}>
@@ -84,47 +86,47 @@ export const NoticeList = () => {
             </Div>
           </Grid>
         </Grid>
-      );
-      const listFragment = () => (
-        <Grid container spacing={2} columns={12}>
-          {OBJECT?.map((item: any, index: number) => (
-            <Grid container spacing={2} key={index}>
-              <Grid size={2}>
-                <Div className={"fs-0-8rem"}>
-                  {item.notice_number}
-                </Div>
-              </Grid>
-              <Grid size={7}>
-                <Div
-                  className={"fs-1-0rem pointer-burgundy"}
-                  onClick={() => {
-                    navigate('/notice/detail', {
-                      state: {
-                        _id: item._id
-                      },
-                    });
-                  }}
-                >
-                  {item.notice_title}
-                </Div>
-              </Grid>
-              <Grid size={3}>
-                <Div className={"fs-0-8rem"}>
-                  {isXs ? (
-                    moment(item.notice_regDt).format("MM-DD")
-                  ) : (
-                    moment(item.notice_regDt).format("YYYY-MM-DD")
-                  )}
-                </Div>
-              </Grid>
-              <Hr px={5} h={1} />
+        <Hr px={40} h={10} className={"bg-burgundy"} />
+        {OBJECT?.map((item: any, index: number) => (
+          <Grid container spacing={2} key={index}>
+            <Grid size={2}>
+              <Div className={"fs-0-8rem"}>
+                {item.notice_number}
+              </Div>
             </Grid>
-          ))}
-        </Grid>
-      );
-      const filterFragment = () => (
-        <Grid container spacing={2} className={"d-center"}>
-          <Grid size={3}>
+            <Grid size={7}>
+              <Div
+                className={"fs-1-0rem pointer-burgundy"}
+                onClick={() => {
+                  navigate('/notice/detail', {
+                    state: {
+                      _id: item._id
+                    },
+                  });
+                }}
+              >
+                {item.notice_title}
+              </Div>
+            </Grid>
+            <Grid size={3}>
+              <Div className={"fs-0-8rem"}>
+                {isXs ? (
+                  moment(item.notice_regDt).format("MM-DD")
+                ) : (
+                  moment(item.notice_regDt).format("YYYY-MM-DD")
+                )}
+              </Div>
+            </Grid>
+            <Hr px={5} h={1} className={"mb-20"} />
+          </Grid>
+        ))}
+      </Card>
+    );
+    // 3. filter
+    const filterSection = (i: number) => (
+      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+        <Grid container spacing={1} columns={12}>
+          <Grid size={4} className={"d-center"}>
             <Select
               label={"정렬"}
               value={PAGING?.sort}
@@ -156,7 +158,7 @@ export const NoticeList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={isAdmin ? 7 : 9}>
+          <Grid size={6} className={"d-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -166,11 +168,6 @@ export const NoticeList = () => {
               page={PAGING.page}
               showFirstButton={true}
               showLastButton={true}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
               onPageChange={(event, newPage) => {
                 setPAGING((prev: any) => ({
                   ...prev,
@@ -185,37 +182,34 @@ export const NoticeList = () => {
               }}
             />
           </Grid>
-          <Grid size={isAdmin ? 2 : 0} className={`${isAdmin ? "" : "d-none"}`}>
+          <Grid size={2} className={`${isAdmin ? "d-center" : "d-none"}`}>
             <Btn
               className={"bg-burgundy"}
               onClick={() => {
                 navigate("/notice/save");
               }}
             >
-              작성
+              {"등록"}
             </Btn>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border radius shadow p-30 fadeIn"}>
-          {headerFragment()}
-          <Hr px={40} h={10} className={"bg-burgundy"} />
-          {listFragment()}
-          <Hr px={40} h={10} className={"bg-grey"} />
-          {filterFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min80vh"}>
+      <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {listSection()}
+            {LOADING ? <Loading /> : (
+              COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
+            )}
+          </Grid>
+          <Hr px={10} h={10} w={90} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>

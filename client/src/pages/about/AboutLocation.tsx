@@ -1,7 +1,7 @@
 // AboutLocation.tsx
 
 import { useEffect } from "@imports/ImportReacts";
-import { Div, Img, Br, Hr } from "@imports/ImportComponents";
+import { Div } from "@imports/ImportComponents";
 import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -91,16 +91,18 @@ export const AboutLocation = () => {
       </Div>
     );
     // 2. location
-    const locationSection = () => (
-      <Card className={"border radius shadow"}>
-        <Div
-          key={"location"}
-          id={"map"}
-          style={{
-            width: "100%",
-            height: "65vh",
-          }}
-        />
+    const locationSection = (i: number) => (
+      <Card className={"border radius shadow p-0 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          <Div
+            key={"location"}
+            id={"map"}
+            style={{
+              width: "100%",
+              height: "65vh",
+            }}
+          />
+        </Grid>
       </Card>
     );
     // 10. return
@@ -111,7 +113,7 @@ export const AboutLocation = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {locationSection()}
+            {locationSection(0)}
           </Grid>
         </Grid>
       </Paper>

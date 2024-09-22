@@ -1,11 +1,12 @@
 // ContactFind.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useState } from "@imports/ImportReacts";
+import { useCommonValue } from "@imports/ImportHooks";
 import { useValidateContact } from "@imports/ImportValidates";
-import { axios, moment } from "@imports/ImportLibs";
+import { axios } from "@imports/ImportLibs";
+import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
+import { Div, Br, Input, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -13,7 +14,7 @@ export const ContactFind = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, adminId
+    navigate, URL, SUBFIX
   } = useCommonValue();
   const {
     REFS, ERRORS, validate,
@@ -24,7 +25,7 @@ export const ContactFind = () => {
   const [OBJECT, setOBJECT] = useState<any>(Contact);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSearch = async () => {
+  const flowSearch = () => {
     setLOADING(true);
     if (!validate(OBJECT)) {
       setLOADING(false);
@@ -38,7 +39,6 @@ export const ContactFind = () => {
     })
     .then((res: any) => {
       if (res.data.status === "success") {
-        alert(res.data.msg);
         navigate('/contact/list', {
           state: {
             contact_name: OBJECT.contact_name,
@@ -71,9 +71,9 @@ export const ContactFind = () => {
       </Div>
     );
     // 2. find
-    const findSection = () => {
-      const findFragment = (i: number) => (
-        <Grid container spacing={3}>
+    const findSection = (i: number) => (
+      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+        <Grid container spacing={4} columns={12}>
           <Grid size={12}>
             <Input
               variant={"standard"}
@@ -109,9 +109,13 @@ export const ContactFind = () => {
             />
           </Grid>
         </Grid>
-      );
-      const btnFragment = () => (
-        <Grid container spacing={2} columns={12}>
+        <Br px={30} />
+      </Card>
+    );
+    // 3. filter
+    const filterSection = (i: number) => (
+      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
@@ -123,24 +127,21 @@ export const ContactFind = () => {
             </Btn>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border radius shadow p-30 fadeIn"}>
-          {findFragment(0)}
-          <Br px={50} />
-          {btnFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min80vh"}>
+      <Paper className={"content-wrapper d-center h-min75vh"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs:12 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {findSection()}
+            {LOADING ? <Loading /> : findSection(0)}
+          </Grid>
+          <Br px={30} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>

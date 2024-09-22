@@ -1,28 +1,25 @@
-// ContactList.tsx
+// MenuListMain.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { axios, moment } from "@imports/ImportLibs";
+import { useCommonValue } from "@imports/ImportHooks";
+import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
-import { Contact } from "@imports/ImportSchemas";
+import { Menu } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
-import { Div, Hr, Select } from "@imports/ImportComponents";
+import { Div, Img, Hr, Br, Select, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const ContactList = () => {
+export const MenuListMain = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, location,
+    URL, SUBFIX, navigate, isAdmin,
   } = useCommonValue();
-  const {
-    isXs
-  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>([Contact]);
+  const [OBJECT, setOBJECT] = useState<any>([Menu]);
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
     page: 0,
@@ -36,13 +33,12 @@ export const ContactList = () => {
     setLOADING(true);
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
-        contact_name: location.state?.contact_name || "",
-        contact_email: location.state?.contact_email || "",
-        PAGING: PAGING
+        PAGING: PAGING,
+        category: "main"
       }
     })
     .then((res: any) => {
-      setOBJECT(res.data.result.length > 0 ? res.data.result : [Contact]);
+      setOBJECT(res.data.result.length > 0 ? res.data.result : [Menu]);
       setCOUNT((prev: any) => ({
         ...prev,
         totalCnt: res.data.totalCnt || 0,
@@ -65,59 +61,39 @@ export const ContactList = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        문의 목록
+        대표 메뉴
       </Div>
     );
     // 2. list
     const listSection = (i: number) => (
-      <Card className={"border radius shadow p-30 fadeIn"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 5, sm: 2 }}>
-            <Div className={"fs-0-8rem fw-500"}>
-              유형
-            </Div>
-          </Grid>
-          <Grid size={{ xs: 7, sm: 7 }}>
-            <Div className={"fs-0-8rem fw-500"}>
-              제목
-            </Div>
-          </Grid>
-          <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
-            <Div className={"fs-0-8rem fw-500"}>
-              작성일
-            </Div>
-          </Grid>
-        </Grid>
-        <Hr px={40} h={10} className={"bg-burgundy"} />
+      <Grid container spacing={2} columns={12} key={i}>
         {OBJECT?.map((item: any, index: number) => (
-          <Grid container spacing={2} key={index}>
-            <Grid size={{ xs: 5, sm: 2 }}>
-              <Div className={"fs-1-0rem"}>
-                {item.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"}
-              </Div>
-            </Grid>
-            <Grid size={{ xs: 7, sm: 7 }}>
-              <Div
-                className={"fs-1-0rem pointer-burgundy"}
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4, xl: 4 }} key={index}>
+            <Paper className={"border radius shadow p-50 fadeIn"}>
+              <Img
+                key={item.menu_images[0]}
+                src={item.menu_images[0]}
+                group={"menu"}
+                className={"w-180 h-180 hover"}
                 onClick={() => {
-                  navigate('/contact/detail', {
+                  navigate("/menu/detail", {
                     state: {
                       _id: item._id
-                    },
+                    }
                   });
                 }}
-              >
-                {item.contact_title}
+              />
+              <Br px={30} />
+              <Div className={"fs-1-4rem fw-600"}>
+                {item.menu_name}
               </Div>
-            </Grid>
-            <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
               <Div className={"fs-1-0rem"}>
-                {moment(item.contact_regDt).format("YYYY-MM-DD")}
+                {item.menu_price}
               </Div>
-            </Grid>
+            </Paper>
           </Grid>
         ))}
-      </Card>
+      </Grid>
     );
     // 3. filter
     const filterSection = (i: number) => (
@@ -155,7 +131,7 @@ export const ContactList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={8} className={"d-center"}>
+          <Grid size={6} className={"d-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -178,6 +154,16 @@ export const ContactList = () => {
                 }));
               }}
             />
+          </Grid>
+          <Grid size={2} className={`${isAdmin ? "d-center" : "d-none"}`}>
+            <Btn
+              className={"bg-burgundy"}
+              onClick={() => {
+                navigate("/menu/save");
+              }}
+            >
+              {"등록"}
+            </Btn>
           </Grid>
         </Grid>
       </Card>

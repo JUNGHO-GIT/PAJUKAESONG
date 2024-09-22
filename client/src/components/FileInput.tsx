@@ -163,8 +163,8 @@ export const FileInput = (props: any) => {
     const updatedExistingFile = fileExisting.filter((_file, i) => i !== index);
     setFileExisting(updatedExistingFile);
 
-    if (props.onExistingChange) {
-      props.onExistingChange(updatedExistingFile);
+    if (props?.onExistingChange) {
+      props?.onExistingChange(updatedExistingFile);
     }
   }
 
@@ -264,6 +264,7 @@ export const FileInput = (props: any) => {
         multiline={props?.multiline || true}
         multiple={props?.multiple || true}
         onClick={(e: any) => e.preventDefault()}
+        onExistingChange={props?.onExistingChange || (() => {})}
         InputProps={{
           readOnly: (
             props?.readOnly || false

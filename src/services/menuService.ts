@@ -8,6 +8,7 @@ import { uploadCloud } from "@scripts/upload";
 // 빈값은 [] 리턴
 export const list = async (
   PAGING_param: any,
+  category_param: string,
 ) => {
 
   // result 변수 선언
@@ -24,7 +25,7 @@ export const list = async (
   );
 
   findResult = await repository.list(
-    sort, page
+    category_param, sort, page
   );
 
   if (!findResult || findResult.length <= 0) {
@@ -82,9 +83,6 @@ export const save = async (
   let saveResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "fail";
-
-  console.log(OBJECT_param);
-  console.log(fileList_param);
 
   const mergedImages = (
     JSON.parse(OBJECT_param.menu_images).concat(fileList_param.map((file: any) => (

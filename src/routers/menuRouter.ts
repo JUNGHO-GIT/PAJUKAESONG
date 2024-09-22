@@ -10,6 +10,7 @@ router.get("/list", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.list(
       req.query.PAGING as any,
+      req.query.category as string,
     );
     if (finalResult.status === "success") {
       res.json({

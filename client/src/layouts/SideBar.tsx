@@ -18,7 +18,7 @@ export const SideBar = (
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, firstStr, secondStr, dataArray, PATH
+    navigate, firstStr, secondStr, thirdStr, dataArray, PATH
   } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
@@ -31,7 +31,14 @@ export const SideBar = (
   useEffect(() => {
     setSelectedTab(firstStr);
     setSelectedTabVal(firstStr);
-    setSelectedListItem(secondStr);
+    // foo/boo/roo 형식인 경우
+    if (PATH.split("/").length > 3) {
+      setSelectedListItem(thirdStr);
+    }
+    // foo/boo 형식인 경우
+    else if (PATH.split("/").length > 2) {
+      setSelectedListItem(secondStr);
+    }
   }, [PATH]);
 
   // 7. sidebar ------------------------------------------------------------------------------------

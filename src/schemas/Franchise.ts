@@ -51,13 +51,17 @@ const schema = new mongoose.Schema(
   },
   {
     collection: "Franchise",
+    timestamps: {
+      createdAt: "franchise_regDt",
+      updatedAt: "franchise_updateDt"
+    },
   }
 );
 
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre("save", async function(next) {
   if (this.isNew) {
-    this.franchise_number = await incrementSeq("franchise_number", "Franchise");
+    this.franchise_number = await incrementSeq("franchise_number", "Franchise") ?? 0;
   }
   next();
 });

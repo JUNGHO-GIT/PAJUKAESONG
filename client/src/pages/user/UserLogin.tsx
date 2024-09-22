@@ -44,7 +44,7 @@ export const UserLogin = () => {
   }, [isAdmin, adminId, adminPw, isUser, userId, userPw]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowLogin = async () => {
+  const flowLogin = () => {
     setLOADING(true);
     if (!validate(OBJECT)) {
       setLOADING(false);

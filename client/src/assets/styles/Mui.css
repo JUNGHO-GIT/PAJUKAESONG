@@ -73,7 +73,7 @@
 }
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: rgb(255, 165, 166) !important;
+  border-color: rgb(0, 0, 0) !important;
   border-width: 2px !important;
 }
 

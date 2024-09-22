@@ -65,13 +65,17 @@ const schema = new mongoose.Schema(
   },
   {
     collection: "Order",
+    timestamps: {
+      createdAt: "order_regDt",
+      updatedAt: "order_updateDt"
+    },
   }
 );
 
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre("save", async function(next) {
   if (this.isNew) {
-    this.order_number = await incrementSeq("order_number", "Order");
+    this.order_number = await incrementSeq("order_number", "Order") ?? 0;
   }
   next();
 });
