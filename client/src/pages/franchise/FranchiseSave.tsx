@@ -30,13 +30,13 @@ export const FranchiseSave = () => {
   const [fileList, setFileList] = useState<any>([]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = async () => {
+  const flowSave = () => {
     setLOADING(true);
     if (!validate(OBJECT)) {
       setLOADING(false);
       return;
     }
-    await axios.post(`${URL}${SUBFIX}/save`,
+    axios.post(`${URL}${SUBFIX}/save`,
       makeFormData(
         OBJECT,
         fileList,
@@ -196,9 +196,10 @@ export const FranchiseSave = () => {
               variant={"outlined"}
               label={"가맹점 사진"}
               required={true}
-              id={"franchise_image"}
               limit={1}
-              existing={OBJECT.franchise_image}
+              existing={OBJECT.franchise_images}
+              group={"franchise"}
+              value={fileList}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
@@ -232,7 +233,7 @@ export const FranchiseSave = () => {
     return (
       <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>

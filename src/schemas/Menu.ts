@@ -16,12 +16,12 @@ const schema = new mongoose.Schema(
       default: "",
       required: false
     },
-    menu_title: {
+    menu_name: {
       type: String,
       default: "",
       required: false
     },
-    menu_content: {
+    menu_description: {
       type: String,
       default: "",
       required: false
@@ -31,7 +31,7 @@ const schema = new mongoose.Schema(
       default: "",
       required: false
     },
-    menu_image: {
+    menu_images: {
       type: Array,
       default: [],
       required: false

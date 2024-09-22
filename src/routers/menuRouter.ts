@@ -88,7 +88,6 @@ router.get("/detail", async (req: Request, res: Response) => {
 router.post("/save", uploadMemory("fileList", "array", 5), async (req: Request, res: Response) => {
   try {
     let finalResult = await service.save(
-      req.body.user_id as string,
       req.body.OBJECT as any,
       req.files as Express.Multer.File[]
     );
@@ -128,7 +127,6 @@ router.post("/save", uploadMemory("fileList", "array", 5), async (req: Request, 
 router.put("/update", uploadMemory("fileList", "array", 5), async (req: Request, res: Response) => {
   try {
     let finalResult = await service.update(
-      req.body.user_id as string,
       req.body._id as string,
       req.body.OBJECT as any,
       req.files as Express.Multer.File[]
@@ -165,11 +163,11 @@ router.put("/update", uploadMemory("fileList", "array", 5), async (req: Request,
   }
 });
 
-// 5. deletes --------------------------------------------------------------------------------------
-router.delete("/deletes", async (req: Request, res: Response) => {
+// 5. delete ---------------------------------------------------------------------------------------
+router.delete("/delete", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.deletes(
-      req.body._id as string
+      req.query._id as string
     );
     if (finalResult.status === "success") {
       res.json({

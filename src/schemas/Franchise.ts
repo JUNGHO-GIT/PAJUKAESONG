@@ -32,7 +32,7 @@ const schema = new mongoose.Schema(
       default: "",
       required: false
     },
-    franchise_image: {
+    franchise_images: {
       type: Array,
       default: [],
       required: false

@@ -12,8 +12,13 @@ export const Loading = () => {
         <Div className={"loader"} />
       </Div>
     );
+    const nonWrapperSection = () => (
+      <Div className={`h-min60vh d-center`}>
+        <Div className={"loader"} />
+      </Div>
+    );
     return (
-      wrapperSection()
+      nonWrapperSection()
     );
   };
 

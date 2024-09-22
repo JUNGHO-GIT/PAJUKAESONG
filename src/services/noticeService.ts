@@ -1,7 +1,6 @@
 // noticeService.ts
 
 import * as repository from "@repositories/noticeRepository";
-import { adminCheck } from "@scripts/utils";
 
 // 1. list -----------------------------------------------------------------------------------------
 // page는 무조건 0부터 시작
@@ -13,7 +12,7 @@ export const list = async (
   // result 변수 선언
   let findResult: any = null;
   let finalResult: any[] = [];
-  let statusResult: string = "";
+  let statusResult: string = "fail";
   let totalCntResult: any = null;
 
   // sort, page 변수 선언
@@ -51,7 +50,7 @@ export const detail = async (
   // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
   findResult = await repository.detail(
     _id_param
@@ -74,34 +73,25 @@ export const detail = async (
 
 // 3. save -----------------------------------------------------------------------------------------
 export const save = async (
-  user_id_param: string,
   OBJECT_param: any,
 ) => {
 
   // result 변수 선언
-  let findResult: any = null;
+  let saveResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
-  // adminCheck
-  if (!adminCheck(user_id_param)) {
-    return {
-      status: "fail",
-      result: null,
-    };
-  }
-
-  findResult = await repository.save(
+  saveResult = await repository.save(
     OBJECT_param
   );
 
-  if (!findResult) {
+  if (!saveResult) {
     statusResult = "fail";
     finalResult = null;
   }
   else {
     statusResult = "success";
-    finalResult = findResult;
+    finalResult = saveResult;
   }
 
   return {
@@ -112,35 +102,26 @@ export const save = async (
 
 // 4. update ---------------------------------------------------------------------------------------
 export const update = async (
-  user_id_param: string,
   _id_param: string,
   OBJECT_param: any,
 ) => {
 
   // result 변수 선언
-  let findResult: any = null;
+  let updateResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
-  // adminCheck
-  if (!adminCheck(user_id_param)) {
-    return {
-      status: "fail",
-      result: null,
-    };
-  }
-
-  findResult = await repository.update(
+  updateResult = await repository.update(
     _id_param, OBJECT_param
   );
 
-  if (!findResult) {
+  if (!updateResult) {
     statusResult = "fail";
     finalResult = null;
   }
   else {
     statusResult = "success";
-    finalResult = findResult;
+    finalResult = updateResult;
   }
 
   return {
@@ -149,36 +130,30 @@ export const update = async (
   };
 };
 
-// 5. deletes --------------------------------------------------------------------------------------
+// 5. delete ---------------------------------------------------------------------------------------
 export const deletes = async (
-  user_id_param: string,
   _id_param: string,
 ) => {
 
   // result 변수 선언
-  let findResult: any = null;
+  let deleteResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
-  // adminCheck
-  if (!adminCheck(user_id_param)) {
-    return {
-      status: "fail",
-      result: null,
-    };
-  }
-
-  findResult = await repository.deletes(
+  deleteResult = await repository.deletes(
     _id_param
   );
 
-  if (!findResult) {
+  console.log("_id_param", _id_param);
+  console.log("deleteResult", deleteResult);
+
+  if (!deleteResult) {
     statusResult = "fail";
     finalResult = null;
   }
   else {
     statusResult = "success";
-    finalResult = findResult;
+    finalResult = deleteResult;
   }
 
   return {

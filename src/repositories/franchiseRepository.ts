@@ -29,7 +29,7 @@ export const list = async (
         franchise_address_main: 1,
         franchise_address_detail: 1,
         franchise_phone: 1,
-        franchise_image: 1,
+        franchise_images: 1,
         franchise_updateDt: 1,
       }
     },
@@ -74,7 +74,7 @@ export const save = async (
       franchise_address_main: OBJECT_param.franchise_address_main,
       franchise_address_detail: OBJECT_param.franchise_address_detail,
       franchise_phone: OBJECT_param.franchise_phone,
-      franchise_image: OBJECT_param.franchise_image,
+      franchise_images: OBJECT_param.franchise_images,
       franchise_regDt: newDate,
       franchise_updateDt: null,
     },
@@ -98,7 +98,7 @@ export const update = async (
         franchise_address_main: OBJECT_param.franchise_address_main,
         franchise_address_detail: OBJECT_param.franchise_address_detail,
         franchise_phone: OBJECT_param.franchise_phone,
-        franchise_image: OBJECT_param.franchise_image,
+        franchise_images: OBJECT_param.franchise_images,
         franchise_updateDt: newDate,
       }
     },
@@ -112,7 +112,7 @@ export const update = async (
   return finalResult;
 };
 
-// 5. deletes --------------------------------------------------------------------------------------
+// 5. delete ---------------------------------------------------------------------------------------
 export const deletes = async (
   _id_param: string,
 ) => {

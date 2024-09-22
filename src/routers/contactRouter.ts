@@ -201,12 +201,11 @@ router.put("/update", async (req: Request, res: Response) => {
   }
 });
 
-// 5. deletes --------------------------------------------------------------------------------------
-router.delete("/deletes", async (req: Request, res: Response) => {
+// 5. delete ---------------------------------------------------------------------------------------
+router.delete("/delete", async (req: Request, res: Response) => {
   try {
-    console.log(req);
     let finalResult = await service.deletes(
-      req.body._id as string,
+      req.query._id as string,
     );
     if (finalResult.status === "success") {
       res.json({

@@ -48,7 +48,7 @@ export const useValidateContact = () => {
             "contact_email",
           ];
           REFS.current = (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: createRef()
@@ -56,7 +56,7 @@ export const useValidateContact = () => {
             ))
           );
           setERRORS (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: false
@@ -86,7 +86,7 @@ export const useValidateContact = () => {
             "contact_content",
           ];
           REFS.current = (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: createRef()
@@ -94,7 +94,7 @@ export const useValidateContact = () => {
             ))
           );
           setERRORS (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: false

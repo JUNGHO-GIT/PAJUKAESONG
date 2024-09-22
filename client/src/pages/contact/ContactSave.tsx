@@ -24,7 +24,7 @@ export const ContactSave = () => {
   const [OBJECT, setOBJECT] = useState<any>(Contact);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = async () => {
+  const flowSave = () => {
     setLOADING(true);
     if (!validate(OBJECT)) {
       setLOADING(false);

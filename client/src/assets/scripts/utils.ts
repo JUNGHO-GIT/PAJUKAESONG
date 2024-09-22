@@ -68,7 +68,7 @@ export const log = (name: string, data: any) => {
 // 3. makeFormData ---------------------------------------------------------------------------------
 export const makeFormData = (
   object: any,
-  fileList: any[],
+  fileList: File[] | null,
   extra?: any
 ) => {
 
@@ -76,11 +76,12 @@ export const makeFormData = (
 
   // object 데이터 추가
   if (object) {
-    Object.keys(object).forEach((key: string, index: number) => {
-      // 배열인 경우 빈배열로 추가 (서버에서 처리할거임)
+    Object.keys(object).forEach((key: string, _index: number) => {
+      // 이미지 배열인 경우
       if (Array.isArray(object[key])) {
-        form.append(`OBJECT[${key}]`, "[]");
+        form.append(`OBJECT[${key}]`, JSON.stringify(object[key]));
       }
+      // 나머지 항목인 경우
       else {
         form.append(`OBJECT[${key}]`, object[key]);
       }
@@ -89,14 +90,19 @@ export const makeFormData = (
 
   // 파일 추가
   if (fileList) {
-    fileList.forEach((file: File, index: number) => {
-      form.append("fileList", file);
+    fileList.forEach((file: File, _index: number) => {
+      const newFile = new File(
+        [file],
+        `${new Date().getTime()}_${file.name}`,
+        { type: file.type }
+      );
+      form.append("fileList", newFile);
     });
   }
 
   // 추가 데이터 추가
   if (extra) {
-    Object.keys(extra).forEach((key: string, index: number) => {
+    Object.keys(extra).forEach((key: string, _index: number) => {
       form.append(key, extra[key]);
     });
   }

@@ -9,7 +9,7 @@ export const info = async (
   // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
   findResult = await repository.info(
   );
@@ -36,7 +36,7 @@ export const greeting = async (
   // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
   findResult = await repository.greeting(
   );
@@ -63,7 +63,7 @@ export const location = async (
   // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
   findResult = await repository.location(
   );

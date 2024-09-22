@@ -7,7 +7,7 @@ export const Notice: any = {
   notice_title: "",
   notice_content: "",
   notice_view: "",
-  notice_image: [""],
+  notice_images: [],
   notice_regDt: null,
   notice_updateDt: null,
 };

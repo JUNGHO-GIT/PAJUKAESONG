@@ -14,7 +14,7 @@ export const login = async (
   let finalResult: any = null;
   let loginResult: any = null;
   let adminResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
   findResult = await repository.checkId(
     user_id_param
@@ -64,7 +64,7 @@ export const signup = async (
   // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
   findResult = await repository.checkId(
     OBJECT_param.user_id

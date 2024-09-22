@@ -54,7 +54,7 @@ export const useValidateUser = () => {
             "user_pw",
           ];
           REFS.current = (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: createRef()
@@ -62,7 +62,7 @@ export const useValidateUser = () => {
             ))
           );
           setERRORS (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: false
@@ -89,7 +89,7 @@ export const useValidateUser = () => {
             "user_address", */
           ];
           REFS.current = (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: createRef()
@@ -97,7 +97,7 @@ export const useValidateUser = () => {
             ))
           );
           setERRORS (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: false

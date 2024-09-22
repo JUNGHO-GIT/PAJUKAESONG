@@ -33,19 +33,19 @@ export const useValidateMenu = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    validate.current = (OBJECT: any) => {
+    validate.current = (OBJECT: any, fileList: any) => {
       try {
         // 1. save
         if (PATH.includes("/menu/save") || PATH.includes("/menu/update")) {
           const target = [
             "menu_category",
-            "menu_title",
-            "menu_content",
+            "menu_name",
+            "menu_description",
             "menu_price",
-            "menu_image",
+            "menu_images",
           ];
           REFS.current = (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: createRef()
@@ -53,7 +53,7 @@ export const useValidateMenu = () => {
             ))
           );
           setERRORS (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: false
@@ -63,17 +63,17 @@ export const useValidateMenu = () => {
           if (!OBJECT.menu_category) {
             return showAlertAndFocus('menu_category', "메뉴 카테고리를 선택해주세요.", 0);
           }
-          else if (!OBJECT.menu_title) {
-            return showAlertAndFocus('menu_title', "메뉴 이름을 입력해주세요.", 0);
+          else if (!OBJECT.menu_name) {
+            return showAlertAndFocus('menu_name', "메뉴 이름을 입력해주세요.", 0);
           }
-          else if (!OBJECT.menu_content) {
-            return showAlertAndFocus('menu_content', "메뉴 설명을 입력해주세요.", 0);
+          else if (!OBJECT.menu_description) {
+            return showAlertAndFocus('menu_description', "메뉴 설명을 입력해주세요.", 0);
           }
           else if (!OBJECT.menu_price) {
             return showAlertAndFocus('menu_price', "메뉴 가격을 입력해주세요.", 0);
           }
-          else if (!OBJECT.menu_image) {
-            return showAlertAndFocus('menu_image', "메뉴 이미지를 등록해주세요.", 0);
+          else if (OBJECT.menu_images.length === 0 && fileList.length === 0) {
+            return showAlertAndFocus('menu_images', "메뉴 이미지를 등록해주세요.", 0);
           }
           return true;
         }

@@ -27,7 +27,7 @@ const schema = new mongoose.Schema(
       default: "0",
       required: false
     },
-    notice_image: {
+    notice_images: {
       type: Array,
       default: [],
       required: false

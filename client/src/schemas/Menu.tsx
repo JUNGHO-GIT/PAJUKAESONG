@@ -4,11 +4,11 @@
 export const Menu: any = {
   _id: "",
   menu_number: 0,
-  menu_category: "",
-  menu_title: "",
-  menu_content: "",
+  menu_category: "main",
+  menu_name: "",
+  menu_description: "",
   menu_price: "",
-  menu_image: [""],
+  menu_images: [],
   menu_regDt: null,
   menu_updateDt: null,
 };

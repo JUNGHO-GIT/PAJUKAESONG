@@ -125,7 +125,7 @@ export const update = async (
   return finalResult;
 };
 
-// 5. deletes --------------------------------------------------------------------------------------
+// 5. delete ---------------------------------------------------------------------------------------
 export const deletes = async (
   _id_param: string,
 ) => {
@@ -133,7 +133,8 @@ export const deletes = async (
     {
       _id: _id_param
     }
-  );
+  )
+  .lean();
 
   return finalResult;
 };

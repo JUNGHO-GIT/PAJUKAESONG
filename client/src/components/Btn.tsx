@@ -18,7 +18,8 @@ export const Btn = ({...props}: any) => {
         whiteSpace: props?.style?.whiteSpace || "nowrap",
         overflow: props?.style?.overflow || "hidden",
         textOverflow: props?.style?.textOverflow || "ellipsis",
-        fontSize: props?.style?.fontSize || "0.8rem"
+        fontSize: props?.style?.fontSize || "0.8rem",
+        position: "relative",
       }}
     />
   );

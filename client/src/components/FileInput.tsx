@@ -8,16 +8,11 @@ import { MuiFileInput, Grid } from "@imports/ImportMuis";
 export const FileInput = (props: any) => {
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [fileExisting, setFileExisting] = useState<any>([]);
-  const [fileList, setFileList] = useState<any>([]);
+  const [fileExisting, setFileExisting] = useState<any[]>([]);
+  const [fileList, setFileList] = useState<File[] | null>(null);
   const [fileCount, setFileCount] = useState<number>(0);
   const [fileHeight, setFileHeight] = useState<string>("100px");
   const [fileLimit, setFileLimit] = useState<number>(1);
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    setFileExisting(props?.existing || []);
-  }, [props?.existing]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -49,6 +44,16 @@ export const FileInput = (props: any) => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
+    setFileExisting(props?.existing || []);
+  }, [props?.existing]);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    setFileLimit(props?.limit || 1);
+  }, [props?.limit]);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
 
     // 최초 로드 시 파일 배열 초기화
     setFileList(props?.value || []);
@@ -58,55 +63,66 @@ export const FileInput = (props: any) => {
     const minHeight = 100;
     setFileHeight(`${Math.max(minHeight, (props?.value || []).length * heightPerFile)}px`);
 
-    setFileLimit(props?.limit);
-
   }, [props?.value]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    const newCount = fileList.length;
-    const existingCount = fileExisting.length;
+    if (fileList) {
+      const newCount = fileList.length;
+      const existingCount = fileExisting.length;
 
-    if (newCount + existingCount > 0) {
-      setFileCount(newCount + existingCount);
-    }
-    else {
-      setFileCount(0);
+      if (newCount + existingCount > 0) {
+        setFileCount(newCount + existingCount);
+      }
+      else {
+        setFileCount(0);
+      }
     }
   }, [fileList, fileExisting]);
 
   // 6. handle (파일 추가) -------------------------------------------------------------------------
-  const flowFileChange = (newFiles: File[]) => {
+  const flowFileChange = (newFiles: File[] | null) => {
 
     // 파일이 이미지가 아닌 경우
     if (newFiles && newFiles.some((file: File) => !file.type.startsWith("image/"))) {
       alert("이미지 파일만 업로드 가능합니다.");
+
+      // input 요소 삭제
+      const input = document.querySelector("input[type=file]");
+      if (input) {
+        input.remove();
+      }
       return;
     }
 
     // 파일이 제한 개수 이상인 경우
     else if (newFiles && newFiles.length + fileCount > fileLimit) {
       alert(`파일은 최대 ${fileLimit}개까지 업로드 가능합니다.`);
+
+      // input 요소 삭제
+      const input = document.querySelector("input[type=file]");
+      if (input) {
+        input.remove();
+      }
       return;
     }
 
     if (newFiles) {
-      setFileList((prevFiles: any) => {
-        const existingFiles = prevFiles || [];
+      const existingFiles = fileList || [];
 
-        // 중복 파일 필터링
-        const nonDuplicateFiles = newFiles.filter((newFile) => (
-          !existingFiles.some(
-            (existingFile: File) => existingFile.name === newFile.name
-          )
-        ));
+      // Filter out duplicate files
+      const nonDuplicateFiles = newFiles.filter((newFile) => (
+        !existingFiles.some((existingFile) => existingFile.name === newFile.name)
+      ));
 
-        // 부모로 변경된 파일 리스트 전달
-        const updatedFiles = [...existingFiles, ...nonDuplicateFiles];
-        props?.onChange(updatedFiles);
+      // Create the updated files list
+      const updatedFiles = [...existingFiles, ...nonDuplicateFiles];
 
-        return updatedFiles;
-      });
+      // Update state
+      setFileList(updatedFiles);
+
+      // Notify parent component
+      props.onChange(updatedFiles);
     }
   };
 
@@ -129,28 +145,34 @@ export const FileInput = (props: any) => {
   // 6. handle (파일 삭제) -------------------------------------------------------------------------
   const handleFileDelete = (index: number, extra?: string) => {
     if (extra === "single") {
-      setFileList((prevFiles: any) => {
-
-        // 부모 컴포넌트에 변경 사항 전달
-        const updatedFiles = prevFiles.filter((_file: any, i: number) => i !== index);
-        props?.onChange(updatedFiles);
-
-        return updatedFiles;
-      });
+      if (!fileList) {
+        return;
+      }
+      const updatedFiles = fileList.filter((_file, i) => i !== index);
+      setFileList(updatedFiles);
+      props.onChange(updatedFiles);
     }
     else if (extra === "all") {
-      setFileList((prevFiles: any) => {
-        props?.onChange([]);
-        return [];
-      });
+      setFileList([]);
+      props.onChange([]);
     }
   };
+
+  // 6. handle (파일 삭제) -------------------------------------------------------------------------
+  const handleExistingFileDelete = (index: number) => {
+    const updatedExistingFile = fileExisting.filter((_file, i) => i !== index);
+    setFileExisting(updatedExistingFile);
+
+    if (props.onExistingChange) {
+      props.onExistingChange(updatedExistingFile);
+    }
+  }
 
   // 7. node ---------------------------------------------------------------------------------------
   const adornmentNode = (
     <Grid container spacing={2} columns={12}>
       <Grid size={8}>
-        {fileList.length > 0 && fileList.map((file: any, index: number) => (
+        {fileList && fileList.length > 0 && fileList.map((file: any, index: number) => (
           <Grid size={12} className={"d-left"} key={index}>
             <Div className={"d-center"}>
               <Img
@@ -211,7 +233,7 @@ export const FileInput = (props: any) => {
           <Div
             className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
             onClick={() => {
-              setFileExisting((prev: any) => prev.filter((_: any, i: number) => i !== index));
+              handleExistingFileDelete(index);
             }}
           >
             {!file ? "" : "x"}

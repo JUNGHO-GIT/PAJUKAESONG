@@ -8,7 +8,7 @@ export const Franchise: any = {
   franchise_address_main: "",
   franchise_address_detail: "",
   franchise_phone: "",
-  franchise_image: [""],
+  franchise_images: [],
   franchise_regDt: null,
   franchise_updateDt: null,
 };

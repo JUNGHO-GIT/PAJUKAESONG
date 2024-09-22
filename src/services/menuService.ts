@@ -13,7 +13,7 @@ export const list = async (
   // result 변수 선언
   let findResult: any = null;
   let finalResult: any[] = [];
-  let statusResult: string = "";
+  let statusResult: string = "fail";
   let totalCntResult: any = null;
 
   // sort, page 변수 선언
@@ -51,7 +51,7 @@ export const detail = async (
   // result 변수 선언
   let findResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
   findResult = await repository.detail(
     _id_param
@@ -75,22 +75,23 @@ export const detail = async (
 // 3. save -----------------------------------------------------------------------------------------
 export const save = async (
   OBJECT_param: any,
-  user_id_param: string,
   fileList_param: any,
 ) => {
 
   // result 변수 선언
   let saveResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
-  // 이미지 파일명 삽입
-  OBJECT_param.menu_image = [];
-  fileList_param.forEach((file: any, _index: number) => {
-    const newFileName = `${user_id_param}_${new Date().getTime()}_${file.originalname}`;
-    file.filename = newFileName;
-    OBJECT_param.menu_image.push(newFileName);
-  });
+  console.log(OBJECT_param);
+  console.log(fileList_param);
+
+  const mergedImages = (
+    JSON.parse(OBJECT_param.menu_images).concat(fileList_param.map((file: any) => (
+      file.originalname
+    )))
+  );
+  OBJECT_param.menu_images = mergedImages;
 
   saveResult = await repository.save(
     OBJECT_param
@@ -118,34 +119,20 @@ export const save = async (
 export const update = async (
   _id_param: string,
   OBJECT_param: any,
-  user_id_param: string,
   fileList_param: any,
 ) => {
 
   // result 변수 선언
-  let findResult: any = null;
   let updateResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
-  if (fileList_param.length > 0) {
-    // 이미지 파일명 삽입
-    OBJECT_param.menu_image = [];
-    fileList_param.forEach((file: any, _index: number) => {
-      const newFileName = `${user_id_param}_${new Date().getTime()}_${file.originalname}`;
-      file.filename = newFileName;
-      OBJECT_param.menu_image.push(newFileName);
-    });
-
-    // 클라우드에 이미지 업로드
-    uploadCloud("menu", fileList_param);
-  }
-  else {
-    findResult = await repository.detail(
-      _id_param
-    );
-    OBJECT_param.menu_image = findResult.menu_image;
-  }
+  const mergedImages = (
+    JSON.parse(OBJECT_param.menu_images).concat(fileList_param.map((file: any) => (
+      file.originalname
+    )))
+  );
+  OBJECT_param.menu_images = mergedImages;
 
   updateResult = await repository.update(
     _id_param, OBJECT_param
@@ -158,6 +145,9 @@ export const update = async (
   else {
     statusResult = "success";
     finalResult = updateResult;
+
+    // 클라우드에 이미지 업로드
+    uploadCloud("menu", fileList_param);
   }
 
   return {
@@ -166,7 +156,7 @@ export const update = async (
   };
 };
 
-// 5. deletes --------------------------------------------------------------------------------------
+// 5. delete ---------------------------------------------------------------------------------------
 export const deletes = async (
   _id_param: string,
 ) => {
@@ -174,7 +164,7 @@ export const deletes = async (
   // result 변수 선언
   let deleteResult: any = null;
   let finalResult: any = null;
-  let statusResult: string = "";
+  let statusResult: string = "fail";
 
   deleteResult = await repository.deletes(
     _id_param

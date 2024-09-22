@@ -87,7 +87,6 @@ router.get("/detail", async (req: Request, res: Response) => {
 router.post("/save", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.save(
-      req.body.user_id as string,
       req.body.OBJECT as any,
     );
     if (finalResult.status === "success") {
@@ -126,7 +125,6 @@ router.post("/save", async (req: Request, res: Response) => {
 router.put("/update", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.update(
-      req.body.user_id as string,
       req.body._id as string,
       req.body.OBJECT as any,
     );
@@ -162,12 +160,11 @@ router.put("/update", async (req: Request, res: Response) => {
   }
 });
 
-// 5. deletes --------------------------------------------------------------------------------------
-router.delete("/deletes", async (req: Request, res: Response) => {
+// 5. delete ---------------------------------------------------------------------------------------
+router.delete("/delete", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.deletes(
-      req.body.user_id as string,
-      req.body._id as string,
+      req.query._id as string,
     );
     if (finalResult.status === "success") {
       res.json({

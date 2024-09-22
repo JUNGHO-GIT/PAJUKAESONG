@@ -112,8 +112,8 @@ export const UserLogin = () => {
               label={"아이디"}
               required={true}
               value={OBJECT.user_id}
-              inputRef={REFS[i].user_id}
-              error={ERRORS[i].user_id}
+              inputRef={REFS[i]?.user_id}
+              error={ERRORS[i]?.user_id}
               disabled={isAdmin || isUser}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -129,8 +129,8 @@ export const UserLogin = () => {
               label={"비밀번호"}
               required={true}
               value={OBJECT.user_pw}
-              inputRef={REFS[i].user_pw}
-              error={ERRORS[i].user_pw}
+              inputRef={REFS[i]?.user_pw}
+              error={ERRORS[i]?.user_pw}
               disabled={isAdmin || isUser}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -224,7 +224,7 @@ export const UserLogin = () => {
     return (
       <Paper className={"content-wrapper d-center h-min80vh"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>

@@ -42,6 +42,32 @@ export const NoticeDetail = () => {
     });
   }, [URL, SUBFIX]);
 
+  // 3. flow ---------------------------------------------------------------------------------------
+  const flowDelete = () => {
+    setLOADING(true);
+    axios.delete(`${URL}${SUBFIX}/delete`, {
+      params: {
+        _id: STATE._id
+      }
+    })
+    .then((res: any) => {
+      if (res.data.status === "success") {
+        alert(res.data.msg);
+        navigate("/notice/list");
+      }
+      else {
+        alert(res.data.msg);
+      }
+    })
+    .catch((err: any) => {
+      alert(err.response.data.msg);
+      console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
+    });
+  };
+
   // 7. detailNode ---------------------------------------------------------------------------------
   const detailNode = () => {
     // 1. title
@@ -79,7 +105,6 @@ export const NoticeDetail = () => {
             <Icons
               key={"Calendar"}
               name={"Calendar"}
-              fill={"#dedede"}
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>
@@ -100,7 +125,6 @@ export const NoticeDetail = () => {
             <Icons
               key={"View"}
               name={"View"}
-              fill={"#dedede"}
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>
@@ -109,7 +133,7 @@ export const NoticeDetail = () => {
           </Grid>
           <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
+              className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
               onClick={() => {
                 navigate("/notice/update", {
                   state: {
@@ -118,7 +142,15 @@ export const NoticeDetail = () => {
                 });
               }}
             >
-              수정하기
+              수정
+            </Div>
+            <Div
+              className={"fs-1-0rem fw-700 pointer-burgundy"}
+              onClick={() => {
+                flowDelete();
+              }}
+            >
+              삭제
             </Div>
           </Grid>
         </Grid>
@@ -136,7 +168,7 @@ export const NoticeDetail = () => {
     return (
       <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>

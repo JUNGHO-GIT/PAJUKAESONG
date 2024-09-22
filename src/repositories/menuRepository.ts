@@ -26,10 +26,10 @@ export const list = async (
         _id: 1,
         menu_number: 1,
         menu_category: 1,
-        menu_title: 1,
-        menu_content: 1,
+        menu_name: 1,
+        menu_description: 1,
         menu_price: 1,
-        menu_image: 1,
+        menu_images: 1,
       }
     },
     {
@@ -70,10 +70,10 @@ export const save = async (
     {
       _id: new mongoose.Types.ObjectId(),
       menu_category: OBJECT_param.menu_category,
-      menu_title: OBJECT_param.menu_title,
-      menu_content: OBJECT_param.menu_content,
+      menu_name: OBJECT_param.menu_name,
+      menu_description: OBJECT_param.menu_description,
       menu_price: OBJECT_param.menu_price,
-      menu_image: OBJECT_param.menu_image,
+      menu_images: OBJECT_param.menu_images,
       menu_regDt: newDate,
       menu_updateDt: null,
     },
@@ -94,10 +94,10 @@ export const update = async (
     {
       $set: {
         menu_category: OBJECT_param.menu_category,
-        menu_title: OBJECT_param.menu_title,
-        menu_content: OBJECT_param.menu_content,
+        menu_name: OBJECT_param.menu_name,
+        menu_description: OBJECT_param.menu_description,
         menu_price: OBJECT_param.menu_price,
-        menu_image: OBJECT_param.menu_image,
+        menu_images: OBJECT_param.menu_images,
         menu_updateDt: newDate,
       }
     },
@@ -111,7 +111,7 @@ export const update = async (
   return finalResult;
 };
 
-// 5. deletes --------------------------------------------------------------------------------------
+// 5. delete ---------------------------------------------------------------------------------------
 export const deletes = async (
   _id_param: string,
 ) => {

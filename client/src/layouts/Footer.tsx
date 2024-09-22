@@ -55,7 +55,7 @@ export const Footer = () => {
     );
     // 3. text
     const textSection = () => (
-      <Grid container columns={12} spacing={1} className={`d-center horizontal-text`}>
+      <Grid container spacing={1} columns={12} className={`d-center horizontal-text`}>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
           <Icons
             key={"Info"}
@@ -115,16 +115,16 @@ export const Footer = () => {
     );
     // 4. return
     return (
-      <Paper className={"layout-wrapper border-top p-30 mt-20"}>
+      <Paper className={"layout-wrapper border-top p-20 mt-20"}>
         <Grid container spacing={1} columns={24}>
           <Grid
-            size={{ xs: 24, sm: 10, md: 12 }}
+            size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }}
             className={`d-center ${isXs ? "mb-20" : ""}`}
           >
             {logoSection()}
           </Grid>
           <Grid
-            size={{ xs: 24, sm: 14, md: 12 }}
+            size={{ xs: 24, sm: 14, md: 12, lg: 12, xl: 12 }}
             className={`d-center`}
           >
             {textSection()}

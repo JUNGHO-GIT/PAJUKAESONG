@@ -25,6 +25,7 @@
 .MuiCard-root {
   box-shadow: none !important;
   width: 100% !important;
+  padding: 5px 5px 5px 5px !important;
 }
 
 /** table *****************************************************************************************/
@@ -58,10 +59,10 @@
 }
 
 [class*="MuiInput-root"]::after {
-  border-bottom: 2px solid rgb(255, 165, 166) !important;
+  border-bottom: 2px solid rgb(0, 0, 0) !important;
 }
 [class*="MuiInputLabel-root"][class*="Mui-focused"] {
-  color: rgb(255, 81, 84) !important;
+  color:  rgb(0, 0, 0) !important;
 }
 
 [class*="MuiInputLabel-root"][class*="Mui-error"] {

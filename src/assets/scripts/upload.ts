@@ -61,7 +61,7 @@ export const uploadCloud = (groupName:string, fileList: any[]) => {
   const bucket = storage.bucket(bucketName as string);
 
   fileList.forEach(async (file: any, _index: number) => {
-    const fileUpload = bucket.file(`${destination}/${groupName}/${file.filename}`);
+    const fileUpload = bucket.file(`${destination}/${groupName}/${file.originalname}`);
 
     // Create a stream and pipe buffer content
     const stream = fileUpload.createWriteStream({

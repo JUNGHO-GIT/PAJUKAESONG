@@ -27,14 +27,13 @@ export const NoticeSave = () => {
   const [OBJECT, setOBJECT] = useState<any>(Notice);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = async () => {
+  const flowSave = () => {
     setLOADING(true);
     if (!validate(OBJECT)) {
       setLOADING(false);
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`, {
-      user_id: adminId,
       OBJECT: OBJECT,
     })
     .then((res: any) => {
@@ -141,7 +140,7 @@ export const NoticeSave = () => {
     return (
       <Paper className={"content-wrapper h-min75vh"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>

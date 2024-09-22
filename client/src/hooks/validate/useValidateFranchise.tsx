@@ -42,10 +42,10 @@ export const useValidateFranchise = () => {
             "franchise_address_main",
             "franchise_address_detail",
             "franchise_phone",
-            "franchise_image",
+            "franchise_images",
           ];
           REFS.current = (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: createRef()
@@ -53,7 +53,7 @@ export const useValidateFranchise = () => {
             ))
           );
           setERRORS (
-            Array.from({ length: 0 }, (_, _idx) => (
+            Array.from({ length: 1 }, (_, _idx) => (
               target.reduce((acc, cur) => ({
                 ...acc,
                 [cur]: false
@@ -72,8 +72,8 @@ export const useValidateFranchise = () => {
           else if (!OBJECT.franchise_phone) {
             return showAlertAndFocus('franchise_phone', "가맹점 전화번호를 입력해주세요.", 0);
           }
-          else if (!OBJECT.franchise_image) {
-            return showAlertAndFocus('franchise_image', "가맹점 이미지를 등록해주세요.", 0);
+          else if (!OBJECT.franchise_images) {
+            return showAlertAndFocus('franchise_images', "가맹점 이미지를 등록해주세요.", 0);
           }
           return true;
         }
