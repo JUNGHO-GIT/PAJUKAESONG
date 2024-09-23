@@ -19,16 +19,13 @@ export const NoticeDetail = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Notice);
-  const [STATE, setSTATE] = useState<any>({
-    _id: location_id
-  });
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
     axios.get(`${URL}${SUBFIX}/detail`, {
       params: {
-        _id: STATE._id
+        _id: location_id
       }
     })
     .then((res: any) => {
@@ -41,14 +38,14 @@ export const NoticeDetail = () => {
     .finally(() => {
       setLOADING(false);
     });
-  }, [URL, SUBFIX]);
+  }, [URL, SUBFIX, location_id]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowDelete = () => {
     setLOADING(true);
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
-        _id: STATE._id
+        _id: OBJECT._id
       }
     })
     .then((res: any) => {
@@ -103,7 +100,7 @@ export const NoticeDetail = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+      <Card className={"mx-20 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-left"}>
             <Icons
@@ -170,7 +167,7 @@ export const NoticeDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : detailSection(0)}
           </Grid>
-          <Hr px={50} h={10} w={90} className={"bg-grey"} />
+          <Hr px={20} h={10} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

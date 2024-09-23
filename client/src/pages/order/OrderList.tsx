@@ -121,7 +121,7 @@ export const OrderList = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+      <Card className={"mx-20 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -194,7 +194,7 @@ export const OrderList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={50} h={10} w={90} className={"bg-grey"} />
+          <Hr px={20} h={10} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

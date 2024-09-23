@@ -208,7 +208,7 @@ export const MenuSave = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+      <Card className={"mx-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-right"}>
             <Btn

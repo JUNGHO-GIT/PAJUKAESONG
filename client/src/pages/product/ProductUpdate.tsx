@@ -96,7 +96,7 @@ export const ProductUpdate = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        상품 수정
+        제품 수정
       </Div>
     );
     // 2. update
@@ -223,7 +223,7 @@ export const ProductUpdate = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+      <Card className={"mx-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-right"}>
             <Btn

@@ -12,6 +12,23 @@ const schema = new mongoose.Schema(
       unique : true
     },
 
+    order_product: [{
+      product_name: {
+        type: String,
+        default: "",
+        required: false
+      },
+      product_count: {
+        type: String,
+        default: "",
+        required: false
+      },
+      product_price: {
+        type: String,
+        default: "",
+        required: false
+      }
+    }],
     order_category: {
       type: String,
       default: "",

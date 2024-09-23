@@ -1,6 +1,6 @@
 // OrderSave.tsx
 
-import { useState } from "@imports/ImportReacts";
+import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateOrder } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
@@ -14,7 +14,7 @@ export const OrderSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX
+    navigate, URL, SUBFIX, location
   } = useCommonValue();
   const {
     dayFmt,
@@ -26,6 +26,22 @@ export const OrderSave = () => {
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
+
+  useEffect(() => {
+    console.log("===================================");
+    console.log("location", location);
+    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
+  }, [location, OBJECT]);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    setLOADING(true);
+    setOBJECT((prev: any) => ({
+      ...prev,
+      order_product: [location?.state?.order_product],
+    }));
+    setLOADING(false);
+  }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
@@ -193,7 +209,7 @@ export const OrderSave = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+      <Card className={"mx-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Btn

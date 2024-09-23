@@ -5,7 +5,7 @@ import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
-import { Div, Img, Hr } from "@imports/ImportComponents";
+import { Div, Img, Hr, Icons, Input, Btn, Br } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -23,9 +23,8 @@ export const ProductDetail = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Product);
   const [imageSize, setImageSize] = useState<string>("");
-  const [STATE, setSTATE] = useState<any>({
-    _id: location_id
-  });
+  const [orderCount, setOrderCount] = useState<number>(1);
+  const [orderPrice, setOrderPrice] = useState<number>(1);
 
   // 2-2. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -51,11 +50,12 @@ export const ProductDetail = () => {
     setLOADING(true);
     axios.get(`${URL}${SUBFIX}/detail`, {
       params: {
-        _id: STATE._id
+        _id: location_id
       }
     })
     .then((res: any) => {
       setOBJECT(res.data.result || Product);
+      setOrderPrice(Number(res.data.result.product_price));
     })
     .catch((err: any) => {
       alert(err.response.data.msg);
@@ -64,14 +64,28 @@ export const ProductDetail = () => {
     .finally(() => {
       setLOADING(false);
     });
-  }, [URL, SUBFIX]);
+  }, [URL, SUBFIX, location_id]);
+
+  // 3. flow ---------------------------------------------------------------------------------------
+  const flowSave = () => {
+    setLOADING(true);
+    navigate(`/order/save`, {
+      state: {
+        order_product: {
+          product_name: OBJECT.product_name,
+          product_count: orderCount,
+          product_price: orderPrice,
+        },
+      }
+    });
+  };
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowDelete = () => {
     setLOADING(true);
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
-        _id: STATE._id
+        _id: OBJECT._id
       }
     })
     .then((res: any) => {
@@ -100,7 +114,7 @@ export const ProductDetail = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        상품 상세
+        제품 상세
       </Div>
     );
     // 2. detail
@@ -115,11 +129,7 @@ export const ProductDetail = () => {
               className={imageSize}
             />
           </Grid>
-          <Hr
-            className={"bg-burgundy"}
-            px={40}
-            h={10}
-          />
+          <Hr className={"bg-burgundy"} px={40} h={10} />
           <Grid size={6} className={"d-left"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT.product_name}
@@ -138,9 +148,87 @@ export const ProductDetail = () => {
         </Grid>
       </Card>
     );
-    // 3. filter
-    const filterSection = (i: number) => (
-      <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
+    // 3. filter1
+    const filter1Section = (i: number) => (
+      <Card className={"mx-20 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={4} className={"d-center"}>
+            <Input
+              label={"수량"}
+              value={orderCount}
+              readOnly={true}
+              error={orderCount < 0}
+              endadornment={
+                <Div className={"d-center me-n10"}>
+                  <Icons
+                    name={"Minus"}
+                    className={"w-20 h-20 black"}
+                    onClick={(e: any) => {
+                      const value = orderCount;
+                      const newValue = value < 1 ? 1 : value - 1;
+                      if (newValue <= 1) {
+                        setOrderCount(1);
+                        setOrderPrice(Number(OBJECT.product_price));
+                      }
+                      else if (!isNaN(newValue) && newValue <= 30) {
+                        setOrderCount(newValue);
+                        setOrderPrice(Number(OBJECT.product_price) * newValue);
+                      }
+                    }}
+                  />
+                  <Icons
+                    name={"Plus"}
+                    className={"w-20 h-20 black"}
+                    onClick={(e: any) => {
+                      const value = orderCount;
+                      const newValue = value < 1 ? 1 : value + 1;
+                      if (newValue <= 1) {
+                        setOrderCount(1);
+                        setOrderPrice(Number(OBJECT.product_price));
+                      }
+                      else if (!isNaN(newValue) && newValue <= 30) {
+                        setOrderCount(newValue);
+                        setOrderPrice(Number(OBJECT.product_price) * newValue);
+                      }
+                    }}
+                  />
+                </Div>
+              }
+            />
+          </Grid>
+          <Grid size={8} className={"d-center"}>
+            <Input
+              label={"총 금액"}
+              value={numeral(orderPrice).format("0,0")}
+              readOnly={true}
+              error={orderPrice < 0}
+              startadornment={
+                <Div className={"d-center ms-n10"}>
+                  <Icons
+                    key={"Won"}
+                    name={"Won"}
+                    className={"w-20 h-20 black"}
+                  />
+                </Div>
+              }
+            />
+          </Grid>
+          <Grid size={12} className={"d-center"}>
+            <Btn
+              className={"w-100p fs-1-0rem bg-burgundy"}
+              onClick={() => {
+                flowSave();
+              }}
+            >
+              주문하기
+            </Btn>
+          </Grid>
+        </Grid>
+      </Card>
+    );
+    // 4. filter2
+    const filter2Section = (i: number) => (
+      <Card className={"mx-20 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
             <Div
@@ -187,9 +275,12 @@ export const ProductDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : detailSection(0)}
           </Grid>
-          <Hr px={50} h={10} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {filterSection(0)}
+            {filter1Section(0)}
+          </Grid>
+          <Hr px={20} h={10} w={90} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {filter2Section(0)}
           </Grid>
         </Grid>
       </Paper>

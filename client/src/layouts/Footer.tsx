@@ -29,7 +29,7 @@ export const Footer = () => {
     );
     // 3. text
     const textSection = () => (
-      <Grid container spacing={1} columns={12} className={`d-center horizontal-text`}>
+      <Grid container spacing={0} columns={12} className={`d-center horizontal-text`}>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
           <Icons
             key={"Info"}
@@ -93,7 +93,7 @@ export const Footer = () => {
         <Grid container spacing={1} columns={24}>
           <Grid
             size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }}
-            className={`d-center ${isXs ? "mb-20" : ""}`}
+            className={`d-center ${isXs ? "mb-10" : ""}`}
           >
             {logoSection()}
           </Grid>

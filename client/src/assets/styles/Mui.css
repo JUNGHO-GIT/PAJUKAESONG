@@ -85,7 +85,7 @@
 /** grid ******************************************************************************************/
 .MuiGrid2-root {
   margin: 0px 0px 0px 0px !important;
-  padding: 0px 0px 0px 0px !important;
+  padding: 2px 2px 2px 2px !important;
 }
 .MuiGrid2-container {
   margin: 0px 0px 0px 0px !important;
@@ -96,10 +96,6 @@
   justify-content: center !important;
   align-items: center !important;
   align-content: center !important;
-}
-.MuiGrid2-item {
-  margin: 0px 0px 0px 0px !important;
-  padding: 0px 0px 0px 0px !important;
 }
 
 /** bottom ****************************************************************************************/

@@ -143,7 +143,7 @@ export const SideBar = (
         <Grid size={12} className={"d-left"}>
           <Icons
             name={"Info"} className={"w-12 h-12"} />
-          <Div className={"fs-0-8rem"}>
+          <Div className={"fs-0-7rem"}>
             사업자 등록번호: 883-03-03096
           </Div>
         </Grid>

@@ -30,7 +30,7 @@ export const Input = (props: any) => {
           startAdornment: (
             props?.startadornment ? (
               typeof props?.startadornment === "string" ? (
-                <div className={"fs-0-6rem"}>{props?.startadornment}</div>
+                <div className={"fs-0-6rem me-2vw"}>{props?.startadornment}</div>
               ) : (
                 <div className={"me-2vw"}>{props?.startadornment}</div>
               )
@@ -39,7 +39,7 @@ export const Input = (props: any) => {
           endAdornment: (
             props?.endadornment ? (
               typeof props?.endadornment === "string" ? (
-                <div className={"fs-0-6rem"}>{props?.endadornment}</div>
+                <div className={"fs-0-6rem ms-2vw"}>{props?.endadornment}</div>
               ) : (
                 <div className={"ms-2vw"}>{props?.endadornment}</div>
               )
