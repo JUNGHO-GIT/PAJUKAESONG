@@ -221,49 +221,60 @@ export const OrderDetail = () => {
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-left"}>
-            <Icons
-              key={"Calendar"}
-              name={"Calendar"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500"}>
-              {getDayFmt(OBJECT.order_regDt)}
-            </Div>
+            <Grid size={12} className={"d-center"}>
+              <Icons
+                key={"Calendar"}
+                name={"Calendar"}
+                className={"w-20 h-20"}
+              />
+              <Div className={"fs-1-0rem fw-500"}>
+                {getDayFmt(OBJECT.order_regDt)}
+              </Div>
+            </Grid>
+            <Grid size={12} className={"d-center"}>
+              <Icons
+                key={"Person"}
+                name={"Person"}
+                className={"w-20 h-20"}
+              />
+              <Div className={"fs-1-0rem fw-500"}>
+                {OBJECT.order_name}
+              </Div>
+            </Grid>
           </Grid>
-          <Grid size={6} className={"d-right"}>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
-              onClick={() => {
-                navigate("/order/list", {
-                  state: {
-                    order_name: OBJECT.order_name,
-                    order_phone: OBJECT.order_phone
-                  }
-                });
-              }}
-            >
-              목록으로
-            </Div>
-          </Grid>
-          <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
-            <Icons
-              key={"Person"}
-              name={"Person"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500"}>
-              {OBJECT.order_name}
-            </Div>
-          </Grid>
-          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
-              onClick={() => {
-                flowDelete();
-              }}
-            >
-              삭제하기
-            </Div>
+          <Grid size={6}>
+            <Grid size={12} className={"d-center"}>
+              <Div
+                className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
+                onClick={() => {
+                  navigate("/order/list", {
+                    state: {
+                      order_name: OBJECT.order_name,
+                      order_phone: OBJECT.order_phone
+                    }
+                  });
+                }}
+              >
+                목록으로
+              </Div>
+            </Grid>
+            <Grid size={12} className={"d-center"}>
+              <Div
+                className={"fs-1-0rem fw-700 pointer-burgundy me-20"}
+                onClick={() => {
+                }}
+              >
+                수정하기
+              </Div>
+              <Div
+                className={"fs-1-0rem fw-700 pointer-burgundy"}
+                onClick={() => {
+                  flowDelete();
+                }}
+              >
+                삭제하기
+              </Div>
+            </Grid>
           </Grid>
         </Grid>
       </Card>
