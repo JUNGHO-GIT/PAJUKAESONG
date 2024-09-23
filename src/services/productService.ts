@@ -8,7 +8,6 @@ import { uploadCloud } from "@scripts/upload";
 // 빈값은 [] 리턴
 export const list = async (
   PAGING_param: any,
-  category_param: string,
 ) => {
 
   // result 변수 선언
@@ -25,7 +24,7 @@ export const list = async (
   );
 
   findResult = await repository.list(
-    category_param, sort, page
+    sort, page
   );
 
   if (!findResult || findResult.length <= 0) {

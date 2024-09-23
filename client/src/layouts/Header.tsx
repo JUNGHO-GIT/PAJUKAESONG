@@ -12,11 +12,11 @@ export const Header = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
-  const {
     navigate, PATH, firstStr, secondStr, dataArray, isAdmin, location_category
   } = useCommonValue();
+  const {
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [tabWidth, setTabWidth] = useState<string>("");

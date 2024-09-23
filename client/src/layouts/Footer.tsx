@@ -10,11 +10,11 @@ export const Footer = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
-  const {
     URL, isAdmin, adminId, adminPw, navigate, TITLE,
   } = useCommonValue();
+  const {
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [width, setWidth] = useState<string>("");

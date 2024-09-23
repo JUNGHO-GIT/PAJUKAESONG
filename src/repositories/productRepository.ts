@@ -17,16 +17,10 @@ export const cnt = async (
 // page는 무조건 0부터 시작
 // 빈값은 [] 리턴
 export const list = async (
-  category_param: string,
   sort_param: 1 | -1,
   page_param: number,
 ) => {
   const finalResult = await Product.aggregate([
-    {
-      $match: {
-        product_category: category_param
-      }
-    },
     {
       $project: {
         _id: 1,

@@ -8,7 +8,7 @@ const schema = new mongoose.Schema(
   {
     about_number : {
       type : Number,
-      default: 0,
+      default: 1,
       unique : true
     },
     about_greeting: {

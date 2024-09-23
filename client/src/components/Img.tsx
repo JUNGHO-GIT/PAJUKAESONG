@@ -7,12 +7,17 @@ import { useCommonValue } from "@imports/ImportHooks";
 export const Img = (props: any) => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { GCLOUD_URL } = useCommonValue();
-  const groupProps = props.group;
-  const srcProps = props.src;
-  const fileName = srcProps ? srcProps.split("/").pop().split(".")[0] : "empty";
-  const srcResult = groupProps === "new" ? srcProps : `${GCLOUD_URL}/${groupProps}/${srcProps}`;
-  const defaultImage = "https://via.placeholder.com/150";
+  let { GCLOUD_URL } = useCommonValue();
+  let groupProps: string = props.group;
+  let srcProps: string = props.src;
+  let fileName: string = "empty";
+  let srcResult: string = "";
+  let defaultImage: string = "https://via.placeholder.com/150";
+
+  if (srcProps) {
+    fileName = srcProps.split("/").pop()?.split(".")[0] || "empty";
+    srcResult = groupProps === "new" ? srcProps : `${GCLOUD_URL}/${groupProps}/${srcProps}`;
+  }
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [imgSrc, setImgSrc] = useState(srcResult);

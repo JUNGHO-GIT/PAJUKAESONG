@@ -1,7 +1,7 @@
 // ProductList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
@@ -16,10 +16,14 @@ export const ProductList = () => {
   const {
     URL, SUBFIX, navigate, isAdmin,
   } = useCommonValue();
+  const {
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>([Product]);
+  const [imageSize, setImageSize] = useState<string>("");
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
     page: 0,
@@ -27,6 +31,25 @@ export const ProductList = () => {
   const [COUNT, setCOUNT] = useState<any>({
     totalCnt: 0,
   });
+
+  // 2-2. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    if (isXs) {
+      setImageSize("w-100 h-100 hover");
+    }
+    else if (isSm) {
+      setImageSize("w-120 h-120 hover");
+    }
+    else if (isMd) {
+      setImageSize("w-140 h-140 hover");
+    }
+    else if (isLg) {
+      setImageSize("w-160 h-160 hover");
+    }
+    else if (isXl) {
+      setImageSize("w-180 h-180 hover");
+    }
+  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -67,13 +90,13 @@ export const ProductList = () => {
     const listSection = (i: number) => (
       <Grid container spacing={2} columns={12} key={i}>
         {OBJECT?.map((item: any, index: number) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4, xl: 4 }} key={index}>
-            <Paper className={"border radius shadow p-50 fadeIn"}>
+          <Grid size={{ xs: 6, sm: 4, md: 4, lg: 4, xl: 4 }} key={index}>
+            <Paper className={"border radius shadow px-50 py-20 fadeIn"}>
               <Img
                 key={item.product_images[0]}
                 src={item.product_images[0]}
                 group={"product"}
-                className={"w-180 h-180 hover"}
+                className={imageSize}
                 onClick={() => {
                   navigate("/product/detail", {
                     state: {
