@@ -1,7 +1,7 @@
 // ProductDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
@@ -15,13 +15,36 @@ export const ProductDetail = () => {
   const {
     navigate, location_id, isAdmin, URL, SUBFIX
   } = useCommonValue();
+  const {
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Product);
+  const [imageSize, setImageSize] = useState<string>("");
   const [STATE, setSTATE] = useState<any>({
     _id: location_id
   });
+
+  // 2-2. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    if (isXs) {
+      setImageSize("w-210 h-210");
+    }
+    else if (isSm) {
+      setImageSize("w-230 h-230");
+    }
+    else if (isMd) {
+      setImageSize("w-250 h-250");
+    }
+    else if (isLg) {
+      setImageSize("w-270 h-270");
+    }
+    else if (isXl) {
+      setImageSize("w-300 h-300");
+    }
+  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -82,30 +105,34 @@ export const ProductDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Img
               key={OBJECT.product_images[0]}
               src={OBJECT.product_images[0]}
               group={"product"}
-              className={"w-300 h-300"}
+              className={imageSize}
             />
           </Grid>
-          <Hr px={20} h={10} className={"bg-burgundy"} />
+          <Hr
+            className={"bg-burgundy"}
+            px={40}
+            h={10}
+          />
           <Grid size={6} className={"d-left"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT.product_name}
             </Div>
           </Grid>
           <Grid size={6} className={"d-right"}>
-            <Div className={"fs-1-2rem fw-600 black"}>
-              {`₩ ${numeral(OBJECT.product_price).format("0,0")}`}
+            <Div className={"fs-1-2rem fw-500 dark"}>
+              {OBJECT.product_description}
             </Div>
           </Grid>
           <Grid size={12} className={"d-left"}>
-            <Div className={"fs-1-2rem fw-500 dark"}>
-              {OBJECT.product_description}
+            <Div className={"fs-1-2rem fw-600 black"}>
+              {`₩ ${numeral(OBJECT.product_price).format("0,0")}`}
             </Div>
           </Grid>
         </Grid>
@@ -160,7 +187,7 @@ export const ProductDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : detailSection(0)}
           </Grid>
-          <Hr px={20} h={10} w={90} className={"bg-grey"} />
+          <Hr px={50} h={10} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

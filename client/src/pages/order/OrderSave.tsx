@@ -68,14 +68,14 @@ export const OrderSave = () => {
     );
     // 2. save
     const saveSection = (i: number) => (
-      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
               variant={"standard"}
               required={true}
               label={"작성일"}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               disabled={true}
               value={dayFmt}
             />
@@ -85,7 +85,7 @@ export const OrderSave = () => {
               variant={"standard"}
               label={"주문 유형"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.order_category}
               inputRef={REFS[i]?.order_category}
               error={ERRORS[i]?.order_category}
@@ -96,10 +96,10 @@ export const OrderSave = () => {
                 }));
               }}
             >
-              {["franchise", "personal"].map((item: any, idx: number) => (
+              {["reservation", "buy"].map((item: string, idx: number) => (
                 <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                  {item === "franchise" && "가맹 주문"}
-                  {item === "personal" && "1:1 주문"}
+                  {item === "reservation" && "매장 예약"}
+                  {item === "buy" && "제품 구매"}
                 </MenuItem>
               ))}
             </Select>
@@ -109,7 +109,7 @@ export const OrderSave = () => {
               variant={"standard"}
               label={"이름"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.order_name}
               inputRef={REFS[i]?.order_name}
               error={ERRORS[i]?.order_name}
@@ -126,7 +126,7 @@ export const OrderSave = () => {
               variant={"standard"}
               label={"이메일"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.order_email}
               inputRef={REFS[i]?.order_email}
               error={ERRORS[i]?.order_email}
@@ -143,7 +143,7 @@ export const OrderSave = () => {
               variant={"standard"}
               label={"전화번호"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.order_phone}
               inputRef={REFS[i]?.order_phone}
               error={ERRORS[i]?.order_phone}
@@ -160,7 +160,7 @@ export const OrderSave = () => {
               variant={"standard"}
               label={"주문 제목"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.order_title}
               inputRef={REFS[i]?.order_title}
               error={ERRORS[i]?.order_title}

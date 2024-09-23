@@ -101,14 +101,14 @@ export const OrderUpdate = () => {
     );
     // 2. update
     const updateSection = (i: number) => (
-      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Select
               variant={"standard"}
               label={"메뉴 카테고리"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.order_category}
               inputRef={REFS[i]?.order_category}
               error={ERRORS[i]?.order_category}
@@ -132,7 +132,7 @@ export const OrderUpdate = () => {
               variant={"standard"}
               label={"메뉴 이름"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.order_name}
               inputRef={REFS[i]?.order_name}
               error={ERRORS[i]?.order_name}
@@ -149,7 +149,7 @@ export const OrderUpdate = () => {
               variant={"standard"}
               label={"메뉴 설명"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.order_description}
               inputRef={REFS[i]?.order_description}
               error={ERRORS[i]?.order_description}
@@ -165,7 +165,7 @@ export const OrderUpdate = () => {
             <Input
               variant={"standard"}
               label={"가격"}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={numeral(OBJECT?.order_price).format("0,0")}
               inputRef={REFS[i]?.order_price}
               error={ERRORS[i]?.order_price}
@@ -193,7 +193,7 @@ export const OrderUpdate = () => {
               required={true}
               label={"작성일"}
               shrink={"shrink"}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               readOnly={true}
               value={dayFmt}
             />

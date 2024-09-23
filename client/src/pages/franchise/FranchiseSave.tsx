@@ -113,7 +113,7 @@ export const FranchiseSave = () => {
               variant={"standard"}
               label={"가맹점 이름"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.franchise_name}
               inputRef={REFS[i]?.franchise_name}
               error={ERRORS[i]?.franchise_name}
@@ -151,7 +151,7 @@ export const FranchiseSave = () => {
               variant={"standard"}
               label={"상세주소"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.franchise_address_detail}
               inputRef={REFS[i]?.franchise_address_detail}
               error={ERRORS[i]?.franchise_address_detail}
@@ -168,7 +168,7 @@ export const FranchiseSave = () => {
               variant={"standard"}
               label={"가맹점 전화번호"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.franchise_phone}
               inputRef={REFS[i]?.franchise_phone}
               error={ERRORS[i]?.franchise_phone}
@@ -186,7 +186,7 @@ export const FranchiseSave = () => {
               required={true}
               label={"작성일"}
               shrink={"shrink"}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               readOnly={true}
               value={dayFmt}
             />
@@ -222,7 +222,7 @@ export const FranchiseSave = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-30 fadeIn"}>
+        <Card className={"border-1 radius shadow p-30 fadeIn"}>
           {saveFragment(0)}
           <Br px={50} />
           {btnFragment()}

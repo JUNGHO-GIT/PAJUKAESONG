@@ -10,37 +10,11 @@ export const Footer = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    URL, isAdmin, adminId, adminPw, navigate, TITLE,
+    adminId, adminPw, navigate
   } = useCommonValue();
   const {
     isXs, isSm, isMd, isLg, isXl
   } = useResponsive();
-
-  // 2-1. useState ---------------------------------------------------------------------------------
-  const [width, setWidth] = useState<string>("");
-  const [OBJECT, setOBJECT] = useState<any>({
-    user_id: adminId || "",
-    user_pw: adminPw || "",
-  });
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (isXs) {
-      setWidth("w-100p");
-    }
-    else if (isSm) {
-      setWidth("w-90p");
-    }
-    else if (isMd) {
-      setWidth("w-70p");
-    }
-    else if (isLg) {
-      setWidth("w-55p");
-    }
-    else if (isXl) {
-      setWidth("w-40p");
-    }
-  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 7. footer -------------------------------------------------------------------------------------
   const footerNode = () => {
@@ -115,7 +89,7 @@ export const Footer = () => {
     );
     // 4. return
     return (
-      <Paper className={"layout-wrapper border-top p-20 mt-20"}>
+      <Paper className={"layout-wrapper border-top-2 p-20 mt-20"}>
         <Grid container spacing={1} columns={24}>
           <Grid
             size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }}

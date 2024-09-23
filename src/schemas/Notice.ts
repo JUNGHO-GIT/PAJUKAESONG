@@ -56,7 +56,7 @@ const schema = new mongoose.Schema(
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre("save", async function(next) {
   if (this.isNew) {
-    this.notice_number = await incrementSeq("notice_number", "Notice") ?? 0;
+    this.notice_number = await incrementSeq("notice_number", "Notice");
   }
   next();
 });

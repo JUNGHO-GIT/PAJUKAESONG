@@ -7,7 +7,12 @@ import { Div, Br } from "@imports/ImportComponents";
 export const TextArea = (props: any) => {
   return (
     <>
-      <Div className={"d-left black-50 fs-0-9rem fw-400 mt-15"}>
+      <Div
+        className={"d-left fs-0-9rem fw-400 mt-15"}
+        style={{
+          color: "#484848de"
+        }}
+      >
         {props?.required ? `${props?.label} *` : props?.label}
       </Div>
       <Br px={10} />

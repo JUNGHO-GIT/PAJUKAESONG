@@ -72,14 +72,14 @@ export const ContactFind = () => {
     );
     // 2. find
     const findSection = (i: number) => (
-      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={4} columns={12}>
           <Grid size={12}>
             <Input
               variant={"standard"}
               label={"이름"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.contact_name}
               inputRef={REFS[i]?.contact_name}
               error={ERRORS[i]?.contact_name}
@@ -96,7 +96,7 @@ export const ContactFind = () => {
               variant={"standard"}
               label={"이메일"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.contact_email}
               inputRef={REFS[i]?.contact_email}
               error={ERRORS[i]?.contact_email}

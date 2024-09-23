@@ -60,7 +60,7 @@ const schema = new mongoose.Schema(
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre("save", async function(next) {
   if (this.isNew) {
-    this.product_number = (await incrementSeq("product_number", "Product")) || 0;
+    this.product_number = await incrementSeq("product_number", "Product");
   }
   next();
 });

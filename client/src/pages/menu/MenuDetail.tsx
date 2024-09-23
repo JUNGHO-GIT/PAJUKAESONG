@@ -86,7 +86,7 @@ export const MenuDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Img
@@ -96,7 +96,7 @@ export const MenuDetail = () => {
               className={"w-300 h-300"}
             />
           </Grid>
-          <Hr px={20} h={10} className={"bg-burgundy"} />
+          <Hr px={40} h={10} className={"bg-burgundy"} />
           <Grid size={6} className={"d-left"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT.menu_name}
@@ -168,7 +168,7 @@ export const MenuDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : detailSection(0)}
           </Grid>
-          <Hr px={20} h={10} w={90} className={"bg-grey"} />
+          <Hr px={50} h={10} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

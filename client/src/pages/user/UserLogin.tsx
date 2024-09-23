@@ -211,7 +211,7 @@ export const UserLogin = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius p-30 fadeIn"}>
+        <Card className={"border-1 radius p-30 fadeIn"}>
           {loginFragment(0)}
           <Hr px={50} h={1} />
           {btnFragment()}

@@ -72,14 +72,14 @@ export const OrderFind = () => {
     );
     // 2. find
     const findSection = (i: number) => (
-      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={4} columns={12}>
           <Grid size={12}>
             <Input
               variant={"standard"}
               label={"이름"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.order_name}
               inputRef={REFS[i]?.order_name}
               error={ERRORS[i]?.order_name}
@@ -96,7 +96,7 @@ export const OrderFind = () => {
               variant={"standard"}
               label={"이메일"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.order_email}
               inputRef={REFS[i]?.order_email}
               error={ERRORS[i]?.order_email}

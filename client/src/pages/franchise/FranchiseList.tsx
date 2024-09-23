@@ -229,7 +229,7 @@ export const FranchiseList = () => {
         </Grid>
       );
       return (
-        <Card className={"border radius shadow p-30 fadeIn"}>
+        <Card className={"border-1 radius shadow p-30 fadeIn"}>
           {listFragment()}
           <Hr px={40} h={10} className={"bg-grey"} />
           {filterFragment()}

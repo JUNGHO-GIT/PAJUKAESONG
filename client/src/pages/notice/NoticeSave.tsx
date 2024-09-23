@@ -68,14 +68,14 @@ export const NoticeSave = () => {
     );
     // 2. save
     const saveSection = (i: number) => (
-      <Card className={"border radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
               variant={"standard"}
               required={true}
               label={"작성일"}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               disabled={true}
               value={dayFmt}
             />
@@ -85,7 +85,7 @@ export const NoticeSave = () => {
               variant={"standard"}
               label={"공지사항 제목"}
               required={true}
-              className={"border-bottom"}
+              className={"border-bottom-1"}
               value={OBJECT.notice_title}
               inputRef={REFS[i]?.notice_title}
               error={ERRORS[i]?.notice_title}

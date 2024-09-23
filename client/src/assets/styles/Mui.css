@@ -55,6 +55,7 @@
   box-shadow: 0px 0px 0px 0px !important;
 }
 .MuiInputLabel-root {
+  color: #484848de !important;
   font-size: 0.9rem !important;
 }
 
@@ -70,6 +71,10 @@
 }
 [class*="MuiInput-root"][class*="Mui-error"]::after {
   border-bottom: 2px solid #ff0000 !important;
+}
+
+[class*="MuiInputBase-input-MuiInput-input"][class*="Mui-disabled"] {
+  -webkit-text-fill-color: #555555 !important;
 }
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {

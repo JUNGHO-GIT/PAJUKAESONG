@@ -92,7 +92,7 @@ export const MenuList = () => {
       <Grid container spacing={2} columns={12} key={i}>
         {OBJECT?.map((item: any, index: number) => (
           <Grid size={{ xs: 6, sm: 4, md: 4, lg: 4, xl: 4 }} key={index}>
-            <Paper className={"border radius shadow px-50 py-20 fadeIn"}>
+            <Paper className={"border-1 radius shadow px-50 py-20 fadeIn"}>
               <Img
                 key={item.menu_images[0]}
                 src={item.menu_images[0]}
@@ -203,7 +203,7 @@ export const MenuList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={20} h={10} w={90} className={"bg-grey"} />
+          <Hr px={50} h={10} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

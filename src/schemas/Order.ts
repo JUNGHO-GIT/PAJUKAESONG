@@ -12,41 +12,27 @@ const schema = new mongoose.Schema(
       unique : true
     },
 
-    // 주문 상품
-    order_buy_name: {
+    order_category: {
       type: String,
       default: "",
       required: false
     },
-    order_buy_count: {
+    order_name: {
       type: String,
       default: "",
       required: false
     },
-    order_buy_price: {
+    order_email: {
       type: String,
       default: "",
       required: false
     },
-
-
-    // 주문자 정보
-    order_lookup_name: {
+    order_phone: {
       type: String,
       default: "",
       required: false
     },
-    order_lookup_email: {
-      type: String,
-      default: "",
-      required: false
-    },
-    order_lookup_phone: {
-      type: String,
-      default: "",
-      required: false
-    },
-    order_lookup_account: {
+    order_date: {
       type: String,
       default: "",
       required: false
@@ -75,7 +61,7 @@ const schema = new mongoose.Schema(
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre("save", async function(next) {
   if (this.isNew) {
-    this.order_number = await incrementSeq("order_number", "Order") ?? 0;
+    this.order_number = await incrementSeq("order_number", "Order");
   }
   next();
 });

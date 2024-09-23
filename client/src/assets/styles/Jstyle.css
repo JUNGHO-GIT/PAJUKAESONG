@@ -11143,35 +11143,68 @@
 }
 
 /** 98. border ************************************************************************************/
-.border {
-  border: 1px solid #dbdbdb !important;
-}
-.border-top {
-  border-top: 1px solid #dbdbdb !important;
+
+
+/** 98. border ************************************************************************************/
+.border-none {
+  border: none !important;
 }
 .border-top-none {
   border-top: none !important;
 }
-.border-right {
-  border-right: 1px solid #dbdbdb !important;
-}
 .border-right-none {
   border-right: none !important;
-}
-.border-bottom {
-  border-bottom: 1px solid #dbdbdb !important;
 }
 .border-bottom-none {
   border-bottom: none !important;
 }
-.border-left {
-  border-left: 1px solid #dbdbdb !important;
-}
 .border-left-none {
   border-left: none !important;
 }
-.border-none {
-  border: none !important;
+.border-1 {
+  border: 1px solid #dbdbdb !important;
+}
+.border-top-1 {
+  border-top: 1px solid #dbdbdb !important;
+}
+.border-right-1 {
+  border-right: 1px solid #dbdbdb !important;
+}
+.border-bottom-1 {
+  border-bottom: 1px solid #dbdbdb !important;
+}
+.border-left-1 {
+  border-left: 1px solid #dbdbdb !important;
+}
+.border-2 {
+  border: 2px solid #dbdbdb !important;
+}
+.border-top-2 {
+  border-top: 2px solid #dbdbdb !important;
+}
+.border-right-2 {
+  border-right: 2px solid #dbdbdb !important;
+}
+.border-bottom-2 {
+  border-bottom: 2px solid #dbdbdb !important;
+}
+.border-left-2 {
+  border-left: 2px solid #dbdbdb !important;
+}
+.border-3 {
+  border: 3px solid #dbdbdb !important;
+}
+.border-top-3 {
+  border-top: 3px solid #dbdbdb !important;
+}
+.border-right-3 {
+  border-right: 3px solid #dbdbdb !important;
+}
+.border-bottom-3 {
+  border-bottom: 3px solid #dbdbdb !important;
+}
+.border-left-3 {
+  border-left: 3px solid #dbdbdb !important;
 }
 
 /** 99. color *************************************************************************************/
@@ -11338,6 +11371,18 @@
 }
 .bg-light {
   background-color: #e1e2e5 !important;
+}
+
+.light-grey {
+  color: #D1D5DB !important;
+}
+.pointer-light-grey:hover {
+  cursor: pointer !important;
+  color: #D1D5DB !important;
+  transform: scale(1.1);
+}
+.bg-light-grey {
+  background-color: #D1D5DB !important;
 }
 
 .grey {
