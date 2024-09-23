@@ -1,16 +1,16 @@
-// MenuListMain.tsx
+// ProductList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
-import { Menu } from "@imports/ImportSchemas";
+import { Product } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
 import { Div, Img, Hr, Br, Select, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuListMain = () => {
+export const ProductList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
@@ -19,7 +19,7 @@ export const MenuListMain = () => {
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>([Menu]);
+  const [OBJECT, setOBJECT] = useState<any>([Product]);
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
     page: 0,
@@ -33,12 +33,11 @@ export const MenuListMain = () => {
     setLOADING(true);
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
-        PAGING: PAGING,
-        category: "main"
+        PAGING: PAGING
       }
     })
     .then((res: any) => {
-      setOBJECT(res.data.result.length > 0 ? res.data.result : [Menu]);
+      setOBJECT(res.data.result.length > 0 ? res.data.result : [Product]);
       setCOUNT((prev: any) => ({
         ...prev,
         totalCnt: res.data.totalCnt || 0,
@@ -61,7 +60,7 @@ export const MenuListMain = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        대표 메뉴
+        제품 목록
       </Div>
     );
     // 2. list
@@ -71,12 +70,12 @@ export const MenuListMain = () => {
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4, xl: 4 }} key={index}>
             <Paper className={"border radius shadow p-50 fadeIn"}>
               <Img
-                key={item.menu_images[0]}
-                src={item.menu_images[0]}
-                group={"menu"}
+                key={item.product_images[0]}
+                src={item.product_images[0]}
+                group={"product"}
                 className={"w-180 h-180 hover"}
                 onClick={() => {
-                  navigate("/menu/detail", {
+                  navigate("/product/detail", {
                     state: {
                       _id: item._id
                     }
@@ -85,10 +84,10 @@ export const MenuListMain = () => {
               />
               <Br px={30} />
               <Div className={"fs-1-4rem fw-600"}>
-                {item.menu_name}
+                {item.product_name}
               </Div>
               <Div className={"fs-1-0rem"}>
-                {item.menu_price}
+                {item.product_price}
               </Div>
             </Paper>
           </Grid>
@@ -159,7 +158,7 @@ export const MenuListMain = () => {
             <Btn
               className={"bg-burgundy"}
               onClick={() => {
-                navigate("/menu/save");
+                navigate("/product/save");
               }}
             >
               {"등록"}

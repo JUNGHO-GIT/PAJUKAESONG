@@ -27,11 +27,12 @@ import {
 import {
   Main,
   AboutGreeting, AboutLocation,
-  ContactFind, ContactList, ContactDetail, ContactSave,
+  ContactList, ContactFind, ContactDetail, ContactSave,
   FranchiseInfo, FranchiseList, FranchiseSave, FranchiseUpdate,
-  MenuListMain, MenuListSide, MenuDetail, MenuSave, MenuUpdate,
+  MenuList, MenuDetail, MenuSave, MenuUpdate,
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
-  OrderBuy, OrderLookup,
+  OrderList, OrderFind, OrderDetail, OrderSave, OrderUpdate,
+  ProductList, ProductDetail, ProductSave, ProductUpdate,
   UserLogin, UserSignup,
 } from "@imports/ImportPages";
 
@@ -67,8 +68,7 @@ const Franchise = () => (
 // -------------------------------------------------------------------------------------------------
 const Menu = () => (
   <Routes>
-    <Route path={"/list/main"} element={<MenuListMain />} />
-    <Route path={"/list/side"} element={<MenuListSide />} />
+    <Route path={"/list"} element={<MenuList />} />
     <Route path={"/save"} element={<MenuSave />} />
     <Route path={"/update"} element={<MenuUpdate />} />
     <Route path={"/detail"} element={<MenuDetail />} />
@@ -88,8 +88,21 @@ const Notice = () => (
 // -------------------------------------------------------------------------------------------------
 const Order = () => (
   <Routes>
-    <Route path={"/buy"} element={<OrderBuy />} />
-    <Route path={"/lookup"} element={<OrderLookup />} />
+    <Route path={"/list"} element={<OrderList />} />
+    <Route path={"/find"} element={<OrderFind />} />
+    <Route path={"/detail"} element={<OrderDetail />} />
+    <Route path={"/save"} element={<OrderSave />} />
+    <Route path={"/update"} element={<OrderUpdate />} />
+  </Routes>
+);
+
+// -------------------------------------------------------------------------------------------------
+const Product = () => (
+  <Routes>
+    <Route path={"/list"} element={<ProductList />} />
+    <Route path={"/detail"} element={<ProductDetail />} />
+    <Route path={"/save"} element={<ProductSave />} />
+    <Route path={"/update"} element={<ProductUpdate />} />
   </Routes>
 );
 
@@ -119,6 +132,7 @@ const App = () => {
         <Route path={"/menu/*"} element={<Menu />} />
         <Route path={"/notice/*"} element={<Notice />} />
         <Route path={"/order/*"} element={<Order />} />
+        <Route path={"/product/*"} element={<Product />} />
         <Route path={"/user/*"} element={<User />} />
       </Routes>
       <Footer />

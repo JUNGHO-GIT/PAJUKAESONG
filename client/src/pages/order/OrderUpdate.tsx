@@ -1,47 +1,66 @@
-// MenuSave.tsx
+// OrderUpdate.tsx
 
-import { useState } from "@imports/ImportReacts";
+import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useValidateMenu } from "@imports/ImportValidates";
+import { useValidateOrder } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
-import { Menu } from "@imports/ImportSchemas";
-import { Div, Select, Br, Hr,  Input, FileInput, Btn } from "@imports/ImportComponents";
+import { Order } from "@imports/ImportSchemas";
+import { Div, Img, Hr, Br, Input, FileInput, Btn, Select } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuSave = () => {
+export const OrderUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, adminId,
+    navigate, URL, SUBFIX, adminId, location_id,
   } = useCommonValue();
   const {
     dayFmt
   } = useCommonDate();
   const {
     REFS, ERRORS, validate,
-  } = useValidateMenu();
+  } = useValidateOrder();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(Menu);
-  const [fileList, setFileList] = useState<any>([]);
+  const [OBJECT, setOBJECT] = useState<any>(Order);
+  const [fileList, setFileList] = useState<File[] | null>(null);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    setLOADING(true);
+    axios.get(`${URL}${SUBFIX}/detail`, {
+      params: {
+        _id: location_id
+      },
+    })
+    .then((res: any) => {
+      setOBJECT(res.data.result || Order);
+    })
+    .catch((err: any) => {
+      console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
+    });
+  }, [URL, SUBFIX]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = () => {
+  const flowUpdate = () => {
     setLOADING(true);
-    if (!validate(OBJECT, fileList)) {
+    if (!validate(OBJECT)) {
       setLOADING(false);
       return;
     }
-    axios.post(`${URL}${SUBFIX}/save`,
+    axios.put(`${URL}${SUBFIX}/update`,
       makeFormData(
         OBJECT,
         fileList,
         {
-          user_id: adminId
+          _id: location_id
         }
       ),
       {
@@ -54,11 +73,7 @@ export const MenuSave = () => {
       if (res.data.status === "success") {
         alert(res.data.msg);
         document.querySelector("input[type=file]")?.remove();
-        navigate(`/menu/list`, {
-          state: {
-            category: OBJECT.menu_category,
-          },
-        });
+        navigate(`/order/list`);
       }
       else {
         alert(res.data.msg);
@@ -73,19 +88,19 @@ export const MenuSave = () => {
     });
   };
 
-  // 7. saveNode -----------------------------------------------------------------------------------
-  const saveNode = () => {
+  // 7. updateNode ---------------------------------------------------------------------------------
+  const updateNode = () => {
     // 1. title
     const titleSection = () => (
       <Div
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        메뉴 등록
+        주문 수정
       </Div>
     );
-    // 2. save
-    const saveSection = (i: number) => (
+    // 2. update
+    const updateSection = (i: number) => (
       <Card className={"border radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
@@ -94,20 +109,20 @@ export const MenuSave = () => {
               label={"메뉴 카테고리"}
               required={true}
               className={"border-bottom"}
-              value={OBJECT.menu_category}
-              inputRef={REFS[i]?.menu_category}
-              error={ERRORS[i]?.menu_category}
+              value={OBJECT.order_category}
+              inputRef={REFS[i]?.order_category}
+              error={ERRORS[i]?.order_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_category: e.target.value,
+                  order_category: e.target.value,
                 }));
               }}
             >
               {["main", "side"].map((item: string, idx: number) => (
                 <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                  {item === "main" && "메인 메뉴"}
-                  {item === "side" && "사이드 메뉴"}
+                  {item === "main" && "메인메뉴"}
+                  {item === "side" && "사이드메뉴"}
                 </MenuItem>
               ))}
             </Select>
@@ -118,13 +133,13 @@ export const MenuSave = () => {
               label={"메뉴 이름"}
               required={true}
               className={"border-bottom"}
-              value={OBJECT.menu_name}
-              inputRef={REFS[i]?.menu_name}
-              error={ERRORS[i]?.menu_name}
+              value={OBJECT.order_name}
+              inputRef={REFS[i]?.order_name}
+              error={ERRORS[i]?.order_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_name: e.target.value,
+                  order_name: e.target.value,
                 }));
               }}
             />
@@ -135,13 +150,13 @@ export const MenuSave = () => {
               label={"메뉴 설명"}
               required={true}
               className={"border-bottom"}
-              value={OBJECT.menu_description}
-              inputRef={REFS[i]?.menu_description}
-              error={ERRORS[i]?.menu_description}
+              value={OBJECT.order_description}
+              inputRef={REFS[i]?.order_description}
+              error={ERRORS[i]?.order_description}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_description: e.target.value,
+                  order_description: e.target.value,
                 }));
               }}
             />
@@ -151,22 +166,22 @@ export const MenuSave = () => {
               variant={"standard"}
               label={"가격"}
               className={"border-bottom"}
-              value={numeral(OBJECT?.menu_price).format("0,0")}
-              inputRef={REFS[i]?.menu_price}
-              error={ERRORS[i]?.menu_price}
+              value={numeral(OBJECT?.order_price).format("0,0")}
+              inputRef={REFS[i]?.order_price}
+              error={ERRORS[i]?.order_price}
               onChange={(e: any) => {
                 const value = e.target.value.replace(/,/g, '');
                 const newValue = value === "" ? 0 : Number(value);
                 if (value === "") {
                   setOBJECT((prev: any) => ({
                     ...prev,
-                    menu_price: "0",
+                    order_price: "0",
                   }));
                 }
                 else if (!isNaN(newValue) && newValue <= 9999999999) {
                   setOBJECT((prev: any) => ({
                     ...prev,
-                    menu_price: String(newValue),
+                    order_price: String(newValue),
                   }));
                 }
               }}
@@ -189,8 +204,8 @@ export const MenuSave = () => {
               label={"메뉴 이미지"}
               required={true}
               limit={2}
-              existing={OBJECT.menu_images}
-              group={"menu"}
+              existing={OBJECT.order_images}
+              group={"order"}
               value={fileList}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
@@ -198,7 +213,7 @@ export const MenuSave = () => {
               handleExistingFilesChange={(updatedExistingFiles: string[]) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_images: updatedExistingFiles,
+                  order_images: updatedExistingFiles,
                 }));
               }}
             />
@@ -214,24 +229,20 @@ export const MenuSave = () => {
             <Btn
               className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {
-                flowSave();
+                flowUpdate();
               }}
             >
-              {"저장하기"}
+              수정하기
             </Btn>
           </Grid>
           <Grid size={6} className={"d-left"}>
             <Btn
               className={"w-70p fs-1-0rem bg-light black"}
               onClick={() => {
-                navigate(`/menu/list`, {
-                  state: {
-                    category: OBJECT.menu_category,
-                  },
-                });
+                navigate(`/order/list`);
               }}
             >
-              {"목록으로"}
+              목록으로
             </Btn>
           </Grid>
         </Grid>
@@ -245,7 +256,7 @@ export const MenuSave = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {LOADING ? <Loading /> : saveSection(0)}
+            {LOADING ? <Loading /> : updateSection(0)}
           </Grid>
           <Br px={5} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
@@ -259,7 +270,7 @@ export const MenuSave = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {saveNode()}
+      {updateNode()}
     </>
   );
 };

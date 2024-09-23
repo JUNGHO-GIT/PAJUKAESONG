@@ -5,7 +5,7 @@ import { Div, Br, Img } from "@imports/ImportComponents";
 import { MuiFileInput, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const FileInput = (props: any) => {
+export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [fileExisting, setFileExisting] = useState<any[]>([]);
@@ -163,8 +163,8 @@ export const FileInput = (props: any) => {
     const updatedExistingFile = fileExisting.filter((_file, i) => i !== index);
     setFileExisting(updatedExistingFile);
 
-    if (props?.onExistingChange) {
-      props?.onExistingChange(updatedExistingFile);
+    if (handleExistingFilesChange) {
+      handleExistingFilesChange(updatedExistingFile);
     }
   }
 
@@ -264,7 +264,6 @@ export const FileInput = (props: any) => {
         multiline={props?.multiline || true}
         multiple={props?.multiple || true}
         onClick={(e: any) => e.preventDefault()}
-        onExistingChange={props?.onExistingChange || (() => {})}
         InputProps={{
           readOnly: (
             props?.readOnly || false

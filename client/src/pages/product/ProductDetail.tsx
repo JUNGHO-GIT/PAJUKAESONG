@@ -1,15 +1,15 @@
-// MenuDetail.tsx
+// ProductDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
-import { Menu } from "@imports/ImportSchemas";
+import { Product } from "@imports/ImportSchemas";
 import { Div, Img, Hr } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuDetail = () => {
+export const ProductDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
@@ -18,7 +18,7 @@ export const MenuDetail = () => {
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(Menu);
+  const [OBJECT, setOBJECT] = useState<any>(Product);
   const [STATE, setSTATE] = useState<any>({
     _id: location_id
   });
@@ -32,7 +32,7 @@ export const MenuDetail = () => {
       }
     })
     .then((res: any) => {
-      setOBJECT(res.data.result || Menu);
+      setOBJECT(res.data.result || Product);
     })
     .catch((err: any) => {
       alert(err.response.data.msg);
@@ -54,11 +54,7 @@ export const MenuDetail = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        navigate(`/menu/list`,{
-          state: {
-            category: OBJECT.menu_category
-          }
-        });
+        navigate(`/product/list`);
       }
       else {
         alert(res.data.msg);
@@ -81,7 +77,7 @@ export const MenuDetail = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        메뉴 상세
+        상품 상세
       </Div>
     );
     // 2. detail
@@ -90,26 +86,26 @@ export const MenuDetail = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Img
-              key={OBJECT.menu_images[0]}
-              src={OBJECT.menu_images[0]}
-              group={"menu"}
+              key={OBJECT.product_images[0]}
+              src={OBJECT.product_images[0]}
+              group={"product"}
               className={"w-300 h-300"}
             />
           </Grid>
           <Hr px={20} h={10} className={"bg-burgundy"} />
           <Grid size={6} className={"d-left"}>
             <Div className={"fs-1-8rem fw-700 black"}>
-              {OBJECT.menu_name}
+              {OBJECT.product_name}
             </Div>
           </Grid>
           <Grid size={6} className={"d-right"}>
             <Div className={"fs-1-2rem fw-600 black"}>
-              {`₩ ${numeral(OBJECT.menu_price).format("0,0")}`}
+              {`₩ ${numeral(OBJECT.product_price).format("0,0")}`}
             </Div>
           </Grid>
           <Grid size={12} className={"d-left"}>
             <Div className={"fs-1-2rem fw-500 dark"}>
-              {OBJECT.menu_description}
+              {OBJECT.product_description}
             </Div>
           </Grid>
         </Grid>
@@ -123,11 +119,7 @@ export const MenuDetail = () => {
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
               onClick={() => {
-                navigate(`/menu/list`,{
-                  state: {
-                    category: OBJECT.menu_category
-                  }
-                });
+                navigate(`/product/list`);
               }}
             >
               목록으로
@@ -137,7 +129,7 @@ export const MenuDetail = () => {
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
               onClick={() => {
-                navigate("/menu/update", {
+                navigate("/product/update", {
                   state: {
                     _id: OBJECT._id
                   }

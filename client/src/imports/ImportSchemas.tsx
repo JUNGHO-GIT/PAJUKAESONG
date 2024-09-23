@@ -6,6 +6,7 @@ import { Franchise } from "@schemas/Franchise";
 import { Menu } from "@schemas/Menu";
 import { Notice } from "@schemas/Notice";
 import { Order } from "@schemas/Order";
+import { Product } from "@schemas/Product";
 import { User } from "@schemas/User";
 
 // -------------------------------------------------------------------------------------------------
@@ -16,5 +17,6 @@ export {
   Menu,
   Notice,
   Order,
+  Product,
   User,
 };

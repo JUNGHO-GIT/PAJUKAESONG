@@ -73,7 +73,11 @@ export const MenuUpdate = () => {
       if (res.data.status === "success") {
         alert(res.data.msg);
         document.querySelector("input[type=file]")?.remove();
-        navigate(`/menu/list/${OBJECT.menu_category}`);
+        navigate(`/menu/list`, {
+          state: {
+            category: OBJECT.menu_category,
+          },
+        });
       }
       else {
         alert(res.data.msg);
@@ -201,7 +205,7 @@ export const MenuUpdate = () => {
           <Grid size={12}>
             <FileInput
               variant={"outlined"}
-              label={"가맹점 사진"}
+              label={"메뉴 이미지"}
               required={true}
               limit={2}
               existing={OBJECT.menu_images}
@@ -210,7 +214,7 @@ export const MenuUpdate = () => {
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
-              onExistingChange={(updatedExistingFiles: string[]) => {
+              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
                   menu_images: updatedExistingFiles,
@@ -239,7 +243,11 @@ export const MenuUpdate = () => {
             <Btn
               className={"w-70p fs-1-0rem bg-light black"}
               onClick={() => {
-                navigate(`/menu/list/${OBJECT.menu_category}`);
+                navigate(`/menu/list`, {
+                  state: {
+                    category: OBJECT.menu_category,
+                  },
+                });
               }}
             >
               목록으로

@@ -1,4 +1,4 @@
-// Contact.ts
+// Product.ts
 
 import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
@@ -6,59 +6,53 @@ import { incrementSeq } from "@schemas/Counter";
 // 1. schema ---------------------------------------------------------------------------------------
 const schema = new mongoose.Schema(
   {
-    contact_number : {
+    product_number : {
       type : Number,
       default: 0,
-      unique : true,
+      unique : true
     },
-
-    contact_category: {
+    product_category: {
       type: String,
       default: "",
       required: false
     },
-    contact_name: {
+    product_name: {
       type: String,
       default: "",
       required: false
     },
-    contact_email: {
+    product_description: {
       type: String,
       default: "",
       required: false
     },
-    contact_phone: {
+    product_price: {
       type: String,
       default: "",
       required: false
     },
-    contact_title: {
-      type: String,
-      default: "",
-      required: false
-    },
-    contact_content: {
-      type: String,
-      default: "",
+    product_images: {
+      type: Array,
+      default: [],
       required: false
     },
 
-    contact_regDt: {
+    product_regDt: {
       type: Date,
       default: Date.now,
       required: false
     },
-    contact_updateDt: {
+    product_updateDt: {
       type: Date,
       default: Date.now,
       required: false
     }
   },
   {
-    collection: "Contact",
+    collection: "Product",
     timestamps: {
-      createdAt: "contact_regDt",
-      updatedAt: "contact_updateDt"
+      createdAt: "product_regDt",
+      updatedAt: "product_updateDt"
     },
   }
 );
@@ -66,12 +60,12 @@ const schema = new mongoose.Schema(
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre("save", async function(next) {
   if (this.isNew) {
-    this.contact_number = await incrementSeq("contact_number", "Contact") ?? 0;
+    this.product_number = (await incrementSeq("product_number", "Product")) || 0;
   }
   next();
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Contact = mongoose.model(
-  "Contact", schema,
+export const Product = mongoose.model(
+  "Product", schema
 );

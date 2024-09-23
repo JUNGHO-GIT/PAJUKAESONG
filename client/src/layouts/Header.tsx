@@ -15,7 +15,7 @@ export const Header = () => {
     isXs, isSm, isMd, isLg, isXl
   } = useResponsive();
   const {
-    navigate, PATH, firstStr, secondStr, dataArray, isAdmin,
+    navigate, PATH, firstStr, secondStr, dataArray, isAdmin, location_category
   } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
@@ -39,19 +39,28 @@ export const Header = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화
   useEffect(() => {
-    const index = dataArray.findIndex((item) => (
-      item.titleEn === firstStr
-    ));
-    if (firstStr === "main") {
-      setSelectedTab("");
-      setSelectedTabVal("");
-      setSelectedMenuItem("");
+
+    // menu인 경우
+    if (firstStr === "menu") {
+      setSelectedTab(firstStr);
+      setSelectedTabVal(firstStr);
+      setSelectedMenuItem(location_category);
     }
-    if (index !== -1) {
+
+    // product인 경우
+    else if (firstStr === "product") {
+      setSelectedTab("order");
+      setSelectedTabVal("order");
+      setSelectedMenuItem(secondStr);
+    }
+
+    // 나머지 경우
+    else {
       setSelectedTab(firstStr);
       setSelectedTabVal(firstStr);
       setSelectedMenuItem(secondStr);
     }
+
   }, [PATH]);
 
   // 2. toggle -------------------------------------------------------------------------------------
@@ -159,11 +168,15 @@ export const Header = () => {
               onClick={() => {
                 setSelectedTabVal(selectedTab);
                 setSelectedMenuItem(subItem.titleEn);
-                navigate(subItem.url);
                 setSelectedAnchorEl((prev) => ({
                   ...prev,
                   [selectedTab]: null,
                 }));
+                navigate(subItem.url, {
+                  state: {
+                    category: subItem?.category
+                  }
+                });
               }}
             >
               {subItem.titleKo}

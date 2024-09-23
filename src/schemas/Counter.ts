@@ -2,7 +2,7 @@
 
 import mongoose from "mongoose";
 
-// Counter model schema
+// -------------------------------------------------------------------------------------------------
 const schema = new mongoose.Schema(
   {
     seq_collection: {
@@ -20,32 +20,41 @@ const schema = new mongoose.Schema(
   }
 );
 
-const Counter = mongoose.model("Counter", schema);
-
+// -------------------------------------------------------------------------------------------------
 export const incrementSeq = async (sequenceName: string, modelName: string) => {
+
+  // 1. Model과 Counter 초기화
   const Model = mongoose.model(modelName);
+  const Counter = mongoose.model("Counter", schema);
 
-  const latestDoc = await Model.findOne().sort({ [sequenceName]: -1 })
-  const latestSeq = latestDoc ? latestDoc[sequenceName] : 0;
+  // 2. 최신 sequence 값을 가져오기
+  const latestFindResult:any = await Model.findOne({ [sequenceName]: { $exists: true } })
+  .sort({ [sequenceName]: -1 })
+  .lean();
 
-  const updateSeq = await Counter.findOneAndUpdate(
-    { seq_collection: modelName },
-    { $inc: { seq_number: 1 } },
-    { new: true, upsert: true }
-  )
-  .lean()
+  const latestResult = latestFindResult ? latestFindResult[sequenceName] : 0;
 
-  if (updateSeq.seq_number <= latestSeq) {
-    const correctedSeq = await Counter.findOneAndUpdate(
+  // 3. Counter에서 해당 sequenceName 존재 여부 확인
+  let existingFindResult = await Counter.findOne({ seq_collection: modelName }).lean();
+
+  // 4. Counter 업데이트 또는 새로운 Counter 생성
+  let existingUpdateResult:any = null;
+  if (!existingFindResult) {
+    const newCounterData:any  = {
+      seq_collection: modelName,
+      seq_number: latestResult + 1,
+    };
+    newCounterData[sequenceName] = latestResult + 1;
+    existingUpdateResult = await Counter.create(newCounterData);
+  }
+  else {
+    existingUpdateResult = await Counter.findOneAndUpdate(
       { seq_collection: modelName },
-      { seq_number: latestSeq + 1 },
+      { $set: { [sequenceName]: latestResult + 1, seq_number: latestResult + 1 } },
       { new: true }
-    )
-    .lean()
-
-    return correctedSeq && correctedSeq.seq_number;
+    );
   }
 
-  // Return the updated sequence number
-  return updateSeq && updateSeq.seq_number;
+  // 5. 최종 결과 반환
+  return existingUpdateResult ? existingUpdateResult[sequenceName] : null;
 };

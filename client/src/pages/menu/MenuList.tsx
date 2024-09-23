@@ -1,4 +1,4 @@
-// MenuListSide.tsx
+// MenuList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
@@ -6,15 +6,15 @@ import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
-import { Div, Img, Hr, Br, Input, Select, Btn, Icons } from "@imports/ImportComponents";
+import { Div, Img, Hr, Br, Select, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuListSide = () => {
+export const MenuList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    URL, SUBFIX, navigate, isAdmin,
+    URL, SUBFIX, navigate, isAdmin, location_category
   } = useCommonValue();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ export const MenuListSide = () => {
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
         PAGING: PAGING,
-        category: "side"
+        category: location_category
       }
     })
     .then((res: any) => {
@@ -51,7 +51,7 @@ export const MenuListSide = () => {
     .finally(() => {
       setLOADING(false);
     });
-  }, [URL, SUBFIX, PAGING]);
+  }, [URL, SUBFIX, PAGING, location_category]);
 
   // 7. listNode -----------------------------------------------------------------------------------
   const listNode = () => {
@@ -61,7 +61,7 @@ export const MenuListSide = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        사이드 메뉴
+        {location_category === "main" ? "대표 메뉴" : "서브 메뉴"}
       </Div>
     );
     // 2. list
@@ -69,7 +69,7 @@ export const MenuListSide = () => {
       <Grid container spacing={2} columns={12} key={i}>
         {OBJECT?.map((item: any, index: number) => (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4, xl: 4 }} key={index}>
-            <Paper className={"border radius shadow p-50 fadeIn"} key={index}>
+            <Paper className={"border radius shadow p-50 fadeIn"}>
               <Img
                 key={item.menu_images[0]}
                 src={item.menu_images[0]}

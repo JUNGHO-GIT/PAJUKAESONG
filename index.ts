@@ -13,6 +13,7 @@ import { router as franchiseRouter } from "@routers/franchiseRouter";
 import { router as menuRouter } from "@routers/menuRouter";
 import { router as noticeRouter } from "@routers/noticeRouter";
 import { router as orderRouter } from "@routers/orderRouter";
+import { router as productRouter } from "@routers/productRouter";
 import { router as userRouter } from "@routers/userRouter";
 
 // -------------------------------------------------------------------------------------------------
@@ -95,4 +96,5 @@ app.use(`${preFix}/franchise`, franchiseRouter);
 app.use(`${preFix}/menu`, menuRouter);
 app.use(`${preFix}/notice`, noticeRouter);
 app.use(`${preFix}/order`, orderRouter);
+app.use(`${preFix}/product`, productRouter);
 app.use(`${preFix}/user`, userRouter);

@@ -1,64 +1,46 @@
-// MenuSave.tsx
+// OrderSave.tsx
 
 import { useState } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useValidateMenu } from "@imports/ImportValidates";
-import { axios, numeral } from "@imports/ImportLibs";
-import { makeFormData } from "@imports/ImportUtils";
+import { useValidateOrder } from "@imports/ImportValidates";
+import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
-import { Menu } from "@imports/ImportSchemas";
-import { Div, Select, Br, Hr,  Input, FileInput, Btn } from "@imports/ImportComponents";
+import { Order } from "@imports/ImportSchemas";
+import { Div, Select, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuSave = () => {
+export const OrderSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, adminId,
+    navigate, URL, SUBFIX
   } = useCommonValue();
   const {
-    dayFmt
+    dayFmt,
   } = useCommonDate();
   const {
     REFS, ERRORS, validate,
-  } = useValidateMenu();
+  } = useValidateOrder();
 
-  // 2-1. useState ---------------------------------------------------------------------------------
+  // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(Menu);
-  const [fileList, setFileList] = useState<any>([]);
+  const [OBJECT, setOBJECT] = useState<any>(Order);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
     setLOADING(true);
-    if (!validate(OBJECT, fileList)) {
+    if (!validate(OBJECT)) {
       setLOADING(false);
       return;
     }
-    axios.post(`${URL}${SUBFIX}/save`,
-      makeFormData(
-        OBJECT,
-        fileList,
-        {
-          user_id: adminId
-        }
-      ),
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    )
+    axios.post(`${URL}${SUBFIX}/save`, {
+      OBJECT: OBJECT,
+    })
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        document.querySelector("input[type=file]")?.remove();
-        navigate(`/menu/list`, {
-          state: {
-            category: OBJECT.menu_category,
-          },
-        });
+        navigate("/order/find");
       }
       else {
         alert(res.data.msg);
@@ -81,7 +63,7 @@ export const MenuSave = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        메뉴 등록
+        주문 하기
       </Div>
     );
     // 2. save
@@ -89,25 +71,35 @@ export const MenuSave = () => {
       <Card className={"border radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
+            <Input
+              variant={"standard"}
+              required={true}
+              label={"작성일"}
+              className={"border-bottom"}
+              disabled={true}
+              value={dayFmt}
+            />
+          </Grid>
+          <Grid size={12}>
             <Select
               variant={"standard"}
-              label={"메뉴 카테고리"}
+              label={"주문 유형"}
               required={true}
               className={"border-bottom"}
-              value={OBJECT.menu_category}
-              inputRef={REFS[i]?.menu_category}
-              error={ERRORS[i]?.menu_category}
+              value={OBJECT.order_category}
+              inputRef={REFS[i]?.order_category}
+              error={ERRORS[i]?.order_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_category: e.target.value,
+                  order_category: e.target.value,
                 }));
               }}
             >
-              {["main", "side"].map((item: string, idx: number) => (
+              {["franchise", "personal"].map((item: any, idx: number) => (
                 <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                  {item === "main" && "메인 메뉴"}
-                  {item === "side" && "사이드 메뉴"}
+                  {item === "franchise" && "가맹 주문"}
+                  {item === "personal" && "1:1 주문"}
                 </MenuItem>
               ))}
             </Select>
@@ -115,16 +107,16 @@ export const MenuSave = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"메뉴 이름"}
+              label={"이름"}
               required={true}
               className={"border-bottom"}
-              value={OBJECT.menu_name}
-              inputRef={REFS[i]?.menu_name}
-              error={ERRORS[i]?.menu_name}
+              value={OBJECT.order_name}
+              inputRef={REFS[i]?.order_name}
+              error={ERRORS[i]?.order_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_name: e.target.value,
+                  order_name: e.target.value,
                 }));
               }}
             />
@@ -132,16 +124,16 @@ export const MenuSave = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"메뉴 설명"}
+              label={"이메일"}
               required={true}
               className={"border-bottom"}
-              value={OBJECT.menu_description}
-              inputRef={REFS[i]?.menu_description}
-              error={ERRORS[i]?.menu_description}
+              value={OBJECT.order_email}
+              inputRef={REFS[i]?.order_email}
+              error={ERRORS[i]?.order_email}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_description: e.target.value,
+                  order_email: e.target.value,
                 }));
               }}
             />
@@ -149,56 +141,49 @@ export const MenuSave = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"가격"}
+              label={"전화번호"}
+              required={true}
               className={"border-bottom"}
-              value={numeral(OBJECT?.menu_price).format("0,0")}
-              inputRef={REFS[i]?.menu_price}
-              error={ERRORS[i]?.menu_price}
+              value={OBJECT.order_phone}
+              inputRef={REFS[i]?.order_phone}
+              error={ERRORS[i]?.order_phone}
               onChange={(e: any) => {
-                const value = e.target.value.replace(/,/g, '');
-                const newValue = value === "" ? 0 : Number(value);
-                if (value === "") {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    menu_price: "0",
-                  }));
-                }
-                else if (!isNaN(newValue) && newValue <= 9999999999) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    menu_price: String(newValue),
-                  }));
-                }
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  order_phone: e.target.value,
+                }));
               }}
             />
           </Grid>
           <Grid size={12}>
             <Input
               variant={"standard"}
+              label={"주문 제목"}
               required={true}
-              label={"작성일"}
-              shrink={"shrink"}
               className={"border-bottom"}
-              readOnly={true}
-              value={dayFmt}
+              value={OBJECT.order_title}
+              inputRef={REFS[i]?.order_title}
+              error={ERRORS[i]?.order_title}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  order_title: e.target.value,
+                }));
+              }}
             />
           </Grid>
           <Grid size={12}>
-            <FileInput
-              variant={"outlined"}
-              label={"메뉴 이미지"}
+            <TextArea
+              label={"주문 내용"}
               required={true}
-              limit={2}
-              existing={OBJECT.menu_images}
-              group={"menu"}
-              value={fileList}
-              onChange={(updatedFiles: File[] | null) => {
-                setFileList(updatedFiles);
-              }}
-              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
+              inputclass={"h-35vh"}
+              value={OBJECT.order_content}
+              inputRef={REFS[i]?.order_content}
+              error={ERRORS[i]?.order_content}
+              onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_images: updatedExistingFiles,
+                  order_content: e.target.value,
                 }));
               }}
             />
@@ -210,28 +195,14 @@ export const MenuSave = () => {
     const filterSection = (i: number) => (
       <Card className={"mx-20 mt-n10 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={12} className={"d-center"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}
             >
-              {"저장하기"}
-            </Btn>
-          </Grid>
-          <Grid size={6} className={"d-left"}>
-            <Btn
-              className={"w-70p fs-1-0rem bg-light black"}
-              onClick={() => {
-                navigate(`/menu/list`, {
-                  state: {
-                    category: OBJECT.menu_category,
-                  },
-                });
-              }}
-            >
-              {"목록으로"}
+              {"주문하기"}
             </Btn>
           </Grid>
         </Grid>

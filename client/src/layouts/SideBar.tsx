@@ -18,7 +18,7 @@ export const SideBar = (
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, firstStr, secondStr, thirdStr, dataArray, PATH
+    navigate, firstStr, secondStr, dataArray, PATH, location_category
   } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
@@ -29,16 +29,28 @@ export const SideBar = (
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화
   useEffect(() => {
-    setSelectedTab(firstStr);
-    setSelectedTabVal(firstStr);
-    // foo/boo/roo 형식인 경우
-    if (PATH.split("/").length > 3) {
-      setSelectedListItem(thirdStr);
+
+    // menu인 경우
+    if (firstStr === "menu") {
+      setSelectedTab(firstStr);
+      setSelectedTabVal(firstStr);
+      setSelectedListItem(location_category);
     }
-    // foo/boo 형식인 경우
-    else if (PATH.split("/").length > 2) {
+
+    // product인 경우
+    else if (firstStr === "product") {
+      setSelectedTab("order");
+      setSelectedTabVal("order");
       setSelectedListItem(secondStr);
     }
+
+    // 나머지 경우
+    else {
+      setSelectedTab(firstStr);
+      setSelectedTabVal(firstStr);
+      setSelectedListItem(secondStr);
+    }
+
   }, [PATH]);
 
   // 7. sidebar ------------------------------------------------------------------------------------
@@ -108,7 +120,11 @@ export const SideBar = (
                     setSelectedTab(item.titleEn);
                     setSelectedTabVal(item.titleEn);
                     setSelectedListItem(subItem.titleEn);
-                    navigate(subItem.url);
+                    navigate(subItem.url, {
+                      state: {
+                        category: subItem?.category
+                      }
+                    });
                     toggleSidebar();
                   }}
                 >
