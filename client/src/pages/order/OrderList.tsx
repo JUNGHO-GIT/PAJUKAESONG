@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { axios, moment } from "@imports/ImportLibs";
+import { axios, moment, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
@@ -72,31 +72,31 @@ export const OrderList = () => {
     const listSection = (i: number) => (
       <Card className={"border-1 radius shadow p-30 fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 5, sm: 2 }}>
+          <Grid size={3}>
             <Div className={"fs-0-8rem fw-500"}>
               유형
             </Div>
           </Grid>
-          <Grid size={{ xs: 7, sm: 7 }}>
+          <Grid size={6}>
             <Div className={"fs-0-8rem fw-500"}>
-              제품명
+              금액
             </Div>
           </Grid>
-          <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
+          <Grid size={3}>
             <Div className={"fs-0-8rem fw-500"}>
-              작성일
+              날짜
             </Div>
           </Grid>
         </Grid>
         <Hr px={40} h={10} className={"bg-burgundy"} />
         {OBJECT?.map((item: any, index: number) => (
           <Grid container spacing={2} key={index}>
-            <Grid size={{ xs: 5, sm: 2 }}>
-              <Div className={"fs-1-0rem"}>
+            <Grid size={3}>
+              <Div className={"fs-0-8rem"}>
                 {item.order_category === "reservation" ? "매장 예약" : "제품 구매"}
               </Div>
             </Grid>
-            <Grid size={{ xs: 7, sm: 7 }}>
+            <Grid size={6}>
               <Div
                 className={"fs-1-0rem pointer-burgundy"}
                 onClick={() => {
@@ -107,12 +107,12 @@ export const OrderList = () => {
                   });
                 }}
               >
-                {item.order_title}
+                {`${numeral(item.order_total_price).format("0,0")}`}
               </Div>
             </Grid>
-            <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
-              <Div className={"fs-1-0rem"}>
-                {moment(item.order_regDt).format("YYYY-MM-DD")}
+            <Grid size={3}>
+              <Div className={"fs-0-8rem"}>
+                {moment(item.order_regDt).format("MM-DD")}
               </Div>
             </Grid>
           </Grid>

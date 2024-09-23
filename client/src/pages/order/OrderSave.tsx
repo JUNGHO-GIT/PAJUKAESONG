@@ -73,6 +73,14 @@ export const OrderSave = () => {
   useEffect(() => {
     const updatedOrderProduct = OBJECT?.order_product;
     sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(updatedOrderProduct));
+    setOBJECT((prev: any) => ({
+      ...prev,
+      order_total_price: String(
+        OBJECT?.order_product?.reduce((acc: number, cur: any) => (
+          acc + Number(cur.product_price)
+        ), 0)
+      ),
+    }));
   }, [OBJECT.order_product]);
 
   // 3. flow ---------------------------------------------------------------------------------------
@@ -117,7 +125,7 @@ export const OrderSave = () => {
     );
     // 2. product
     const productSection = (i: number) => (
-      <Card className={"border-1 radius shadow px-20 py-20 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         {OBJECT?.order_product?.map((item: any, index: number) => (
           <Grid container spacing={2} columns={12} key={index}>
             <Grid size={3} className={"d-left"}>
@@ -243,7 +251,7 @@ export const OrderSave = () => {
     );
     // 3. order
     const orderSection = (i: number) => (
-      <Card className={"border-1 radius shadow px-50 py-20 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input

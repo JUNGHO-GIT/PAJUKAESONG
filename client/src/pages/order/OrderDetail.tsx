@@ -1,24 +1,54 @@
 // OrderDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
-import { axios, moment } from "@imports/ImportLibs";
+import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
+import { useValidateOrder } from "@imports/ImportValidates";
+import { axios, numeral,  } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
-import { Div, Hr, Icons, TextArea } from "@imports/ImportComponents";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Div, Select, Br, Input, Hr, Btn, Img, Icons } from "@imports/ImportComponents";
+import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, location_id, isAdmin, URL, SUBFIX
+    navigate, URL, SUBFIX, location_id, isAdmin,
   } = useCommonValue();
+  const {
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
+  const {
+    dayFmt, getDayFmt,
+  } = useCommonDate();
+  const {
+    REFS, ERRORS, validate,
+  } = useValidateOrder();
 
-  // 2-1. useState ---------------------------------------------------------------------------------
+  // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
+  const [imageSize, setImageSize] = useState<string>("");
+
+  // 2-2. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    if (isXs) {
+      setImageSize("w-50 h-50 hover");
+    }
+    else if (isSm) {
+      setImageSize("w-60 h-60 hover");
+    }
+    else if (isMd) {
+      setImageSize("w-70 h-70 hover");
+    }
+    else if (isLg) {
+      setImageSize("w-80 h-80 hover");
+    }
+    else if (isXl) {
+      setImageSize("w-100 h-100 hover");
+    }
+  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -54,7 +84,7 @@ export const OrderDetail = () => {
         navigate('/order/list', {
           state: {
             order_name: OBJECT.order_name,
-            order_email: OBJECT.order_email,
+            order_phone: OBJECT.order_phone,
           },
         });
       }
@@ -71,8 +101,8 @@ export const OrderDetail = () => {
     });
   };
 
-  // 7. detailNode ---------------------------------------------------------------------------------
-  const detailNode = () => {
+  // 7. saveNode -----------------------------------------------------------------------------------
+  const saveNode = () => {
     // 1. title
     const titleSection = () => (
       <Div
@@ -82,25 +112,105 @@ export const OrderDetail = () => {
         주문 상세
       </Div>
     );
-    // 2. detail
-    const detailSection = (i: number) => (
+    // 2. product
+    const productSection = (i: number) => (
       <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
+          {OBJECT?.order_product?.map((item: any, index: number) => (
+            <Grid container spacing={2} columns={12} key={index}>
+              <Grid size={3} className={"d-left"}>
+                <Img
+                  key={item.product_images[0]}
+                  src={item.product_images[0]}
+                  group={"product"}
+                  className={imageSize}
+                />
+              </Grid>
+              <Grid size={4} className={"d-left"}>
+                <Div className={"d-column"}>
+                  <Div className={"fs-1-4rem fw-600"}>
+                    {item.product_name}
+                  </Div>
+                  <Div className={"fs-1-0rem"}>
+                    {`₩ ${numeral(item.product_price).format("0,0")}`}
+                  </Div>
+                </Div>
+              </Grid>
+              <Grid size={4} className={"d-center"}>
+                <Div className={"fs-1-0rem"}>
+                  {item.product_count}
+                </Div>
+              </Grid>
+            </Grid>
+          ))}
+          <Hr px={20} h={10} className={"bg-burgundy"} />
           <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-8rem fw-700"}>
-              {OBJECT.order_title}
-            </Div>
-            <Div className={"fs-1-8rem fw-500 ms-10 grey"}>
-              {`[ ${OBJECT.order_category === "franchise" ? "가맹 주문" : "1:1 주문"} ]`}
+            <Div className={"fs-1-0rem"}>
+              {`총 금액  : ₩ ${numeral(OBJECT.order_total_price).format("0,0")}`}
             </Div>
           </Grid>
-          <Hr px={10} h={10} className={"bg-burgundy"} />
+        </Grid>
+      </Card>
+    );
+    // 3. order
+    const orderSection = (i: number) => (
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12}>
-            <TextArea
-              label={""}
-              readOnly={true}
-              inputclass={"h-min50vh readonly"}
-              value={OBJECT.order_content}
+            <Input
+              variant={"standard"}
+              required={true}
+              disabled={true}
+              label={"주문 날짜"}
+              className={"border-bottom-1"}
+              value={OBJECT.order_date}
+            />
+          </Grid>
+          <Grid size={12}>
+            <Select
+              variant={"standard"}
+              label={"주문 유형"}
+              required={true}
+              disabled={true}
+              className={"border-bottom-1"}
+              value={OBJECT.order_category}
+            >
+              {["reservation", "buy"].map((item: string, idx: number) => (
+                <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
+                  {item === "reservation" && "매장 예약"}
+                  {item === "buy" && "제품 구매"}
+                </MenuItem>
+              ))}
+            </Select>
+          </Grid>
+          <Grid size={12}>
+            <Input
+              variant={"standard"}
+              label={"이름"}
+              required={true}
+              disabled={true}
+              className={"border-bottom-1"}
+              value={OBJECT.order_name}
+            />
+          </Grid>
+          <Grid size={12}>
+            <Input
+              variant={"standard"}
+              label={"이메일"}
+              required={true}
+              disabled={true}
+              className={"border-bottom-1"}
+              value={OBJECT.order_email}
+            />
+          </Grid>
+          <Grid size={12}>
+            <Input
+              variant={"standard"}
+              label={"전화번호"}
+              required={true}
+              disabled={true}
+              className={"border-bottom-1"}
+              value={OBJECT.order_phone}
             />
           </Grid>
         </Grid>
@@ -117,7 +227,7 @@ export const OrderDetail = () => {
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>
-              {moment(OBJECT.order_regDt).format("YYYY-MM-DD")}
+              {getDayFmt(OBJECT.order_regDt)}
             </Div>
           </Grid>
           <Grid size={6} className={"d-right"}>
@@ -127,7 +237,7 @@ export const OrderDetail = () => {
                 navigate("/order/list", {
                   state: {
                     order_name: OBJECT.order_name,
-                    order_email: OBJECT.order_email
+                    order_phone: OBJECT.order_phone
                   }
                 });
               }}
@@ -166,9 +276,11 @@ export const OrderDetail = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {LOADING ? <Loading /> : detailSection(0)}
+            {LOADING ? <Loading /> : productSection(0)}
           </Grid>
-          <Hr px={20} h={10} w={90} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {orderSection(0)}
+          </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>
@@ -180,7 +292,7 @@ export const OrderDetail = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {detailNode()}
+      {saveNode()}
     </>
   );
 };

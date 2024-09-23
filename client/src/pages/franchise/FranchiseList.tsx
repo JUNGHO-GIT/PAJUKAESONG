@@ -1,8 +1,8 @@
 // FranchiseList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { axios, moment } from "@imports/ImportLibs";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { axios } from "@imports/ImportLibs";
 import { Swiper, SwiperSlide } from "@imports/ImportLibs";
 import { SwiperPagination, SwiperNavigation, SwiperAutoplay } from "@imports/ImportLibs";
 import { Franchise } from "@imports/ImportSchemas";
@@ -16,6 +16,9 @@ export const FranchiseList = () => {
   const {
     URL, SUBFIX, navigate, isAdmin,
   } = useCommonValue();
+  const {
+    getDayFmt,
+  } = useCommonDate();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -132,7 +135,7 @@ export const FranchiseList = () => {
                       className={"w-20 h-20"}
                     />
                     <Div className={"fs-0-9rem ms-5"}>
-                      {moment(item.franchise_regDt).format("YYYY-MM-DD")}
+                      {getDayFmt(item.franchise_regDt)}
                     </Div>
                   </Div>
                 </Grid>

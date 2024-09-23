@@ -3,7 +3,7 @@
 // -------------------------------------------------------------------------------------------------
 export const Menu: any = {
   _id: "",
-  menu_number: 0,
+  menu_number: 1,
   menu_category: "main",
   menu_name: "",
   menu_description: "",

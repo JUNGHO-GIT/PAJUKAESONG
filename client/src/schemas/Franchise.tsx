@@ -3,7 +3,7 @@
 // -------------------------------------------------------------------------------------------------
 export const Franchise: any = {
   _id: "",
-  franchise_number: 0,
+  franchise_number: 1,
   franchise_name: "",
   franchise_address_main: "",
   franchise_address_detail: "",

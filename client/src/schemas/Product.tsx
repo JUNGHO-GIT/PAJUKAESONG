@@ -3,7 +3,7 @@
 // -------------------------------------------------------------------------------------------------
 export const Product: any = {
   _id: "",
-  product_number: 0,
+  product_number: 1,
   product_category: "main",
   product_name: "",
   product_description: "",

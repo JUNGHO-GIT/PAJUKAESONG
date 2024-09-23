@@ -1,9 +1,9 @@
 // NoticeUpdate.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateNotice } from "@imports/ImportValidates";
-import { axios, moment } from "@imports/ImportLibs";
+import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
@@ -14,8 +14,11 @@ export const NoticeUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, adminId, location_id
+    navigate, URL, SUBFIX, location_id
   } = useCommonValue();
+  const {
+    getDayFmt,
+  } = useCommonDate();
   const {
     REFS, ERRORS, validate,
   } = useValidateNotice();
@@ -95,7 +98,7 @@ export const NoticeUpdate = () => {
               label={"작성일"}
               className={"border-bottom-1"}
               disabled={true}
-              value={moment(OBJECT.regDt).format("YYYY-MM-DD")}
+              value={getDayFmt(OBJECT.notice_regDt)}
             />
           </Grid>
           <Grid size={12}>

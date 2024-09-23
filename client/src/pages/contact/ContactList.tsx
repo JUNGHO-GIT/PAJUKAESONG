@@ -1,8 +1,8 @@
 // ContactList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { axios, moment } from "@imports/ImportLibs";
+import { useCommonValue, useResponsive, useCommonDate } from "@imports/ImportHooks";
+import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
@@ -16,6 +16,9 @@ export const ContactList = () => {
   const {
     navigate, URL, SUBFIX, location,
   } = useCommonValue();
+  const {
+    getDayFmt,
+  } = useCommonDate();
   const {
     isXs
   } = useResponsive();
@@ -84,7 +87,7 @@ export const ContactList = () => {
           </Grid>
           <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
             <Div className={"fs-0-8rem fw-500"}>
-              작성일
+              날짜
             </Div>
           </Grid>
         </Grid>
@@ -92,7 +95,7 @@ export const ContactList = () => {
         {OBJECT?.map((item: any, index: number) => (
           <Grid container spacing={2} key={index}>
             <Grid size={{ xs: 5, sm: 2 }}>
-              <Div className={"fs-1-0rem"}>
+              <Div className={"fs-0-8rem"}>
                 {item.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"}
               </Div>
             </Grid>
@@ -111,8 +114,8 @@ export const ContactList = () => {
               </Div>
             </Grid>
             <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
-              <Div className={"fs-1-0rem"}>
-                {moment(item.contact_regDt).format("YYYY-MM-DD")}
+              <Div className={"fs-0-8rem"}>
+                {getDayFmt(item.contact_regDt)}
               </Div>
             </Grid>
           </Grid>

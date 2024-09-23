@@ -3,7 +3,7 @@
 // -------------------------------------------------------------------------------------------------
 export const Contact: any = {
   _id: "",
-  contact_number: 0,
+  contact_number: 1,
   contact_category: "",
   contact_name: "",
   contact_email: "",

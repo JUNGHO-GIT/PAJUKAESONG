@@ -1,8 +1,8 @@
 // NoticeDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
-import { axios, moment } from "@imports/ImportLibs";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Div, Hr, Icons, TextArea } from "@imports/ImportComponents";
@@ -15,6 +15,9 @@ export const NoticeDetail = () => {
   const {
     navigate, location_id, isAdmin, URL, SUBFIX
   } = useCommonValue();
+  const {
+    getDayFmt,
+  } = useCommonDate();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -109,7 +112,7 @@ export const NoticeDetail = () => {
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>
-              {moment(OBJECT.notice_regDt).format("YYYY-MM-DD")}
+              {getDayFmt(OBJECT.notice_regDt)}
             </Div>
           </Grid>
           <Grid size={6} className={"d-right"}>

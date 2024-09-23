@@ -12,28 +12,6 @@ const schema = new mongoose.Schema(
       unique : true
     },
 
-    order_product: [{
-      product_name: {
-        type: String,
-        default: "",
-        required: false
-      },
-      product_count: {
-        type: String,
-        default: "",
-        required: false
-      },
-      product_price: {
-        type: String,
-        default: "",
-        required: false
-      },
-      product_images: {
-        type: Array,
-        default: [],
-        required: false
-      }
-    }],
     order_category: {
       type: String,
       default: "",
@@ -59,6 +37,33 @@ const schema = new mongoose.Schema(
       default: "",
       required: false
     },
+    order_total_price: {
+      type: String,
+      default: "",
+      required: false
+    },
+    order_product: [{
+      product_name: {
+        type: String,
+        default: "",
+        required: false
+      },
+      product_count: {
+        type: String,
+        default: "",
+        required: false
+      },
+      product_price: {
+        type: String,
+        default: "",
+        required: false
+      },
+      product_images: {
+        type: Array,
+        default: [],
+        required: false
+      }
+    }],
 
     order_regDt: {
       type: Date,

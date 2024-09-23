@@ -1,8 +1,8 @@
 // NoticeList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { axios, moment } from "@imports/ImportLibs";
+import { useCommonValue, useResponsive, useCommonDate } from "@imports/ImportHooks";
+import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
@@ -17,8 +17,8 @@ export const NoticeList = () => {
     URL, SUBFIX, navigate, isAdmin,
   } = useCommonValue();
   const {
-    isXs
-  } = useResponsive();
+    getDayFmt,
+  } = useCommonDate();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -82,7 +82,7 @@ export const NoticeList = () => {
           </Grid>
           <Grid size={3}>
             <Div className={"fs-0-8rem fw-500"}>
-              작성일
+              날짜
             </Div>
           </Grid>
         </Grid>
@@ -110,11 +110,7 @@ export const NoticeList = () => {
             </Grid>
             <Grid size={3}>
               <Div className={"fs-0-8rem"}>
-                {isXs ? (
-                  moment(item.notice_regDt).format("MM-DD")
-                ) : (
-                  moment(item.notice_regDt).format("YYYY-MM-DD")
-                )}
+                {getDayFmt(item.notice_regDt)}
               </Div>
             </Grid>
             <Hr px={5} h={1} className={"mb-20"} />
