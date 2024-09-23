@@ -11000,10 +11000,38 @@
   justify-content: center !important;
   text-align: center !important;
 }
+.d-row-top {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  text-align: center !important;
+}
+.d-row-bottom {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: flex-end !important;
+  text-align: center !important;
+}
 .d-column {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
+  text-align: center !important;
+}
+.d-column-left {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+.d-column-right {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
   text-align: center !important;
 }
 .d-fill {

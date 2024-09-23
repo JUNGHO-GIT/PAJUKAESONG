@@ -75,6 +75,7 @@ export const ProductDetail = () => {
           product_name: OBJECT.product_name,
           product_count: orderCount,
           product_price: orderPrice,
+          product_images: OBJECT.product_images,
         },
       }
     });
@@ -150,16 +151,31 @@ export const ProductDetail = () => {
     );
     // 3. filter1
     const filter1Section = (i: number) => (
-      <Card className={"mx-20 fadeIn"} key={i}>
+      <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={4} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8 }} className={"d-center"}>
+            <Input
+              label={"총 금액"}
+              value={numeral(orderPrice).format("0,0")}
+              readOnly={true}
+              error={orderPrice < 0}
+              startadornment={
+                <Icons
+                  key={"Won"}
+                  name={"Won"}
+                  className={"w-15 h-20 black"}
+                />
+              }
+            />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }} className={"d-center"}>
             <Input
               label={"수량"}
               value={orderCount}
               readOnly={true}
               error={orderCount < 0}
               endadornment={
-                <Div className={"d-center me-n10"}>
+                <Div className={"d-center"}>
                   <Icons
                     name={"Minus"}
                     className={"w-20 h-20 black"}
@@ -196,24 +212,16 @@ export const ProductDetail = () => {
               }
             />
           </Grid>
-          <Grid size={8} className={"d-center"}>
-            <Input
-              label={"총 금액"}
-              value={numeral(orderPrice).format("0,0")}
-              readOnly={true}
-              error={orderPrice < 0}
-              startadornment={
-                <Div className={"d-center ms-n10"}>
-                  <Icons
-                    key={"Won"}
-                    name={"Won"}
-                    className={"w-20 h-20 black"}
-                  />
-                </Div>
-              }
-            />
+          <Grid size={6} className={"d-right"}>
+            <Btn
+              className={"w-100p fs-1-0rem bg-grey"}
+              onClick={() => {
+              }}
+            >
+              장바구니
+            </Btn>
           </Grid>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={6} className={"d-left"}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
@@ -228,7 +236,7 @@ export const ProductDetail = () => {
     );
     // 4. filter2
     const filter2Section = (i: number) => (
-      <Card className={"mx-20 fadeIn"} key={i}>
+      <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
             <Div

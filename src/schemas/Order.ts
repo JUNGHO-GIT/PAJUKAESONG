@@ -27,6 +27,11 @@ const schema = new mongoose.Schema(
         type: String,
         default: "",
         required: false
+      },
+      product_images: {
+        type: Array,
+        default: [],
+        required: false
       }
     }],
     order_category: {
