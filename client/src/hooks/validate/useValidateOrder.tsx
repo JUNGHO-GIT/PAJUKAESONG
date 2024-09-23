@@ -45,7 +45,7 @@ export const useValidateOrder = () => {
         if (PATH.includes("/order/find")) {
           const target = [
             "order_name",
-            "order_email",
+            "order_phone",
           ];
           REFS.current = (
             Array.from({ length: 1 }, (_, _idx) => (
@@ -66,11 +66,8 @@ export const useValidateOrder = () => {
           if (!OBJECT.order_name) {
             return showAlertAndFocus('order_name', "이름을 입력해주세요.", 0);
           }
-          else if (!OBJECT.order_email) {
-            return showAlertAndFocus('order_email', "이메일을 입력해주세요.", 0);
-          }
-          else if (!validateEmail(OBJECT.order_email)) {
-            return showAlertAndFocus('order_email', "이메일 형식으로 입력해주세요.", 0);
+          else if (!OBJECT.order_phone) {
+            return showAlertAndFocus('order_phone', "전화번호를 입력해주세요.", 0);
           }
           return true;
         }
@@ -82,8 +79,6 @@ export const useValidateOrder = () => {
             "order_name",
             "order_email",
             "order_phone",
-            "order_title",
-            "order_content",
           ];
           REFS.current = (
             Array.from({ length: 1 }, (_, _idx) => (
@@ -102,7 +97,7 @@ export const useValidateOrder = () => {
             ))
           );
           if (!OBJECT.order_category) {
-            return showAlertAndFocus('order_category', "문의 유형을 선택해주세요.", 0);
+            return showAlertAndFocus('order_category', "주문 유형을 선택해주세요.", 0);
           }
           else if (!OBJECT.order_name) {
             return showAlertAndFocus('order_name', "이름을 입력해주세요.", 0);
@@ -115,12 +110,6 @@ export const useValidateOrder = () => {
           }
           else if (!OBJECT.order_phone) {
             return showAlertAndFocus('order_phone', "전화번호를 입력해주세요.", 0);
-          }
-          else if (!OBJECT.order_title) {
-            return showAlertAndFocus('order_title', "제목을 입력해주세요.", 0);
-          }
-          else if (!OBJECT.order_content) {
-            return showAlertAndFocus('order_content', "내용을 입력해주세요.", 0);
           }
           return true;
         }

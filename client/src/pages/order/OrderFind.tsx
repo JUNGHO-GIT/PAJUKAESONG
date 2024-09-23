@@ -34,7 +34,7 @@ export const OrderFind = () => {
     axios.get(`${URL}${SUBFIX}/find`, {
       params: {
         order_name: OBJECT.order_name,
-        order_email: OBJECT.order_email,
+        order_phone: OBJECT.order_phone,
       }
     })
     .then((res: any) => {
@@ -42,7 +42,7 @@ export const OrderFind = () => {
         navigate('/order/list', {
           state: {
             order_name: OBJECT.order_name,
-            order_email: OBJECT.order_email,
+            order_phone: OBJECT.order_phone,
           },
         });
       }
@@ -77,7 +77,7 @@ export const OrderFind = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"이름"}
+              label={"주문자 이름"}
               required={true}
               className={"border-bottom-1"}
               value={OBJECT.order_name}
@@ -94,22 +94,21 @@ export const OrderFind = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"이메일"}
+              label={"주문자 전화번호"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_email}
-              inputRef={REFS[i]?.order_email}
-              error={ERRORS[i]?.order_email}
+              value={OBJECT.order_phone}
+              inputRef={REFS[i]?.order_phone}
+              error={ERRORS[i]?.order_phone}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  order_email: e.target.value,
+                  order_phone: e.target.value,
                 }));
               }}
             />
           </Grid>
         </Grid>
-        <Br px={30} />
       </Card>
     );
     // 3. filter
@@ -139,7 +138,6 @@ export const OrderFind = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : findSection(0)}
           </Grid>
-          <Br px={30} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

@@ -14,7 +14,7 @@ export const OrderSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, location
+    navigate, URL, SUBFIX, TITLE, PATH
   } = useCommonValue();
   const {
     isXs, isSm, isMd, isLg, isXl
@@ -50,15 +50,30 @@ export const OrderSave = () => {
     }
   }, [isXs, isSm, isMd, isLg, isXl]);
 
+  useEffect(() => {
+    console.log("===================================");
+    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
+  }, [OBJECT]);
+
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-    setOBJECT((prev: any) => ({
-      ...prev,
-      order_product: [location?.state?.order_product],
-    }));
+    const existOrderProduct = sessionStorage.getItem(`${TITLE}_order_product`);
+    if (existOrderProduct) {
+      setOBJECT((prev: any) => ({
+        ...prev,
+        order_product: JSON.parse(existOrderProduct),
+        order_date: dayFmt,
+      }));
+    }
     setLOADING(false);
-  }, []);
+  }, [PATH]);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    const updatedOrderProduct = OBJECT?.order_product;
+    sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(updatedOrderProduct));
+  }, [OBJECT.order_product]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
@@ -73,6 +88,7 @@ export const OrderSave = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
+        sessionStorage.removeItem(`${TITLE}_order_product`);
         navigate("/order/find");
       }
       else {
@@ -135,21 +151,29 @@ export const OrderSave = () => {
                     if (newValue <= 1) {
                       setOBJECT((prev: any) => ({
                         ...prev,
-                        order_product: [{
-                          ...item,
-                          product_count: 1,
-                          product_price: Number(originalPrice),
-                        }],
+                        order_product: prev.order_product.map((product: any) => (
+                          product.product_id === item.product_id ? {
+                            ...product,
+                            product_count: 1,
+                            product_price: originalPrice,
+                          } : (
+                            product
+                          )
+                        )),
                       }));
                     }
                     else if (!isNaN(newValue) && newValue <= 30) {
                       setOBJECT((prev: any) => ({
                         ...prev,
-                        order_product: [{
-                          ...item,
-                          product_count: newValue,
-                          product_price: Number(originalPrice) * newValue,
-                        }],
+                        order_product: prev.order_product.map((product: any) => (
+                          product.product_id === item.product_id ? {
+                            ...product,
+                            product_count: newValue,
+                            product_price: originalPrice * newValue,
+                          } : (
+                            product
+                          )
+                        )),
                       }));
                     }
                   }}
@@ -168,21 +192,29 @@ export const OrderSave = () => {
                     if (newValue <= 1) {
                       setOBJECT((prev: any) => ({
                         ...prev,
-                        order_product: [{
-                          ...item,
-                          product_count: 1,
-                          product_price: Number(originalPrice),
-                        }],
+                        order_product: prev.order_product.map((product: any) => (
+                          product.product_id === item.product_id ? {
+                            ...product,
+                            product_count: 1,
+                            product_price: originalPrice,
+                          } : (
+                            product
+                          )
+                        )),
                       }));
                     }
                     else if (!isNaN(newValue) && newValue <= 30) {
                       setOBJECT((prev: any) => ({
                         ...prev,
-                        order_product: [{
-                          ...item,
-                          product_count: newValue,
-                          product_price: Number(originalPrice) * newValue,
-                        }],
+                        order_product: prev.order_product.map((product: any) => (
+                          product.product_id === item.product_id ? {
+                            ...product,
+                            product_count: newValue,
+                            product_price: originalPrice * newValue,
+                          } : (
+                            product
+                          )
+                        )),
                       }));
                     }
                   }}
@@ -217,10 +249,16 @@ export const OrderSave = () => {
             <Input
               variant={"standard"}
               required={true}
-              label={"작성일"}
+              label={"주문 날짜"}
               className={"border-bottom-1"}
               disabled={true}
               value={dayFmt}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  order_date: e.target.value
+                }));
+              }}
             />
           </Grid>
           <Grid size={12}>
@@ -305,14 +343,24 @@ export const OrderSave = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={6} className={"d-right"}>
+            <Btn
+              className={"w-100p fs-1-0rem bg-grey"}
+              onClick={() => {
+                navigate("/product/list");
+              }}
+            >
+              더 찾기
+            </Btn>
+          </Grid>
+          <Grid size={6} className={"d-left"}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}
             >
-              {"주문하기"}
+              주문하기
             </Btn>
           </Grid>
         </Grid>
@@ -320,7 +368,7 @@ export const OrderSave = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min75vh"}>
+      <Paper className={"content-wrapper d-center h-min75vh"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}

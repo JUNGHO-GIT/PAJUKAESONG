@@ -37,7 +37,7 @@ export const OrderList = () => {
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
         order_name: location.state?.order_name || "",
-        order_email: location.state?.order_email || "",
+        order_phone: location.state?.order_phone || "",
         PAGING: PAGING
       }
     })
@@ -79,7 +79,7 @@ export const OrderList = () => {
           </Grid>
           <Grid size={{ xs: 7, sm: 7 }}>
             <Div className={"fs-0-8rem fw-500"}>
-              제목
+              제품명
             </Div>
           </Grid>
           <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
@@ -93,7 +93,7 @@ export const OrderList = () => {
           <Grid container spacing={2} key={index}>
             <Grid size={{ xs: 5, sm: 2 }}>
               <Div className={"fs-1-0rem"}>
-                {item.order_category === "franchise" ? "가맹 주문" : "1:1 주문"}
+                {item.order_category === "reservation" ? "매장 예약" : "제품 구매"}
               </Div>
             </Grid>
             <Grid size={{ xs: 7, sm: 7 }}>
@@ -184,7 +184,7 @@ export const OrderList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min75vh"}>
+      <Paper className={"content-wrapper d-center h-min75vh"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}

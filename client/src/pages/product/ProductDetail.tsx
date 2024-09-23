@@ -13,7 +13,7 @@ export const ProductDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, location_id, isAdmin, URL, SUBFIX
+    navigate, location_id, isAdmin, URL, SUBFIX, TITLE
   } = useCommonValue();
   const {
     isXs, isSm, isMd, isLg, isXl
@@ -67,19 +67,47 @@ export const ProductDetail = () => {
   }, [URL, SUBFIX, location_id]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = () => {
-    setLOADING(true);
-    navigate(`/order/save`, {
-      state: {
-        order_product: {
-          product_name: OBJECT.product_name,
-          product_count: orderCount,
-          product_price: orderPrice,
-          product_images: OBJECT.product_images,
-        },
+  const flowSave = (extra: string) => {
+    const orderProduct: any = {
+      product_id: OBJECT._id,
+      product_name: OBJECT.product_name,
+      product_count: orderCount,
+      product_price: orderPrice,
+      product_images: OBJECT.product_images,
+    };
+
+    const existOrderProduct = sessionStorage.getItem(`${TITLE}_order_product`);
+
+    if (extra === "buy") {
+      sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify([]));
+    }
+
+    if (existOrderProduct) {
+      const orderProducts = JSON.parse(existOrderProduct);
+
+      // 기존에 같은 product_id가 있는지 확인
+      const productIndex = orderProducts.findIndex(
+        (product: any) => product.product_id === orderProduct.product_id
+      );
+
+      // 중복된 항목이 있으면 덮어씌움
+      if (productIndex > -1) {
+        orderProducts[productIndex] = orderProduct;
       }
-    });
+      // 중복된 항목이 없으면 새로운 항목 추가
+      else {
+        orderProducts.push(orderProduct);
+      }
+
+      sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(orderProducts));
+    }
+    else {
+      sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify([orderProduct]));
+    }
+
+    navigate(`/order/save`);
   };
+
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowDelete = () => {
@@ -216,6 +244,7 @@ export const ProductDetail = () => {
             <Btn
               className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
+                flowSave("cart");
               }}
             >
               장바구니
@@ -225,7 +254,7 @@ export const ProductDetail = () => {
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
-                flowSave();
+                flowSave("buy");
               }}
             >
               주문하기
@@ -275,7 +304,7 @@ export const ProductDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min75vh"}>
+      <Paper className={"content-wrapper d-center h-min75vh"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}

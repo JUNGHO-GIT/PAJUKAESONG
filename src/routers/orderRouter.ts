@@ -63,7 +63,7 @@ router.get("/find", async (req: Request, res: Response) => {
     }
     else if (finalResult.status === "fail") {
       res.json({
-        msg: "문의 내역이 없습니다.",
+        msg: "주문 내역이 없습니다.",
         status: finalResult.status,
         result: finalResult.result,
       });

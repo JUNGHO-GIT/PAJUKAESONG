@@ -37,6 +37,7 @@ export const list = async (
       $project: {
         _id: 1,
         order_number: 1,
+        order_product: 1,
         order_category: 1,
         order_name: 1,
         order_email: 1,
@@ -99,6 +100,7 @@ export const save = async (
   const finalResult = await Order.create(
     {
       _id: new mongoose.Types.ObjectId(),
+      order_product: OBJECT_param.order_product,
       order_category: OBJECT_param.order_category,
       order_name: OBJECT_param.order_name,
       order_email: OBJECT_param.order_email,
@@ -123,6 +125,7 @@ export const update = async (
     },
     {
       $set: {
+        order_product: OBJECT_param.order_product,
         order_category: OBJECT_param.order_category,
         order_name: OBJECT_param.order_name,
         order_email: OBJECT_param.order_email,
