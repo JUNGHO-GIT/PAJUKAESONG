@@ -194,7 +194,7 @@ export const ProductDetail = () => {
                 <Icons
                   key={"Won"}
                   name={"Won"}
-                  className={"w-15 h-20 black"}
+                  className={"w-15 h-20"}
                 />
               }
             />
@@ -209,7 +209,7 @@ export const ProductDetail = () => {
                 <Div className={"d-center"}>
                   <Icons
                     name={"Minus"}
-                    className={"w-20 h-20 black"}
+                    className={"w-20 h-20"}
                     onClick={(e: any) => {
                       const value = orderCount;
                       const newValue = value < 1 ? 1 : value - 1;
@@ -225,7 +225,7 @@ export const ProductDetail = () => {
                   />
                   <Icons
                     name={"Plus"}
-                    className={"w-20 h-20 black"}
+                    className={"w-20 h-20"}
                     onClick={(e: any) => {
                       const value = orderCount;
                       const newValue = value < 1 ? 1 : value + 1;

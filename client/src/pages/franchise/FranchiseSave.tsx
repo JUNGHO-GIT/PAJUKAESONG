@@ -7,7 +7,7 @@ import { axios } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
-import { Div, Br, Input, FileInput, Btn } from "@imports/ImportComponents";
+import { Div, Br, Input, FileInput, Btn, Icons } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -26,7 +26,6 @@ export const FranchiseSave = () => {
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [mapAddress, setMapAddress] = useState<string>("");
   const [OBJECT, setOBJECT] = useState<any>(Franchise);
   const [fileList, setFileList] = useState<File[] | null>(null);
 
@@ -87,7 +86,6 @@ export const FranchiseSave = () => {
           ...prev,
           franchise_address_main: data.address,
         }));
-        setMapAddress(fullAddress);
       },
     }).open();
   };
@@ -130,7 +128,7 @@ export const FranchiseSave = () => {
               label={"가맹점 주소"}
               required={true}
               readOnly={true}
-              className={"border-bottom pointer"}
+              className={"border-bottom-1 pointer"}
               value={OBJECT?.franchise_address_main}
               inputRef={REFS?.[i]?.franchise_address_main}
               error={ERRORS?.[i]?.franchise_address_main}

@@ -69,7 +69,9 @@
 [class*="MuiOutlinedInput-root"][class*="Mui-error"] .MuiOutlinedInput-notchedOutline {
   border: 2px solid #ff0000 !important;
 }
-
+[class*="MuiFormLabel-root"][class*="Mui-error"] {
+  color: #ff0000 !important;
+}
 [class*="MuiInputBase-input-MuiInput-input"][class*="Mui-disabled"] {
   -webkit-text-fill-color: #757575 !important;
 }

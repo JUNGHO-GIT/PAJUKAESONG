@@ -131,6 +131,7 @@ export const FranchiseDetail = () => {
                 key={"Location"}
                 name={"Location"}
                 className={"w-20 h-20"}
+                fill={"lightgreen"}
               />
               <Div className={"fs-0-9rem ms-5"}>
                 {OBJECT?.franchise_address_main}
@@ -144,6 +145,7 @@ export const FranchiseDetail = () => {
                 key={"Phone"}
                 name={"Phone"}
                 className={"w-20 h-20"}
+                fill={"yellow"}
               />
               <Div className={"fs-0-9rem ms-5"}>
                 {OBJECT?.franchise_phone}
@@ -154,6 +156,7 @@ export const FranchiseDetail = () => {
                 key={"Calendar"}
                 name={"Calendar"}
                 className={"w-20 h-20"}
+                fill={"cornsilk"}
               />
               <Div className={"fs-0-9rem ms-5"}>
                 {getDayFmt(OBJECT?.franchise_regDt)}

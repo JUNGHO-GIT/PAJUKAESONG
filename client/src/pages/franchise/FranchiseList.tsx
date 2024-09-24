@@ -164,7 +164,7 @@ export const FranchiseList = () => {
               page={PAGING.page}
               showFirstButton={true}
               showLastButton={true}
-              onPageChange={(event, newPage) => {
+              onPageChange={(_event, newPage) => {
                 setPAGING((prev: any) => ({
                   ...prev,
                   page: newPage

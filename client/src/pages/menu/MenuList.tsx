@@ -110,9 +110,6 @@ export const MenuList = () => {
               <Div className={"fs-1-4rem fw-600"}>
                 {item?.menu_name}
               </Div>
-              <Div className={"fs-1-0rem"}>
-                {item?.menu_price}
-              </Div>
             </Paper>
           </Grid>
         ))}
@@ -164,7 +161,7 @@ export const MenuList = () => {
               page={PAGING.page}
               showFirstButton={true}
               showLastButton={true}
-              onPageChange={(event, newPage) => {
+              onPageChange={(_event, newPage) => {
                 setPAGING((prev: any) => ({
                   ...prev,
                   page: newPage

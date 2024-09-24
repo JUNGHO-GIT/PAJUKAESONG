@@ -7,7 +7,7 @@ import { axios, numeral } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
-import { Div, Br, Input, FileInput, Btn, Select } from "@imports/ImportComponents";
+import { Div, Br, Input, FileInput, Btn, Select, Icons } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -169,6 +169,13 @@ export const ProductUpdate = () => {
               value={numeral(OBJECT?.product_price).format("0,0")}
               inputRef={REFS?.[i]?.product_price}
               error={ERRORS?.[i]?.product_price}
+              startadornment={
+                <Icons
+                  key={"Won"}
+                  name={"Won"}
+                  className={"w-15 h-15"}
+                />
+              }
               onChange={(e: any) => {
                 const value = e.target.value.replace(/,/g, '');
                 const newValue = value === "" ? 0 : Number(value);
@@ -196,6 +203,13 @@ export const ProductUpdate = () => {
               className={"border-bottom-1"}
               readOnly={true}
               value={dayFmt}
+              startadornment={
+                <Icons
+                  key={"Calendar"}
+                  name={"Calendar"}
+                  className={"w-20 h-20"}
+                />
+              }
             />
           </Grid>
           <Grid size={12}>

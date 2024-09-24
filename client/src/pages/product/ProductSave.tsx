@@ -178,10 +178,16 @@ export const ProductSave = () => {
               variant={"standard"}
               required={true}
               label={"작성일"}
-              shrink={"shrink"}
               className={"border-bottom-1"}
               readOnly={true}
               value={dayFmt}
+              startadornment={
+                <Icons
+                  key={"Calendar"}
+                  name={"Calendar"}
+                  className={"w-20 h-20 mt-n5"}
+                />
+              }
             />
           </Grid>
           <Grid size={12}>
