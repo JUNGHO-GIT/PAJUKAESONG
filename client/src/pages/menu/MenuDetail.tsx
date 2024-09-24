@@ -137,7 +137,7 @@ export const MenuDetail = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
             <Div

@@ -7,12 +7,12 @@ import { newDate } from "@scripts/date";
 // 0. cnt ------------------------------------------------------------------------------------------
 export const cnt = async (
   contact_name_param: string,
-  contact_email_param: string,
+  contact_phone_param: string,
 ) => {
   const finalResult = await Contact.countDocuments(
     {
       contact_name: contact_name_param,
-      contact_email: contact_email_param,
+      contact_email: contact_phone_param,
     }
   );
 
@@ -22,7 +22,7 @@ export const cnt = async (
 // 1. list -----------------------------------------------------------------------------------------
 export const list = async (
   contact_name_param: string,
-  contact_email_param: string,
+  contact_phone_param: string,
   sort_param: 1 | -1,
   page_param: number,
 ) => {
@@ -30,7 +30,7 @@ export const list = async (
     {
       $match: {
         contact_name: contact_name_param,
-        contact_email: contact_email_param,
+        contact_email: contact_phone_param,
       }
     },
     {
@@ -66,12 +66,12 @@ export const list = async (
 // 2-1. find ---------------------------------------------------------------------------------------
 export const find = async (
   contact_name_param: string,
-  contact_email_param: string,
+  contact_phone_param: string,
 ) => {
   const finalResult = await Contact.findOne(
     {
       contact_name: contact_name_param,
-      contact_email: contact_email_param,
+      contact_email: contact_phone_param,
     }
   )
   .lean();
@@ -106,6 +106,7 @@ export const save = async (
       contact_phone: OBJECT_param.contact_phone,
       contact_title: OBJECT_param.contact_title,
       contact_content: OBJECT_param.contact_content,
+      contact_images: OBJECT_param.contact_images,
       contact_regDt: newDate,
       contact_updateDt: null,
     },
@@ -131,6 +132,7 @@ export const update = async (
         contact_phone: OBJECT_param.contact_phone,
         contact_title: OBJECT_param.contact_title,
         contact_content: OBJECT_param.contact_content,
+        contact_images: OBJECT_param.contact_images,
         contact_updateDt: newDate,
       }
     },

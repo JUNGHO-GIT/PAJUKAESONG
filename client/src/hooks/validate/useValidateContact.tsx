@@ -45,7 +45,7 @@ export const useValidateContact = () => {
         if (PATH.includes("/contact/find")) {
           const target = [
             "contact_name",
-            "contact_email",
+            "contact_phone",
           ];
           REFS.current = (
             Array.from({ length: 1 }, (_, _idx) => (
@@ -66,11 +66,8 @@ export const useValidateContact = () => {
           if (!OBJECT?.contact_name) {
             return showAlertAndFocus('contact_name', "이름을 입력해주세요.", 0);
           }
-          else if (!OBJECT?.contact_email) {
-            return showAlertAndFocus('contact_email', "이메일을 입력해주세요.", 0);
-          }
-          else if (!validateEmail(OBJECT?.contact_email)) {
-            return showAlertAndFocus('contact_email', "이메일 형식으로 입력해주세요.", 0);
+          else if (!OBJECT?.contact_phone) {
+            return showAlertAndFocus('contact_phone', "전화번호를 입력해주세요.", 0);
           }
           return true;
         }

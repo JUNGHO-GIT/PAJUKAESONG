@@ -41,18 +41,15 @@ export const FranchiseInfo = () => {
       </Div>
     );
     // 2. info
-    const infoSection = () => {
-      const titleFragment = () => (
+    const infoSection = (i: number) => (
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹점 창업 안내
             </Div>
           </Grid>
-        </Grid>
-      );
-      const infoFragment = () => (
-        <Grid container spacing={2} columns={12}>
+          <Br px={5} />
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-0rem"}>
               1995년 개인 창업하였을 때부터, 프랜차이즈 회사를 운영하는 현재까지 ‘장사는 제 양심을 파는 것’이라고 생각하였기에 동기와 과정을 중요시하고, ‘성실, 공의, 정직’의 원칙 아래 공동선의식 동행(나에게도 남에게도 유익하게)을 (주)이삭의 사명으로 삼고, ‘정당하고 바른 기업’이 되고자 노력하며 ‘이삭’을 운영하고 있습니다.
@@ -69,28 +66,18 @@ export const FranchiseInfo = () => {
             </Div>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border-1 radius shadow p-20 fadeIn"}>
-          {titleFragment()}
-          <Br px={30} />
-          {infoFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 3. step
-    const stepSection = () => {
-      const titleFragment = () => (
+    const stepSection = (i: number) => (
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹점 창업 절차
             </Div>
           </Grid>
-        </Grid>
-      );
-      const stepFragment = () => (
-        <Grid container spacing={2} columns={12}>
+          <Br px={5} />
           {isXs ? (
             <Grid size={12}>
               <Stepper
@@ -177,28 +164,18 @@ export const FranchiseInfo = () => {
             </Grid>
           )}
         </Grid>
-      );
-      return (
-        <Card className={"border-1 radius shadow p-20 fadeIn"}>
-          {titleFragment()}
-          <Br px={30} />
-          {stepFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 4. cost
-    const costSection = () => {
-      const titleFragment = () => (
+    const costSection = (i: number) => (
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹비 및 창업비용
             </Div>
           </Grid>
-        </Grid>
-      );
-      const headFragment = () => (
-        <Grid container spacing={2} columns={12}>
+          <Br px={5} />
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem fw-500"}>
               구분
@@ -214,10 +191,7 @@ export const FranchiseInfo = () => {
               비용
             </Div>
           </Grid>
-        </Grid>
-      );
-      const costFragment = () => (
-        <Grid container spacing={2} columns={12}>
+          <Hr px={10} h={10} className={"bg-burgundy"} />
           {/** row 1 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -329,34 +303,23 @@ export const FranchiseInfo = () => {
             </Div>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border-1 radius shadow p-20 fadeIn"}>
-          {titleFragment()}
-          <Br px={30} />
-          {headFragment()}
-          <Hr px={40} h={10} className={"bg-burgundy"} />
-          {costFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs:12 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {infoSection()}
+            {infoSection(0)}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {stepSection()}
+            {stepSection(0)}
           </Grid>
-          <Br px={10} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {costSection()}
+            {costSection(0)}
           </Grid>
         </Grid>
       </Paper>

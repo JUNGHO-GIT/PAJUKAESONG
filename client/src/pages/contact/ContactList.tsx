@@ -40,7 +40,7 @@ export const ContactList = () => {
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
         contact_name: location.state?.contact_name || "",
-        contact_email: location.state?.contact_email || "",
+        contact_phone: location.state?.contact_phone || "",
         PAGING: PAGING
       }
     })
@@ -73,7 +73,7 @@ export const ContactList = () => {
     );
     // 2. list
     const listSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-20 fadeIn"}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 5, sm: 2 }}>
             <Div className={"fs-0-8rem fw-500"}>
@@ -124,7 +124,7 @@ export const ContactList = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select

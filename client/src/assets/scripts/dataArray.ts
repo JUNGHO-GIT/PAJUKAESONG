@@ -38,7 +38,7 @@ export const dataArray = [
     ],
   },
   {
-    titleKo: "제품주문",
+    titleKo: "주문예약",
     titleEn: "order",
     sub: [
       {

@@ -68,19 +68,19 @@ export const NoticeList = () => {
     );
     // 2. list
     const listSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-20 fadeIn"}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={2}>
             <Div className={"fs-0-8rem fw-500"}>
               번호
             </Div>
           </Grid>
-          <Grid size={7}>
+          <Grid size={6}>
             <Div className={"fs-0-8rem fw-500"}>
               제목
             </Div>
           </Grid>
-          <Grid size={3}>
+          <Grid size={4}>
             <Div className={"fs-0-8rem fw-500"}>
               날짜
             </Div>
@@ -94,7 +94,7 @@ export const NoticeList = () => {
                 {item.notice_number}
               </Div>
             </Grid>
-            <Grid size={7}>
+            <Grid size={6}>
               <Div
                 className={"fs-1-0rem pointer-burgundy"}
                 onClick={() => {
@@ -105,10 +105,14 @@ export const NoticeList = () => {
                   });
                 }}
               >
-                {item.notice_title}
+                {item.notice_title.length > 15 ? (
+                  `${item.notice_title.substring(0, 15)}...`
+                ) : (
+                  item.notice_title
+                )}
               </Div>
             </Grid>
-            <Grid size={3}>
+            <Grid size={4}>
               <Div className={"fs-0-8rem"}>
                 {getDayFmt(item.notice_regDt)}
               </Div>
@@ -120,7 +124,7 @@ export const NoticeList = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select

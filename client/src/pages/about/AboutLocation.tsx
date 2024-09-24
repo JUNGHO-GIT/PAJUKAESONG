@@ -92,7 +92,7 @@ export const AboutLocation = () => {
     );
     // 2. location
     const locationSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-0 fadeIn"} key={i}>
+      <Card className={"border-2 radius shadow p-0 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Div
             key={"location"}

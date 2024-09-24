@@ -34,7 +34,7 @@ export const ContactFind = () => {
     axios.get(`${URL}${SUBFIX}/find`, {
       params: {
         contact_name: OBJECT?.contact_name,
-        contact_email: OBJECT?.contact_email,
+        contact_phone: OBJECT?.contact_phone,
       }
     })
     .then((res: any) => {
@@ -42,7 +42,7 @@ export const ContactFind = () => {
         navigate('/contact/list', {
           state: {
             contact_name: OBJECT?.contact_name,
-            contact_email: OBJECT?.contact_email,
+            contact_phone: OBJECT?.contact_phone,
           },
         });
       }
@@ -73,7 +73,7 @@ export const ContactFind = () => {
     // 2. find
     const findSection = (i: number) => (
       <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
-        <Grid container spacing={4} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12}>
             <Input
               variant={"standard"}
@@ -94,27 +94,26 @@ export const ContactFind = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"이메일"}
+              label={"전화번호"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT?.contact_email}
-              inputRef={REFS?.[i]?.contact_email}
-              error={ERRORS?.[i]?.contact_email}
+              value={OBJECT?.contact_phone}
+              inputRef={REFS?.[i]?.contact_phone}
+              error={ERRORS?.[i]?.contact_phone}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  contact_email: e.target.value,
+                  contact_phone: e.target.value,
                 }));
               }}
             />
           </Grid>
         </Grid>
-        <Br px={30} />
       </Card>
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
           <Grid size={12}>
             <Btn

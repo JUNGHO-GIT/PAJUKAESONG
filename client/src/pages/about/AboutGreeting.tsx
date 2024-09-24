@@ -21,12 +21,12 @@ export const AboutGreeting = () => {
     const greetingSection = (i: number) => (
       <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-left"}>
+          <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               여러분 반갑습니다.
             </Div>
           </Grid>
-          <Br px={10} />
+          <Br px={5} />
           <Grid size={12} className={"d-left"}>
             <Div className={"fs-1-0rem fw-500"}>
               1995년 개인 창업하였을 때부터, 프랜차이즈 회사를 운영하는 현재까지 ‘장사는 제 양심을 파는 것’이라고 생각하였기에 동기와 과정을 중요시하고, ‘성실, 공의, 정직’의 원칙 아래 공동선의식 동행(나에게도 남에게도 유익하게)을 (주)이삭의 사명으로 삼고, ‘정당하고 바른 기업’이 되고자 노력하며 ‘이삭’을 운영하고 있습니다.
@@ -42,7 +42,7 @@ export const AboutGreeting = () => {
               '이삭토스트'는 어쩌면 저와 가맹점주님들, 창업을 꿈꾸시는 예비 가맹 점주님께 '희망'의 다른 이름일지도 모르겠습니다. '이삭토스트'를 통해 고객과 가맹점주님들, 임직원 및 협력업체들이 더불어 행복하시기를 진심으로 바랍니다. 아울러 '이삭'이라는 이름의 뜻처럼, 기쁨과 웃음, 행복과 축복을 유통하는 삶이 되시기를 소망합니다.
             </Div>
           </Grid>
-          <Br px={10} />
+          <Br px={5} />
           <Grid size={12} className={"d-left"}>
             <Div className={"fs-1-5rem fw-500 me-20"}>
               대표이사

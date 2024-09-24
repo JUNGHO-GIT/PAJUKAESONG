@@ -70,7 +70,7 @@ export const OrderList = () => {
     );
     // 2. list
     const listSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-20 fadeIn"}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={3}>
             <Div className={"fs-0-8rem fw-500"}>
@@ -121,7 +121,7 @@ export const OrderList = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
