@@ -166,32 +166,23 @@ export const Main = () => {
               1995년 개인 창업하였을 때부터, 프랜차이즈 회사를 운영하는 현재까지 ‘장사는 제 양심을 파는 것’이라고 생각하였기에 동기와 과정을 중요시하고, ‘성실, 공의, 정직’의 원칙 아래 공동선의식 동행(나에게도 남에게도 유익하게)을 (주)이삭의 사명으로 삼고, ‘정당하고 바른 기업’이 되고자 노력하며 ‘이삭’을 운영하고 있습니다.
             </Div>
           </Grid>
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-0rem"}>
-              힘들었던 시절 '이삭토스트'를 창업하여 자립할 수 있었고, 우연히 만난 한 어려운 부부의 자립을 도와드리는 일이 계기가 되어 '이삭토스트 1호 가맹점'이 탄생했습니다. 그렇게 만들어진 '(주)이삭'은 오늘날 수많은 가정에게 희망을 주고 길을 여는‘이삭토스트’가 되었습니다.
-            </Div>
-          </Grid>
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-0rem"}>
-              '이삭토스트'는 어쩌면 저와 가맹점주님들, 창업을 꿈꾸시는 예비 가맹 점주님께 '희망'의 다른 이름일지도 모르겠습니다. '이삭토스트'를 통해 고객과 가맹점주님들, 임직원 및 협력업체들이 더불어 행복하시기를 진심으로 바랍니다. 아울러 '이삭'이라는 이름의 뜻처럼, 기쁨과 웃음, 행복과 축복을 유통하는 삶이 되시기를 소망합니다.
-            </Div>
-          </Grid>
         </Grid>
       </Card>
     );
     // 2. location
     const locationSection = (i: number) => (
       <Card className={"border-1 border-bottom-none p-20 fadeIn"} key={i}>
-        <Grid container spacing={2} columns={12}>
           <Div
             key={"location"}
             id={"map"}
             style={{
               width: "100%",
               height: "40vh",
+              borderRadius: "10px",
+              border: "1px solid #dbdbdb",
+              boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
             }}
           />
-        </Grid>
       </Card>
     );
     // 7-10. return
