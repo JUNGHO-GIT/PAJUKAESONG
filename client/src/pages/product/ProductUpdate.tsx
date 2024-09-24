@@ -94,7 +94,7 @@ export const ProductUpdate = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         제품 수정
       </Div>

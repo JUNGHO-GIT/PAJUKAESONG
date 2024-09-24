@@ -81,7 +81,7 @@ export const ProductList = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         제품 목록
       </Div>
@@ -93,24 +93,24 @@ export const ProductList = () => {
           <Grid size={{ xs: 6, sm: 4, md: 4, lg: 4, xl: 4 }} key={index}>
             <Paper className={"border-1 radius shadow p-20 fadeIn"}>
               <Img
-                key={item.product_images?.[0]}
-                src={item.product_images?.[0]}
+                key={item?.product_images?.[0]}
+                src={item?.product_images?.[0]}
                 group={"product"}
                 className={imageSize}
                 onClick={() => {
                   navigate("/product/detail", {
                     state: {
-                      _id: item._id
+                      _id: item?._id
                     }
                   });
                 }}
               />
               <Br px={30} />
               <Div className={"fs-1-4rem fw-600"}>
-                {item.product_name}
+                {item?.product_name}
               </Div>
               <Div className={"fs-1-0rem"}>
-                {item.product_price}
+                {item?.product_price}
               </Div>
             </Paper>
           </Grid>
@@ -202,8 +202,8 @@ export const ProductList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={20} h={10} w={90} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Hr px={20} h={10} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
             {filterSection(0)}
           </Grid>
         </Grid>

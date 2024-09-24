@@ -123,13 +123,13 @@ export const Header = () => {
           {dataArray.map((item, idx) => (
             <Tab
               key={`tab-${idx}`}
-              label={item.titleKo}
-              value={item.titleEn}
-              className={`pointer-burgundy fs-1-1rem horizontal-text ${tabWidth} ${selectedTab === item.titleEn ? "burgundy fw-600" : ""}`}
+              label={item?.titleKo}
+              value={item?.titleEn}
+              className={`pointer-burgundy fs-1-1rem horizontal-text ${tabWidth} ${selectedTab === item?.titleEn ? "burgundy fw-600" : ""}`}
               onClick={(e) => {
-                setSelectedTab(item.titleEn);
+                setSelectedTab(item?.titleEn);
                 setSelectedAnchorEl({
-                  [item.titleEn]: e.currentTarget,
+                  [item?.titleEn]: e.currentTarget,
                 });
               }}
             />
@@ -160,7 +160,7 @@ export const Header = () => {
             }));
           }}
         >
-          {dataArray.find((item) => item.titleEn === selectedTab)?.sub.map((subItem, subIdx) => (
+          {dataArray.find((item) => item?.titleEn === selectedTab)?.sub.map((subItem, subIdx) => (
             <MenuItem
               key={`menuItem-${subIdx}`}
               selected={selectedMenuItem === subItem.titleEn}

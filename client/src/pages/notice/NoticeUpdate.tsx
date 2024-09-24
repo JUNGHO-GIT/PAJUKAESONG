@@ -27,7 +27,7 @@ export const NoticeUpdate = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Notice);
-  const [fileList, setFileList] = useState<any>([]);
+  const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -95,7 +95,7 @@ export const NoticeUpdate = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         공지사항 수정
       </Div>

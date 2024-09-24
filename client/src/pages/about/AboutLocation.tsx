@@ -85,7 +85,7 @@ export const AboutLocation = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         오시는길
       </Div>

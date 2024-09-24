@@ -63,7 +63,7 @@ export const OrderList = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         주문 목록
       </Div>
@@ -90,10 +90,10 @@ export const OrderList = () => {
         </Grid>
         <Hr px={40} h={10} className={"bg-burgundy"} />
         {OBJECT?.map((item: any, index: number) => (
-          <Grid container spacing={2} key={index}>
+          <Grid container spacing={2} columns={12} key={index}>
             <Grid size={3}>
               <Div className={"fs-0-8rem"}>
-                {item.order_category === "reservation" ? "매장 예약" : "제품 구매"}
+                {item?.order_category === "reservation" ? "매장 예약" : "제품 구매"}
               </Div>
             </Grid>
             <Grid size={6}>
@@ -102,17 +102,17 @@ export const OrderList = () => {
                 onClick={() => {
                   navigate('/order/detail', {
                     state: {
-                      _id: item._id
+                      _id: item?._id
                     },
                   });
                 }}
               >
-                {`${numeral(item.order_total_price).format("0,0")}`}
+                {`${numeral(item?.order_total_price).format("0,0")}`}
               </Div>
             </Grid>
             <Grid size={3}>
               <Div className={"fs-0-8rem"}>
-                {moment(item.order_regDt).format("MM-DD")}
+                {moment(item?.order_regDt).format("MM-DD")}
               </Div>
             </Grid>
           </Grid>
@@ -194,8 +194,8 @@ export const OrderList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={20} h={10} w={90} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Hr px={20} h={10} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
             {filterSection(0)}
           </Grid>
         </Grid>

@@ -8,8 +8,8 @@ import { newDate } from "@scripts/date";
 export const cnt = async (
 ) => {
   const finalResult = await Notice.countDocuments(
-    {}
   );
+
   return finalResult;
 };
 

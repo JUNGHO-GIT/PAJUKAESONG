@@ -61,7 +61,7 @@ export const NoticeList = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         공지사항
       </Div>
@@ -88,10 +88,10 @@ export const NoticeList = () => {
         </Grid>
         <Hr px={40} h={10} className={"bg-burgundy"} />
         {OBJECT?.map((item: any, index: number) => (
-          <Grid container spacing={2} key={index}>
+          <Grid container spacing={2} columns={12} key={index}>
             <Grid size={2}>
               <Div className={"fs-0-8rem"}>
-                {item.notice_number}
+                {item?.notice_number}
               </Div>
             </Grid>
             <Grid size={6}>
@@ -100,21 +100,21 @@ export const NoticeList = () => {
                 onClick={() => {
                   navigate('/notice/detail', {
                     state: {
-                      _id: item._id
+                      _id: item?._id
                     },
                   });
                 }}
               >
-                {item.notice_title.length > 15 ? (
-                  `${item.notice_title.substring(0, 15)}...`
+                {item?.notice_title.length > 15 ? (
+                  `${item?.notice_title.substring(0, 15)}...`
                 ) : (
-                  item.notice_title
+                  item?.notice_title
                 )}
               </Div>
             </Grid>
             <Grid size={4}>
               <Div className={"fs-0-8rem"}>
-                {getDayFmt(item.notice_regDt)}
+                {getDayFmt(item?.notice_regDt)}
               </Div>
             </Grid>
             <Hr px={5} h={1} className={"mb-20"} />

@@ -1,13 +1,12 @@
 // OrderUpdate.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { useValidateOrder } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportLibs";
-import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Input, FileInput, Btn, Select } from "@imports/ImportComponents";
+import { Div, Select, Input, Btn, Img, Icons, Hr } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -15,19 +14,41 @@ export const OrderUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, adminId, location_id,
+    navigate, URL, SUBFIX, TITLE, PATH, location_id
   } = useCommonValue();
   const {
-    dayFmt
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
+  const {
+    dayFmt,
   } = useCommonDate();
   const {
     REFS, ERRORS, validate,
   } = useValidateOrder();
 
-  // 2-1. useState ---------------------------------------------------------------------------------
+  // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
-  const [fileList, setFileList] = useState<File[] | null>(null);
+  const [imageSize, setImageSize] = useState<string>("");
+
+  // 2-2. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    if (isXs) {
+      setImageSize("w-50 h-50 hover");
+    }
+    else if (isSm) {
+      setImageSize("w-60 h-60 hover");
+    }
+    else if (isMd) {
+      setImageSize("w-70 h-70 hover");
+    }
+    else if (isLg) {
+      setImageSize("w-80 h-80 hover");
+    }
+    else if (isXl) {
+      setImageSize("w-100 h-100 hover");
+    }
+  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -35,18 +56,47 @@ export const OrderUpdate = () => {
     axios.get(`${URL}${SUBFIX}/detail`, {
       params: {
         _id: location_id
-      },
+      }
     })
     .then((res: any) => {
       setOBJECT(res.data.result || Order);
     })
     .catch((err: any) => {
+      alert(err.response.data.msg);
       console.error(err);
     })
     .finally(() => {
       setLOADING(false);
     });
-  }, [URL, SUBFIX]);
+  }, [URL, SUBFIX, location_id]);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    setLOADING(true);
+    const existOrderProduct = sessionStorage.getItem(`${TITLE}_order_product`);
+    if (existOrderProduct) {
+      setOBJECT((prev: any) => ({
+        ...prev,
+        order_product: JSON.parse(existOrderProduct),
+        order_date: dayFmt,
+      }));
+    }
+    setLOADING(false);
+  }, [PATH]);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    const updatedOrderProduct = OBJECT?.order_product;
+    sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(updatedOrderProduct));
+    setOBJECT((prev: any) => ({
+      ...prev,
+      order_total_price: String(
+        OBJECT?.order_product?.reduce((acc: number, cur: any) => (
+          acc + Number(cur.product_price)
+        ), 0)
+      ),
+    }));
+  }, [OBJECT?.order_product]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowUpdate = () => {
@@ -55,25 +105,15 @@ export const OrderUpdate = () => {
       setLOADING(false);
       return;
     }
-    axios.put(`${URL}${SUBFIX}/update`,
-      makeFormData(
-        OBJECT,
-        fileList,
-        {
-          _id: location_id
-        }
-      ),
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    )
+    axios.put(`${URL}${SUBFIX}/update`, {
+      OBJECT: OBJECT,
+    })
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
+        sessionStorage.removeItem(`${TITLE}_order_product`);
         document?.querySelector("input[type=file]")?.remove();
-        navigate(`/order/list`);
+        navigate("/order/find");
       }
       else {
         alert(res.data.msg);
@@ -94,19 +134,190 @@ export const OrderUpdate = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         주문 수정
       </Div>
     );
-    // 2. update
-    const updateSection = (i: number) => (
+    // 2. product
+    const productSection = (i: number) => (
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          {OBJECT?.order_product?.map((item: any, index: number) => (
+            item.product_name && (
+              <Grid container spacing={2} columns={12} key={index}>
+                <Grid size={3} className={"d-left"}>
+                  <Img
+                    key={item?.product_images?.[0]}
+                    src={item?.product_images?.[0]}
+                    group={"product"}
+                    className={imageSize}
+                  />
+                </Grid>
+                <Grid size={5}>
+                  <Grid container spacing={1} columns={12}>
+                    <Grid size={12} className={"d-left"}>
+                      <Div className={"fs-1-4rem fw-600"}>
+                        {item?.product_name}
+                      </Div>
+                    </Grid>
+                    <Grid size={12} className={"d-left"}>
+                      <Div className={"fs-0-8rem me-5"}>
+                        ₩
+                      </Div>
+                      <Div className={"fs-1-0rem"}>
+                        {numeral(item?.product_price).format("0,0")}
+                      </Div>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid size={3} className={"d-center"}>
+                  <Div className={"d-center border-1"}>
+                    <Icons
+                      key={"Minus"}
+                      name={"Minus"}
+                      className={"w-10 h-10"}
+                      onClick={(e: any) => {
+                        const value = item?.product_count;
+                        const newValue = value < 1 ? 1 : value - 1;
+                        const originalPrice = Number(item?.product_price) / value;
+                        if (newValue <= 1) {
+                          setOBJECT((prev: any) => ({
+                            ...prev,
+                            order_product: prev.order_product.map((product: any) => (
+                              product.product_id === item?.product_id ? {
+                                ...product,
+                                product_count: 1,
+                                product_price: originalPrice,
+                              } : (
+                                product
+                              )
+                            )),
+                          }));
+                        }
+                        else if (!isNaN(newValue) && newValue <= 30) {
+                          setOBJECT((prev: any) => ({
+                            ...prev,
+                            order_product: prev.order_product.map((product: any) => (
+                              product.product_id === item?.product_id ? {
+                                ...product,
+                                product_count: newValue,
+                                product_price: originalPrice * newValue,
+                              } : (
+                                product
+                              )
+                            )),
+                          }));
+                        }
+                      }}
+                    />
+                    <Div className={"fs-1-0rem"}>
+                      {item?.product_count}
+                    </Div>
+                    <Icons
+                      key={"Plus"}
+                      name={"Plus"}
+                      className={"w-10 h-10"}
+                      onClick={(e: any) => {
+                        const value = item?.product_count;
+                        const newValue = value < 1 ? 1 : value + 1;
+                        const originalPrice = Number(item?.product_price) / value;
+                        if (newValue <= 1) {
+                          setOBJECT((prev: any) => ({
+                            ...prev,
+                            order_product: prev.order_product.map((product: any) => (
+                              product.product_id === item?.product_id ? {
+                                ...product,
+                                product_count: 1,
+                                product_price: originalPrice,
+                              } : (
+                                product
+                              )
+                            )),
+                          }));
+                        }
+                        else if (!isNaN(newValue) && newValue <= 30) {
+                          setOBJECT((prev: any) => ({
+                            ...prev,
+                            order_product: prev.order_product.map((product: any) => (
+                              product.product_id === item?.product_id ? {
+                                ...product,
+                                product_count: newValue,
+                                product_price: originalPrice * newValue,
+                              } : (
+                                product
+                              )
+                            )),
+                          }));
+                        }
+                      }}
+                    />
+                  </Div>
+                </Grid>
+                <Grid size={1} className={"d-center"}>
+                  <Div
+                    className={"fs-1-0rem"}
+                    onClick={() => {
+                      setOBJECT((prev: any) => ({
+                        ...prev,
+                        order_product: [
+                          ...prev.order_product.slice(0, index),
+                          ...prev.order_product.slice(index + 1),
+                        ],
+                      }));
+                    }}
+                  >
+                    {`x`}
+                  </Div>
+                </Grid>
+                {/** 마지막 항목 제외 hr 추가 */}
+                {index !== OBJECT?.order_product?.length - 1 && (
+                  <Grid size={12}>
+                    <Hr px={5} h={1} className={"mb-10"} />
+                  </Grid>
+                )}
+              </Grid>
+            )
+          ))}
+        </Grid>
+        <Hr px={40} h={10} className={"bg-burgundy"} />
+        <Grid size={12} className={"d-center"}>
+          <Div className={"fs-1-0rem me-10"}>
+            총 금액  :
+          </Div>
+          <Div className={"fs-0-8rem me-5"}>
+            ₩
+          </Div>
+          <Div className={"fs-1-2rem fw-600"}>
+            {numeral(OBJECT?.order_total_price).format("0,0")}
+          </Div>
+        </Grid>
+      </Card>
+    );
+    // 3. order
+    const orderSection = (i: number) => (
       <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
+            <Input
+              variant={"standard"}
+              required={true}
+              label={"주문 날짜"}
+              className={"border-bottom-1"}
+              disabled={true}
+              value={dayFmt}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  order_date: e.target.value
+                }));
+              }}
+            />
+          </Grid>
+          <Grid size={12}>
             <Select
               variant={"standard"}
-              label={"메뉴 카테고리"}
+              label={"주문 유형"}
               required={true}
               className={"border-bottom-1"}
               value={OBJECT?.order_category}
@@ -119,10 +330,10 @@ export const OrderUpdate = () => {
                 }));
               }}
             >
-              {["main", "side"].map((item: string, idx: number) => (
+              {["reservation", "buy"].map((item: string, idx: number) => (
                 <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                  {item === "main" && "메인메뉴"}
-                  {item === "side" && "사이드메뉴"}
+                  {item === "reservation" && "매장 예약"}
+                  {item === "buy" && "제품 구매"}
                 </MenuItem>
               ))}
             </Select>
@@ -130,7 +341,7 @@ export const OrderUpdate = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"메뉴 이름"}
+              label={"이름"}
               required={true}
               className={"border-bottom-1"}
               value={OBJECT?.order_name}
@@ -147,16 +358,16 @@ export const OrderUpdate = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"메뉴 설명"}
+              label={"이메일"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT?.order_description}
-              inputRef={REFS?.[i]?.order_description}
-              error={ERRORS?.[i]?.order_description}
+              value={OBJECT?.order_email}
+              inputRef={REFS?.[i]?.order_email}
+              error={ERRORS?.[i]?.order_email}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  order_description: e.target.value,
+                  order_email: e.target.value,
                 }));
               }}
             />
@@ -164,56 +375,16 @@ export const OrderUpdate = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"가격"}
+              label={"전화번호"}
+              required={true}
               className={"border-bottom-1"}
-              value={numeral(OBJECT?.order_price).format("0,0")}
-              inputRef={REFS?.[i]?.order_price}
-              error={ERRORS?.[i]?.order_price}
+              value={OBJECT?.order_phone}
+              inputRef={REFS?.[i]?.order_phone}
+              error={ERRORS?.[i]?.order_phone}
               onChange={(e: any) => {
-                const value = e.target.value.replace(/,/g, '');
-                const newValue = value === "" ? 0 : Number(value);
-                if (value === "") {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_price: "0",
-                  }));
-                }
-                else if (!isNaN(newValue) && newValue <= 9999999999) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_price: String(newValue),
-                  }));
-                }
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              required={true}
-              label={"작성일"}
-              shrink={"shrink"}
-              className={"border-bottom-1"}
-              readOnly={true}
-              value={dayFmt}
-            />
-          </Grid>
-          <Grid size={12}>
-            <FileInput
-              variant={"outlined"}
-              label={"메뉴 이미지"}
-              required={true}
-              limit={2}
-              existing={OBJECT?.order_images}
-              group={"order"}
-              value={fileList}
-              onChange={(updatedFiles: File[] | null) => {
-                setFileList(updatedFiles);
-              }}
-              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  order_images: updatedExistingFiles,
+                  order_phone: e.target.value,
                 }));
               }}
             />
@@ -221,28 +392,28 @@ export const OrderUpdate = () => {
         </Grid>
       </Card>
     );
-    // 3. filter
+    // 4. filter
     const filterSection = (i: number) => (
       <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-grey"}
+              onClick={() => {
+                navigate("/product/list");
+              }}
+            >
+              더 찾기
+            </Btn>
+          </Grid>
+          <Grid size={6} className={"d-left"}>
+            <Btn
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowUpdate();
               }}
             >
               수정하기
-            </Btn>
-          </Grid>
-          <Grid size={6} className={"d-left"}>
-            <Btn
-              className={"w-70p fs-1-0rem bg-light black"}
-              onClick={() => {
-                navigate(`/order/list`);
-              }}
-            >
-              목록으로
             </Btn>
           </Grid>
         </Grid>
@@ -256,9 +427,11 @@ export const OrderUpdate = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {LOADING ? <Loading /> : updateSection(0)}
+            {LOADING ? <Loading /> : productSection(0)}
           </Grid>
-          <Br px={5} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {orderSection(0)}
+          </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

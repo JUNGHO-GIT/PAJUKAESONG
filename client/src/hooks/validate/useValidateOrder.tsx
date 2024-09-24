@@ -73,7 +73,7 @@ export const useValidateOrder = () => {
         }
 
         // 2. save
-        if (PATH.includes("/order/save")) {
+        if (PATH.includes("/order/save") || PATH.includes("/order/update")) {
           const target = [
             "order_category",
             "order_name",

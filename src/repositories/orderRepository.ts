@@ -19,7 +19,39 @@ export const cnt = async (
   return finalResult;
 };
 
-// 1. list -----------------------------------------------------------------------------------------
+// 1-1. find ---------------------------------------------------------------------------------------
+export const find = async (
+  order_name_param: string,
+  order_phone_param: string,
+) => {
+  const finalResult = await Order.aggregate([
+    {
+      $match: {
+        order_name: order_name_param,
+        order_phone: order_phone_param,
+      }
+    },
+    {
+      $project: {
+        _id: 1,
+        order_number: 1,
+        order_category: 1,
+        order_name: 1,
+        order_email: 1,
+        order_phone: 1,
+        order_date: 1,
+        order_total_price: 1,
+        order_product: 1,
+        order_regDt: 1,
+        order_updateDt: 1,
+      }
+    }
+  ]);
+
+  return finalResult;
+};
+
+// 1-2. list ---------------------------------------------------------------------------------------
 export const list = async (
   order_name_param: string,
   order_phone_param: string,
@@ -64,23 +96,7 @@ export const list = async (
   return finalResult;
 };
 
-// 2-1. find ---------------------------------------------------------------------------------------
-export const find = async (
-  order_name_param: string,
-  order_phone_param: string,
-) => {
-  const finalResult = await Order.findOne(
-    {
-      order_name: order_name_param,
-      order_phone: order_phone_param,
-    }
-  )
-  .lean();
-
-  return finalResult;
-};
-
-// 2-2. detail -------------------------------------------------------------------------------------
+// 2. detail ---------------------------------------------------------------------------------------
 export const detail = async (
   _id_param: string,
 ) => {

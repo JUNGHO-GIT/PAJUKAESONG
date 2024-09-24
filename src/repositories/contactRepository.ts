@@ -12,25 +12,23 @@ export const cnt = async (
   const finalResult = await Contact.countDocuments(
     {
       contact_name: contact_name_param,
-      contact_email: contact_phone_param,
+      contact_phone: contact_phone_param,
     }
   );
 
   return finalResult;
 };
 
-// 1. list -----------------------------------------------------------------------------------------
-export const list = async (
+// 1-1. find ---------------------------------------------------------------------------------------
+export const find = async (
   contact_name_param: string,
   contact_phone_param: string,
-  sort_param: 1 | -1,
-  page_param: number,
 ) => {
   const finalResult = await Contact.aggregate([
     {
       $match: {
         contact_name: contact_name_param,
-        contact_email: contact_phone_param,
+        contact_phone: contact_phone_param,
       }
     },
     {
@@ -43,6 +41,41 @@ export const list = async (
         contact_phone: 1,
         contact_title: 1,
         contact_content: 1,
+        contact_images: 1,
+        contact_regDt: 1,
+        contact_updateDt: 1,
+      }
+    }
+  ]);
+
+  return finalResult;
+}
+
+// 1-2. list ---------------------------------------------------------------------------------------
+export const list = async (
+  contact_name_param: string,
+  contact_phone_param: string,
+  sort_param: 1 | -1,
+  page_param: number,
+) => {
+  const finalResult = await Contact.aggregate([
+    {
+      $match: {
+        contact_name: contact_name_param,
+        contact_phone: contact_phone_param,
+      }
+    },
+    {
+      $project: {
+        _id: 1,
+        contact_number: 1,
+        contact_category: 1,
+        contact_name: 1,
+        contact_email: 1,
+        contact_phone: 1,
+        contact_title: 1,
+        contact_content: 1,
+        contact_images: 1,
         contact_regDt: 1,
         contact_updateDt: 1,
       }
@@ -63,23 +96,7 @@ export const list = async (
   return finalResult;
 };
 
-// 2-1. find ---------------------------------------------------------------------------------------
-export const find = async (
-  contact_name_param: string,
-  contact_phone_param: string,
-) => {
-  const finalResult = await Contact.findOne(
-    {
-      contact_name: contact_name_param,
-      contact_email: contact_phone_param,
-    }
-  )
-  .lean();
-
-  return finalResult;
-};
-
-// 2-2. detail -------------------------------------------------------------------------------------
+// 2. detail ---------------------------------------------------------------------------------------
 export const detail = async (
   _id_param: string,
 ) => {

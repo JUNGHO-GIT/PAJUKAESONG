@@ -7,7 +7,7 @@ import { axios, numeral } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
-import { Div, Select, Br, Hr,  Input, FileInput, Btn } from "@imports/ImportComponents";
+import { Div, Select, Br, Input, FileInput, Btn, Icons } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ export const ProductSave = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Product);
-  const [fileList, setFileList] = useState<any>([]);
+  const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
@@ -72,7 +72,7 @@ export const ProductSave = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         제품 등록
       </Div>
@@ -142,11 +142,19 @@ export const ProductSave = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
+              required={true}
               label={"가격"}
               className={"border-bottom-1"}
               value={numeral(OBJECT?.product_price).format("0,0")}
               inputRef={REFS?.[i]?.product_price}
               error={ERRORS?.[i]?.product_price}
+              startadornment={
+                <Icons
+                  key={"Won"}
+                  name={"Won"}
+                  className={"w-15 h-15"}
+                />
+              }
               onChange={(e: any) => {
                 const value = e.target.value.replace(/,/g, '');
                 const newValue = value === "" ? 0 : Number(value);
@@ -185,6 +193,8 @@ export const ProductSave = () => {
               existing={OBJECT?.product_images}
               group={"product"}
               value={fileList}
+              inputRef={REFS?.[i]?.product_images}
+              error={ERRORS?.[i]?.product_images}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
@@ -205,22 +215,22 @@ export const ProductSave = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
-              onClick={() => {
-                flowSave();
-              }}
-            >
-              {"저장하기"}
-            </Btn>
-          </Grid>
-          <Grid size={6} className={"d-left"}>
-            <Btn
               className={"w-70p fs-1-0rem bg-light black"}
               onClick={() => {
                 navigate(`/product/list`);
               }}
             >
-              {"목록으로"}
+              목록으로
+            </Btn>
+          </Grid>
+          <Grid size={6} className={"d-left"}>
+            <Btn
+              className={"w-70p fs-1-0rem bg-burgundy"}
+              onClick={() => {
+                flowSave();
+              }}
+            >
+              저장하기
             </Btn>
           </Grid>
         </Grid>

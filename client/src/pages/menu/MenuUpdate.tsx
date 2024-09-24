@@ -98,7 +98,7 @@ export const MenuUpdate = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         메뉴 수정
       </Div>

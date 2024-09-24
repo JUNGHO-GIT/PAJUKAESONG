@@ -28,7 +28,7 @@ export const FranchiseSave = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [mapAddress, setMapAddress] = useState<string>("");
   const [OBJECT, setOBJECT] = useState<any>(Franchise);
-  const [fileList, setFileList] = useState<any>([]);
+  const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
@@ -98,7 +98,7 @@ export const FranchiseSave = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         가맹점 등록
       </Div>
@@ -217,9 +217,19 @@ export const FranchiseSave = () => {
     const filterSection = (i: number) => (
       <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={6} className={"d-right"}>
             <Btn
-              className={"w-100p fs-1-0rem bg-burgundy"}
+              className={"w-70p fs-1-0rem bg-light black"}
+              onClick={() => {
+                navigate(`/franchise/list`);
+              }}
+            >
+              목록으로
+            </Btn>
+          </Grid>
+          <Grid size={6} className={"d-left"}>
+            <Btn
+              className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}

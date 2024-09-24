@@ -98,7 +98,7 @@ export const UserLogin = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         로그인
       </Div>
@@ -106,7 +106,7 @@ export const UserLogin = () => {
     // 2. login
     const loginSection = (i: number) => (
       <Card className={"border-1 radius p-20 fadeIn"} key={i}>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Input
               label={"아이디"}

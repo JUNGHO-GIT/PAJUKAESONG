@@ -50,11 +50,6 @@ export const OrderSave = () => {
     }
   }, [isXs, isSm, isMd, isLg, isXl]);
 
-  useEffect(() => {
-    console.log("===================================");
-    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
-  }, [OBJECT]);
-
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
@@ -119,7 +114,7 @@ export const OrderSave = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         주문 하기
       </Div>
@@ -127,127 +122,156 @@ export const OrderSave = () => {
     // 2. product
     const productSection = (i: number) => (
       <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
-        {OBJECT?.order_product?.map((item: any, index: number) => (
-          <Grid container spacing={2} columns={12} key={index}>
-            <Grid size={3} className={"d-left"}>
-              <Img
-                key={item.product_images?.[0]}
-                src={item.product_images?.[0]}
-                group={"product"}
-                className={imageSize}
-              />
-            </Grid>
-            <Grid size={4} className={"d-left"}>
-              <Div className={"d-column"}>
-                <Div className={"fs-1-4rem fw-600"}>
-                  {item.product_name}
-                </Div>
-                <Div className={"fs-1-0rem"}>
-                  {`₩ ${numeral(item.product_price).format("0,0")}`}
-                </Div>
-              </Div>
-            </Grid>
-            <Grid size={4} className={"d-center"}>
-              <Div className={"d-center border-1"}>
-                <Icons
-                  key={"Minus"}
-                  name={"Minus"}
-                  className={"w-10 h-10"}
-                  onClick={(e: any) => {
-                    const value = item.product_count;
-                    const newValue = value < 1 ? 1 : value - 1;
-                    const originalPrice = Number(item.product_price) / value;
-                    if (newValue <= 1) {
+        <Grid container spacing={2} columns={12}>
+          {OBJECT?.order_product?.map((item: any, index: number) => (
+            item.product_name && (
+              <Grid container spacing={2} columns={12} key={index}>
+                <Grid size={3} className={"d-left"}>
+                  <Img
+                    key={item?.product_images?.[0]}
+                    src={item?.product_images?.[0]}
+                    group={"product"}
+                    className={imageSize}
+                  />
+                </Grid>
+                <Grid size={5}>
+                  <Grid container spacing={1} columns={12}>
+                    <Grid size={12} className={"d-left"}>
+                      <Div className={"fs-1-4rem fw-600"}>
+                        {item?.product_name}
+                      </Div>
+                    </Grid>
+                    <Grid size={12} className={"d-left"}>
+                      <Div className={"fs-0-8rem me-5"}>
+                        ₩
+                      </Div>
+                      <Div className={"fs-1-0rem"}>
+                        {numeral(item?.product_price).format("0,0")}
+                      </Div>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid size={3} className={"d-center"}>
+                  <Div className={"d-center border-1"}>
+                    <Icons
+                      key={"Minus"}
+                      name={"Minus"}
+                      className={"w-10 h-10"}
+                      onClick={(e: any) => {
+                        const value = item?.product_count;
+                        const newValue = value < 1 ? 1 : value - 1;
+                        const originalPrice = Number(item?.product_price) / value;
+                        if (newValue <= 1) {
+                          setOBJECT((prev: any) => ({
+                            ...prev,
+                            order_product: prev.order_product.map((product: any) => (
+                              product.product_id === item?.product_id ? {
+                                ...product,
+                                product_count: 1,
+                                product_price: originalPrice,
+                              } : (
+                                product
+                              )
+                            )),
+                          }));
+                        }
+                        else if (!isNaN(newValue) && newValue <= 30) {
+                          setOBJECT((prev: any) => ({
+                            ...prev,
+                            order_product: prev.order_product.map((product: any) => (
+                              product.product_id === item?.product_id ? {
+                                ...product,
+                                product_count: newValue,
+                                product_price: originalPrice * newValue,
+                              } : (
+                                product
+                              )
+                            )),
+                          }));
+                        }
+                      }}
+                    />
+                    <Div className={"fs-1-0rem"}>
+                      {item?.product_count}
+                    </Div>
+                    <Icons
+                      key={"Plus"}
+                      name={"Plus"}
+                      className={"w-10 h-10"}
+                      onClick={(e: any) => {
+                        const value = item?.product_count;
+                        const newValue = value < 1 ? 1 : value + 1;
+                        const originalPrice = Number(item?.product_price) / value;
+                        if (newValue <= 1) {
+                          setOBJECT((prev: any) => ({
+                            ...prev,
+                            order_product: prev.order_product.map((product: any) => (
+                              product.product_id === item?.product_id ? {
+                                ...product,
+                                product_count: 1,
+                                product_price: originalPrice,
+                              } : (
+                                product
+                              )
+                            )),
+                          }));
+                        }
+                        else if (!isNaN(newValue) && newValue <= 30) {
+                          setOBJECT((prev: any) => ({
+                            ...prev,
+                            order_product: prev.order_product.map((product: any) => (
+                              product.product_id === item?.product_id ? {
+                                ...product,
+                                product_count: newValue,
+                                product_price: originalPrice * newValue,
+                              } : (
+                                product
+                              )
+                            )),
+                          }));
+                        }
+                      }}
+                    />
+                  </Div>
+                </Grid>
+                <Grid size={1} className={"d-center"}>
+                  <Div
+                    className={"fs-1-0rem"}
+                    onClick={() => {
                       setOBJECT((prev: any) => ({
                         ...prev,
-                        order_product: prev.order_product.map((product: any) => (
-                          product.product_id === item.product_id ? {
-                            ...product,
-                            product_count: 1,
-                            product_price: originalPrice,
-                          } : (
-                            product
-                          )
-                        )),
+                        order_product: [
+                          ...prev.order_product.slice(0, index),
+                          ...prev.order_product.slice(index + 1),
+                        ],
                       }));
-                    }
-                    else if (!isNaN(newValue) && newValue <= 30) {
-                      setOBJECT((prev: any) => ({
-                        ...prev,
-                        order_product: prev.order_product.map((product: any) => (
-                          product.product_id === item.product_id ? {
-                            ...product,
-                            product_count: newValue,
-                            product_price: originalPrice * newValue,
-                          } : (
-                            product
-                          )
-                        )),
-                      }));
-                    }
-                  }}
-                />
-                <Div className={"fs-1-0rem"}>
-                  {item.product_count}
-                </Div>
-                <Icons
-                  key={"Plus"}
-                  name={"Plus"}
-                  className={"w-10 h-10"}
-                  onClick={(e: any) => {
-                    const value = item.product_count;
-                    const newValue = value < 1 ? 1 : value + 1;
-                    const originalPrice = Number(item.product_price) / value;
-                    if (newValue <= 1) {
-                      setOBJECT((prev: any) => ({
-                        ...prev,
-                        order_product: prev.order_product.map((product: any) => (
-                          product.product_id === item.product_id ? {
-                            ...product,
-                            product_count: 1,
-                            product_price: originalPrice,
-                          } : (
-                            product
-                          )
-                        )),
-                      }));
-                    }
-                    else if (!isNaN(newValue) && newValue <= 30) {
-                      setOBJECT((prev: any) => ({
-                        ...prev,
-                        order_product: prev.order_product.map((product: any) => (
-                          product.product_id === item.product_id ? {
-                            ...product,
-                            product_count: newValue,
-                            product_price: originalPrice * newValue,
-                          } : (
-                            product
-                          )
-                        )),
-                      }));
-                    }
-                  }}
-                />
-              </Div>
-            </Grid>
-            <Grid size={1} className={"d-center"}>
-              <Div
-                className={"fs-1-0rem"}
-                onClick={() => {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_product: [
-                      ...prev.order_product.slice(0, index),
-                      ...prev.order_product.slice(index + 1),
-                    ],
-                  }));
-                }}
-              >
-                {`x`}
-              </Div>
-            </Grid>
-          </Grid>
-        ))}
+                    }}
+                  >
+                    {`x`}
+                  </Div>
+                </Grid>
+                {/** 마지막 항목 제외 hr 추가 */}
+                {index !== OBJECT?.order_product?.length - 1 && (
+                  <Grid size={12}>
+                    <Hr px={5} h={1} className={"mb-10"} />
+                  </Grid>
+                )}
+              </Grid>
+            )
+          ))}
+        </Grid>
+        <Hr px={40} h={10} className={"bg-burgundy"} />
+        <Grid size={12} className={"d-center"}>
+          <Div className={"fs-1-0rem me-10"}>
+            총 금액  :
+          </Div>
+          <Div className={"fs-0-8rem me-5"}>
+            ₩
+          </Div>
+          <Div className={"fs-1-2rem fw-600"}>
+            {numeral(OBJECT?.order_total_price).format("0,0")}
+          </Div>
+        </Grid>
       </Card>
     );
     // 3. order

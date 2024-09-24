@@ -78,7 +78,7 @@ export const Main = () => {
     // 7-10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={1}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12}>
             {swiperSection()}
           </Grid>

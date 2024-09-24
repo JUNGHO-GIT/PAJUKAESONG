@@ -65,7 +65,7 @@ export const OrderFind = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         주문 조회
       </Div>
@@ -73,7 +73,7 @@ export const OrderFind = () => {
     // 2. find
     const findSection = (i: number) => (
       <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
-        <Grid container spacing={4} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12}>
             <Input
               variant={"standard"}

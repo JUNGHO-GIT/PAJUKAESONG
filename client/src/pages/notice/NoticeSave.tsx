@@ -27,7 +27,7 @@ export const NoticeSave = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Notice);
-  const [fileList, setFileList] = useState<any>([]);
+  const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
@@ -72,7 +72,7 @@ export const NoticeSave = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         공지사항 저장
       </Div>
@@ -151,9 +151,19 @@ export const NoticeSave = () => {
     const filterSection = (i: number) => (
       <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={6} className={"d-right"}>
             <Btn
-              className={"w-100p fs-1-0rem bg-burgundy"}
+              className={"w-70p fs-1-0rem bg-light black"}
+              onClick={() => {
+                navigate(`/notice/list`);
+              }}
+            >
+              목록으로
+            </Btn>
+          </Grid>
+          <Grid size={6} className={"d-left"}>
+            <Btn
+              className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave()
               }}

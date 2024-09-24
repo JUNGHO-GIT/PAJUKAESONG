@@ -65,7 +65,7 @@ export const ContactFind = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         문의 조회
       </Div>
@@ -138,7 +138,6 @@ export const ContactFind = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : findSection(0)}
           </Grid>
-          <Br px={30} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

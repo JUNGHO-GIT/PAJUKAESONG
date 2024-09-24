@@ -77,20 +77,20 @@ export const SideBar = (
           {/* 메인 항목 */}
           <ListItem
             onClick={() => {
-              if (selectedTab === item.titleEn) {
+              if (selectedTab === item?.titleEn) {
                 setSelectedTab("");
               }
               else {
-                setSelectedTab(item.titleEn);
+                setSelectedTab(item?.titleEn);
               }
             }}
           >
             <Div className={"d-center"}>
-              <Div className={`pointer-burgundy ${selectedTab === item.titleEn ? "burgundy fs-1-1rem fw-600" : "fs-1-0rem"}`}>
-                {item.titleKo}
+              <Div className={`pointer-burgundy ${selectedTab === item?.titleEn ? "burgundy fs-1-1rem fw-600" : "fs-1-0rem"}`}>
+                {item?.titleKo}
               </Div>
               <Div className={"ms-2"}>
-                {selectedTab === item.titleEn ? (
+                {selectedTab === item?.titleEn ? (
                   <Icons
                     key={"ChevronUp"}
                     name={"ChevronUp"}
@@ -108,17 +108,17 @@ export const SideBar = (
           </ListItem>
           {/* 하위 항목 */}
           <Collapse
-            in={selectedTab === item.titleEn}
+            in={selectedTab === item?.titleEn}
             timeout={"auto"}
             unmountOnExit={true}
           >
             <List>
-              {item.sub.map((subItem, subIdx) => (
+              {item?.sub.map((subItem, subIdx) => (
                 <ListItem
                   key={subIdx}
                   onClick={() => {
-                    setSelectedTab(item.titleEn);
-                    setSelectedTabVal(item.titleEn);
+                    setSelectedTab(item?.titleEn);
+                    setSelectedTabVal(item?.titleEn);
                     setSelectedListItem(subItem.titleEn);
                     navigate(subItem.url, {
                       state: {
@@ -128,7 +128,7 @@ export const SideBar = (
                     toggleSidebar();
                   }}
                 >
-                  <Div className={`pointer-burgundy ${selectedTabVal === item.titleEn && selectedListItem === subItem.titleEn ? "burgundy fs-1-0rem" : "fs-0-9rem"}`}>
+                  <Div className={`pointer-burgundy ${selectedTabVal === item?.titleEn && selectedListItem === subItem.titleEn ? "burgundy fs-1-0rem" : "fs-0-9rem"}`}>
                     {subItem.titleKo}
                   </Div>
                 </ListItem>
@@ -139,7 +139,7 @@ export const SideBar = (
       ))
     );
     const textSection1 = () => (
-      <Grid container columns={12} spacing={1} className={`d-center horizontal-text`}>
+      <Grid container spacing={1} columns={12} className={`d-center horizontal-text`}>
         <Grid size={12} className={"d-left"}>
           <Icons
             name={"Info"} className={"w-12 h-12"} />

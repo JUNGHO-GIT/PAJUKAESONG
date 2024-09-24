@@ -15,6 +15,7 @@ export const Input = (props: any) => (
     inputRef={props?.inputRef || null}
     error={props?.error || false}
     slotProps={{
+      ...props?.slotProps,
       input: {
         className: (
           props?.inputclass?.includes("fs-") ? (
@@ -29,13 +30,13 @@ export const Input = (props: any) => (
         startAdornment: (
           props?.startadornment ? (
             typeof props?.startadornment === "string" ? (
-              <div className={"ms-n10 me-2vw"}>
+              <div className={"ms-n5 me-1vw"}>
                 <div className={"fs-0-6rem"}>
                   {props?.startadornment}
                 </div>
               </div>
             ) : (
-              <div className={"ms-n10 me-2vw"}>
+              <div className={"ms-n5 me-1vw"}>
                 {props?.startadornment}
               </div>
             )
@@ -44,13 +45,13 @@ export const Input = (props: any) => (
         endAdornment: (
           props?.endadornment ? (
             typeof props?.endadornment === "string" ? (
-              <div className={"me-n10 ms-2vw"}>
+              <div className={"me-n5 ms-1vw"}>
                 <div className={"fs-0-6rem"}>
                   {props?.endadornment}
                 </div>
               </div>
             ) : (
-              <div className={"me-n10 ms-2vw"}>
+              <div className={"me-n5 ms-1vw"}>
                 {props?.endadornment}
               </div>
             )

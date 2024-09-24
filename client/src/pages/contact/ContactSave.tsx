@@ -4,6 +4,7 @@ import { useState } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateContact } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
+import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
 import { Div, Select, Br, Input, TextArea, Btn, FileInput } from "@imports/ImportComponents";
@@ -26,7 +27,7 @@ export const ContactSave = () => {
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Contact);
-  const [fileList, setFileList] = useState<any>([]);
+  const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
@@ -35,6 +36,17 @@ export const ContactSave = () => {
       setLOADING(false);
       return;
     }
+    axios.post(`${URL}${SUBFIX}/save`,
+      makeFormData(
+        OBJECT,
+        fileList
+      ),
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
     axios.post(`${URL}${SUBFIX}/save`, {
       OBJECT: OBJECT,
     })
@@ -63,7 +75,7 @@ export const ContactSave = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         문의 하기
       </Div>

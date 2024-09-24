@@ -76,11 +76,11 @@ export const ProductDetail = () => {
       product_images: OBJECT?.product_images,
     };
 
-    const existOrderProduct = sessionStorage.getItem(`${TITLE}_order_product`);
-
     if (extra === "buy") {
       sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify([]));
     }
+
+    const existOrderProduct = sessionStorage.getItem(`${TITLE}_order_product`);
 
     if (existOrderProduct) {
       const orderProducts = JSON.parse(existOrderProduct);
@@ -141,7 +141,7 @@ export const ProductDetail = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         제품 상세
       </Div>
@@ -315,8 +315,8 @@ export const ProductDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filter1Section(0)}
           </Grid>
-          <Hr px={20} h={10} w={90} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Hr px={20} h={10} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
             {filter2Section(0)}
           </Grid>
         </Grid>

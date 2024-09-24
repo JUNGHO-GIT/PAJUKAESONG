@@ -21,7 +21,7 @@ export const useStorage = (key: string, initialVal: any) => {
       return initialVal;
     }
 
-    if (datePattern.test(item.trim())) {
+    if (datePattern.test(item?.trim())) {
       const parsedDate = parseISO(item);
       return isNaN(parsedDate.getTime()) ? initialVal : parsedDate;
     }

@@ -66,7 +66,7 @@ export const ContactList = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         문의 목록
       </Div>
@@ -93,10 +93,10 @@ export const ContactList = () => {
         </Grid>
         <Hr px={40} h={10} className={"bg-burgundy"} />
         {OBJECT?.map((item: any, index: number) => (
-          <Grid container spacing={2} key={index}>
+          <Grid container spacing={2} columns={12} key={index}>
             <Grid size={{ xs: 5, sm: 2 }}>
               <Div className={"fs-0-8rem"}>
-                {item.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"}
+                {item?.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"}
               </Div>
             </Grid>
             <Grid size={{ xs: 7, sm: 7 }}>
@@ -105,17 +105,17 @@ export const ContactList = () => {
                 onClick={() => {
                   navigate('/contact/detail', {
                     state: {
-                      _id: item._id
+                      _id: item?._id
                     },
                   });
                 }}
               >
-                {item.contact_title}
+                {item?.contact_title}
               </Div>
             </Grid>
             <Grid size={{ xs: 0, sm: 3 }} className={`${isXs ? "d-none" : ""}`}>
               <Div className={"fs-0-8rem"}>
-                {getDayFmt(item.contact_regDt)}
+                {getDayFmt(item?.contact_regDt)}
               </Div>
             </Grid>
           </Grid>
@@ -197,8 +197,8 @@ export const ContactList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={20} h={10} w={90} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Hr px={20} h={10} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
             {filterSection(0)}
           </Grid>
         </Grid>

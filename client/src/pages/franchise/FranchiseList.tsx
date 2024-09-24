@@ -82,7 +82,7 @@ export const FranchiseList = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         가맹 지점
       </Div>
@@ -94,24 +94,24 @@ export const FranchiseList = () => {
           <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 4 }} key={index}>
             <Paper className={"border-1 radius shadow p-20 fadeIn"}>
               <Img
-                key={item.franchise_images?.[0]}
-                src={item.franchise_images?.[0]}
+                key={item?.franchise_images?.[0]}
+                src={item?.franchise_images?.[0]}
                 group={"franchise"}
                 className={imageSize}
                 onClick={() => {
                   navigate("/franchise/detail", {
                     state: {
-                      _id: item._id
+                      _id: item?._id
                     }
                   });
                 }}
               />
               <Br px={30} />
               <Div className={"fs-1-4rem fw-600"}>
-                {item.franchise_name}
+                {item?.franchise_name}
               </Div>
               <Div className={"fs-1-0rem"}>
-                {item.franchise_price}
+                {item?.franchise_price}
               </Div>
             </Paper>
           </Grid>
@@ -203,8 +203,8 @@ export const FranchiseList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={20} h={10} w={90} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Hr px={20} h={10} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
             {filterSection(0)}
           </Grid>
         </Grid>

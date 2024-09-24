@@ -15,7 +15,7 @@ export const Order: any = {
   order_product: [{
     product_name: "",
     product_count: "",
-    product_price: "",
+    product_price: "1",
     product_images: [],
   }],
 

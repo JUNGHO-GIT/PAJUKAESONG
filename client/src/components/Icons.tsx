@@ -70,14 +70,7 @@ export const Icons = (props: any) => {
       </svg>
     ),
     ArrowRight: (
-      <svg
-        {...commonValues}
-        className={
-          props.className +
-          " black" +
-          " icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"
-        }
-      >
+      <svg {...commonValues}>
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M5 12l14 0" />
         <path d="M13 18l6 -6" />
@@ -203,8 +196,7 @@ export const Icons = (props: any) => {
     ),
     Won: (
       <svg {...commonValues}>
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M4 6l3.245 11.358a.85.85 0 001.624.035L12 8l3.131 9.393a.85.85 0 001.624-.035L20 6M21 10H3M21 14H3" />
+        <path d="M6 12L8 19L10 12M6 12L4 5M6 12H3M6 12H10M14 12L16 19L18 12M14 12L12 5L10 12M14 12H10M14 12H18M18 12L20 5M18 12H21" />
       </svg>
     ),
   };

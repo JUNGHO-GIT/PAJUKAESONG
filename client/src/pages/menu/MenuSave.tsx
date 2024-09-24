@@ -27,7 +27,7 @@ export const MenuSave = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Menu);
-  const [fileList, setFileList] = useState<any>([]);
+  const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
@@ -76,7 +76,7 @@ export const MenuSave = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         메뉴 등록
       </Div>
@@ -209,16 +209,6 @@ export const MenuSave = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
-              onClick={() => {
-                flowSave();
-              }}
-            >
-              {"저장하기"}
-            </Btn>
-          </Grid>
-          <Grid size={6} className={"d-left"}>
-            <Btn
               className={"w-70p fs-1-0rem bg-light black"}
               onClick={() => {
                 navigate(`/menu/list`, {
@@ -228,7 +218,17 @@ export const MenuSave = () => {
                 });
               }}
             >
-              {"목록으로"}
+              목록으로
+            </Btn>
+          </Grid>
+          <Grid size={6} className={"d-left"}>
+            <Btn
+              className={"w-70p fs-1-0rem bg-burgundy"}
+              onClick={() => {
+                flowSave();
+              }}
+            >
+              저장하기
             </Btn>
           </Grid>
         </Grid>

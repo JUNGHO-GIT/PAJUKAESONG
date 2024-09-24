@@ -35,7 +35,7 @@ export const FranchiseInfo = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         가맹 안내
       </Div>

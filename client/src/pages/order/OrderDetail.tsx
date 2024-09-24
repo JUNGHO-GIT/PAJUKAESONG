@@ -107,7 +107,7 @@ export const OrderDetail = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         주문 상세
       </Div>
@@ -117,38 +117,71 @@ export const OrderDetail = () => {
       <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           {OBJECT?.order_product?.map((item: any, index: number) => (
-            <Grid container spacing={2} columns={12} key={index}>
-              <Grid size={3} className={"d-left"}>
-                <Img
-                  key={item.product_images?.[0]}
-                  src={item.product_images?.[0]}
-                  group={"product"}
-                  className={imageSize}
-                />
-              </Grid>
-              <Grid size={4} className={"d-left"}>
-                <Div className={"d-column"}>
-                  <Div className={"fs-1-4rem fw-600"}>
-                    {item.product_name}
+            item.product_name && (
+              <Grid container spacing={2} columns={12} key={index}>
+                <Grid size={3} className={"d-left"}>
+                  <Img
+                    key={item?.product_images?.[0]}
+                    src={item?.product_images?.[0]}
+                    group={"product"}
+                    className={imageSize}
+                  />
+                </Grid>
+                <Grid size={5}>
+                  <Grid container spacing={1} columns={12}>
+                    <Grid size={12} className={"d-left"}>
+                      <Div className={"fs-1-4rem fw-600"}>
+                        {item?.product_name}
+                      </Div>
+                    </Grid>
+                    <Grid size={12} className={"d-left"}>
+                      <Div className={"fs-0-8rem me-5"}>
+                        ₩
+                      </Div>
+                      <Div className={"fs-1-0rem"}>
+                        {numeral(item?.product_price).format("0,0")}
+                      </Div>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid size={3} className={"d-center"}>
+                  <Div className={"d-center border-1"}>
+                    <Icons
+                      key={"Minus"}
+                      name={"Minus"}
+                      className={"w-10 h-10"}
+                    />
+                    <Div className={"fs-1-0rem"}>
+                      {item?.product_count}
+                    </Div>
+                    <Icons
+                      key={"Plus"}
+                      name={"Plus"}
+                      className={"w-10 h-10"}
+                    />
                   </Div>
-                  <Div className={"fs-1-0rem"}>
-                    {`₩ ${numeral(item.product_price).format("0,0")}`}
-                  </Div>
-                </Div>
+                </Grid>
+                {/** 마지막 항목 제외 hr 추가 */}
+                {index !== OBJECT?.order_product?.length - 1 && (
+                  <Grid size={12}>
+                    <Hr px={5} h={1} className={"mb-10"} />
+                  </Grid>
+                )}
               </Grid>
-              <Grid size={4} className={"d-center"}>
-                <Div className={"fs-1-0rem"}>
-                  {item.product_count}
-                </Div>
-              </Grid>
-            </Grid>
+            )
           ))}
-          <Hr px={20} h={10} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-0rem"}>
-              {`총 금액  : ₩ ${numeral(OBJECT?.order_total_price).format("0,0")}`}
-            </Div>
-          </Grid>
+        </Grid>
+        <Hr px={40} h={10} className={"bg-burgundy"} />
+        <Grid size={12} className={"d-center"}>
+          <Div className={"fs-1-0rem me-10"}>
+            총 금액  :
+          </Div>
+          <Div className={"fs-0-8rem me-5"}>
+            ₩
+          </Div>
+          <Div className={"fs-1-2rem fw-600"}>
+            {numeral(OBJECT?.order_total_price).format("0,0")}
+          </Div>
         </Grid>
       </Card>
     );
@@ -220,61 +253,62 @@ export const OrderDetail = () => {
     const filterSection = (i: number) => (
       <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={6} direction={"column"}>
-            <Grid size={12} className={"d-center"}>
-              <Icons
-                key={"Calendar"}
-                name={"Calendar"}
-                className={"w-20 h-20"}
-              />
-              <Div className={"fs-1-0rem fw-500"}>
-                {getDayFmt(OBJECT?.order_regDt)}
-              </Div>
-            </Grid>
-            <Grid size={12} className={"d-center"}>
-              <Icons
-                key={"Person"}
-                name={"Person"}
-                className={"w-20 h-20"}
-              />
-              <Div className={"fs-1-0rem fw-500"}>
-                {OBJECT?.order_name}
-              </Div>
-            </Grid>
+          <Grid size={6} className={"d-left"}>
+            <Icons
+              key={"Calendar"}
+              name={"Calendar"}
+              className={"w-20 h-20"}
+            />
+            <Div className={"fs-1-0rem fw-500"}>
+              {getDayFmt(OBJECT?.order_regDt)}
+            </Div>
           </Grid>
-          <Grid size={6}>
-            <Grid size={12} className={"d-center"}>
-              <Div
-                className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
-                onClick={() => {
-                  navigate("/order/list", {
-                    state: {
-                      order_name: OBJECT?.order_name,
-                      order_phone: OBJECT?.order_phone
-                    }
-                  });
-                }}
-              >
-                목록으로
-              </Div>
-            </Grid>
-            <Grid size={12} className={"d-center"}>
-              <Div
-                className={"fs-1-0rem fw-700 pointer-burgundy me-20"}
-                onClick={() => {
-                }}
-              >
-                수정하기
-              </Div>
-              <Div
-                className={"fs-1-0rem fw-700 pointer-burgundy"}
-                onClick={() => {
-                  flowDelete();
-                }}
-              >
-                삭제하기
-              </Div>
-            </Grid>
+          <Grid size={6} className={"d-right"}>
+            <Icons
+              key={"Person"}
+              name={"Person"}
+              className={"w-20 h-20"}
+            />
+            <Div className={"fs-1-0rem fw-500"}>
+              {OBJECT?.order_name}
+            </Div>
+          </Grid>
+          <Grid size={6} className={"d-left"}>
+            <Div
+              className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
+              onClick={() => {
+                navigate("/order/list", {
+                  state: {
+                    order_name: OBJECT?.order_name,
+                    order_phone: OBJECT?.order_phone
+                  }
+                });
+              }}
+            >
+              목록으로
+            </Div>
+          </Grid>
+          <Grid size={6} className={"d-right"}>
+            <Div
+              className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
+              onClick={() => {
+                navigate("/order/update", {
+                  state: {
+                    _id: OBJECT?._id
+                  }
+                });
+              }}
+            >
+              수정
+            </Div>
+            <Div
+              className={"fs-1-0rem fw-700 pointer-burgundy"}
+              onClick={() => {
+                flowDelete();
+              }}
+            >
+              삭제
+            </Div>
           </Grid>
         </Grid>
       </Card>
@@ -292,7 +326,8 @@ export const OrderDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {orderSection(0)}
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Hr px={20} h={10} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
             {filterSection(0)}
           </Grid>
         </Grid>

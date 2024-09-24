@@ -1,9 +1,10 @@
 // ContactUpdate.tsx
 
-import { useState } from "@imports/ImportReacts";
+import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateContact } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
+import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
 import { Div, Select, Br, Input, TextArea, Btn, FileInput } from "@imports/ImportComponents";
@@ -14,10 +15,10 @@ export const ContactUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX
+    navigate, URL, SUBFIX, location_id,
   } = useCommonValue();
   const {
-    dayFmt,
+    dayFmt
   } = useCommonDate();
   const {
     REFS, ERRORS, validate,
@@ -26,7 +27,26 @@ export const ContactUpdate = () => {
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Contact);
-  const [fileList, setFileList] = useState<any>([]);
+  const [fileList, setFileList] = useState<File[] | null>(null);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    setLOADING(true);
+    axios.get(`${URL}${SUBFIX}/detail`, {
+      params: {
+        _id: location_id
+      },
+    })
+    .then((res: any) => {
+      setOBJECT(res.data.result || Contact);
+    })
+    .catch((err: any) => {
+      console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
+    });
+  }, [URL, SUBFIX]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowUpdate = () => {
@@ -35,9 +55,20 @@ export const ContactUpdate = () => {
       setLOADING(false);
       return;
     }
-    axios.put(`${URL}${SUBFIX}/update`, {
-      OBJECT: OBJECT,
-    })
+    axios.put(`${URL}${SUBFIX}/update`,
+      makeFormData(
+        OBJECT,
+        fileList,
+        {
+          _id: location_id
+        }
+      ),
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
@@ -63,7 +94,7 @@ export const ContactUpdate = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         문의 하기
       </Div>

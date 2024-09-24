@@ -10,7 +10,7 @@ export const AuthPrivacy = () => {
     // 1. privacy
     const privacySection = () => (
       <Card key={"privacy"} className={"p-20"}>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} columns={12}>
 
           {/** 1. privacy */}
           <Grid size={12}>

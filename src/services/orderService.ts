@@ -2,7 +2,37 @@
 
 import * as repository from "@repositories/orderRepository";
 
-// 1. list -----------------------------------------------------------------------------------------
+// 1-1. find ---------------------------------------------------------------------------------------
+export const find = async (
+  order_name_param: string,
+  order_phone_param: string,
+) => {
+
+  // result 변수 선언
+  let findResult: any = null;
+  let finalResult: any = null;
+  let statusResult: string = "fail";
+
+  findResult = await repository.find(
+    order_name_param, order_phone_param
+  );
+
+  if (!findResult) {
+    statusResult = "fail";
+    finalResult = null;
+  }
+  else {
+    statusResult = "success";
+    finalResult = findResult;
+  }
+
+  return {
+    status: statusResult,
+    result: finalResult,
+  };
+};
+
+// 1-2. list ---------------------------------------------------------------------------------------
 export const list = async (
   order_name_param: string,
   order_phone_param: string,
@@ -43,37 +73,7 @@ export const list = async (
   };
 };
 
-// 2-1. find ---------------------------------------------------------------------------------------
-export const find = async (
-  order_name_param: string,
-  order_phone_param: string,
-) => {
-
-  // result 변수 선언
-  let findResult: any = null;
-  let finalResult: any = null;
-  let statusResult: string = "fail";
-
-  findResult = await repository.find(
-    order_name_param, order_phone_param
-  );
-
-  if (!findResult) {
-    statusResult = "fail";
-    finalResult = null;
-  }
-  else {
-    statusResult = "success";
-    finalResult = findResult;
-  }
-
-  return {
-    status: statusResult,
-    result: finalResult,
-  };
-};
-
-// 2-2. detail -------------------------------------------------------------------------------------
+// 2. detail ---------------------------------------------------------------------------------------
 export const detail = async (
   _id_param: string,
 ) => {

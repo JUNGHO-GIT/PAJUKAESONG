@@ -5,7 +5,41 @@ import { uploadCloud } from "@scripts/upload";
 
 const title = "contact";
 
-// 1. list -----------------------------------------------------------------------------------------
+// 1-1. find ---------------------------------------------------------------------------------------
+export const find = async (
+  contact_name_param: string,
+  contact_phone_param: string,
+) => {
+
+  // result 변수 선언
+  let findResult: any = null;
+  let finalResult: any = null;
+  let statusResult: string = "fail";
+
+  findResult = await repository.find(
+    contact_name_param, contact_phone_param
+  );
+
+  console.log("contact_name_param", contact_name_param);
+  console.log("contact_phone_param", contact_phone_param);
+  console.log("findResult", findResult);
+
+  if (!findResult) {
+    statusResult = "fail";
+    finalResult = null;
+  }
+  else {
+    statusResult = "success";
+    finalResult = findResult;
+  }
+
+  return {
+    status: statusResult,
+    result: finalResult,
+  };
+};
+
+// 1-2. list ---------------------------------------------------------------------------------------
 export const list = async (
   contact_name_param: string,
   contact_phone_param: string,
@@ -46,37 +80,7 @@ export const list = async (
   };
 };
 
-// 2-1. find ---------------------------------------------------------------------------------------
-export const find = async (
-  contact_name_param: string,
-  contact_phone_param: string,
-) => {
-
-  // result 변수 선언
-  let findResult: any = null;
-  let finalResult: any = null;
-  let statusResult: string = "fail";
-
-  findResult = await repository.find(
-    contact_name_param, contact_phone_param
-  );
-
-  if (!findResult) {
-    statusResult = "fail";
-    finalResult = null;
-  }
-  else {
-    statusResult = "success";
-    finalResult = findResult;
-  }
-
-  return {
-    status: statusResult,
-    result: finalResult,
-  };
-};
-
-// 2-2. detail -------------------------------------------------------------------------------------
+// 2. detail ---------------------------------------------------------------------------------------
 export const detail = async (
   _id_param: string,
 ) => {

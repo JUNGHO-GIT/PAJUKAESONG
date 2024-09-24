@@ -59,18 +59,15 @@
   font-size: 0.9rem !important;
 }
 
-[class*="MuiInput-root"]::after {
+[class*="MuiInput-root"][class*="Mui-focused"]::after {
   border-bottom: 2px solid rgb(0, 0, 0) !important;
 }
-[class*="MuiInputLabel-root"][class*="Mui-focused"] {
-  color:  rgb(0, 0, 0) !important;
-}
 
-[class*="MuiInputLabel-root"][class*="Mui-error"] {
-  color: #ff0000 !important;
-}
 [class*="MuiInput-root"][class*="Mui-error"]::after {
   border-bottom: 2px solid #ff0000 !important;
+}
+[class*="MuiOutlinedInput-root"][class*="Mui-error"] .MuiOutlinedInput-notchedOutline {
+  border: 2px solid #ff0000 !important;
 }
 
 [class*="MuiInputBase-input-MuiInput-input"][class*="Mui-disabled"] {

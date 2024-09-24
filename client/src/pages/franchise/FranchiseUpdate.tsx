@@ -28,7 +28,7 @@ export const FranchiseUpdate = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [mapAddress, setMapAddress] = useState<string>("");
   const [OBJECT, setOBJECT] = useState<any>(Franchise);
-  const [fileList, setFileList] = useState<any>([]);
+  const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -120,7 +120,7 @@ export const FranchiseUpdate = () => {
     const titleSection = () => (
       <Div
         key={"title"}
-        className={"fs-2-0rem fw-700"}
+        className={"fs-2-0rem fw-700 fadeIn"}
       >
         가맹점 수정
       </Div>
