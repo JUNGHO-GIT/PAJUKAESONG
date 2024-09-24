@@ -7,7 +7,7 @@ import { axios, numeral } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Input, FileInput, Btn, Select } from "@imports/ImportComponents";
+import { Div, Br, Input, FileInput, Btn, Select } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ export const MenuUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, adminId, location_id,
+    navigate, URL, SUBFIX, location_id,
   } = useCommonValue();
   const {
     dayFmt
@@ -231,16 +231,6 @@ export const MenuUpdate = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
-              onClick={() => {
-                flowUpdate();
-              }}
-            >
-              수정하기
-            </Btn>
-          </Grid>
-          <Grid size={6} className={"d-left"}>
-            <Btn
               className={"w-70p fs-1-0rem bg-light black"}
               onClick={() => {
                 navigate(`/menu/list`, {
@@ -251,6 +241,16 @@ export const MenuUpdate = () => {
               }}
             >
               목록으로
+            </Btn>
+          </Grid>
+          <Grid size={6} className={"d-left"}>
+            <Btn
+              className={"w-70p fs-1-0rem bg-burgundy"}
+              onClick={() => {
+                flowUpdate();
+              }}
+            >
+              수정하기
             </Btn>
           </Grid>
         </Grid>

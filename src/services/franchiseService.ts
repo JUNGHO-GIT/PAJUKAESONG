@@ -3,9 +3,9 @@
 import * as repository from "@repositories/franchiseRepository";
 import { uploadCloud } from "@scripts/upload";
 
+const title = "franchise";
+
 // 1. list -----------------------------------------------------------------------------------------
-// page는 무조건 0부터 시작
-// 빈값은 [] 리턴
 export const list = async (
   PAGING_param: any,
 ) => {
@@ -83,13 +83,12 @@ export const save = async (
   let finalResult: any = null;
   let statusResult: string = "fail";
 
-  // 이미지 파일명 삽입
-  OBJECT_param.franchise_images = [];
-  fileList_param.forEach((file: any, _index: number) => {
-    const newFileName = `${new Date().getTime()}_${file.originalname}`;
-    file.filename = newFileName;
-    OBJECT_param.franchise_images.push(newFileName);
-  });
+  const mergedImages = (
+    JSON.parse(OBJECT_param[`${title}_images`]).concat(fileList_param.map((file: any) => (
+      file.originalname
+    )))
+  );
+  OBJECT_param[`${title}_images`] = mergedImages;
 
   saveResult = await repository.save(
     OBJECT_param
@@ -104,7 +103,7 @@ export const save = async (
     finalResult = saveResult;
 
     // 클라우드에 이미지 업로드
-    uploadCloud("franchise", fileList_param);
+    uploadCloud(title, fileList_param);
   }
 
   return {
@@ -121,29 +120,16 @@ export const update = async (
 ) => {
 
   // result 변수 선언
-  let findResult: any = null;
   let updateResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "fail";
 
-  if (fileList_param.length > 0) {
-    // 이미지 파일명 삽입
-    OBJECT_param.franchise_images = [];
-    fileList_param.forEach((file: any, _index: number) => {
-      const newFileName = `${new Date().getTime()}_${file.originalname}`;
-      file.filename = newFileName;
-      OBJECT_param.franchise_images.push(newFileName);
-    });
-
-    // 클라우드에 이미지 업로드
-    uploadCloud("franchise", fileList_param);
-  }
-  else {
-    findResult = await repository.detail(
-      _id_param
-    );
-    OBJECT_param.franchise_images = findResult.franchise_images;
-  }
+  const mergedImages = (
+    JSON.parse(OBJECT_param[`${title}_images`]).concat(fileList_param.map((file: any) => (
+      file.originalname
+    )))
+  );
+  OBJECT_param[`${title}_images`] = mergedImages;
 
   updateResult = await repository.update(
     _id_param, OBJECT_param
@@ -156,6 +142,9 @@ export const update = async (
   else {
     statusResult = "success";
     finalResult = updateResult;
+
+    // 클라우드에 이미지 업로드
+    uploadCloud(title, fileList_param);
   }
 
   return {

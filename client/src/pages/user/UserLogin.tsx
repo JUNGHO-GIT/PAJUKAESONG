@@ -104,8 +104,8 @@ export const UserLogin = () => {
       </Div>
     );
     // 2. login
-    const loginSection = () => {
-      const loginFragment = (i: number) => (
+    const loginSection = (i: number) => (
+      <Card className={"border-1 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={3}>
           <Grid size={12} className={"d-center"}>
             <Input
@@ -141,8 +141,11 @@ export const UserLogin = () => {
             />
           </Grid>
         </Grid>
-      );
-      const btnFragment = () => (
+      </Card>
+    );
+    // 3. btn
+    const btnSection = (i: number) => (
+      <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             {(isAdmin || isUser) ? (
@@ -157,7 +160,7 @@ export const UserLogin = () => {
             ) : (
               <Btn
                 color={"primary"}
-                className={"w-100p fs-1-0rem"}
+                className={"w-100p bg-primary fs-1-0rem"}
                 onClick={() => {
                   flowLogin();
                 }}
@@ -166,23 +169,12 @@ export const UserLogin = () => {
               </Btn>
             )}
           </Grid>
-          <Grid size={12} className={"d-center"}>
-            <Btn
-              color={"primary"}
-              className={"w-100p fs-1-0rem bg-white black"}
-            >
-              <Img
-                key={"google"}
-                group={"main"}
-                src={"google.webp"}
-                className={"w-15 h-15 me-10"}
-              />
-              구글 아이디로 로그인
-            </Btn>
-          </Grid>
         </Grid>
-      );
-      const linkFragment = () => (
+      </Card>
+    );
+    // 4. link
+    const linkSection = (i: number) => (
+      <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"d-center"}>
@@ -209,26 +201,24 @@ export const UserLogin = () => {
             </Div>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border-1 radius p-30 fadeIn"}>
-          {loginFragment(0)}
-          <Hr px={50} h={1} />
-          {btnFragment()}
-          <Hr px={50} h={1} />
-          {linkFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min80vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {loginSection()}
+            {loginSection(0)}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {btnSection(0)}
+          </Grid>
+          <Hr px={10} h={10} w={90} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {linkSection(0)}
           </Grid>
         </Grid>
       </Paper>

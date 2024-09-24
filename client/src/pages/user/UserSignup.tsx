@@ -63,8 +63,8 @@ export const UserSignup = () => {
       </Div>
     );
     // 2. signup
-    const signupSection = () => {
-      const signupFragment = (i: number) => (
+    const signupSection = (i: number) => (
+      <Card className={"border-1 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={3}>
           <Grid size={12} className={"d-center"}>
             <Input
@@ -98,8 +98,11 @@ export const UserSignup = () => {
             />
           </Grid>
         </Grid>
-      );
-      const btnFragment = () => (
+      </Card>
+    );
+    // 3. btn
+    const btnSection = (i: number) => (
+      <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Btn
@@ -127,8 +130,11 @@ export const UserSignup = () => {
             </Btn>
           </Grid>
         </Grid>
-      );
-      const linkFragment = () => (
+      </Card>
+    );
+    // 4. link
+    const linkSection = (i: number) => (
+      <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"d-center"}>
@@ -158,26 +164,24 @@ export const UserSignup = () => {
             </Div>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border-1 radius shadow p-30 fadeIn"}>
-          {signupFragment(0)}
-          <Hr px={50} h={1} />
-          {btnFragment()}
-          <Hr px={50} h={1} />
-          {linkFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min80vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {signupSection()}
+            {signupSection(0)}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {btnSection(0)}
+          </Grid>
+          <Hr px={10} h={10} w={90} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {linkSection(0)}
           </Grid>
         </Grid>
       </Paper>

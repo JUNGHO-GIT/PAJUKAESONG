@@ -1,13 +1,14 @@
 // contactService.ts
 
 import * as repository from "@repositories/contactRepository";
+import { uploadCloud } from "@scripts/upload";
+
+const title = "contact";
 
 // 1. list -----------------------------------------------------------------------------------------
-// page는 무조건 0부터 시작
-// 빈값은 [] 리턴
 export const list = async (
   contact_name_param: string,
-  contact_email_param: string,
+  contact_phone_param: string,
   PAGING_param: any,
 ) => {
 
@@ -22,11 +23,11 @@ export const list = async (
   const page = PAGING_param.page || 0;
 
   totalCntResult = await repository.cnt(
-    contact_name_param, contact_email_param
+    contact_name_param, contact_phone_param
   );
 
   findResult = await repository.list(
-    contact_name_param, contact_email_param, sort, page
+    contact_name_param, contact_phone_param, sort, page
   );
 
   if (!findResult || findResult.length <= 0) {
@@ -48,7 +49,7 @@ export const list = async (
 // 2-1. find ---------------------------------------------------------------------------------------
 export const find = async (
   contact_name_param: string,
-  contact_email_param: string,
+  contact_phone_param: string,
 ) => {
 
   // result 변수 선언
@@ -57,7 +58,7 @@ export const find = async (
   let statusResult: string = "fail";
 
   findResult = await repository.find(
-    contact_name_param, contact_email_param
+    contact_name_param, contact_phone_param
   );
 
   if (!findResult) {
@@ -107,12 +108,20 @@ export const detail = async (
 // 3. save -----------------------------------------------------------------------------------------
 export const save = async (
   OBJECT_param: any,
+  fileList_param: any,
 ) => {
 
   // result 변수 선언
   let saveResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "fail";
+
+  const mergedImages = (
+    JSON.parse(OBJECT_param[`${title}_images`]).concat(fileList_param.map((file: any) => (
+      file.originalname
+    )))
+  );
+  OBJECT_param[`${title}_images`] = mergedImages;
 
   saveResult = await repository.save(
     OBJECT_param
@@ -125,6 +134,9 @@ export const save = async (
   else {
     statusResult = "success";
     finalResult = saveResult;
+
+    // 클라우드에 이미지 업로드
+    uploadCloud(title, fileList_param);
   }
 
   return {
@@ -137,12 +149,20 @@ export const save = async (
 export const update = async (
   _id_param: string,
   OBJECT_param: any,
+  fileList_param: any,
 ) => {
 
   // result 변수 선언
   let updateResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "fail";
+
+  const mergedImages = (
+    JSON.parse(OBJECT_param[`${title}_images`]).concat(fileList_param.map((file: any) => (
+      file.originalname
+    )))
+  );
+  OBJECT_param[`${title}_images`] = mergedImages;
 
   updateResult = await repository.update(
     _id_param, OBJECT_param
@@ -155,6 +175,9 @@ export const update = async (
   else {
     statusResult = "success";
     finalResult = updateResult;
+
+    // 클라우드에 이미지 업로드
+    uploadCloud(title, fileList_param);
   }
 
   return {

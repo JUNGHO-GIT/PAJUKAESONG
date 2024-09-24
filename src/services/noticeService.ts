@@ -1,10 +1,11 @@
 // noticeService.ts
 
 import * as repository from "@repositories/noticeRepository";
+import { uploadCloud } from "@scripts/upload";
+
+const title = "notice";
 
 // 1. list -----------------------------------------------------------------------------------------
-// page는 무조건 0부터 시작
-// 빈값은 [] 리턴
 export const list = async (
   PAGING_param: any,
 ) => {
@@ -74,12 +75,20 @@ export const detail = async (
 // 3. save -----------------------------------------------------------------------------------------
 export const save = async (
   OBJECT_param: any,
+  fileList_param: any,
 ) => {
 
   // result 변수 선언
   let saveResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "fail";
+
+  const mergedImages = (
+    JSON.parse(OBJECT_param[`${title}_images`]).concat(fileList_param.map((file: any) => (
+      file.originalname
+    )))
+  );
+  OBJECT_param[`${title}_images`] = mergedImages;
 
   saveResult = await repository.save(
     OBJECT_param
@@ -92,6 +101,9 @@ export const save = async (
   else {
     statusResult = "success";
     finalResult = saveResult;
+
+    // 클라우드에 이미지 업로드
+    uploadCloud(title, fileList_param);
   }
 
   return {
@@ -104,12 +116,20 @@ export const save = async (
 export const update = async (
   _id_param: string,
   OBJECT_param: any,
+  fileList_param: any,
 ) => {
 
   // result 변수 선언
   let updateResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "fail";
+
+  const mergedImages = (
+    JSON.parse(OBJECT_param[`${title}_images`]).concat(fileList_param.map((file: any) => (
+      file.originalname
+    )))
+  );
+  OBJECT_param[`${title}_images`] = mergedImages;
 
   updateResult = await repository.update(
     _id_param, OBJECT_param
@@ -122,6 +142,9 @@ export const update = async (
   else {
     statusResult = "success";
     finalResult = updateResult;
+
+    // 클라우드에 이미지 업로드
+    uploadCloud(title, fileList_param);
   }
 
   return {
@@ -143,9 +166,6 @@ export const deletes = async (
   deleteResult = await repository.deletes(
     _id_param
   );
-
-  console.log("_id_param", _id_param);
-  console.log("deleteResult", deleteResult);
 
   if (!deleteResult) {
     statusResult = "fail";

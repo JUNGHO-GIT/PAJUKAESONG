@@ -33,7 +33,7 @@ export const useValidateFranchise = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    validate.current = (OBJECT: any) => {
+    validate.current = (OBJECT: any, fileList: any) => {
       try {
         // 1. save
         if (PATH.includes("/franchise/save") || PATH.includes("/franchise/update")) {
@@ -72,8 +72,8 @@ export const useValidateFranchise = () => {
           else if (!OBJECT.franchise_phone) {
             return showAlertAndFocus('franchise_phone', "가맹점 전화번호를 입력해주세요.", 0);
           }
-          else if (!OBJECT.franchise_images) {
-            return showAlertAndFocus('franchise_images', "가맹점 이미지를 등록해주세요.", 0);
+          else if (OBJECT.franchise_images.length === 0 && fileList.length === 0) {
+            return showAlertAndFocus('franchise_images', "메뉴 이미지를 등록해주세요.", 0);
           }
           return true;
         }

@@ -2,7 +2,9 @@
 
 // -------------------------------------------------------------------------------------------------
 export const Order: any = {
+
   _id: "",
+
   order_number: 1,
   order_category: "reservation",
   order_name: "",
@@ -16,6 +18,7 @@ export const Order: any = {
     product_price: "",
     product_images: [],
   }],
+
   order_regDt: null,
   order_updateDt: null,
 };

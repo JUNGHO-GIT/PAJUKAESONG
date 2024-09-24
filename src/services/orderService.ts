@@ -3,8 +3,6 @@
 import * as repository from "@repositories/orderRepository";
 
 // 1. list -----------------------------------------------------------------------------------------
-// page는 무조건 0부터 시작
-// 빈값은 [] 리턴
 export const list = async (
   order_name_param: string,
   order_phone_param: string,

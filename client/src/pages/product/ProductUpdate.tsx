@@ -201,7 +201,7 @@ export const ProductUpdate = () => {
           <Grid size={12}>
             <FileInput
               variant={"outlined"}
-              label={"가맹점 사진"}
+              label={"제품 이미지"}
               required={true}
               limit={2}
               existing={OBJECT.product_images}

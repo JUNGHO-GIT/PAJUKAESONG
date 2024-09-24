@@ -2,7 +2,9 @@
 
 // -------------------------------------------------------------------------------------------------
 export const Contact: any = {
+
   _id: "",
+
   contact_number: 1,
   contact_category: "",
   contact_name: "",
@@ -10,6 +12,8 @@ export const Contact: any = {
   contact_phone: "",
   contact_title: "",
   contact_content: "",
+  contact_images: [],
+
   contact_regDt: null,
   contact_updateDt: null,
 };

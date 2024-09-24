@@ -1,6 +1,7 @@
 // contactRouter.ts
 
 import express, { Request, Response } from "express";
+import { uploadMemory } from "@scripts/upload";
 import * as service from "@services/contactService";
 export const router = express.Router();
 
@@ -9,7 +10,7 @@ router.get("/list", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.list(
       req.query.contact_name as any,
-      req.query.contact_email as any,
+      req.query.contact_phone as any,
       req.query.PAGING as any,
     );
     if (finalResult.status === "success") {
@@ -52,7 +53,7 @@ router.get("/find", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.find(
       req.query.contact_name as any,
-      req.query.contact_email as any,
+      req.query.contact_phone as any,
     );
     if (finalResult.status === "success") {
       res.json({
@@ -125,10 +126,11 @@ router.get("/detail", async (req: Request, res: Response) => {
 });
 
 // 3. save -----------------------------------------------------------------------------------------
-router.post("/save", async (req: Request, res: Response) => {
+router.post("/save", uploadMemory("fileList", "array", 5), async (req: Request, res: Response) => {
   try {
     let finalResult = await service.save(
       req.body.OBJECT as any,
+      req.files as Express.Multer.File[]
     );
     if (finalResult.status === "success") {
       res.json({
@@ -163,11 +165,12 @@ router.post("/save", async (req: Request, res: Response) => {
 });
 
 // 4. update ---------------------------------------------------------------------------------------
-router.put("/update", async (req: Request, res: Response) => {
+router.put("/update", uploadMemory("fileList", "array", 5), async (req: Request, res: Response) => {
   try {
     let finalResult = await service.update(
       req.body._id as string,
       req.body.OBJECT as any,
+      req.files as Express.Multer.File[]
     );
     if (finalResult.status === "success") {
       res.json({
@@ -205,7 +208,7 @@ router.put("/update", async (req: Request, res: Response) => {
 router.delete("/delete", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.deletes(
-      req.query._id as string,
+      req.query._id as string
     );
     if (finalResult.status === "success") {
       res.json({

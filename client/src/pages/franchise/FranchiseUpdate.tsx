@@ -5,8 +5,9 @@ import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateFranchise } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
+import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Input, FileInput, Btn } from "@imports/ImportComponents";
+import { Div, Br, Input, FileInput, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -14,7 +15,7 @@ export const FranchiseUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, adminId, location_id,
+    navigate, URL, SUBFIX, location_id,
   } = useCommonValue();
   const {
     dayFmt
@@ -124,9 +125,9 @@ export const FranchiseUpdate = () => {
       </Div>
     );
     // 2. update
-    const updateSection = () => {
-      const updateFragment = (i: number) => (
-        <Grid container spacing={3} className={"text-left"}>
+    const updateSection = (i: number) => (
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
               variant={"standard"}
@@ -213,7 +214,7 @@ export const FranchiseUpdate = () => {
           <Grid size={12}>
             <FileInput
               variant={"outlined"}
-              label={"가맹점 사진"}
+              label={"가맹점 이미지"}
               required={true}
               limit={1}
               existing={OBJECT.franchise_images}
@@ -225,12 +226,25 @@ export const FranchiseUpdate = () => {
             />
           </Grid>
         </Grid>
-      );
-      const btnFragment = () => (
+      </Card>
+    );
+    // 3. filter
+    const filterSection = (i: number) => (
+      <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={6} className={"d-right"}>
             <Btn
-              className={"w-100p fs-1-0rem bg-burgundy"}
+              className={"w-70p fs-1-0rem bg-light black"}
+              onClick={() => {
+                navigate(`/franchise/list`);
+              }}
+            >
+              목록으로
+            </Btn>
+          </Grid>
+          <Grid size={6} className={"d-left"}>
+            <Btn
+              className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowUpdate();
               }}
@@ -239,15 +253,8 @@ export const FranchiseUpdate = () => {
             </Btn>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border-1 radius shadow p-30 fadeIn"}>
-          {updateFragment(0)}
-          <Br px={50} />
-          {btnFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
       <Paper className={"content-wrapper d-center h-min75vh"}>
@@ -256,7 +263,11 @@ export const FranchiseUpdate = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {updateSection()}
+            {LOADING ? <Loading /> : updateSection(0)}
+          </Grid>
+          <Br px={5} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>

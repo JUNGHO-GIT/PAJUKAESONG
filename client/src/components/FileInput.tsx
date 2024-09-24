@@ -246,7 +246,10 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      <Div className={"d-left black fs-0-9rem fw-400 mt-15"}>
+      <Div
+        className={"d-left fs-0-9rem fw-400 mt-15"}
+        style={{ color: "#484848de" }}
+      >
         {props?.required ? `${props?.label} *` : props?.label}
       </Div>
       <Br px={10} />

@@ -3,9 +3,9 @@
 import * as repository from "@repositories/menuRepository";
 import { uploadCloud } from "@scripts/upload";
 
+const title = "menu";
+
 // 1. list -----------------------------------------------------------------------------------------
-// page는 무조건 0부터 시작
-// 빈값은 [] 리턴
 export const list = async (
   PAGING_param: any,
   category_param: string,
@@ -85,11 +85,11 @@ export const save = async (
   let statusResult: string = "fail";
 
   const mergedImages = (
-    JSON.parse(OBJECT_param.menu_images).concat(fileList_param.map((file: any) => (
+    JSON.parse(OBJECT_param[`${title}_images`]).concat(fileList_param.map((file: any) => (
       file.originalname
     )))
   );
-  OBJECT_param.menu_images = mergedImages;
+  OBJECT_param[`${title}_images`] = mergedImages;
 
   saveResult = await repository.save(
     OBJECT_param
@@ -104,7 +104,7 @@ export const save = async (
     finalResult = saveResult;
 
     // 클라우드에 이미지 업로드
-    uploadCloud("menu", fileList_param);
+    uploadCloud(title, fileList_param);
   }
 
   return {
@@ -126,11 +126,11 @@ export const update = async (
   let statusResult: string = "fail";
 
   const mergedImages = (
-    JSON.parse(OBJECT_param.menu_images).concat(fileList_param.map((file: any) => (
+    JSON.parse(OBJECT_param[`${title}_images`]).concat(fileList_param.map((file: any) => (
       file.originalname
     )))
   );
-  OBJECT_param.menu_images = mergedImages;
+  OBJECT_param[`${title}_images`] = mergedImages;
 
   updateResult = await repository.update(
     _id_param, OBJECT_param
@@ -145,7 +145,7 @@ export const update = async (
     finalResult = updateResult;
 
     // 클라우드에 이미지 업로드
-    uploadCloud("menu", fileList_param);
+    uploadCloud(title, fileList_param);
   }
 
   return {

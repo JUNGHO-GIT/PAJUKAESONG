@@ -11338,16 +11338,16 @@
 }
 
 .primary {
-  color: #3B82F6 !important;
+  color: #1976D2 !important;
 }
 .pointer-primary:hover {
   cursor: pointer !important;
-  color: #3B82F6 !important;
+  color: #1976D2 !important;
   transition: transform 0.1s ease-in-out !important;
   transform: scale(1.1) !important;
 }
 .bg-primary {
-  background-color: #3B82F6 !important;
+  background-color: #1976D2 !important;
 }
 
 .blue {
@@ -11358,6 +11358,9 @@
   color: #3B82F6 !important;
   transition: transform 0.1s ease-in-out !important;
   transform: scale(1.1) !important;
+}
+.bg-blue {
+  background-color: #3B82F6 !important;
 }
 
 .navy {
@@ -11465,7 +11468,7 @@
 }
 
 .firstScore {
-  color: #3B82F6 !important;
+  color: #1976D2 !important;
 }
 .secondScore {
   color: #10B981 !important;

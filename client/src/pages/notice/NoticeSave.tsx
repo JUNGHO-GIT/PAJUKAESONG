@@ -6,7 +6,7 @@ import { useValidateNotice } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
+import { Div, Br, Input, TextArea, Btn, FileInput } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -26,6 +26,7 @@ export const NoticeSave = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Notice);
+  const [fileList, setFileList] = useState<any>([]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
@@ -110,6 +111,20 @@ export const NoticeSave = () => {
                   ...prev,
                   notice_content: e.target.value,
                 }));
+              }}
+            />
+          </Grid>
+          <Grid size={12}>
+            <FileInput
+              variant={"outlined"}
+              label={"공지사항 이미지"}
+              required={true}
+              limit={1}
+              existing={OBJECT.notice_images}
+              group={"notice"}
+              value={fileList}
+              onChange={(updatedFiles: File[] | null) => {
+                setFileList(updatedFiles);
               }}
             />
           </Grid>

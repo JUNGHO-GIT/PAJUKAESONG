@@ -42,6 +42,11 @@ const schema = new mongoose.Schema(
       default: "",
       required: false
     },
+    contact_images: {
+      type: Array,
+      default: [],
+      required: false
+    },
 
     contact_regDt: {
       type: Date,

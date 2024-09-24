@@ -74,7 +74,7 @@
 }
 
 [class*="MuiInputBase-input-MuiInput-input"][class*="Mui-disabled"] {
-  -webkit-text-fill-color: #555555 !important;
+  -webkit-text-fill-color: #757575 !important;
 }
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
