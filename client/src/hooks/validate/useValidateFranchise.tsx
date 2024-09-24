@@ -31,6 +31,12 @@ export const useValidateFranchise = () => {
     return false;
   };
 
+  // 휴대폰 번호 형식 ------------------------------------------------------------------------------
+  const validatePhone = (phone: string) => {
+    const phoneRegex = /^\d{3}-\d{3,4}-\d{4}$/;
+    return phoneRegex.test(phone);
+  };
+
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     validate.current = (OBJECT: any, fileList?: any) => {
@@ -71,6 +77,9 @@ export const useValidateFranchise = () => {
           }
           else if (!OBJECT?.franchise_phone) {
             return showAlertAndFocus('franchise_phone', "가맹점 전화번호를 입력해주세요.", 0);
+          }
+          else if (!validatePhone(OBJECT?.franchise_phone)) {
+            return showAlertAndFocus('franchise_phone', "전화번호 형식으로 입력해주세요.", 0);
           }
           else if (OBJECT?.franchise_images.length === 0 && fileList.length === 0) {
             return showAlertAndFocus('franchise_images', "메뉴 이미지를 등록해주세요.", 0);

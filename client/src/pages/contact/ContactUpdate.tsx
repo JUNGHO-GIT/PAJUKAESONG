@@ -163,11 +163,21 @@ export const ContactUpdate = () => {
               value={OBJECT?.contact_email}
               inputRef={REFS?.[i]?.contact_email}
               error={ERRORS?.[i]?.contact_email}
+              placeholder={"abcd@naver.com"}
               onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  contact_email: e.target.value,
-                }));
+                const value = e.target.value;
+                if (value.length > 30) {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_email: prev.contact_email,
+                  }));
+                }
+                else {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_email: value,
+                  }));
+                }
               }}
             />
           </Grid>
@@ -180,11 +190,22 @@ export const ContactUpdate = () => {
               value={OBJECT?.contact_phone}
               inputRef={REFS?.[i]?.contact_phone}
               error={ERRORS?.[i]?.contact_phone}
+              placeholder={"010-1234-5678"}
               onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  contact_phone: e.target.value,
-                }));
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
+                if (value.length > 11) {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_phone: prev.contact_phone,
+                  }));
+                }
+                else {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_phone: newValue,
+                  }));
+                }
               }}
             />
           </Grid>

@@ -16,9 +16,6 @@ export const OrderList = () => {
   const {
     navigate, URL, SUBFIX, location,
   } = useCommonValue();
-  const {
-    isXs
-  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);

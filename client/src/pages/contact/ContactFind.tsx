@@ -101,10 +101,20 @@ export const ContactFind = () => {
               inputRef={REFS?.[i]?.contact_phone}
               error={ERRORS?.[i]?.contact_phone}
               onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  contact_phone: e.target.value,
-                }));
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
+                if (value.length > 11) {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_phone: prev.contact_phone,
+                  }));
+                }
+                else {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_phone: newValue,
+                  }));
+                }
               }}
             />
           </Grid>

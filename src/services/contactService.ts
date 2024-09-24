@@ -20,10 +20,6 @@ export const find = async (
     contact_name_param, contact_phone_param
   );
 
-  console.log("contact_name_param", contact_name_param);
-  console.log("contact_phone_param", contact_phone_param);
-  console.log("findResult", findResult);
-
   if (!findResult) {
     statusResult = "fail";
     finalResult = null;

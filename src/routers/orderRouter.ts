@@ -132,21 +132,21 @@ router.post("/save", async (req: Request, res: Response) => {
     );
     if (finalResult.status === "success") {
       res.json({
-        msg: "저장 성공",
+        msg: "주문 성공",
         status: finalResult.status,
         result: finalResult.result,
       });
     }
     else if (finalResult.status === "fail") {
       res.json({
-        msg: "저장 실패",
+        msg: "주문 실패",
         status: finalResult.status,
         result: finalResult.result,
       });
     }
     else {
       res.json({
-        msg: "저장 에러",
+        msg: "주문 에러",
         status: finalResult.status,
         result: finalResult.result,
       });

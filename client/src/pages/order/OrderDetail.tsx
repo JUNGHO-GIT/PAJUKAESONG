@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
-import { useValidateOrder } from "@imports/ImportValidates";
-import { axios, numeral,  } from "@imports/ImportLibs";
+import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
-import { Div, Select, Br, Input, Hr, Btn, Img, Icons } from "@imports/ImportComponents";
+import { Div, Select, Input, Hr, Img, Icons } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -14,17 +13,14 @@ export const OrderDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, location_id, isAdmin,
+    navigate, URL, SUBFIX, location_id,
   } = useCommonValue();
   const {
     isXs, isSm, isMd, isLg, isXl
   } = useResponsive();
   const {
-    dayFmt, getDayFmt,
+    getDayFmt,
   } = useCommonDate();
-  const {
-    REFS, ERRORS, validate,
-  } = useValidateOrder();
 
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);

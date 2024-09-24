@@ -7,7 +7,7 @@ export const Select = (props: any) => (
   <TextField
     {...props}
     select={true}
-    type={"text"}
+    type={props?.type || "text"}
     variant={props?.variant || "outlined"}
     size={props?.size || "small"}
     fullWidth={props?.fullWidth || true}

@@ -6,7 +6,7 @@ import { useValidateOrder } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
-import { Div, Select, Br, Input, Hr, Btn, Img, Icons } from "@imports/ImportComponents";
+import { Div, Select, Input, Hr, Btn, Img, Icons } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -30,6 +30,11 @@ export const OrderSave = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
   const [imageSize, setImageSize] = useState<string>("");
+
+  useEffect(() => {
+    console.log("===================================");
+    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
+  }, [OBJECT]);
 
   // 2-2. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -344,11 +349,21 @@ export const OrderSave = () => {
               value={OBJECT?.order_email}
               inputRef={REFS?.[i]?.order_email}
               error={ERRORS?.[i]?.order_email}
+              placeholder={"abcd@naver.com"}
               onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  order_email: e.target.value,
-                }));
+                const value = e.target.value;
+                if (value.length > 30) {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    order_email: prev.order_email,
+                  }));
+                }
+                else {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    order_email: value,
+                  }));
+                }
               }}
             />
           </Grid>
@@ -361,11 +376,22 @@ export const OrderSave = () => {
               value={OBJECT?.order_phone}
               inputRef={REFS?.[i]?.order_phone}
               error={ERRORS?.[i]?.order_phone}
+              placeholder={"010-1234-5678"}
               onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  order_phone: e.target.value,
-                }));
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
+                if (value.length > 11) {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    order_phone: prev.order_phone,
+                  }));
+                }
+                else {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    order_phone: newValue,
+                  }));
+                }
               }}
             />
           </Grid>

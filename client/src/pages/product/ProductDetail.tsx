@@ -158,20 +158,23 @@ export const ProductDetail = () => {
               className={imageSize}
             />
           </Grid>
-          <Hr className={"bg-burgundy"} px={40} h={10} />
-          <Grid size={6} className={"d-left"}>
+          <Hr px={20} h={10} className={"bg-burgundy"} />
+          <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT?.product_name}
             </Div>
           </Grid>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={12} className={"d-left"}>
             <Div className={"fs-1-2rem fw-500 dark"}>
               {OBJECT?.product_description}
             </Div>
           </Grid>
           <Grid size={12} className={"d-left"}>
-            <Div className={"fs-1-2rem fw-600 black"}>
-              {`₩ ${numeral(OBJECT?.product_price).format("0,0")}`}
+            <Div className={"fs-0-8rem me-5"}>
+              ₩
+            </Div>
+            <Div className={"fs-1-0rem fw-500 dark"}>
+              {numeral(OBJECT?.product_price).format("0,0")}
             </Div>
           </Grid>
         </Grid>

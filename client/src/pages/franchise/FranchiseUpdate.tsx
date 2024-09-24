@@ -193,11 +193,22 @@ export const FranchiseUpdate = () => {
               value={OBJECT?.franchise_phone}
               inputRef={REFS?.[i]?.franchise_phone}
               error={ERRORS?.[i]?.franchise_phone}
+              placeholder={"010-1234-5678"}
               onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  franchise_phone: e.target.value,
-                }));
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
+                if (value.length > 11) {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    franchise_phone: prev.franchise_phone,
+                  }));
+                }
+                else {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    franchise_phone: newValue,
+                  }));
+                }
               }}
             />
           </Grid>

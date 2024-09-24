@@ -101,10 +101,20 @@ export const OrderFind = () => {
               inputRef={REFS?.[i]?.order_phone}
               error={ERRORS?.[i]?.order_phone}
               onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  order_phone: e.target.value,
-                }));
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
+                if (value.length > 11) {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    order_phone: prev.order_phone,
+                  }));
+                }
+                else {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    order_phone: newValue,
+                  }));
+                }
               }}
             />
           </Grid>
