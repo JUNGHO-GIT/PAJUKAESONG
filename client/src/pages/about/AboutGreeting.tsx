@@ -21,7 +21,7 @@ export const AboutGreeting = () => {
     const greetingSection = (i: number) => (
       <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-left"}>
             <Div className={"fs-1-8rem fw-700"}>
               여러분 반갑습니다.
             </Div>

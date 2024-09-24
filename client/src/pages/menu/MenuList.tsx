@@ -92,7 +92,7 @@ export const MenuList = () => {
       <Grid container spacing={2} columns={12} key={i}>
         {OBJECT?.map((item: any, index: number) => (
           <Grid size={{ xs: 6, sm: 4, md: 4, lg: 4, xl: 4 }} key={index}>
-            <Paper className={"border-1 radius shadow p-20 fadeIn"}>
+            <Card className={"border-1 radius shadow p-20 fadeIn"}>
               <Img
                 key={item?.menu_images?.[0]}
                 src={item?.menu_images?.[0]}
@@ -110,7 +110,7 @@ export const MenuList = () => {
               <Div className={"fs-1-4rem fw-600"}>
                 {item?.menu_name}
               </Div>
-            </Paper>
+            </Card>
           </Grid>
         ))}
       </Grid>
