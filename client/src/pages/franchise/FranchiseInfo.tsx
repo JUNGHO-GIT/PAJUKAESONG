@@ -2,8 +2,7 @@
 
 import { useState } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { Loading } from "@imports/ImportLayouts";
-import { Div, Img, Hr, Br } from "@imports/ImportComponents";
+import { Div, Hr, Br } from "@imports/ImportComponents";
 import { Paper, Card, Grid, Stepper, Step, StepLabel } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -343,7 +342,7 @@ export const FranchiseInfo = () => {
     };
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min75vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs:12 }} className={"d-center"}>
             {titleSection()}

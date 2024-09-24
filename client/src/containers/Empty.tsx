@@ -9,7 +9,7 @@ export const Empty = () => {
   // 7. empty --------------------------------------------------------------------------------------
   const emptyNode = () => {
     const emptySection = () => (
-      <Card className={"h-min50vh d-center fadeIn"}>
+      <Card className={"h-min70vh d-center fadeIn"}>
         <Div
           key={"empty"}
           className={"fs-1-6rem d-center"}

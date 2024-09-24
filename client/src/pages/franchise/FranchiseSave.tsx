@@ -15,7 +15,7 @@ export const FranchiseSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, adminId,
+    navigate, URL, SUBFIX
   } = useCommonValue();
   const {
     dayFmt
@@ -40,10 +40,7 @@ export const FranchiseSave = () => {
     axios.post(`${URL}${SUBFIX}/save`,
       makeFormData(
         OBJECT,
-        fileList,
-        {
-          user_id: adminId
-        }
+        fileList
       ),
       {
         headers: {
@@ -54,6 +51,7 @@ export const FranchiseSave = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
+        document?.querySelector("input[type=file]")?.remove();
         navigate("/franchise/list");
       }
       else {
@@ -204,6 +202,12 @@ export const FranchiseSave = () => {
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
+              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  franchise_images: updatedExistingFiles,
+                }));
+              }}
             />
           </Grid>
         </Grid>
@@ -228,7 +232,7 @@ export const FranchiseSave = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min75vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}

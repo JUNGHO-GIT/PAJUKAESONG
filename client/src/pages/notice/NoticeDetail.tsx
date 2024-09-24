@@ -1,11 +1,11 @@
 // NoticeDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Hr, Icons, TextArea } from "@imports/ImportComponents";
+import { Div, Hr, Icons, TextArea, Img } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -18,10 +18,33 @@ export const NoticeDetail = () => {
   const {
     getDayFmt,
   } = useCommonDate();
+  const {
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Notice);
+  const [imageSize, setImageSize] = useState<string>("");
+
+  // 2-2. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    if (isXs) {
+      setImageSize("w-210 h-210");
+    }
+    else if (isSm) {
+      setImageSize("w-230 h-230");
+    }
+    else if (isMd) {
+      setImageSize("w-250 h-250");
+    }
+    else if (isLg) {
+      setImageSize("w-270 h-270");
+    }
+    else if (isXl) {
+      setImageSize("w-300 h-300");
+    }
+  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -91,6 +114,14 @@ export const NoticeDetail = () => {
           </Grid>
           <Hr px={10} h={10} className={"bg-burgundy"} />
           <Grid size={12}>
+            <Img
+              key={OBJECT?.notice_images?.[0]}
+              src={OBJECT?.notice_images?.[0]}
+              group={"notice"}
+              className={imageSize}
+            />
+          </Grid>
+          <Grid size={12}>
             <TextArea
               label={""}
               readOnly={true}
@@ -116,16 +147,6 @@ export const NoticeDetail = () => {
             </Div>
           </Grid>
           <Grid size={6} className={"d-right"}>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
-              onClick={() => {
-                navigate("/notice/list");
-              }}
-            >
-              목록으로
-            </Div>
-          </Grid>
-          <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
             <Icons
               key={"View"}
               name={"View"}
@@ -133,6 +154,16 @@ export const NoticeDetail = () => {
             />
             <Div className={"fs-1-0rem fw-500"}>
               {OBJECT.notice_view}
+            </Div>
+          </Grid>
+          <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
+            <Div
+              className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
+              onClick={() => {
+                navigate("/notice/list");
+              }}
+            >
+              목록으로
             </Div>
           </Grid>
           <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
@@ -162,7 +193,7 @@ export const NoticeDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min75vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}

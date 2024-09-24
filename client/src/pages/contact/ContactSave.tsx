@@ -6,7 +6,7 @@ import { useValidateContact } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
-import { Div, Select, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
+import { Div, Select, Br, Input, TextArea, Btn, FileInput } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -26,11 +26,12 @@ export const ContactSave = () => {
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Contact);
+  const [fileList, setFileList] = useState<any>([]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
     setLOADING(true);
-    if (!validate(OBJECT)) {
+    if (!validate(OBJECT, fileList)) {
       setLOADING(false);
       return;
     }
@@ -40,6 +41,7 @@ export const ContactSave = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
+        document?.querySelector("input[type=file]")?.remove();
         navigate("/contact/find");
       }
       else {
@@ -96,9 +98,9 @@ export const ContactSave = () => {
                 }));
               }}
             >
-              {["franchise", "personal"].map((item: any, idx: number) => (
+              {["contact", "personal"].map((item: any, idx: number) => (
                 <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                  {item === "franchise" && "가맹 문의"}
+                  {item === "contact" && "가맹 문의"}
                   {item === "personal" && "1:1 문의"}
                 </MenuItem>
               ))}
@@ -188,6 +190,26 @@ export const ContactSave = () => {
               }}
             />
           </Grid>
+          <Grid size={12}>
+            <FileInput
+              variant={"outlined"}
+              label={"문의 이미지"}
+              required={true}
+              limit={1}
+              existing={OBJECT.contact_images}
+              group={"contact"}
+              value={fileList}
+              onChange={(updatedFiles: File[] | null) => {
+                setFileList(updatedFiles);
+              }}
+              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  contact_images: updatedExistingFiles,
+                }));
+              }}
+            />
+          </Grid>
         </Grid>
       </Card>
     );
@@ -210,7 +232,7 @@ export const ContactSave = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min75vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}

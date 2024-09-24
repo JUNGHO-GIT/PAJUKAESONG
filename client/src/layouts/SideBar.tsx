@@ -156,7 +156,7 @@ export const SideBar = (
         </Grid>
         <Grid size={12} className={"d-left"}>
           <Icons
-            name={"Call"} className={"w-12 h-12"} />
+            name={"Phone"} className={"w-12 h-12"} />
           <Div className={"fs-0-8rem"}>
             031-952-8083
           </Div>

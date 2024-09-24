@@ -26,6 +26,7 @@ export const list = async (
         notice_title: 1,
         notice_content: 1,
         notice_view: 1,
+        notice_images: 1,
         notice_regDt: 1,
         notice_updateDt: 1,
       }
@@ -91,6 +92,8 @@ export const save = async (
       _id: new mongoose.Types.ObjectId(),
       notice_title: OBJECT_param.notice_title,
       notice_content: OBJECT_param.notice_content,
+      notice_view: 0,
+      notice_images: OBJECT_param.notice_images,
       notice_regDt: newDate,
       notice_updateDt: null,
     },
@@ -112,6 +115,7 @@ export const update = async (
       $set: {
         notice_title: OBJECT_param.notice_title,
         notice_content: OBJECT_param.notice_content,
+        notice_images: OBJECT_param.notice_images,
         notice_updateDt: newDate,
       }
     },

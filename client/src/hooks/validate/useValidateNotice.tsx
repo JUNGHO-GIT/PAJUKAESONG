@@ -33,41 +33,10 @@ export const useValidateNotice = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    validate.current = (OBJECT: any) => {
+    validate.current = (OBJECT: any, fileList?: any) => {
       try {
         // 1. save
-        if (PATH.includes("/notice/save")) {
-          const target = [
-            "notice_title",
-            "notice_content",
-          ];
-          REFS.current = (
-            Array.from({ length: 1 }, (_, _idx) => (
-              target.reduce((acc, cur) => ({
-                ...acc,
-                [cur]: createRef()
-              }), {})
-            ))
-          );
-          setERRORS (
-            Array.from({ length: 1 }, (_, _idx) => (
-              target.reduce((acc, cur) => ({
-                ...acc,
-                [cur]: false
-              }), {})
-            ))
-          );
-          if (!OBJECT.notice_title) {
-            return showAlertAndFocus('notice_title', "제목을 입력해주세요.", 0);
-          }
-          else if (!OBJECT.notice_content) {
-            return showAlertAndFocus('notice_content', "내용을 입력해주세요.", 0);
-          }
-          return true;
-        }
-
-        // 2. update
-        else if (PATH.includes("/notice/update")) {
+        if (PATH.includes("/notice/save") || PATH.includes("/notice/update")) {
           const target = [
             "notice_title",
             "notice_content",

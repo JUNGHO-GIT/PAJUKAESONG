@@ -1,12 +1,12 @@
 // FranchiseList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
-import { Swiper, SwiperSlide } from "@imports/ImportLibs";
-import { SwiperPagination, SwiperNavigation, SwiperAutoplay } from "@imports/ImportLibs";
+import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Input, Select, Btn, Icons } from "@imports/ImportComponents";
+import { Empty } from "@imports/ImportContainers";
+import { Div, Img, Hr, Br, Select, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -14,16 +14,16 @@ export const FranchiseList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    URL, SUBFIX, navigate, isAdmin,
+    URL, SUBFIX, navigate, isAdmin, location_category
   } = useCommonValue();
   const {
-    getDayFmt,
-  } = useCommonDate();
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [currIdx, setCurrIdx] = useState<number>(0);
   const [OBJECT, setOBJECT] = useState<any>([Franchise]);
+  const [imageSize, setImageSize] = useState<string>("");
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
     page: 0,
@@ -32,12 +32,32 @@ export const FranchiseList = () => {
     totalCnt: 0,
   });
 
+  // 2-2. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    if (isXs) {
+      setImageSize("w-100 h-100 hover");
+    }
+    else if (isSm) {
+      setImageSize("w-120 h-120 hover");
+    }
+    else if (isMd) {
+      setImageSize("w-140 h-140 hover");
+    }
+    else if (isLg) {
+      setImageSize("w-160 h-160 hover");
+    }
+    else if (isXl) {
+      setImageSize("w-180 h-180 hover");
+    }
+  }, [isXs, isSm, isMd, isLg, isXl]);
+
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
-        PAGING: PAGING
+        PAGING: PAGING,
+        category: location_category
       }
     })
     .then((res: any) => {
@@ -54,7 +74,7 @@ export const FranchiseList = () => {
     .finally(() => {
       setLOADING(false);
     });
-  }, [URL, SUBFIX, PAGING]);
+  }, [URL, SUBFIX, PAGING, location_category]);
 
   // 7. listNode -----------------------------------------------------------------------------------
   const listNode = () => {
@@ -68,85 +88,41 @@ export const FranchiseList = () => {
       </Div>
     );
     // 2. list
-    const listSection = () => {
-      const listFragment = () => (
-        <Swiper
-          spaceBetween={0}
-          centeredSlides={true}
-          navigation={true}
-          loop={true}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[
-            SwiperPagination,
-            SwiperNavigation,
-          ]}
-          onSlideChange={(swiper) => {
-            setCurrIdx(swiper.realIndex);
-          }}
-        >
-          {OBJECT?.map((item: any, index: number) => (
-            <SwiperSlide key={index}>
-              <Grid container spacing={2}>
-                <Grid size={12} key={index} className={"d-center"}>
-                  <Div className={"fs-1-8rem fw-700"}>
-                    {item.franchise_name}
-                  </Div>
-                </Grid>
-                <Hr px={40} h={10} className={"bg-burgundy"} />
-                <Grid size={12} className={"d-center"}>
-                  <Img
-                    key={item.franchise_images[0]}
-                    group={"franchise"}
-                    src={item.franchise_images[0]}
-                    className={"w-100p h-300"}
-                  />
-                </Grid>
-                <Hr px={40} h={10} className={"bg-grey"} />
-                <Grid size={12} className={"d-column"}>
-                  <Div className={"d-left"}>
-                    <Icons
-                      key={"Location"}
-                      name={"Location"}
-                      className={"w-20 h-20"}
-                    />
-                    <Div className={"fs-0-9rem ms-5"}>
-                      {item.franchise_address_main}
-                    </Div>
-                    <Div className={"fs-0-9rem ms-10"}>
-                      {`(${item.franchise_address_detail})`}
-                    </Div>
-                  </Div>
-                  <Div className={"d-left"}>
-                    <Icons
-                      key={"Call"}
-                      name={"Call"}
-                      className={"w-20 h-20"}
-                    />
-                    <Div className={"fs-0-9rem ms-5"}>
-                      {item.franchise_phone}
-                    </Div>
-                  </Div>
-                  <Div className={"d-left"}>
-                    <Icons
-                      key={"Calendar"}
-                      name={"Calendar"}
-                      className={"w-20 h-20"}
-                    />
-                    <Div className={"fs-0-9rem ms-5"}>
-                      {getDayFmt(item.franchise_regDt)}
-                    </Div>
-                  </Div>
-                </Grid>
-              </Grid>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      );
-      const filterFragment = () => (
-        <Grid container spacing={2} className={"d-center"}>
-          <Grid size={3}>
+    const listSection = (i: number) => (
+      <Grid container spacing={2} columns={12} key={i}>
+        {OBJECT?.map((item: any, index: number) => (
+          <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 4 }} key={index}>
+            <Paper className={"border-1 radius shadow p-30 fadeIn"}>
+              <Img
+                key={item.franchise_images[0]}
+                src={item.franchise_images[0]}
+                group={"franchise"}
+                className={imageSize}
+                onClick={() => {
+                  navigate("/franchise/detail", {
+                    state: {
+                      _id: item._id
+                    }
+                  });
+                }}
+              />
+              <Br px={30} />
+              <Div className={"fs-1-4rem fw-600"}>
+                {item.franchise_name}
+              </Div>
+              <Div className={"fs-1-0rem"}>
+                {item.franchise_price}
+              </Div>
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
+    );
+    // 3. filter
+    const filterSection = (i: number) => (
+      <Card className={"px-20 fadeIn"} key={i}>
+        <Grid container spacing={1} columns={12}>
+          <Grid size={4} className={"d-center"}>
             <Select
               label={"정렬"}
               value={PAGING?.sort}
@@ -178,7 +154,7 @@ export const FranchiseList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={isAdmin ? 5 : 9}>
+          <Grid size={6} className={"d-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -188,11 +164,6 @@ export const FranchiseList = () => {
               page={PAGING.page}
               showFirstButton={true}
               showLastButton={true}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
               onPageChange={(event, newPage) => {
                 setPAGING((prev: any) => ({
                   ...prev,
@@ -207,19 +178,7 @@ export const FranchiseList = () => {
               }}
             />
           </Grid>
-          <Grid size={isAdmin ? 3 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
-            <Btn
-              className={"bg-burgundy me-1vw"}
-              onClick={() => {
-                navigate("/franchise/update", {
-                  state: {
-                    _id: OBJECT[currIdx]._id,
-                  },
-                });
-              }}
-            >
-              {"수정"}
-            </Btn>
+          <Grid size={2} className={`${isAdmin ? "d-center" : "d-none"}`}>
             <Btn
               className={"bg-burgundy"}
               onClick={() => {
@@ -230,24 +189,23 @@ export const FranchiseList = () => {
             </Btn>
           </Grid>
         </Grid>
-      );
-      return (
-        <Card className={"border-1 radius shadow p-30 fadeIn"}>
-          {listFragment()}
-          <Hr px={40} h={10} className={"bg-grey"} />
-          {filterFragment()}
-        </Card>
-      );
-    };
+      </Card>
+    );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min75vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {listSection()}
+            {LOADING ? <Loading /> : (
+              COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
+            )}
+          </Grid>
+          <Hr px={20} h={10} w={90} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>

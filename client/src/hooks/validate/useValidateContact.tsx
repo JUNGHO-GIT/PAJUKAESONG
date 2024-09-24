@@ -39,7 +39,7 @@ export const useValidateContact = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    validate.current = (OBJECT: any) => {
+    validate.current = (OBJECT: any, fileList?: any) => {
       try {
         // 1. find
         if (PATH.includes("/contact/find")) {
@@ -76,7 +76,7 @@ export const useValidateContact = () => {
         }
 
         // 2. save
-        if (PATH.includes("/contact/save")) {
+        if (PATH.includes("/contact/save") || PATH.includes("/contact/update")) {
           const target = [
             "contact_category",
             "contact_name",

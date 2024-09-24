@@ -1,7 +1,7 @@
 // MenuDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
@@ -15,10 +15,33 @@ export const MenuDetail = () => {
   const {
     navigate, location_id, isAdmin, URL, SUBFIX
   } = useCommonValue();
+  const {
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Menu);
+  const [imageSize, setImageSize] = useState<string>("");
+
+  // 2-2. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    if (isXs) {
+      setImageSize("w-210 h-210");
+    }
+    else if (isSm) {
+      setImageSize("w-230 h-230");
+    }
+    else if (isMd) {
+      setImageSize("w-250 h-250");
+    }
+    else if (isLg) {
+      setImageSize("w-270 h-270");
+    }
+    else if (isXl) {
+      setImageSize("w-300 h-300");
+    }
+  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -90,7 +113,7 @@ export const MenuDetail = () => {
               key={OBJECT.menu_images[0]}
               src={OBJECT.menu_images[0]}
               group={"menu"}
-              className={"w-300 h-300"}
+              className={imageSize}
             />
           </Grid>
           <Hr px={40} h={10} className={"bg-burgundy"} />
@@ -157,7 +180,7 @@ export const MenuDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min75vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}

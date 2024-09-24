@@ -33,7 +33,7 @@ export const useValidateMenu = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    validate.current = (OBJECT: any, fileList: any) => {
+    validate.current = (OBJECT: any, fileList?: any) => {
       try {
         // 1. save
         if (PATH.includes("/menu/save") || PATH.includes("/menu/update")) {

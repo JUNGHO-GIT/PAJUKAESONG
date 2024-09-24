@@ -1,15 +1,15 @@
-// ContactDetail.tsx
+// FranchiseDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
-import { Contact } from "@imports/ImportSchemas";
-import { Div, Hr, Icons, TextArea } from "@imports/ImportComponents";
+import { Franchise } from "@imports/ImportSchemas";
+import { Div, Img, Hr, Icons } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const ContactDetail = () => {
+export const FranchiseDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
@@ -18,10 +18,33 @@ export const ContactDetail = () => {
   const {
     getDayFmt,
   } = useCommonDate();
+  const {
+    isXs, isSm, isMd, isLg, isXl
+  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(Contact);
+  const [OBJECT, setOBJECT] = useState<any>(Franchise);
+  const [imageSize, setImageSize] = useState<string>("");
+
+  // 2-2. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    if (isXs) {
+      setImageSize("w-210 h-210");
+    }
+    else if (isSm) {
+      setImageSize("w-230 h-230");
+    }
+    else if (isMd) {
+      setImageSize("w-250 h-250");
+    }
+    else if (isLg) {
+      setImageSize("w-270 h-270");
+    }
+    else if (isXl) {
+      setImageSize("w-300 h-300");
+    }
+  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -32,7 +55,7 @@ export const ContactDetail = () => {
       }
     })
     .then((res: any) => {
-      setOBJECT(res.data.result || Contact);
+      setOBJECT(res.data.result || Franchise);
     })
     .catch((err: any) => {
       alert(err.response.data.msg);
@@ -54,11 +77,10 @@ export const ContactDetail = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        navigate('/contact/list', {
+        navigate(`/franchise/list`,{
           state: {
-            contact_name: OBJECT.contact_name,
-            contact_email: OBJECT.contact_email,
-          },
+            category: OBJECT.franchise_category
+          }
         });
       }
       else {
@@ -82,29 +104,61 @@ export const ContactDetail = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        문의 상세
+        가맹점 상세
       </Div>
     );
     // 2. detail
     const detailSection = (i: number) => (
       <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
+          <Grid size={12}>
+            <Img
+              key={OBJECT.franchise_images[0]}
+              src={OBJECT.franchise_images[0]}
+              group={"franchise"}
+              className={imageSize}
+            />
+          </Grid>
+          <Hr px={30} h={10} className={"bg-burgundy"} />
           <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-8rem fw-700"}>
-              {OBJECT.contact_title}
-            </Div>
-            <Div className={"fs-1-8rem fw-500 ms-10 grey"}>
-              {`[ ${OBJECT.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"} ]`}
+            <Div className={"fs-1-8rem fw-700 black"}>
+              {OBJECT.franchise_name}
             </Div>
           </Grid>
-          <Hr px={10} h={10} className={"bg-burgundy"} />
-          <Grid size={12}>
-            <TextArea
-              label={""}
-              readOnly={true}
-              inputclass={"h-min50vh readonly"}
-              value={OBJECT.contact_content}
-            />
+          <Grid size={12} className={"d-column"}>
+            <Div className={"d-left"}>
+              <Icons
+                key={"Location"}
+                name={"Location"}
+                className={"w-20 h-20"}
+              />
+              <Div className={"fs-0-9rem ms-5"}>
+                {OBJECT.franchise_address_main}
+              </Div>
+              <Div className={"fs-0-9rem ms-10"}>
+                {`(${OBJECT.franchise_address_detail})`}
+              </Div>
+            </Div>
+            <Div className={"d-left"}>
+              <Icons
+                key={"Phone"}
+                name={"Phone"}
+                className={"w-20 h-20"}
+              />
+              <Div className={"fs-0-9rem ms-5"}>
+                {OBJECT.franchise_phone}
+              </Div>
+            </Div>
+            <Div className={"d-left"}>
+              <Icons
+                key={"Calendar"}
+                name={"Calendar"}
+                className={"w-20 h-20"}
+              />
+              <Div className={"fs-0-9rem ms-5"}>
+                {getDayFmt(OBJECT.franchise_regDt)}
+              </Div>
+            </Div>
           </Grid>
         </Grid>
       </Card>
@@ -113,24 +167,13 @@ export const ContactDetail = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={6} className={"d-left"}>
-            <Icons
-              key={"Calendar"}
-              name={"Calendar"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500"}>
-              {getDayFmt(OBJECT.contact_regDt)}
-            </Div>
-          </Grid>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
               onClick={() => {
-                navigate("/contact/list", {
+                navigate(`/franchise/list`,{
                   state: {
-                    contact_name: OBJECT.contact_name,
-                    contact_email: OBJECT.contact_email
+                    category: OBJECT.franchise_category
                   }
                 });
               }}
@@ -138,24 +181,26 @@ export const ContactDetail = () => {
               목록으로
             </Div>
           </Grid>
-          <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
-            <Icons
-              key={"Person"}
-              name={"Person"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500"}>
-              {OBJECT.contact_name}
-            </Div>
-          </Grid>
           <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
+            <Div
+              className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
+              onClick={() => {
+                navigate("/franchise/update", {
+                  state: {
+                    _id: OBJECT._id
+                  }
+                });
+              }}
+            >
+              수정
+            </Div>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {
                 flowDelete();
               }}
             >
-              삭제하기
+              삭제
             </Div>
           </Grid>
         </Grid>

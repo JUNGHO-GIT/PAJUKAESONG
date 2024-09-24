@@ -52,8 +52,8 @@ export const Footer = () => {
         </Grid>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
           <Icons
-            key={"Call"}
-            name={"Call"}
+            key={"Phone"}
+            name={"Phone"}
             className={"w-12 h-12"}
           />
           <Div className={"fs-0-8rem"}>

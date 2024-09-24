@@ -4,9 +4,10 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateNotice } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
+import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
+import { Div, Br, Input, TextArea, Btn, FileInput } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -26,6 +27,7 @@ export const NoticeUpdate = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Notice);
+  const [fileList, setFileList] = useState<any>([]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -50,17 +52,28 @@ export const NoticeUpdate = () => {
   // 3. flow ---------------------------------------------------------------------------------------
   const flowUpdate = () => {
     setLOADING(true);
-    if (!validate(OBJECT)) {
+    if (!validate(OBJECT, fileList)) {
       setLOADING(false);
       return;
     }
-    axios.put(`${URL}${SUBFIX}/update`, {
-      _id: OBJECT._id,
-      OBJECT: OBJECT,
-    })
+    axios.put(`${URL}${SUBFIX}/update`,
+      makeFormData(
+        OBJECT,
+        fileList,
+        {
+          _id: location_id
+        }
+      ),
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
+        document?.querySelector("input[type=file]")?.remove();
         navigate("/notice/list");
       }
       else {
@@ -134,6 +147,26 @@ export const NoticeUpdate = () => {
               }}
             />
           </Grid>
+          <Grid size={12}>
+            <FileInput
+              variant={"outlined"}
+              label={"공지사항 이미지"}
+              required={true}
+              limit={1}
+              existing={OBJECT.notice_images}
+              group={"notice"}
+              value={fileList}
+              onChange={(updatedFiles: File[] | null) => {
+                setFileList(updatedFiles);
+              }}
+              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  notice_images: updatedExistingFiles,
+                }));
+              }}
+            />
+          </Grid>
         </Grid>
       </Card>
     );
@@ -156,7 +189,7 @@ export const NoticeUpdate = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min75vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}

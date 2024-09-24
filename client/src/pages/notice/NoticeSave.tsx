@@ -4,6 +4,7 @@ import { useState } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateNotice } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
+import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Div, Br, Input, TextArea, Btn, FileInput } from "@imports/ImportComponents";
@@ -31,16 +32,25 @@ export const NoticeSave = () => {
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
     setLOADING(true);
-    if (!validate(OBJECT)) {
+    if (!validate(OBJECT, fileList)) {
       setLOADING(false);
       return;
     }
-    axios.post(`${URL}${SUBFIX}/save`, {
-      OBJECT: OBJECT,
-    })
+    axios.post(`${URL}${SUBFIX}/save`,
+      makeFormData(
+        OBJECT,
+        fileList
+      ),
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
+        document?.querySelector("input[type=file]")?.remove();
         navigate("/notice/list");
       }
       else {
@@ -126,6 +136,12 @@ export const NoticeSave = () => {
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
+              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  notice_images: updatedExistingFiles,
+                }));
+              }}
             />
           </Grid>
         </Grid>
@@ -150,7 +166,7 @@ export const NoticeSave = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min75vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}

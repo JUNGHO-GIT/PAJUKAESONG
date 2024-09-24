@@ -7,7 +7,7 @@ import { axios, numeral } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Input, FileInput, Btn, Select } from "@imports/ImportComponents";
+import { Div, Br, Input, FileInput, Btn, Select } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ export const ProductUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, adminId, location_id,
+    navigate, URL, SUBFIX, location_id,
   } = useCommonValue();
   const {
     dayFmt
@@ -51,7 +51,7 @@ export const ProductUpdate = () => {
   // 3. flow ---------------------------------------------------------------------------------------
   const flowUpdate = () => {
     setLOADING(true);
-    if (!validate(OBJECT)) {
+    if (!validate(OBJECT, fileList)) {
       setLOADING(false);
       return;
     }
@@ -72,7 +72,7 @@ export const ProductUpdate = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        document.querySelector("input[type=file]")?.remove();
+        document?.querySelector("input[type=file]")?.remove();
         navigate(`/product/list`);
       }
       else {
@@ -250,7 +250,7 @@ export const ProductUpdate = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min75vh"}>
+      <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}

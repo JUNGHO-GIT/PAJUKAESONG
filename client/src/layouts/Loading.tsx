@@ -13,7 +13,7 @@ export const Loading = () => {
       </Div>
     );
     const nonWrapperSection = () => (
-      <Div className={`h-min60vh d-center`}>
+      <Div className={`h-min70vh d-center`}>
         <Div className={"loader"} />
       </Div>
     );

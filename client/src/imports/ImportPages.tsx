@@ -12,10 +12,12 @@ import { ContactList } from "@pages/contact/ContactList";
 import { ContactFind } from "@pages/contact/ContactFind";
 import { ContactDetail } from "@pages/contact/ContactDetail";
 import { ContactSave } from "@pages/contact/ContactSave";
+import { ContactUpdate } from "@pages/contact/ContactUpdate";
 
 // franchise
 import { FranchiseInfo } from "@pages/franchise/FranchiseInfo";
 import { FranchiseList } from "@pages/franchise/FranchiseList";
+import { FranchiseDetail } from "@pages/franchise/FranchiseDetail";
 import { FranchiseSave } from "@pages/franchise/FranchiseSave";
 import { FranchiseUpdate } from "@pages/franchise/FranchiseUpdate";
 
@@ -52,8 +54,8 @@ import { UserSignup } from "@pages/user/UserSignup";
 export {
   Main,
   AboutGreeting, AboutLocation,
-  ContactList, ContactFind, ContactDetail, ContactSave,
-  FranchiseInfo, FranchiseList, FranchiseSave, FranchiseUpdate,
+  ContactList, ContactFind, ContactDetail, ContactSave, ContactUpdate,
+  FranchiseInfo, FranchiseList, FranchiseDetail, FranchiseSave, FranchiseUpdate,
   MenuList, MenuDetail, MenuSave, MenuUpdate,
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
   OrderList, OrderFind, OrderDetail, OrderSave, OrderUpdate,

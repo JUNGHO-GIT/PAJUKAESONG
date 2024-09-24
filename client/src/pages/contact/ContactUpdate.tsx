@@ -1,52 +1,32 @@
-// MenuUpdate.tsx
+// ContactUpdate.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
+import { useState } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useValidateMenu } from "@imports/ImportValidates";
-import { axios, numeral } from "@imports/ImportLibs";
-import { makeFormData } from "@imports/ImportUtils";
+import { useValidateContact } from "@imports/ImportValidates";
+import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
-import { Menu } from "@imports/ImportSchemas";
-import { Div, Br, Input, FileInput, Btn, Select } from "@imports/ImportComponents";
+import { Contact } from "@imports/ImportSchemas";
+import { Div, Select, Br, Input, TextArea, Btn, FileInput } from "@imports/ImportComponents";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuUpdate = () => {
+export const ContactUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, location_id,
+    navigate, URL, SUBFIX
   } = useCommonValue();
   const {
-    dayFmt
+    dayFmt,
   } = useCommonDate();
   const {
     REFS, ERRORS, validate,
-  } = useValidateMenu();
+  } = useValidateContact();
 
-  // 2-1. useState ---------------------------------------------------------------------------------
+  // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(Menu);
-  const [fileList, setFileList] = useState<File[] | null>(null);
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    setLOADING(true);
-    axios.get(`${URL}${SUBFIX}/detail`, {
-      params: {
-        _id: location_id
-      },
-    })
-    .then((res: any) => {
-      setOBJECT(res.data.result || Menu);
-    })
-    .catch((err: any) => {
-      console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
-    });
-  }, [URL, SUBFIX]);
+  const [OBJECT, setOBJECT] = useState<any>(Contact);
+  const [fileList, setFileList] = useState<any>([]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowUpdate = () => {
@@ -55,29 +35,14 @@ export const MenuUpdate = () => {
       setLOADING(false);
       return;
     }
-    axios.put(`${URL}${SUBFIX}/update`,
-      makeFormData(
-        OBJECT,
-        fileList,
-        {
-          _id: location_id
-        }
-      ),
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    )
+    axios.put(`${URL}${SUBFIX}/update`, {
+      OBJECT: OBJECT,
+    })
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
         document?.querySelector("input[type=file]")?.remove();
-        navigate(`/menu/list`, {
-          state: {
-            category: OBJECT.menu_category,
-          },
-        });
+        navigate("/contact/find");
       }
       else {
         alert(res.data.msg);
@@ -100,7 +65,7 @@ export const MenuUpdate = () => {
         key={"title"}
         className={"fs-2-0rem fw-700"}
       >
-        메뉴 수정
+        문의 하기
       </Div>
     );
     // 2. update
@@ -108,25 +73,35 @@ export const MenuUpdate = () => {
       <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
+            <Input
+              variant={"standard"}
+              required={true}
+              label={"작성일"}
+              className={"border-bottom-1"}
+              disabled={true}
+              value={dayFmt}
+            />
+          </Grid>
+          <Grid size={12}>
             <Select
               variant={"standard"}
-              label={"메뉴 카테고리"}
+              label={"문의 유형"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.menu_category}
-              inputRef={REFS[i]?.menu_category}
-              error={ERRORS[i]?.menu_category}
+              value={OBJECT.contact_category}
+              inputRef={REFS[i]?.contact_category}
+              error={ERRORS[i]?.contact_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_category: e.target.value,
+                  contact_category: e.target.value,
                 }));
               }}
             >
-              {["main", "side"].map((item: string, idx: number) => (
+              {["franchise", "personal"].map((item: any, idx: number) => (
                 <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                  {item === "main" && "메인메뉴"}
-                  {item === "side" && "사이드메뉴"}
+                  {item === "franchise" && "가맹 문의"}
+                  {item === "personal" && "1:1 문의"}
                 </MenuItem>
               ))}
             </Select>
@@ -134,16 +109,16 @@ export const MenuUpdate = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"메뉴 이름"}
+              label={"이름"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.menu_name}
-              inputRef={REFS[i]?.menu_name}
-              error={ERRORS[i]?.menu_name}
+              value={OBJECT.contact_name}
+              inputRef={REFS[i]?.contact_name}
+              error={ERRORS[i]?.contact_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_name: e.target.value,
+                  contact_name: e.target.value,
                 }));
               }}
             />
@@ -151,16 +126,16 @@ export const MenuUpdate = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"메뉴 설명"}
+              label={"이메일"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.menu_description}
-              inputRef={REFS[i]?.menu_description}
-              error={ERRORS[i]?.menu_description}
+              value={OBJECT.contact_email}
+              inputRef={REFS[i]?.contact_email}
+              error={ERRORS[i]?.contact_email}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_description: e.target.value,
+                  contact_email: e.target.value,
                 }));
               }}
             />
@@ -168,48 +143,61 @@ export const MenuUpdate = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
-              label={"가격"}
+              label={"전화번호"}
+              required={true}
               className={"border-bottom-1"}
-              value={numeral(OBJECT?.menu_price).format("0,0")}
-              inputRef={REFS[i]?.menu_price}
-              error={ERRORS[i]?.menu_price}
+              value={OBJECT.contact_phone}
+              inputRef={REFS[i]?.contact_phone}
+              error={ERRORS[i]?.contact_phone}
               onChange={(e: any) => {
-                const value = e.target.value.replace(/,/g, '');
-                const newValue = value === "" ? 0 : Number(value);
-                if (value === "") {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    menu_price: "0",
-                  }));
-                }
-                else if (!isNaN(newValue) && newValue <= 9999999999) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    menu_price: String(newValue),
-                  }));
-                }
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  contact_phone: e.target.value,
+                }));
               }}
             />
           </Grid>
           <Grid size={12}>
             <Input
               variant={"standard"}
+              label={"문의 제목"}
               required={true}
-              label={"작성일"}
-              shrink={"shrink"}
               className={"border-bottom-1"}
-              readOnly={true}
-              value={dayFmt}
+              value={OBJECT.contact_title}
+              inputRef={REFS[i]?.contact_title}
+              error={ERRORS[i]?.contact_title}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  contact_title: e.target.value,
+                }));
+              }}
+            />
+          </Grid>
+          <Grid size={12}>
+            <TextArea
+              label={"문의 내용"}
+              required={true}
+              inputclass={"h-35vh"}
+              value={OBJECT.contact_content}
+              inputRef={REFS[i]?.contact_content}
+              error={ERRORS[i]?.contact_content}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  contact_content: e.target.value,
+                }));
+              }}
             />
           </Grid>
           <Grid size={12}>
             <FileInput
               variant={"outlined"}
-              label={"메뉴 이미지"}
+              label={"문의 이미지"}
               required={true}
-              limit={2}
-              existing={OBJECT.menu_images}
-              group={"menu"}
+              limit={1}
+              existing={OBJECT.contact_images}
+              group={"contact"}
               value={fileList}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
@@ -217,7 +205,7 @@ export const MenuUpdate = () => {
               handleExistingFilesChange={(updatedExistingFiles: string[]) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  menu_images: updatedExistingFiles,
+                  contact_images: updatedExistingFiles,
                 }));
               }}
             />
@@ -229,28 +217,14 @@ export const MenuUpdate = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={12} className={"d-center"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-light black"}
-              onClick={() => {
-                navigate(`/menu/list`, {
-                  state: {
-                    category: OBJECT.menu_category,
-                  },
-                });
-              }}
-            >
-              목록으로
-            </Btn>
-          </Grid>
-          <Grid size={6} className={"d-left"}>
-            <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowUpdate();
               }}
             >
-              수정하기
+              {"문의하기"}
             </Btn>
           </Grid>
         </Grid>
