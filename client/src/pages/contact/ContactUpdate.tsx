@@ -70,7 +70,7 @@ export const ContactUpdate = () => {
     );
     // 2. update
     const updateSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
@@ -88,9 +88,9 @@ export const ContactUpdate = () => {
               label={"문의 유형"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.contact_category}
-              inputRef={REFS[i]?.contact_category}
-              error={ERRORS[i]?.contact_category}
+              value={OBJECT?.contact_category}
+              inputRef={REFS?.[i]?.contact_category}
+              error={ERRORS?.[i]?.contact_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -112,9 +112,9 @@ export const ContactUpdate = () => {
               label={"이름"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.contact_name}
-              inputRef={REFS[i]?.contact_name}
-              error={ERRORS[i]?.contact_name}
+              value={OBJECT?.contact_name}
+              inputRef={REFS?.[i]?.contact_name}
+              error={ERRORS?.[i]?.contact_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -129,9 +129,9 @@ export const ContactUpdate = () => {
               label={"이메일"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.contact_email}
-              inputRef={REFS[i]?.contact_email}
-              error={ERRORS[i]?.contact_email}
+              value={OBJECT?.contact_email}
+              inputRef={REFS?.[i]?.contact_email}
+              error={ERRORS?.[i]?.contact_email}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -146,9 +146,9 @@ export const ContactUpdate = () => {
               label={"전화번호"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.contact_phone}
-              inputRef={REFS[i]?.contact_phone}
-              error={ERRORS[i]?.contact_phone}
+              value={OBJECT?.contact_phone}
+              inputRef={REFS?.[i]?.contact_phone}
+              error={ERRORS?.[i]?.contact_phone}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -163,9 +163,9 @@ export const ContactUpdate = () => {
               label={"문의 제목"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.contact_title}
-              inputRef={REFS[i]?.contact_title}
-              error={ERRORS[i]?.contact_title}
+              value={OBJECT?.contact_title}
+              inputRef={REFS?.[i]?.contact_title}
+              error={ERRORS?.[i]?.contact_title}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -179,9 +179,9 @@ export const ContactUpdate = () => {
               label={"문의 내용"}
               required={true}
               inputclass={"h-35vh"}
-              value={OBJECT.contact_content}
-              inputRef={REFS[i]?.contact_content}
-              error={ERRORS[i]?.contact_content}
+              value={OBJECT?.contact_content}
+              inputRef={REFS?.[i]?.contact_content}
+              error={ERRORS?.[i]?.contact_content}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -196,7 +196,7 @@ export const ContactUpdate = () => {
               label={"문의 이미지"}
               required={true}
               limit={1}
-              existing={OBJECT.contact_images}
+              existing={OBJECT?.contact_images}
               group={"contact"}
               value={fileList}
               onChange={(updatedFiles: File[] | null) => {

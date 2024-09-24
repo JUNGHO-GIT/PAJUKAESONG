@@ -68,7 +68,7 @@ export const NoticeList = () => {
     );
     // 2. list
     const listSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={2}>
             <Div className={"fs-0-8rem fw-500"}>

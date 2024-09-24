@@ -79,7 +79,7 @@ export const ProductSave = () => {
     );
     // 2. save
     const saveSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Select
@@ -87,9 +87,9 @@ export const ProductSave = () => {
               label={"상품 카테고리"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.product_category}
-              inputRef={REFS[i]?.product_category}
-              error={ERRORS[i]?.product_category}
+              value={OBJECT?.product_category}
+              inputRef={REFS?.[i]?.product_category}
+              error={ERRORS?.[i]?.product_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -111,9 +111,9 @@ export const ProductSave = () => {
               label={"상품 이름"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.product_name}
-              inputRef={REFS[i]?.product_name}
-              error={ERRORS[i]?.product_name}
+              value={OBJECT?.product_name}
+              inputRef={REFS?.[i]?.product_name}
+              error={ERRORS?.[i]?.product_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -128,9 +128,9 @@ export const ProductSave = () => {
               label={"상품 설명"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.product_description}
-              inputRef={REFS[i]?.product_description}
-              error={ERRORS[i]?.product_description}
+              value={OBJECT?.product_description}
+              inputRef={REFS?.[i]?.product_description}
+              error={ERRORS?.[i]?.product_description}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -145,8 +145,8 @@ export const ProductSave = () => {
               label={"가격"}
               className={"border-bottom-1"}
               value={numeral(OBJECT?.product_price).format("0,0")}
-              inputRef={REFS[i]?.product_price}
-              error={ERRORS[i]?.product_price}
+              inputRef={REFS?.[i]?.product_price}
+              error={ERRORS?.[i]?.product_price}
               onChange={(e: any) => {
                 const value = e.target.value.replace(/,/g, '');
                 const newValue = value === "" ? 0 : Number(value);
@@ -182,7 +182,7 @@ export const ProductSave = () => {
               label={"제품 이미지"}
               required={true}
               limit={2}
-              existing={OBJECT.product_images}
+              existing={OBJECT?.product_images}
               group={"product"}
               value={fileList}
               onChange={(updatedFiles: File[] | null) => {

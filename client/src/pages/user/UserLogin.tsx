@@ -51,22 +51,22 @@ export const UserLogin = () => {
       return;
     }
     axios.post(`${URL}${SUBFIX}/login`, {
-      user_id: OBJECT.user_id,
-      user_pw: OBJECT.user_pw,
+      user_id: OBJECT?.user_id,
+      user_pw: OBJECT?.user_pw,
     })
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
         if (res.data.admin === "admin") {
           localStorage.clear();
-          localStorage.setItem(`${TITLE}_adminId`, OBJECT.user_id);
-          localStorage.setItem(`${TITLE}_adminPw`, OBJECT.user_pw);
+          localStorage.setItem(`${TITLE}_adminId`, OBJECT?.user_id);
+          localStorage.setItem(`${TITLE}_adminPw`, OBJECT?.user_pw);
           localStorage.setItem(`${TITLE}_admin`, "true");
         }
         else {
           localStorage.clear();
-          localStorage.setItem(`${TITLE}_userId`, OBJECT.user_id);
-          localStorage.setItem(`${TITLE}_userPw`, OBJECT.user_pw);
+          localStorage.setItem(`${TITLE}_userId`, OBJECT?.user_id);
+          localStorage.setItem(`${TITLE}_userPw`, OBJECT?.user_pw);
           localStorage.setItem(`${TITLE}_user`, "true");
         }
         navigate("/main");
@@ -105,15 +105,15 @@ export const UserLogin = () => {
     );
     // 2. login
     const loginSection = (i: number) => (
-      <Card className={"border-1 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius p-20 fadeIn"} key={i}>
         <Grid container spacing={3}>
           <Grid size={12} className={"d-center"}>
             <Input
               label={"아이디"}
               required={true}
-              value={OBJECT.user_id}
-              inputRef={REFS[i]?.user_id}
-              error={ERRORS[i]?.user_id}
+              value={OBJECT?.user_id}
+              inputRef={REFS?.[i]?.user_id}
+              error={ERRORS?.[i]?.user_id}
               disabled={isAdmin || isUser}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
@@ -128,9 +128,9 @@ export const UserLogin = () => {
               type={"password"}
               label={"비밀번호"}
               required={true}
-              value={OBJECT.user_pw}
-              inputRef={REFS[i]?.user_pw}
-              error={ERRORS[i]?.user_pw}
+              value={OBJECT?.user_pw}
+              inputRef={REFS?.[i]?.user_pw}
+              error={ERRORS?.[i]?.user_pw}
               disabled={isAdmin || isUser}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({

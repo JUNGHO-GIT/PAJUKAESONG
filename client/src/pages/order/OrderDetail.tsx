@@ -75,7 +75,7 @@ export const OrderDetail = () => {
     setLOADING(true);
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
-        _id: OBJECT._id
+        _id: OBJECT?._id
       }
     })
     .then((res: any) => {
@@ -83,8 +83,8 @@ export const OrderDetail = () => {
         alert(res.data.msg);
         navigate('/order/list', {
           state: {
-            order_name: OBJECT.order_name,
-            order_phone: OBJECT.order_phone,
+            order_name: OBJECT?.order_name,
+            order_phone: OBJECT?.order_phone,
           },
         });
       }
@@ -114,14 +114,14 @@ export const OrderDetail = () => {
     );
     // 2. product
     const productSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           {OBJECT?.order_product?.map((item: any, index: number) => (
             <Grid container spacing={2} columns={12} key={index}>
               <Grid size={3} className={"d-left"}>
                 <Img
-                  key={item.product_images[0]}
-                  src={item.product_images[0]}
+                  key={item.product_images?.[0]}
+                  src={item.product_images?.[0]}
                   group={"product"}
                   className={imageSize}
                 />
@@ -146,7 +146,7 @@ export const OrderDetail = () => {
           <Hr px={20} h={10} className={"bg-burgundy"} />
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-0rem"}>
-              {`총 금액  : ₩ ${numeral(OBJECT.order_total_price).format("0,0")}`}
+              {`총 금액  : ₩ ${numeral(OBJECT?.order_total_price).format("0,0")}`}
             </Div>
           </Grid>
         </Grid>
@@ -154,7 +154,7 @@ export const OrderDetail = () => {
     );
     // 3. order
     const orderSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
@@ -163,7 +163,7 @@ export const OrderDetail = () => {
               disabled={true}
               label={"주문 날짜"}
               className={"border-bottom-1"}
-              value={OBJECT.order_date}
+              value={OBJECT?.order_date}
             />
           </Grid>
           <Grid size={12}>
@@ -173,7 +173,7 @@ export const OrderDetail = () => {
               required={true}
               disabled={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_category}
+              value={OBJECT?.order_category}
             >
               {["reservation", "buy"].map((item: string, idx: number) => (
                 <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
@@ -190,7 +190,7 @@ export const OrderDetail = () => {
               required={true}
               disabled={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_name}
+              value={OBJECT?.order_name}
             />
           </Grid>
           <Grid size={12}>
@@ -200,7 +200,7 @@ export const OrderDetail = () => {
               required={true}
               disabled={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_email}
+              value={OBJECT?.order_email}
             />
           </Grid>
           <Grid size={12}>
@@ -210,7 +210,7 @@ export const OrderDetail = () => {
               required={true}
               disabled={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_phone}
+              value={OBJECT?.order_phone}
             />
           </Grid>
         </Grid>
@@ -228,7 +228,7 @@ export const OrderDetail = () => {
                 className={"w-20 h-20"}
               />
               <Div className={"fs-1-0rem fw-500"}>
-                {getDayFmt(OBJECT.order_regDt)}
+                {getDayFmt(OBJECT?.order_regDt)}
               </Div>
             </Grid>
             <Grid size={12} className={"d-center"}>
@@ -238,7 +238,7 @@ export const OrderDetail = () => {
                 className={"w-20 h-20"}
               />
               <Div className={"fs-1-0rem fw-500"}>
-                {OBJECT.order_name}
+                {OBJECT?.order_name}
               </Div>
             </Grid>
           </Grid>
@@ -249,8 +249,8 @@ export const OrderDetail = () => {
                 onClick={() => {
                   navigate("/order/list", {
                     state: {
-                      order_name: OBJECT.order_name,
-                      order_phone: OBJECT.order_phone
+                      order_name: OBJECT?.order_name,
+                      order_phone: OBJECT?.order_phone
                     }
                   });
                 }}

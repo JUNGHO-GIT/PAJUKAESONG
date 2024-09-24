@@ -33,16 +33,16 @@ export const OrderFind = () => {
     }
     axios.get(`${URL}${SUBFIX}/find`, {
       params: {
-        order_name: OBJECT.order_name,
-        order_phone: OBJECT.order_phone,
+        order_name: OBJECT?.order_name,
+        order_phone: OBJECT?.order_phone,
       }
     })
     .then((res: any) => {
       if (res.data.status === "success") {
         navigate('/order/list', {
           state: {
-            order_name: OBJECT.order_name,
-            order_phone: OBJECT.order_phone,
+            order_name: OBJECT?.order_name,
+            order_phone: OBJECT?.order_phone,
           },
         });
       }
@@ -72,7 +72,7 @@ export const OrderFind = () => {
     );
     // 2. find
     const findSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={4} columns={12}>
           <Grid size={12}>
             <Input
@@ -80,9 +80,9 @@ export const OrderFind = () => {
               label={"주문자 이름"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_name}
-              inputRef={REFS[i]?.order_name}
-              error={ERRORS[i]?.order_name}
+              value={OBJECT?.order_name}
+              inputRef={REFS?.[i]?.order_name}
+              error={ERRORS?.[i]?.order_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -97,9 +97,9 @@ export const OrderFind = () => {
               label={"주문자 전화번호"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_phone}
-              inputRef={REFS[i]?.order_phone}
-              error={ERRORS[i]?.order_phone}
+              value={OBJECT?.order_phone}
+              inputRef={REFS?.[i]?.order_phone}
+              error={ERRORS?.[i]?.order_phone}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,

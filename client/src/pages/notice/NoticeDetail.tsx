@@ -71,7 +71,7 @@ export const NoticeDetail = () => {
     setLOADING(true);
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
-        _id: OBJECT._id
+        _id: OBJECT?._id
       }
     })
     .then((res: any) => {
@@ -105,11 +105,11 @@ export const NoticeDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
-              {OBJECT.notice_title}
+              {OBJECT?.notice_title}
             </Div>
           </Grid>
           <Hr px={10} h={10} className={"bg-burgundy"} />
@@ -121,12 +121,13 @@ export const NoticeDetail = () => {
               className={imageSize}
             />
           </Grid>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <TextArea
               label={""}
+              variant={"standard"}
+              required={true}
               readOnly={true}
-              inputclass={"h-min50vh readonly"}
-              value={OBJECT.notice_content}
+              value={OBJECT?.notice_content}
             />
           </Grid>
         </Grid>
@@ -143,7 +144,7 @@ export const NoticeDetail = () => {
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>
-              {getDayFmt(OBJECT.notice_regDt)}
+              {getDayFmt(OBJECT?.notice_regDt)}
             </Div>
           </Grid>
           <Grid size={6} className={"d-right"}>
@@ -153,7 +154,7 @@ export const NoticeDetail = () => {
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>
-              {OBJECT.notice_view}
+              {OBJECT?.notice_view}
             </Div>
           </Grid>
           <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
@@ -172,7 +173,7 @@ export const NoticeDetail = () => {
               onClick={() => {
                 navigate("/notice/update", {
                   state: {
-                    _id: OBJECT._id
+                    _id: OBJECT?._id
                   }
                 });
               }}

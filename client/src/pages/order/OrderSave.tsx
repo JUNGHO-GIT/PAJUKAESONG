@@ -81,7 +81,7 @@ export const OrderSave = () => {
         ), 0)
       ),
     }));
-  }, [OBJECT.order_product]);
+  }, [OBJECT?.order_product]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
@@ -126,13 +126,13 @@ export const OrderSave = () => {
     );
     // 2. product
     const productSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         {OBJECT?.order_product?.map((item: any, index: number) => (
           <Grid container spacing={2} columns={12} key={index}>
             <Grid size={3} className={"d-left"}>
               <Img
-                key={item.product_images[0]}
-                src={item.product_images[0]}
+                key={item.product_images?.[0]}
+                src={item.product_images?.[0]}
                 group={"product"}
                 className={imageSize}
               />
@@ -252,7 +252,7 @@ export const OrderSave = () => {
     );
     // 3. order
     const orderSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
@@ -276,9 +276,9 @@ export const OrderSave = () => {
               label={"주문 유형"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_category}
-              inputRef={REFS[i]?.order_category}
-              error={ERRORS[i]?.order_category}
+              value={OBJECT?.order_category}
+              inputRef={REFS?.[i]?.order_category}
+              error={ERRORS?.[i]?.order_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -300,9 +300,9 @@ export const OrderSave = () => {
               label={"이름"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_name}
-              inputRef={REFS[i]?.order_name}
-              error={ERRORS[i]?.order_name}
+              value={OBJECT?.order_name}
+              inputRef={REFS?.[i]?.order_name}
+              error={ERRORS?.[i]?.order_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -317,9 +317,9 @@ export const OrderSave = () => {
               label={"이메일"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_email}
-              inputRef={REFS[i]?.order_email}
-              error={ERRORS[i]?.order_email}
+              value={OBJECT?.order_email}
+              inputRef={REFS?.[i]?.order_email}
+              error={ERRORS?.[i]?.order_email}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -334,9 +334,9 @@ export const OrderSave = () => {
               label={"전화번호"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_phone}
-              inputRef={REFS[i]?.order_phone}
-              error={ERRORS[i]?.order_phone}
+              value={OBJECT?.order_phone}
+              inputRef={REFS?.[i]?.order_phone}
+              error={ERRORS?.[i]?.order_phone}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,

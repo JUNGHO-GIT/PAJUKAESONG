@@ -60,19 +60,19 @@ export const useValidateFranchise = () => {
               }), {})
             ))
           );
-          if (!OBJECT.franchise_name) {
+          if (!OBJECT?.franchise_name) {
             return showAlertAndFocus('franchise_name', "가맹점 이름을 입력해주세요.", 0);
           }
-          else if (!OBJECT.franchise_address_main) {
+          else if (!OBJECT?.franchise_address_main) {
             return showAlertAndFocus('franchise_address_main', "가맹점 주소를 입력해주세요.", 0);
           }
-          else if (!OBJECT.franchise_address_detail) {
+          else if (!OBJECT?.franchise_address_detail) {
             return showAlertAndFocus('franchise_address_detail', "가맹점 상세주소를 입력해주세요.", 0);
           }
-          else if (!OBJECT.franchise_phone) {
+          else if (!OBJECT?.franchise_phone) {
             return showAlertAndFocus('franchise_phone', "가맹점 전화번호를 입력해주세요.", 0);
           }
-          else if (OBJECT.franchise_images.length === 0 && fileList.length === 0) {
+          else if (OBJECT?.franchise_images.length === 0 && fileList.length === 0) {
             return showAlertAndFocus('franchise_images', "메뉴 이미지를 등록해주세요.", 0);
           }
           return true;

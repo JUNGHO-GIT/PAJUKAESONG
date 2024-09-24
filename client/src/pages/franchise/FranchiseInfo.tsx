@@ -71,7 +71,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Card className={"border-1 radius shadow p-30 fadeIn"}>
+        <Card className={"border-1 radius shadow p-20 fadeIn"}>
           {titleFragment()}
           <Br px={30} />
           {infoFragment()}
@@ -179,7 +179,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Card className={"border-1 radius shadow p-30 fadeIn"}>
+        <Card className={"border-1 radius shadow p-20 fadeIn"}>
           {titleFragment()}
           <Br px={30} />
           {stepFragment()}
@@ -331,7 +331,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Card className={"border-1 radius shadow p-30 fadeIn"}>
+        <Card className={"border-1 radius shadow p-20 fadeIn"}>
           {titleFragment()}
           <Br px={30} />
           {headFragment()}

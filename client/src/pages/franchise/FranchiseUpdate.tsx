@@ -127,7 +127,7 @@ export const FranchiseUpdate = () => {
     );
     // 2. update
     const updateSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
@@ -135,9 +135,9 @@ export const FranchiseUpdate = () => {
               label={"가맹점 이름"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.franchise_name}
-              inputRef={REFS[i]?.franchise_name}
-              error={ERRORS[i]?.franchise_name}
+              value={OBJECT?.franchise_name}
+              inputRef={REFS?.[i]?.franchise_name}
+              error={ERRORS?.[i]?.franchise_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -153,9 +153,9 @@ export const FranchiseUpdate = () => {
               required={true}
               readOnly={true}
               className={"border-bottom pointer"}
-              value={OBJECT.franchise_address_main}
-              inputRef={REFS[i]?.franchise_address_main}
-              error={ERRORS[i]?.franchise_address_main}
+              value={OBJECT?.franchise_address_main}
+              inputRef={REFS?.[i]?.franchise_address_main}
+              error={ERRORS?.[i]?.franchise_address_main}
               onClick={() => {
                 handleMap();
               }}
@@ -173,9 +173,9 @@ export const FranchiseUpdate = () => {
               label={"상세주소"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.franchise_address_detail}
-              inputRef={REFS[i]?.franchise_address_detail}
-              error={ERRORS[i]?.franchise_address_detail}
+              value={OBJECT?.franchise_address_detail}
+              inputRef={REFS?.[i]?.franchise_address_detail}
+              error={ERRORS?.[i]?.franchise_address_detail}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -190,9 +190,9 @@ export const FranchiseUpdate = () => {
               label={"가맹점 전화번호"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.franchise_phone}
-              inputRef={REFS[i]?.franchise_phone}
-              error={ERRORS[i]?.franchise_phone}
+              value={OBJECT?.franchise_phone}
+              inputRef={REFS?.[i]?.franchise_phone}
+              error={ERRORS?.[i]?.franchise_phone}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -218,7 +218,7 @@ export const FranchiseUpdate = () => {
               label={"가맹점 이미지"}
               required={true}
               limit={1}
-              existing={OBJECT.franchise_images}
+              existing={OBJECT?.franchise_images}
               group={"franchise"}
               value={fileList}
               onChange={(updatedFiles: File[] | null) => {

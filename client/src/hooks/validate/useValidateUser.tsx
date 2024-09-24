@@ -69,10 +69,10 @@ export const useValidateUser = () => {
               }), {})
             ))
           );
-          if (!OBJECT.user_id) {
+          if (!OBJECT?.user_id) {
             return showAlertAndFocus('user_id', "아이디를 입력해주세요.", 0);
           }
-          else if (!OBJECT.user_pw) {
+          else if (!OBJECT?.user_pw) {
             return showAlertAndFocus('user_pw', "비밀번호를 입력해주세요.", 0);
           }
           return true;
@@ -104,28 +104,28 @@ export const useValidateUser = () => {
               }), {})
             ))
           );
-          if (!OBJECT.user_id) {
+          if (!OBJECT?.user_id) {
             return showAlertAndFocus('user_id', "아이디를 입력해주세요.", 0);
           }
-          else if (!OBJECT.user_pw) {
+          else if (!OBJECT?.user_pw) {
             return showAlertAndFocus('user_pw', "비밀번호를 입력해주세요.", 0);
           }
-          /* else if (!OBJECT.user_pw_confirm) {
+          /* else if (!OBJECT?.user_pw_confirm) {
             return showAlertAndFocus('user_pw_confirm', "비밀번호 확인을 입력해주세요.", 0);
           }
-          else if (OBJECT.user_pw !== OBJECT.user_pw_confirm) {
+          else if (OBJECT?.user_pw !== OBJECT?.user_pw_confirm) {
             return showAlertAndFocus('user_pw_confirm', "비밀번호가 일치하지 않습니다.", 0);
           }
-          else if (!OBJECT.user_name) {
+          else if (!OBJECT?.user_name) {
             return showAlertAndFocus('user_name', "이름을 입력해주세요.", 0);
           }
-          else if (!OBJECT.user_email) {
+          else if (!OBJECT?.user_email) {
             return showAlertAndFocus('user_email', "이메일을 입력해주세요.", 0);
           }
-          else if (!OBJECT.user_phone) {
+          else if (!OBJECT?.user_phone) {
             return showAlertAndFocus('user_phone', "전화번호를 입력해주세요.", 0);
           }
-          else if (!OBJECT.user_address) {
+          else if (!OBJECT?.user_address) {
             return showAlertAndFocus('user_address', "주소를 입력해주세요.", 0);
           } */
           return true;

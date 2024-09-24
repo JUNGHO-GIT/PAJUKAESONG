@@ -63,13 +63,13 @@ export const useValidateContact = () => {
               }), {})
             ))
           );
-          if (!OBJECT.contact_name) {
+          if (!OBJECT?.contact_name) {
             return showAlertAndFocus('contact_name', "이름을 입력해주세요.", 0);
           }
-          else if (!OBJECT.contact_email) {
+          else if (!OBJECT?.contact_email) {
             return showAlertAndFocus('contact_email', "이메일을 입력해주세요.", 0);
           }
-          else if (!validateEmail(OBJECT.contact_email)) {
+          else if (!validateEmail(OBJECT?.contact_email)) {
             return showAlertAndFocus('contact_email', "이메일 형식으로 입력해주세요.", 0);
           }
           return true;
@@ -101,25 +101,25 @@ export const useValidateContact = () => {
               }), {})
             ))
           );
-          if (!OBJECT.contact_category) {
+          if (!OBJECT?.contact_category) {
             return showAlertAndFocus('contact_category', "문의 유형을 선택해주세요.", 0);
           }
-          else if (!OBJECT.contact_name) {
+          else if (!OBJECT?.contact_name) {
             return showAlertAndFocus('contact_name', "이름을 입력해주세요.", 0);
           }
-          else if (!OBJECT.contact_email) {
+          else if (!OBJECT?.contact_email) {
             return showAlertAndFocus('contact_email', "이메일을 입력해주세요.", 0);
           }
-          else if (!validateEmail(OBJECT.contact_email)) {
+          else if (!validateEmail(OBJECT?.contact_email)) {
             return showAlertAndFocus('contact_email', "이메일 형식으로 입력해주세요.", 0);
           }
-          else if (!OBJECT.contact_phone) {
+          else if (!OBJECT?.contact_phone) {
             return showAlertAndFocus('contact_phone', "전화번호를 입력해주세요.", 0);
           }
-          else if (!OBJECT.contact_title) {
+          else if (!OBJECT?.contact_title) {
             return showAlertAndFocus('contact_title', "제목을 입력해주세요.", 0);
           }
-          else if (!OBJECT.contact_content) {
+          else if (!OBJECT?.contact_content) {
             return showAlertAndFocus('contact_content', "내용을 입력해주세요.", 0);
           }
           return true;

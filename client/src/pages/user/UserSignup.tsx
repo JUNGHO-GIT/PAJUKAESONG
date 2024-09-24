@@ -64,15 +64,15 @@ export const UserSignup = () => {
     );
     // 2. signup
     const signupSection = (i: number) => (
-      <Card className={"border-1 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius p-20 fadeIn"} key={i}>
         <Grid container spacing={3}>
           <Grid size={12} className={"d-center"}>
             <Input
               label={"아이디"}
               required={true}
-              value={OBJECT.user_id}
-              inputRef={REFS[i]?.user_id}
-              error={ERRORS[i]?.user_id}
+              value={OBJECT?.user_id}
+              inputRef={REFS?.[i]?.user_id}
+              error={ERRORS?.[i]?.user_id}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -86,9 +86,9 @@ export const UserSignup = () => {
               type={"password"}
               label={"비밀번호"}
               required={true}
-              value={OBJECT.user_pw}
-              inputRef={REFS[i]?.user_pw}
-              error={ERRORS[i]?.user_pw}
+              value={OBJECT?.user_pw}
+              inputRef={REFS?.[i]?.user_pw}
+              error={ERRORS?.[i]?.user_pw}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,

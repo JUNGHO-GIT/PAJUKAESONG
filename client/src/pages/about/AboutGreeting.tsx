@@ -19,7 +19,7 @@ export const AboutGreeting = () => {
     );
     // 2. greeting
     const greetingSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-left"}>
             <Div className={"fs-1-8rem fw-700"}>

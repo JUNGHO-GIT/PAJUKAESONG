@@ -92,10 +92,10 @@ export const FranchiseList = () => {
       <Grid container spacing={2} columns={12} key={i}>
         {OBJECT?.map((item: any, index: number) => (
           <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 4 }} key={index}>
-            <Paper className={"border-1 radius shadow p-30 fadeIn"}>
+            <Paper className={"border-1 radius shadow p-20 fadeIn"}>
               <Img
-                key={item.franchise_images[0]}
-                src={item.franchise_images[0]}
+                key={item.franchise_images?.[0]}
+                src={item.franchise_images?.[0]}
                 group={"franchise"}
                 className={imageSize}
                 onClick={() => {

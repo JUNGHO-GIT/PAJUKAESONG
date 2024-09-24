@@ -60,19 +60,19 @@ export const useValidateProduct = () => {
               }), {})
             ))
           );
-          if (!OBJECT.product_category) {
+          if (!OBJECT?.product_category) {
             return showAlertAndFocus('product_category', "상품 카테고리를 선택해주세요.", 0);
           }
-          else if (!OBJECT.product_name) {
+          else if (!OBJECT?.product_name) {
             return showAlertAndFocus('product_name', "상품 이름을 입력해주세요.", 0);
           }
-          else if (!OBJECT.product_description) {
+          else if (!OBJECT?.product_description) {
             return showAlertAndFocus('product_description', "상품 설명을 입력해주세요.", 0);
           }
-          else if (!OBJECT.product_price) {
+          else if (!OBJECT?.product_price) {
             return showAlertAndFocus('product_price', "상품 가격을 입력해주세요.", 0);
           }
-          else if (OBJECT.product_images.length === 0 && fileList.length === 0) {
+          else if (OBJECT?.product_images.length === 0 && fileList.length === 0) {
             return showAlertAndFocus('product_images', "상품 이미지를 등록해주세요.", 0);
           }
           return true;

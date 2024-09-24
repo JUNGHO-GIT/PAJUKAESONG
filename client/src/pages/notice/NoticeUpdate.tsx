@@ -102,7 +102,7 @@ export const NoticeUpdate = () => {
     );
     // 2. update
     const updateSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
@@ -111,7 +111,7 @@ export const NoticeUpdate = () => {
               label={"작성일"}
               className={"border-bottom-1"}
               disabled={true}
-              value={getDayFmt(OBJECT.notice_regDt)}
+              value={getDayFmt(OBJECT?.notice_regDt)}
             />
           </Grid>
           <Grid size={12}>
@@ -120,9 +120,9 @@ export const NoticeUpdate = () => {
               label={"공지사항 제목"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.notice_title}
-              inputRef={REFS[i]?.notice_title}
-              error={ERRORS[i]?.notice_title}
+              value={OBJECT?.notice_title}
+              inputRef={REFS?.[i]?.notice_title}
+              error={ERRORS?.[i]?.notice_title}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -131,14 +131,13 @@ export const NoticeUpdate = () => {
               }}
             />
           </Grid>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <TextArea
               required={true}
               label={"공지사항 내용"}
-              inputclass={"h-35vh"}
-              value={OBJECT.notice_content}
-              itemRef={REFS[i]?.notice_content}
-              error={ERRORS[i]?.notice_content}
+              value={OBJECT?.notice_content}
+              itemRef={REFS?.[i]?.notice_content}
+              error={ERRORS?.[i]?.notice_content}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -153,7 +152,7 @@ export const NoticeUpdate = () => {
               label={"공지사항 이미지"}
               required={true}
               limit={1}
-              existing={OBJECT.notice_images}
+              existing={OBJECT?.notice_images}
               group={"notice"}
               value={fileList}
               onChange={(updatedFiles: File[] | null) => {

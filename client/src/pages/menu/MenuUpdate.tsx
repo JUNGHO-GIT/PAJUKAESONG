@@ -75,7 +75,7 @@ export const MenuUpdate = () => {
         document?.querySelector("input[type=file]")?.remove();
         navigate(`/menu/list`, {
           state: {
-            category: OBJECT.menu_category,
+            category: OBJECT?.menu_category,
           },
         });
       }
@@ -105,7 +105,7 @@ export const MenuUpdate = () => {
     );
     // 2. update
     const updateSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Select
@@ -113,9 +113,9 @@ export const MenuUpdate = () => {
               label={"메뉴 카테고리"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.menu_category}
-              inputRef={REFS[i]?.menu_category}
-              error={ERRORS[i]?.menu_category}
+              value={OBJECT?.menu_category}
+              inputRef={REFS?.[i]?.menu_category}
+              error={ERRORS?.[i]?.menu_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -137,9 +137,9 @@ export const MenuUpdate = () => {
               label={"메뉴 이름"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.menu_name}
-              inputRef={REFS[i]?.menu_name}
-              error={ERRORS[i]?.menu_name}
+              value={OBJECT?.menu_name}
+              inputRef={REFS?.[i]?.menu_name}
+              error={ERRORS?.[i]?.menu_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -154,9 +154,9 @@ export const MenuUpdate = () => {
               label={"메뉴 설명"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.menu_description}
-              inputRef={REFS[i]?.menu_description}
-              error={ERRORS[i]?.menu_description}
+              value={OBJECT?.menu_description}
+              inputRef={REFS?.[i]?.menu_description}
+              error={ERRORS?.[i]?.menu_description}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -171,8 +171,8 @@ export const MenuUpdate = () => {
               label={"가격"}
               className={"border-bottom-1"}
               value={numeral(OBJECT?.menu_price).format("0,0")}
-              inputRef={REFS[i]?.menu_price}
-              error={ERRORS[i]?.menu_price}
+              inputRef={REFS?.[i]?.menu_price}
+              error={ERRORS?.[i]?.menu_price}
               onChange={(e: any) => {
                 const value = e.target.value.replace(/,/g, '');
                 const newValue = value === "" ? 0 : Number(value);
@@ -208,7 +208,7 @@ export const MenuUpdate = () => {
               label={"메뉴 이미지"}
               required={true}
               limit={2}
-              existing={OBJECT.menu_images}
+              existing={OBJECT?.menu_images}
               group={"menu"}
               value={fileList}
               onChange={(updatedFiles: File[] | null) => {
@@ -235,7 +235,7 @@ export const MenuUpdate = () => {
               onClick={() => {
                 navigate(`/menu/list`, {
                   state: {
-                    category: OBJECT.menu_category,
+                    category: OBJECT?.menu_category,
                   },
                 });
               }}

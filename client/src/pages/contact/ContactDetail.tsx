@@ -48,7 +48,7 @@ export const ContactDetail = () => {
     setLOADING(true);
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
-        _id: OBJECT._id
+        _id: OBJECT?._id
       }
     })
     .then((res: any) => {
@@ -56,8 +56,8 @@ export const ContactDetail = () => {
         alert(res.data.msg);
         navigate('/contact/list', {
           state: {
-            contact_name: OBJECT.contact_name,
-            contact_email: OBJECT.contact_email,
+            contact_name: OBJECT?.contact_name,
+            contact_email: OBJECT?.contact_email,
           },
         });
       }
@@ -87,14 +87,14 @@ export const ContactDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
-              {OBJECT.contact_title}
+              {OBJECT?.contact_title}
             </Div>
             <Div className={"fs-1-8rem fw-500 ms-10 grey"}>
-              {`[ ${OBJECT.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"} ]`}
+              {`[ ${OBJECT?.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"} ]`}
             </Div>
           </Grid>
           <Hr px={10} h={10} className={"bg-burgundy"} />
@@ -103,7 +103,7 @@ export const ContactDetail = () => {
               label={""}
               readOnly={true}
               inputclass={"h-min50vh readonly"}
-              value={OBJECT.contact_content}
+              value={OBJECT?.contact_content}
             />
           </Grid>
         </Grid>
@@ -120,7 +120,7 @@ export const ContactDetail = () => {
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>
-              {getDayFmt(OBJECT.contact_regDt)}
+              {getDayFmt(OBJECT?.contact_regDt)}
             </Div>
           </Grid>
           <Grid size={6} className={"d-right"}>
@@ -129,8 +129,8 @@ export const ContactDetail = () => {
               onClick={() => {
                 navigate("/contact/list", {
                   state: {
-                    contact_name: OBJECT.contact_name,
-                    contact_email: OBJECT.contact_email
+                    contact_name: OBJECT?.contact_name,
+                    contact_email: OBJECT?.contact_email
                   }
                 });
               }}
@@ -145,7 +145,7 @@ export const ContactDetail = () => {
               className={"w-20 h-20"}
             />
             <Div className={"fs-1-0rem fw-500"}>
-              {OBJECT.contact_name}
+              {OBJECT?.contact_name}
             </Div>
           </Grid>
           <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>

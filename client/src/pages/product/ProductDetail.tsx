@@ -69,11 +69,11 @@ export const ProductDetail = () => {
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = (extra: string) => {
     const orderProduct: any = {
-      product_id: OBJECT._id,
-      product_name: OBJECT.product_name,
+      product_id: OBJECT?._id,
+      product_name: OBJECT?.product_name,
       product_count: orderCount,
       product_price: orderPrice,
-      product_images: OBJECT.product_images,
+      product_images: OBJECT?.product_images,
     };
 
     const existOrderProduct = sessionStorage.getItem(`${TITLE}_order_product`);
@@ -114,7 +114,7 @@ export const ProductDetail = () => {
     setLOADING(true);
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
-        _id: OBJECT._id
+        _id: OBJECT?._id
       }
     })
     .then((res: any) => {
@@ -148,12 +148,12 @@ export const ProductDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Img
-              key={OBJECT.product_images[0]}
-              src={OBJECT.product_images[0]}
+              key={OBJECT?.product_images?.[0]}
+              src={OBJECT?.product_images?.[0]}
               group={"product"}
               className={imageSize}
             />
@@ -161,17 +161,17 @@ export const ProductDetail = () => {
           <Hr className={"bg-burgundy"} px={40} h={10} />
           <Grid size={6} className={"d-left"}>
             <Div className={"fs-1-8rem fw-700 black"}>
-              {OBJECT.product_name}
+              {OBJECT?.product_name}
             </Div>
           </Grid>
           <Grid size={6} className={"d-right"}>
             <Div className={"fs-1-2rem fw-500 dark"}>
-              {OBJECT.product_description}
+              {OBJECT?.product_description}
             </Div>
           </Grid>
           <Grid size={12} className={"d-left"}>
             <Div className={"fs-1-2rem fw-600 black"}>
-              {`₩ ${numeral(OBJECT.product_price).format("0,0")}`}
+              {`₩ ${numeral(OBJECT?.product_price).format("0,0")}`}
             </Div>
           </Grid>
         </Grid>
@@ -212,11 +212,11 @@ export const ProductDetail = () => {
                       const newValue = value < 1 ? 1 : value - 1;
                       if (newValue <= 1) {
                         setOrderCount(1);
-                        setOrderPrice(Number(OBJECT.product_price));
+                        setOrderPrice(Number(OBJECT?.product_price));
                       }
                       else if (!isNaN(newValue) && newValue <= 30) {
                         setOrderCount(newValue);
-                        setOrderPrice(Number(OBJECT.product_price) * newValue);
+                        setOrderPrice(Number(OBJECT?.product_price) * newValue);
                       }
                     }}
                   />
@@ -228,11 +228,11 @@ export const ProductDetail = () => {
                       const newValue = value < 1 ? 1 : value + 1;
                       if (newValue <= 1) {
                         setOrderCount(1);
-                        setOrderPrice(Number(OBJECT.product_price));
+                        setOrderPrice(Number(OBJECT?.product_price));
                       }
                       else if (!isNaN(newValue) && newValue <= 30) {
                         setOrderCount(newValue);
-                        setOrderPrice(Number(OBJECT.product_price) * newValue);
+                        setOrderPrice(Number(OBJECT?.product_price) * newValue);
                       }
                     }}
                   />
@@ -283,7 +283,7 @@ export const ProductDetail = () => {
               onClick={() => {
                 navigate("/product/update", {
                   state: {
-                    _id: OBJECT._id
+                    _id: OBJECT?._id
                   }
                 });
               }}

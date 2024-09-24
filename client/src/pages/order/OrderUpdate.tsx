@@ -101,7 +101,7 @@ export const OrderUpdate = () => {
     );
     // 2. update
     const updateSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Select
@@ -109,9 +109,9 @@ export const OrderUpdate = () => {
               label={"메뉴 카테고리"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_category}
-              inputRef={REFS[i]?.order_category}
-              error={ERRORS[i]?.order_category}
+              value={OBJECT?.order_category}
+              inputRef={REFS?.[i]?.order_category}
+              error={ERRORS?.[i]?.order_category}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -133,9 +133,9 @@ export const OrderUpdate = () => {
               label={"메뉴 이름"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_name}
-              inputRef={REFS[i]?.order_name}
-              error={ERRORS[i]?.order_name}
+              value={OBJECT?.order_name}
+              inputRef={REFS?.[i]?.order_name}
+              error={ERRORS?.[i]?.order_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -150,9 +150,9 @@ export const OrderUpdate = () => {
               label={"메뉴 설명"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.order_description}
-              inputRef={REFS[i]?.order_description}
-              error={ERRORS[i]?.order_description}
+              value={OBJECT?.order_description}
+              inputRef={REFS?.[i]?.order_description}
+              error={ERRORS?.[i]?.order_description}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -167,8 +167,8 @@ export const OrderUpdate = () => {
               label={"가격"}
               className={"border-bottom-1"}
               value={numeral(OBJECT?.order_price).format("0,0")}
-              inputRef={REFS[i]?.order_price}
-              error={ERRORS[i]?.order_price}
+              inputRef={REFS?.[i]?.order_price}
+              error={ERRORS?.[i]?.order_price}
               onChange={(e: any) => {
                 const value = e.target.value.replace(/,/g, '');
                 const newValue = value === "" ? 0 : Number(value);
@@ -204,7 +204,7 @@ export const OrderUpdate = () => {
               label={"메뉴 이미지"}
               required={true}
               limit={2}
-              existing={OBJECT.order_images}
+              existing={OBJECT?.order_images}
               group={"order"}
               value={fileList}
               onChange={(updatedFiles: File[] | null) => {

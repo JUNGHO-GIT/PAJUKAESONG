@@ -68,7 +68,7 @@ export const MenuDetail = () => {
     setLOADING(true);
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
-        _id: OBJECT._id
+        _id: OBJECT?._id
       }
     })
     .then((res: any) => {
@@ -76,7 +76,7 @@ export const MenuDetail = () => {
         alert(res.data.msg);
         navigate(`/menu/list`,{
           state: {
-            category: OBJECT.menu_category
+            category: OBJECT?.menu_category
           }
         });
       }
@@ -106,12 +106,12 @@ export const MenuDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Img
-              key={OBJECT.menu_images[0]}
-              src={OBJECT.menu_images[0]}
+              key={OBJECT?.menu_images?.[0]}
+              src={OBJECT?.menu_images?.[0]}
               group={"menu"}
               className={imageSize}
             />
@@ -119,17 +119,17 @@ export const MenuDetail = () => {
           <Hr px={40} h={10} className={"bg-burgundy"} />
           <Grid size={6} className={"d-left"}>
             <Div className={"fs-1-8rem fw-700 black"}>
-              {OBJECT.menu_name}
+              {OBJECT?.menu_name}
             </Div>
           </Grid>
           <Grid size={6} className={"d-right"}>
             <Div className={"fs-1-2rem fw-600 black"}>
-              {`₩ ${numeral(OBJECT.menu_price).format("0,0")}`}
+              {`₩ ${numeral(OBJECT?.menu_price).format("0,0")}`}
             </Div>
           </Grid>
           <Grid size={12} className={"d-left"}>
             <Div className={"fs-1-2rem fw-500 dark"}>
-              {OBJECT.menu_description}
+              {OBJECT?.menu_description}
             </Div>
           </Grid>
         </Grid>
@@ -145,7 +145,7 @@ export const MenuDetail = () => {
               onClick={() => {
                 navigate(`/menu/list`,{
                   state: {
-                    category: OBJECT.menu_category
+                    category: OBJECT?.menu_category
                   }
                 });
               }}
@@ -159,7 +159,7 @@ export const MenuDetail = () => {
               onClick={() => {
                 navigate("/menu/update", {
                   state: {
-                    _id: OBJECT._id
+                    _id: OBJECT?._id
                   }
                 });
               }}

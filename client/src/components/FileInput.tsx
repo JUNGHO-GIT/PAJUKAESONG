@@ -245,12 +245,12 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
 
   // 10. return ------------------------------------------------------------------------------------
   return (
-    <>
+    <Div className={"w-100p mt-10"}>
       <Div
-        className={"d-left fs-0-9rem fw-400 mt-15"}
+        className={"d-left fs-0-9rem fw-400"}
         style={{ color: "#484848de" }}
       >
-        {props?.required ? `${props?.label} *` : props?.label}
+        {props?.label ? props?.required ? `${props?.label} *` : props?.label : ""}
       </Div>
       <Br px={10} />
       <MuiFileInput
@@ -287,6 +287,6 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
       <Br px={10} />
       {/** 기존 이미지 표시하기 **/}
       {fileExisting.length > 0 && existingNode()}
-    </>
+    </Div>
   );
 };

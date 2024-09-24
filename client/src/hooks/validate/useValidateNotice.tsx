@@ -57,10 +57,10 @@ export const useValidateNotice = () => {
               }), {})
             ))
           );
-          if (!OBJECT.notice_title) {
+          if (!OBJECT?.notice_title) {
             return showAlertAndFocus('notice_title', "제목을 입력해주세요.", 0);
           }
-          else if (!OBJECT.notice_content) {
+          else if (!OBJECT?.notice_content) {
             return showAlertAndFocus('notice_content', "내용을 입력해주세요.", 0);
           }
           return true;

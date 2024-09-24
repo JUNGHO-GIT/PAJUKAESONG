@@ -60,19 +60,19 @@ export const useValidateMenu = () => {
               }), {})
             ))
           );
-          if (!OBJECT.menu_category) {
+          if (!OBJECT?.menu_category) {
             return showAlertAndFocus('menu_category', "메뉴 카테고리를 선택해주세요.", 0);
           }
-          else if (!OBJECT.menu_name) {
+          else if (!OBJECT?.menu_name) {
             return showAlertAndFocus('menu_name', "메뉴 이름을 입력해주세요.", 0);
           }
-          else if (!OBJECT.menu_description) {
+          else if (!OBJECT?.menu_description) {
             return showAlertAndFocus('menu_description', "메뉴 설명을 입력해주세요.", 0);
           }
-          else if (!OBJECT.menu_price) {
+          else if (!OBJECT?.menu_price) {
             return showAlertAndFocus('menu_price', "메뉴 가격을 입력해주세요.", 0);
           }
-          else if (OBJECT.menu_images.length === 0 && fileList.length === 0) {
+          else if (OBJECT?.menu_images.length === 0 && fileList.length === 0) {
             return showAlertAndFocus('menu_images', "메뉴 이미지를 등록해주세요.", 0);
           }
           return true;

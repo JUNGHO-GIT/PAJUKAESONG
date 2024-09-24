@@ -33,16 +33,16 @@ export const ContactFind = () => {
     }
     axios.get(`${URL}${SUBFIX}/find`, {
       params: {
-        contact_name: OBJECT.contact_name,
-        contact_email: OBJECT.contact_email,
+        contact_name: OBJECT?.contact_name,
+        contact_email: OBJECT?.contact_email,
       }
     })
     .then((res: any) => {
       if (res.data.status === "success") {
         navigate('/contact/list', {
           state: {
-            contact_name: OBJECT.contact_name,
-            contact_email: OBJECT.contact_email,
+            contact_name: OBJECT?.contact_name,
+            contact_email: OBJECT?.contact_email,
           },
         });
       }
@@ -72,7 +72,7 @@ export const ContactFind = () => {
     );
     // 2. find
     const findSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={4} columns={12}>
           <Grid size={12}>
             <Input
@@ -80,9 +80,9 @@ export const ContactFind = () => {
               label={"이름"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.contact_name}
-              inputRef={REFS[i]?.contact_name}
-              error={ERRORS[i]?.contact_name}
+              value={OBJECT?.contact_name}
+              inputRef={REFS?.[i]?.contact_name}
+              error={ERRORS?.[i]?.contact_name}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -97,9 +97,9 @@ export const ContactFind = () => {
               label={"이메일"}
               required={true}
               className={"border-bottom-1"}
-              value={OBJECT.contact_email}
-              inputRef={REFS[i]?.contact_email}
-              error={ERRORS[i]?.contact_email}
+              value={OBJECT?.contact_email}
+              inputRef={REFS?.[i]?.contact_email}
+              error={ERRORS?.[i]?.contact_email}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,

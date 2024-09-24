@@ -71,7 +71,7 @@ export const FranchiseDetail = () => {
     setLOADING(true);
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
-        _id: OBJECT._id
+        _id: OBJECT?._id
       }
     })
     .then((res: any) => {
@@ -79,7 +79,7 @@ export const FranchiseDetail = () => {
         alert(res.data.msg);
         navigate(`/franchise/list`,{
           state: {
-            category: OBJECT.franchise_category
+            category: OBJECT?.franchise_category
           }
         });
       }
@@ -109,12 +109,12 @@ export const FranchiseDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Img
-              key={OBJECT.franchise_images[0]}
-              src={OBJECT.franchise_images[0]}
+              key={OBJECT?.franchise_images?.[0]}
+              src={OBJECT?.franchise_images?.[0]}
               group={"franchise"}
               className={imageSize}
             />
@@ -122,7 +122,7 @@ export const FranchiseDetail = () => {
           <Hr px={30} h={10} className={"bg-burgundy"} />
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
-              {OBJECT.franchise_name}
+              {OBJECT?.franchise_name}
             </Div>
           </Grid>
           <Grid size={12} className={"d-column"}>
@@ -133,10 +133,10 @@ export const FranchiseDetail = () => {
                 className={"w-20 h-20"}
               />
               <Div className={"fs-0-9rem ms-5"}>
-                {OBJECT.franchise_address_main}
+                {OBJECT?.franchise_address_main}
               </Div>
               <Div className={"fs-0-9rem ms-10"}>
-                {`(${OBJECT.franchise_address_detail})`}
+                {`(${OBJECT?.franchise_address_detail})`}
               </Div>
             </Div>
             <Div className={"d-left"}>
@@ -146,7 +146,7 @@ export const FranchiseDetail = () => {
                 className={"w-20 h-20"}
               />
               <Div className={"fs-0-9rem ms-5"}>
-                {OBJECT.franchise_phone}
+                {OBJECT?.franchise_phone}
               </Div>
             </Div>
             <Div className={"d-left"}>
@@ -156,7 +156,7 @@ export const FranchiseDetail = () => {
                 className={"w-20 h-20"}
               />
               <Div className={"fs-0-9rem ms-5"}>
-                {getDayFmt(OBJECT.franchise_regDt)}
+                {getDayFmt(OBJECT?.franchise_regDt)}
               </Div>
             </Div>
           </Grid>
@@ -173,7 +173,7 @@ export const FranchiseDetail = () => {
               onClick={() => {
                 navigate(`/franchise/list`,{
                   state: {
-                    category: OBJECT.franchise_category
+                    category: OBJECT?.franchise_category
                   }
                 });
               }}
@@ -187,7 +187,7 @@ export const FranchiseDetail = () => {
               onClick={() => {
                 navigate("/franchise/update", {
                   state: {
-                    _id: OBJECT._id
+                    _id: OBJECT?._id
                   }
                 });
               }}
