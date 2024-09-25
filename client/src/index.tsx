@@ -1,15 +1,11 @@
 // index.tsx
 
+import "./index.css";
 import "swiper/css";
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import "@styles/Swiper.css";
-import "@styles/Components.css";
 import "@styles/Core.css";
 import "@styles/Mui.css";
 import "@styles/Jstyle.css";
-import "./index.css";
 
 import {
   ReactDOM, BrowserRouter, Routes, Route

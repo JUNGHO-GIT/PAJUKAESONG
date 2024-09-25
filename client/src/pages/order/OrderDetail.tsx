@@ -13,7 +13,7 @@ export const OrderDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, URL, SUBFIX, location_id,
+    navigate, URL, SUBFIX, location_id, TITLE
   } = useCommonValue();
   const {
     isXs, isSm, isMd, isLg, isXl
@@ -77,6 +77,8 @@ export const OrderDetail = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
+        document?.querySelector("input[type=file]")?.remove();
+        sessionStorage?.removeItem(`${TITLE}_order_product`);
         navigate('/order/list', {
           state: {
             order_name: OBJECT?.order_name,

@@ -165,12 +165,12 @@ export const ProductDetail = () => {
             </Div>
           </Grid>
           <Grid size={12} className={"d-left"}>
-            <Div className={"fs-1-2rem fw-500 dark"}>
+            <Div className={"fs-1-2rem fw-500 light-black"}>
               {OBJECT?.product_description}
             </Div>
           </Grid>
           <Grid size={12} className={"d-left"}>
-            <Div className={"fs-0-8rem me-5"}>
+            <Div className={"fs-0-8rem fw-500 dark me-5"}>
               ₩
             </Div>
             <Div className={"fs-1-0rem fw-500 dark"}>
@@ -184,7 +184,7 @@ export const ProductDetail = () => {
     const filter1Section = (i: number) => (
       <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8 }} className={"d-center"}>
+          <Grid size={7} className={"d-center"}>
             <Input
               label={"총 금액"}
               value={numeral(orderPrice).format("0,0")}
@@ -199,7 +199,7 @@ export const ProductDetail = () => {
               }
             />
           </Grid>
-          <Grid size={{ xs: 12, sm: 4 }} className={"d-center"}>
+          <Grid size={5} className={"d-center"}>
             <Input
               label={"수량"}
               value={orderCount}
@@ -209,7 +209,7 @@ export const ProductDetail = () => {
                 <Div className={"d-center"}>
                   <Icons
                     name={"Minus"}
-                    className={"w-20 h-20"}
+                    className={"w-15 h-15"}
                     onClick={(e: any) => {
                       const value = orderCount;
                       const newValue = value < 1 ? 1 : value - 1;
@@ -225,7 +225,7 @@ export const ProductDetail = () => {
                   />
                   <Icons
                     name={"Plus"}
-                    className={"w-20 h-20"}
+                    className={"w-15 h-15"}
                     onClick={(e: any) => {
                       const value = orderCount;
                       const newValue = value < 1 ? 1 : value + 1;

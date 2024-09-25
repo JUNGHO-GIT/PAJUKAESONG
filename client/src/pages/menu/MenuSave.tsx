@@ -185,7 +185,7 @@ export const MenuSave = () => {
               variant={"outlined"}
               label={"메뉴 이미지"}
               required={true}
-              limit={2}
+              limit={1}
               existing={OBJECT?.menu_images}
               group={"menu"}
               value={fileList}

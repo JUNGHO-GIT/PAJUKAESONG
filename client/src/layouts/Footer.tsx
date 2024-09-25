@@ -24,6 +24,9 @@ export const Footer = () => {
         key={"logo1_2.webp"}
         src={"logo1_2.webp"}
         className={`h-max50`}
+        onClick={() => {
+          navigate("/main");
+        }}
       />
     );
     // 3. text

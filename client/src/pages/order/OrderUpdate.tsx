@@ -111,8 +111,8 @@ export const OrderUpdate = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        sessionStorage.removeItem(`${TITLE}_order_product`);
         document?.querySelector("input[type=file]")?.remove();
+        sessionStorage?.removeItem(`${TITLE}_order_product`);
         navigate("/order/find");
       }
       else {

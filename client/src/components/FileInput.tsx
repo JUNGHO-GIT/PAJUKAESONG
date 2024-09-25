@@ -225,7 +225,7 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
             key={file}
             group={props?.group}
             src={file}
-            className={"w-25 h-25 me-10"}
+            className={"w-25 h-25 ms-10 me-10"}
           />
           <Div className={"black fs-0-9rem fw-500"} max={15}>
             {file}
@@ -284,7 +284,7 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
           startAdornment: adornmentNode,
         }}
       />
-      <Br px={10} />
+      <Br px={20} />
       {/** 기존 이미지 표시하기 **/}
       {fileExisting.length > 0 && existingNode()}
     </Div>

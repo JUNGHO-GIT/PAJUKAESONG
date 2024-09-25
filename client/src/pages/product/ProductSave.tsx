@@ -148,13 +148,6 @@ export const ProductSave = () => {
               value={numeral(OBJECT?.product_price).format("0,0")}
               inputRef={REFS?.[i]?.product_price}
               error={ERRORS?.[i]?.product_price}
-              startadornment={
-                <Icons
-                  key={"Won"}
-                  name={"Won"}
-                  className={"w-15 h-15"}
-                />
-              }
               onChange={(e: any) => {
                 const value = e.target.value.replace(/,/g, '');
                 const newValue = value === "" ? 0 : Number(value);
@@ -181,13 +174,6 @@ export const ProductSave = () => {
               className={"border-bottom-1"}
               readOnly={true}
               value={dayFmt}
-              startadornment={
-                <Icons
-                  key={"Calendar"}
-                  name={"Calendar"}
-                  className={"w-20 h-20 mt-n5"}
-                />
-              }
             />
           </Grid>
           <Grid size={12}>
@@ -195,7 +181,7 @@ export const ProductSave = () => {
               variant={"outlined"}
               label={"제품 이미지"}
               required={true}
-              limit={2}
+              limit={1}
               existing={OBJECT?.product_images}
               group={"product"}
               value={fileList}

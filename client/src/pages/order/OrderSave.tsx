@@ -31,11 +31,6 @@ export const OrderSave = () => {
   const [OBJECT, setOBJECT] = useState<any>(Order);
   const [imageSize, setImageSize] = useState<string>("");
 
-  useEffect(() => {
-    console.log("===================================");
-    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
-  }, [OBJECT]);
-
   // 2-2. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     if (isXs) {
@@ -96,8 +91,8 @@ export const OrderSave = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
-        sessionStorage.removeItem(`${TITLE}_order_product`);
         document?.querySelector("input[type=file]")?.remove();
+        sessionStorage?.removeItem(`${TITLE}_order_product`);
         navigate("/order/find");
       }
       else {
@@ -241,7 +236,7 @@ export const OrderSave = () => {
                 </Grid>
                 <Grid size={1} className={"d-center"}>
                   <Div
-                    className={"fs-1-0rem"}
+                    className={"fs-1-0rem ms-30"}
                     onClick={() => {
                       setOBJECT((prev: any) => ({
                         ...prev,
