@@ -11160,6 +11160,9 @@
 .radius {
   border-radius: 10px !important;
 }
+.radius-50 {
+  border-radius: 50px !important;
+}
 .radius-top {
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
@@ -11248,6 +11251,19 @@
 }
 
 /** 99. color *************************************************************************************/
+.light-burgundy {
+  color: #f9e6e6 !important;
+}
+.pointer-light-burgundy:hover {
+  cursor: pointer !important;
+  color: #f9e6e6 !important;
+  transition: transform 0.1s ease-in-out !important;
+  transform: scale(1.1) !important;
+}
+.bg-light-burgundy {
+  background-color: #f9e6e6 !important;
+}
+
 .burgundy {
   color: #c30104 !important;
 }
@@ -11541,25 +11557,6 @@
 .animation-none {
   animation: none !important;
 }
-.animation {
-  animation-duration: 1s !important;
-  animation-fill-mode: forwards !important;
-  animation-iteration-count: infinite !important;
-  animation-name: shimmer !important;
-  animation-timing-function: linear !important;
-  background: linear-gradient(to right, #eff1f3 8%, #f4f5f7 18%, #eff1f3 33%) !important;
-  background-size: 800px 104px !important;
-  position: relative !important;
-}
-.dynamic {
-  transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease !important;
-}
-.fadeIn {
-  animation: fadeIn 1s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-}
-.shake {
-  animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) both !important;
-}
 .hover {
   transition: transform 0.1s ease-in-out;
   cursor: pointer !important;
@@ -11567,16 +11564,14 @@
 .hover:hover {
   transform: scale(1.08);
 }
+.fadeIn {
+  animation: fadeIn 0.5s cubic-bezier(0.42, 0, 0.58, 1) !important;
+}
+.shake {
+  animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) both !important;
+}
 
 /** 101. keyframes ********************************************************************************/
-@keyframes shimmer {
-  0% {
-    background-position: -468px 0 !important;
-  }
-  100% {
-    background-position: 468px 0 !important;
-  }
-}
 @keyframes fadeIn {
   0% {
     opacity: 0;
