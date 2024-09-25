@@ -72,10 +72,11 @@ export const Main = () => {
           disableAnchor: false,
           anchorColor: "#ffffff",
           content: `
-            <div style="padding: 5px 10px 10px 10px;">
-              <h3>파주개성면옥</h3>
-              <p>경기 파주시 문산읍 방촌로 1675-34</p>
-            </div>
+          <div style="padding: 10px 10px 20px 10px;">
+            <p style="font-size: 1.2rem; font-weight: 700;">파주개성면옥</p>
+            <p style="font-size: 0.8rem;" font-weight: 500;>⊙ 경기 파주시 문산읍 방촌로 1675-34</p>
+            <p style="font-size: 1.0rem;" font-weight: 500;>☎ 031-952-8083</p>
+          </div>
           `,
         });
         naverMaps.Event.addListener(marker, "click", function () {
