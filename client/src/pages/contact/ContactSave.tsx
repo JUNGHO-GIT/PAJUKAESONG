@@ -252,12 +252,12 @@ export const ContactSave = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Btn
-              className={"w-100p fs-1-0rem bg-burgundy"}
+              className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}
             >
-              {"문의하기"}
+              문의하기
             </Btn>
           </Grid>
         </Grid>
@@ -273,7 +273,6 @@ export const ContactSave = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : saveSection(0)}
           </Grid>
-          <Br px={5} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

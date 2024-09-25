@@ -399,7 +399,7 @@ export const OrderSave = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-right"}>
             <Btn
-              className={"w-100p fs-1-0rem bg-grey"}
+              className={"w-70p fs-1-0rem bg-grey"}
               onClick={() => {
                 navigate("/product/list");
               }}
@@ -409,7 +409,7 @@ export const OrderSave = () => {
           </Grid>
           <Grid size={6} className={"d-left"}>
             <Btn
-              className={"w-100p fs-1-0rem bg-burgundy"}
+              className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}

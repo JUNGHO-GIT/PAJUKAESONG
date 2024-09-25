@@ -184,12 +184,13 @@ export const ProductDetail = () => {
     const filter1Section = (i: number) => (
       <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={7} className={"d-center"}>
+          <Grid size={6} className={"d-right"}>
             <Input
               label={"총 금액"}
               value={numeral(orderPrice).format("0,0")}
               readOnly={true}
               error={orderPrice < 0}
+              className={"w-90p"}
               startadornment={
                 <Icons
                   key={"Won"}
@@ -199,12 +200,13 @@ export const ProductDetail = () => {
               }
             />
           </Grid>
-          <Grid size={5} className={"d-center"}>
+          <Grid size={6} className={"d-left"}>
             <Input
               label={"수량"}
               value={orderCount}
               readOnly={true}
               error={orderCount < 0}
+              className={"w-90p"}
               endadornment={
                 <Div className={"d-center"}>
                   <Icons
@@ -243,9 +245,10 @@ export const ProductDetail = () => {
               }
             />
           </Grid>
+          <Br px={10} />
           <Grid size={6} className={"d-right"}>
             <Btn
-              className={"w-100p fs-1-0rem bg-grey"}
+              className={"w-70p fs-1-0rem bg-grey"}
               onClick={() => {
                 flowSave("cart");
               }}
@@ -255,7 +258,7 @@ export const ProductDetail = () => {
           </Grid>
           <Grid size={6} className={"d-left"}>
             <Btn
-              className={"w-100p fs-1-0rem bg-burgundy"}
+              className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave("buy");
               }}

@@ -107,7 +107,7 @@ export const UserSignup = () => {
           <Grid size={12} className={"d-center"}>
             <Btn
               color={"primary"}
-              className={"w-100p fs-1-0rem"}
+              className={"w-70p fs-1-0rem"}
               onClick={() => {
                 flowSignup();
               }}
@@ -118,7 +118,7 @@ export const UserSignup = () => {
           <Grid size={12} className={"d-center"}>
             <Btn
               color={"primary"}
-              className={"w-100p fs-1-0rem bg-white black"}
+              className={"w-70p fs-1-0rem bg-white black"}
             >
               <Img
                 key={"google"}
