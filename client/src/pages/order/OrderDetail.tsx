@@ -126,7 +126,7 @@ export const OrderDetail = () => {
                   />
                 </Grid>
                 <Grid size={5}>
-                  <Grid container spacing={1} columns={12}>
+                  <Grid container spacing={2} columns={12}>
                     <Grid size={12} className={"d-left"}>
                       <Div className={"fs-1-4rem fw-600"}>
                         {item?.product_name}

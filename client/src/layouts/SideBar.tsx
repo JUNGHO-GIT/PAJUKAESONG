@@ -139,7 +139,7 @@ export const SideBar = (
       ))
     );
     const textSection1 = () => (
-      <Grid container spacing={1} columns={12} className={`d-center horizontal-text`}>
+      <Grid container spacing={2} columns={12} className={`d-center horizontal-text`}>
         <Grid size={12} className={"d-left"}>
           <Icons
             name={"Info"} className={"w-12 h-12"} />

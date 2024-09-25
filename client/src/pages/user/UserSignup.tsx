@@ -64,7 +64,7 @@ export const UserSignup = () => {
     );
     // 2. signup
     const signupSection = (i: number) => (
-      <Card className={"border-1 radius p-20 fadeIn"} key={i}>
+      <Card className={"border-1 radius p-40 fadeIn"} key={i}>
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Input

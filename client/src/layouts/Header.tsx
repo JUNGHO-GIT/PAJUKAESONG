@@ -187,7 +187,7 @@ export const Header = () => {
     );
     return (
       <Paper className={"layout-wrapper p-sticky top-0vh border-bottom-1 p-20"}>
-        <Grid container spacing={1}>
+        <Grid container spacing={2}>
           <Grid
             size={{ xs: 2, sm: 0, md: 0 }}
             className={`${isXs ? "d-left" : "d-none"}`}
