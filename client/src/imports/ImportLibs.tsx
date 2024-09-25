@@ -8,9 +8,9 @@ import { getCountryForTimezone } from "countries-and-timezones";
 import { getAllInfoByISO } from "iso-country-currency";
 import Calendar from "react-calendar";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination as SwiperPagination } from 'swiper/modules';
-import { Navigation as SwiperNavigation } from 'swiper/modules';
-import { Autoplay as SwiperAutoplay } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 
 
 // -------------------------------------------------------------------------------------------------
@@ -24,6 +24,5 @@ export {
   getCountryForTimezone,
   getAllInfoByISO,
   Calendar,
-  Swiper, SwiperSlide,
-  SwiperPagination, SwiperNavigation, SwiperAutoplay
+  Swiper, SwiperSlide, Pagination, Navigation, Autoplay,
 };

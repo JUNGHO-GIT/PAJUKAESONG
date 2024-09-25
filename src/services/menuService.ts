@@ -22,6 +22,7 @@ export const list = async (
   const page = PAGING_param.page || 0;
 
   totalCntResult = await repository.cnt(
+    category_param
   );
 
   findResult = await repository.list(

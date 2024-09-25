@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { Div, Img, Icons } from "@imports/ImportComponents";
 import { Paper, Grid } from "@imports/ImportMuis";
-import { Tabs, Tab, Card, Menu, MenuItem, tabsClasses } from "@imports/ImportMuis";
+import { Tabs, Tab, Menu, MenuItem, tabsClasses } from "@imports/ImportMuis";
 import { SideBar } from '@imports/ImportLayouts';
 
 // -------------------------------------------------------------------------------------------------

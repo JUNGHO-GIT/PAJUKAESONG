@@ -1,19 +1,18 @@
 // Footer.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
 import { useResponsive, useCommonValue } from "@imports/ImportHooks";
-import { Div, Img, Icons, Input, Btn, Hr } from "@imports/ImportComponents";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { Div, Img, Icons } from "@imports/ImportComponents";
+import { Paper, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Footer = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    adminId, adminPw, navigate
+    navigate
   } = useCommonValue();
   const {
-    isXs, isSm, isMd, isLg, isXl
+    isXs
   } = useResponsive();
 
   // 7. footer -------------------------------------------------------------------------------------

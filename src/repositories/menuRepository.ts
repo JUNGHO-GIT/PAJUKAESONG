@@ -6,8 +6,12 @@ import { newDate } from "@scripts/date";
 
 // 0. cnt ------------------------------------------------------------------------------------------
 export const cnt = async (
+  category_param: string,
 ) => {
   const finalResult = await Menu.countDocuments(
+    {
+      menu_category: category_param
+    }
   );
 
   return finalResult;

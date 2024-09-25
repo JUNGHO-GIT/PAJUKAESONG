@@ -1,6 +1,9 @@
 // index.tsx
 
 import "swiper/css";
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 import "@styles/Swiper.css";
 import "@styles/Components.css";
 import "@styles/Core.css";

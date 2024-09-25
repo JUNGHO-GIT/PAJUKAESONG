@@ -1,19 +1,38 @@
 // Main.tsx
 
-import { useEffect } from "@imports/ImportReacts";
-import { Swiper, SwiperSlide } from "@imports/ImportLibs";
-import { SwiperPagination, SwiperNavigation, SwiperAutoplay } from "@imports/ImportLibs";
-import { Div, Img, Br } from "@imports/ImportComponents";
+import { useState, useEffect } from "@imports/ImportReacts";
+import { useCommonValue } from "@imports/ImportHooks";
+import { Swiper, SwiperSlide, axios } from "@imports/ImportLibs";
+import { Pagination } from "@imports/ImportLibs";
+import { Menu } from "@imports/ImportSchemas";
+import { Div, Img, Br, Hr } from "@imports/ImportComponents";
 import { Grid, Card, Paper } from "@imports/ImportMuis";
+import { Tabs, Tab, MenuItem, tabsClasses } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Main = () => {
-  
-  
+
+  // 1. common -------------------------------------------------------------------------------------
+  const {
+    URL
+  } = useCommonValue();
+
   // 1. common -------------------------------------------------------------------------------------
   const NAVER_MAPS_CLIENT_ID = process.env.REACT_APP_NAVER_MAPS_CLIENT_ID;
   const srcPre = "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=";
   const scriptSrc = `${srcPre}${NAVER_MAPS_CLIENT_ID}`;
+  const themeArray = ["smile1.webp", "smile2.webp", "smile3.webp", "smile4.webp", "smile5.webp"];
+
+  // 2-1. useState ---------------------------------------------------------------------------------
+  const [OBJECT_MENU, setOBJECT_MENU] = useState<any>([Menu]);
+  const [category, setCategory] = useState<string>("main");
+  const [PAGING, setPAGING] = useState<any>({
+    sort: "asc",
+    page: 0,
+  });
+  const [COUNT, setCOUNT] = useState<any>({
+    totalCnt: 0,
+  });
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -63,7 +82,6 @@ export const Main = () => {
             infoWindow.open(newMap, marker);
           }
         });
-
         infoWindow.open(newMap, marker);
       }
     };
@@ -82,78 +100,158 @@ export const Main = () => {
     };
   }, []);
 
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    axios.get(`${URL}/api/menu/list`, {
+      params: {
+        PAGING: PAGING,
+        category: category,
+      }
+    })
+    .then((res: any) => {
+      setOBJECT_MENU(res.data.result.length > 0 ? res.data.result : [Menu]);
+      setCOUNT((prev: any) => ({
+        ...prev,
+        totalCnt: res.data.totalCnt || 0,
+      }));
+    })
+    .catch((err: any) => {
+      alert(err.response.data.msg);
+      console.error(err);
+    });
+  }, [URL, PAGING, category]);
+
   // 7. main ---------------------------------------------------------------------------------------
   const mainNode = () => {
-    // 7-1. swiperSection
-    const swiperSection = (i: number) => (
-      <Card className={"border-none p-0 fadeIn"} key={i}>
-        <Swiper
-          spaceBetween={0}
-          centeredSlides={true}
-          navigation={true}
-          loop={true}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[
-            SwiperPagination,
-            SwiperNavigation,
-          ]}
-          style={{
-            width: "100%",
-            height: 700,
-          }}
-        >
-          <SwiperSlide>
-            <Img
-              src={"https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=800"}
-              group={"new"}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
+    // 1. theme
+    const themeSection = (i: number) => (
+      <Card className={"border-1 p-20 d-center fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12}>
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={3}
+              centeredSlides={false}
+              loop={true}
+              navigation={false}
+              pagination={{
+                clickable: true,
+                enabled: true,
+                dynamicBullets: true,
+                dynamicMainBullets: 3,
+                el: '.theme-pagination',
               }}
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Img
-              src={"https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=800"}
-              group={"new"}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Img
-              src={"https://images.unsplash.com/photo-1521747116042-5a810fda9664?w=800"}
-              group={"new"}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Img
-              src={"https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800"}
-              group={"new"}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
-          </SwiperSlide>
-        </Swiper>
+              modules={[
+                Pagination,
+              ]}
+            >
+              {themeArray.map((item: any, index: number) => (
+                <SwiperSlide className={"d-center"} key={index}>
+                  <Card className={"border-1 p-20 radius shadow w-max25vw h-max25vw"}>
+                    <Img
+                      key={item}
+                      src={item}
+                      group={"main"}
+                      className={"w-100p h-100p object-contain"}
+                    />
+                  </Card>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"theme-pagination transform-none"} />
+          </Grid>
+        </Grid>
       </Card>
     );
-    // 2. info
+    // 2. menu
+    const menuSection = (i: number) => (
+      <Card className={"border-1 p-20 d-center fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Tabs
+              value={category || false}
+              variant={"scrollable"}
+              selectionFollowsFocus={true}
+              scrollButtons={false}
+              className={`w-100p`}
+              sx={{
+                [`& .${tabsClasses.scrollButtons}`]: {
+                  '&.Mui-disabled': { opacity: 0.3 },
+                },
+                "& .MuiTab-root": {
+                  color: "black",
+                },
+                "& .MuiTabs-flexContainer": {
+                  display: "flex",
+                  justifyContent: "center",
+                },
+              }}
+            >
+              <Tab
+                label={"대표 메뉴"}
+                value={"main"}
+                className={"pointer-burgundy fs-1-1rem"}
+                onClick={() => {
+                  setCategory("main");
+                }}
+              />
+              <Tab
+                label={"사이드 메뉴"}
+                value={"side"}
+                className={"pointer-burgundy fs-1-1rem"}
+                onClick={() => {
+                  setCategory("side");
+                }}
+              />
+            </Tabs>
+          </Grid>
+          <Grid size={12} className={"d-center"}>
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={3}
+              centeredSlides={false}
+              loop={true}
+              navigation={false}
+              pagination={{
+                clickable: true,
+                enabled: true,
+                dynamicBullets: true,
+                dynamicMainBullets: 3,
+                el: '.menu-pagination',
+              }}
+              modules={[
+                Pagination,
+              ]}
+            >
+              {OBJECT_MENU?.map((item: any, index: number) => (
+                <SwiperSlide className={"d-center"} key={index}>
+                  <Card className={"border-1 p-20 radius shadow w-max25vw h-max25vw"}>
+                    <Img
+                      key={item?.menu_images?.[0]}
+                      src={item?.menu_images?.[0]}
+                      group={"menu"}
+                      className={"w-100p h-100p object-contain hover"}
+                    />
+                    <Hr px={50} className={"bg-light-grey"} />
+                    <Div className={"fs-1-2rem fw-600"}>
+                      {item?.menu_name}
+                    </Div>
+                  </Card>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"menu-pagination transform-none"} />
+          </Grid>
+        </Grid>
+      </Card>
+    );
+    // 3. info
     const infoSection = (i: number) => (
-      <Card className={"border-1 p-20 fadeIn"} key={i}>
+      <Card className={"border-1 p-20 d-center fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -169,20 +267,20 @@ export const Main = () => {
         </Grid>
       </Card>
     );
-    // 2. location
+    // 4. location
     const locationSection = (i: number) => (
-      <Card className={"border-1 border-bottom-none p-20 fadeIn"} key={i}>
-          <Div
-            key={"location"}
-            id={"map"}
-            style={{
-              width: "100%",
-              height: "40vh",
-              borderRadius: "10px",
-              border: "1px solid #dbdbdb",
-              boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
-            }}
-          />
+      <Card className={"border-1 p-20 d-center fadeIn"} key={i}>
+        <Div
+          key={"location"}
+          id={"map"}
+          style={{
+            width: "100%",
+            height: "40vh",
+            borderRadius: "10px",
+            border: "1px solid #dbdbdb",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+          }}
+        />
       </Card>
     );
     // 7-10. return
@@ -190,7 +288,10 @@ export const Main = () => {
       <Paper className={"content-wrapper d-center p-0"}>
         <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center p-0"}>
-            {swiperSection(0)}
+            {themeSection(0)}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center p-0"}>
+            {menuSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center p-0"}>
             {infoSection(0)}

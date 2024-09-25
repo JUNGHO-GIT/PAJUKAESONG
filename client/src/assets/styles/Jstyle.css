@@ -11046,6 +11046,21 @@
 .d-fit {
   width: fit-content !important;
 }
+.object-cover {
+  object-fit: cover !important;
+}
+.object-contain {
+  object-fit: contain !important;
+}
+.object-fill {
+  object-fit: fill !important;
+}
+.object-none {
+  object-fit: none !important;
+}
+.object-scale-down {
+  object-fit: scale-down !important;
+}
 
 /** 94. overflow **********************************************************************************/
 .over-hidden {
@@ -11520,6 +11535,9 @@
 }
 
 /** 100. animation ********************************************************************************/
+.transform-none {
+  transform: none !important;
+}
 .animation-none {
   animation: none !important;
 }
