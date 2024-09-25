@@ -126,7 +126,7 @@ export const OrderSave = () => {
     );
     // 2. product
     const productSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           {OBJECT?.order_product?.map((item: any, index: number) => (
             item.product_name && (
@@ -281,7 +281,7 @@ export const OrderSave = () => {
     );
     // 3. order
     const orderSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
@@ -400,7 +400,7 @@ export const OrderSave = () => {
     );
     // 4. filter
     const filterSection = (i: number) => (
-      <Card className={"px-10 fadeIn"} key={i}>
+      <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-right"}>
             <Btn
@@ -428,7 +428,7 @@ export const OrderSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

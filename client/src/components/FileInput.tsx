@@ -182,8 +182,8 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
                 className={"w-25 h-25 me-10"}
               />
             </Div>
-            <Div className={"black fs-0-9rem fw-500"}>
-              {file?.name.length > 20 ? `${file?.name.slice(0, 20)}...` : file?.name}
+            <Div className={"black fs-0-9rem fw-500"} max={15}>
+              {file?.name}
             </Div>
             <Div
               className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
@@ -227,8 +227,8 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
             src={file}
             className={"w-25 h-25 me-10"}
           />
-          <Div className={"black fs-0-9rem fw-500"}>
-            {file.length > 20 ? `${file.slice(0, 20)}...` : file}
+          <Div className={"black fs-0-9rem fw-500"} max={15}>
+            {file}
           </Div>
           <Div
             className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}

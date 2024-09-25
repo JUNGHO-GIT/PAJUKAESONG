@@ -20,9 +20,9 @@ export const Footer = () => {
     // 1. logo
     const logoSection = () => (
       <Img
-        key={"logo1"}
         group={"main"}
-        src={"logo1.webp"}
+        key={"logo1_2.webp"}
+        src={"logo1_2.webp"}
         className={`h-max50`}
       />
     );
@@ -88,7 +88,7 @@ export const Footer = () => {
     );
     // 4. return
     return (
-      <Paper className={"layout-wrapper p-relative border-top-1 p-20"}>
+      <Paper className={"layout-wrapper bg-light-burgundy p-relative border-top-1 p-20"}>
         <Grid container spacing={1} columns={24}>
           <Grid
             size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }}

@@ -1,7 +1,7 @@
 // Main.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { Swiper, SwiperSlide, Autoplay, axios } from "@imports/ImportLibs";
 import { Pagination } from "@imports/ImportLibs";
 import { Menu, Notice } from "@imports/ImportSchemas";
@@ -16,6 +16,9 @@ export const Main = () => {
     URL, navigate
   } = useCommonValue();
   const {
+    getDayFmt
+  } = useCommonDate();
+  const {
     isXs, isSm, isMd, isLg, isXl
   } = useResponsive();
 
@@ -23,6 +26,7 @@ export const Main = () => {
   const NAVER_MAPS_CLIENT_ID = process.env.REACT_APP_NAVER_MAPS_CLIENT_ID;
   const srcPre = "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=";
   const scriptSrc = `${srcPre}${NAVER_MAPS_CLIENT_ID}`;
+  const mainArray = ["main1.webp", "main2.webp", "main3.webp", "main4.webp", "main5.webp"];
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [imageSize, setImageSize] = useState<string>("");
@@ -59,20 +63,20 @@ export const Main = () => {
           map: newMap,
         });
         const infoWindow = new naverMaps.InfoWindow({
-            pixelOffset: new naverMaps.Point(0, -10),
-            anchorSize: new naverMaps.Size(0, -5),
-            backgroundColor: "#ffffff",
-            borderColor: "#333333",
-            borderWidth: 0.5,
-            anchorSkew: false,
-            disableAnchor: false,
-            anchorColor: "#ffffff",
-            content: `
-              <div style="padding: 10px;">
-                <h3>파주개성면옥</h3>
-                <p>경기 파주시 문산읍 방촌로 1675-34</p>
-              </div>
-            `,
+          pixelOffset: new naverMaps.Point(0, -10),
+          anchorSize: new naverMaps.Size(0, -5),
+          backgroundColor: "#ffffff",
+          borderColor: "#333333",
+          borderWidth: 0.5,
+          anchorSkew: false,
+          disableAnchor: false,
+          anchorColor: "#ffffff",
+          content: `
+            <div style="padding: 5px 10px 10px 10px;">
+              <h3>파주개성면옥</h3>
+              <p>경기 파주시 문산읍 방촌로 1675-34</p>
+            </div>
+          `,
         });
         naverMaps.Event.addListener(marker, "click", function () {
           if (infoWindow.getMap()) {
@@ -85,7 +89,6 @@ export const Main = () => {
         infoWindow.open(newMap, marker);
       }
     };
-
     const script = document.createElement("script");
     script.src = scriptSrc;
     script.async = true;
@@ -103,19 +106,19 @@ export const Main = () => {
   // 2-2. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     if (isXs) {
-      setImageSize("w-140 h-140 object-contain hover");
+      setImageSize("w-120 h-120 object-contain hover");
     }
     else if (isSm) {
-      setImageSize("w-160 h-160 object-contain hover");
+      setImageSize("w-140 h-140 object-contain hover");
     }
     else if (isMd) {
-      setImageSize("w-180 h-180 object-contain hover");
+      setImageSize("w-160 h-160 object-contain hover");
     }
     else if (isLg) {
-      setImageSize("w-200 h-200 object-contain hover");
+      setImageSize("w-180 h-180 object-contain hover");
     }
     else if (isXl) {
-      setImageSize("w-220 h-220 object-contain hover");
+      setImageSize("w-200 h-200 object-contain hover");
     }
   }, [isXs, isSm, isMd, isLg, isXl]);
 
@@ -146,65 +149,50 @@ export const Main = () => {
 
   // 7. main ---------------------------------------------------------------------------------------
   const mainNode = () => {
-    // 3. info
-    const infoSection = (i: number) => (
-      <Card className={"bg-light-burgundy border-1 p-20 d-center fadeIn"} key={i}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-8rem fw-700"}>
-              가맹점 창업 안내
-            </Div>
-          </Grid>
-          <Br px={5} />
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-0rem"}>
-              1995년 개인 창업하였을 때부터, 프랜차이즈 회사를 운영하는 현재까지 ‘장사는 제 양심을 파는 것’이라고 생각하였기에 동기와 과정을 중요시하고, ‘성실, 공의, 정직’의 원칙 아래 공동선의식 동행(나에게도 남에게도 유익하게)을 (주)이삭의 사명으로 삼고, ‘정당하고 바른 기업’이 되고자 노력하며 ‘이삭’을 운영하고 있습니다.
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
-    // 3. info2
-    const infoSection2 = (i: number) => (
-      <Card className={"bg-white border-1 p-20 d-center fadeIn"} key={i}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-8rem fw-700"}>
-              파주개성면옥
-            </Div>
-          </Grid>
-          <Br px={5} />
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-0rem"}>
-              1995년 개인 창업하였을 때부터, 프랜차이즈 회사를 운영하는 현재까지 ‘장사는 제 양심을 파는 것’이라고 생각하였기에 동기와 과정을 중요시하고, ‘성실, 공의, 정직’의 원칙 아래 공동선의식 동행(나에게도 남에게도 유익하게)을 (주)이삭의 사명으로 삼고, ‘정당하고 바른 기업’이 되고자 노력하며 ‘이삭’을 운영하고 있습니다.
-            </Div>
+    // 1. main
+    const mainSection = (i: number) => (
+      <Card className={"bg-white border-bottom-1 p-0 d-center fadeIn"} key={i}>
+        <Grid container spacing={0} columns={12}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center p-0"}>
+            <Swiper
+              spaceBetween={0}
+              slidesPerView={1}
+              centeredSlides={true}
+              loop={true}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+              }}
+              navigation={false}
+              modules={[
+                Autoplay,
+              ]}
+            >
+              {mainArray.map((item: any, index: number) => (
+                <SwiperSlide key={index}>
+                  <Img
+                    key={item}
+                    src={item}
+                    group={"main"}
+                    className={"w-100p h-60vh object-cover p-0"}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </Grid>
         </Grid>
       </Card>
     );
-    // 3. info3
-    const infoSection3 = (i: number) => (
-      <Card className={"bg-light-burgundy border-1 p-20 d-center fadeIn"} key={i}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-8rem fw-700"}>
-              파주개성면옥
-            </Div>
-          </Grid>
-          <Br px={5} />
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-0rem"}>
-              1995년 개인 창업하였을 때부터, 프랜차이즈 회사를 운영하는 현재까지 ‘장사는 제 양심을 파는 것’이라고 생각하였기에 동기와 과정을 중요시하고, ‘성실, 공의, 정직’의 원칙 아래 공동선의식 동행(나에게도 남에게도 유익하게)을 (주)이삭의 사명으로 삼고, ‘정당하고 바른 기업’이 되고자 노력하며 ‘이삭’을 운영하고 있습니다.
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
-    // 2. menu
+    // 3. menu
     const menuSection = (i: number) => (
       <Card className={"bg-white border-1 p-20 d-center fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            <Div className={"fs-1-8rem fw-700"}>
+              메뉴 소개
+            </Div>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={`border-1 radius-50 p-10 me-2vw hover ${category === "main" ? "bg-burgundy" : ""}`}>
               <Div
                 className={`fs-0-8rem fw-600 ${category === "main" ? "white" : "black"}`}
@@ -226,10 +214,10 @@ export const Main = () => {
               </Div>
             </Div>
           </Grid>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Swiper
               spaceBetween={20}
-              slidesPerView={2}
+              slidesPerView={isXs ? 2 : isSm ? 2 : isMd ? 3 : isLg ? 4 : 4}
               centeredSlides={false}
               loop={true}
               autoplay={{
@@ -272,24 +260,29 @@ export const Main = () => {
               ))}
             </Swiper>
           </Grid>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"menu-pagination transform-none"} />
           </Grid>
         </Grid>
       </Card>
     );
-    // 7. notice
+    // 4. notice
     const noticeSection = (i: number) => (
-      <Card className={"bg-white border-1 p-20 d-center fadeIn"} key={i}>
+      <Card className={"bg-light-burgundy border-1 p-20 d-center fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            <Div className={"fs-1-8rem fw-700"}>
+              공지사항
+            </Div>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Swiper
               spaceBetween={20}
               slidesPerView={2}
               centeredSlides={false}
               loop={true}
               autoplay={{
-                delay: 2000,
+                delay: 4000,
                 disableOnInteraction: false,
               }}
               navigation={false}
@@ -320,31 +313,46 @@ export const Main = () => {
                       }}
                     />
                     <Hr px={50} className={"bg-light-grey"} />
-                    <Div className={"fs-1-0rem fw-600"}>
+                    <Div className={"d-left fs-1-0rem fw-600"} max={10}>
                       {item?.notice_title}
+                    </Div>
+                    <Br px={5} />
+                    <Div className={"d-left fs-0-8rem fw-500 grey"}>
+                      {getDayFmt(item?.notice_regDt)}
                     </Div>
                   </Card>
                 </SwiperSlide>
               ))}
             </Swiper>
           </Grid>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"notice-pagination transform-none"} />
           </Grid>
         </Grid>
       </Card>
     );
-    // 8. location
+    // 5. location
     const locationSection = (i: number) => (
-      <Card className={"bg-white border-1 p-0 d-center fadeIn"} key={i}>
-        <Div
-          key={"location"}
-          id={"map"}
-          style={{
-            width: "100%",
-            height: "50vh",
-          }}
-        />
+      <Card className={"bg-white border-1 p-20 d-center fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            <Div className={"fs-1-8rem fw-700"}>
+              오시는 길
+            </Div>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            <Card className={"border-1 radius shadow fadeIn p-0"}>
+              <Div
+                key={"location"}
+                id={"map"}
+                style={{
+                  width: "100%",
+                  height: "50vh",
+                }}
+              />
+            </Card>
+          </Grid>
+        </Grid>
       </Card>
     );
     // 7-10. return
@@ -352,13 +360,7 @@ export const Main = () => {
       <Paper className={"content-wrapper d-center p-0"}>
         <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center p-0"}>
-            {infoSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center p-0"}>
-            {infoSection2(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center p-0"}>
-            {infoSection3(0)}
+            {mainSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center p-0"}>
             {menuSection(0)}

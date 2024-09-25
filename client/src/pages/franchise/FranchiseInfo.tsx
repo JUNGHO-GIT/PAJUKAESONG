@@ -42,26 +42,24 @@ export const FranchiseInfo = () => {
     );
     // 2. info
     const infoSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹점 창업 안내
             </Div>
           </Grid>
-          <Br px={5} />
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-0rem"}>
+          <Br px={15} />
+          <Grid size={12} className={"d-column"}>
+            <Div className={"fs-1-0rem fw-500 text-left"}>
               1995년 개인 창업하였을 때부터, 프랜차이즈 회사를 운영하는 현재까지 ‘장사는 제 양심을 파는 것’이라고 생각하였기에 동기와 과정을 중요시하고, ‘성실, 공의, 정직’의 원칙 아래 공동선의식 동행(나에게도 남에게도 유익하게)을 (주)이삭의 사명으로 삼고, ‘정당하고 바른 기업’이 되고자 노력하며 ‘이삭’을 운영하고 있습니다.
             </Div>
-          </Grid>
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-0rem"}>
+            <Br px={20} />
+            <Div className={"fs-1-0rem fw-500 text-left"}>
               힘들었던 시절 '이삭토스트'를 창업하여 자립할 수 있었고, 우연히 만난 한 어려운 부부의 자립을 도와드리는 일이 계기가 되어 '이삭토스트 1호 가맹점'이 탄생했습니다. 그렇게 만들어진 '(주)이삭'은 오늘날 수많은 가정에게 희망을 주고 길을 여는‘이삭토스트’가 되었습니다.
             </Div>
-          </Grid>
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-0rem"}>
+            <Br px={20} />
+            <Div className={"fs-1-0rem fw-500 text-left"}>
               '이삭토스트'는 어쩌면 저와 가맹점주님들, 창업을 꿈꾸시는 예비 가맹 점주님께 '희망'의 다른 이름일지도 모르겠습니다. '이삭토스트'를 통해 고객과 가맹점주님들, 임직원 및 협력업체들이 더불어 행복하시기를 진심으로 바랍니다. 아울러 '이삭'이라는 이름의 뜻처럼, 기쁨과 웃음, 행복과 축복을 유통하는 삶이 되시기를 소망합니다.
             </Div>
           </Grid>
@@ -70,14 +68,14 @@ export const FranchiseInfo = () => {
     );
     // 3. step
     const stepSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹점 창업 절차
             </Div>
           </Grid>
-          <Br px={5} />
+          <Br px={15} />
           {isXs ? (
             <Grid size={12}>
               <Stepper
@@ -168,14 +166,14 @@ export const FranchiseInfo = () => {
     );
     // 4. cost
     const costSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹비 및 창업비용
             </Div>
           </Grid>
-          <Br px={5} />
+          <Br px={15} />
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem fw-500"}>
               구분
@@ -210,7 +208,7 @@ export const FranchiseInfo = () => {
               500 만원
             </Div>
           </Grid>
-          <Hr px={10} className={"h-1"} />
+          <Hr px={1} h={1} className={"bg-light-grey"} />
           {/** row 3 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -229,7 +227,7 @@ export const FranchiseInfo = () => {
               300 만원
             </Div>
           </Grid>
-          <Hr px={10} className={"h-1"} />
+          <Hr px={1} h={1} className={"bg-light-grey"} />
           {/** row 4 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -247,7 +245,7 @@ export const FranchiseInfo = () => {
               300 만원
             </Div>
           </Grid>
-          <Hr px={10} className={"h-1"} />
+          <Hr px={1} h={1} className={"bg-light-grey"} />
           {/** row 5 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -266,7 +264,7 @@ export const FranchiseInfo = () => {
               2,100 만원
             </Div>
           </Grid>
-          <Hr px={10} className={"h-1"} />
+          <Hr px={1} h={1} className={"bg-light-grey"} />
           {/** row 6 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -285,7 +283,7 @@ export const FranchiseInfo = () => {
               400 만원
             </Div>
           </Grid>
-          <Hr px={10} className={"h-1"} />
+          <Hr px={1} h={1} className={"bg-light-grey"} />
           {/** row 7 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -308,7 +306,7 @@ export const FranchiseInfo = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

@@ -11204,6 +11204,21 @@
 .border-left-none {
   border-left: none !important;
 }
+.border-0 {
+  border: 0px solid #dbdbdb !important;
+}
+.border-top-0 {
+  border-top: 0px solid #dbdbdb !important;
+}
+.border-right-0 {
+  border-right: 0px solid #dbdbdb !important;
+}
+.border-bottom-0 {
+  border-bottom: 0px solid #dbdbdb !important;
+}
+.border-left-0 {
+  border-left: 0px solid #dbdbdb !important;
+}
 .border-1 {
   border: 1px solid #dbdbdb !important;
 }
@@ -11252,16 +11267,16 @@
 
 /** 99. color *************************************************************************************/
 .light-burgundy {
-  color: #f9e6e6 !important;
+  color: #faf2f3 !important;
 }
 .pointer-light-burgundy:hover {
   cursor: pointer !important;
-  color: #f9e6e6 !important;
+  color: #faf2f3 !important;
   transition: transform 0.1s ease-in-out !important;
   transform: scale(1.1) !important;
 }
 .bg-light-burgundy {
-  background-color: #f9e6e6 !important;
+  background-color: #faf2f3 !important;
 }
 
 .burgundy {

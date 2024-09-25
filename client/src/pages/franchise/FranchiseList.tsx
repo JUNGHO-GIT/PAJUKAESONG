@@ -120,8 +120,8 @@ export const FranchiseList = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-10 fadeIn"} key={i}>
-        <Grid container spacing={1} columns={12}>
+      <Card className={"px-20 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
               label={"정렬"}
@@ -194,7 +194,7 @@ export const FranchiseList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
