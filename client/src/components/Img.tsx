@@ -6,7 +6,7 @@ import { useCommonValue } from "@imports/ImportHooks";
 // -------------------------------------------------------------------------------------------------
 declare type ImgProps = React.HTMLAttributes<HTMLImageElement> & {
   group?: string;
-  src?: string;
+  src?: any;
   hover?: boolean;
   shadow?: boolean;
   max?: number;
@@ -17,17 +17,15 @@ export const Img = ( { group, src, hover, shadow, max, ...props }: ImgProps ) =>
 
   // 1. common -------------------------------------------------------------------------------------
   let { GCLOUD_URL } = useCommonValue();
-  let groupProps: string = group || "new";
-  let srcProps: string = src || "";
-  let fileName: string = "empty";
+  let fileName: string = "";
   let srcResult: string = "";
   let defaultImage: string = "https://via.placeholder.com/150";
   let imageClass: any = "";
   let imageStyle: any = {};
 
-  if (srcProps) {
-    fileName = srcProps.split("/").pop()?.split(".")[0] || "empty";
-    srcResult = groupProps === "new" ? srcProps : `${GCLOUD_URL}/${groupProps}/${srcProps}`;
+  if (src && typeof src === "string") {
+    fileName = src.split("/").pop()?.split(".")[0] || "empty";
+    srcResult = group === "new" ? src : `${GCLOUD_URL}/${group}/${src}`;
   }
 
   if (!props?.className) {
