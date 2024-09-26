@@ -1,12 +1,13 @@
 // MenuList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
-import { Div, Img, Hr, Br, Select, Btn } from "@imports/ImportComponents";
+import { Div, Img, Hr, Btn } from "@imports/ImportComponents";
+import { Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -16,9 +17,6 @@ export const MenuList = () => {
   const {
     URL, SUBFIX, navigate, isAdmin, location_category
   } = useCommonValue();
-  const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -60,24 +58,23 @@ export const MenuList = () => {
   const listNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         {location_category === "main" ? "대표 메뉴" : "사이드 메뉴"}
       </Div>
     );
     // 2. list
     const listSection = (i: number) => (
-      <Grid container spacing={1} columns={12} key={i}>
+      <Grid container spacing={2} columns={12} key={i}>
         {OBJECT?.map((item: any, index: number) => (
-          <Card className={"border-1 radius shadow p-20 fadeIn"} key={index}>
-            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4, xl: 3 }}>
+          <Grid size={{ xs: 6, sm: 4 }} key={index}>
+            <Card className={"border-1 shadow-1 radius p-20 fadeIn"}>
               <Img
+                max={130}
+                hover={true}
+                shadow={true}
                 group={"menu"}
-                key={item?.menu_images?.[0]}
                 src={item?.menu_images?.[0]}
-                className={"w-105p h-105p object-cover drop-shadow"}
+                className={"w-100p h-100p"}
                 onClick={() => {
                   navigate("/menu/detail", {
                     state: {
@@ -86,12 +83,12 @@ export const MenuList = () => {
                   });
                 }}
               />
-              <Hr px={50} className={"bg-light-grey"} />
+              <Hr px={30} className={"bg-burgundy"} />
               <Div className={"fs-1-4rem fw-600"}>
                 {item?.menu_name}
               </Div>
-            </Grid>
-          </Card>
+            </Card>
+          </Grid>
         ))}
       </Grid>
     );
@@ -133,8 +130,8 @@ export const MenuList = () => {
           </Grid>
           <Grid size={6} className={"d-center"}>
             <TablePagination
-              rowsPerPageOptions={[10]}
-              rowsPerPage={10}
+              rowsPerPageOptions={[6]}
+              rowsPerPage={6}
               component={"div"}
               labelRowsPerPage={""}
               count={COUNT.totalCnt}
@@ -162,7 +159,7 @@ export const MenuList = () => {
                 navigate("/menu/save");
               }}
             >
-              {"등록"}
+              등록
             </Btn>
           </Grid>
         </Grid>
@@ -171,7 +168,7 @@ export const MenuList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
@@ -180,7 +177,7 @@ export const MenuList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Hr px={20} w={95} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

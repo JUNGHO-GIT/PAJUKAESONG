@@ -7,7 +7,8 @@ import { axios, numeral } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
-import { Div, Select, Br, Input, FileInput, Btn } from "@imports/ImportComponents";
+import { Div, Btn } from "@imports/ImportComponents";
+import { Input, Select, FileInput } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -74,23 +75,19 @@ export const MenuSave = () => {
   const saveNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         메뉴 등록
       </Div>
     );
     // 2. save
     const saveSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Select
               variant={"standard"}
               label={"메뉴 카테고리"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.menu_category}
               inputRef={REFS?.[i]?.menu_category}
               error={ERRORS?.[i]?.menu_category}
@@ -114,7 +111,6 @@ export const MenuSave = () => {
               variant={"standard"}
               label={"메뉴 이름"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.menu_name}
               inputRef={REFS?.[i]?.menu_name}
               error={ERRORS?.[i]?.menu_name}
@@ -131,7 +127,6 @@ export const MenuSave = () => {
               variant={"standard"}
               label={"메뉴 설명"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.menu_description}
               inputRef={REFS?.[i]?.menu_description}
               error={ERRORS?.[i]?.menu_description}
@@ -146,8 +141,8 @@ export const MenuSave = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
+              required={true}
               label={"가격"}
-              className={"border-bottom-1"}
               value={numeral(OBJECT?.menu_price).format("0,0")}
               inputRef={REFS?.[i]?.menu_price}
               error={ERRORS?.[i]?.menu_price}
@@ -173,10 +168,8 @@ export const MenuSave = () => {
             <Input
               variant={"standard"}
               required={true}
-              label={"작성일"}
-              shrink={"shrink"}
-              className={"border-bottom-1"}
               readOnly={true}
+              label={"작성일"}
               value={dayFmt}
             />
           </Grid>
@@ -189,6 +182,8 @@ export const MenuSave = () => {
               existing={OBJECT?.menu_images}
               group={"menu"}
               value={fileList}
+              inputRef={REFS?.[i]?.menu_images}
+              error={ERRORS?.[i]?.menu_images}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
@@ -209,7 +204,7 @@ export const MenuSave = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-light black"}
+              className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
                 navigate(`/menu/list`, {
                   state: {
@@ -223,7 +218,7 @@ export const MenuSave = () => {
           </Grid>
           <Grid size={6} className={"d-row-left"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}
@@ -237,7 +232,7 @@ export const MenuSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

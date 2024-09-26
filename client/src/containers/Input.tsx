@@ -11,7 +11,7 @@ export const Input = (props: any) => (
     variant={props?.variant || "outlined"}
     size={props?.size || "small"}
     fullWidth={props?.fullWidth || true}
-    className={props?.className || ""}
+    className={(props?.variant === "standard" ? `${props?.className || ""} border-bottom-1` : props?.className || "")}
     inputRef={props?.inputRef || null}
     error={props?.error || false}
     slotProps={{

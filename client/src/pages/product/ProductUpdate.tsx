@@ -7,7 +7,8 @@ import { axios, numeral } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
-import { Div, Br, Input, FileInput, Btn, Select, Icons } from "@imports/ImportComponents";
+import { Div, Btn } from "@imports/ImportComponents";
+import { Input, FileInput, Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -92,23 +93,19 @@ export const ProductUpdate = () => {
   const updateNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         제품 수정
       </Div>
     );
     // 2. update
     const updateSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Select
               variant={"standard"}
               label={"상품 카테고리"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.product_category}
               inputRef={REFS?.[i]?.product_category}
               error={ERRORS?.[i]?.product_category}
@@ -132,7 +129,6 @@ export const ProductUpdate = () => {
               variant={"standard"}
               label={"상품 이름"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.product_name}
               inputRef={REFS?.[i]?.product_name}
               error={ERRORS?.[i]?.product_name}
@@ -149,7 +145,6 @@ export const ProductUpdate = () => {
               variant={"standard"}
               label={"상품 설명"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.product_description}
               inputRef={REFS?.[i]?.product_description}
               error={ERRORS?.[i]?.product_description}
@@ -165,7 +160,6 @@ export const ProductUpdate = () => {
             <Input
               variant={"standard"}
               label={"가격"}
-              className={"border-bottom-1"}
               value={numeral(OBJECT?.product_price).format("0,0")}
               inputRef={REFS?.[i]?.product_price}
               error={ERRORS?.[i]?.product_price}
@@ -191,10 +185,8 @@ export const ProductUpdate = () => {
             <Input
               variant={"standard"}
               required={true}
-              label={"작성일"}
-              shrink={"shrink"}
-              className={"border-bottom-1"}
               readOnly={true}
+              label={"작성일"}
               value={dayFmt}
             />
           </Grid>
@@ -207,6 +199,8 @@ export const ProductUpdate = () => {
               existing={OBJECT?.product_images}
               group={"product"}
               value={fileList}
+              inputRef={REFS?.[i]?.product_images}
+              error={ERRORS?.[i]?.product_images}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
@@ -227,7 +221,7 @@ export const ProductUpdate = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-light black"}
+              className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
                 navigate(`/product/list`);
               }}
@@ -237,7 +231,7 @@ export const ProductUpdate = () => {
           </Grid>
           <Grid size={6} className={"d-row-left"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowUpdate();
               }}
@@ -251,7 +245,7 @@ export const ProductUpdate = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

@@ -1,12 +1,13 @@
 // OrderSave.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateOrder } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
-import { Div, Select, Input, Hr, Btn, Img, Icons } from "@imports/ImportComponents";
+import { Div, Hr, Btn, Img, Icons } from "@imports/ImportComponents";
+import { Input, Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -16,9 +17,6 @@ export const OrderSave = () => {
   const {
     navigate, URL, SUBFIX, TITLE, PATH
   } = useCommonValue();
-  const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
   const {
     dayFmt,
   } = useCommonDate();
@@ -92,52 +90,49 @@ export const OrderSave = () => {
   const saveNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         주문 하기
       </Div>
     );
     // 2. product
     const productSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           {OBJECT?.order_product?.map((item: any, index: number) => (
             item.product_name && (
               <Grid container spacing={2} columns={12} key={index}>
                 <Grid size={3} className={"d-column-left"}>
                   <Img
+                    max={150}
+                    hover={false}
+                    shadow={true}
                     group={"product"}
-                    key={item?.product_images?.[0]}
                     src={item?.product_images?.[0]}
-                    className={"w-105p h-105p object-cover drop-shadow"}
+                    className={"w-70p h-70p"}
                   />
                 </Grid>
                 <Grid size={5}>
-                  <Grid container spacing={2} columns={12}>
-                    <Grid size={12} className={"d-column-left"}>
-                      <Div className={"fs-1-4rem fw-600"}>
-                        {item?.product_name}
-                      </Div>
-                    </Grid>
-                    <Grid size={12} className={"d-column-left"}>
-                      <Div className={"fs-0-8rem me-5"}>
-                        ₩
-                      </Div>
-                      <Div className={"fs-1-0rem"}>
-                        {numeral(item?.product_price).format("0,0")}
-                      </Div>
-                    </Grid>
+                  <Grid size={12} className={"d-row-left"}>
+                    <Div className={"fs-1-4rem fw-600"}>
+                      {item?.product_name}
+                    </Div>
+                  </Grid>
+                  <Grid size={12} className={"d-row-left"}>
+                    <Div className={"fs-0-8rem me-5"}>
+                      ₩
+                    </Div>
+                    <Div className={"fs-1-0rem"}>
+                      {numeral(item?.product_price).format("0,0")}
+                    </Div>
                   </Grid>
                 </Grid>
-                <Grid size={3} className={"d-center"}>
-                  <Div className={"d-center border-1"}>
+                <Grid size={3}>
+                  <Div className={"border-1 d-row-between"}>
                     <Icons
                       key={"Minus"}
                       name={"Minus"}
-                      className={"w-10 h-10"}
-                      onClick={(e: any) => {
+                      className={"w-12 h-12 black"}
+                      onClick={() => {
                         const value = item?.product_count;
                         const newValue = value < 1 ? 1 : value - 1;
                         const originalPrice = Number(item?.product_price) / value;
@@ -177,8 +172,8 @@ export const OrderSave = () => {
                     <Icons
                       key={"Plus"}
                       name={"Plus"}
-                      className={"w-10 h-10"}
-                      onClick={(e: any) => {
+                      className={"w-12 h-12 black"}
+                      onClick={() => {
                         const value = item?.product_count;
                         const newValue = value < 1 ? 1 : value + 1;
                         const originalPrice = Number(item?.product_price) / value;
@@ -215,8 +210,10 @@ export const OrderSave = () => {
                   </Div>
                 </Grid>
                 <Grid size={1} className={"d-center"}>
-                  <Div
-                    className={"fs-1-0rem ms-30"}
+                  <Icons
+                    key={"X"}
+                    name={"X"}
+                    className={"w-16 h-16 black"}
                     onClick={() => {
                       setOBJECT((prev: any) => ({
                         ...prev,
@@ -226,21 +223,19 @@ export const OrderSave = () => {
                         ],
                       }));
                     }}
-                  >
-                    {`x`}
-                  </Div>
+                  />
                 </Grid>
                 {/** 마지막 항목 제외 hr 추가 */}
                 {index !== OBJECT?.order_product?.length - 1 && (
                   <Grid size={12}>
-                    <Hr px={5} h={1} className={"mb-10"} />
+                    <Hr px={5} className={"mb-10"} />
                   </Grid>
                 )}
               </Grid>
             )
           ))}
         </Grid>
-        <Hr px={40} h={1} className={"bg-burgundy"} />
+        <Hr px={40} className={"bg-burgundy"} />
         <Grid size={12} className={"d-center"}>
           <Div className={"fs-1-0rem me-10"}>
             총 금액  :
@@ -256,30 +251,13 @@ export const OrderSave = () => {
     );
     // 3. order
     const orderSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              required={true}
-              label={"주문 날짜"}
-              className={"border-bottom-1"}
-              disabled={true}
-              value={dayFmt}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  order_date: e.target.value
-                }));
-              }}
-            />
-          </Grid>
           <Grid size={12}>
             <Select
               variant={"standard"}
               label={"주문 유형"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.order_category}
               inputRef={REFS?.[i]?.order_category}
               error={ERRORS?.[i]?.order_category}
@@ -303,7 +281,6 @@ export const OrderSave = () => {
               variant={"standard"}
               label={"이름"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.order_name}
               inputRef={REFS?.[i]?.order_name}
               error={ERRORS?.[i]?.order_name}
@@ -320,7 +297,6 @@ export const OrderSave = () => {
               variant={"standard"}
               label={"이메일"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.order_email}
               inputRef={REFS?.[i]?.order_email}
               error={ERRORS?.[i]?.order_email}
@@ -347,7 +323,6 @@ export const OrderSave = () => {
               variant={"standard"}
               label={"전화번호"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.order_phone}
               inputRef={REFS?.[i]?.order_phone}
               error={ERRORS?.[i]?.order_phone}
@@ -370,6 +345,20 @@ export const OrderSave = () => {
               }}
             />
           </Grid>
+          <Grid size={12}>
+            <Input
+              variant={"standard"}
+              required={true}
+              label={"주문 날짜"}
+              value={dayFmt}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  order_date: e.target.value
+                }));
+              }}
+            />
+          </Grid>
         </Grid>
       </Card>
     );
@@ -379,7 +368,7 @@ export const OrderSave = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-grey"}
+              className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
                 navigate("/product/list");
               }}
@@ -389,7 +378,7 @@ export const OrderSave = () => {
           </Grid>
           <Grid size={6} className={"d-row-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave();
               }}
@@ -403,7 +392,7 @@ export const OrderSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

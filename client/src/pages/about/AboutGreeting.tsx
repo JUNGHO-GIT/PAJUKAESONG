@@ -10,16 +10,13 @@ export const AboutGreeting = () => {
   const greetingNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         대표 인사말
       </Div>
     );
     // 2. greeting
     const greetingSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-column-left"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -61,7 +58,7 @@ export const AboutGreeting = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

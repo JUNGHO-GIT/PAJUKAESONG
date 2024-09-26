@@ -1,7 +1,7 @@
 // FranchiseInfo.tsx
 
 import { useState } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useResponsive } from "@imports/ImportHooks";
 import { Div, Hr, Br } from "@imports/ImportComponents";
 import { Paper, Card, Grid, Stepper, Step, StepLabel } from "@imports/ImportMuis";
 
@@ -10,10 +10,7 @@ export const FranchiseInfo = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    URL, SUBFIX, navigate, isAdmin,
-  } = useCommonValue();
-  const {
-    isXs, isSm, isMd, isLg, isXl
+    isXs
   } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -33,16 +30,13 @@ export const FranchiseInfo = () => {
   const infoNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         가맹 안내
       </Div>
     );
     // 2. info
     const infoSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -67,7 +61,7 @@ export const FranchiseInfo = () => {
     );
     // 3. step
     const stepSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -164,7 +158,7 @@ export const FranchiseInfo = () => {
     );
     // 4. cost
     const costSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -186,7 +180,7 @@ export const FranchiseInfo = () => {
               비용
             </Div>
           </Grid>
-          <Hr px={10} h={1} className={"bg-burgundy"} />
+          <Hr px={10} className={"bg-burgundy"} />
           {/** row 1 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -205,7 +199,7 @@ export const FranchiseInfo = () => {
               500 만원
             </Div>
           </Grid>
-          <Hr px={1} h={1} className={"bg-light-grey"} />
+          <Hr px={1} className={"bg-light-grey"} />
           {/** row 3 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -224,7 +218,7 @@ export const FranchiseInfo = () => {
               300 만원
             </Div>
           </Grid>
-          <Hr px={1} h={1} className={"bg-light-grey"} />
+          <Hr px={1} className={"bg-light-grey"} />
           {/** row 4 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -242,7 +236,7 @@ export const FranchiseInfo = () => {
               300 만원
             </Div>
           </Grid>
-          <Hr px={1} h={1} className={"bg-light-grey"} />
+          <Hr px={1} className={"bg-light-grey"} />
           {/** row 5 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -261,7 +255,7 @@ export const FranchiseInfo = () => {
               2,100 만원
             </Div>
           </Grid>
-          <Hr px={1} h={1} className={"bg-light-grey"} />
+          <Hr px={1} className={"bg-light-grey"} />
           {/** row 6 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -280,7 +274,7 @@ export const FranchiseInfo = () => {
               400 만원
             </Div>
           </Grid>
-          <Hr px={1} h={1} className={"bg-light-grey"} />
+          <Hr px={1} className={"bg-light-grey"} />
           {/** row 7 **/}
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem"}>
@@ -303,7 +297,7 @@ export const FranchiseInfo = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

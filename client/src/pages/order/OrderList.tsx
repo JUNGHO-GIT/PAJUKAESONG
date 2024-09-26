@@ -1,12 +1,13 @@
 // OrderList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 import { axios, moment, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
-import { Div, Hr, Select } from "@imports/ImportComponents";
+import { Div, Hr } from "@imports/ImportComponents";
+import { Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -58,18 +59,15 @@ export const OrderList = () => {
   const listNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         주문 목록
       </Div>
     );
     // 2. list
     const listSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={3}>
+          <Grid size={2}>
             <Div className={"fs-0-8rem fw-500"}>
               유형
             </Div>
@@ -79,22 +77,23 @@ export const OrderList = () => {
               금액
             </Div>
           </Grid>
-          <Grid size={3}>
+          <Grid size={4}>
             <Div className={"fs-0-8rem fw-500"}>
               날짜
             </Div>
           </Grid>
         </Grid>
-        <Hr px={40} h={1} className={"bg-burgundy"} />
+        <Hr px={40} className={"bg-burgundy"} />
         {OBJECT?.map((item: any, index: number) => (
           <Grid container spacing={2} columns={12} key={index}>
-            <Grid size={3}>
+            <Grid size={2}>
               <Div className={"fs-0-8rem"}>
                 {item?.order_category === "reservation" ? "매장 예약" : "제품 구매"}
               </Div>
             </Grid>
             <Grid size={6}>
               <Div
+                max={15}
                 className={"fs-1-0rem pointer-burgundy"}
                 onClick={() => {
                   navigate('/order/detail', {
@@ -107,11 +106,12 @@ export const OrderList = () => {
                 {`${numeral(item?.order_total_price).format("0,0")}`}
               </Div>
             </Grid>
-            <Grid size={3}>
+            <Grid size={4}>
               <Div className={"fs-0-8rem"}>
                 {moment(item?.order_regDt).format("MM-DD")}
               </Div>
             </Grid>
+            <Hr px={1} className={"bg-light-grey mb-20"} />
           </Grid>
         ))}
       </Card>
@@ -182,7 +182,7 @@ export const OrderList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
@@ -191,7 +191,7 @@ export const OrderList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Hr px={20} w={95} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

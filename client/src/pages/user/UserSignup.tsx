@@ -5,7 +5,8 @@ import { useCommonValue } from "@imports/ImportHooks";
 import { useValidateUser } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
 import { User } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Input, TextArea, Btn } from "@imports/ImportComponents";
+import { Div, Btn, Img, Hr } from "@imports/ImportComponents";
+import { Input } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -55,10 +56,7 @@ export const UserSignup = () => {
   const signupNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         회원가입
       </Div>
     );
@@ -107,7 +105,7 @@ export const UserSignup = () => {
           <Grid size={12} className={"d-center"}>
             <Btn
               color={"primary"}
-              className={"w-70p fs-1-0rem"}
+              className={"w-100p fs-1-0rem"}
               onClick={() => {
                 flowSignup();
               }}
@@ -118,7 +116,7 @@ export const UserSignup = () => {
           <Grid size={12} className={"d-center"}>
             <Btn
               color={"primary"}
-              className={"w-70p fs-1-0rem bg-white black"}
+              className={"w-100p fs-1-0rem bg-white black"}
             >
               <Img
                 group={"main"}
@@ -171,7 +169,7 @@ export const UserSignup = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
@@ -181,7 +179,7 @@ export const UserSignup = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {btnSection(0)}
           </Grid>
-          <Hr px={10} h={1} w={90} className={"bg-grey"} />
+          <Hr px={10} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {linkSection(0)}
           </Grid>

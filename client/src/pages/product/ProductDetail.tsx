@@ -1,11 +1,12 @@
 // ProductDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Icons, Input, Btn, Br } from "@imports/ImportComponents";
+import { Div, Img, Hr, Icons, Btn } from "@imports/ImportComponents";
+import { Input } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -15,9 +16,6 @@ export const ProductDetail = () => {
   const {
     navigate, location_id, isAdmin, URL, SUBFIX, TITLE
   } = useCommonValue();
-  const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -88,7 +86,6 @@ export const ProductDetail = () => {
     navigate(`/order/save`);
   };
 
-
   // 3. flow ---------------------------------------------------------------------------------------
   const flowDelete = () => {
     setLOADING(true);
@@ -119,42 +116,41 @@ export const ProductDetail = () => {
   const detailNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         제품 상세
       </Div>
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 radius shadow px-40 py-20 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <Img
+              max={450}
+              hover={false}
+              shadow={true}
               group={"product"}
-              key={OBJECT?.product_images?.[0]}
               src={OBJECT?.product_images?.[0]}
-              className={"w-105p h-105p object-cover drop-shadow"}
+              className={"w-100p h-auto"}
             />
           </Grid>
-          <Hr px={20} h={1} className={"bg-burgundy"} />
+          <Hr px={10} className={"bg-burgundy"} />
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT?.product_name}
             </Div>
           </Grid>
-          <Grid size={12} className={"d-row-left"}>
+          <Grid size={6} className={"d-row-left"}>
             <Div className={"fs-1-2rem fw-500 dark"}>
-                {OBJECT?.product_description}
+              {OBJECT?.product_description}
             </Div>
           </Grid>
-          <Grid size={12} className={"d-row-left"}>
-            <Div className={"fs-0-8rem me-5"}>
+          <Grid size={6} className={"d-row-right"}>
+            <Div className={"fs-0-8rem fw-500 dark me-5"}>
               ₩
             </Div>
-            <Div className={"fs-1-0rem fw-500 dark"}>
-                {numeral(OBJECT?.product_price).format("0,0")}
+            <Div className={"fs-1-2rem fw-500 light-black"}>
+              {numeral(OBJECT?.product_price).format("0,0")}
             </Div>
           </Grid>
         </Grid>
@@ -164,13 +160,12 @@ export const ProductDetail = () => {
     const filter1Section = (i: number) => (
       <Card className={"px-10 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={6} className={"d-row-right"}>
             <Input
               label={"총 금액"}
               value={numeral(orderPrice).format("0,0")}
               readOnly={true}
               error={orderPrice < 0}
-              className={"w-90p"}
               startadornment={
                 <Icons
                   key={"Won"}
@@ -186,7 +181,6 @@ export const ProductDetail = () => {
               value={orderCount}
               readOnly={true}
               error={orderCount < 0}
-              className={"w-90p"}
               endadornment={
                 <Div className={"d-center"}>
                   <Icons
@@ -225,10 +219,9 @@ export const ProductDetail = () => {
               }
             />
           </Grid>
-          <Br px={10} />
-          <Grid size={6} className={"d-right"}>
+          <Grid size={6} className={"d-row-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-grey"}
+              className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
                 flowSave("cart");
               }}
@@ -238,7 +231,7 @@ export const ProductDetail = () => {
           </Grid>
           <Grid size={6} className={"d-row-left"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave("buy");
               }}
@@ -263,7 +256,7 @@ export const ProductDetail = () => {
               목록으로
             </Div>
           </Grid>
-          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
+          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
               onClick={() => {
@@ -291,7 +284,7 @@ export const ProductDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
@@ -301,7 +294,7 @@ export const ProductDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filter1Section(0)}
           </Grid>
-          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Hr px={20} w={95} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filter2Section(0)}
           </Grid>

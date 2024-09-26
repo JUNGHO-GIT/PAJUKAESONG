@@ -7,7 +7,8 @@ import { axios } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
-import { Div, Select, Br, Input, TextArea, Btn, FileInput } from "@imports/ImportComponents";
+import { Div, Btn } from "@imports/ImportComponents";
+import { Select, Input, TextArea, FileInput } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -47,9 +48,6 @@ export const ContactSave = () => {
         },
       }
     )
-    axios.post(`${URL}${SUBFIX}/save`, {
-      OBJECT: OBJECT,
-    })
     .then((res: any) => {
       if (res.data.status === "success") {
         alert(res.data.msg);
@@ -73,33 +71,19 @@ export const ContactSave = () => {
   const saveNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         문의 하기
       </Div>
     );
     // 2. save
     const saveSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              required={true}
-              label={"작성일"}
-              className={"border-bottom-1"}
-              disabled={true}
-              value={dayFmt}
-            />
-          </Grid>
           <Grid size={12}>
             <Select
               variant={"standard"}
               label={"문의 유형"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.contact_category}
               inputRef={REFS?.[i]?.contact_category}
               error={ERRORS?.[i]?.contact_category}
@@ -110,9 +94,9 @@ export const ContactSave = () => {
                 }));
               }}
             >
-              {["contact", "personal"].map((item: any, idx: number) => (
+              {["franchise", "personal"].map((item, idx) => (
                 <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                  {item === "contact" && "가맹 문의"}
+                  {item === "franchise" && "가맹 문의"}
                   {item === "personal" && "1:1 문의"}
                 </MenuItem>
               ))}
@@ -123,7 +107,6 @@ export const ContactSave = () => {
               variant={"standard"}
               label={"이름"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.contact_name}
               inputRef={REFS?.[i]?.contact_name}
               error={ERRORS?.[i]?.contact_name}
@@ -140,7 +123,6 @@ export const ContactSave = () => {
               variant={"standard"}
               label={"이메일"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.contact_email}
               inputRef={REFS?.[i]?.contact_email}
               error={ERRORS?.[i]?.contact_email}
@@ -167,7 +149,6 @@ export const ContactSave = () => {
               variant={"standard"}
               label={"전화번호"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.contact_phone}
               inputRef={REFS?.[i]?.contact_phone}
               error={ERRORS?.[i]?.contact_phone}
@@ -193,9 +174,17 @@ export const ContactSave = () => {
           <Grid size={12}>
             <Input
               variant={"standard"}
+              required={true}
+              readOnly={true}
+              label={"작성일"}
+              value={dayFmt}
+            />
+          </Grid>
+          <Grid size={12}>
+            <Input
+              variant={"standard"}
               label={"문의 제목"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.contact_title}
               inputRef={REFS?.[i]?.contact_title}
               error={ERRORS?.[i]?.contact_title}
@@ -250,7 +239,17 @@ export const ContactSave = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={6} className={"d-row-right"}>
+            <Btn
+              className={"w-100p fs-1-0rem bg-grey"}
+              onClick={() => {
+                navigate(`/contact/find`);
+              }}
+            >
+              목록으로
+            </Btn>
+          </Grid>
+          <Grid size={6} className={"d-row-left"}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
@@ -266,7 +265,7 @@ export const ContactSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

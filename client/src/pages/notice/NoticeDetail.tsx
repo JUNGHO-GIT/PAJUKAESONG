@@ -1,11 +1,12 @@
 // NoticeDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Hr, Icons, TextArea, Img } from "@imports/ImportComponents";
+import { Div, Hr, Icons, Img } from "@imports/ImportComponents";
+import { TextArea } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -73,47 +74,40 @@ export const NoticeDetail = () => {
   const detailNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         공지사항 상세
       </Div>
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-8rem fw-700"}>
+            <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT?.notice_title}
             </Div>
           </Grid>
-          <Hr px={10} h={1} className={"bg-burgundy"} />
-          <Grid size={12}>
+          <Hr px={10} className={"bg-burgundy"} />
+          <Grid size={12} className={"d-center"}>
             <Img
+              max={200}
+              hover={false}
+              shadow={true}
               group={"notice"}
-              key={OBJECT?.notice_images?.[0]}
               src={OBJECT?.notice_images?.[0]}
-              className={"w-105p h-105p object-cover drop-shadow"}
+              className={"w-100p h-auto"}
             />
           </Grid>
           <Grid size={12} className={"d-center"}>
             <TextArea
               label={""}
-              variant={"standard"}
               required={true}
               readOnly={true}
               value={OBJECT?.notice_content}
+              inputclass={"h-35vh"}
+              className={"border-1 radius p-30"}
             />
           </Grid>
-        </Grid>
-      </Card>
-    );
-    // 3. filter
-    const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
-        <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-left"}>
             <Icons
               key={"Calendar"}
@@ -134,6 +128,13 @@ export const NoticeDetail = () => {
               {OBJECT?.notice_view}
             </Div>
           </Grid>
+        </Grid>
+      </Card>
+    );
+    // 3. filter
+    const filterSection = (i: number) => (
+      <Card className={"px-20 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy"}
@@ -172,14 +173,14 @@ export const NoticeDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : detailSection(0)}
           </Grid>
-          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Hr px={20} w={95} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

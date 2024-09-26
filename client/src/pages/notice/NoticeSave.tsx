@@ -7,7 +7,8 @@ import { axios } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Br, Input, TextArea, Btn, FileInput } from "@imports/ImportComponents";
+import { Div, Btn } from "@imports/ImportComponents";
+import { Input, TextArea, FileInput } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -70,33 +71,28 @@ export const NoticeSave = () => {
   const saveNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         공지사항 저장
       </Div>
     );
     // 2. save
     const saveSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <Input
               variant={"standard"}
               required={true}
+              readOnly={true}
               label={"작성일"}
-              className={"border-bottom-1"}
-              disabled={true}
               value={dayFmt}
             />
           </Grid>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <Input
               variant={"standard"}
               label={"공지사항 제목"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.notice_title}
               inputRef={REFS?.[i]?.notice_title}
               error={ERRORS?.[i]?.notice_title}
@@ -108,14 +104,15 @@ export const NoticeSave = () => {
               }}
             />
           </Grid>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <TextArea
-              required={true}
               label={"공지사항 내용"}
-              inputclass={"h-35vh"}
+              variant={"standard"}
+              required={true}
               value={OBJECT?.notice_content}
               itemRef={REFS?.[i]?.notice_content}
               error={ERRORS?.[i]?.notice_content}
+              inputclass={"h-35vh border-none"}
               onChange={(e: any) => {
                 setOBJECT((prev: any) => ({
                   ...prev,
@@ -153,7 +150,7 @@ export const NoticeSave = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-light black"}
+              className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
                 navigate(`/notice/list`);
               }}
@@ -163,7 +160,7 @@ export const NoticeSave = () => {
           </Grid>
           <Grid size={6} className={"d-row-left"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
                 flowSave()
               }}
@@ -177,7 +174,7 @@ export const NoticeSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

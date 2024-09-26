@@ -11,21 +11,21 @@ export const Select = (props: any) => (
     variant={props?.variant || "outlined"}
     size={props?.size || "small"}
     fullWidth={props?.fullWidth || true}
-    className={props?.className || ""}
+    className={(props?.variant === "standard" ? `${props?.className || ""} border-bottom-1` : props?.className || "")}
     inputRef={props?.inputRef || null}
     error={props?.error || false}
     slotProps={{
       ...props?.slotProps,
       input: {
+        readOnly: (
+          props?.readOnly || false
+        ),
         className: (
           props?.inputclass?.includes("fs-") ? (
             `text-left ${props?.inputclass || ""}`
           ) : (
             `fs-1-0rem text-left ${props?.inputclass || ""}`
           )
-        ),
-        readOnly: (
-          props?.readOnly || false
         ),
         startAdornment: (
           props?.startadornment ? (

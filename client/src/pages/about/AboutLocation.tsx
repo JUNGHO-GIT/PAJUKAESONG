@@ -1,113 +1,33 @@
 // AboutLocation.tsx
 
-import { useEffect } from "@imports/ImportReacts";
 import { Div } from "@imports/ImportComponents";
+import { Location } from "@imports/ImportContainers";
 import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutLocation = () => {
 
-  // 1. common -------------------------------------------------------------------------------------
-  const NAVER_MAPS_CLIENT_ID = process.env.REACT_APP_NAVER_MAPS_CLIENT_ID;
-  const srcPre = "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=";
-  const scriptSrc = `${srcPre}${NAVER_MAPS_CLIENT_ID}`;
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    const initMap = () => {
-      if (window.naver && window.naver.maps) {
-        const naverMaps = window.naver.maps;
-        const location = new naverMaps.LatLng(37.864200, 126.780585);
-        const mapOptions = {
-          center: location,
-          zoom: 17,
-          zoomControl: true,
-          zoomControlOptions: {
-            position: naverMaps.Position.RIGHT_CENTER,
-          },
-          mapTypeControl: true,
-          mapTypeControlOptions: {
-            style: naverMaps.MapTypeControlStyle.BUTTON,
-            position: naverMaps.Position.TOP_RIGHT,
-          },
-        };
-        const newMap = new naverMaps.Map("map", mapOptions);
-        const marker = new naverMaps.Marker({
-          position: location,
-          map: newMap,
-        });
-        const infoWindow = new naverMaps.InfoWindow({
-          pixelOffset: new naverMaps.Point(0, 0),
-          anchorSize: new naverMaps.Size(0, 0),
-          backgroundColor: "#ffffff",
-          borderColor: "#333333",
-          borderWidth: 0.5,
-          anchorSkew: false,
-          disableAnchor: false,
-          anchorColor: "#ffffff",
-          content: `
-          <div style="padding: 10px 10px 20px 10px;">
-            <p style="font-size: 1.2rem; font-weight: 700;">파주개성면옥</p>
-            <p style="font-size: 0.8rem;" font-weight: 500;>⊙ 경기 파주시 문산읍 방촌로 1675-34</p>
-            <p style="font-size: 1.0rem;" font-weight: 500;>☎ 031-952-8083</p>
-          </div>
-          `,
-        });
-        naverMaps.Event.addListener(marker, "click", function () {
-          if (infoWindow.getMap()) {
-            infoWindow.close();
-          }
-          else {
-            infoWindow.open(newMap, marker);
-          }
-        });
-
-        infoWindow.open(newMap, marker);
-      }
-    };
-
-    const script = document.createElement("script");
-    script.src = scriptSrc;
-    script.async = true;
-    script.onload = initMap;
-    document.head.appendChild(script);
-
-    return () => {
-      const script = document.querySelector(`script[src="${scriptSrc}"]`);
-      if (script) {
-        script.remove();
-      }
-    };
-  }, []);
-
   // 7. locationNode -------------------------------------------------------------------------------
   const locationNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         오시는길
       </Div>
     );
     // 2. location
     const locationSection = (i: number) => (
-      <Card className={"border-1 radius shadow fadeIn p-0"} key={i}>
-        <Div
-          key={"location"}
-          id={"map"}
-          style={{
-            width: "100%",
-            height: "60vh",
-          }}
+      <Card className={"border-1 shadow-3 radius fadeIn p-0"} key={i}>
+        <Location
+          width={"100%"}
+          height={"60vh"}
         />
       </Card>
     );
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

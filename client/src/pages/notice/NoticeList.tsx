@@ -1,12 +1,13 @@
 // NoticeList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive, useCommonDate } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
-import { Div, Hr, Select, Btn } from "@imports/ImportComponents";
+import { Div, Hr, Btn } from "@imports/ImportComponents";
+import { Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -59,16 +60,13 @@ export const NoticeList = () => {
   const listNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         공지사항
       </Div>
     );
     // 2. list
     const listSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={2}>
             <Div className={"fs-0-8rem fw-500"}>
@@ -86,7 +84,7 @@ export const NoticeList = () => {
             </Div>
           </Grid>
         </Grid>
-        <Hr px={40} h={1} className={"bg-burgundy"} />
+        <Hr px={40} className={"bg-burgundy"} />
         {OBJECT?.map((item: any, index: number) => (
           <Grid container spacing={2} columns={12} key={index}>
             <Grid size={2}>
@@ -96,6 +94,7 @@ export const NoticeList = () => {
             </Grid>
             <Grid size={6}>
               <Div
+                max={15}
                 className={"fs-1-0rem pointer-burgundy"}
                 onClick={() => {
                   navigate('/notice/detail', {
@@ -105,11 +104,7 @@ export const NoticeList = () => {
                   });
                 }}
               >
-                {item?.notice_title.length > 15 ? (
-                  `${item?.notice_title.substring(0, 15)}...`
-                ) : (
-                  item?.notice_title
-                )}
+                {item?.notice_title}
               </Div>
             </Grid>
             <Grid size={4}>
@@ -117,7 +112,7 @@ export const NoticeList = () => {
                 {getDayFmt(item?.notice_regDt)}
               </Div>
             </Grid>
-            <Hr px={1} h={1} className={"bg-light-grey mb-20"} />
+            <Hr px={1} className={"bg-light-grey mb-20"} />
           </Grid>
         ))}
       </Card>
@@ -189,7 +184,7 @@ export const NoticeList = () => {
                 navigate("/notice/save");
               }}
             >
-              {"등록"}
+              등록
             </Btn>
           </Grid>
         </Grid>
@@ -198,7 +193,7 @@ export const NoticeList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
@@ -207,7 +202,7 @@ export const NoticeList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={10} h={1} w={90} className={"bg-grey"} />
+          <Hr px={20} w={95} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

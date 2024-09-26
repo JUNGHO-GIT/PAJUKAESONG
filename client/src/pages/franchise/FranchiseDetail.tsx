@@ -1,7 +1,7 @@
 // FranchiseDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
@@ -18,9 +18,6 @@ export const FranchiseDetail = () => {
   const {
     getDayFmt,
   } = useCommonDate();
-  const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -80,26 +77,25 @@ export const FranchiseDetail = () => {
   const detailNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         가맹점 상세
       </Div>
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <Img
+              max={450}
+              hover={false}
+              shadow={true}
               group={"franchise"}
-              key={OBJECT?.franchise_images?.[0]}
               src={OBJECT?.franchise_images?.[0]}
-              className={"w-105p h-105p object-cover drop-shadow"}
+              className={"w-100p h-auto"}
             />
           </Grid>
-          <Hr px={30} h={1} className={"bg-burgundy"} />
+          <Hr px={10} className={"bg-burgundy"} />
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT?.franchise_name}
@@ -190,14 +186,14 @@ export const FranchiseDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : detailSection(0)}
           </Grid>
-          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Hr px={20} w={95} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

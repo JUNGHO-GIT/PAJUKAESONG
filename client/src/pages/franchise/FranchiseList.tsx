@@ -1,12 +1,13 @@
 // FranchiseList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
-import { Div, Img, Hr, Br, Select, Btn } from "@imports/ImportComponents";
+import { Div, Img, Hr, Br, Btn } from "@imports/ImportComponents";
+import { Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -16,9 +17,6 @@ export const FranchiseList = () => {
   const {
     URL, SUBFIX, navigate, isAdmin, location_category
   } = useCommonValue();
-  const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -60,10 +58,7 @@ export const FranchiseList = () => {
   const listNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         가맹 지점
       </Div>
     );
@@ -72,12 +67,14 @@ export const FranchiseList = () => {
       <Grid container spacing={2} columns={12} key={i}>
         {OBJECT?.map((item: any, index: number) => (
           <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 4 }} key={index}>
-            <Card className={"border-1 radius shadow p-20 fadeIn"}>
+            <Card className={"border-1 shadow-1 radius p-20 fadeIn"}>
               <Img
+                max={300}
+                hover={true}
+                shadow={true}
                 group={"franchise"}
-                key={item?.franchise_images?.[0]}
                 src={item?.franchise_images?.[0]}
-                className={"w-105p h-105p object-cover drop-shadow"}
+                className={"w-100p h-100p"}
                 onClick={() => {
                   navigate("/franchise/detail", {
                     state: {
@@ -165,7 +162,7 @@ export const FranchiseList = () => {
                 navigate("/franchise/save");
               }}
             >
-              {"등록"}
+              등록
             </Btn>
           </Grid>
         </Grid>
@@ -174,7 +171,7 @@ export const FranchiseList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
@@ -183,7 +180,7 @@ export const FranchiseList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Hr px={20} w={95} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>

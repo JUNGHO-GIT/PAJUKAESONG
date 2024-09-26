@@ -5,6 +5,7 @@ import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHoo
 import { Swiper, SwiperSlide, Autoplay, axios } from "@imports/ImportLibs";
 import { Pagination } from "@imports/ImportLibs";
 import { Menu, Notice } from "@imports/ImportSchemas";
+import { Location } from "@imports/ImportContainers";
 import { Div, Img, Br, Hr } from "@imports/ImportComponents";
 import { Grid, Card, Paper } from "@imports/ImportMuis";
 
@@ -23,9 +24,6 @@ export const Main = () => {
   } = useResponsive();
 
   // 1. common -------------------------------------------------------------------------------------
-  const NAVER_MAPS_CLIENT_ID = process.env.REACT_APP_NAVER_MAPS_CLIENT_ID;
-  const srcPre = "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=";
-  const scriptSrc = `${srcPre}${NAVER_MAPS_CLIENT_ID}`;
   const mainArray = ["main1.webp", "main2.webp", "main3.webp", "main4.webp", "main5.webp"];
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -36,72 +34,6 @@ export const Main = () => {
     sort: "asc",
     page: 0,
   });
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    const initMap = () => {
-      if (window.naver && window.naver.maps) {
-        const naverMaps = window.naver.maps;
-        const location = new naverMaps.LatLng(37.864200, 126.780585);
-        const mapOptions = {
-          center: location,
-          zoom: 17,
-          zoomControl: true,
-          zoomControlOptions: {
-            position: naverMaps.Position.RIGHT_CENTER,
-          },
-          mapTypeControl: true,
-          mapTypeControlOptions: {
-            style: naverMaps.MapTypeControlStyle.BUTTON,
-            position: naverMaps.Position.TOP_RIGHT,
-          },
-        };
-        const newMap = new naverMaps.Map("map", mapOptions);
-        const marker = new naverMaps.Marker({
-          position: location,
-          map: newMap,
-        });
-        const infoWindow = new naverMaps.InfoWindow({
-          pixelOffset: new naverMaps.Point(0, -10),
-          anchorSize: new naverMaps.Size(0, -5),
-          backgroundColor: "#ffffff",
-          borderColor: "#333333",
-          borderWidth: 0.5,
-          anchorSkew: false,
-          disableAnchor: false,
-          anchorColor: "#ffffff",
-          content: `
-          <div style="padding: 10px 10px 20px 10px;">
-            <p style="font-size: 1.2rem; font-weight: 700;">파주개성면옥</p>
-            <p style="font-size: 0.8rem;" font-weight: 500;>⊙ 경기 파주시 문산읍 방촌로 1675-34</p>
-            <p style="font-size: 1.0rem;" font-weight: 500;>☎ 031-952-8083</p>
-          </div>
-          `,
-        });
-        naverMaps.Event.addListener(marker, "click", function () {
-          if (infoWindow.getMap()) {
-            infoWindow.close();
-          }
-          else {
-            infoWindow.open(newMap, marker);
-          }
-        });
-        infoWindow.open(newMap, marker);
-      }
-    };
-    const script = document.createElement("script");
-    script.src = scriptSrc;
-    script.async = true;
-    script.onload = initMap;
-    document.head.appendChild(script);
-
-    return () => {
-      const script = document.querySelector(`script[src="${scriptSrc}"]`);
-      if (script) {
-        script.remove();
-      }
-    };
-  }, []);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -134,7 +66,7 @@ export const Main = () => {
     const mainSection = (i: number) => (
       <Card className={"bg-white border-bottom-1 p-0 d-center fadeIn"} key={i}>
         <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center p-0"}>
+          <Grid size={12} className={"d-center p-0"}>
             <Swiper
               spaceBetween={0}
               slidesPerView={1}
@@ -150,12 +82,14 @@ export const Main = () => {
               ]}
             >
               {mainArray.map((item: any, index: number) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide className={"d-center"} key={index}>
                   <Img
+                    max={600}
+                    hover={false}
+                    shadow={false}
                     group={"main"}
-                    key={item}
                     src={item}
-                    className={"w-100p h-60vh object-cover p-0"}
+                    className={"w-100p h-auto radius-none"}
                   />
                 </SwiperSlide>
               ))}
@@ -167,14 +101,14 @@ export const Main = () => {
     // 3. menu
     const menuSection = (i: number) => (
       <Card className={"bg-white border-1 p-20 d-center fadeIn"} key={i}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               메뉴 소개
             </Div>
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            <Div className={`border-1 radius-50 p-10 me-2vw hover ${category === "main" ? "bg-burgundy" : ""}`}>
+          <Grid size={{ xs: 12, sm: 10, md: 8, lg: 6, xl: 4 }} className={"d-row-center"}>
+            <Div className={`${category === "main" ? "bg-burgundy" : ""} border-1 radius-50 p-10 me-1vw hover`}>
               <Div
                 className={`fs-0-8rem fw-600 ${category === "main" ? "white" : "black"}`}
                 onClick={() => {
@@ -184,7 +118,7 @@ export const Main = () => {
                 메인 메뉴
               </Div>
             </Div>
-            <Div className={`border-1 radius-50 p-10 ms-2vw hover ${category === "side" ? "bg-burgundy" : ""}`}>
+            <Div className={`${category === "side" ? "bg-burgundy" : ""} border-1 radius-50 p-10 ms-1vw hover`}>
               <Div
                 className={`fs-0-8rem fw-600 ${category === "side" ? "white" : "black"}`}
                 onClick={() => {
@@ -198,14 +132,15 @@ export const Main = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Swiper
               spaceBetween={20}
-              slidesPerView={isXs ? 2 : isSm ? 2 : isMd ? 3 : isLg ? 4 : 4}
+              slidesPerView={isXs ? 2 : isSm ? 2 : isMd ? 3 : isLg ? 3 : 3}
               centeredSlides={false}
               loop={true}
+              navigation={false}
+              className={"p-10"}
               autoplay={{
                 delay: 2000,
                 disableOnInteraction: false,
               }}
-              navigation={false}
               pagination={{
                 clickable: true,
                 enabled: true,
@@ -217,27 +152,33 @@ export const Main = () => {
               ]}
             >
               {OBJECT_MENU?.map((item: any, index: number) => (
-                <SwiperSlide className={"d-center"} key={index}>
-                  <Card className={"border-1 p-20 radius shadow fadeIn"}>
-                    <Img
-                      key={item?.menu_images?.[0]}
-                      src={item?.menu_images?.[0]}
-                      group={"menu"}
-                      className={"w-105p h-105p object-cover drop-shadow"}
-                      onClick={() => {
-                        navigate("/menu/detail", {
-                          state: {
-                            _id: item?._id
-                          }
-                        });
-                      }}
-                    />
-                    <Hr px={50} className={"bg-light-grey"} />
-                    <Div className={"fs-1-2rem fw-600"}>
-                      {item?.menu_name}
-                    </Div>
-                  </Card>
-                </SwiperSlide>
+                item.menu_images.length > 0 && (
+                  <SwiperSlide className={"d-center"} key={index}>
+                    <Card className={"border-1 shadow-2 p-10 radius fadeIn"}>
+                      <Img
+                        max={220}
+                        hover={true}
+                        shadow={true}
+                        group={"menu"}
+                        src={item?.menu_images?.[0]}
+                        className={"w-100p h-100p"}
+                        onClick={() => {
+                          navigate("/menu/detail", {
+                            state: {
+                              _id: item?._id
+                            }
+                          });
+                        }}
+                      />
+                      <Hr px={30} className={"bg-burgundy"} />
+                      <Div className={"d-column-center"}>
+                        <Div className={"fs-1-2rem fw-600"}>
+                          {item?.menu_name}
+                        </Div>
+                      </Div>
+                    </Card>
+                  </SwiperSlide>
+                )
               ))}
             </Swiper>
           </Grid>
@@ -250,7 +191,7 @@ export const Main = () => {
     // 4. notice
     const noticeSection = (i: number) => (
       <Card className={"bg-ivory border-1 p-20 d-center fadeIn"} key={i}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               공지사항
@@ -262,15 +203,16 @@ export const Main = () => {
               slidesPerView={2}
               centeredSlides={false}
               loop={true}
-              autoplay={{
-                delay: 4000,
-                disableOnInteraction: false,
-              }}
               navigation={false}
+              className={"p-10"}
               pagination={{
                 clickable: true,
                 enabled: true,
                 el: '.notice-pagination',
+              }}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
               }}
               modules={[
                 Pagination,
@@ -279,12 +221,14 @@ export const Main = () => {
             >
               {OBJECT_NOTICE?.map((item: any, index: number) => (
                 <SwiperSlide className={"d-center"} key={index}>
-                  <Card className={"border-1 p-20 radius shadow fadeIn"}>
+                  <Card className={"border-1 shadow-2 p-20 radius fadeIn"}>
                     <Img
-                      key={"logo1.webp"}
-                      src={"logo1.webp"}
+                      max={180}
+                      hover={true}
+                      shadow={false}
                       group={"main"}
-                      className={"w-105p h-105p object-cover drop-shadow"}
+                      src={"logo1.webp"}
+                      className={"w-100p h-100p"}
                       onClick={() => {
                         navigate("/notice/detail", {
                           state: {
@@ -293,13 +237,15 @@ export const Main = () => {
                         });
                       }}
                     />
-                    <Hr px={50} className={"bg-light-grey"} />
-                    <Div className={"d-column-left fs-1-0rem fw-600"} max={10}>
-                      {item?.notice_title}
-                    </Div>
-                    <Br px={5} />
-                    <Div className={"d-column-left fs-0-8rem fw-500 grey"}>
-                      {getDayFmt(item?.notice_regDt)}
+                    <Hr px={30} className={"bg-light-grey"} />
+                    <Div className={"d-column-left"}>
+                      <Div className={"fs-1-2rem fw-600"} max={10}>
+                        {item?.notice_title}
+                      </Div>
+                      <Br px={5} />
+                      <Div className={"fs-0-8rem fw-500 grey"}>
+                        {getDayFmt(item?.notice_regDt)}
+                      </Div>
                     </Div>
                   </Card>
                 </SwiperSlide>
@@ -315,21 +261,17 @@ export const Main = () => {
     // 5. location
     const locationSection = (i: number) => (
       <Card className={"bg-white border-1 p-20 d-center fadeIn"} key={i}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               오시는 길
             </Div>
           </Grid>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            <Card className={"border-1 radius shadow fadeIn p-0"}>
-              <Div
-                key={"location"}
-                id={"map"}
-                style={{
-                  width: "100%",
-                  height: "50vh",
-                }}
+            <Card className={"border-1 shadow-3 radius fadeIn p-0"}>
+              <Location
+                width={"100%"}
+                height={"60vh"}
               />
             </Card>
           </Grid>
@@ -339,7 +281,7 @@ export const Main = () => {
     // 7-10. return
     return (
       <Paper className={"content-wrapper d-center p-0"}>
-        <Grid container spacing={0} columns={12}>
+        <Grid container spacing={0} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center p-0"}>
             {mainSection(0)}
           </Grid>

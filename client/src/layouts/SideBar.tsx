@@ -211,15 +211,15 @@ export const SideBar = (
           <Grid size={12} className={"d-center"}>
             {logoSection()}
           </Grid>
-          <Hr px={1} h={1} className={"bg-light-grey"} />
+          <Hr px={1} className={"bg-light-grey"} />
           <Grid size={12}>
             {mainSection()}
           </Grid>
-          <Hr px={10} h={1} className={"bg-light-grey"} />
+          <Hr px={10} className={"bg-light-grey"} />
           <Grid size={12}>
             {textSection1()}
           </Grid>
-          <Hr px={10} h={1} className={"bg-light-grey"} />
+          <Hr px={10} className={"bg-light-grey"} />
           <Grid size={12}>
             {textSection2()}
           </Grid>

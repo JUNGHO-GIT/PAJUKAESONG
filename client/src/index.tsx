@@ -3,6 +3,7 @@
 import "./index.css";
 import "swiper/css";
 import 'swiper/css/pagination';
+import '@styles/Components.css';
 import "@styles/Core.css";
 import "@styles/Mui.css";
 import "@styles/Jstyle.css";

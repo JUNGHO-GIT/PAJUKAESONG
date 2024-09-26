@@ -7,7 +7,8 @@ import { axios } from "@imports/ImportLibs";
 import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
-import { Div, Br, Input, FileInput, Btn, Icons } from "@imports/ImportComponents";
+import { Div, Btn } from "@imports/ImportComponents";
+import { Input, FileInput } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -94,23 +95,19 @@ export const FranchiseSave = () => {
   const saveNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div
-        key={"title"}
-        className={"fs-2-0rem fw-700 fadeIn"}
-      >
+      <Div className={"fs-2-0rem fw-700 fadeIn"}>
         가맹점 등록
       </Div>
     );
     // 2. save
     const saveSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
               variant={"standard"}
               label={"가맹점 이름"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.franchise_name}
               inputRef={REFS?.[i]?.franchise_name}
               error={ERRORS?.[i]?.franchise_name}
@@ -128,7 +125,7 @@ export const FranchiseSave = () => {
               label={"가맹점 주소"}
               required={true}
               readOnly={true}
-              className={"border-bottom-1 pointer"}
+              className={"pointer"}
               value={OBJECT?.franchise_address_main}
               inputRef={REFS?.[i]?.franchise_address_main}
               error={ERRORS?.[i]?.franchise_address_main}
@@ -148,7 +145,6 @@ export const FranchiseSave = () => {
               variant={"standard"}
               label={"상세주소"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.franchise_address_detail}
               inputRef={REFS?.[i]?.franchise_address_detail}
               error={ERRORS?.[i]?.franchise_address_detail}
@@ -165,7 +161,6 @@ export const FranchiseSave = () => {
               variant={"standard"}
               label={"가맹점 전화번호"}
               required={true}
-              className={"border-bottom-1"}
               value={OBJECT?.franchise_phone}
               inputRef={REFS?.[i]?.franchise_phone}
               error={ERRORS?.[i]?.franchise_phone}
@@ -192,10 +187,8 @@ export const FranchiseSave = () => {
             <Input
               variant={"standard"}
               required={true}
-              label={"작성일"}
-              shrink={"shrink"}
-              className={"border-bottom-1"}
               readOnly={true}
+              label={"작성일"}
               value={dayFmt}
             />
           </Grid>
@@ -208,6 +201,8 @@ export const FranchiseSave = () => {
               existing={OBJECT?.franchise_images}
               group={"franchise"}
               value={fileList}
+              inputRef={REFS?.[i]?.franchise_images}
+              error={ERRORS?.[i]?.franchise_images}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}
@@ -228,7 +223,7 @@ export const FranchiseSave = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-light black"}
+              className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
                 navigate(`/franchise/list`);
               }}
@@ -238,9 +233,9 @@ export const FranchiseSave = () => {
           </Grid>
           <Grid size={6} className={"d-row-left"}>
             <Btn
-              className={"w-70p fs-1-0rem bg-burgundy"}
+              className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
-                flowSave();
+                flowSave()
               }}
             >
               저장하기
@@ -252,7 +247,7 @@ export const FranchiseSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }} columns={12}>
+        <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>

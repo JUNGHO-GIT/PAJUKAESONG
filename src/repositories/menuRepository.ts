@@ -46,10 +46,10 @@ export const list = async (
       }
     },
     {
-      $skip: (page_param) * 10
+      $skip: (page_param) * 6
     },
     {
-      $limit: 10
+      $limit: 6
     }
   ]);
 
