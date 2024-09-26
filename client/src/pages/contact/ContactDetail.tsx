@@ -113,7 +113,7 @@ export const ContactDetail = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-left"}>
+          <Grid size={6} className={"d-column-left"}>
             <Icons
               key={"Calendar"}
               name={"Calendar"}
@@ -123,7 +123,7 @@ export const ContactDetail = () => {
               {getDayFmt(OBJECT?.contact_regDt)}
             </Div>
           </Grid>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={6} className={"d-row-right"}>
             <Icons
               key={"Person"}
               name={"Person"}
@@ -133,7 +133,7 @@ export const ContactDetail = () => {
               {OBJECT?.contact_name}
             </Div>
           </Grid>
-          <Grid size={6} className={"d-left"}>
+          <Grid size={6} className={"d-column-left"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
               onClick={() => {
@@ -148,7 +148,7 @@ export const ContactDetail = () => {
               목록으로
             </Div>
           </Grid>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={6} className={"d-row-right"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
               onClick={() => {

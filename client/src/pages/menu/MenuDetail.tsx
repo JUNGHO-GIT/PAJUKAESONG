@@ -122,12 +122,12 @@ export const MenuDetail = () => {
               {OBJECT?.menu_name}
             </Div>
           </Grid>
-          <Grid size={12} className={"d-left"}>
+          <Grid size={12} className={"d-row-left"}>
             <Div className={"fs-1-2rem fw-500 dark"}>
               {OBJECT?.menu_description}
             </Div>
           </Grid>
-          <Grid size={12} className={"d-left"}>
+          <Grid size={12} className={"d-row-left"}>
             <Div className={"fs-0-8rem me-5"}>
               ₩
             </Div>
@@ -142,7 +142,7 @@ export const MenuDetail = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
+          <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
               onClick={() => {
@@ -156,7 +156,7 @@ export const MenuDetail = () => {
               목록으로
             </Div>
           </Grid>
-          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
+          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
               onClick={() => {

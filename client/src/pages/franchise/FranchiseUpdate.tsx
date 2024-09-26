@@ -250,7 +250,7 @@ export const FranchiseUpdate = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={6} className={"d-row-right"}>
             <Btn
               className={"w-70p fs-1-0rem bg-light black"}
               onClick={() => {
@@ -260,7 +260,7 @@ export const FranchiseUpdate = () => {
               목록으로
             </Btn>
           </Grid>
-          <Grid size={6} className={"d-left"}>
+          <Grid size={6} className={"d-column-left"}>
             <Btn
               className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {

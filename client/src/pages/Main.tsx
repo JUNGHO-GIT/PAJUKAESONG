@@ -314,11 +314,11 @@ export const Main = () => {
                       }}
                     />
                     <Hr px={50} className={"bg-light-grey"} />
-                    <Div className={"d-left fs-1-0rem fw-600"} max={10}>
+                    <Div className={"d-column-left fs-1-0rem fw-600"} max={10}>
                       {item?.notice_title}
                     </Div>
                     <Br px={5} />
-                    <Div className={"d-left fs-0-8rem fw-500 grey"}>
+                    <Div className={"d-column-left fs-0-8rem fw-500 grey"}>
                       {getDayFmt(item?.notice_regDt)}
                     </Div>
                   </Card>

@@ -146,7 +146,7 @@ export const OrderUpdate = () => {
           {OBJECT?.order_product?.map((item: any, index: number) => (
             item.product_name && (
               <Grid container spacing={2} columns={12} key={index}>
-                <Grid size={3} className={"d-left"}>
+                <Grid size={3} className={"d-column-left"}>
                   <Img
                     key={item?.product_images?.[0]}
                     src={item?.product_images?.[0]}
@@ -156,12 +156,12 @@ export const OrderUpdate = () => {
                 </Grid>
                 <Grid size={5}>
                   <Grid container spacing={2} columns={12}>
-                    <Grid size={12} className={"d-left"}>
+                    <Grid size={12} className={"d-column-left"}>
                       <Div className={"fs-1-4rem fw-600"}>
                         {item?.product_name}
                       </Div>
                     </Grid>
-                    <Grid size={12} className={"d-left"}>
+                    <Grid size={12} className={"d-column-left"}>
                       <Div className={"fs-0-8rem me-5"}>
                         ₩
                       </Div>
@@ -417,7 +417,7 @@ export const OrderUpdate = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={6} className={"d-row-right"}>
             <Btn
               className={"w-70p fs-1-0rem bg-grey"}
               onClick={() => {
@@ -427,7 +427,7 @@ export const OrderUpdate = () => {
               더 찾기
             </Btn>
           </Grid>
-          <Grid size={6} className={"d-left"}>
+          <Grid size={6} className={"d-column-left"}>
             <Btn
               className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {

@@ -137,7 +137,7 @@ export const NoticeDetail = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-left"}>
+          <Grid size={6} className={"d-column-left"}>
             <Icons
               key={"Calendar"}
               name={"Calendar"}
@@ -147,7 +147,7 @@ export const NoticeDetail = () => {
               {getDayFmt(OBJECT?.notice_regDt)}
             </Div>
           </Grid>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={6} className={"d-row-right"}>
             <Icons
               key={"View"}
               name={"View"}
@@ -157,7 +157,7 @@ export const NoticeDetail = () => {
               {OBJECT?.notice_view}
             </Div>
           </Grid>
-          <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
+          <Grid size={isAdmin ? 6 : 12} className={"d-column-left"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
               onClick={() => {
@@ -167,7 +167,7 @@ export const NoticeDetail = () => {
               목록으로
             </Div>
           </Grid>
-          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
+          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
               onClick={() => {

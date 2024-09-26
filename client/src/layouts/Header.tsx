@@ -190,14 +190,14 @@ export const Header = () => {
         <Grid container spacing={2}>
           <Grid
             size={{ xs: 2, sm: 0, md: 0 }}
-            className={`${isXs ? "d-left" : "d-none"}`}
+            className={`${isXs ? "d-column-left" : "d-none"}`}
           >
             {sidebarSection()}
             {toggleSection()}
           </Grid>
           <Grid
             size={{ xs: 10, sm: 12, md: 4 }}
-            className={`${isXs ? "d-left" : "d-center"}`}
+            className={`${isXs ? "d-column-left" : "d-center"}`}
           >
             {logoSection()}
           </Grid>

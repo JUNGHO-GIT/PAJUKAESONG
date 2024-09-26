@@ -10911,128 +10911,8 @@
 .z-10000 {z-index: 10000 !important;}
 
 /** 9-1. display **********************************************************************************/
-.text-center {
-  text-align: center !important;
-}
-.text-left {
-  text-align: left !important;
-}
-.text-right {
-  text-align: right !important;
-}
-.align-center {
-  display: flex !important;
-  align-items: center !important;
-}
-.align-left {
-  display: flex !important;
-  align-items: flex-start !important;
-}
-.align-right {
-  display: flex !important;
-  align-items: flex-end !important;
-}
-.justify-center {
-  display: flex !important;
-  justify-content: center !important;
-}
-.justify-left {
-  display: flex !important;
-  justify-content: flex-start !important;
-}
-.justify-right {
-  display: flex !important;
-  justify-content: flex-end !important;
-}
 .d-none {
   display: none !important;
-}
-.d-flex {
-  display: flex !important;
-}
-.d-inline {
-  display: inline-block !important;
-}
-.d-inline-flex {
-  display: inline-flex !important;
-}
-.d-between {
-  display: flex !important;
-  justify-content: space-between !important;
-}
-.d-center {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  text-align: center !important;
-}
-.d-left {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: flex-start !important;
-  align-items: center !important;
-  text-align: center !important;
-}
-.d-right {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: flex-end !important;
-  align-items: center !important;
-  text-align: center !important;
-}
-.d-top {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  align-items: center !important;
-  text-align: center !important;
-}
-.d-bottom {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-end !important;
-  align-items: center !important;
-  text-align: center !important;
-}
-.d-row {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center !important;
-  text-align: center !important;
-}
-.d-row-top {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center !important;
-  align-items: flex-start !important;
-  text-align: center !important;
-}
-.d-row-bottom {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center !important;
-  align-items: flex-end !important;
-  text-align: center !important;
-}
-.d-column {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  text-align: center !important;
-}
-.d-column-left {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  align-items: center !important;
-  text-align: center !important;
-}
-.d-column-right {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-end !important;
-  align-items: center !important;
-  text-align: center !important;
 }
 .d-fill {
   display: -webkit-fill-available !important;
@@ -11046,6 +10926,46 @@
 .d-fit {
   width: fit-content !important;
 }
+.d-between {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+.d-center {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+.d-row-left {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  text-align: left !important;
+}
+.d-row-right {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  text-align: right !important;
+}
+.d-column-left {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+.d-column-right {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-end !important;
+  text-align: right !important;
+}
+
+/** 94. object **********************************************************************************/
 .object-cover {
   object-fit: cover !important;
 }

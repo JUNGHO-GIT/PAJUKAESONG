@@ -126,7 +126,7 @@ export const FranchiseDetail = () => {
             </Div>
           </Grid>
           <Grid size={12} className={"d-column"}>
-            <Div className={"d-left"}>
+            <Div className={"d-column-left"}>
               <Icons
                 key={"Location"}
                 name={"Location"}
@@ -140,7 +140,7 @@ export const FranchiseDetail = () => {
                 {`(${OBJECT?.franchise_address_detail})`}
               </Div>
             </Div>
-            <Div className={"d-left"}>
+            <Div className={"d-column-left"}>
               <Icons
                 key={"Phone"}
                 name={"Phone"}
@@ -151,7 +151,7 @@ export const FranchiseDetail = () => {
                 {OBJECT?.franchise_phone}
               </Div>
             </Div>
-            <Div className={"d-left"}>
+            <Div className={"d-column-left"}>
               <Icons
                 key={"Calendar"}
                 name={"Calendar"}
@@ -170,7 +170,7 @@ export const FranchiseDetail = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={isAdmin ? 6 : 12} className={"d-left"}>
+          <Grid size={isAdmin ? 6 : 12} className={"d-column-left"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
               onClick={() => {
@@ -184,7 +184,7 @@ export const FranchiseDetail = () => {
               목록으로
             </Div>
           </Grid>
-          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-right" : "d-none"}`}>
+          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
               onClick={() => {

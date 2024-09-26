@@ -117,7 +117,7 @@ export const OrderDetail = () => {
           {OBJECT?.order_product?.map((item: any, index: number) => (
             item.product_name && (
               <Grid container spacing={2} columns={12} key={index}>
-                <Grid size={3} className={"d-left"}>
+                <Grid size={3} className={"d-column-left"}>
                   <Img
                     key={item?.product_images?.[0]}
                     src={item?.product_images?.[0]}
@@ -127,12 +127,12 @@ export const OrderDetail = () => {
                 </Grid>
                 <Grid size={5}>
                   <Grid container spacing={2} columns={12}>
-                    <Grid size={12} className={"d-left"}>
+                    <Grid size={12} className={"d-column-left"}>
                       <Div className={"fs-1-4rem fw-600"}>
                         {item?.product_name}
                       </Div>
                     </Grid>
-                    <Grid size={12} className={"d-left"}>
+                    <Grid size={12} className={"d-column-left"}>
                       <Div className={"fs-0-8rem me-5"}>
                         ₩
                       </Div>
@@ -251,7 +251,7 @@ export const OrderDetail = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-left"}>
+          <Grid size={6} className={"d-column-left"}>
             <Icons
               key={"Calendar"}
               name={"Calendar"}
@@ -261,7 +261,7 @@ export const OrderDetail = () => {
               {getDayFmt(OBJECT?.order_regDt)}
             </Div>
           </Grid>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={6} className={"d-row-right"}>
             <Icons
               key={"Person"}
               name={"Person"}
@@ -271,7 +271,7 @@ export const OrderDetail = () => {
               {OBJECT?.order_name}
             </Div>
           </Grid>
-          <Grid size={6} className={"d-left"}>
+          <Grid size={6} className={"d-column-left"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
               onClick={() => {
@@ -286,7 +286,7 @@ export const OrderDetail = () => {
               목록으로
             </Div>
           </Grid>
-          <Grid size={6} className={"d-right"}>
+          <Grid size={6} className={"d-row-right"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
               onClick={() => {

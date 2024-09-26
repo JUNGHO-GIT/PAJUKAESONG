@@ -140,30 +140,42 @@ export const SideBar = (
     );
     const textSection1 = () => (
       <Grid container spacing={2} columns={12} className={`d-center horizontal-text`}>
-        <Grid size={12} className={"d-left"}>
+        <Grid size={12} className={"d-row-left"}>
           <Icons
-            name={"Info"} className={"w-12 h-12"} />
+            key={"Info"}
+            name={"Info"}
+            className={"w-12 h-12"}
+          />
           <Div className={"fs-0-7rem"}>
             사업자 등록번호: 883-03-03096
           </Div>
         </Grid>
-        <Grid size={12} className={"d-left"}>
+        <Grid size={12} className={"d-row-left"}>
           <Icons
-            name={"Location"} className={"w-12 h-12"} />
+            key={"Location"}
+            name={"Location"}
+            className={"w-12 h-12"}
+          />
           <Div className={"fs-0-7rem"}>
             경기 파주시 문산읍 방촌로 1675-34
           </Div>
         </Grid>
-        <Grid size={12} className={"d-left"}>
+        <Grid size={12} className={"d-row-left"}>
           <Icons
-            name={"Phone"} className={"w-12 h-12"} />
+            key={"Phone"}
+            name={"Phone"}
+            className={"w-12 h-12"}
+          />
           <Div className={"fs-0-8rem"}>
             031-952-8083
           </Div>
         </Grid>
-        <Grid size={12} className={"d-left"}>
+        <Grid size={12} className={"d-row-left"}>
           <Icons
-            name={"Mail"} className={"w-12 h-12"} />
+            key={"Mail"}
+            name={"Mail"}
+            className={"w-12 h-12"}
+          />
           <Div className={"fs-0-8rem"}>
             sooookee@naver.com
           </Div>

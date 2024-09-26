@@ -32,7 +32,7 @@ export const Footer = () => {
     // 3. text
     const textSection = () => (
       <Grid container spacing={0} columns={12} className={`d-center horizontal-text`}>
-        <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-column-left'}`}>
           <Icons
             key={"Info"}
             name={"Info"}
@@ -42,7 +42,7 @@ export const Footer = () => {
             대표: 강민서 | 사업자 등록번호: 883-03-03096
           </Div>
         </Grid>
-        <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-column-left'}`}>
           <Icons
             key={"Location"}
             name={"Location"}
@@ -52,7 +52,7 @@ export const Footer = () => {
             주소: 경기 파주시 문산읍 방촌로 1675-34 1층
           </Div>
         </Grid>
-        <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-column-left'}`}>
           <Icons
             key={"Phone"}
             name={"Phone"}
@@ -62,7 +62,7 @@ export const Footer = () => {
             전화: 031-952-8083
           </Div>
         </Grid>
-        <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-column-left'}`}>
           <Icons
             key={"Mail"}
             name={"Mail"}
@@ -72,7 +72,7 @@ export const Footer = () => {
             이메일: sooookee@naver.com
           </Div>
         </Grid>
-        <Grid size={12} className={`${isXs ? 'd-center' : 'd-left'}`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-column-left'}`}>
           <Icons
             key={"Copyright"}
             name={"Copyright"}
