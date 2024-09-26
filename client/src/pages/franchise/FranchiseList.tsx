@@ -23,7 +23,6 @@ export const FranchiseList = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>([Franchise]);
-  const [imageSize, setImageSize] = useState<string>("");
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
     page: 0,
@@ -31,25 +30,6 @@ export const FranchiseList = () => {
   const [COUNT, setCOUNT] = useState<any>({
     totalCnt: 0,
   });
-
-  // 2-2. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (isXs) {
-      setImageSize("w-100 h-100 hover");
-    }
-    else if (isSm) {
-      setImageSize("w-120 h-120 hover");
-    }
-    else if (isMd) {
-      setImageSize("w-140 h-140 hover");
-    }
-    else if (isLg) {
-      setImageSize("w-160 h-160 hover");
-    }
-    else if (isXl) {
-      setImageSize("w-180 h-180 hover");
-    }
-  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -94,10 +74,10 @@ export const FranchiseList = () => {
           <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 4 }} key={index}>
             <Card className={"border-1 radius shadow p-20 fadeIn"}>
               <Img
+                group={"franchise"}
                 key={item?.franchise_images?.[0]}
                 src={item?.franchise_images?.[0]}
-                group={"franchise"}
-                className={imageSize}
+                className={"w-105p h-105p object-cover drop-shadow"}
                 onClick={() => {
                   navigate("/franchise/detail", {
                     state: {
@@ -203,8 +183,8 @@ export const FranchiseList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={20} h={10} w={95} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
+          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>
         </Grid>

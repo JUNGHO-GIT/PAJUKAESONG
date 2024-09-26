@@ -86,9 +86,9 @@ export const Header = () => {
     const logoSection = () => (
       <Div className={"d-center"}>
         <Img
-          key={"logo1"}
           group={"main"}
-          src={"logo1.webp"}
+          key={"logo1_3.webp"}
+          src={"logo1_3.webp"}
           className={"pointer h-max50"}
           onClick={() => {
             navigate("/main");
@@ -148,9 +148,7 @@ export const Header = () => {
           }}
           slotProps={{
             paper: {
-              style: {
-                padding: "0px 5px",
-              }
+              className: "bg-ivory py-0 px-5",
             }
           }}
           onClose={() => {
@@ -186,25 +184,16 @@ export const Header = () => {
       </>
     );
     return (
-      <Paper className={"layout-wrapper p-sticky top-0vh border-bottom-1 p-20"}>
+      <Paper className={"layout-wrapper bg-ivory p-sticky top-0vh border-bottom-1 p-20"}>
         <Grid container spacing={2}>
-          <Grid
-            size={{ xs: 2, sm: 0, md: 0 }}
-            className={`${isXs ? "d-column-left" : "d-none"}`}
-          >
+          <Grid size={{ xs: 2, sm: 0 }} className={`${isXs ? "d-column-left" : "d-none"}`}>
             {sidebarSection()}
             {toggleSection()}
           </Grid>
-          <Grid
-            size={{ xs: 10, sm: 12, md: 4 }}
-            className={`${isXs ? "d-column-left" : "d-center"}`}
-          >
+          <Grid size={{ xs: 10, sm: 12, md: 4 }} className={`${isXs ? "d-column-left" : "d-center"}`}>
             {logoSection()}
           </Grid>
-          <Grid
-            size={{ xs: 0, sm: 12, md: 8 }}
-            className={`${isXs ? "d-none" : "d-center"}`}
-          >
+          <Grid size={{ xs: 0, sm: 12, md: 8 }} className={`${isXs ? "d-none" : "d-center"}`}>
             {tabsSection()}
           </Grid>
         </Grid>

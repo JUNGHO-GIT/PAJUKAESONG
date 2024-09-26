@@ -16,35 +16,12 @@ export const OrderDetail = () => {
     navigate, URL, SUBFIX, location_id, TITLE
   } = useCommonValue();
   const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
-  const {
     getDayFmt,
   } = useCommonDate();
 
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
-  const [imageSize, setImageSize] = useState<string>("");
-
-  // 2-2. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (isXs) {
-      setImageSize("w-50 h-50 hover");
-    }
-    else if (isSm) {
-      setImageSize("w-60 h-60 hover");
-    }
-    else if (isMd) {
-      setImageSize("w-70 h-70 hover");
-    }
-    else if (isLg) {
-      setImageSize("w-80 h-80 hover");
-    }
-    else if (isXl) {
-      setImageSize("w-100 h-100 hover");
-    }
-  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -112,17 +89,17 @@ export const OrderDetail = () => {
     );
     // 2. product
     const productSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           {OBJECT?.order_product?.map((item: any, index: number) => (
             item.product_name && (
               <Grid container spacing={2} columns={12} key={index}>
                 <Grid size={3} className={"d-column-left"}>
                   <Img
+                    group={"product"}
                     key={item?.product_images?.[0]}
                     src={item?.product_images?.[0]}
-                    group={"product"}
-                    className={imageSize}
+                    className={"w-105p h-105p object-cover drop-shadow"}
                   />
                 </Grid>
                 <Grid size={5}>
@@ -169,7 +146,7 @@ export const OrderDetail = () => {
             )
           ))}
         </Grid>
-        <Hr px={40} h={10} className={"bg-burgundy"} />
+        <Hr px={40} h={1} className={"bg-burgundy"} />
         <Grid size={12} className={"d-center"}>
           <Div className={"fs-1-0rem me-10"}>
             총 금액  :
@@ -185,7 +162,7 @@ export const OrderDetail = () => {
     );
     // 3. order
     const orderSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
@@ -251,7 +228,7 @@ export const OrderDetail = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-column-left"}>
+          <Grid size={6} className={"d-row-left"}>
             <Icons
               key={"Calendar"}
               name={"Calendar"}
@@ -271,9 +248,9 @@ export const OrderDetail = () => {
               {OBJECT?.order_name}
             </Div>
           </Grid>
-          <Grid size={6} className={"d-column-left"}>
+          <Grid size={6} className={"d-row-left"}>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
+              className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {
                 navigate("/order/list", {
                   state: {
@@ -300,7 +277,7 @@ export const OrderDetail = () => {
               수정
             </Div>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
+              className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
               onClick={() => {
                 flowDelete();
               }}
@@ -324,8 +301,8 @@ export const OrderDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {orderSection(0)}
           </Grid>
-          <Hr px={20} h={10} w={95} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
+          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>
         </Grid>

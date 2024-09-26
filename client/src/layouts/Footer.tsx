@@ -21,8 +21,8 @@ export const Footer = () => {
     const logoSection = () => (
       <Img
         group={"main"}
-        key={"logo1_2.webp"}
-        src={"logo1_2.webp"}
+        key={"logo1_3.webp"}
+        src={"logo1_3.webp"}
         className={`h-max50`}
         onClick={() => {
           navigate("/main");
@@ -32,7 +32,7 @@ export const Footer = () => {
     // 3. text
     const textSection = () => (
       <Grid container spacing={0} columns={12} className={`d-center horizontal-text`}>
-        <Grid size={12} className={`${isXs ? 'd-center' : 'd-column-left'}`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-row-left'}`}>
           <Icons
             key={"Info"}
             name={"Info"}
@@ -42,7 +42,7 @@ export const Footer = () => {
             대표: 강민서 | 사업자 등록번호: 883-03-03096
           </Div>
         </Grid>
-        <Grid size={12} className={`${isXs ? 'd-center' : 'd-column-left'}`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-row-left'}`}>
           <Icons
             key={"Location"}
             name={"Location"}
@@ -52,7 +52,7 @@ export const Footer = () => {
             주소: 경기 파주시 문산읍 방촌로 1675-34 1층
           </Div>
         </Grid>
-        <Grid size={12} className={`${isXs ? 'd-center' : 'd-column-left'}`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-row-left'}`}>
           <Icons
             key={"Phone"}
             name={"Phone"}
@@ -62,7 +62,7 @@ export const Footer = () => {
             전화: 031-952-8083
           </Div>
         </Grid>
-        <Grid size={12} className={`${isXs ? 'd-center' : 'd-column-left'}`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-row-left'}`}>
           <Icons
             key={"Mail"}
             name={"Mail"}
@@ -72,7 +72,7 @@ export const Footer = () => {
             이메일: sooookee@naver.com
           </Div>
         </Grid>
-        <Grid size={12} className={`${isXs ? 'd-center' : 'd-column-left'}`}>
+        <Grid size={12} className={`${isXs ? 'd-center' : 'd-row-left'}`}>
           <Icons
             key={"Copyright"}
             name={"Copyright"}
@@ -91,18 +91,12 @@ export const Footer = () => {
     );
     // 4. return
     return (
-      <Paper className={"layout-wrapper bg-light-burgundy p-relative border-top-1 p-20"}>
+      <Paper className={"layout-wrapper bg-ivory p-relative border-top-1 p-20"}>
         <Grid container spacing={2} columns={24}>
-          <Grid
-            size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }}
-            className={`d-center ${isXs ? "mb-10" : ""}`}
-          >
+          <Grid size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {logoSection()}
           </Grid>
-          <Grid
-            size={{ xs: 24, sm: 14, md: 12, lg: 12, xl: 12 }}
-            className={`d-center`}
-          >
+          <Grid size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {textSection()}
           </Grid>
         </Grid>

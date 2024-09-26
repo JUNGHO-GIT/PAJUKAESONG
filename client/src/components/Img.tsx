@@ -29,20 +29,12 @@ export const Img = (props: any) => {
 
   // 10. return ------------------------------------------------------------------------------------
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <img
-        {...props}
-        src={imgSrc}
-        alt={fileName}
-        loading={"lazy"}
-        onError={handleError}
-      />
-    </div>
+    <img
+      {...props}
+      src={imgSrc}
+      alt={fileName}
+      loading={"lazy"}
+      onError={handleError}
+    />
   );
 };

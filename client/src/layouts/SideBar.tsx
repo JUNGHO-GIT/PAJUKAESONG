@@ -58,8 +58,8 @@ export const SideBar = (
     // 1. logo
     const logoSection = () => (
       <Img
-        key={"logo1"}
         group={"main"}
+        key={"logo1.webp"}
         src={"logo1.webp"}
         className={"pointer h-max50 m-10"}
         onClick={() => {

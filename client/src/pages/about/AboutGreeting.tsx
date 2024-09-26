@@ -19,7 +19,7 @@ export const AboutGreeting = () => {
     );
     // 2. greeting
     const greetingSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-column-left"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -48,8 +48,8 @@ export const AboutGreeting = () => {
             </Div>
             <Div className={"fs-1-5rem fw-500"}>
               <Img
-                key={"stamp"}
                 group={"main"}
+                key={"stamp.webp"}
                 src={"stamp.webp"}
                 className={"w-30 h-30"}
               />

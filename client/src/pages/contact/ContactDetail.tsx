@@ -97,7 +97,7 @@ export const ContactDetail = () => {
               {`[ ${OBJECT?.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"} ]`}
             </Div>
           </Grid>
-          <Hr px={10} h={10} className={"bg-burgundy"} />
+          <Hr px={10} h={1} className={"bg-burgundy"} />
           <Grid size={12}>
             <TextArea
               label={""}
@@ -113,7 +113,7 @@ export const ContactDetail = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-column-left"}>
+          <Grid size={6} className={"d-row-left"}>
             <Icons
               key={"Calendar"}
               name={"Calendar"}
@@ -133,9 +133,9 @@ export const ContactDetail = () => {
               {OBJECT?.contact_name}
             </Div>
           </Grid>
-          <Grid size={6} className={"d-column-left"}>
+          <Grid size={6} className={"d-row-left"}>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
+              className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {
                 navigate("/contact/list", {
                   state: {
@@ -162,7 +162,7 @@ export const ContactDetail = () => {
               수정
             </Div>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
+              className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
               onClick={() => {
                 flowDelete();
               }}
@@ -183,8 +183,8 @@ export const ContactDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : detailSection(0)}
           </Grid>
-          <Hr px={20} h={10} w={95} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
+          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>
         </Grid>

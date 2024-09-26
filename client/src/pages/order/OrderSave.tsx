@@ -29,26 +29,6 @@ export const OrderSave = () => {
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
-  const [imageSize, setImageSize] = useState<string>("");
-
-  // 2-2. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (isXs) {
-      setImageSize("w-50 h-50 hover");
-    }
-    else if (isSm) {
-      setImageSize("w-60 h-60 hover");
-    }
-    else if (isMd) {
-      setImageSize("w-70 h-70 hover");
-    }
-    else if (isLg) {
-      setImageSize("w-80 h-80 hover");
-    }
-    else if (isXl) {
-      setImageSize("w-100 h-100 hover");
-    }
-  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -121,17 +101,17 @@ export const OrderSave = () => {
     );
     // 2. product
     const productSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           {OBJECT?.order_product?.map((item: any, index: number) => (
             item.product_name && (
               <Grid container spacing={2} columns={12} key={index}>
                 <Grid size={3} className={"d-column-left"}>
                   <Img
+                    group={"product"}
                     key={item?.product_images?.[0]}
                     src={item?.product_images?.[0]}
-                    group={"product"}
-                    className={imageSize}
+                    className={"w-105p h-105p object-cover drop-shadow"}
                   />
                 </Grid>
                 <Grid size={5}>
@@ -260,7 +240,7 @@ export const OrderSave = () => {
             )
           ))}
         </Grid>
-        <Hr px={40} h={10} className={"bg-burgundy"} />
+        <Hr px={40} h={1} className={"bg-burgundy"} />
         <Grid size={12} className={"d-center"}>
           <Div className={"fs-1-0rem me-10"}>
             총 금액  :
@@ -276,7 +256,7 @@ export const OrderSave = () => {
     );
     // 3. order
     const orderSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
@@ -407,7 +387,7 @@ export const OrderSave = () => {
               더 찾기
             </Btn>
           </Grid>
-          <Grid size={6} className={"d-column-left"}>
+          <Grid size={6} className={"d-row-right"}>
             <Btn
               className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {

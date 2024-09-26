@@ -18,33 +18,10 @@ export const NoticeDetail = () => {
   const {
     getDayFmt,
   } = useCommonDate();
-  const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Notice);
-  const [imageSize, setImageSize] = useState<string>("");
-
-  // 2-2. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (isXs) {
-      setImageSize("w-210 h-210");
-    }
-    else if (isSm) {
-      setImageSize("w-230 h-230");
-    }
-    else if (isMd) {
-      setImageSize("w-250 h-250");
-    }
-    else if (isLg) {
-      setImageSize("w-270 h-270");
-    }
-    else if (isXl) {
-      setImageSize("w-300 h-300");
-    }
-  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -105,20 +82,20 @@ export const NoticeDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               {OBJECT?.notice_title}
             </Div>
           </Grid>
-          <Hr px={10} h={10} className={"bg-burgundy"} />
+          <Hr px={10} h={1} className={"bg-burgundy"} />
           <Grid size={12}>
             <Img
+              group={"notice"}
               key={OBJECT?.notice_images?.[0]}
               src={OBJECT?.notice_images?.[0]}
-              group={"notice"}
-              className={imageSize}
+              className={"w-105p h-105p object-cover drop-shadow"}
             />
           </Grid>
           <Grid size={12} className={"d-center"}>
@@ -137,7 +114,7 @@ export const NoticeDetail = () => {
     const filterSection = (i: number) => (
       <Card className={"px-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-column-left"}>
+          <Grid size={6} className={"d-row-left"}>
             <Icons
               key={"Calendar"}
               name={"Calendar"}
@@ -157,9 +134,9 @@ export const NoticeDetail = () => {
               {OBJECT?.notice_view}
             </Div>
           </Grid>
-          <Grid size={isAdmin ? 6 : 12} className={"d-column-left"}>
+          <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
+              className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {
                 navigate("/notice/list");
               }}
@@ -181,7 +158,7 @@ export const NoticeDetail = () => {
               수정
             </Div>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
+              className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
               onClick={() => {
                 flowDelete();
               }}
@@ -202,8 +179,8 @@ export const NoticeDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : detailSection(0)}
           </Grid>
-          <Hr px={20} h={10} w={95} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
+          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>
         </Grid>

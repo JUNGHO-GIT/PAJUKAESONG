@@ -20,6 +20,9 @@
 .MuiToolbar-root {
   padding: 0px 0px 0px 0px !important;
 }
+[class*="MuiMenuItem-root"][class*="Mui-selected"] {
+  background-color: rgb(0 0 0 / 5%) !important;
+}
 
 /** card ******************************************************************************************/
 .MuiCard-root {
@@ -142,4 +145,7 @@
 }
 .MuiStepIcon-root.Mui-active {
   color: #c30104 !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #c30104 !important;
 }

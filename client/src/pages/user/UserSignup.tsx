@@ -64,7 +64,7 @@ export const UserSignup = () => {
     );
     // 2. signup
     const signupSection = (i: number) => (
-      <Card className={"border-1 radius p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius p-30 fadeIn"} key={i}>
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Input
@@ -121,12 +121,14 @@ export const UserSignup = () => {
               className={"w-70p fs-1-0rem bg-white black"}
             >
               <Img
-                key={"google"}
                 group={"main"}
+                key={"google.webp"}
                 src={"google.webp"}
                 className={"w-15 h-15 me-10"}
               />
-              구글 아이디로 로그인
+              <Div className={"d-center"}>
+                구글 아이디로 로그인
+              </Div>
             </Btn>
           </Grid>
         </Grid>
@@ -179,7 +181,7 @@ export const UserSignup = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {btnSection(0)}
           </Grid>
-          <Hr px={10} h={10} w={90} className={"bg-grey"} />
+          <Hr px={10} h={1} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {linkSection(0)}
           </Grid>

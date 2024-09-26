@@ -173,11 +173,11 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
     <Grid container spacing={2} columns={12}>
       <Grid size={8}>
         {fileList && fileList.length > 0 && fileList.map((file: any, index: number) => (
-          <Grid size={12} className={"d-column-left"} key={index}>
+          <Grid size={12} className={"d-row-left"} key={index}>
             <Div className={"d-center"}>
               <Img
-                key={file?.name}
                 group={"new"}
+                key={file?.name}
                 src={URL.createObjectURL(file)}
                 className={"w-25 h-25 me-10"}
               />
@@ -220,7 +220,7 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
   const existingNode = () => (
     <Grid container spacing={2} columns={12}>
       {fileExisting.map((file: any, index: number) => (
-        <Grid size={12} key={index} className={"d-column-left"}>
+        <Grid size={12} key={index} className={"d-row-left"}>
           <Img
             key={file}
             group={props?.group}

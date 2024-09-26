@@ -72,7 +72,7 @@ export const OrderFind = () => {
     );
     // 2. find
     const findSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input

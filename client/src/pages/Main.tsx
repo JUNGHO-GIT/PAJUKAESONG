@@ -29,7 +29,6 @@ export const Main = () => {
   const mainArray = ["main1.webp", "main2.webp", "main3.webp", "main4.webp", "main5.webp"];
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [imageSize, setImageSize] = useState<string>("");
   const [category, setCategory] = useState<string>("main");
   const [OBJECT_MENU, setOBJECT_MENU] = useState<any>([Menu]);
   const [OBJECT_NOTICE, setOBJECT_NOTICE] = useState<any>([Notice]);
@@ -104,25 +103,6 @@ export const Main = () => {
     };
   }, []);
 
-  // 2-2. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (isXs) {
-      setImageSize("w-120 h-120 object-contain hover");
-    }
-    else if (isSm) {
-      setImageSize("w-140 h-140 object-contain hover");
-    }
-    else if (isMd) {
-      setImageSize("w-160 h-160 object-contain hover");
-    }
-    else if (isLg) {
-      setImageSize("w-180 h-180 object-contain hover");
-    }
-    else if (isXl) {
-      setImageSize("w-200 h-200 object-contain hover");
-    }
-  }, [isXs, isSm, isMd, isLg, isXl]);
-
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     Promise.all([
@@ -172,9 +152,9 @@ export const Main = () => {
               {mainArray.map((item: any, index: number) => (
                 <SwiperSlide key={index}>
                   <Img
+                    group={"main"}
                     key={item}
                     src={item}
-                    group={"main"}
                     className={"w-100p h-60vh object-cover p-0"}
                   />
                 </SwiperSlide>
@@ -243,7 +223,7 @@ export const Main = () => {
                       key={item?.menu_images?.[0]}
                       src={item?.menu_images?.[0]}
                       group={"menu"}
-                      className={imageSize}
+                      className={"w-105p h-105p object-cover drop-shadow"}
                       onClick={() => {
                         navigate("/menu/detail", {
                           state: {
@@ -269,7 +249,7 @@ export const Main = () => {
     );
     // 4. notice
     const noticeSection = (i: number) => (
-      <Card className={"bg-light-burgundy border-1 p-20 d-center fadeIn"} key={i}>
+      <Card className={"bg-ivory border-1 p-20 d-center fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -304,7 +284,7 @@ export const Main = () => {
                       key={"logo1.webp"}
                       src={"logo1.webp"}
                       group={"main"}
-                      className={imageSize}
+                      className={"w-105p h-105p object-cover drop-shadow"}
                       onClick={() => {
                         navigate("/notice/detail", {
                           state: {

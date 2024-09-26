@@ -79,7 +79,7 @@ export const NoticeSave = () => {
     );
     // 2. save
     const saveSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
@@ -161,7 +161,7 @@ export const NoticeSave = () => {
               목록으로
             </Btn>
           </Grid>
-          <Grid size={6} className={"d-column-left"}>
+          <Grid size={6} className={"d-row-left"}>
             <Btn
               className={"w-70p fs-1-0rem bg-burgundy"}
               onClick={() => {

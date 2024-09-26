@@ -15,33 +15,10 @@ export const MenuDetail = () => {
   const {
     navigate, location_id, isAdmin, URL, SUBFIX
   } = useCommonValue();
-  const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Menu);
-  const [imageSize, setImageSize] = useState<string>("");
-
-  // 2-2. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (isXs) {
-      setImageSize("w-210 h-210");
-    }
-    else if (isSm) {
-      setImageSize("w-230 h-230");
-    }
-    else if (isMd) {
-      setImageSize("w-250 h-250");
-    }
-    else if (isLg) {
-      setImageSize("w-270 h-270");
-    }
-    else if (isXl) {
-      setImageSize("w-300 h-300");
-    }
-  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -106,32 +83,32 @@ export const MenuDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <Img
+              group={"menu"}
               key={OBJECT?.menu_images?.[0]}
               src={OBJECT?.menu_images?.[0]}
-              group={"menu"}
-              className={imageSize}
+              className={"w-105p h-105p object-cover drop-shadow"}
             />
           </Grid>
-          <Hr px={20} h={10} className={"bg-burgundy"} />
+          <Hr px={10} h={1} className={"bg-burgundy"} />
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT?.menu_name}
             </Div>
           </Grid>
-          <Grid size={12} className={"d-row-left"}>
+          <Grid size={6} className={"d-row-left"}>
             <Div className={"fs-1-2rem fw-500 dark"}>
               {OBJECT?.menu_description}
             </Div>
           </Grid>
-          <Grid size={12} className={"d-row-left"}>
-            <Div className={"fs-0-8rem me-5"}>
+          <Grid size={6} className={"d-row-right"}>
+            <Div className={"fs-0-8rem fw-500 dark me-5"}>
               ₩
             </Div>
-            <Div className={"fs-1-0rem fw-500 dark"}>
+            <Div className={"fs-1-2rem fw-500 light-black"}>
               {numeral(OBJECT?.menu_price).format("0,0")}
             </Div>
           </Grid>
@@ -144,7 +121,7 @@ export const MenuDetail = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
+              className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {
                 navigate(`/menu/list`,{
                   state: {
@@ -170,7 +147,7 @@ export const MenuDetail = () => {
               수정
             </Div>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
+              className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
               onClick={() => {
                 flowDelete();
               }}
@@ -191,8 +168,8 @@ export const MenuDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {LOADING ? <Loading /> : detailSection(0)}
           </Grid>
-          <Hr px={20} h={10} w={95} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
+          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>
         </Grid>

@@ -22,28 +22,8 @@ export const ProductDetail = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Product);
-  const [imageSize, setImageSize] = useState<string>("");
   const [orderCount, setOrderCount] = useState<number>(1);
   const [orderPrice, setOrderPrice] = useState<number>(1);
-
-  // 2-2. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (isXs) {
-      setImageSize("w-300 h-300");
-    }
-    else if (isSm) {
-      setImageSize("w-230 h-230");
-    }
-    else if (isMd) {
-      setImageSize("w-250 h-250");
-    }
-    else if (isLg) {
-      setImageSize("w-270 h-270");
-    }
-    else if (isXl) {
-      setImageSize("w-300 h-300");
-    }
-  }, [isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -152,31 +132,29 @@ export const ProductDetail = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Img
+              group={"product"}
               key={OBJECT?.product_images?.[0]}
               src={OBJECT?.product_images?.[0]}
-              group={"product"}
-              className={imageSize}
+              className={"w-105p h-105p object-cover drop-shadow"}
             />
           </Grid>
-          <Hr px={20} h={10} className={"bg-burgundy"} />
+          <Hr px={20} h={1} className={"bg-burgundy"} />
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT?.product_name}
             </Div>
           </Grid>
-          <Grid size={12} className={"d-column"}>
-            <Div className={"d-row-left"}>
-              <Div className={"fs-1-2rem fw-500 light-black"}>
+          <Grid size={12} className={"d-row-left"}>
+            <Div className={"fs-1-2rem fw-500 dark"}>
                 {OBJECT?.product_description}
-              </Div>
             </Div>
-            <Div className={"d-row-left"}>
-              <Div className={"fs-0-8rem fw-500 dark me-5"}>
-                ₩
-              </Div>
-              <Div className={"fs-1-0rem fw-500 dark"}>
+          </Grid>
+          <Grid size={12} className={"d-row-left"}>
+            <Div className={"fs-0-8rem me-5"}>
+              ₩
+            </Div>
+            <Div className={"fs-1-0rem fw-500 dark"}>
                 {numeral(OBJECT?.product_price).format("0,0")}
-              </Div>
             </Div>
           </Grid>
         </Grid>
@@ -277,7 +255,7 @@ export const ProductDetail = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy ms-5"}
+              className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {
                 navigate(`/product/list`);
               }}
@@ -299,7 +277,7 @@ export const ProductDetail = () => {
               수정
             </Div>
             <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
+              className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
               onClick={() => {
                 flowDelete();
               }}
@@ -323,8 +301,8 @@ export const ProductDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filter1Section(0)}
           </Grid>
-          <Hr px={20} h={10} w={95} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
+          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filter2Section(0)}
           </Grid>
         </Grid>

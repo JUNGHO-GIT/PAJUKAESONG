@@ -67,7 +67,7 @@ export const OrderList = () => {
     );
     // 2. list
     const listSection = (i: number) => (
-      <Card className={"border-1 radius shadow p-40 fadeIn"} key={i}>
+      <Card className={"border-1 radius shadow p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={3}>
             <Div className={"fs-0-8rem fw-500"}>
@@ -85,7 +85,7 @@ export const OrderList = () => {
             </Div>
           </Grid>
         </Grid>
-        <Hr px={40} h={10} className={"bg-burgundy"} />
+        <Hr px={40} h={1} className={"bg-burgundy"} />
         {OBJECT?.map((item: any, index: number) => (
           <Grid container spacing={2} columns={12} key={index}>
             <Grid size={3}>
@@ -191,8 +191,8 @@ export const OrderList = () => {
               COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
             )}
           </Grid>
-          <Hr px={20} h={10} w={95} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center mt-n20"}>
+          <Hr px={20} h={1} w={95} className={"bg-grey"} />
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {filterSection(0)}
           </Grid>
         </Grid>
