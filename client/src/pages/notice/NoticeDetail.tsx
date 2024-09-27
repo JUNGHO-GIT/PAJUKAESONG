@@ -80,7 +80,7 @@ export const NoticeDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
@@ -93,6 +93,7 @@ export const NoticeDetail = () => {
               max={200}
               hover={false}
               shadow={true}
+              radius={false}
               group={"notice"}
               src={OBJECT?.notice_images?.[0]}
               className={"w-100p h-auto"}
@@ -133,7 +134,7 @@ export const NoticeDetail = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div

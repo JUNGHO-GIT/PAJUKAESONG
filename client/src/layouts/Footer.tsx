@@ -22,6 +22,7 @@ export const Footer = () => {
       <Img
         hover={false}
         shadow={false}
+        radius={false}
         group={"main"}
         src={"logo1_3.webp"}
         className={"pointer h-max50"}
@@ -50,7 +51,7 @@ export const Footer = () => {
             className={"w-12 h-12"}
           />
           <Div className={"fs-0-8rem"}>
-            주소: 경기 파주시 문산읍 방촌로 1675-34 1층
+            경기 파주시 문산읍 방촌로 1675-34 1층
           </Div>
         </Grid>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-row-left'}`}>
@@ -60,7 +61,7 @@ export const Footer = () => {
             className={"w-12 h-12"}
           />
           <Div className={"fs-0-8rem"}>
-            전화: 031-952-8083
+            031-952-8083
           </Div>
         </Grid>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-row-left'}`}>
@@ -70,7 +71,7 @@ export const Footer = () => {
             className={"w-12 h-12"}
           />
           <Div className={"fs-0-8rem"}>
-            이메일: sooookee@naver.com
+            sooookee@naver.com
           </Div>
         </Grid>
         <Grid size={12} className={`${isXs ? 'd-center' : 'd-row-left'}`}>

@@ -36,7 +36,7 @@ export const FranchiseInfo = () => {
     );
     // 2. info
     const infoSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -61,7 +61,7 @@ export const FranchiseInfo = () => {
     );
     // 3. step
     const stepSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -158,7 +158,7 @@ export const FranchiseInfo = () => {
     );
     // 4. cost
     const costSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>

@@ -64,13 +64,13 @@ export const FranchiseList = () => {
     );
     // 2. list
     const listSection = (item: any, i: number) => (
-      <Card className={"border-1 shadow-3 radius p-20 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Img
               max={110}
               hover={true}
-              shadow={true}
+              shadow={false}
               radius={false}
               group={"franchise"}
               src={item?.franchise_images?.[0]}
@@ -95,7 +95,7 @@ export const FranchiseList = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -131,8 +131,8 @@ export const FranchiseList = () => {
           </Grid>
           <Grid size={6} className={"d-center"}>
             <TablePagination
-              rowsPerPageOptions={[10]}
-              rowsPerPage={10}
+              rowsPerPageOptions={[6]}
+              rowsPerPage={6}
               component={"div"}
               labelRowsPerPage={""}
               count={COUNT.totalCnt}
@@ -174,10 +174,12 @@ export const FranchiseList = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {COUNT.totalCnt <= 0 ? <Empty /> : (
+            {COUNT.totalCnt <= 0 ? (
+              <Empty h={"50vh"} />
+            ) : (
               <Grid container spacing={2} columns={12}>
                 {OBJECT.map((item: any, i: number) => (
-                  <Grid size={12} className={"d-column-center p-0"} key={i}>
+                  <Grid size={{ xs: 12, sm: 6 }} className={"d-column-center p-0"} key={i}>
                     {listSection(item, i)}
                   </Grid>
                 ))}

@@ -16,7 +16,7 @@ export const AboutGreeting = () => {
     );
     // 2. greeting
     const greetingSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-column-left"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -45,8 +45,11 @@ export const AboutGreeting = () => {
             </Div>
             <Div className={"fs-1-5rem fw-500"}>
               <Img
+                max={30}
+                hover={false}
+                shadow={false}
+                radius={false}
                 group={"main"}
-                key={"stamp.webp"}
                 src={"stamp.webp"}
                 className={"w-30 h-30"}
               />

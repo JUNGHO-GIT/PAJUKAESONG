@@ -10,7 +10,9 @@ export const Order: any = {
   order_name: "",
   order_email: "",
   order_phone: "",
-  order_date: "",
+  order_date: new Date(),
+  order_time: "11:00",
+  order_headcount: "1",
   order_total_price: "",
   order_product: [{
     product_name: "",

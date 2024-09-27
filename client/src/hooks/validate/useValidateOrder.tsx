@@ -85,6 +85,9 @@ export const useValidateOrder = () => {
             "order_name",
             "order_email",
             "order_phone",
+            "order_date",
+            "order_time",
+            "order_headcount",
           ];
           REFS.current = (
             Array.from({ length: 1 }, (_, _idx) => (
@@ -119,6 +122,15 @@ export const useValidateOrder = () => {
           }
           else if (!validatePhone(OBJECT?.order_phone)) {
             return showAlertAndFocus('order_phone', "전화번호 형식으로 입력해주세요.", 0);
+          }
+          else if (!OBJECT?.order_date) {
+            return showAlertAndFocus('order_date', "주문 날짜를 선택해주세요.", 0);
+          }
+          else if (!OBJECT?.order_time) {
+            return showAlertAndFocus('order_time', "주문 시간을 선택해주세요.", 0);
+          }
+          else if (!OBJECT?.order_headcount) {
+            return showAlertAndFocus('order_headcount', "인원을 입력해주세요.", 0);
           }
           return true;
         }

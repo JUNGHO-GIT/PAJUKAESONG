@@ -83,13 +83,13 @@ export const FranchiseDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-20 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Img
               max={450}
               hover={false}
-              shadow={true}
+              shadow={false}
               radius={false}
               group={"franchise"}
               src={OBJECT?.franchise_images?.[0]}
@@ -102,40 +102,42 @@ export const FranchiseDetail = () => {
               {OBJECT?.franchise_name}
             </Div>
           </Grid>
-          <Grid size={12} className={"d-row-left"}>
-            <Icons
-              key={"Location"}
-              name={"Location"}
-              className={"w-20 h-20"}
-              fill={"whitesmoke"}
-            />
-            <Div className={"fs-0-9rem ms-5"}>
-              {OBJECT?.franchise_address_main}
+          <Grid size={12} className={"d-column-left"}>
+            <Div className={"d-row-center"}>
+              <Icons
+                key={"Location"}
+                name={"Location"}
+                className={"w-20 h-20"}
+                fill={"whitesmoke"}
+              />
+              <Div className={"fs-0-9rem ms-5"}>
+                {OBJECT?.franchise_address_main}
+              </Div>
+              <Div className={"fs-0-9rem ms-10"}>
+                {`(${OBJECT?.franchise_address_detail})`}
+              </Div>
             </Div>
-            <Div className={"fs-0-9rem ms-10"}>
-              {`(${OBJECT?.franchise_address_detail})`}
+            <Div className={"d-row-center"}>
+              <Icons
+                key={"Phone"}
+                name={"Phone"}
+                className={"w-20 h-20"}
+                fill={"whitesmoke"}
+              />
+              <Div className={"fs-0-9rem ms-5"}>
+                {OBJECT?.franchise_phone}
+              </Div>
             </Div>
-          </Grid>
-          <Grid size={12} className={"d-row-left"}>
-            <Icons
-              key={"Phone"}
-              name={"Phone"}
-              className={"w-20 h-20"}
-              fill={"whitesmoke"}
-            />
-            <Div className={"fs-0-9rem ms-5"}>
-              {OBJECT?.franchise_phone}
-            </Div>
-          </Grid>
-          <Grid size={12} className={"d-row-left"}>
-            <Icons
-              key={"Calendar"}
-              name={"Calendar"}
-              className={"w-20 h-20"}
-              fill={"whitesmoke"}
-            />
-            <Div className={"fs-0-9rem ms-5"}>
-              {getDayFmt(OBJECT?.franchise_regDt)}
+            <Div className={"d-row-center"}>
+              <Icons
+                key={"Calendar"}
+                name={"Calendar"}
+                className={"w-20 h-20"}
+                fill={"whitesmoke"}
+              />
+              <Div className={"fs-0-9rem ms-5"}>
+                {getDayFmt(OBJECT?.franchise_regDt)}
+              </Div>
             </Div>
           </Grid>
         </Grid>
@@ -143,7 +145,7 @@ export const FranchiseDetail = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div

@@ -1,8 +1,8 @@
 // OrderList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
-import { axios, moment, numeral } from "@imports/ImportLibs";
+import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
@@ -17,6 +17,9 @@ export const OrderList = () => {
   const {
     navigate, URL, SUBFIX, location,
   } = useCommonValue();
+  const {
+    getDayFmt
+  } = useCommonDate();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -65,9 +68,9 @@ export const OrderList = () => {
     );
     // 2. list
     const listSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={2}>
+          <Grid size={3}>
             <Div className={"fs-0-8rem fw-500"}>
               유형
             </Div>
@@ -77,7 +80,7 @@ export const OrderList = () => {
               금액
             </Div>
           </Grid>
-          <Grid size={4}>
+          <Grid size={3}>
             <Div className={"fs-0-8rem fw-500"}>
               날짜
             </Div>
@@ -86,7 +89,7 @@ export const OrderList = () => {
         <Hr px={40} className={"bg-burgundy"} />
         {OBJECT?.map((item: any, index: number) => (
           <Grid container spacing={2} columns={12} key={index}>
-            <Grid size={2}>
+            <Grid size={3}>
               <Div className={"fs-0-8rem"}>
                 {item?.order_category === "reservation" ? "매장 예약" : "제품 구매"}
               </Div>
@@ -106,9 +109,9 @@ export const OrderList = () => {
                 {`${numeral(item?.order_total_price).format("0,0")}`}
               </Div>
             </Grid>
-            <Grid size={4}>
+            <Grid size={3}>
               <Div className={"fs-0-8rem"}>
-                {moment(item?.order_regDt).format("MM-DD")}
+                {getDayFmt(item?.order_regDt)}
               </Div>
             </Grid>
             <Hr px={1} className={"bg-light-grey mb-20"} />
@@ -118,7 +121,7 @@ export const OrderList = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -187,7 +190,7 @@ export const OrderList = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)}
+            {COUNT.totalCnt <= 0 ? <Empty h={"50vh"} /> : listSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Hr px={20} className={"bg-grey"} />

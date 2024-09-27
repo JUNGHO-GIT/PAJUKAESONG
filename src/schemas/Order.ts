@@ -37,6 +37,16 @@ const schema = new mongoose.Schema(
       default: "",
       required: false
     },
+    order_time: {
+      type: String,
+      default: "",
+      required: false
+    },
+    order_headcount: {
+      type: String,
+      default: "",
+      required: false
+    },
     order_total_price: {
       type: String,
       default: "",

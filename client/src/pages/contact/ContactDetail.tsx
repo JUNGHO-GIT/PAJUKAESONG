@@ -85,7 +85,7 @@ export const ContactDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -99,7 +99,7 @@ export const ContactDetail = () => {
           <Grid size={12}>
             <TextArea
               label={""}
-              readOnly={true}
+              disabled={true}
               inputclass={"h-35vh"}
               className={"border-1 radius p-30"}
               value={OBJECT?.contact_content}
@@ -130,7 +130,7 @@ export const ContactDetail = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-left"}>
             <Div

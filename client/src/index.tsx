@@ -25,17 +25,51 @@ import {
 } from "@imports/ImportLayouts";
 
 import {
-  Main,
-  AboutGreeting, AboutLocation,
-  ContactList, ContactFind, ContactDetail, ContactSave, ContactUpdate,
-  FranchiseInfo, FranchiseList, FranchiseDetail, FranchiseSave, FranchiseUpdate,
-  MenuList, MenuDetail, MenuSave, MenuUpdate,
-  NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
-  OrderList, OrderFind, OrderDetail, OrderSave, OrderUpdate,
-  ProductList, ProductDetail, ProductSave, ProductUpdate,
+  Main
+} from "@imports/ImportPages";
+
+import {
+  AdminDashboard
+} from "@imports/ImportPages";
+
+import {
+  AboutGreeting, AboutLocation
+} from "@imports/ImportPages";
+
+import {
+  ContactList, ContactFind, ContactDetail, ContactSave, ContactUpdate
+} from "@imports/ImportPages";
+
+import {
+  FranchiseInfo, FranchiseList, FranchiseDetail, FranchiseSave, FranchiseUpdate
+} from "@imports/ImportPages";
+
+import {
+  MenuList, MenuDetail, MenuSave, MenuUpdate
+} from "@imports/ImportPages";
+
+import {
+  NoticeList, NoticeDetail, NoticeSave, NoticeUpdate
+} from "@imports/ImportPages";
+
+import {
+  OrderList, OrderFind, OrderDetail, OrderSave, OrderUpdate
+} from "@imports/ImportPages";
+
+import {
+  ProductList, ProductDetail, ProductSave, ProductUpdate
+} from "@imports/ImportPages";
+
+import {
   UserLogin, UserSignup,
 } from "@imports/ImportPages";
 
+// -------------------------------------------------------------------------------------------------
+const Admin = () => (
+  <Routes>
+    <Route path={"/dashboard"} element={<AdminDashboard />} />
+  </Routes>
+);
 
 // -------------------------------------------------------------------------------------------------
 const About = () => (
@@ -128,6 +162,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path={"/*"} element={<Main />} />
+        <Route path={"/admin/*"} element={<Admin />} />
         <Route path={"/about/*"} element={<About />} />
         <Route path={"/contact/*"} element={<Contact />} />
         <Route path={"/franchise/*"} element={<Franchise />} />

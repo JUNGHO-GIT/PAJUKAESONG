@@ -166,9 +166,9 @@ export const NoticeUpdate = () => {
         </Grid>
       </Card>
     );
-    // 3. filter
-    const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+    // 3. btn
+    const btnSection = (i: number) => (
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
@@ -204,7 +204,7 @@ export const NoticeUpdate = () => {
             {updateSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {filterSection(0)}
+            {btnSection(0)}
           </Grid>
         </Grid>
       </Paper>

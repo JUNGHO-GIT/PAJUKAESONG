@@ -43,7 +43,7 @@ export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgPr
     imageClass += " shadow-4";
   }
   if (radius) {
-    imageClass += " radius";
+    imageClass += " radius-1";
   }
 
   if (max) {

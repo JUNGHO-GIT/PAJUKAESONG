@@ -56,11 +56,14 @@ export const Header = () => {
 
     // 나머지 경우
     else {
-      setSelectedTab(firstStr);
-      setSelectedTabVal(firstStr);
-      setSelectedMenuItem(secondStr);
+      dataArray.forEach((item) => {
+        if (item?.titleEn === firstStr) {
+          setSelectedTab(firstStr);
+          setSelectedTabVal(firstStr);
+          setSelectedMenuItem(secondStr);
+        }
+      });
     }
-
   }, [PATH]);
 
   // 2. toggle -------------------------------------------------------------------------------------
@@ -88,6 +91,7 @@ export const Header = () => {
         <Img
           hover={false}
           shadow={false}
+          radius={false}
           group={"main"}
           src={"logo1.webp"}
           className={"pointer h-max50"}
@@ -95,9 +99,16 @@ export const Header = () => {
             navigate("/main");
           }}
         />
-        <Div className={"fs-0-9rem fw-600 burgundy"}>
-          {isAdmin ? "관리자" : ""}
-        </Div>
+        {isAdmin && (
+          <Div
+            className={"fw-600 pointer-burgundy burgundy"}
+            onClick={() => {
+              navigate("/admin/dashboard");
+            }}
+          >
+            관리자
+          </Div>
+        )}
       </Div>
     );
     const tabsSection = () => (

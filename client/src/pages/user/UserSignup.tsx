@@ -113,22 +113,6 @@ export const UserSignup = () => {
               회원가입
             </Btn>
           </Grid>
-          <Grid size={12} className={"d-center"}>
-            <Btn
-              color={"primary"}
-              className={"w-100p fs-1-0rem bg-white black"}
-            >
-              <Img
-                group={"main"}
-                key={"google.webp"}
-                src={"google.webp"}
-                className={"w-15 h-15 me-10"}
-              />
-              <Div className={"d-center"}>
-                구글 아이디로 로그인
-              </Div>
-            </Btn>
-          </Grid>
         </Grid>
       </Card>
     );

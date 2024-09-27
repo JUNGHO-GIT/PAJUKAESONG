@@ -189,7 +189,8 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
             <Img
               max={40}
               hover={false}
-              shadow={true}
+              shadow={false}
+              radius={true}
               group={"new"}
               src={URL.createObjectURL(file)}
               className={"w-35 h-35 me-10"}
@@ -232,7 +233,8 @@ export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
           <Img
             max={40}
             hover={false}
-            shadow={true}
+            shadow={false}
+            radius={true}
             group={props?.group}
             src={file}
             className={"w-35 h-35 me-10"}

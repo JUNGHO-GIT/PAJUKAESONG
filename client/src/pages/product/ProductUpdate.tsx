@@ -99,7 +99,7 @@ export const ProductUpdate = () => {
     );
     // 2. update
     const updateSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Select
@@ -185,7 +185,7 @@ export const ProductUpdate = () => {
             <Input
               variant={"standard"}
               required={true}
-              readOnly={true}
+              disabled={true}
               label={"작성일"}
               value={dayFmt}
             />
@@ -215,9 +215,9 @@ export const ProductUpdate = () => {
         </Grid>
       </Card>
     );
-    // 3. filter
-    const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+    // 3. btn
+    const btnSection = (i: number) => (
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
@@ -253,7 +253,7 @@ export const ProductUpdate = () => {
             {updateSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {filterSection(0)}
+            {btnSection(0)}
           </Grid>
         </Grid>
       </Paper>

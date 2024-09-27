@@ -66,7 +66,7 @@ export const NoticeList = () => {
     );
     // 2. list
     const listSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={2}>
             <Div className={"fs-0-8rem fw-500"}>
@@ -119,7 +119,7 @@ export const NoticeList = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -198,7 +198,7 @@ export const NoticeList = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)}
+            {COUNT.totalCnt <= 0 ? <Empty h={"50vh"} /> : listSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Hr px={20} className={"bg-grey"} />

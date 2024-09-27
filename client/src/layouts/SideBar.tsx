@@ -60,8 +60,9 @@ export const SideBar = (
       <Img
         hover={false}
         shadow={false}
+        radius={false}
         group={"main"}
-        src={"logo1.webp"}
+        src={"logo1_3.webp"}
         className={"pointer m-10 h-max50"}
         onClick={() => {
           navigate("/main");
@@ -141,44 +142,46 @@ export const SideBar = (
     );
     const textSection1 = () => (
       <Grid container spacing={2} columns={12} className={`d-center horizontal-text`}>
-        <Grid size={12} className={"d-row-left"}>
-          <Icons
-            key={"Info"}
-            name={"Info"}
-            className={"w-12 h-12"}
-          />
-          <Div className={"fs-0-7rem"}>
-            사업자 등록번호: 883-03-03096
+        <Grid size={12} className={"d-column-left"}>
+          <Div className={"d-row-center"}>
+            <Icons
+              key={"Info"}
+              name={"Info"}
+              className={"w-12 h-12"}
+            />
+            <Div className={"fs-0-7rem"}>
+              사업자 등록번호: 883-03-03096
+            </Div>
           </Div>
-        </Grid>
-        <Grid size={12} className={"d-row-left"}>
-          <Icons
-            key={"Location"}
-            name={"Location"}
-            className={"w-12 h-12"}
-          />
-          <Div className={"fs-0-7rem"}>
-            경기 파주시 문산읍 방촌로 1675-34
+          <Div className={"d-row-center"}>
+            <Icons
+              key={"Location"}
+              name={"Location"}
+              className={"w-12 h-12"}
+            />
+            <Div className={"fs-0-7rem"}>
+              경기 파주시 문산읍 방촌로 1675-34
+            </Div>
           </Div>
-        </Grid>
-        <Grid size={12} className={"d-row-left"}>
-          <Icons
-            key={"Phone"}
-            name={"Phone"}
-            className={"w-12 h-12"}
-          />
-          <Div className={"fs-0-8rem"}>
-            031-952-8083
+          <Div className={"d-row-center"}>
+            <Icons
+              key={"Phone"}
+              name={"Phone"}
+              className={"w-12 h-12"}
+            />
+            <Div className={"fs-0-8rem"}>
+              031-952-8083
+            </Div>
           </Div>
-        </Grid>
-        <Grid size={12} className={"d-row-left"}>
-          <Icons
-            key={"Mail"}
-            name={"Mail"}
-            className={"w-12 h-12"}
-          />
-          <Div className={"fs-0-8rem"}>
-            sooookee@naver.com
+          <Div className={"d-row-center"}>
+            <Icons
+              key={"Mail"}
+              name={"Mail"}
+              className={"w-12 h-12"}
+            />
+            <Div className={"fs-0-8rem"}>
+              sooookee@naver.com
+            </Div>
           </Div>
         </Grid>
       </Grid>
@@ -204,24 +207,24 @@ export const SideBar = (
           "& .MuiDrawer-paper": {
             width: "240px",
             padding: "15px",
-            backgroundColor: "#ffffff",
+            backgroundColor: "#fffcf3",
           },
         }}
       >
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+        <Grid container spacing={0} columns={12} direction={"column"}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
             {logoSection()}
           </Grid>
-          <Hr px={1} className={"bg-light-grey"} />
-          <Grid size={12}>
+          <Hr px={20} className={"bg-light-grey"} />
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-left"}>
             {mainSection()}
           </Grid>
-          <Hr px={10} className={"bg-light-grey"} />
-          <Grid size={12}>
+          <Hr px={20} className={"bg-light-grey"} />
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
             {textSection1()}
           </Grid>
-          <Hr px={10} className={"bg-light-grey"} />
-          <Grid size={12}>
+          <Hr px={20} className={"bg-light-grey"} />
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
             {textSection2()}
           </Grid>
         </Grid>

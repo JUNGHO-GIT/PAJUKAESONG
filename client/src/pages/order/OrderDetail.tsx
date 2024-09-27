@@ -87,7 +87,7 @@ export const OrderDetail = () => {
     );
     // 2. product
     const productSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           {OBJECT?.order_product?.map((item: any, index: number) => (
             item.product_name && (
@@ -97,6 +97,7 @@ export const OrderDetail = () => {
                     max={150}
                     hover={false}
                     shadow={true}
+                    radius={false}
                     group={"product"}
                     src={item?.product_images?.[0]}
                     className={"w-70p h-70p"}
@@ -160,14 +161,14 @@ export const OrderDetail = () => {
     );
     // 3. order
     const orderSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Select
               variant={"standard"}
               label={"주문 유형"}
               required={true}
-              readOnly={true}
+              disabled={true}
               value={OBJECT?.order_category}
             >
               {["reservation", "buy"].map((item: string, idx: number) => (
@@ -183,7 +184,7 @@ export const OrderDetail = () => {
               variant={"standard"}
               label={"이름"}
               required={true}
-              readOnly={true}
+              disabled={true}
               value={OBJECT?.order_name}
             />
           </Grid>
@@ -192,7 +193,7 @@ export const OrderDetail = () => {
               variant={"standard"}
               label={"이메일"}
               required={true}
-              readOnly={true}
+              disabled={true}
               value={OBJECT?.order_email}
             />
           </Grid>
@@ -201,7 +202,7 @@ export const OrderDetail = () => {
               variant={"standard"}
               label={"전화번호"}
               required={true}
-              readOnly={true}
+              disabled={true}
               value={OBJECT?.order_phone}
             />
           </Grid>
@@ -209,7 +210,7 @@ export const OrderDetail = () => {
             <Input
               variant={"standard"}
               required={true}
-              readOnly={true}
+              disabled={true}
               label={"주문 날짜"}
               value={getDayFmt(OBJECT?.order_regDt)}
             />
@@ -219,7 +220,7 @@ export const OrderDetail = () => {
     );
     // 3. filter
     const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-left"}>
             <Div

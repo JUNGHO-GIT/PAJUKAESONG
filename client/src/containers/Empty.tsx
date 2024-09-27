@@ -4,11 +4,16 @@ import { Div } from "@imports/ImportComponents";
 import { Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const Empty = () => {
+declare type EmptyProps = {
+  h?: string;
+};
+
+// -------------------------------------------------------------------------------------------------
+export const Empty = ({ h }: EmptyProps) => {
 
   // 7. empty --------------------------------------------------------------------------------------
   const emptyNode = () => (
-    <Card className={"h-min70vh d-center fadeIn"}>
+    <Card className={`h-${h} d-center fadeIn`}>
       <Div
         key={"empty"}
         className={"fs-1-6rem d-center"}

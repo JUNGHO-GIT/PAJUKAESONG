@@ -5,8 +5,8 @@ import { useCommonValue } from "@imports/ImportHooks";
 import { useValidateUser } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportLibs";
 import { User } from "@imports/ImportSchemas";
-import { Div, Btn } from "@imports/ImportComponents";
 import { Input } from "@imports/ImportContainers";
+import { Div, Btn, Hr } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -103,13 +103,14 @@ export const UserLogin = () => {
     );
     // 2. login
     const loginSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Input
-              variant={"standard"}
+              variant={"outlined"}
               required={true}
               label={"아이디"}
+              helperText={"이메일 형식으로 입력해주세요."}
               value={OBJECT?.user_id}
               inputRef={REFS?.[i]?.user_id}
               error={ERRORS?.[i]?.user_id}
@@ -124,10 +125,11 @@ export const UserLogin = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"standard"}
+              variant={"outlined"}
               required={true}
               type={"password"}
               label={"비밀번호"}
+              helperText={"영문, 숫자, 특수문자 포함 8자 이상 입력해주세요."}
               value={OBJECT?.user_pw}
               inputRef={REFS?.[i]?.user_pw}
               error={ERRORS?.[i]?.user_pw}
@@ -145,7 +147,7 @@ export const UserLogin = () => {
     );
     // 3. btn
     const btnSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             {(isAdmin || isUser) ? (
@@ -174,9 +176,9 @@ export const UserLogin = () => {
     );
     // 4. link
     const linkSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-row-right"}>
+          <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-0-8rem"}>
               아이디가 없는 경우
             </Div>
@@ -186,7 +188,7 @@ export const UserLogin = () => {
               회원가입
             </Div>
           </Grid>
-          <Grid size={6} className={"d-row-left"}>
+          <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-0-8rem"}>
               비밀번호를 잊은 경우
             </Div>
@@ -201,7 +203,7 @@ export const UserLogin = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center"}>
+      <Paper className={"content-wrapper d-center h-min90vh"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
@@ -213,6 +215,7 @@ export const UserLogin = () => {
             {btnSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Hr px={20} className={"bg-grey"} />
             {linkSection(0)}
           </Grid>
         </Grid>

@@ -70,13 +70,14 @@ export const OrderFind = () => {
     );
     // 2. find
     const findSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input
-              variant={"standard"}
-              label={"주문자 이름"}
+              variant={"outlined"}
+              label={"이름"}
               required={true}
+              helperText={"주문자 이름을 입력해주세요."}
               value={OBJECT?.order_name}
               inputRef={REFS?.[i]?.order_name}
               error={ERRORS?.[i]?.order_name}
@@ -90,12 +91,14 @@ export const OrderFind = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"standard"}
-              label={"주문자 전화번호"}
+              variant={"outlined"}
+              label={"전화번호"}
               required={true}
+              helperText={"주문자 전화번호를 입력해주세요."}
               value={OBJECT?.order_phone}
               inputRef={REFS?.[i]?.order_phone}
               error={ERRORS?.[i]?.order_phone}
+              placeholder={"010-1234-5678"}
               onChange={(e: any) => {
                 const value = e.target.value.replace(/[^0-9]/g, '');
                 const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
@@ -117,9 +120,9 @@ export const OrderFind = () => {
         </Grid>
       </Card>
     );
-    // 3. filter
-    const filterSection = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+    // 3. btn
+    const btnSection = (i: number) => (
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Btn
@@ -136,7 +139,7 @@ export const OrderFind = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center"}>
+      <Paper className={"content-wrapper d-center h-min90vh"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
@@ -145,7 +148,7 @@ export const OrderFind = () => {
             {findSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {filterSection(0)}
+            {btnSection(0)}
           </Grid>
         </Grid>
       </Paper>

@@ -7,6 +7,8 @@ import { Input } from "@containers/Input";
 import { Select } from "@containers/Select";
 import { TextArea } from "@containers/TextArea";
 import { FileInput } from "@containers/FileInput";
+import { TimePicker } from "../containers/TimePicker";
+import { DayPicker } from "../containers/DayPicker";
 
 
 // -------------------------------------------------------------------------------------------------
@@ -18,4 +20,6 @@ export {
   Select,
   TextArea,
   FileInput,
+  TimePicker,
+  DayPicker,
 };

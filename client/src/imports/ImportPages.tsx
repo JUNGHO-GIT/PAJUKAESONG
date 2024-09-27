@@ -3,6 +3,9 @@
 // main
 import { Main } from "@pages/Main";
 
+// admin
+import { AdminDashboard } from "@pages/admin/AdminDashboard";
+
 // about
 import { AboutGreeting } from "@pages/about/AboutGreeting";
 import { AboutLocation } from "@pages/about/AboutLocation";
@@ -53,6 +56,7 @@ import { UserSignup } from "@pages/user/UserSignup";
 // -------------------------------------------------------------------------------------------------
 export {
   Main,
+  AdminDashboard,
   AboutGreeting, AboutLocation,
   ContactList, ContactFind, ContactDetail, ContactSave, ContactUpdate,
   FranchiseInfo, FranchiseList, FranchiseDetail, FranchiseSave, FranchiseUpdate,

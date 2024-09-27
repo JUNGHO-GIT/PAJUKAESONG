@@ -1,11 +1,11 @@
 // aboutRepository.ts
 
-import { Contact } from "@schemas/Contact";
+import { About } from "@schemas/About";
 
 // 1-1. info ---------------------------------------------------------------------------------------
 export const info = async (
 ) => {
-  const finalResult = await Contact.aggregate([
+  const finalResult = await About.aggregate([
     {
       $project: {
         _id: 1,
@@ -20,7 +20,7 @@ export const info = async (
 // 1-2. greeting -----------------------------------------------------------------------------------
 export const greeting = async (
 ) => {
-  const finalResult = await Contact.aggregate([
+  const finalResult = await About.aggregate([
     {
       $project: {
         _id: 1,
@@ -35,7 +35,7 @@ export const greeting = async (
 // 2-2. location -----------------------------------------------------------------------------------
 export const location = async (
 ) => {
-  const finalResult = await Contact.aggregate([
+  const finalResult = await About.aggregate([
     {
       $project: {
         _id: 1,

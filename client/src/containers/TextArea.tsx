@@ -22,7 +22,7 @@ export const TextArea = (props: any) => (
       size={props?.size || "small"}
       fullWidth={props?.fullWidth || true}
       multiline={props?.multiline || true}
-      className={`border-1 radius p-30 over-auto ${props?.className || ""}`}
+      className={`border-1 radius-1 p-30 over-auto ${props?.className || ""}`}
       slotProps={{
         ...props?.slotProps,
         input: {

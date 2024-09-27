@@ -17,7 +17,7 @@ export const Main = () => {
     URL, navigate
   } = useCommonValue();
   const {
-    getDayFmt
+    dayFmt, getDayFmt
   } = useCommonDate();
   const {
     isXs, isSm, isMd, isLg, isXl
@@ -27,9 +27,10 @@ export const Main = () => {
   const mainArray = ["main1.webp", "main2.webp", "main3.webp", "main4.webp", "main5.webp"];
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [category, setCategory] = useState<string>("main");
+  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT_MENU, setOBJECT_MENU] = useState<any>([Menu]);
   const [OBJECT_NOTICE, setOBJECT_NOTICE] = useState<any>([Notice]);
+  const [category, setCategory] = useState<string>("main");
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
     page: 0,
@@ -37,6 +38,7 @@ export const Main = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
+    setLOADING(true);
     Promise.all([
       axios.get(`${URL}/api/menu/list`, {
         params: {
@@ -49,6 +51,11 @@ export const Main = () => {
           PAGING: PAGING,
         }
       }),
+      axios.get(`${URL}/api/admin/visit`, {
+        params: {
+          date: dayFmt
+        }
+      })
     ])
     .then(([resMenu, resNotice]) => {
       setOBJECT_MENU(resMenu.data.result.length > 0 ? resMenu.data.result : [Menu]);
@@ -57,6 +64,9 @@ export const Main = () => {
     .catch((err: any) => {
       alert(err.response.data.msg);
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   }, [URL, PAGING, category]);
 
@@ -69,7 +79,7 @@ export const Main = () => {
           <Grid size={12} className={"d-center p-0"}>
             <Swiper
               spaceBetween={0}
-              slidesPerView={1}
+              slidesPerView={LOADING ? 0 : 1}
               centeredSlides={true}
               loop={true}
               autoplay={{
@@ -87,9 +97,10 @@ export const Main = () => {
                     max={600}
                     hover={false}
                     shadow={false}
+                    radius={false}
                     group={"main"}
                     src={item}
-                    className={"w-100p h-auto radius-none"}
+                    className={"w-100p h-auto"}
                   />
                 </SwiperSlide>
               ))}
@@ -102,12 +113,12 @@ export const Main = () => {
     const menuSection = (i: number) => (
       <Card className={"bg-white border-1 p-20 d-center fadeIn"} key={i}>
         <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               메뉴 소개
             </Div>
           </Grid>
-          <Grid size={{ xs: 12, sm: 10, md: 8, lg: 6, xl: 4 }} className={"d-row-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-row-center"}>
             <Div className={`${category === "main" ? "bg-burgundy" : ""} border-1 radius-50 p-10 me-1vw hover`}>
               <Div
                 className={`fs-0-8rem fw-600 ${category === "main" ? "white" : "black"}`}
@@ -129,10 +140,12 @@ export const Main = () => {
               </Div>
             </Div>
           </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Swiper
               spaceBetween={20}
-              slidesPerView={isXs ? 2 : isSm ? 2 : isMd ? 3 : isLg ? 3 : 3}
+              slidesPerView={LOADING ? 0 : (
+                isXs ? 2 : isSm ? 2 : isMd ? 3 : isLg ? 3 : isXl ? 3 : 3
+              )}
               centeredSlides={false}
               loop={true}
               navigation={false}
@@ -154,14 +167,15 @@ export const Main = () => {
               {OBJECT_MENU?.map((item: any, index: number) => (
                 item.menu_images.length > 0 && (
                   <SwiperSlide className={"d-center"} key={index}>
-                    <Card className={"border-1 shadow-2 p-10 radius fadeIn"}>
+                    <Card className={"border-1 shadow-2 radius-1 p-10 fadeIn"}>
                       <Img
-                        max={220}
+                        max={200}
                         hover={true}
-                        shadow={true}
+                        shadow={false}
+                        radius={false}
                         group={"menu"}
                         src={item?.menu_images?.[0]}
-                        className={"w-100p h-100p"}
+                        className={"w-100p"}
                         onClick={() => {
                           navigate("/menu/detail", {
                             state: {
@@ -170,10 +184,14 @@ export const Main = () => {
                           });
                         }}
                       />
-                      <Hr px={30} className={"bg-burgundy"} />
+                      <Hr px={30} h={2} className={"bg-burgundy"} />
                       <Div className={"d-column-center"}>
-                        <Div className={"fs-1-2rem fw-600"}>
+                        <Div className={"fs-1-0rem fw-600"} max={10}>
                           {item?.menu_name}
+                        </Div>
+                        <Br px={5} />
+                        <Div className={"fs-0-8rem grey"}>
+                          {item?.menu_description}
                         </Div>
                       </Div>
                     </Card>
@@ -182,7 +200,7 @@ export const Main = () => {
               ))}
             </Swiper>
           </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"menu-pagination transform-none"} />
           </Grid>
         </Grid>
@@ -192,15 +210,15 @@ export const Main = () => {
     const noticeSection = (i: number) => (
       <Card className={"bg-ivory border-1 p-20 d-center fadeIn"} key={i}>
         <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               공지사항
             </Div>
           </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Swiper
               spaceBetween={20}
-              slidesPerView={2}
+              slidesPerView={LOADING ? 0 : 2}
               centeredSlides={false}
               loop={true}
               navigation={false}
@@ -221,11 +239,12 @@ export const Main = () => {
             >
               {OBJECT_NOTICE?.map((item: any, index: number) => (
                 <SwiperSlide className={"d-center"} key={index}>
-                  <Card className={"border-1 shadow-2 p-20 radius fadeIn"}>
+                  <Card className={"border-1 shadow-2 radius-1 p-20 fadeIn"}>
                     <Img
                       max={180}
                       hover={true}
                       shadow={false}
+                      radius={false}
                       group={"main"}
                       src={"logo1.webp"}
                       className={"w-100p h-100p"}
@@ -237,9 +256,9 @@ export const Main = () => {
                         });
                       }}
                     />
-                    <Hr px={30} className={"bg-light-grey"} />
+                    <Hr px={30} h={2} className={"bg-light-grey"} />
                     <Div className={"d-column-left"}>
-                      <Div className={"fs-1-2rem fw-600"} max={10}>
+                      <Div className={"fs-1-0rem fw-600"} max={10}>
                         {item?.notice_title}
                       </Div>
                       <Br px={5} />
@@ -252,7 +271,7 @@ export const Main = () => {
               ))}
             </Swiper>
           </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"notice-pagination transform-none"} />
           </Grid>
         </Grid>
@@ -262,13 +281,13 @@ export const Main = () => {
     const locationSection = (i: number) => (
       <Card className={"bg-white border-1 p-20 d-center fadeIn"} key={i}>
         <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               오시는 길
             </Div>
           </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            <Card className={"border-1 shadow-3 radius fadeIn p-0"}>
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+            <Card className={"border-1 shadow-3 radius-1 p-0 fadeIn"}>
               <Location
                 width={"100%"}
                 height={"60vh"}

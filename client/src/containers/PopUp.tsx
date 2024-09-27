@@ -19,7 +19,7 @@ export const PopUp = (props: any) => {
       alignItems: "center",
       border: '0.2px solid rgba(0, 0, 0, 0.2)',
       boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-      padding: "20px 20px 20px 20px",
+      padding: props?.padding || "20px",
     };
   }
   else if (props.type === "alert") {
@@ -30,18 +30,7 @@ export const PopUp = (props: any) => {
       alignItems: "center",
       border: '1px solid red',
       boxShadow: '0px 0px 10px rgba(255, 0, 0, 0.5)',
-      padding: "6px 6px 6px 6px",
-    };
-  }
-  else if (props.type === "chart") {
-    popupStyle = {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      border: '0.2px solid rgba(0, 0, 0, 0.2)',
-      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-      padding: "6px 0px 6px 12px",
+      padding: props?.padding || "6px",
     };
   }
   else if (props.type === "modal") {
@@ -56,18 +45,7 @@ export const PopUp = (props: any) => {
       alignItems: "center",
       border: '0.2px solid rgba(0, 0, 0, 0.2)',
       boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-      padding: "6px 6px 6px 6px",
-    };
-  }
-  else {
-    popupStyle = {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      border: '0.2px solid rgba(0, 0, 0, 0.2)',
-      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-      padding: "6px 6px 6px 6px",
+      padding: props?.padding || "6px",
     };
   }
 

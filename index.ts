@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import { Request, Response, NextFunction } from "express";
 
+import { router as adminRouter } from "@routers/adminRouter";
 import { router as aboutRouter } from "@routers/aboutRouter";
 import { router as contactRouter } from "@routers/contactRouter";
 import { router as franchiseRouter } from "@routers/franchiseRouter";
@@ -90,6 +91,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 // 라우터 설정 -------------------------------------------------------------------------------------
+app.use(`${preFix}/admin`, adminRouter);
 app.use(`${preFix}/about`, aboutRouter);
 app.use(`${preFix}/contact`, contactRouter);
 app.use(`${preFix}/franchise`, franchiseRouter);

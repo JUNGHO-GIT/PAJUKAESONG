@@ -122,13 +122,13 @@ export const ProductDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-20 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Img
               max={450}
               hover={false}
-              shadow={true}
+              shadow={false}
               radius={false}
               group={"product"}
               src={OBJECT?.product_images?.[0]}
@@ -141,20 +141,27 @@ export const ProductDetail = () => {
               {OBJECT?.product_name}
             </Div>
           </Grid>
-          <Grid size={12} className={"d-row-between"}>
+          <Grid size={6} className={"d-row-left"}>
             <Div className={"fs-1-2rem fw-500 dark"}>
               {OBJECT?.product_description}
             </Div>
+          </Grid>
+          <Grid size={6} className={"d-row-right"}>
+            <Icons
+              key={"Won"}
+              name={"Won"}
+              className={"w-15 h-15 dark"}
+            />
             <Div className={"fs-1-2rem fw-500 light-black"}>
-              ₩ {numeral(OBJECT?.product_price).format("0,0")}
+              {numeral(OBJECT?.product_price).format("0,0")}
             </Div>
           </Grid>
         </Grid>
       </Card>
     );
-    // 3. filter1
-    const filter1Section = (i: number) => (
-      <Card className={"px-10 fadeIn"} key={i}>
+    // 3. btn
+    const btnSection = (i: number) => (
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Input
@@ -166,7 +173,7 @@ export const ProductDetail = () => {
                 <Icons
                   key={"Won"}
                   name={"Won"}
-                  className={"w-15 h-20"}
+                  className={"w-15 h-15"}
                 />
               }
             />
@@ -182,7 +189,7 @@ export const ProductDetail = () => {
                   <Icons
                     name={"Minus"}
                     className={"w-15 h-15"}
-                    onClick={(e: any) => {
+                    onClick={() => {
                       const value = orderCount;
                       const newValue = value < 1 ? 1 : value - 1;
                       if (newValue <= 1) {
@@ -198,7 +205,7 @@ export const ProductDetail = () => {
                   <Icons
                     name={"Plus"}
                     className={"w-15 h-15"}
-                    onClick={(e: any) => {
+                    onClick={() => {
                       const value = orderCount;
                       const newValue = value < 1 ? 1 : value + 1;
                       if (newValue <= 1) {
@@ -238,9 +245,9 @@ export const ProductDetail = () => {
         </Grid>
       </Card>
     );
-    // 4. filter2
-    const filter2Section = (i: number) => (
-      <Card className={"px-20 fadeIn"} key={i}>
+    // 4. filter
+    const filterSection = (i: number) => (
+      <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
@@ -288,11 +295,11 @@ export const ProductDetail = () => {
             {detailSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {filter1Section(0)}
+            {btnSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Hr px={20} className={"bg-grey"} />
-            {filter2Section(0)}
+            {filterSection(0)}
           </Grid>
         </Grid>
       </Paper>
