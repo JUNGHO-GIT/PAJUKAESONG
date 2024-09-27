@@ -86,9 +86,10 @@ export const Header = () => {
     const logoSection = () => (
       <Div className={"d-center"}>
         <Img
+          hover={false}
+          shadow={false}
           group={"main"}
-          key={"logo1_3.webp"}
-          src={"logo1_3.webp"}
+          src={"logo1.webp"}
           className={"pointer h-max50"}
           onClick={() => {
             navigate("/main");
@@ -184,7 +185,7 @@ export const Header = () => {
       </>
     );
     return (
-      <Paper className={"layout-wrapper bg-ivory p-sticky top-0vh border-bottom-1 p-20"}>
+      <Paper className={"layout-wrapper p-sticky top-0vh border-bottom-1 p-20"}>
         <Grid container spacing={2}>
           <Grid size={{ xs: 2, sm: 0 }} className={`${isXs ? "d-column-left" : "d-none"}`}>
             {sidebarSection()}

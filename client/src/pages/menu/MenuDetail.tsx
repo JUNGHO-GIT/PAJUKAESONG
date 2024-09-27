@@ -80,19 +80,22 @@ export const MenuDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+      <Card className={"border-1 shadow-3 radius p-0 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12} className={"p-0"}>
+          <Grid size={12} className={"d-center p-0"}>
             <Img
               max={450}
               hover={false}
-              shadow={true}
+              shadow={false}
+              radius={false}
               group={"menu"}
               src={OBJECT?.menu_images?.[0]}
               className={"w-100p h-auto"}
             />
           </Grid>
-          <Hr px={10} className={"bg-burgundy"} />
+        </Grid>
+        <Hr px={20} className={"bg-burgundy"} />
+        <Grid container spacing={2} columns={12} className={"p-20"}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT?.menu_name}
@@ -164,8 +167,8 @@ export const MenuDetail = () => {
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {LOADING ? <Loading /> : detailSection(0)}
+          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-column-center"}>
+            {detailSection(0)}
           </Grid>
           <Hr px={20} w={95} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
@@ -179,7 +182,7 @@ export const MenuDetail = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {detailNode()}
+      {LOADING ? <Loading /> : detailNode()}
     </>
   );
 };

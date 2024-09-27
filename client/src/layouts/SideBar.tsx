@@ -58,10 +58,11 @@ export const SideBar = (
     // 1. logo
     const logoSection = () => (
       <Img
+        hover={false}
+        shadow={false}
         group={"main"}
-        key={"logo1.webp"}
         src={"logo1.webp"}
-        className={"pointer h-max50 m-10"}
+        className={"pointer m-10 h-max50"}
         onClick={() => {
           navigate("/main");
         }}

@@ -20,10 +20,11 @@ export const Footer = () => {
     // 1. logo
     const logoSection = () => (
       <Img
+        hover={false}
+        shadow={false}
         group={"main"}
-        key={"logo1_3.webp"}
         src={"logo1_3.webp"}
-        className={`h-max50`}
+        className={`pointer h-max50`}
         onClick={() => {
           navigate("/main");
         }}

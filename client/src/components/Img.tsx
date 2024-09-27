@@ -9,11 +9,12 @@ declare type ImgProps = React.HTMLAttributes<HTMLImageElement> & {
   src?: any;
   hover?: boolean;
   shadow?: boolean;
+  radius?: boolean;
   max?: number;
 };
 
 // -------------------------------------------------------------------------------------------------
-export const Img = ( { group, src, hover, shadow, max, ...props }: ImgProps ) => {
+export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgProps ) => {
 
   // 1. common -------------------------------------------------------------------------------------
   let { GCLOUD_URL } = useCommonValue();
@@ -29,10 +30,10 @@ export const Img = ( { group, src, hover, shadow, max, ...props }: ImgProps ) =>
   }
 
   if (!props?.className) {
-    imageClass = `radius object-cover`;
+    imageClass = `object-cover`;
   }
   else {
-    imageClass = `${props?.className} radius object-cover`;
+    imageClass = `${props?.className} object-cover`;
   }
 
   if (hover) {
@@ -40,6 +41,9 @@ export const Img = ( { group, src, hover, shadow, max, ...props }: ImgProps ) =>
   }
   if (shadow) {
     imageClass += " shadow-4";
+  }
+  if (radius) {
+    imageClass += " raduus";
   }
 
   if (max) {

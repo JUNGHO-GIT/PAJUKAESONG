@@ -66,15 +66,15 @@ export const MenuList = () => {
     const listSection = (i: number) => (
       <Grid container spacing={2} columns={12} key={i}>
         {OBJECT?.map((item: any, index: number) => (
-          <Grid size={{ xs: 6, sm: 4 }} key={index}>
-            <Card className={"border-1 shadow-1 radius p-20 fadeIn"}>
+          <Grid size={{ xs: 6, sm: 4 }} key={index} className={"d-column-center p-0"}>
+            <Card className={"border-1 shadow-2 radius p-0 fadeIn"}>
               <Img
-                max={130}
+                max={180}
                 hover={true}
                 shadow={true}
                 group={"menu"}
                 src={item?.menu_images?.[0]}
-                className={"w-100p h-100p"}
+                className={"w-100p h-auto"}
                 onClick={() => {
                   navigate("/menu/detail", {
                     state: {
@@ -83,7 +83,7 @@ export const MenuList = () => {
                   });
                 }}
               />
-              <Hr px={30} className={"bg-burgundy"} />
+              <Hr px={20} className={"bg-burgundy"} />
               <Div className={"fs-1-4rem fw-600"}>
                 {item?.menu_name}
               </Div>
