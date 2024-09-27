@@ -24,7 +24,7 @@ export const Footer = () => {
         shadow={false}
         group={"main"}
         src={"logo1_3.webp"}
-        className={`pointer h-max50`}
+        className={"pointer h-max50"}
         onClick={() => {
           navigate("/main");
         }}

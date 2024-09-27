@@ -30,10 +30,10 @@ export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgPr
   }
 
   if (!props?.className) {
-    imageClass = `object-cover`;
+    imageClass = `h-auto object-cover`;
   }
   else {
-    imageClass = `${props?.className} object-cover`;
+    imageClass = `${props?.className} h-auto object-cover`;
   }
 
   if (hover) {
@@ -43,7 +43,7 @@ export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgPr
     imageClass += " shadow-4";
   }
   if (radius) {
-    imageClass += " raduus";
+    imageClass += " radius";
   }
 
   if (max) {

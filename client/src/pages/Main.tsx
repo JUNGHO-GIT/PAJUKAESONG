@@ -102,7 +102,7 @@ export const Main = () => {
     const menuSection = (i: number) => (
       <Card className={"bg-white border-1 p-20 d-center fadeIn"} key={i}>
         <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               메뉴 소개
             </Div>
@@ -129,7 +129,7 @@ export const Main = () => {
               </Div>
             </Div>
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Swiper
               spaceBetween={20}
               slidesPerView={isXs ? 2 : isSm ? 2 : isMd ? 3 : isLg ? 3 : 3}
@@ -182,7 +182,7 @@ export const Main = () => {
               ))}
             </Swiper>
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Div className={"menu-pagination transform-none"} />
           </Grid>
         </Grid>
@@ -192,12 +192,12 @@ export const Main = () => {
     const noticeSection = (i: number) => (
       <Card className={"bg-ivory border-1 p-20 d-center fadeIn"} key={i}>
         <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               공지사항
             </Div>
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Swiper
               spaceBetween={20}
               slidesPerView={2}
@@ -252,7 +252,7 @@ export const Main = () => {
               ))}
             </Swiper>
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Div className={"notice-pagination transform-none"} />
           </Grid>
         </Grid>
@@ -262,12 +262,12 @@ export const Main = () => {
     const locationSection = (i: number) => (
       <Card className={"bg-white border-1 p-20 d-center fadeIn"} key={i}>
         <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               오시는 길
             </Div>
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Card className={"border-1 shadow-3 radius fadeIn p-0"}>
               <Location
                 width={"100%"}

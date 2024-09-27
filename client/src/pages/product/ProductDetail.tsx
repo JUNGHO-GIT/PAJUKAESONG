@@ -122,35 +122,31 @@ export const ProductDetail = () => {
     );
     // 2. detail
     const detailSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-3 radius p-20 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-row-center"}>
             <Img
               max={450}
               hover={false}
               shadow={true}
+              radius={false}
               group={"product"}
               src={OBJECT?.product_images?.[0]}
-              className={"w-100p h-auto"}
+              className={"w-100p"}
             />
           </Grid>
-          <Hr px={10} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-center"}>
+          <Hr px={20} h={2} className={"bg-burgundy"} />
+          <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT?.product_name}
             </Div>
           </Grid>
-          <Grid size={6} className={"d-row-left"}>
+          <Grid size={12} className={"d-row-between"}>
             <Div className={"fs-1-2rem fw-500 dark"}>
               {OBJECT?.product_description}
             </Div>
-          </Grid>
-          <Grid size={6} className={"d-row-right"}>
-            <Div className={"fs-0-8rem fw-500 dark me-5"}>
-              ₩
-            </Div>
             <Div className={"fs-1-2rem fw-500 light-black"}>
-              {numeral(OBJECT?.product_price).format("0,0")}
+              ₩ {numeral(OBJECT?.product_price).format("0,0")}
             </Div>
           </Grid>
         </Grid>
@@ -285,17 +281,17 @@ export const ProductDetail = () => {
     return (
       <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {LOADING ? <Loading /> : detailSection(0)}
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {detailSection(0)}
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {filter1Section(0)}
           </Grid>
-          <Hr px={20} w={95} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Hr px={20} className={"bg-grey"} />
             {filter2Section(0)}
           </Grid>
         </Grid>
@@ -306,7 +302,7 @@ export const ProductDetail = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {detailNode()}
+      {LOADING ? <Loading /> : detailNode()}
     </>
   );
 };

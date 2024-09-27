@@ -233,13 +233,13 @@ export const MenuSave = () => {
     return (
       <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {LOADING ? <Loading /> : saveSection(0)}
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {saveSection(0)}
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {filterSection(0)}
           </Grid>
         </Grid>
@@ -250,7 +250,7 @@ export const MenuSave = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {saveNode()}
+      {LOADING ? <Loading /> : saveNode()}
     </>
   );
 };

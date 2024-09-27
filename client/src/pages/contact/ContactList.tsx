@@ -186,16 +186,14 @@ export const ContactList = () => {
     return (
       <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {LOADING ? <Loading /> : (
-              COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
-            )}
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)}
           </Grid>
-          <Hr px={20} w={95} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Hr px={20} className={"bg-grey"} />
             {filterSection(0)}
           </Grid>
         </Grid>
@@ -206,7 +204,7 @@ export const ContactList = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {listNode()}
+      {LOADING ? <Loading /> : listNode()}
     </>
   );
 };

@@ -63,37 +63,35 @@ export const FranchiseList = () => {
       </Div>
     );
     // 2. list
-    const listSection = (i: number) => (
-      <Grid container spacing={2} columns={12} key={i}>
-        {OBJECT?.map((item: any, index: number) => (
-          <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6, xl: 4 }} key={index}>
-            <Card className={"border-1 shadow-1 radius p-20 fadeIn"}>
-              <Img
-                max={300}
-                hover={true}
-                shadow={true}
-                group={"franchise"}
-                src={item?.franchise_images?.[0]}
-                className={"w-100p h-100p"}
-                onClick={() => {
-                  navigate("/franchise/detail", {
-                    state: {
-                      _id: item?._id
-                    }
-                  });
-                }}
-              />
-              <Br px={30} />
-              <Div className={"fs-1-4rem fw-600"}>
-                {item?.franchise_name}
-              </Div>
-              <Div className={"fs-1-0rem"}>
-                {item?.franchise_price}
-              </Div>
-            </Card>
+    const listSection = (item: any, i: number) => (
+      <Card className={"border-1 shadow-3 radius p-20 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-row-center"}>
+            <Img
+              max={110}
+              hover={true}
+              shadow={true}
+              radius={false}
+              group={"franchise"}
+              src={item?.franchise_images?.[0]}
+              className={"w-100p"}
+              onClick={() => {
+                navigate("/franchise/detail", {
+                  state: {
+                    _id: item?._id
+                  }
+                });
+              }}
+            />
           </Grid>
-        ))}
-      </Grid>
+          <Hr px={20} h={2} className={"bg-burgundy"} />
+          <Grid size={12} className={"d-row-center"}>
+            <Div className={"fs-1-4rem fw-600"}>
+              {item?.franchise_name}
+            </Div>
+          </Grid>
+        </Grid>
+      </Card>
     );
     // 3. filter
     const filterSection = (i: number) => (
@@ -172,16 +170,22 @@ export const FranchiseList = () => {
     return (
       <Paper className={"content-wrapper d-center"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
           </Grid>
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
-            {LOADING ? <Loading /> : (
-              COUNT.totalCnt <= 0 ? <Empty /> : listSection(0)
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {COUNT.totalCnt <= 0 ? <Empty /> : (
+              <Grid container spacing={2} columns={12}>
+                {OBJECT.map((item: any, i: number) => (
+                  <Grid size={12} className={"d-column-center p-0"} key={i}>
+                    {listSection(item, i)}
+                  </Grid>
+                ))}
+              </Grid>
             )}
           </Grid>
-          <Hr px={20} w={95} className={"bg-grey"} />
-          <Grid size={{ xs: 12, sm: 11, md: 10, lg: 9, xl: 8 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Hr px={20} className={"bg-grey"} />
             {filterSection(0)}
           </Grid>
         </Grid>
@@ -192,7 +196,7 @@ export const FranchiseList = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {listNode()}
+      {LOADING ? <Loading /> : listNode()}
     </>
   );
 };
