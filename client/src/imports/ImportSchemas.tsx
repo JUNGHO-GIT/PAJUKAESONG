@@ -1,5 +1,6 @@
 // ImportSchemas.tsx
 
+import { Admin } from "@schemas/Admin";
 import { About } from "@schemas/About";
 import { Contact } from "@schemas/Contact";
 import { Franchise } from "@schemas/Franchise";
@@ -11,6 +12,7 @@ import { User } from "@schemas/User";
 
 // -------------------------------------------------------------------------------------------------
 export {
+  Admin,
   About,
   Contact,
   Franchise,

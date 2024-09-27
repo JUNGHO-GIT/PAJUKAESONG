@@ -29,7 +29,7 @@ import {
 } from "@imports/ImportPages";
 
 import {
-  AdminDashboard
+  AdminDashboard,
 } from "@imports/ImportPages";
 
 import {

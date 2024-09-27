@@ -2,8 +2,40 @@
 
 import * as repository from "@repositories/adminRepository";
 
-// 0. visit ----------------------------------------------------------------------------------------
-export const visit = async (
+// 1-0. visit (count) ------------------------------------------------------------------------------
+export const visitCount = async (
+  date_param: string,
+) => {
+
+  // result 변수 선언
+  let cntResult: any = null;
+  let finalResult: any = null;
+  let statusResult: string = "fail";
+
+  cntResult = await repository.visitCount(
+    date_param
+  );
+
+  if (!cntResult) {
+    statusResult = "fail";
+    finalResult = null;
+  }
+  else {
+    statusResult = "success";
+    finalResult = {
+      admin_visit_count: cntResult,
+      admin_date: date_param,
+    };
+  }
+
+  return {
+    status: statusResult,
+    result: finalResult,
+  };
+};
+
+// 1-3. visit (save) -------------------------------------------------------------------------------
+export const visitSave = async (
   req_param: any,
   date_param: string,
 ) => {
@@ -20,12 +52,12 @@ export const visit = async (
   ipResult = headerResult ? headerResult.split(',')[0] : req_param.connection.remoteAddress;
   ipResult === "::1" ? ipResult = "127.0.0.1" : ipResult;
 
-  findResult = await repository.detail(
+  findResult = await repository.visitDetail(
     ipResult, date_param
   );
 
   if (!findResult) {
-    createResult = await repository.save(
+    createResult = await repository.visitSave(
       ipResult, date_param
     );
 
@@ -43,14 +75,48 @@ export const visit = async (
     finalResult = findResult;
   }
 
-  console.log("ipResult: ", ipResult);
-  console.log("date_param: ", date_param);
-  console.log("findResult: ", findResult);
-  console.log("createResult: ", createResult);
-  console.log("finalResult: ", finalResult);
+  return {
+    status: statusResult,
+    result: finalResult,
+  };
+};
+
+// 2-1. order (list) -------------------------------------------------------------------------------
+export const orderList = async (
+  date_param: string,
+  PAGING_param: any,
+) => {
+
+  // result 변수 선언
+  let findResult: any = null;
+  let finalResult: any = null;
+  let statusResult: string = "fail";
+  let totalCntResult: any = null;
+
+  // sort, page 변수 선언
+  const sort = PAGING_param.sort === "asc" ? 1 : -1;
+  const page = PAGING_param.page || 0;
+
+  totalCntResult = await repository.orderCount(
+    date_param
+  );
+
+  findResult = await repository.orderList(
+    date_param, sort, page
+  );
+
+  if (!findResult || findResult.length <= 0) {
+    statusResult = "fail";
+    finalResult = [];
+  }
+  else {
+    statusResult = "success";
+    finalResult = findResult;
+  }
 
   return {
     status: statusResult,
+    totalCnt: totalCntResult,
     result: finalResult,
   };
 };

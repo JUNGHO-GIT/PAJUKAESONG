@@ -51,7 +51,7 @@ export const Main = () => {
           PAGING: PAGING,
         }
       }),
-      axios.get(`${URL}/api/admin/visit`, {
+      axios.get(`${URL}/api/admin/visitSave`, {
         params: {
           date: dayFmt
         }

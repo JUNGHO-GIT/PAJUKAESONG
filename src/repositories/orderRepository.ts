@@ -11,8 +11,8 @@ export const cnt = async (
 ) => {
   const finalResult = await Order.countDocuments(
     {
-      order_name: order_name_param,
-      order_phone: order_phone_param,
+      order_name: order_name_param || { $ne: null },
+      order_phone: order_phone_param || { $ne: null },
     }
   );
 
@@ -27,8 +27,8 @@ export const find = async (
   const finalResult = await Order.aggregate([
     {
       $match: {
-        order_name: order_name_param,
-        order_phone: order_phone_param,
+        order_name: order_name_param || { $ne: null },
+        order_phone: order_phone_param || { $ne: null },
       }
     },
     {
@@ -63,8 +63,8 @@ export const list = async (
   const finalResult = await Order.aggregate([
     {
       $match: {
-        order_name: order_name_param,
-        order_phone: order_phone_param,
+        order_name: order_name_param || { $ne: null },
+        order_phone: order_phone_param || { $ne: null },
       }
     },
     {

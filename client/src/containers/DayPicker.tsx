@@ -1,26 +1,25 @@
 // DayPicker.tsx
-// 계획은 week, month, year, select
-// 실제는 day
 
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { Btn, Img, Div } from "@imports/ImportComponents";
-import { PopUp, Input, Select } from "@imports/ImportContainers";
-import { MenuItem, PickersDay, Grid, Card, Badge } from "@imports/ImportMuis";
+import { useCommonDate } from "@imports/ImportHooks";
+import { Btn, Div } from "@imports/ImportComponents";
+import { PopUp, Input } from "@imports/ImportContainers";
+import { PickersDay, Grid, Card } from "@imports/ImportMuis";
 import { DateCalendar, AdapterMoment, LocalizationProvider } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 declare interface DayPickerProps {
   OBJECT: any;
   setOBJECT: any;
-  REFS: any;
-  ERRORS: any;
+  REFS?: any;
+  ERRORS?: any;
   extra: string;
+  variant?: string;
   i: number;
 }
 
 // -------------------------------------------------------------------------------------------------
 export const DayPicker = (
-  { OBJECT, setOBJECT, REFS, ERRORS, extra, i }: DayPickerProps
+  { OBJECT, setOBJECT, REFS, ERRORS, extra, variant, i }: DayPickerProps
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------
@@ -140,7 +139,7 @@ export const DayPicker = (
         {(popTrigger: any) => (
           <Input
             label={"날짜"}
-            variant={"standard"}
+            variant={variant || "standard"}
             value={getDayFmt(OBJECT?.[`${extra}`])}
             readOnly={true}
             inputclass={""}

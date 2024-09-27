@@ -2,64 +2,70 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { axios } from "@imports/ImportLibs";
+import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
-import { Notice } from "@imports/ImportSchemas";
-import { Div, Hr, Icons, Img } from "@imports/ImportComponents";
-import { TextArea } from "@imports/ImportContainers";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Admin, Order } from "@imports/ImportSchemas";
+import { Empty } from "@imports/ImportContainers";
+import { Div, Hr } from "@imports/ImportComponents";
+import { DayPicker, Select } from "@imports/ImportContainers";
+import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AdminDashboard = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const {
-    navigate, location_id, isAdmin, URL, SUBFIX
+    URL, SUBFIX
   } = useCommonValue();
   const {
-    getDayFmt,
+    dayFmt, getDayFmt
   } = useCommonDate();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(Notice);
+  const [OBJECT, setOBJECT] = useState<any>(Admin);
+  const [OBJECT_ORDER, setOBJECT_ORDER] = useState<any>([Order]);
+  const [ORDER_PAGING, setORDER_PAGING] = useState<any>({
+    sort: "asc",
+    page: 0,
+  });
+  const [ORDER_COUNT, setORDER_COUNT] = useState<any>({
+    totalCnt: 0,
+  });
+  const [DATE, setDATE] = useState<any>({
+    today: dayFmt
+  });
+
+  useEffect(() => {
+    console.log("===================================");
+    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
+    console.log("OBJECT_ORDER", JSON.stringify(OBJECT_ORDER, null, 2));
+    console.log("ORDER_COUNT", JSON.stringify(ORDER_COUNT, null, 2));
+  }, [OBJECT, OBJECT_ORDER, ORDER_COUNT]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-    axios.get(`${URL}${SUBFIX}/detail`, {
-      params: {
-        _id: location_id
-      }
-    })
-    .then((res: any) => {
-      setOBJECT(res.data.result || Notice);
-    })
-    .catch((err: any) => {
-      alert(err.response.data.msg);
-      console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
-    });
-  }, [URL, SUBFIX, location_id]);
-
-  // 3. flow ---------------------------------------------------------------------------------------
-  const flowDelete = () => {
-    setLOADING(true);
-    axios.delete(`${URL}${SUBFIX}/delete`, {
-      params: {
-        _id: OBJECT?._id
-      }
-    })
-    .then((res: any) => {
-      if (res.data.status === "success") {
-        alert(res.data.msg);
-        navigate("/notice/list");
-      }
-      else {
-        alert(res.data.msg);
-      }
+    Promise.all([
+      axios.get(`${URL}${SUBFIX}/visitCount`, {
+        params: {
+          date: DATE?.today
+        }
+      }),
+      axios.get(`${URL}${SUBFIX}/orderList`, {
+        params: {
+          date: DATE?.today,
+          PAGING: ORDER_PAGING
+        }
+      })
+    ])
+    .then(([resCount, resOrder]: any) => {
+      setOBJECT(resCount.data.result || Admin);
+      setOBJECT_ORDER(resOrder.data.result.length > 0 ? resOrder.data.result : [Order]);
+      setORDER_COUNT((prev: any) => ({
+        ...prev,
+        totalCnt: resOrder.data.totalCnt || 0,
+      }));
     })
     .catch((err: any) => {
       alert(err.response.data.msg);
@@ -68,105 +74,153 @@ export const AdminDashboard = () => {
     .finally(() => {
       setLOADING(false);
     });
-  };
+  }, [URL, SUBFIX, ORDER_PAGING, DATE?.today]);
 
   // 7. detailNode ---------------------------------------------------------------------------------
   const detailNode = () => {
     // 1. title
     const titleSection = () => (
       <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        공지사항 상세
+        관리자 대시보드
       </Div>
     );
-    // 2. detail
-    const detailSection = (i: number) => (
+    // 1. date
+    const dateSection = () => (
+      <DayPicker
+        OBJECT={DATE}
+        setOBJECT={setDATE}
+        extra={"today"}
+        variant={"outlined"}
+        i={0}
+      />
+    );
+    // 2. visit
+    const visitSection = (i: number) => (
       <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-8rem fw-700 black"}>
-              {OBJECT?.notice_title}
+          <Grid size={12} className={"d-row-center"}>
+            <Div className={"fs-1-8rem fw-700"}>
+              방문자 수
             </Div>
           </Grid>
-          <Hr px={10} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-center"}>
-            <Img
-              max={200}
-              hover={false}
-              shadow={true}
-              radius={false}
-              group={"notice"}
-              src={OBJECT?.notice_images?.[0]}
-              className={"w-100p h-auto"}
-            />
-          </Grid>
-          <Grid size={12} className={"d-center"}>
-            <TextArea
-              label={""}
-              required={true}
-              readOnly={true}
-              value={OBJECT?.notice_content}
-              inputclass={"h-35vh"}
-              className={"border-1 radius p-30"}
-            />
-          </Grid>
-          <Grid size={6} className={"d-row-left"}>
-            <Icons
-              key={"Calendar"}
-              name={"Calendar"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500"}>
-              {getDayFmt(OBJECT?.notice_regDt)}
+          <Grid size={12} className={"d-row-center"}>
+            <Div className={"fs-1-6rem fw-600 black me-5"}>
+              {OBJECT?.admin_visit_count || 0}
             </Div>
-          </Grid>
-          <Grid size={6} className={"d-row-right"}>
-            <Icons
-              key={"View"}
-              name={"View"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500"}>
-              {OBJECT?.notice_view}
+            <Div className={"fs-1-3rem fw-500 grey ms-10"}>
+              명
             </Div>
           </Grid>
         </Grid>
+      </Card>
+    );
+    // 3. order
+    const orderSection = (i: number) => (
+      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-row-center"}>
+            <Div className={"fs-1-8rem fw-700"}>
+              주문 내역
+            </Div>
+          </Grid>
+          <Grid size={3}>
+            <Div className={"fs-0-8rem fw-500"}>
+              유형
+            </Div>
+          </Grid>
+          <Grid size={6}>
+            <Div className={"fs-0-8rem fw-500"}>
+              금액
+            </Div>
+          </Grid>
+          <Grid size={3}>
+            <Div className={"fs-0-8rem fw-500"}>
+              이름
+            </Div>
+          </Grid>
+        </Grid>
+        <Hr px={40} className={"bg-burgundy"} />
+        {OBJECT_ORDER?.map((item: any, index: number) => (
+          <Grid container spacing={2} columns={12} key={index}>
+            <Grid size={3}>
+              <Div className={"fs-0-8rem"}>
+                {item?.order_category === "reservation" ? "매장 예약" : "제품 구매"}
+              </Div>
+            </Grid>
+            <Grid size={6}>
+              <Div max={15} className={"fs-1-0rem pointer-burgundy"}>
+                {`${numeral(item?.order_total_price).format("0,0")}`}
+              </Div>
+            </Grid>
+            <Grid size={3}>
+              <Div className={"fs-0-8rem"}>
+                {item?.order_name}
+              </Div>
+            </Grid>
+            <Hr px={1} className={"bg-light-grey mb-20"} />
+          </Grid>
+        ))}
       </Card>
     );
     // 3. filter
     const filterSection = (i: number) => (
       <Card className={"fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
-              onClick={() => {
-                navigate("/notice/list");
-              }}
+          <Grid size={4} className={"d-center"}>
+            <Select
+              label={"정렬"}
+              value={ORDER_PAGING?.sort}
+              inputclass={"h-min0 h-4vh"}
+              onChange={(e: any) => (
+                setORDER_PAGING((prev: any) => ({
+                  ...prev,
+                  sort: e.target.value
+                }))
+              )}
             >
-              목록으로
-            </Div>
+              {["asc", "desc"]?.map((item: string) => (
+                <MenuItem
+                  key={item}
+                  value={item}
+                  selected={ORDER_PAGING?.sort === item}
+                  onChange={(e: any) => (
+                    setORDER_PAGING((prev: any) => ({
+                      ...prev,
+                      sort: e.target.value
+                    }))
+                  )}
+                >
+                  <Div className={"fs-0-9rem"}>
+                    {item === "asc" && "오름차순"}
+                    {item === "desc" && "내림차순"}
+                  </Div>
+                </MenuItem>
+              ))}
+            </Select>
           </Grid>
-          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
-              onClick={() => {
-                navigate("/notice/update", {
-                  state: {
-                    _id: OBJECT?._id
-                  }
-                });
+          <Grid size={8} className={"d-center"}>
+            <TablePagination
+              rowsPerPageOptions={[10]}
+              rowsPerPage={10}
+              component={"div"}
+              labelRowsPerPage={""}
+              count={ORDER_COUNT.totalCnt}
+              page={ORDER_PAGING.page}
+              showFirstButton={true}
+              showLastButton={true}
+              onPageChange={(_event, newPage) => {
+                setORDER_PAGING((prev: any) => ({
+                  ...prev,
+                  page: newPage
+                }));
               }}
-            >
-              수정
-            </Div>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
-              onClick={() => {
-                flowDelete();
+              onRowsPerPageChange={(event) => {
+                setORDER_PAGING((prev: any) => ({
+                  ...prev,
+                  limit: parseFloat(event.target.value)
+                }));
               }}
-            >
-              삭제
-            </Div>
+            />
           </Grid>
         </Grid>
       </Card>
@@ -179,10 +233,15 @@ export const AdminDashboard = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {detailSection(0)}
+            {dateSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            <Hr px={20} className={"bg-grey"} />
+            {visitSection(0)}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {ORDER_COUNT.totalCnt <= 0 ? <Empty h={"30vh"} /> : orderSection(0)}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {filterSection(0)}
           </Grid>
         </Grid>

@@ -1,17 +1,32 @@
 // adminRepository.ts
 
-import { Visit } from "@schemas/Visit";
+import { Admin } from "@schemas/Admin";
+import { Order } from "@schemas/Order";
+import { newDate } from "@scripts/date";
 
-// 2. detail ---------------------------------------------------------------------------------------
-export const detail = async (
+// 1-0. visit (count) ------------------------------------------------------------------------------
+export const visitCount = async (
+  date_param: string,
+) => {
+  const finalResult = await Admin.countDocuments(
+    {
+      admin_date: date_param
+    }
+  );
+
+  return finalResult;
+};
+
+// 1-2. visit (detail) -----------------------------------------------------------------------------
+export const visitDetail = async (
   ip_param: string,
   date_param: string,
 ) => {
 
-  const finalResult:any = await Visit.findOne(
+  const finalResult:any = await Admin.findOne(
     {
-      visit_date: date_param,
-      visit_ip: ip_param
+      admin_visit_ip: ip_param,
+      admin_date: date_param,
     }
   )
   .lean();
@@ -19,19 +34,79 @@ export const detail = async (
   return finalResult;
 };
 
-// 3. save -----------------------------------------------------------------------------------------
-export const save = async (
+// 1-3. visit (save) -------------------------------------------------------------------------------
+export const visitSave = async (
   ip_param: string,
   date_param: string,
 ) => {
 
-  const finalResult = await Visit.create(
+  const finalResult:any = await Admin.create(
     {
-      visit_date: date_param,
-      visit_ip: ip_param,
-      visit_count: 1
+      admin_date: date_param,
+      admin_visit_ip: ip_param,
+      admin_visit_count: 1,
+      admin_regDt: newDate,
+      admin_updateDt: null,
     }
   );
+
+  return finalResult;
+};
+
+// 2-0. order (count) ------------------------------------------------------------------------------
+export const orderCount = async (
+  date_param: string,
+) => {
+  const finalResult = await Order.countDocuments(
+    {
+      order_date: date_param
+    }
+  );
+
+  return finalResult;
+};
+
+// 2-1. order (list) -------------------------------------------------------------------------------
+export const orderList = async (
+  date_param: string,
+  sort_param: 1 | -1,
+  page_param: number,
+) => {
+  const finalResult:any = await Order.aggregate([
+    {
+      $match: {
+        order_date: date_param
+      }
+    },
+    {
+      $project: {
+        _id: 1,
+        order_number: 1,
+        order_category: 1,
+        order_name: 1,
+        order_email: 1,
+        order_phone: 1,
+        order_date: 1,
+        order_time: 1,
+        order_headcount: 1,
+        order_total_price: 1,
+        order_product: 1,
+        order_regDt: 1,
+        order_updateDt: 1,
+      }
+    },
+    {
+      $sort: {
+        order_number: sort_param
+      }
+    },
+    {
+      $skip: (page_param) * 10
+    },
+    {
+      $limit: 10
+    }
+  ]);
 
   return finalResult;
 };

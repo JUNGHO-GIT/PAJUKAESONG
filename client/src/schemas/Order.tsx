@@ -1,5 +1,7 @@
 // Order.tsx
 
+import { moment } from "@imports/ImportLibs";
+
 // -------------------------------------------------------------------------------------------------
 export const Order: any = {
 
@@ -10,7 +12,7 @@ export const Order: any = {
   order_name: "",
   order_email: "",
   order_phone: "",
-  order_date: new Date(),
+  order_date: moment().tz("Asia/Seoul").format("YYYY-MM-DD"),
   order_time: "11:00",
   order_headcount: "1",
   order_total_price: "",
