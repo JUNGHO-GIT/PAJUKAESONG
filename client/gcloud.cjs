@@ -36,13 +36,14 @@ const runRemoteScript = () => {
   const keyPath = winOrLinux === "win" ? "C:\\Users\\jungh\\.ssh\\JKEY" : "~/ssh/JKEY";
   const serviceId = winOrLinux === "win" ? 'junghomun00' : 'junghomun1234';
   const ipAddr = "34.23.233.23";
-  const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/client';
+  const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/client'
   const cmdGs = 'sudo gcloud storage cp gs://jungho-bucket/PAJUKAESONG/SERVER/build.tar.gz .';
   const cmdTar = 'sudo tar -zvxf build.tar.gz --strip-components=1';
   const cmdRm = 'sudo rm build.tar.gz';
+  const cmdCh = 'sudo chmod -R 755 /var/www/pajukaesong.com/PAJUKAESONG/client'
   const cmdRestart = 'sudo systemctl restart nginx';
 
-  const winCommand = `powershell -Command "ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGs} && ${cmdTar} && ${cmdRm} && ${cmdRestart}\'"
+  const winCommand = `powershell -Command "ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGs} && ${cmdTar} && ${cmdRm} && ${cmdCh} && ${cmdRestart}\'"
   `;
 
   const linuxCommand = `ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGs} && ${cmdTar} && ${cmdRm} && ${cmdRestart}\'`;
