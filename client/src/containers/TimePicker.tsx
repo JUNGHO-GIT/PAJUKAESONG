@@ -28,8 +28,9 @@ export const TimePicker = (
         type={"innerCenter"}
         position={"center"}
         direction={"center"}
+        padding={"20px"}
         contents={({closePopup}: any) => (
-          <Card className={"w-30vw h-40vh p-0"}>
+          <Card className={"w-50vw p-0"}>
             <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"ko"}>
               <DigitalClock
                 ampm={false}

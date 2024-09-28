@@ -153,14 +153,14 @@ export const ProductList = () => {
             />
           </Grid>
           <Grid size={2} className={`${isAdmin ? "d-center" : "d-none"}`}>
-            <Btn
-              className={"bg-burgundy"}
+            <Div
+              className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {
                 navigate("/product/save");
               }}
             >
               등록
-            </Btn>
+            </Div>
           </Grid>
         </Grid>
       </Card>

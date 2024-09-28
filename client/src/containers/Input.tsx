@@ -17,6 +17,7 @@ export const Input = (props: any) => (
     slotProps={{
       ...props?.slotProps,
       input: {
+        ...props?.slotProps?.input,
         readOnly: (
           props?.readOnly || false
         ),
@@ -59,6 +60,7 @@ export const Input = (props: any) => (
         ),
       },
       inputLabel: {
+        ...props?.slotProps?.inputLabel,
         shrink: (props?.shrink === "shrink" ? true : undefined),
       }
     }}

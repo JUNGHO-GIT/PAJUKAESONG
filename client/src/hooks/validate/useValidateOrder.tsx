@@ -19,7 +19,7 @@ export const useValidateOrder = () => {
     alert(msg);
     setTimeout(() => {
       REFS?.current?.[idx]?.[field]?.current?.focus();
-    }, 10);
+    }, 0);
     setERRORS((prev) => {
       const updatedErrors = [...prev];
       updatedErrors[idx] = {
@@ -42,104 +42,105 @@ export const useValidateOrder = () => {
     const phoneRegex = /^\d{3}-\d{3,4}-\d{4}$/;
     return phoneRegex.test(phone);
   };
-
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    validate.current = (OBJECT: any) => {
-      try {
-        // 1. find
-        if (PATH.includes("/order/find")) {
-          const target = [
-            "order_name",
-            "order_phone",
-          ];
-          REFS.current = (
-            Array.from({ length: 1 }, (_, _idx) => (
-              target.reduce((acc, cur) => ({
-                ...acc,
-                [cur]: createRef()
-              }), {})
-            ))
-          );
-          setERRORS (
-            Array.from({ length: 1 }, (_, _idx) => (
-              target.reduce((acc, cur) => ({
-                ...acc,
-                [cur]: false
-              }), {})
-            ))
-          );
-          if (!OBJECT?.order_name) {
-            return showAlertAndFocus('order_name', "이름을 입력해주세요.", 0);
-          }
-          else if (!OBJECT?.order_phone) {
-            return showAlertAndFocus('order_phone', "전화번호를 입력해주세요.", 0);
-          }
-          return true;
-        }
-
-        // 2. save
-        if (PATH.includes("/order/save") || PATH.includes("/order/update")) {
-          const target = [
-            "order_category",
-            "order_name",
-            "order_email",
-            "order_phone",
-            "order_date",
-            "order_time",
-            "order_headcount",
-          ];
-          REFS.current = (
-            Array.from({ length: 1 }, (_, _idx) => (
-              target.reduce((acc, cur) => ({
-                ...acc,
-                [cur]: createRef()
-              }), {})
-            ))
-          );
-          setERRORS (
-            Array.from({ length: 1 }, (_, _idx) => (
-              target.reduce((acc, cur) => ({
-                ...acc,
-                [cur]: false
-              }), {})
-            ))
-          );
-          if (!OBJECT?.order_category) {
-            return showAlertAndFocus('order_category', "주문 유형을 선택해주세요.", 0);
-          }
-          else if (!OBJECT?.order_name) {
-            return showAlertAndFocus('order_name', "이름을 입력해주세요.", 0);
-          }
-          else if (!OBJECT?.order_email) {
-            return showAlertAndFocus('order_email', "이메일을 입력해주세요.", 0);
-          }
-          else if (!validateEmail(OBJECT?.order_email)) {
-            return showAlertAndFocus('order_email', "이메일 형식으로 입력해주세요.", 0);
-          }
-          else if (!OBJECT?.order_phone) {
-            return showAlertAndFocus('order_phone', "전화번호를 입력해주세요.", 0);
-          }
-          else if (!validatePhone(OBJECT?.order_phone)) {
-            return showAlertAndFocus('order_phone', "전화번호 형식으로 입력해주세요.", 0);
-          }
-          else if (!OBJECT?.order_date) {
-            return showAlertAndFocus('order_date', "주문 날짜를 선택해주세요.", 0);
-          }
-          else if (!OBJECT?.order_time) {
-            return showAlertAndFocus('order_time', "주문 시간을 선택해주세요.", 0);
-          }
-          else if (!OBJECT?.order_headcount) {
-            return showAlertAndFocus('order_headcount', "인원을 입력해주세요.", 0);
-          }
-          return true;
-        }
-      }
-      catch (err: any) {
-        console.error(err);
-      }
+    if (PATH.includes("/order/find")) {
+      const target = [
+        "order_name",
+        "order_phone",
+      ];
+      REFS.current = (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: createRef()
+          }), {})
+        ))
+      );
+      setERRORS (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: false
+          }), {})
+        ))
+      );
+    }
+    if (PATH.includes("/order/save") || PATH.includes("/order/update")) {
+      const target = [
+        "order_category",
+        "order_name",
+        "order_email",
+        "order_phone",
+        "order_date",
+        "order_time",
+        "order_headcount",
+      ];
+      REFS.current = (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: createRef()
+          }), {})
+        ))
+      );
+      setERRORS (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: false
+          }), {})
+        ))
+      );
     }
   }, [PATH]);
+  
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  if (PATH.includes("/order/find")) {
+    validate.current = (OBJECT: any) => {
+      if (!OBJECT?.order_name) {
+        return showAlertAndFocus('order_name', "이름을 입력해주세요.", 0);
+      }
+      else if (!OBJECT?.order_phone) {
+        return showAlertAndFocus('order_phone', "전화번호를 입력해주세요.", 0);
+      }
+      return true;
+    }
+  }
+
+  // 2. save
+  if (PATH.includes("/order/save") || PATH.includes("/order/update")) {
+    validate.current = (OBJECT: any) => {
+      if (!OBJECT?.order_category) {
+        return showAlertAndFocus('order_category', "주문 유형을 선택해주세요.", 0);
+      }
+      else if (!OBJECT?.order_name) {
+        return showAlertAndFocus('order_name', "이름을 입력해주세요.", 0);
+      }
+      else if (!OBJECT?.order_email) {
+        return showAlertAndFocus('order_email', "이메일을 입력해주세요.", 0);
+      }
+      else if (!validateEmail(OBJECT?.order_email)) {
+        return showAlertAndFocus('order_email', "이메일 형식으로 입력해주세요.", 0);
+      }
+      else if (!OBJECT?.order_phone) {
+        return showAlertAndFocus('order_phone', "전화번호를 입력해주세요.", 0);
+      }
+      else if (!validatePhone(OBJECT?.order_phone)) {
+        return showAlertAndFocus('order_phone', "전화번호 형식으로 입력해주세요.", 0);
+      }
+      else if (!OBJECT?.order_date) {
+        return showAlertAndFocus('order_date', "주문 날짜를 선택해주세요.", 0);
+      }
+      else if (!OBJECT?.order_time) {
+        return showAlertAndFocus('order_time', "주문 시간을 선택해주세요.", 0);
+      }
+      else if (!OBJECT?.order_headcount) {
+        return showAlertAndFocus('order_headcount', "인원을 입력해주세요.", 0);
+      }
+      return true;
+    };
+  }
 
   // 10. return ------------------------------------------------------------------------------------
   return {

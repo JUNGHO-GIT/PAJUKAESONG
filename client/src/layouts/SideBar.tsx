@@ -62,7 +62,7 @@ export const SideBar = (
         shadow={false}
         radius={false}
         group={"main"}
-        src={"logo1_3.webp"}
+        src={"logo1.webp"}
         className={"pointer m-10 h-max50"}
         onClick={() => {
           navigate("/main");
@@ -207,7 +207,7 @@ export const SideBar = (
           "& .MuiDrawer-paper": {
             width: "240px",
             padding: "15px",
-            backgroundColor: "#fffcf3",
+            backgroundColor: "#ffffff",
           },
         }}
       >

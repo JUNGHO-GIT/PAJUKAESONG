@@ -37,7 +37,7 @@ export const DayPicker = (
         type={"innerCenter"}
         position={"center"}
         direction={"center"}
-        padding={"10px"}
+        padding={"20px"}
         contents={({closePopup}: any) => (
           <Card className={"p-0"}>
             <Grid container spacing={3} columns={12} direction={"column"}>

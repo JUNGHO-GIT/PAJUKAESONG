@@ -94,7 +94,7 @@ export const NoticeList = () => {
             </Grid>
             <Grid size={6}>
               <Div
-                max={15}
+                max={10}
                 className={"fs-1-0rem pointer-burgundy"}
                 onClick={() => {
                   navigate('/notice/detail', {
@@ -112,7 +112,12 @@ export const NoticeList = () => {
                 {getDayFmt(item?.notice_regDt)}
               </Div>
             </Grid>
-            <Hr px={1} className={"bg-light-grey mb-20"} />
+            {/** 마지막 항목 제외 hr 추가 */}
+            {index !== OBJECT?.length - 1 && (
+              <Grid size={12}>
+                <Hr px={5} className={"mb-10 bg-light-grey"} />
+              </Grid>
+            )}
           </Grid>
         ))}
       </Card>
@@ -178,14 +183,14 @@ export const NoticeList = () => {
             />
           </Grid>
           <Grid size={2} className={`${isAdmin ? "d-center" : "d-none"}`}>
-            <Btn
-              className={"bg-burgundy"}
+            <Div
+              className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {
                 navigate("/notice/save");
               }}
             >
               등록
-            </Btn>
+            </Div>
           </Grid>
         </Grid>
       </Card>
