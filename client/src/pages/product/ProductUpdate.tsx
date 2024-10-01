@@ -8,7 +8,7 @@ import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
 import { Div, Btn } from "@imports/ImportComponents";
-import { Input, FileInput, Select } from "@imports/ImportContainers";
+import { Input, InputFile, Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -191,7 +191,7 @@ export const ProductUpdate = () => {
             />
           </Grid>
           <Grid size={12}>
-            <FileInput
+            <InputFile
               variant={"outlined"}
               label={"제품 이미지"}
               required={true}

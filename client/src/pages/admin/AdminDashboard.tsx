@@ -7,7 +7,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Admin, Order } from "@imports/ImportSchemas";
 import { Empty } from "@imports/ImportContainers";
 import { Div, Hr } from "@imports/ImportComponents";
-import { DayPicker, Select } from "@imports/ImportContainers";
+import { PickerDay, Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ export const AdminDashboard = () => {
     );
     // 1. date
     const dateSection = () => (
-      <DayPicker
+      <PickerDay
         OBJECT={DATE}
         setOBJECT={setDATE}
         extra={"today"}

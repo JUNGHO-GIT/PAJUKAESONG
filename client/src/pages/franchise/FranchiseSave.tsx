@@ -8,7 +8,7 @@ import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
 import { Div, Btn } from "@imports/ImportComponents";
-import { Input, FileInput } from "@imports/ImportContainers";
+import { Input, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ export const FranchiseSave = () => {
             />
           </Grid>
           <Grid size={12}>
-            <FileInput
+            <InputFile
               variant={"outlined"}
               label={"가맹점 이미지"}
               required={true}

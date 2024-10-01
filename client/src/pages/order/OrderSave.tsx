@@ -7,7 +7,7 @@ import { axios, numeral } from "@imports/ImportLibs";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Div, Hr, Btn, Img, Icons } from "@imports/ImportComponents";
-import { Input, Select, TimePicker, DayPicker } from "@imports/ImportContainers";
+import { Input, Select, PickerTime, PickerDay } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -372,7 +372,7 @@ export const OrderSave = () => {
             </Select>
           </Grid>
           <Grid size={12}>
-            <DayPicker
+            <PickerDay
               OBJECT={OBJECT}
               setOBJECT={setOBJECT}
               REFS={REFS}
@@ -382,7 +382,7 @@ export const OrderSave = () => {
             />
           </Grid>
           <Grid size={12}>
-            <TimePicker
+            <PickerTime
               OBJECT={OBJECT}
               setOBJECT={setOBJECT}
               REFS={REFS}

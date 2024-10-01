@@ -8,7 +8,7 @@ import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Div, Btn } from "@imports/ImportComponents";
-import { Input, TextArea, FileInput } from "@imports/ImportContainers";
+import { Input, TextArea, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ export const NoticeSave = () => {
             />
           </Grid>
           <Grid size={12}>
-            <FileInput
+            <InputFile
               variant={"outlined"}
               label={"공지사항 이미지"}
               required={true}

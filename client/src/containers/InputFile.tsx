@@ -1,11 +1,11 @@
-// FileInput.tsx
+// InputFile.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { Div, Br, Img } from "@imports/ImportComponents";
 import { MuiFileInput, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const FileInput = ({ handleExistingFilesChange, ...props }: any) => {
+export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [fileExisting, setFileExisting] = useState<any[]>([]);

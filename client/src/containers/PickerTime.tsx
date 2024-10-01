@@ -6,7 +6,7 @@ import { Card } from "@imports/ImportMuis";
 import { DigitalClock, AdapterMoment, LocalizationProvider } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-declare interface TimePickerProps {
+declare interface PickerTimeProps {
   OBJECT: any;
   setOBJECT: any;
   REFS: any;
@@ -16,8 +16,8 @@ declare interface TimePickerProps {
 }
 
 // -------------------------------------------------------------------------------------------------
-export const TimePicker = (
-  { OBJECT, setOBJECT, REFS, ERRORS, extra, i }: TimePickerProps
+export const PickerTime = (
+  { OBJECT, setOBJECT, REFS, ERRORS, extra, i }: PickerTimeProps
 ) => {
 
   // 7. time ---------------------------------------------------------------------------------------

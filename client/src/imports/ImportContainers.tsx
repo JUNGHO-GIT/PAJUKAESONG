@@ -6,9 +6,9 @@ import { Location } from "@containers/Location";
 import { Input } from "@containers/Input";
 import { Select } from "@containers/Select";
 import { TextArea } from "@containers/TextArea";
-import { FileInput } from "@containers/FileInput";
-import { TimePicker } from "../containers/TimePicker";
-import { DayPicker } from "../containers/DayPicker";
+import { InputFile } from "@containers/InputFile";
+import { PickerTime } from "../containers/PickerTime";
+import { PickerDay } from "../containers/PickerDay";
 
 
 // -------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ export {
   Input,
   Select,
   TextArea,
-  FileInput,
-  TimePicker,
-  DayPicker,
+  InputFile,
+  PickerTime,
+  PickerDay,
 };

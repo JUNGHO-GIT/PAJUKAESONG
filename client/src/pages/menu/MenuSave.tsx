@@ -8,7 +8,7 @@ import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
 import { Div, Btn } from "@imports/ImportComponents";
-import { Input, Select, FileInput } from "@imports/ImportContainers";
+import { Input, Select, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -174,7 +174,7 @@ export const MenuSave = () => {
             />
           </Grid>
           <Grid size={12}>
-            <FileInput
+            <InputFile
               variant={"outlined"}
               label={"메뉴 이미지"}
               required={true}

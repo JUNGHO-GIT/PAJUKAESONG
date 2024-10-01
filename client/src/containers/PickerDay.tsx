@@ -1,4 +1,4 @@
-// DayPicker.tsx
+// PickerDay.tsx
 
 import { useCommonDate } from "@imports/ImportHooks";
 import { Btn, Div } from "@imports/ImportComponents";
@@ -7,7 +7,7 @@ import { PickersDay, Grid, Card } from "@imports/ImportMuis";
 import { DateCalendar, AdapterMoment, LocalizationProvider } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
-declare interface DayPickerProps {
+declare interface PickerDayProps {
   OBJECT: any;
   setOBJECT: any;
   REFS?: any;
@@ -18,8 +18,8 @@ declare interface DayPickerProps {
 }
 
 // -------------------------------------------------------------------------------------------------
-export const DayPicker = (
-  { OBJECT, setOBJECT, REFS, ERRORS, extra, variant, i }: DayPickerProps
+export const PickerDay = (
+  { OBJECT, setOBJECT, REFS, ERRORS, extra, variant, i }: PickerDayProps
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------

@@ -8,7 +8,7 @@ import { makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
 import { Div, Btn } from "@imports/ImportComponents";
-import { Select, Input, TextArea, FileInput } from "@imports/ImportContainers";
+import { Select, Input, TextArea, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -235,7 +235,7 @@ export const ContactUpdate = () => {
             />
           </Grid>
           <Grid size={12}>
-            <FileInput
+            <InputFile
               variant={"outlined"}
               label={"문의 이미지"}
               required={true}
