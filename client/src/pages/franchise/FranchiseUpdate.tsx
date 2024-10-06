@@ -3,9 +3,9 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateFranchise } from "@imports/ImportValidates";
-import { axios } from "@imports/ImportLibs";
+import { axios } from "@imports/ImportUtils";
 import { makeFormData } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
+import { Loading, Empty } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
 import { Div, Btn } from "@imports/ImportComponents";
 import { Input, InputFile } from "@imports/ImportContainers";
@@ -53,7 +53,7 @@ export const FranchiseUpdate = () => {
   // 3. flow ---------------------------------------------------------------------------------------
   const flowUpdate = () => {
     setLOADING(true);
-    if (!validate(OBJECT, fileList)) {
+    if (!validate(OBJECT, fileList, "update")) {
       setLOADING(false);
       return;
     }
@@ -125,7 +125,7 @@ export const FranchiseUpdate = () => {
     );
     // 2. update
     const updateSection = (i: number) => (
-      <Card className={"border-1 shadow-1 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 shadow-1 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Input

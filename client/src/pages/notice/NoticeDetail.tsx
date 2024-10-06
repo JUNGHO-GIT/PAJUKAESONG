@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { axios } from "@imports/ImportLibs";
-import { Loading } from "@imports/ImportLayouts";
+import { axios } from "@imports/ImportUtils";
+import { Loading, Empty } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Div, Hr, Icons, Img } from "@imports/ImportComponents";
 import { TextArea } from "@imports/ImportContainers";
@@ -106,7 +106,7 @@ export const NoticeDetail = () => {
               readOnly={true}
               value={OBJECT?.notice_content}
               inputclass={"h-35vh"}
-              className={"border-1 radius p-30"}
+              className={"border-1 radius-1 p-30"}
             />
           </Grid>
           <Grid size={6} className={"d-row-left"}>

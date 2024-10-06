@@ -17,11 +17,11 @@ import {
 } from "@imports/ImportMuis";
 
 import {
-  useRoot, useScrollTop, useTimeZone
+  useRoot, useScrollTop, useLocale
 } from "@imports/ImportHooks";
 
 import {
-  Header, Footer
+  Header, Footer, Alert
 } from "@imports/ImportLayouts";
 
 import {
@@ -154,7 +154,7 @@ const User = () => (
 const App = () => {
 
   useRoot();
-  useTimeZone();
+  useLocale();
   useScrollTop();
 
   return (
@@ -172,6 +172,7 @@ const App = () => {
         <Route path={"/product/*"} element={<Product />} />
         <Route path={"/user/*"} element={<User />} />
       </Routes>
+      {<Alert />}
       <Footer />
     </div>
   );

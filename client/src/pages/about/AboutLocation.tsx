@@ -17,7 +17,7 @@ export const AboutLocation = () => {
     );
     // 2. location
     const locationSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius fadeIn p-0"} key={i}>
+      <Card className={"border-1 shadow-3 radius-1 fadeIn p-0"} key={i}>
         <Location
           width={"100%"}
           height={"60vh"}
@@ -27,11 +27,11 @@ export const AboutLocation = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-center"}>
             {titleSection()}
           </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-center"}>
             {locationSection(0)}
           </Grid>
         </Grid>

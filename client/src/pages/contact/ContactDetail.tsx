@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { axios } from "@imports/ImportLibs";
-import { Loading } from "@imports/ImportLayouts";
+import { axios } from "@imports/ImportUtils";
+import { Loading, Empty } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
 import { Div, Hr, Icons } from "@imports/ImportComponents";
 import { TextArea } from "@imports/ImportContainers";
@@ -101,7 +101,7 @@ export const ContactDetail = () => {
               label={""}
               disabled={true}
               inputclass={"h-35vh"}
-              className={"border-1 radius p-30"}
+              className={"border-1 radius-1 p-30"}
               value={OBJECT?.contact_content}
             />
           </Grid>

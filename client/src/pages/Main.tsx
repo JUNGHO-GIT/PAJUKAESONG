@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
-import { Swiper, SwiperSlide, Autoplay, axios } from "@imports/ImportLibs";
-import { Pagination } from "@imports/ImportLibs";
+import { Swiper, SwiperSlide, Autoplay, axios } from "@imports/ImportUtils";
+import { Pagination } from "@imports/ImportUtils";
 import { Menu, Notice } from "@imports/ImportSchemas";
 import { Location } from "@imports/ImportContainers";
 import { Div, Img, Br, Hr } from "@imports/ImportComponents";

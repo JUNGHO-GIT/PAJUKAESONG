@@ -67,27 +67,47 @@ const modifyChangelog = () => {
 
 // git push ----------------------------------------------------------------------------------------
 const gitPush = () => {
-  execSync('git add .', { stdio: 'inherit' });
-  execSync('git commit -m "update"', { stdio: 'inherit' });
-  execSync('git push origin main', { stdio: 'inherit' });
+  const gitAdd = 'git add .';
+  const gitCommit = (
+    winOrLinux === "win"
+    ? 'git commit -m \"%date% %time:~0,8%\"'
+    : 'git commit -m \"$(date +%Y-%m-%d) $(date +%H:%M:%S)\"'
+  );
+  const gitPush = 'git push origin main';
+
+  execSync(gitAdd, { stdio: 'inherit' });
+  execSync(gitCommit, { stdio: 'inherit' });
+  execSync(gitPush, { stdio: 'inherit' });
 };
 
 // 원격 서버에서 스크립트 실행 ---------------------------------------------------------------------
 const runRemoteScript = () => {
-  const keyPath = winOrLinux === "win" ? "C:\\Users\\jungh\\.ssh\\JKEY" : "~/ssh/JKEY";
-  const serviceId = winOrLinux === "win" ? 'junghomun00' : 'junghomun1234';
+
+  const keyPath = (
+    winOrLinux === "win"
+    ? "C:\\Users\\jungh\\.ssh\\JKEY"
+    : "~/ssh/JKEY"
+  );
+
+  const serviceId = (
+    winOrLinux === "win"
+    ? 'junghomun00'
+    : 'junghomun1234'
+  );
+
   const ipAddr = "34.23.233.23";
   const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/server';
   const cmdGitFetch = 'sudo git fetch --all';
   const cmdGitReset = 'sudo git reset --hard origin/main';
   const cmdRmClient = 'sudo rm -rf client';
+  const cmdCh = 'sudo chmod -R 755 /var/www/pajukaesong.com/PAJUKAESONG/server';
   const cmdNpm = 'sudo npm install';
   const cmdRestart = 'sudo pm2 restart all';
   const cmdSave = 'sudo pm2 save';
 
-  const winCommand = `powershell -Command "ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'"
+  const winCommand = `powershell -Command "ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdCh} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'"
   `;
-  const linuxCommand = `ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'`;
+  const linuxCommand = `ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdCh} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'`;
 
   const sshCommand = winOrLinux === "win" ? winCommand : linuxCommand;
 

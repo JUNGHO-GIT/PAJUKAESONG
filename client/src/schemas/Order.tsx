@@ -1,6 +1,6 @@
 // Order.tsx
 
-import { moment } from "@imports/ImportLibs";
+import { moment } from "@imports/ImportUtils";
 
 // -------------------------------------------------------------------------------------------------
 export const Order: any = {

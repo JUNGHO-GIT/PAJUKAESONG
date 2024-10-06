@@ -1,3 +1,5 @@
+// utils.js
+
 // 1-1. number -------------------------------------------------------------------------------------
 export const randomNumber = (data: number) => {
   return Math.floor(Math.random() * data);
@@ -48,7 +50,7 @@ export const log = (name: string, data: any) => {
   const cache = new Set();
 
   // 순환 참조 발견
-  const jsonString = JSON.stringify(data, (key, value) => {
+  const jsonString = JSON.stringify(data, (_, value) => {
     if (typeof value === "object" && value !== null) {
       if (cache.has(value)) {
         return "[Circular]";

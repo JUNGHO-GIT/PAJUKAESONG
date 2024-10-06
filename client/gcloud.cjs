@@ -33,8 +33,18 @@ const deleteBuildTar = () => {
 
 // 원격 서버에서 스크립트 실행 ---------------------------------------------------------------------
 const runRemoteScript = () => {
-  const keyPath = winOrLinux === "win" ? "C:\\Users\\jungh\\.ssh\\JKEY" : "~/ssh/JKEY";
-  const serviceId = winOrLinux === "win" ? 'junghomun00' : 'junghomun1234';
+
+  const keyPath = (
+    winOrLinux === "win"
+    ? "C:\\Users\\jungh\\.ssh\\JKEY"
+    : "~/ssh/JKEY"
+  );
+
+  const serviceId = (
+    winOrLinux === "win"
+    ? 'junghomun00'
+    : 'junghomun1234'
+  );
   const ipAddr = "34.23.233.23";
   const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/client'
   const cmdGs = 'sudo gcloud storage cp gs://jungho-bucket/PAJUKAESONG/SERVER/build.tar.gz .';

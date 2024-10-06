@@ -1,13 +1,13 @@
 // useValidateOrder.tsx
 
-import { useState, useEffect, createRef, useRef } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
+import { useState, createRef, useRef } from "@imports/ImportReacts";
+import { useAlertStore } from "@imports/ImportStores";
 
 // -------------------------------------------------------------------------------------------------
 export const useValidateOrder = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { PATH } = useCommonValue();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const REFS = useRef<any[]>([]);
@@ -16,18 +16,24 @@ export const useValidateOrder = () => {
 
   // alert 표시 및 focus ---------------------------------------------------------------------------
   const showAlertAndFocus = (field: string, msg: string, idx: number) => {
-    alert(msg);
-    setTimeout(() => {
-      REFS?.current?.[idx]?.[field]?.current?.focus();
-    }, 0);
-    setERRORS((prev) => {
-      const updatedErrors = [...prev];
-      updatedErrors[idx] = {
-        ...updatedErrors[idx],
-        [field]: true,
-      };
-      return updatedErrors;
+    setALERT({
+      open: !ALERT.open,
+      msg: msg,
+      severity: "error",
     });
+    if (field) {
+      setTimeout(() => {
+        REFS?.current?.[idx]?.[field]?.current?.focus();
+      }, 10);
+      setERRORS((prev) => {
+        const updatedErrors = [...prev];
+        updatedErrors[idx] = {
+          ...updatedErrors[idx],
+          [field]: true,
+        };
+        return updatedErrors;
+      });
+    }
     return false;
   };
 
@@ -42,31 +48,12 @@ export const useValidateOrder = () => {
     const phoneRegex = /^\d{3}-\d{3,4}-\d{4}$/;
     return phoneRegex.test(phone);
   };
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (PATH.includes("/order/find")) {
-      const target = [
-        "order_name",
-        "order_phone",
-      ];
-      REFS.current = (
-        Array.from({ length: 1 }, (_, _idx) => (
-          target.reduce((acc, cur) => ({
-            ...acc,
-            [cur]: createRef()
-          }), {})
-        ))
-      );
-      setERRORS (
-        Array.from({ length: 1 }, (_, _idx) => (
-          target.reduce((acc, cur) => ({
-            ...acc,
-            [cur]: false
-          }), {})
-        ))
-      );
-    }
-    if (PATH.includes("/order/save") || PATH.includes("/order/update")) {
+
+  // 7. validate -----------------------------------------------------------------------------------
+  validate.current = (OBJECT: any, fileList?: any, extra?:string) => {
+
+    // 1. save, update
+    if (extra === "save" || extra === "update") {
       const target = [
         "order_category",
         "order_name",
@@ -92,25 +79,6 @@ export const useValidateOrder = () => {
           }), {})
         ))
       );
-    }
-  }, [PATH]);
-  
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  if (PATH.includes("/order/find")) {
-    validate.current = (OBJECT: any) => {
-      if (!OBJECT?.order_name) {
-        return showAlertAndFocus('order_name', "이름을 입력해주세요.", 0);
-      }
-      else if (!OBJECT?.order_phone) {
-        return showAlertAndFocus('order_phone', "전화번호를 입력해주세요.", 0);
-      }
-      return true;
-    }
-  }
-
-  // 2. save
-  if (PATH.includes("/order/save") || PATH.includes("/order/update")) {
-    validate.current = (OBJECT: any) => {
       if (!OBJECT?.order_category) {
         return showAlertAndFocus('order_category', "주문 유형을 선택해주세요.", 0);
       }
@@ -139,8 +107,39 @@ export const useValidateOrder = () => {
         return showAlertAndFocus('order_headcount', "인원을 입력해주세요.", 0);
       }
       return true;
-    };
-  }
+    }
+
+    // 2. find
+    else if (extra === "find") {
+      const target = [
+        "order_name",
+        "order_phone",
+      ];
+      REFS.current = (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: createRef()
+          }), {})
+        ))
+      );
+      setERRORS (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: false
+          }), {})
+        ))
+      );
+      if (!OBJECT?.order_name) {
+        return showAlertAndFocus('order_name', "이름을 입력해주세요.", 0);
+      }
+      else if (!OBJECT?.order_phone) {
+        return showAlertAndFocus('order_phone', "전화번호를 입력해주세요.", 0);
+      }
+      return true;
+    }
+  };
 
   // 10. return ------------------------------------------------------------------------------------
   return {

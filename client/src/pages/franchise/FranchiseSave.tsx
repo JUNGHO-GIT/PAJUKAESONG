@@ -3,9 +3,9 @@
 import { useState } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateFranchise } from "@imports/ImportValidates";
-import { axios } from "@imports/ImportLibs";
+import { axios } from "@imports/ImportUtils";
 import { makeFormData } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
+import { Loading, Empty } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
 import { Div, Btn } from "@imports/ImportComponents";
 import { Input, InputFile } from "@imports/ImportContainers";
@@ -33,7 +33,7 @@ export const FranchiseSave = () => {
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = () => {
     setLOADING(true);
-    if (!validate(OBJECT, fileList)) {
+    if (!validate(OBJECT, fileList, "save")) {
       setLOADING(false);
       return;
     }

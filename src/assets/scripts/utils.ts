@@ -5,8 +5,6 @@ dotenv.config();
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 
-
-
 // 1-1. number -------------------------------------------------------------------------------------
 export const randomNumber = (data: number) => {
   return Math.floor(Math.random() * data);
@@ -15,6 +13,7 @@ export const randomNumber = (data: number) => {
 export const randomTime = () => {
   const hour = Math.floor(Math.random() * 23).toString().padStart(2, '0');
   const minute = Math.floor(Math.random() * 60).toString().padStart(2, '0');
+
   return `${hour}:${minute}`;
 }
 // 1-3. date ---------------------------------------------------------------------------------------
@@ -22,62 +21,61 @@ export const calcDate = (startTime: string, endTime: string) => {
   const start = new Date(`1970/01/01 ${startTime}`);
   const end = new Date(`1970/01/01 ${endTime}`);
   const duration = new Date(Number(end) - Number(start) + 24 * 60 * 60 * 1000);
+
   return `${duration.getHours().toString().padStart(2, '0')}:${duration.getMinutes().toString().padStart(2, '0')}`;
 }
 
-
-
-// 2-1. timeToDecimal ------------------------------------------------------------------------------
+// 1-2. format -------------------------------------------------------------------------------------
 export const timeToDecimal = (data: string) => {
-  if (!data) {
-    return "0";
+  if (typeof data !== 'string' || !data || data === null || data === undefined) {
+    return 0;
   }
   const time = data.split(":");
-  if (time.length === 2) {
-    const hours = parseFloat(time[0]);
-    const minutes = parseFloat(time[1]) / 60;
-    return (hours + minutes).toFixed(1).toString();
+  if (time.length !== 2) {
+    return 0;
   }
-  return "0";
+  // 10분 단위로 반올림
+  const hours = parseFloat(time[0]);
+  const minutes = Math.round(parseFloat(time[1]) / 10) * 10 / 60;
+
+  return hours + minutes;
 };
-// 2-2. decimalToTime ------------------------------------------------------------------------------
-export const decimalToTime = (data: string) => {
-  if (!data) {
+
+export const decimalToTime = (data: number) => {
+  if (typeof data !== 'number' || !data || isNaN(data) || data === null || data === undefined) {
     return "00:00";
   }
-  const floatHours = parseFloat(data);
+  // 10분 단위로 반올림
+  const floatHours = parseFloat(data.toString());
   const hours = Math.floor(floatHours);
-  const minutes = Math.round((floatHours - hours) * 60);
+  const minutes = Math.round((floatHours - hours) * 60 / 10) * 10;
+
   return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 };
 
-
-
-// 3-1. strToDecimal -------------------------------------------------------------------------------
-export const strToDecimal = (time: string) => {
-  if (!time) {
+// 1-2. convert ------------------------------------------------------------------------------------
+export const strToDecimal = (data: string) => {
+  if (!data || data === null || data === undefined) {
     return 0;
   }
-  const [hours, minutes] = time.split(":").map(Number);
+  const [hours, minutes] = data.split(":").map(Number);
   const adjustedHours = hours + Math.floor(minutes / 60);
   const adjustedMinutes = minutes % 60;
 
   return adjustedHours + adjustedMinutes / 60;
 };
-// 3-2. decimalToStr -------------------------------------------------------------------------------
-export const decimalToStr = (time: number) => {
-  if (time === null || time === undefined) {
+
+export const decimalToStr = (data: number) => {
+  if (!data || isNaN(data) || data === null || data === undefined) {
     return "00:00";
   }
-  const hours = Math.floor(time);
-  const minutes = Math.round((time - hours) * 60);
+  const hours = Math.floor(data);
+  const minutes = Math.round((data - hours) * 60);
   const adjustedHours = hours + Math.floor(minutes / 60);
   const adjustedMinutes = minutes % 60;
 
   return `${String(adjustedHours).padStart(2, "0")}:${String(adjustedMinutes).padStart(2, "0")}`;
 };
-
-
 
 // 4-1. token --------------------------------------------------------------------------------------
 export const token: string = crypto.randomBytes(20).toString('hex');
@@ -106,26 +104,3 @@ export const hashPw = async (combinedPw: string) => {
 export const comparePw = async (inputPw: string, storedPw: string) => {
   return await bcrypt.compare(inputPw, storedPw);
 }
-
-
-// 10-1. log ---------------------------------------------------------------------------------------
-export const log = (name: string, data: any) => {
-  const cache = new Set();
-
-  // 순환 참조 발견
-  const jsonString = JSON.stringify(data, (key, value) => {
-    if (typeof value === "object" && value !== null) {
-      if (cache.has(value)) {
-        return "[Circular]";
-      }
-      cache.add(value);
-    }
-    return value;
-  }, 2);
-
-  // 로그 출력
-  console.log(`${name} : ${jsonString}`);
-
-  // 캐시 클리어
-  cache.clear();
-};

@@ -3,7 +3,7 @@
 import { useState } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { useValidateUser } from "@imports/ImportValidates";
-import { axios } from "@imports/ImportLibs";
+import { axios } from "@imports/ImportUtils";
 import { User } from "@imports/ImportSchemas";
 import { Div, Btn, Img, Hr } from "@imports/ImportComponents";
 import { Input } from "@imports/ImportContainers";
@@ -62,7 +62,7 @@ export const UserSignup = () => {
     );
     // 2. signup
     const signupSection = (i: number) => (
-      <Card className={"border-1 radius p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius-1 p-30 fadeIn"} key={i}>
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Input

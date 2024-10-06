@@ -11387,6 +11387,20 @@
   align-items: center !important;
   text-align: right !important;
 }
+.d-row-top {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  text-align: center !important;
+}
+.d-row-bottom {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: flex-end !important;
+  text-align: center !important;
+}
 .d-column {
   display: flex !important;
   flex-direction: column !important;
@@ -11418,6 +11432,20 @@
   justify-content: center !important;
   align-items: flex-end !important;
   text-align: right !important;
+}
+.d-column-top {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+.d-column-bottom {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  text-align: center !important;
 }
 
 /** 94. object **********************************************************************************/
@@ -11764,6 +11792,9 @@
 .border-left-3 {
   border-left: 3px solid #dbdbdb !important;
 }
+.border-dark {
+  border: 1px solid #b3b3b3 !important;
+}
 
 /** 99. color *************************************************************************************/
 .red {
@@ -12077,7 +12108,7 @@
 .upper {
   text-transform: uppercase !important;
 }
-.horizon-text {
+.horizontal-text {
   writing-mode: horizontal-tb !important;
   text-orientation: mixed !important;
   white-space: nowrap !important;
@@ -12090,8 +12121,6 @@
 .locked {
   border: 2px solid #bdbdbd !important;
 }
-
-/** 100. animation ********************************************************************************/
 .transform-none {
   transform: none !important;
 }
@@ -12105,12 +12134,8 @@
 .hover:hover {
   transform: scale(1.08);
 }
-.fadeIn {
-  animation: fadeIn 0.5s cubic-bezier(0.42, 0, 0.58, 1) !important;
-}
-.shake {
-  animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) both !important;
-}
+
+/** 100. animation ********************************************************************************/
 .loader-wrapper {
   position: fixed;
   top: 0;
@@ -12121,7 +12146,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 99999;
+  z-index: 999999;
 }
 .loader {
   width: 50px;
@@ -12132,13 +12157,11 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  border-top: 3px solid #c30104 !important;
+  border-top: 3px solid #1976D2 !important;
   border-right: 3px solid transparent;
   animation: loaderAnimation 0.7s linear infinite;
-  z-index: 100000;
+  z-index: 1000000;
 }
-
-/** 101. keyframes ********************************************************************************/
 @keyframes loaderAnimation {
   0% {
     transform: rotate(0deg);
@@ -12146,6 +12169,13 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s cubic-bezier(0.42, 0, 0.58, 1) !important;
+}
+.snackbar {
+  animation: fadeIn 0.1s cubic-bezier(0.42, 0, 0.58, 1) !important;
 }
 @keyframes fadeIn {
   0% {
@@ -12160,6 +12190,10 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.shake {
+  animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) both !important;
 }
 @keyframes shake {
   0%, 100% {

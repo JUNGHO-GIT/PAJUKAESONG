@@ -1,13 +1,13 @@
 // useValidateContact.tsx
 
-import { useState, useEffect, createRef, useRef } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
+import { useState, createRef, useRef } from "@imports/ImportReacts";
+import { useAlertStore } from "@imports/ImportStores";
 
 // -------------------------------------------------------------------------------------------------
 export const useValidateContact = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { PATH } = useCommonValue();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const REFS = useRef<any[]>([]);
@@ -16,18 +16,24 @@ export const useValidateContact = () => {
 
   // alert 표시 및 focus ---------------------------------------------------------------------------
   const showAlertAndFocus = (field: string, msg: string, idx: number) => {
-    alert(msg);
-    setTimeout(() => {
-      REFS?.current?.[idx]?.[field]?.current?.focus();
-    }, 10);
-    setERRORS((prev) => {
-      const updatedErrors = [...prev];
-      updatedErrors[idx] = {
-        ...updatedErrors[idx],
-        [field]: true,
-      };
-      return updatedErrors;
+    setALERT({
+      open: !ALERT.open,
+      msg: msg,
+      severity: "error",
     });
+    if (field) {
+      setTimeout(() => {
+        REFS?.current?.[idx]?.[field]?.current?.focus();
+      }, 10);
+      setERRORS((prev) => {
+        const updatedErrors = [...prev];
+        updatedErrors[idx] = {
+          ...updatedErrors[idx],
+          [field]: true,
+        };
+        return updatedErrors;
+      });
+    }
     return false;
   };
 
@@ -43,102 +49,96 @@ export const useValidateContact = () => {
     return phoneRegex.test(phone);
   };
 
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    validate.current = (OBJECT: any, fileList?: any) => {
-      try {
-        // 1. find
-        if (PATH.includes("/contact/find")) {
-          const target = [
-            "contact_name",
-            "contact_phone",
-          ];
-          REFS.current = (
-            Array.from({ length: 1 }, (_, _idx) => (
-              target.reduce((acc, cur) => ({
-                ...acc,
-                [cur]: createRef()
-              }), {})
-            ))
-          );
-          setERRORS (
-            Array.from({ length: 1 }, (_, _idx) => (
-              target.reduce((acc, cur) => ({
-                ...acc,
-                [cur]: false
-              }), {})
-            ))
-          );
-          if (!OBJECT?.contact_name) {
-            return showAlertAndFocus('contact_name', "이름을 입력해주세요.", 0);
-          }
-          else if (!OBJECT?.contact_phone) {
-            return showAlertAndFocus('contact_phone', "전화번호를 입력해주세요.", 0);
-          }
-          else if (!validatePhone(OBJECT?.contact_phone)) {
-            return showAlertAndFocus('contact_phone', "전화번호 형식으로 입력해주세요.", 0);
-          }
-          return true;
-        }
+  // 7. validate -----------------------------------------------------------------------------------
+  validate.current = (OBJECT: any, fileList?: any, extra?:string) => {
 
-        // 2. save
-        if (PATH.includes("/contact/save") || PATH.includes("/contact/update")) {
-          const target = [
-            "contact_category",
-            "contact_name",
-            "contact_email",
-            "contact_phone",
-            "contact_title",
-            "contact_content",
-          ];
-          REFS.current = (
-            Array.from({ length: 1 }, (_, _idx) => (
-              target.reduce((acc, cur) => ({
-                ...acc,
-                [cur]: createRef()
-              }), {})
-            ))
-          );
-          setERRORS (
-            Array.from({ length: 1 }, (_, _idx) => (
-              target.reduce((acc, cur) => ({
-                ...acc,
-                [cur]: false
-              }), {})
-            ))
-          );
-          if (!OBJECT?.contact_category) {
-            return showAlertAndFocus('contact_category', "문의 유형을 선택해주세요.", 0);
-          }
-          else if (!OBJECT?.contact_name) {
-            return showAlertAndFocus('contact_name', "이름을 입력해주세요.", 0);
-          }
-          else if (!OBJECT?.contact_email) {
-            return showAlertAndFocus('contact_email', "이메일을 입력해주세요.", 0);
-          }
-          else if (!validateEmail(OBJECT?.contact_email)) {
-            return showAlertAndFocus('contact_email', "이메일 형식으로 입력해주세요.", 0);
-          }
-          else if (!OBJECT?.contact_phone) {
-            return showAlertAndFocus('contact_phone', "전화번호를 입력해주세요.", 0);
-          }
-          else if (!validatePhone(OBJECT?.contact_phone)) {
-            return showAlertAndFocus('contact_phone', "전화번호 형식으로 입력해주세요.", 0);
-          }
-          else if (!OBJECT?.contact_title) {
-            return showAlertAndFocus('contact_title', "제목을 입력해주세요.", 0);
-          }
-          else if (!OBJECT?.contact_content) {
-            return showAlertAndFocus('contact_content', "내용을 입력해주세요.", 0);
-          }
-          return true;
-        }
+    // 1. save, update
+    if (extra === "save" || extra === "update") {
+      const target = [
+        "contact_category",
+        "contact_name",
+        "contact_email",
+        "contact_phone",
+        "contact_title",
+        "contact_content",
+      ];
+      REFS.current = (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: createRef()
+          }), {})
+        ))
+      );
+      setERRORS (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: false
+          }), {})
+        ))
+      );
+      if (!OBJECT?.contact_category) {
+        return showAlertAndFocus('contact_category', "문의 유형을 선택해주세요.", 0);
       }
-      catch (err: any) {
-        console.error(err);
+      else if (!OBJECT?.contact_name) {
+        return showAlertAndFocus('contact_name', "이름을 입력해주세요.", 0);
       }
+      else if (!OBJECT?.contact_email) {
+        return showAlertAndFocus('contact_email', "이메일을 입력해주세요.", 0);
+      }
+      else if (!validateEmail(OBJECT?.contact_email)) {
+        return showAlertAndFocus('contact_email', "이메일 형식으로 입력해주세요.", 0);
+      }
+      else if (!OBJECT?.contact_phone) {
+        return showAlertAndFocus('contact_phone', "전화번호를 입력해주세요.", 0);
+      }
+      else if (!validatePhone(OBJECT?.contact_phone)) {
+        return showAlertAndFocus('contact_phone', "전화번호 형식으로 입력해주세요.", 0);
+      }
+      else if (!OBJECT?.contact_title) {
+        return showAlertAndFocus('contact_title', "제목을 입력해주세요.", 0);
+      }
+      else if (!OBJECT?.contact_content) {
+        return showAlertAndFocus('contact_content', "내용을 입력해주세요.", 0);
+      }
+      return true;
     }
-  }, [PATH]);
+
+    // 2. find
+    else if (extra === "find") {
+      const target = [
+        "contact_name",
+        "contact_phone",
+      ];
+      REFS.current = (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: createRef()
+          }), {})
+        ))
+      );
+      setERRORS (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: false
+          }), {})
+        ))
+      );
+      if (!OBJECT?.contact_name) {
+        return showAlertAndFocus('contact_name', "이름을 입력해주세요.", 0);
+      }
+      else if (!OBJECT?.contact_phone) {
+        return showAlertAndFocus('contact_phone', "전화번호를 입력해주세요.", 0);
+      }
+      else if (!validatePhone(OBJECT?.contact_phone)) {
+        return showAlertAndFocus('contact_phone', "전화번호 형식으로 입력해주세요.", 0);
+      }
+      return true;
+    }
+  };
 
   // 10. return ------------------------------------------------------------------------------------
   return {
