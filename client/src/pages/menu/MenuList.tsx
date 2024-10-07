@@ -62,36 +62,56 @@ export const MenuList = () => {
       </Div>
     );
     // 2. list
-    const listSection = (item: any, i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-20 fadeIn"} key={i}>
+    const listSection = () => {
+      const listFragment = (i: number) => (
+        <Card className={"p-0"} key={i}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-row-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Img
-              max={110}
+              max={150}
               hover={true}
-              shadow={false}
-              radius={false}
+              shadow={true}
+              radius={true}
               group={"menu"}
-              src={item?.menu_images?.[0]}
+              src={OBJECT[i]?.menu_images?.[0]}
               className={"w-100p"}
               onClick={() => {
                 navigate("/menu/detail", {
                   state: {
-                    _id: item?._id
+                    _id: OBJECT[i]?._id
                   }
                 });
               }}
             />
           </Grid>
-          <Hr px={20} h={2} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-row-center"}>
+        </Grid>
+        </Card>
+      );
+      const nameFragment = (i: number) => (
+        <Card className={"p-0"} key={i}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-600"}>
-              {item?.menu_name}
+              {OBJECT[i]?.menu_name}
             </Div>
           </Grid>
         </Grid>
-      </Card>
-    );
+        </Card>
+      );
+      return (
+        <Grid container spacing={2} columns={12}>
+          {OBJECT.map((_item: any, i: number) => (
+            <Grid size={{ xs: 6, md: 4 }} key={i}> 
+              <Card className={"d-column-center p-10 fadeIn"}>
+                {listFragment(i)}
+                <Hr px={20} h={2} w={80} className={"bg-burgundy"} />
+                {nameFragment(i)}
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )
+    };
     // 3. filter
     const filterSection = (i: number) => (
       <Card className={"fadeIn"} key={i}>
@@ -173,17 +193,7 @@ export const MenuList = () => {
             {titleSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {COUNT.totalCnt <= 0 ? (
-              <Empty h={"50vh"} />
-            ) : (
-              <Grid container spacing={2} columns={12}>
-                {OBJECT.map((item: any, i: number) => (
-                  <Grid size={{ xs: 6, md: 4 }} className={"d-column-center p-0"} key={i}>
-                    {listSection(item, i)}
-                  </Grid>
-                ))}
-              </Grid>
-            )}
+            {listSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Hr px={20} className={"bg-grey"} />
