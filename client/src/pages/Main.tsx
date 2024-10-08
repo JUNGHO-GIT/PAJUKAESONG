@@ -76,7 +76,7 @@ export const Main = () => {
     // 1. main -------------------------------------------------------------------------------------
     const mainSection = () => {
       const imageFragment = (i: number) => (
-        <Card className={"p-0"} key={i}>
+        <Card className={"p-0"} key={`image-${i}`}>
           <Grid container spacing={0} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Swiper
@@ -123,7 +123,7 @@ export const Main = () => {
     // 2. menu -------------------------------------------------------------------------------------
     const menuSection = () => {
       const titleFragment = (i: number) => (
-        <Card className={"p-0"} key={i}>
+        <Card className={"p-0"} key={`title-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Div className={"fs-1-8rem fw-700"}>
@@ -134,7 +134,7 @@ export const Main = () => {
         </Card>
       );
       const selectFragment = (i: number) => (
-        <Card className={"p-10"} key={i}>
+        <Card className={"p-10"} key={`select-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-row-center"}>
               <Div className={`${category === "main" ? "bg-burgundy" : ""} border-1 radius-50 p-10 me-1vw hover`}>
@@ -162,7 +162,7 @@ export const Main = () => {
         </Card>
       );
       const menuFragment = (i: number) => (
-        <Card className={"p-20"} key={i}>
+        <Card className={"p-20"} key={`menu-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Swiper
@@ -192,13 +192,12 @@ export const Main = () => {
                     <SwiperSlide className={"d-center"} key={index}>
                       <Card className={"border-1 shadow-1 radius-1 p-10"}>
                         <Img
-                          max={200}
+                          max={130}
                           hover={true}
                           shadow={false}
                           radius={false}
                           group={"menu"}
                           src={item?.menu_images?.[0]}
-                          className={"w-100p"}
                           onClick={() => {
                             navigate("/menu/detail", {
                               state: {
@@ -227,7 +226,7 @@ export const Main = () => {
         </Card>
       );
       const paginationFragment = (i: number) => (
-        <Card className={"p-0"} key={i}>
+        <Card className={"p-0"} key={`pagination-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Div className={"menu-pagination transform-none"} />
@@ -239,9 +238,9 @@ export const Main = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 10, md: 8 }}>
             {titleFragment(0)}
-            {selectFragment(1)}
-            {menuFragment(2)}
-            {paginationFragment(3)}
+            {selectFragment(0)}
+            {menuFragment(0)}
+            {paginationFragment(0)}
           </Grid>
         </Grid>
       );
@@ -250,7 +249,7 @@ export const Main = () => {
     // 3. notice -----------------------------------------------------------------------------------
     const noticeSection = () => {
       const titleFragment = (i: number) => (
-        <Card className={"p-0"} key={i}>
+        <Card className={"p-0"} key={`title-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Div className={"fs-1-8rem fw-700"}>
@@ -261,7 +260,7 @@ export const Main = () => {
         </Card>
       );
       const noticeFragment = (i: number) => (
-        <Card className={"p-20"} key={i}>
+        <Card className={"p-20"} key={`notice-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Swiper
@@ -286,36 +285,37 @@ export const Main = () => {
                 ]}
               >
                 {OBJECT_NOTICE?.map((item: any, index: number) => (
-                  <SwiperSlide className={"d-center"} key={index}>
-                    <Card className={"border-1 shadow-1 radius-1 p-20"}>
-                      <Img
-                        max={180}
-                        hover={true}
-                        shadow={false}
-                        radius={false}
-                        group={"main"}
-                        src={"logo1.webp"}
-                        className={"w-100p"}
-                        onClick={() => {
-                          navigate("/notice/detail", {
-                            state: {
-                              _id: item?._id
-                            }
-                          });
-                        }}
-                      />
-                      <Hr px={30} h={2} className={"bg-light-grey"} />
-                      <Div className={"d-column-left"}>
-                        <Div className={"fs-1-0rem fw-600"} max={20}>
-                          {item?.notice_title}
+                  item.notice_images.length > 0 && (
+                    <SwiperSlide className={"d-center"} key={index}>
+                      <Card className={"border-1 shadow-1 radius-1 p-20"}>
+                        <Img
+                          max={200}
+                          hover={true}
+                          shadow={false}
+                          radius={false}
+                          group={"main"}
+                          src={"logo1.webp"}
+                          onClick={() => {
+                            navigate("/notice/detail", {
+                              state: {
+                                _id: item?._id
+                              }
+                            });
+                          }}
+                        />
+                        <Hr px={30} h={2} className={"bg-light-grey"} />
+                        <Div className={"d-column-left"}>
+                          <Div className={"fs-1-0rem fw-600"} max={20}>
+                            {item?.notice_title}
+                          </Div>
+                          <Br px={5} />
+                          <Div className={"fs-0-8rem fw-500 grey"}>
+                            {getDayFmt(item?.notice_regDt)}
+                          </Div>
                         </Div>
-                        <Br px={5} />
-                        <Div className={"fs-0-8rem fw-500 grey"}>
-                          {getDayFmt(item?.notice_regDt)}
-                        </Div>
-                      </Div>
-                    </Card>
-                  </SwiperSlide>
+                      </Card>
+                    </SwiperSlide>
+                  )
                 ))}
               </Swiper>
             </Grid>
@@ -323,7 +323,7 @@ export const Main = () => {
         </Card>
       );
       const paginationFragment = (i: number) => (
-        <Card className={"p-0"} key={i}>
+        <Card className={"p-0"} key={`pagination-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Div className={"notice-pagination transform-none"} />
@@ -335,8 +335,8 @@ export const Main = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 10, md: 8 }}>
             {titleFragment(0)}
-            {noticeFragment(1)}
-            {paginationFragment(2)}
+            {noticeFragment(0)}
+            {paginationFragment(0)}
           </Grid>
         </Grid>
       );
@@ -345,7 +345,7 @@ export const Main = () => {
     // 4. location ---------------------------------------------------------------------------------
     const locationSection = () => {
       const titleFragment = (i: number) => (
-        <Card className={"p-0"} key={i}>
+        <Card className={"p-0"} key={`title-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Div className={"fs-1-8rem fw-700"}>
@@ -356,7 +356,7 @@ export const Main = () => {
         </Card>
       );
       const locationFragment = (i: number) => (
-        <Card className={"p-20"} key={i}>
+        <Card className={"p-20"} key={`location-${i}`}>
           <Location
             width={"100%"}
             height={"60vh"}
@@ -368,7 +368,7 @@ export const Main = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 10, md: 8 }}>
             {titleFragment(0)}
-            {locationFragment(1)}
+            {locationFragment(0)}
           </Grid>
         </Grid>
       );

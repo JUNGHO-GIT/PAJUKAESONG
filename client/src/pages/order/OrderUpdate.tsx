@@ -79,7 +79,7 @@ export const OrderUpdate = () => {
   // 3. flow ---------------------------------------------------------------------------------------
   const flowUpdate = () => {
     setLOADING(true);
-    if (!validate(OBJECT)) {
+    if (!validate(OBJECT, null, "update")) {
       setLOADING(false);
       return;
     }
@@ -123,20 +123,19 @@ export const OrderUpdate = () => {
     // 2. update
     const updateSection = () => {
       const productFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
+        <Card className={"border-1 shadow-1 radius-1 p-20"} key={`product-${i}`}>
           <Grid container spacing={2} columns={12}>
             {OBJECT?.order_product?.map((item: any, index: number) => (
               item.product_name && (
                 <Grid container spacing={2} columns={12} key={index}>
                   <Grid size={3} className={"d-column-left"}>
                     <Img
-                      max={70}
+                      max={60}
                       hover={false}
                       shadow={false}
                       radius={false}
                       group={"product"}
                       src={item?.product_images?.[0]}
-                      className={"w-70p h-70p"}
                     />
                   </Grid>
                   <Grid size={4} className={"d-column-left"}>
@@ -156,88 +155,90 @@ export const OrderUpdate = () => {
                       </Div>
                     </Div>
                   </Grid>
-                  <Grid size={4} className={"border-1 d-row-between"}>
-                    <Icons
-                      key={"Minus"}
-                      name={"Minus"}
-                      className={"w-12 h-12 black"}
-                      onClick={() => {
-                        const value = item?.product_count;
-                        const newValue = value < 1 ? 1 : value - 1;
-                        const originalPrice = Number(item?.product_price) / value;
-                        if (newValue <= 1) {
-                          setOBJECT((prev: any) => ({
-                            ...prev,
-                            order_product: prev.order_product.map((product: any) => (
-                              product.product_id === item?.product_id ? {
-                                ...product,
-                                product_count: 1,
-                                product_price: originalPrice,
-                              } : (
-                                product
-                              )
-                            )),
-                          }));
-                        }
-                        else if (!isNaN(newValue) && newValue <= 30) {
-                          setOBJECT((prev: any) => ({
-                            ...prev,
-                            order_product: prev.order_product.map((product: any) => (
-                              product.product_id === item?.product_id ? {
-                                ...product,
-                                product_count: newValue,
-                                product_price: originalPrice * newValue,
-                              } : (
-                                product
-                              )
-                            )),
-                          }));
-                        }
-                      }}
-                    />
-                    <Div className={"fs-1-0rem"}>
-                      {item?.product_count}
+                  <Grid size={3} className={"d-column-center"}>
+                    <Div className={"border-1 d-row-between"}>
+                      <Icons
+                        key={"Minus"}
+                        name={"Minus"}
+                        className={"w-12 h-12 black"}
+                        onClick={() => {
+                          const value = item?.product_count;
+                          const newValue = value < 1 ? 1 : value - 1;
+                          const originalPrice = Number(item?.product_price) / value;
+                          if (newValue <= 1) {
+                            setOBJECT((prev: any) => ({
+                              ...prev,
+                              order_product: prev.order_product.map((product: any) => (
+                                product.product_id === item?.product_id ? {
+                                  ...product,
+                                  product_count: 1,
+                                  product_price: originalPrice,
+                                } : (
+                                  product
+                                )
+                              )),
+                            }));
+                          }
+                          else if (!isNaN(newValue) && newValue <= 30) {
+                            setOBJECT((prev: any) => ({
+                              ...prev,
+                              order_product: prev.order_product.map((product: any) => (
+                                product.product_id === item?.product_id ? {
+                                  ...product,
+                                  product_count: newValue,
+                                  product_price: originalPrice * newValue,
+                                } : (
+                                  product
+                                )
+                              )),
+                            }));
+                          }
+                        }}
+                      />
+                      <Div className={"fs-1-0rem"}>
+                        {item?.product_count}
+                      </Div>
+                      <Icons
+                        key={"Plus"}
+                        name={"Plus"}
+                        className={"w-12 h-12 black"}
+                        onClick={() => {
+                          const value = item?.product_count;
+                          const newValue = value < 1 ? 1 : value + 1;
+                          const originalPrice = Number(item?.product_price) / value;
+                          if (newValue <= 1) {
+                            setOBJECT((prev: any) => ({
+                              ...prev,
+                              order_product: prev.order_product.map((product: any) => (
+                                product.product_id === item?.product_id ? {
+                                  ...product,
+                                  product_count: 1,
+                                  product_price: originalPrice,
+                                } : (
+                                  product
+                                )
+                              )),
+                            }));
+                          }
+                          else if (!isNaN(newValue) && newValue <= 30) {
+                            setOBJECT((prev: any) => ({
+                              ...prev,
+                              order_product: prev.order_product.map((product: any) => (
+                                product.product_id === item?.product_id ? {
+                                  ...product,
+                                  product_count: newValue,
+                                  product_price: originalPrice * newValue,
+                                } : (
+                                  product
+                                )
+                              )),
+                            }));
+                          }
+                        }}
+                      />
                     </Div>
-                    <Icons
-                      key={"Plus"}
-                      name={"Plus"}
-                      className={"w-12 h-12 black"}
-                      onClick={() => {
-                        const value = item?.product_count;
-                        const newValue = value < 1 ? 1 : value + 1;
-                        const originalPrice = Number(item?.product_price) / value;
-                        if (newValue <= 1) {
-                          setOBJECT((prev: any) => ({
-                            ...prev,
-                            order_product: prev.order_product.map((product: any) => (
-                              product.product_id === item?.product_id ? {
-                                ...product,
-                                product_count: 1,
-                                product_price: originalPrice,
-                              } : (
-                                product
-                              )
-                            )),
-                          }));
-                        }
-                        else if (!isNaN(newValue) && newValue <= 30) {
-                          setOBJECT((prev: any) => ({
-                            ...prev,
-                            order_product: prev.order_product.map((product: any) => (
-                              product.product_id === item?.product_id ? {
-                                ...product,
-                                product_count: newValue,
-                                product_price: originalPrice * newValue,
-                              } : (
-                                product
-                              )
-                            )),
-                          }));
-                        }
-                      }}
-                    />
                   </Grid>
-                  <Grid size={1} className={"d-center"}>
+                  <Grid size={1} className={"d-row-center"}>
                     <Icons
                       key={"X"}
                       name={"X"}
@@ -256,16 +257,15 @@ export const OrderUpdate = () => {
                   <Grid size={12} className={"d-column-center"}>
                     {/** 마지막 항목 제외 hr 추가 */}
                     {index !== OBJECT?.order_product?.length - 1 ? (
-                        <Hr px={5} className={"bg-grey mb-10"} />
-                      ) : (
-                        <Hr px={5} className={"bg-burgundy mb-10"} />
-                      )
-                    }
+                      <Hr px={10} className={"bg-grey mb-20"} />
+                    ) : (
+                      <Hr px={10} className={"bg-burgundy mb-10"} />
+                    )}
                   </Grid>
                 </Grid>
               )
             ))}
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12} className={"d-row-center"}>
               <Div className={"fs-1-0rem me-10"}>
                 총 금액  :
               </Div>
@@ -282,7 +282,7 @@ export const OrderUpdate = () => {
         </Card>
       );
       const orderFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
+        <Card className={"border-1 shadow-1 radius-1 p-20"} key={`order-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Select
@@ -426,7 +426,7 @@ export const OrderUpdate = () => {
           <Grid size={12} className={"d-column-center"}>
             {productFragment(0)}
             <Br px={20} />
-            {orderFragment(2)}
+            {orderFragment(0)}
           </Grid>
         </Grid>
       )

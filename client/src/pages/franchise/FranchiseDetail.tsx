@@ -90,11 +90,11 @@ export const FranchiseDetail = () => {
     // 2. detail
     const detailSection = () => {
       const imageFragment = (i: number) => (
-        <Card className={"p-10"} key={i}>
+        <Card className={"p-10"} key={`image-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={80}
+                max={300}
                 hover={false}
                 shadow={true}
                 radius={true}
@@ -106,7 +106,7 @@ export const FranchiseDetail = () => {
         </Card>
       );
       const descFragment = (i: number) => (
-        <Card className={"px-20"} key={i}>
+        <Card className={"px-20"} key={`desc-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Div className={"fs-1-8rem fw-700 black"}>
@@ -159,7 +159,7 @@ export const FranchiseDetail = () => {
           <Grid size={12} className={"d-column-center"}>
             {imageFragment(0)}
             <Hr px={40} w={90} className={"bg-burgundy"} />
-            {descFragment(1)}
+            {descFragment(0)}
           </Grid>
         </Grid>
       )

@@ -46,7 +46,7 @@ export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgPr
     imageClass += " radius-2";
   }
   if (max) {
-    imageClass += ` w-max${max || ""}vw h-max${max || ""}vw`
+    imageClass += ` w-max${max || ""} h-max${max || ""}`
   }
 
   // 2-1. useState ---------------------------------------------------------------------------------

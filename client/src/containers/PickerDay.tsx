@@ -35,6 +35,7 @@ export const PickerDay = (
         type={"innerCenter"}
         position={"center"}
         direction={"center"}
+        padding={10}
         contents={({closePopup}: any) => (
           <Card className={"p-0"}>
             <Grid container spacing={3} columns={12}>
@@ -136,6 +137,7 @@ export const PickerDay = (
         {(popTrigger: any) => (
           <Input
             label={"날짜"}
+            shrink={"shrink"}
             variant={variant || "outlined"}
             value={getDayFmt(OBJECT?.[`${extra}`])}
             readOnly={true}

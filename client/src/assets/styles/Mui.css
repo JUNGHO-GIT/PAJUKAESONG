@@ -49,6 +49,10 @@
 .MuiInputBase-input.MuiOutlinedInput-input {
   text-overflow: clip !important;
 }
+.MuiInputBase-input.MuiOutlinedInput-input.Mui-disabled {
+  opacity: 1;
+  -webkit-text-fill-color: rgb(0 0 0 / 65%);
+}
 .MuiOutlinedInput-root {
   border: 1px ghostwhite solid !important;
   border-radius: 10px !important;

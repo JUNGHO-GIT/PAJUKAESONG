@@ -77,7 +77,7 @@ export const OrderFind = () => {
     // 2. find
     const findSection = () => {
       const findFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
+        <Card className={"border-1 shadow-1 radius-1 p-20"} key={`find-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Input

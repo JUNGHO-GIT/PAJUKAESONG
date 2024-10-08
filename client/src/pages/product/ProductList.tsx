@@ -69,11 +69,11 @@ export const ProductList = () => {
     // 2. list
     const listSection = () => {
       const imageFragment = (i: number) => (
-        <Card className={"p-10"} key={i}>
+        <Card className={"p-10"} key={`image-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={40}
+                max={150}
                 hover={true}
                 shadow={true}
                 radius={true}
@@ -92,7 +92,7 @@ export const ProductList = () => {
         </Card>
       );
       const descFragment = (i: number) => (
-        <Card className={"p-0"} key={i}>
+        <Card className={"p-0"} key={`desc-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Div className={"fs-1-2rem fw-600"}>

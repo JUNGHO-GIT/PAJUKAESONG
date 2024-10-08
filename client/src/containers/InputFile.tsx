@@ -193,7 +193,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
               radius={true}
               group={"new"}
               src={URL.createObjectURL(file)}
-              className={"w-35 h-35 me-10"}
+              className={"me-10"}
             />
             <Div className={"black fs-0-9rem fw-500"} max={15}>
               {file?.name}
@@ -246,7 +246,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
               radius={true}
               group={props?.group}
               src={file}
-              className={"w-35 h-35 me-10"}
+              className={"me-10"}
             />
             <Div className={"black fs-0-9rem fw-500"} max={20}>
               {file}

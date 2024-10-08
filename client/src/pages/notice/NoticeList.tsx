@@ -135,7 +135,7 @@ export const NoticeList = () => {
       return (
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-column-center"}>
-            {listFragment(2)}
+            {listFragment(0)}
           </Grid>
         </Grid>
       );

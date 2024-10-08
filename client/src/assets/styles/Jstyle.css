@@ -12097,10 +12097,10 @@
   background-color: #111111 !important;
 }
 
-.transparent: {
+.transparent {
   color: transparent !important;
 }
-.pointer-transparent: {
+.pointer-transparent {
   cursor: pointer !important;
   color: transparent !important;
   transition: transform 0.1s ease-in-out !important;

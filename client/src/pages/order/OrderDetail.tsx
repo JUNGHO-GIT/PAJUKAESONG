@@ -94,20 +94,19 @@ export const OrderDetail = () => {
     // 2. detail
     const detailSection = () => {
       const productFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
+        <Card className={"border-1 shadow-1 radius-1 p-20"} key={`product-${i}`}>
           <Grid container spacing={2} columns={12}>
             {OBJECT?.order_product?.map((item: any, index: number) => (
               item.product_name && (
                 <Grid container spacing={2} columns={12} key={index}>
                   <Grid size={3} className={"d-column-left"}>
                     <Img
-                      max={40}
+                      max={60}
                       hover={false}
-                      shadow={true}
+                      shadow={false}
                       radius={false}
                       group={"product"}
                       src={item?.product_images?.[0]}
-                      className={"w-70p h-70p"}
                     />
                   </Grid>
                   <Grid size={4} className={"d-column-left"}>
@@ -127,7 +126,7 @@ export const OrderDetail = () => {
                       </Div>
                     </Div>
                   </Grid>
-                  <Grid size={4}>
+                  <Grid size={3} className={"d-column-center"}>
                     <Div className={"border-1 d-row-between"}>
                       <Icons
                         key={"Minus"}
@@ -144,19 +143,34 @@ export const OrderDetail = () => {
                       />
                     </Div>
                   </Grid>
+                  <Grid size={1} className={"d-row-center"}>
+                    <Icons
+                      key={"X"}
+                      name={"X"}
+                      className={"w-16 h-16 black"}
+                      onClick={() => {
+                        setOBJECT((prev: any) => ({
+                          ...prev,
+                          order_product: [
+                            ...prev.order_product.slice(0, index),
+                            ...prev.order_product.slice(index + 1),
+                          ],
+                        }));
+                      }}
+                    />
+                  </Grid>
                   <Grid size={12} className={"d-column-center"}>
                     {/** 마지막 항목 제외 hr 추가 */}
                     {index !== OBJECT?.order_product?.length - 1 ? (
-                        <Hr px={5} className={"bg-grey mb-10"} />
-                      ) : (
-                        <Hr px={5} className={"bg-burgundy mb-10"} />
-                      )
-                    }
+                      <Hr px={10} className={"bg-grey mb-20"} />
+                    ) : (
+                      <Hr px={10} className={"bg-burgundy mb-10"} />
+                    )}
                   </Grid>
                 </Grid>
               )
             ))}
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12} className={"d-row-center"}>
               <Div className={"fs-1-0rem me-10"}>
                 총 금액  :
               </Div>
@@ -173,7 +187,7 @@ export const OrderDetail = () => {
         </Card>
       );
       const orderFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
+        <Card className={"border-1 shadow-1 radius-1 p-20"} key={`order-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Select
@@ -221,10 +235,28 @@ export const OrderDetail = () => {
             <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
+                label={"인원"}
+                required={true}
+                disabled={true}
+                value={OBJECT?.order_headcount}
+              />
+            </Grid>
+            <Grid size={12} className={"d-column-center"}>
+              <Input
+                variant={"outlined"}
                 required={true}
                 disabled={true}
                 label={"주문 날짜"}
-                value={getDayFmt(OBJECT?.order_regDt)}
+                value={getDayFmt(OBJECT?.order_date)}
+              />
+            </Grid>
+            <Grid size={12} className={"d-column-center"}>
+              <Input
+                variant={"outlined"}
+                required={true}
+                disabled={true}
+                label={"예약 시간"}
+                value={OBJECT?.order_time}
               />
             </Grid>
           </Grid>
@@ -235,7 +267,7 @@ export const OrderDetail = () => {
           <Grid size={12} className={"d-column-center"}>
             {productFragment(0)}
             <Br px={20} />
-            {orderFragment(2)}
+            {orderFragment(0)}
           </Grid>
         </Grid>
       );

@@ -47,7 +47,7 @@ export const UserLogin = () => {
   // 3. flow ---------------------------------------------------------------------------------------
   const flowLogin = () => {
     setLOADING(true);
-    if (!validate(OBJECT)) {
+    if (!validate(OBJECT, null, "login")) {
       setLOADING(false);
       return;
     }
@@ -110,7 +110,7 @@ export const UserLogin = () => {
     // 2. login
     const loginSection = () => {
       const loginFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
+        <Card className={"border-1 shadow-1 radius-1 p-20"} key={`login-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Input

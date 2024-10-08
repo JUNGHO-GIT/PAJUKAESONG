@@ -28,6 +28,7 @@ export const PickerTime = (
         type={"innerCenter"}
         position={"center"}
         direction={"center"}
+        padding={20}
         contents={({closePopup}: any) => (
           <Card className={"w-50vw p-0"}>
             <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"ko"}>
@@ -55,6 +56,7 @@ export const PickerTime = (
         {(popTrigger: any) => (
           <Input
             label={"시간"}
+            shrink={"shrink"}
             variant={"outlined"}
             value={OBJECT?.[`${extra}`]}
             inputRef={REFS?.[i]?.[`${extra}`]}
