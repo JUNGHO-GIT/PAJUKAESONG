@@ -162,8 +162,8 @@ export const AdminDashboard = () => {
       </Card>
     );
     // 3. filter
-    const filterSection = (i: number) => (
-      <Card className={"fadeIn"} key={i}>
+    const filterSection = () => (
+      <Card className={"fadeIn"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -226,7 +226,7 @@ export const AdminDashboard = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center"}>
+      <Paper className={"content-wrapper-center"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
@@ -241,7 +241,7 @@ export const AdminDashboard = () => {
             {ORDER_COUNT.totalCnt <= 0 ? <Empty h={"30vh"} /> : orderSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {filterSection(0)}
+            {filterSection()}
           </Grid>
         </Grid>
       </Paper>

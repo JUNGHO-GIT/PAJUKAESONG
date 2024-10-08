@@ -119,8 +119,8 @@ export const ContactList = () => {
       </Card>
     );
     // 3. filter
-    const filterSection = (i: number) => (
-      <Card className={"fadeIn"} key={i}>
+    const filterSection = () => (
+      <Card className={"fadeIn"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -183,7 +183,7 @@ export const ContactList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center"}>
+      <Paper className={"content-wrapper-center"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
@@ -193,7 +193,7 @@ export const ContactList = () => {
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Hr px={20} className={"bg-grey"} />
-            {filterSection(0)}
+            {filterSection()}
           </Grid>
         </Grid>
       </Paper>

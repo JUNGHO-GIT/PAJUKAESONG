@@ -146,8 +146,8 @@ export const UserLogin = () => {
       </Card>
     );
     // 3. btn
-    const btnSection = (i: number) => (
-      <Card className={"fadeIn"} key={i}>
+    const btnSection = () => (
+      <Card className={"fadeIn"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             {(isAdmin || isUser) ? (
@@ -175,8 +175,8 @@ export const UserLogin = () => {
       </Card>
     );
     // 4. link
-    const linkSection = (i: number) => (
-      <Card className={"fadeIn"} key={i}>
+    const linkSection = () => (
+      <Card className={"fadeIn"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-0-8rem"}>
@@ -203,7 +203,7 @@ export const UserLogin = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center h-min90vh"}>
+      <Paper className={"content-wrapper-center h-min90vh"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
@@ -212,11 +212,11 @@ export const UserLogin = () => {
             {loginSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {btnSection(0)}
+            {btnSection()}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Hr px={20} className={"bg-grey"} />
-            {linkSection(0)}
+            {linkSection()}
           </Grid>
         </Grid>
       </Paper>

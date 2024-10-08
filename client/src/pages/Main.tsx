@@ -299,7 +299,7 @@ export const Main = () => {
     );
     // 7-10. return
     return (
-      <Paper className={"content-wrapper d-center p-0"}>
+      <Paper className={"content-wrapper-center p-0"}>
         <Grid container spacing={0} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center p-0"}>
             {mainSection(0)}

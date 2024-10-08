@@ -62,7 +62,7 @@ export const UserSignup = () => {
     );
     // 2. signup
     const signupSection = (i: number) => (
-      <Card className={"border-1 radius-1 p-30 fadeIn"} key={i}>
+      <Card className={"border-1 radius-1 p-30 fadeIn"}>
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Input
@@ -99,8 +99,8 @@ export const UserSignup = () => {
       </Card>
     );
     // 3. btn
-    const btnSection = (i: number) => (
-      <Card className={"px-10 fadeIn"} key={i}>
+    const btnSection = () => (
+      <Card className={"px-10 fadeIn"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Btn
@@ -117,8 +117,8 @@ export const UserSignup = () => {
       </Card>
     );
     // 4. link
-    const linkSection = (i: number) => (
-      <Card className={"px-10 fadeIn"} key={i}>
+    const linkSection = () => (
+      <Card className={"px-10 fadeIn"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"d-center"}>
@@ -152,7 +152,7 @@ export const UserSignup = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center"}>
+      <Paper className={"content-wrapper-center"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
@@ -161,11 +161,11 @@ export const UserSignup = () => {
             {signupSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {btnSection(0)}
+            {btnSection()}
           </Grid>
           <Hr px={10} w={90} className={"bg-grey"} />
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {linkSection(0)}
+            {linkSection()}
           </Grid>
         </Grid>
       </Paper>

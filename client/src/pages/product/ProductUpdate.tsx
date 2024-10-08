@@ -216,8 +216,8 @@ export const ProductUpdate = () => {
       </Card>
     );
     // 3. btn
-    const btnSection = (i: number) => (
-      <Card className={"fadeIn"} key={i}>
+    const btnSection = () => (
+      <Card className={"fadeIn"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
@@ -244,7 +244,7 @@ export const ProductUpdate = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center"}>
+      <Paper className={"content-wrapper-center"}>
         <Grid container spacing={2} columns={12} direction={"column"}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
@@ -253,7 +253,7 @@ export const ProductUpdate = () => {
             {updateSection(0)}
           </Grid>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {btnSection(0)}
+            {btnSection()}
           </Grid>
         </Grid>
       </Paper>

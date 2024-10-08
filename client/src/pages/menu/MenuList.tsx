@@ -5,7 +5,7 @@ import { useCommonValue } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportUtils";
 import { Loading, Empty } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Btn } from "@imports/ImportComponents";
+import { Div, Img, Hr, Br, Btn } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
@@ -57,64 +57,68 @@ export const MenuList = () => {
   const listNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        {location_category === "main" ? "대표 메뉴" : "사이드 메뉴"}
-      </Div>
-    );
-    // 2. list
-    const listSection = () => {
-      const listFragment = (i: number) => (
-        <Card className={"p-0"} key={i}>
+      <Card className={"fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            <Img
-              max={150}
-              hover={true}
-              shadow={true}
-              radius={true}
-              group={"menu"}
-              src={OBJECT[i]?.menu_images?.[0]}
-              className={"w-100p"}
-              onClick={() => {
-                navigate("/menu/detail", {
-                  state: {
-                    _id: OBJECT[i]?._id
-                  }
-                });
-              }}
-            />
-          </Grid>
-        </Grid>
-        </Card>
-      );
-      const nameFragment = (i: number) => (
-        <Card className={"p-0"} key={i}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            <Div className={"fs-1-4rem fw-600"}>
-              {OBJECT[i]?.menu_name}
+          <Grid size={4} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700 fadeIn"}>
+              {location_category === "main" ? "대표 메뉴" : "사이드 메뉴"}
             </Div>
           </Grid>
         </Grid>
+      </Card>
+    );
+    // 2. list
+    const listSection = () => {
+      const imageFragment = (i: number) => (
+        <Card className={"p-0"} key={i}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12} className={"d-column-center"}>
+              <Img
+                max={150}
+                hover={true}
+                shadow={false}
+                radius={true}
+                group={"menu"}
+                src={OBJECT[i]?.menu_images?.[0]}
+                className={"w-100p"}
+                onClick={() => {
+                  navigate("/menu/detail", {
+                    state: {
+                      _id: OBJECT[i]?._id
+                    }
+                  });
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      const descFragment = (i: number) => (
+        <Card className={"p-0"} key={i}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12} className={"d-column-center"}>
+              <Div className={"fs-1-4rem fw-600"}>
+                {OBJECT[i]?.menu_name}
+              </Div>
+            </Grid>
+          </Grid>
         </Card>
       );
       return (
         <Grid container spacing={2} columns={12}>
           {OBJECT.map((_item: any, i: number) => (
-            <Grid size={{ xs: 6, md: 4 }} key={i}> 
-              <Card className={"d-column-center p-10 fadeIn"}>
-                {listFragment(i)}
-                <Hr px={20} h={2} w={80} className={"bg-burgundy"} />
-                {nameFragment(i)}
-              </Card>
+            <Grid size={{ xs: 6, md: 4 }} key={i} className={"d-column-center fadeIn"}>
+              {imageFragment(i)}
+              <Hr px={20} h={1} w={90} className={"bg-burgundy"} />
+              {descFragment(i)}
             </Grid>
           ))}
         </Grid>
       )
     };
     // 3. filter
-    const filterSection = (i: number) => (
-      <Card className={"fadeIn"} key={i}>
+    const filterSection = () => (
+      <Card className={"fadeIn"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -187,17 +191,14 @@ export const MenuList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper d-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
+      <Paper className={"content-wrapper-center"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Br px={40} />
             {listSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             <Hr px={20} className={"bg-grey"} />
-            {filterSection(0)}
+            {filterSection()}
           </Grid>
         </Grid>
       </Paper>
