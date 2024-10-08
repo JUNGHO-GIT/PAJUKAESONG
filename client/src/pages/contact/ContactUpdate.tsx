@@ -109,7 +109,7 @@ export const ContactUpdate = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Select
-                variant={"standard"}
+                variant={"outlined"}
                 label={"문의 유형"}
                 required={true}
                 value={OBJECT?.contact_category}
@@ -132,7 +132,7 @@ export const ContactUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"이름"}
                 required={true}
                 value={OBJECT?.contact_name}
@@ -148,7 +148,7 @@ export const ContactUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"이메일"}
                 required={true}
                 value={OBJECT?.contact_email}
@@ -174,7 +174,7 @@ export const ContactUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"전화번호"}
                 required={true}
                 value={OBJECT?.contact_phone}
@@ -201,7 +201,7 @@ export const ContactUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 required={true}
                 disabled={true}
                 label={"작성일"}
@@ -210,7 +210,7 @@ export const ContactUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"문의 제목"}
                 required={true}
                 value={OBJECT?.contact_title}

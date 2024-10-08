@@ -144,21 +144,18 @@ export const OrderDetail = () => {
                       />
                     </Div>
                   </Grid>
-                  {/** 마지막 항목 제외 hr 추가 */}
-                  {index !== OBJECT?.order_product?.length - 1 && (
-                    <Grid size={12}>
-                      <Hr px={5} className={"mb-10"} />
-                    </Grid>
-                  )}
+                  <Grid size={12}>
+                    {/** 마지막 항목 제외 hr 추가 */}
+                    {index !== OBJECT?.order_product?.length - 1 ? (
+                        <Hr px={5} className={"bg-grey mb-10"} />
+                      ) : (
+                        <Hr px={5} className={"bg-burgundy mb-10"} />
+                      )
+                    }
+                  </Grid>
                 </Grid>
               )
             ))}
-          </Grid>
-        </Card>
-      );
-      const descFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
-          <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-0rem me-10"}>
                 총 금액  :
@@ -180,7 +177,7 @@ export const OrderDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Select
-                variant={"standard"}
+                variant={"outlined"}
                 label={"주문 유형"}
                 required={true}
                 disabled={true}
@@ -196,7 +193,7 @@ export const OrderDetail = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"이름"}
                 required={true}
                 disabled={true}
@@ -205,7 +202,7 @@ export const OrderDetail = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"이메일"}
                 required={true}
                 disabled={true}
@@ -214,7 +211,7 @@ export const OrderDetail = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"전화번호"}
                 required={true}
                 disabled={true}
@@ -223,7 +220,7 @@ export const OrderDetail = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 required={true}
                 disabled={true}
                 label={"주문 날짜"}
@@ -237,11 +234,7 @@ export const OrderDetail = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             {productFragment(0)}
-          </Grid>
-          <Grid size={12}>
-            {descFragment(1)}
-          </Grid>
-          <Grid size={12}>
+            <Br px={20} />
             {orderFragment(2)}
           </Grid>
         </Grid>

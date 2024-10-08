@@ -113,7 +113,7 @@ export const MenuUpdate = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Select
-                variant={"standard"}
+                variant={"outlined"}
                 label={"메뉴 카테고리"}
                 required={true}
                 value={OBJECT?.menu_category}
@@ -136,7 +136,7 @@ export const MenuUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"메뉴 이름"}
                 required={true}
                 value={OBJECT?.menu_name}
@@ -152,7 +152,7 @@ export const MenuUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"메뉴 설명"}
                 required={true}
                 value={OBJECT?.menu_description}
@@ -168,7 +168,7 @@ export const MenuUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"가격"}
                 value={numeral(OBJECT?.menu_price).format("0,0")}
                 inputRef={REFS?.[i]?.menu_price}
@@ -193,7 +193,7 @@ export const MenuUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 required={true}
                 disabled={true}
                 label={"작성일"}

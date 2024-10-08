@@ -136,7 +136,7 @@ export const PickerDay = (
         {(popTrigger: any) => (
           <Input
             label={"날짜"}
-            variant={variant || "standard"}
+            variant={variant || "outlined"}
             value={getDayFmt(OBJECT?.[`${extra}`])}
             readOnly={true}
             inputclass={""}

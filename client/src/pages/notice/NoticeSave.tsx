@@ -87,7 +87,7 @@ export const NoticeSave = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 required={true}
                 disabled={true}
                 label={"작성일"}
@@ -96,7 +96,7 @@ export const NoticeSave = () => {
             </Grid>
             <Grid size={12} className={"d-center"}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"공지사항 제목"}
                 required={true}
                 value={OBJECT?.notice_title}
@@ -113,7 +113,7 @@ export const NoticeSave = () => {
             <Grid size={12} className={"d-center"}>
               <TextArea
                 label={"공지사항 내용"}
-                variant={"standard"}
+                variant={"outlined"}
                 required={true}
                 value={OBJECT?.notice_content}
                 itemRef={REFS?.[i]?.notice_content}

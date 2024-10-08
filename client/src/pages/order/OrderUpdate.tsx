@@ -253,27 +253,31 @@ export const OrderUpdate = () => {
                       }}
                     />
                   </Grid>
-                  {/** 마지막 항목 제외 hr 추가 */}
-                  {index !== OBJECT?.order_product?.length - 1 && (
-                    <Grid size={12}>
-                      <Hr px={5} className={"mb-10"} />
-                    </Grid>
-                  )}
+                  <Grid size={12}>
+                    {/** 마지막 항목 제외 hr 추가 */}
+                    {index !== OBJECT?.order_product?.length - 1 ? (
+                        <Hr px={5} className={"bg-grey mb-10"} />
+                      ) : (
+                        <Hr px={5} className={"bg-burgundy mb-10"} />
+                      )
+                    }
+                  </Grid>
                 </Grid>
               )
             ))}
-          </Grid>
-          <Hr px={40} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-0rem me-10"}>
-              총 금액  :
-            </Div>
-            <Div className={"fs-0-8rem me-5"}>
-              ₩
-            </Div>
-            <Div className={"fs-1-2rem fw-600"}>
-              {numeral(OBJECT?.order_total_price).format("0,0")}
-            </Div>
+            <Grid size={12}>
+              <Div className={"fs-1-0rem me-10"}>
+                총 금액  :
+              </Div>
+              <Icons
+                key={"Won"}
+                name={"Won"}
+                className={"w-15 h-15 dark"}
+              />
+              <Div className={"fs-1-2rem fw-600"}>
+                {numeral(OBJECT?.order_total_price).format("0,0")}
+              </Div>
+            </Grid>
           </Grid>
         </Card>
       );
@@ -282,7 +286,7 @@ export const OrderUpdate = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Select
-                variant={"standard"}
+                variant={"outlined"}
                 label={"주문 유형"}
                 required={true}
                 value={OBJECT?.order_category}
@@ -305,7 +309,7 @@ export const OrderUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"이름"}
                 required={true}
                 value={OBJECT?.order_name}
@@ -321,7 +325,7 @@ export const OrderUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"이메일"}
                 required={true}
                 value={OBJECT?.order_email}
@@ -347,7 +351,7 @@ export const OrderUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"전화번호"}
                 required={true}
                 value={OBJECT?.order_phone}
@@ -374,7 +378,7 @@ export const OrderUpdate = () => {
             </Grid>
             <Grid size={12}>
               <Select
-                variant={"standard"}
+                variant={"outlined"}
                 required={true}
                 label={"인원"}
                 value={OBJECT?.order_headcount}
@@ -421,8 +425,8 @@ export const OrderUpdate = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             {productFragment(0)}
-            <Hr px={40} w={90} className={"bg-burgundy"} />
-            {orderFragment(1)}
+            <Br px={20} />
+            {orderFragment(2)}
           </Grid>
         </Grid>
       )

@@ -112,7 +112,7 @@ export const OrderSave = () => {
                       radius={false}
                       group={"product"}
                       src={item?.product_images?.[0]}
-                      className={"w-70p h-70p"}
+                      className={"w-90p"}
                     />
                   </Grid>
                   <Grid size={4} className={"d-column-left"}>
@@ -229,21 +229,18 @@ export const OrderSave = () => {
                       }}
                     />
                   </Grid>
-                  {/** 마지막 항목 제외 hr 추가 */}
-                  {index !== OBJECT?.order_product?.length - 1 && (
-                    <Grid size={12}>
-                      <Hr px={5} className={"mb-10"} />
-                    </Grid>
-                  )}
+                  <Grid size={12}>
+                    {/** 마지막 항목 제외 hr 추가 */}
+                    {index !== OBJECT?.order_product?.length - 1 ? (
+                        <Hr px={5} className={"bg-grey mb-10"} />
+                      ) : (
+                        <Hr px={5} className={"bg-burgundy mb-10"} />
+                      )
+                    }
+                  </Grid>
                 </Grid>
               )
             ))}
-          </Grid>
-        </Card>
-      );
-      const descFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
-          <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-0rem me-10"}>
                 총 금액  :
@@ -265,7 +262,7 @@ export const OrderSave = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Select
-                variant={"standard"}
+                variant={"outlined"}
                 label={"주문 유형"}
                 required={true}
                 value={OBJECT?.order_category}
@@ -288,7 +285,7 @@ export const OrderSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"이름"}
                 required={true}
                 value={OBJECT?.order_name}
@@ -304,7 +301,7 @@ export const OrderSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"이메일"}
                 required={true}
                 value={OBJECT?.order_email}
@@ -330,7 +327,7 @@ export const OrderSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"전화번호"}
                 required={true}
                 value={OBJECT?.order_phone}
@@ -357,7 +354,7 @@ export const OrderSave = () => {
             </Grid>
             <Grid size={12}>
               <Select
-                variant={"standard"}
+                variant={"outlined"}
                 required={true}
                 label={"인원"}
                 value={OBJECT?.order_headcount}
@@ -404,11 +401,7 @@ export const OrderSave = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             {productFragment(0)}
-          </Grid>
-          <Grid size={12}>
-            {descFragment(1)}
-          </Grid>
-          <Grid size={12}>
+            <Br px={20} />
             {orderFragment(2)}
           </Grid>
         </Grid>

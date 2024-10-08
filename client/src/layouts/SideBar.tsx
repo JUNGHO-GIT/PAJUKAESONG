@@ -204,14 +204,14 @@ export const SideBar = (
         onClose={toggleSidebar}
         sx={{
           "& .MuiDrawer-paper": {
-            width: "240px",
+            width: "260px",
             padding: "15px",
             backgroundColor: "#ffffff",
           },
         }}
       >
         <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
+          <Grid size={12} className={"d-column-center"}>
             {logoSection()}
             <Hr px={20} className={"bg-light-grey"} />
             {sidebarSection()}

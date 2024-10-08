@@ -129,7 +129,7 @@ export const ProductDetail = () => {
     // 2. detail
     const detailSection = () => {
       const imageFragment = (i: number) => (
-        <Card className={"p-0"} key={i}>
+        <Card className={"p-10"} key={i}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Img

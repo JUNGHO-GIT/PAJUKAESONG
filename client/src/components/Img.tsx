@@ -30,18 +30,14 @@ export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgPr
   }
 
   if (!props?.className) {
-    imageClass = `h-auto object-cover`;
+    imageClass = `h-auto`;
   }
   else {
-    imageClass = `${props?.className} h-auto object-cover`;
+    imageClass = `${props?.className} h-auto`;
   }
 
   if (hover) {
-    imageStyle = {
-      ...imageStyle,
-      cursor: "pointer",
-      transition: "transform 0.3s ease",
-    };
+    imageClass += " hover"
   }
   if (shadow) {
     imageStyle = {

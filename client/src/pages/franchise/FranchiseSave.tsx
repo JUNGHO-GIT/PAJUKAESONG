@@ -111,7 +111,7 @@ export const FranchiseSave = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"가맹점 이름"}
                 required={true}
                 value={OBJECT?.franchise_name}
@@ -127,7 +127,7 @@ export const FranchiseSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"가맹점 주소"}
                 required={true}
                 readOnly={true}
@@ -148,7 +148,7 @@ export const FranchiseSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"상세주소"}
                 required={true}
                 value={OBJECT?.franchise_address_detail}
@@ -164,7 +164,7 @@ export const FranchiseSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"가맹점 전화번호"}
                 required={true}
                 value={OBJECT?.franchise_phone}
@@ -191,7 +191,7 @@ export const FranchiseSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 required={true}
                 disabled={true}
                 label={"작성일"}

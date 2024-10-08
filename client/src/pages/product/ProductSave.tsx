@@ -87,7 +87,7 @@ export const ProductSave = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Select
-                variant={"standard"}
+                variant={"outlined"}
                 label={"상품 카테고리"}
                 required={true}
                 value={OBJECT?.product_category}
@@ -110,7 +110,7 @@ export const ProductSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"상품 이름"}
                 required={true}
                 value={OBJECT?.product_name}
@@ -126,7 +126,7 @@ export const ProductSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 label={"상품 설명"}
                 required={true}
                 value={OBJECT?.product_description}
@@ -142,7 +142,7 @@ export const ProductSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 required={true}
                 label={"가격"}
                 value={numeral(OBJECT?.product_price).format("0,0")}
@@ -168,7 +168,7 @@ export const ProductSave = () => {
             </Grid>
             <Grid size={12}>
               <Input
-                variant={"standard"}
+                variant={"outlined"}
                 required={true}
                 disabled={true}
                 label={"작성일"}
