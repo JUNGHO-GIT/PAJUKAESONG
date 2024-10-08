@@ -1,7 +1,7 @@
 // FranchiseDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
@@ -18,6 +18,7 @@ export const FranchiseDetail = () => {
   const {
     getDayFmt,
   } = useCommonDate();
+  const { isXxs } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -94,7 +95,7 @@ export const FranchiseDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={300}
+                max={isXxs ? 270 : 300}
                 hover={false}
                 shadow={true}
                 radius={true}

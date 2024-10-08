@@ -215,9 +215,9 @@ export const SideBar = (
             {logoSection()}
             <Hr px={30} className={"bg-light-grey"} />
             {sidebarSection()}
-            <Hr px={30} className={"bg-light-grey"} />
+            <Hr px={50} className={"bg-light-grey"} />
             {textSection1()}
-            <Hr px={30} className={"bg-light-grey"} />
+            <Hr px={50} className={"bg-light-grey"} />
             {textSection2()}
           </Grid>
         </Grid>

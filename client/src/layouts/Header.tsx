@@ -14,9 +14,7 @@ export const Header = () => {
   const {
     navigate, PATH, firstStr, secondStr, dataArray, isAdmin, location_category
   } = useCommonValue();
-  const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
+  const { isXxs, isXs, isSm, isMd, isLg, isXl } = useResponsive();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [tabWidth, setTabWidth] = useState<string>("");
@@ -28,13 +26,13 @@ export const Header = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    if (isXs) {
+    if (isXxs || isXs) {
       setTabWidth("");
     }
     else if (isSm || isMd || isLg || isXl) {
       setTabWidth("w-17p");
     }
-  }, [isXs, isSm, isMd, isLg, isXl]);
+  }, [isXxs, isXs, isSm, isMd, isLg, isXl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화
@@ -94,14 +92,14 @@ export const Header = () => {
           radius={false}
           group={"main"}
           src={"logo1.webp"}
-          className={"pointer h-max50"}
+          className={"h-max45"}
           onClick={() => {
             navigate("/main");
           }}
         />
         {isAdmin && (
           <Div
-            className={"fw-600 pointer-burgundy burgundy"}
+            className={"pointer-burgundy burgundy fw-0-8rem fw-700"}
             onClick={() => {
               navigate("/admin/dashboard");
             }}
@@ -198,14 +196,14 @@ export const Header = () => {
     return (
       <Paper className={"layout-wrapper p-sticky top-0vh border-bottom-1 p-20"}>
         <Grid container spacing={2}>
-          <Grid size={{ xs: 2, sm: 0 }} className={`${isXs ? "d-column-left" : "d-none"}`}>
+          <Grid size={{ xs: 2, sm: 0 }} className={`${isXxs || isXs ? "d-column-left" : "d-none"}`}>
             {sidebarSection()}
             {toggleSection()}
           </Grid>
-          <Grid size={{ xs: 10, sm: 12, md: 4 }} className={`${isXs ? "d-row-left" : "d-center"}`}>
+          <Grid size={{ xs: 10, sm: 12, md: 4 }} className={`${isXxs || isXs ? "d-row-left" : "d-center"}`}>
             {logoSection()}
           </Grid>
-          <Grid size={{ xs: 0, sm: 12, md: 8 }} className={`${isXs ? "d-none" : "d-row-center"}`}>
+          <Grid size={{ xs: 0, sm: 12, md: 8 }} className={`${isXxs || isXs ? "d-none" : "d-row-center"}`}>
             {tabsSection()}
           </Grid>
         </Grid>

@@ -72,10 +72,10 @@ export const NoticeList = () => {
     // 2. list
     const listSection = () => {
       const listFragment = (i:number) => (
-        <Card className={"border-1 radius-1 shadow-1 p-30"}>
+        <Card className={"border-1 radius-1 shadow-1 p-30"} key={`list-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
-              <Grid container spacing={2} columns={12}>
+              <Grid container spacing={0} columns={12}>
                 <Grid size={2}>
                   <Div className={"fs-0-8rem fw-500"}>
                     번호
@@ -92,9 +92,9 @@ export const NoticeList = () => {
                   </Div>
                 </Grid>
               </Grid>
-              <Hr px={30} className={"bg-burgundy"} />
+              <Hr px={50} className={"bg-burgundy"} />
               {OBJECT?.map((item: any, index: number) => (
-                <Grid container spacing={2} columns={12} key={index}>
+                <Grid container spacing={0} columns={12} key={index}>
                   <Grid size={2}>
                     <Div className={"fs-0-7rem"}>
                       {item?.notice_number}
@@ -123,7 +123,7 @@ export const NoticeList = () => {
                   <Grid size={12} className={"d-column-center"}>
                     {/** 마지막 항목 제외 hr 추가 */}
                     {index !== OBJECT?.length - 1 && (
-                      <Hr px={10} className={"mb-20"} />
+                      <Hr px={50} className={"bg-light-grey"} />
                     )}
                   </Grid>
                 </Grid>
@@ -176,7 +176,7 @@ export const NoticeList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={7} className={"d-center"}>
+          <Grid size={6} className={"d-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -200,7 +200,7 @@ export const NoticeList = () => {
               }}
             />
           </Grid>
-          <Grid size={2} className={`${isAdmin ? "d-center" : "d-none"}`}>
+          <Grid size={3} className={`${isAdmin ? "d-center" : "d-none"}`}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {

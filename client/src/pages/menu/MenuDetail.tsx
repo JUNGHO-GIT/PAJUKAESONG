@@ -1,7 +1,7 @@
 // MenuDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
@@ -15,6 +15,7 @@ export const MenuDetail = () => {
   const {
     navigate, location_id, isAdmin, URL, SUBFIX
   } = useCommonValue();
+  const { isXxs } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -91,7 +92,7 @@ export const MenuDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={300}
+                max={isXxs ? 270 : 300}
                 hover={false}
                 shadow={true}
                 radius={true}

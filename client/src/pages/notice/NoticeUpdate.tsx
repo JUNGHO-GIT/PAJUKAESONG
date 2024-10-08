@@ -106,7 +106,7 @@ export const NoticeUpdate = () => {
     // 2. update
     const updateSection = () => {
       const updateFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={`update-${i}`}>
+        <Card className={"p-0"} key={`update-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Input
@@ -165,11 +165,13 @@ export const NoticeUpdate = () => {
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            {updateFragment(0)}
+        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12} className={"d-column-center"}>
+              {updateFragment(0)}
+            </Grid>
           </Grid>
-        </Grid>
+        </Card>
       )
     };
     // 3. btn

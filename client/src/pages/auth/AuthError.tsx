@@ -2,16 +2,14 @@
 // Node -> Section -> Fragment
 
 import { useCommonValue } from "@imports/ImportHooks";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
+import { Div, Btn } from "@imports/ImportComponents";
 import { Grid, Paper } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AuthError = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    navigate
-  } = useCommonValue();
+  const { navigate } = useCommonValue();
 
   // 7. errorNode ----------------------------------------------------------------------------------
   const errorNode = () => {

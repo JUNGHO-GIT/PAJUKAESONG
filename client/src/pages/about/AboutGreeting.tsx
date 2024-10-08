@@ -49,7 +49,7 @@ export const AboutGreeting = () => {
             <Div className={"fs-1-5rem fw-700 me-10"}>
               강 민 서
             </Div>
-            <Div className={"fs-1-5rem fw-500"}>
+            <Div className={"d-row-center"}>
               <Img
                 max={30}
                 hover={false}
@@ -57,7 +57,6 @@ export const AboutGreeting = () => {
                 radius={false}
                 group={"main"}
                 src={"stamp.webp"}
-                className={"w-30 h-30"}
               />
             </Div>
           </Grid>

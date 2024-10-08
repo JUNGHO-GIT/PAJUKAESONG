@@ -9,11 +9,17 @@ export const Select = (props: any) => (
     select={true}
     type={props?.type || "text"}
     variant={props?.variant || "outlined"}
+    className={props?.className || ""}
     size={props?.size || "small"}
     fullWidth={props?.fullWidth || true}
-    className={props?.className || ""}
     inputRef={props?.inputRef || null}
     error={props?.error || false}
+    sx={{
+      ...props?.sx,
+      "& .MuiSelect-icon": {
+        display: props?.readOnly && "none"
+      },
+    }}
     slotProps={{
       ...props?.slotProps,
       input: {
@@ -31,13 +37,11 @@ export const Select = (props: any) => (
         startAdornment: (
           props?.startadornment ? (
             typeof props?.startadornment === "string" ? (
-              <div className={"ms-n5 me-1vw"}>
-                <div className={"fs-0-6rem"}>
-                  {props?.startadornment}
-                </div>
+              <div className={props?.adornmentclass ? `${props?.adornmentclass} d-center fs-0-6rem` : "d-center fs-0-6rem"}>
+                {props?.startadornment}
               </div>
             ) : (
-              <div className={"ms-n5 me-1vw"}>
+              <div className={props?.adornmentclass ? `${props?.adornmentclass} d-center me-2vw` : "d-center me-2vw"}>
                 {props?.startadornment}
               </div>
             )
@@ -46,13 +50,11 @@ export const Select = (props: any) => (
         endAdornment: (
           props?.endadornment ? (
             typeof props?.endadornment === "string" ? (
-              <div className={"me-n5 ms-1vw"}>
-                <div className={"fs-0-6rem"}>
-                  {props?.endadornment}
-                </div>
+              <div className={props?.adornmentclass ? `${props?.adornmentclass} d-center fs-0-6rem` : "d-center fs-0-6rem"}>
+                {props?.endadornment}
               </div>
             ) : (
-              <div className={"me-n5 ms-1vw"}>
+              <div className={props?.adornmentclass ? `${props?.adornmentclass} d-center ms-2vw` : "d-center ms-2vw"}>
                 {props?.endadornment}
               </div>
             )

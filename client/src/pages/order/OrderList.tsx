@@ -74,10 +74,10 @@ export const OrderList = () => {
     // 2. list
     const listSection = () => {
       const listFragment = (i:number) => (
-        <Card className={"border-1 radius-1 shadow-1 p-30"}>
+        <Card className={"border-1 radius-1 shadow-1 p-30"} key={`list-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
-              <Grid container spacing={2} columns={12}>
+              <Grid container spacing={0} columns={12}>
                 <Grid size={2}>
                   <Div className={"fs-0-8rem fw-500"}>
                     유형
@@ -94,9 +94,9 @@ export const OrderList = () => {
                   </Div>
                 </Grid>
               </Grid>
-              <Hr px={40} className={"bg-burgundy"} />
+              <Hr px={50} className={"bg-burgundy"} />
               {OBJECT?.map((item: any, index: number) => (
-                <Grid container spacing={2} columns={12} key={index}>
+                <Grid container spacing={0} columns={12} key={index}>
                   <Grid size={2}>
                     <Div className={"fs-0-7rem"}>
                       {item?.order_category}
@@ -125,7 +125,7 @@ export const OrderList = () => {
                   <Grid size={12} className={"d-column-center"}>
                     {/** 마지막 항목 제외 hr 추가 */}
                     {index !== OBJECT?.length - 1 && (
-                      <Hr px={10} className={"mb-20"} />
+                      <Hr px={50} className={"bg-light-grey"} />
                     )}
                   </Grid>
                 </Grid>

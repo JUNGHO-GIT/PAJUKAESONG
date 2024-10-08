@@ -1,7 +1,7 @@
 // NoticeDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
@@ -19,6 +19,7 @@ export const NoticeDetail = () => {
   const {
     getDayFmt,
   } = useCommonDate();
+  const { isXxs } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -85,57 +86,65 @@ export const NoticeDetail = () => {
       </Card>
     );
     // 2. detail
-    const detailSection = () => (
-      <Card className={"border-1 shadow-1 radius-1 p-30"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            <Div className={"fs-1-8rem fw-700 black"}>
-              {OBJECT?.notice_title}
-            </Div>
+    const detailSection = () => {
+      const titleFragment = (i: number) => (
+        <Card className={"p-0"} key={`title-${i}`}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12} className={"d-column-center"}>
+              <Div className={"fs-1-8rem fw-700 black"}>
+                {OBJECT?.notice_title}
+              </Div>
+            </Grid>
           </Grid>
-          <Hr px={10} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-column-center"}>
-            <Img
-              max={200}
-              hover={false}
-              shadow={true}
-              radius={false}
-              group={"notice"}
-              src={OBJECT?.notice_images?.[0]}
-            />
+        </Card>
+      );
+      const descFragment = (i: number) => (
+        <Card className={"p-0"} key={`desc-${i}`}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12} className={"d-column-center"}>
+              <TextArea
+                label={""}
+                required={true}
+                readOnly={true}
+                value={OBJECT?.notice_content}
+                inputclass={"h-35vh border-none"}
+              />
+            </Grid>
+            <Grid size={10} className={"d-row-left"}>
+              <Icons
+                key={"Calendar"}
+                name={"Calendar"}
+                className={"w-20 h-20"}
+              />
+              <Div className={"fs-1-0rem fw-500"}>
+                {getDayFmt(OBJECT?.notice_regDt)}
+              </Div>
+            </Grid>
+            <Grid size={2} className={"d-row-right"}>
+              <Icons
+                key={"View"}
+                name={"View"}
+                className={"w-20 h-20"}
+              />
+              <Div className={"fs-1-0rem fw-500"}>
+                {OBJECT?.notice_view}
+              </Div>
+            </Grid>
           </Grid>
-          <Grid size={12} className={"d-column-center"}>
-            <TextArea
-              label={""}
-              required={true}
-              readOnly={true}
-              value={OBJECT?.notice_content}
-              inputclass={"h-35vh border-none"}
-            />
+        </Card>
+      );
+      return (
+        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12} className={"d-column-center"}>
+              {titleFragment(0)}
+              <Hr px={40} className={"bg-burgundy"} />
+              {descFragment(0)}
+            </Grid>
           </Grid>
-          <Grid size={6} className={"d-row-left"}>
-            <Icons
-              key={"Calendar"}
-              name={"Calendar"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500"}>
-              {getDayFmt(OBJECT?.notice_regDt)}
-            </Div>
-          </Grid>
-          <Grid size={6} className={"d-row-right"}>
-            <Icons
-              key={"View"}
-              name={"View"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500"}>
-              {OBJECT?.notice_view}
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
+        </Card>
+      )
+    };
     // 3. filter
     const filterSection = () => (
       <Card className={"px-20"}>

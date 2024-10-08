@@ -1,7 +1,7 @@
 // MenuList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
@@ -16,6 +16,7 @@ export const MenuList = () => {
   const {
     URL, SUBFIX, navigate, isAdmin, location_category
   } = useCommonValue();
+  const { isXxs } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -74,7 +75,7 @@ export const MenuList = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={150}
+                max={isXxs ? 120 : 150}
                 hover={true}
                 shadow={true}
                 radius={true}
@@ -108,7 +109,6 @@ export const MenuList = () => {
           {OBJECT.map((_item: any, i: number) => (
             <Grid size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }} key={i}>
               {imageFragment(i)}
-              <Br px={10} />
               {descFragment(i)}
             </Grid>
           ))}
@@ -151,7 +151,7 @@ export const MenuList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={7} className={"d-center"}>
+          <Grid size={6} className={"d-center"}>
             <TablePagination
               rowsPerPageOptions={[6]}
               rowsPerPage={6}
@@ -175,7 +175,7 @@ export const MenuList = () => {
               }}
             />
           </Grid>
-          <Grid size={2} className={`${isAdmin ? "d-center" : "d-none"}`}>
+          <Grid size={3} className={`${isAdmin ? "d-center" : "d-none"}`}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {

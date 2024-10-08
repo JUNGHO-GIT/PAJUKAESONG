@@ -187,15 +187,15 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
         {fileList && fileList.length > 0 && fileList.map((file: any, index: number) => (
           <Div className={"d-row-center"} key={index}>
             <Img
-              max={40}
+              max={25}
               hover={false}
-              shadow={false}
+              shadow={true}
               radius={true}
               group={"new"}
               src={URL.createObjectURL(file)}
               className={"me-10"}
             />
-            <Div className={"black fs-0-9rem fw-500"} max={15}>
+            <Div className={"black fs-0-9rem fw-500"} max={12}>
               {file?.name}
             </Div>
             <Div
@@ -208,26 +208,27 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
         ))}
       </Grid>
       <Grid size={4} className={"d-column-right"}>
-        <Div
-          className={"fs-0-9rem fw-600 pointer-burgundy"}
-          onClick={(e: any) => handleFileAdd(e)}
-        >
-          <Icons
-            key={"CirclePlus"}
-            name={"CirclePlus"}
-            className={"w-20 h-20"}
-          />
-        </Div>
-        <Br px={10} />
-        <Div
-          className={"fs-0-9rem fw-600 pointer-burgundy"}
-          onClick={() => handleFileDelete(0, "all")}
-        >
-          <Icons
-            key={"Trash"}
-            name={"Trash"}
-            className={"w-20 h-20"}
-          />
+        <Div className={"me-n20"}>
+          <Div
+            className={"fs-0-9rem fw-600 pointer-burgundy"}
+            onClick={(e: any) => handleFileAdd(e)}
+          >
+            <Icons
+              key={"CirclePlus"}
+              name={"CirclePlus"}
+              className={"w-22 h-22"}
+            />
+          </Div>
+          <Div
+            className={"fs-0-9rem fw-600 pointer-burgundy"}
+            onClick={() => handleFileDelete(0, "all")}
+          >
+            <Icons
+              key={"Trash"}
+              name={"Trash"}
+              className={"w-22 h-22"}
+            />
+          </Div>
         </Div>
       </Grid>
     </Grid>
@@ -240,9 +241,9 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
         {fileExisting.map((file: any, index: number) => (
           <Div className={"d-row-center"} key={index}>
             <Img
-              max={40}
+              max={25}
               hover={false}
-              shadow={false}
+              shadow={true}
               radius={true}
               group={props?.group}
               src={file}

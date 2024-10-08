@@ -3,7 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
 import { Div, Hr, Br } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
@@ -74,10 +74,10 @@ export const ContactList = () => {
     // 2. list
     const listSection = () => {
       const listFragment = (i:number) => (
-        <Card className={"border-1 radius-1 shadow-1 p-30"}>
+        <Card className={"border-1 radius-1 shadow-1 p-30"} key={`list-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
-              <Grid container spacing={2} columns={12}>
+              <Grid container spacing={0} columns={12}>
                 <Grid size={2}>
                   <Div className={"fs-0-8rem fw-500"}>
                     유형
@@ -94,9 +94,9 @@ export const ContactList = () => {
                   </Div>
                 </Grid>
               </Grid>
-              <Hr px={30} className={"bg-burgundy"} />
+              <Hr px={50} className={"bg-burgundy"} />
               {OBJECT?.map((item: any, index: number) => (
-                <Grid container spacing={2} columns={12} key={index}>
+                <Grid container spacing={0} columns={12} key={index}>
                   <Grid size={2}>
                     <Div className={"fs-0-7rem"}>
                       {item?.contact_category}
@@ -125,7 +125,7 @@ export const ContactList = () => {
                   <Grid size={12} className={"d-column-center"}>
                     {/** 마지막 항목 제외 hr 추가 */}
                     {index !== OBJECT?.length - 1 && (
-                      <Hr px={10} className={"mb-20"} />
+                      <Hr px={50} className={"bg-light-grey"} />
                     )}
                   </Grid>
                 </Grid>

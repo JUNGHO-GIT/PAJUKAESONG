@@ -1,7 +1,7 @@
 // ProductDetail.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
@@ -16,6 +16,7 @@ export const ProductDetail = () => {
   const {
     navigate, location_id, isAdmin, URL, SUBFIX, TITLE
   } = useCommonValue();
+  const { isXxs } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -133,7 +134,7 @@ export const ProductDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={320}
+                max={isXxs ? 270 : 300}
                 hover={false}
                 shadow={true}
                 radius={true}

@@ -19,9 +19,7 @@ export const Main = () => {
   const {
     dayFmt, getDayFmt
   } = useCommonDate();
-  const {
-    isXs, isSm, isMd, isLg, isXl
-  } = useResponsive();
+  const { isXxs, isXs, isSm, isMd, isLg, isXl } = useResponsive();
 
   // 1. common -------------------------------------------------------------------------------------
   const mainArray = ["main1.webp", "main2.webp", "main3.webp", "main4.webp", "main5.webp"];
@@ -168,7 +166,7 @@ export const Main = () => {
               <Swiper
                 spaceBetween={20}
                 slidesPerView={LOADING ? 0 : (
-                  isXs ? 2 : isSm ? 2 : isMd ? 3 : isLg ? 3 : isXl ? 3 : 3
+                  isXxs ? 2 : isXs ? 2 : isSm ? 2 : isMd ? 3 : isLg ? 3 : isXl ? 3 : 3
                 )}
                 centeredSlides={false}
                 loop={true}
