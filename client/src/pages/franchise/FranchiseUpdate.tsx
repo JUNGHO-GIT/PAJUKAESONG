@@ -120,7 +120,7 @@ export const FranchiseUpdate = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               가맹점 수정
             </Div>
@@ -133,7 +133,7 @@ export const FranchiseUpdate = () => {
       const updateFragment = (i: number) => (
           <Card className={"border-1 shadow-1 radius-1 p-30"}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"가맹점 이름"}
@@ -149,7 +149,7 @@ export const FranchiseUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"가맹점 주소"}
@@ -170,7 +170,7 @@ export const FranchiseUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"상세주소"}
@@ -186,7 +186,7 @@ export const FranchiseUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"가맹점 전화번호"}
@@ -213,16 +213,7 @@ export const FranchiseUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
-              <Input
-                variant={"outlined"}
-                required={true}
-                disabled={true}
-                label={"작성일"}
-                value={dayFmt}
-              />
-            </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <InputFile
                 variant={"outlined"}
                 label={"가맹점 이미지"}
@@ -249,7 +240,7 @@ export const FranchiseUpdate = () => {
       );
       return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {updateFragment(0)}
           </Grid>
         </Grid>
@@ -286,7 +277,7 @@ export const FranchiseUpdate = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {updateSection()}

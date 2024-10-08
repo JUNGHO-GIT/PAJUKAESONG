@@ -81,7 +81,7 @@ export const AdminDashboard = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               관리자 대시보드
             </Div>
@@ -171,7 +171,7 @@ export const AdminDashboard = () => {
     const filterSection = () => (
       <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={4} className={"d-center"}>
+          <Grid size={3} className={"d-center"}>
             <Select
               label={"정렬"}
               value={ORDER_PAGING?.sort}
@@ -203,7 +203,7 @@ export const AdminDashboard = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={8} className={"d-center"}>
+          <Grid size={9} className={"d-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -234,7 +234,7 @@ export const AdminDashboard = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {dateSection()}

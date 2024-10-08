@@ -187,11 +187,11 @@ export const SideBar = (
     );
     const textSection2 = () => (
       <Grid container spacing={2} columns={12} className={"horizontal-text fs-0-8rem"}>
-        <Grid size={12} className={"d-center"}>
+        <Grid size={12} className={"d-column-center"}>
           <span>&copy; 2024&nbsp;&nbsp;</span>
           <b>PajuKaesong</b>
         </Grid>
-        <Grid size={12} className={"d-center"}>
+        <Grid size={12} className={"d-column-center"}>
           <span>Designed by&nbsp;&nbsp;</span>
           <b>JUNGHO</b>
         </Grid>

@@ -81,7 +81,7 @@ export const ContactDetail = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               문의 상세
             </Div>
@@ -93,7 +93,7 @@ export const ContactDetail = () => {
     const detailSection = () => (
       <Card className={"border-1 shadow-1 radius-1 p-30"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               {OBJECT?.contact_title}
             </Div>
@@ -102,7 +102,7 @@ export const ContactDetail = () => {
             </Div>
           </Grid>
           <Hr px={10} className={"bg-burgundy"} />
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <TextArea
               label={""}
               disabled={true}
@@ -182,7 +182,7 @@ export const ContactDetail = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {detailSection()}

@@ -76,7 +76,7 @@ export const MenuDetail = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               메뉴 상세
             </Div>
@@ -89,9 +89,9 @@ export const MenuDetail = () => {
       const imageFragment = (i: number) => (
         <Card className={"p-10"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Img
-                max={350}
+                max={80}
                 hover={false}
                 shadow={true}
                 radius={true}
@@ -105,7 +105,7 @@ export const MenuDetail = () => {
       const descFragment = (i: number) => (
         <Card className={"px-40"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Div className={"fs-1-8rem fw-700 black"}>
                 {OBJECT?.menu_name}
               </Div>
@@ -130,7 +130,7 @@ export const MenuDetail = () => {
       );
       return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {imageFragment(0)}
             <Hr px={40} w={90} className={"bg-burgundy"} />
             {descFragment(1)}
@@ -185,7 +185,7 @@ export const MenuDetail = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {detailSection()}

@@ -94,7 +94,7 @@ export const ProductUpdate = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               제품 수정
             </Div>
@@ -107,7 +107,7 @@ export const ProductUpdate = () => {
       const updateFragment = (i: number) => (
         <Card className={"border-1 shadow-1 radius-1 p-30"}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Select
                 variant={"outlined"}
                 label={"상품 카테고리"}
@@ -130,7 +130,7 @@ export const ProductUpdate = () => {
                 ))}
               </Select>
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"상품 이름"}
@@ -146,7 +146,7 @@ export const ProductUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"상품 설명"}
@@ -162,7 +162,7 @@ export const ProductUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"가격"}
@@ -187,16 +187,7 @@ export const ProductUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
-              <Input
-                variant={"outlined"}
-                required={true}
-                disabled={true}
-                label={"작성일"}
-                value={dayFmt}
-              />
-            </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <InputFile
                 variant={"outlined"}
                 label={"제품 이미지"}
@@ -223,7 +214,7 @@ export const ProductUpdate = () => {
       );
       return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {updateFragment(0)}
           </Grid>
         </Grid>
@@ -260,7 +251,7 @@ export const ProductUpdate = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {updateSection()}

@@ -118,7 +118,7 @@ export const ProductDetail = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               제품 상세
             </Div>
@@ -131,9 +131,9 @@ export const ProductDetail = () => {
       const imageFragment = (i: number) => (
         <Card className={"p-10"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Img
-                max={350}
+                max={80}
                 hover={false}
                 shadow={true}
                 radius={true}
@@ -147,7 +147,7 @@ export const ProductDetail = () => {
       const descFragment = (i: number) => (
         <Card className={"px-40"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Div className={"fs-1-8rem fw-700 black"}>
                 {OBJECT?.product_name}
               </Div>
@@ -172,7 +172,7 @@ export const ProductDetail = () => {
       );
       return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {imageFragment(0)}
             <Hr px={40} w={90} className={"bg-burgundy"} />
             {descFragment(1)}
@@ -309,7 +309,7 @@ export const ProductDetail = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {detailSection()}

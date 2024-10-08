@@ -72,7 +72,7 @@ export const ContactSave = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               문의 하기
             </Div>
@@ -85,7 +85,7 @@ export const ContactSave = () => {
       const saveFragment = (i: number) => (
         <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Select
                 variant={"outlined"}
                 label={"문의 유형"}
@@ -108,7 +108,7 @@ export const ContactSave = () => {
                 ))}
               </Select>
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"이름"}
@@ -124,7 +124,7 @@ export const ContactSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"이메일"}
@@ -150,7 +150,7 @@ export const ContactSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"전화번호"}
@@ -177,16 +177,7 @@ export const ContactSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
-              <Input
-                variant={"outlined"}
-                required={true}
-                disabled={true}
-                label={"작성일"}
-                value={dayFmt}
-              />
-            </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"문의 제목"}
@@ -202,7 +193,7 @@ export const ContactSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <TextArea
                 label={"문의 내용"}
                 required={true}
@@ -218,7 +209,7 @@ export const ContactSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <InputFile
                 variant={"outlined"}
                 label={"문의 이미지"}
@@ -243,7 +234,7 @@ export const ContactSave = () => {
       );
       return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {saveFragment(0)}
           </Grid>
         </Grid>
@@ -280,7 +271,7 @@ export const ContactSave = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {saveSection()}

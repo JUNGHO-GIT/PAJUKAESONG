@@ -13,7 +13,7 @@ export const AuthPrivacy = () => {
         <Grid container spacing={3} columns={12}>
 
           {/** 1. privacy */}
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-700 mb-20"}>
               Privacy Policy
             </Div>
@@ -25,7 +25,7 @@ export const AuthPrivacy = () => {
           <Hr px={15} />
 
           {/** 2. information collection and use */}
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-700 mb-20"}>
               Information Collection and Use
             </Div>
@@ -50,7 +50,7 @@ export const AuthPrivacy = () => {
           <Hr px={15} />
 
           {/** 3. third party access */}
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-700 mb-20"}>
               Third Party Access
             </Div>
@@ -91,7 +91,7 @@ export const AuthPrivacy = () => {
           <Hr px={15} />
 
           {/** 4. opt-out rights */}
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-700 mb-20"}>
               Opt-Out Rights
             </Div>
@@ -103,7 +103,7 @@ export const AuthPrivacy = () => {
           <Hr px={15} />
 
           {/** 5. data retention policy */}
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-700 mb-20"}>
               Data Retention Policy
             </Div>
@@ -115,7 +115,7 @@ export const AuthPrivacy = () => {
           <Hr px={15} />
 
           {/** 6. children */}
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-700 mb-20"}>
               Children
             </Div>
@@ -130,7 +130,7 @@ export const AuthPrivacy = () => {
           <Hr px={15} />
 
           {/** 7. security */}
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-700 mb-20"}>
               Security
             </Div>
@@ -142,7 +142,7 @@ export const AuthPrivacy = () => {
           <Hr px={15} />
 
           {/** 8. changes */}
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-700 mb-20"}>
               Changes
             </Div>
@@ -157,7 +157,7 @@ export const AuthPrivacy = () => {
           <Hr px={15} />
 
           {/** 9. your consent */}
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-700 mb-20"}>
               Your Consent
             </Div>
@@ -169,7 +169,7 @@ export const AuthPrivacy = () => {
           <Hr px={15} />
 
           {/** 10. contact us */}
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-4rem fw-700 mb-20"}>
               Contact Us
             </Div>
@@ -184,7 +184,7 @@ export const AuthPrivacy = () => {
     return (
       <Paper className={"content-wrapper radius-1 border-1 h-100vh"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {privacySection()}
           </Grid>
         </Grid>

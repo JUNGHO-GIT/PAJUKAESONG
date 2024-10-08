@@ -99,7 +99,7 @@ export const UserLogin = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               로그인
             </Div>
@@ -112,7 +112,7 @@ export const UserLogin = () => {
       const loginFragment = (i: number) => (
         <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12} className={"d-center"}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 required={true}
@@ -130,7 +130,7 @@ export const UserLogin = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 required={true}
@@ -154,7 +154,7 @@ export const UserLogin = () => {
       );
       return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {loginFragment(0)}
           </Grid>
         </Grid>
@@ -164,7 +164,7 @@ export const UserLogin = () => {
     const btnSection = () => (
       <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             {(isAdmin || isUser) ? (
               <Btn
                 className={"w-100p bg-burgundy fs-1-0rem"}
@@ -220,7 +220,7 @@ export const UserLogin = () => {
     return (
       <Paper className={"content-wrapper h-min90vh"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {loginSection()}

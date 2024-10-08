@@ -38,12 +38,12 @@ export const PickerDay = (
         contents={({closePopup}: any) => (
           <Card className={"p-0"}>
             <Grid container spacing={3} columns={12}>
-              <Grid size={12} className={"d-center"}>
+              <Grid size={12} className={"d-column-center"}>
                 <Div className={"fs-1-2rem fw-600"}>
                   날짜 선택
                 </Div>
               </Grid>
-              <Grid size={12} className={"d-center"}>
+              <Grid size={12} className={"d-column-center"}>
                 <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"ko"}>
                   <DateCalendar
                     timezone={"Asia/Seoul"}

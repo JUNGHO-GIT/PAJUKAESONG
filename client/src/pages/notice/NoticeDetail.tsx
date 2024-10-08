@@ -76,7 +76,7 @@ export const NoticeDetail = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               공지사항 상세
             </Div>
@@ -88,13 +88,13 @@ export const NoticeDetail = () => {
     const detailSection = () => (
       <Card className={"border-1 shadow-1 radius-1 p-30"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {OBJECT?.notice_title}
             </Div>
           </Grid>
           <Hr px={10} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Img
               max={200}
               hover={false}
@@ -105,14 +105,13 @@ export const NoticeDetail = () => {
               className={"w-100p h-auto"}
             />
           </Grid>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <TextArea
               label={""}
               required={true}
               readOnly={true}
               value={OBJECT?.notice_content}
-              inputclass={"h-35vh"}
-              className={"border-1 radius-1 p-30"}
+              inputclass={"h-35vh border-none"}
             />
           </Grid>
           <Grid size={6} className={"d-row-left"}>
@@ -181,7 +180,7 @@ export const NoticeDetail = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {detailSection()}

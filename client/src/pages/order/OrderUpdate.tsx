@@ -112,7 +112,7 @@ export const OrderUpdate = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               주문 수정
             </Div>
@@ -253,7 +253,7 @@ export const OrderUpdate = () => {
                       }}
                     />
                   </Grid>
-                  <Grid size={12}>
+                  <Grid size={12} className={"d-column-center"}>
                     {/** 마지막 항목 제외 hr 추가 */}
                     {index !== OBJECT?.order_product?.length - 1 ? (
                         <Hr px={5} className={"bg-grey mb-10"} />
@@ -265,7 +265,7 @@ export const OrderUpdate = () => {
                 </Grid>
               )
             ))}
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Div className={"fs-1-0rem me-10"}>
                 총 금액  :
               </Div>
@@ -284,7 +284,7 @@ export const OrderUpdate = () => {
       const orderFragment = (i: number) => (
         <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Select
                 variant={"outlined"}
                 label={"주문 유형"}
@@ -307,7 +307,7 @@ export const OrderUpdate = () => {
                 ))}
               </Select>
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"이름"}
@@ -323,7 +323,7 @@ export const OrderUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"이메일"}
@@ -349,7 +349,7 @@ export const OrderUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"전화번호"}
@@ -376,7 +376,7 @@ export const OrderUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Select
                 variant={"outlined"}
                 required={true}
@@ -398,7 +398,7 @@ export const OrderUpdate = () => {
                 ))}
               </Select>
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <PickerDay
                 OBJECT={OBJECT}
                 setOBJECT={setOBJECT}
@@ -408,7 +408,7 @@ export const OrderUpdate = () => {
                 i={i}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <PickerTime
                 OBJECT={OBJECT}
                 setOBJECT={setOBJECT}
@@ -423,7 +423,7 @@ export const OrderUpdate = () => {
       );
       return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {productFragment(0)}
             <Br px={20} />
             {orderFragment(2)}
@@ -462,7 +462,7 @@ export const OrderUpdate = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {updateSection()}

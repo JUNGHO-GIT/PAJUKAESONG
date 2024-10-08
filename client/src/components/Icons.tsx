@@ -105,7 +105,7 @@ export const Icons = (props: any) => {
       </svg>
     ),
     Trash: (
-      <svg {...commonValues}>
+      <svg {...commonValues} fill={"none"}>
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M4 7l16 0" />
         <path d="M10 11l0 6" />

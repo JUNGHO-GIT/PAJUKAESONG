@@ -30,33 +30,23 @@ export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgPr
   }
 
   if (!props?.className) {
-    imageClass = `h-auto`;
+    imageClass = `h-auto object-contain`;
   }
   else {
-    imageClass = `${props?.className} h-auto`;
+    imageClass = `${props?.className} h-auto object-contain`;
   }
 
   if (hover) {
-    imageClass += " hover"
+    imageClass += " hover";
   }
   if (shadow) {
-    imageStyle = {
-      ...imageStyle,
-      filter: "drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3))",
-    };
+    imageClass += " shadow-3";
   }
   if (radius) {
-    imageStyle = {
-      ...imageStyle,
-      borderRadius: "10px",
-    };
+    imageClass += " radius-2";
   }
   if (max) {
-    imageStyle = {
-      ...imageStyle,
-      maxWidth: `${max}px`,
-      maxHeight: `${max}px`,
-    };
+    imageClass += ` w-max${max || ""}vw h-max${max || ""}vw`
   }
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -79,7 +69,6 @@ export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgPr
       src={imgSrc}
       alt={fileName}
       key={fileName}
-      loading={"lazy"}
       onError={handleError}
       style={imageStyle}
       className={imageClass}

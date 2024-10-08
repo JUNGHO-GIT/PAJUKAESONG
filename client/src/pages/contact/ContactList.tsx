@@ -17,7 +17,7 @@ export const ContactList = () => {
     navigate, URL, SUBFIX, location,
   } = useCommonValue();
   const {
-    getDayFmt,
+    getDayNotFmt,
   } = useCommonDate();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ export const ContactList = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               문의 목록
             </Div>
@@ -72,63 +72,81 @@ export const ContactList = () => {
       </Card>
     );
     // 2. list
-    const listSection = () => (
-      <Card className={"border-1 shadow-1 radius-1 p-30"}>
+    const listSection = () => {
+      const listFragment = (i:number) => (
+        <Card className={"border-1 radius-1 shadow-1 p-30"}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12} className={"d-column-center"}>
+              <Grid container spacing={2} columns={12}>
+                <Grid size={2}>
+                  <Div className={"fs-0-8rem fw-500"}>
+                    유형
+                  </Div>
+                </Grid>
+                <Grid size={8}>
+                  <Div className={"fs-0-8rem fw-500"}>
+                    제목
+                  </Div>
+                </Grid>
+                <Grid size={2}>
+                  <Div className={"fs-0-8rem fw-500"}>
+                    날짜
+                  </Div>
+                </Grid>
+              </Grid>
+              <Hr px={30} className={"bg-burgundy"} />
+              {OBJECT?.map((item: any, index: number) => (
+                <Grid container spacing={2} columns={12} key={index}>
+                  <Grid size={2}>
+                    <Div className={"fs-0-7rem"}>
+                      {item?.contact_category}
+                    </Div>
+                  </Grid>
+                  <Grid size={8}>
+                    <Div
+                      max={10}
+                      className={"fs-1-0rem pointer-burgundy"}
+                      onClick={() => {
+                        navigate('/contact/detail', {
+                          state: {
+                            _id: item?._id
+                          },
+                        });
+                      }}
+                    >
+                      {item?.contact_title}
+                    </Div>
+                  </Grid>
+                  <Grid size={2}>
+                    <Div className={"fs-0-7rem"}>
+                      {getDayNotFmt(item?.contact_regDt).format("MM-DD")}
+                    </Div>
+                  </Grid>
+                  <Grid size={12} className={"d-column-center"}>
+                    {/** 마지막 항목 제외 hr 추가 */}
+                    {index !== OBJECT?.length - 1 && (
+                      <Hr px={10} className={"mb-20"} />
+                    )}
+                  </Grid>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={2}>
-            <Div className={"fs-0-8rem fw-500"}>
-              유형
-            </Div>
-          </Grid>
-          <Grid size={6}>
-            <Div className={"fs-0-8rem fw-500"}>
-              제목
-            </Div>
-          </Grid>
-          <Grid size={4}>
-            <Div className={"fs-0-8rem fw-500"}>
-              날짜
-            </Div>
+          <Grid size={12} className={"d-column-center"}>
+            {listFragment(2)}
           </Grid>
         </Grid>
-        <Hr px={40} className={"bg-burgundy"} />
-        {OBJECT?.map((item: any, index: number) => (
-          <Grid container spacing={2} columns={12} key={index}>
-            <Grid size={2}>
-              <Div className={"fs-0-8rem"}>
-                {item?.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"}
-              </Div>
-            </Grid>
-            <Grid size={6}>
-              <Div
-                max={15}
-                className={"fs-1-0rem pointer-burgundy"}
-                onClick={() => {
-                  navigate('/contact/detail', {
-                    state: {
-                      _id: item?._id
-                    },
-                  });
-                }}
-              >
-                {item?.contact_title}
-              </Div>
-            </Grid>
-            <Grid size={4}>
-              <Div className={"fs-0-8rem"}>
-                {getDayFmt(item?.contact_regDt)}
-              </Div>
-            </Grid>
-            <Hr px={1} className={"bg-light-grey mb-20"} />
-          </Grid>
-        ))}
-      </Card>
-    );
+      );
+    };
     // 3. filter
     const filterSection = () => (
       <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={4} className={"d-center"}>
+          <Grid size={3} className={"d-center"}>
             <Select
               label={"정렬"}
               value={PAGING?.sort}
@@ -160,7 +178,7 @@ export const ContactList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={8} className={"d-center"}>
+          <Grid size={9} className={"d-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -191,7 +209,7 @@ export const ContactList = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {listSection()}

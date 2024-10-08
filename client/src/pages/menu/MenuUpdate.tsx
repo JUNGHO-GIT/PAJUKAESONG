@@ -98,7 +98,7 @@ export const MenuUpdate = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               메뉴 수정
             </Div>
@@ -111,7 +111,7 @@ export const MenuUpdate = () => {
       const updateFragment = (i: number) => (
         <Card className={"border-1 shadow-1 radius-1 p-30"}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Select
                 variant={"outlined"}
                 label={"메뉴 카테고리"}
@@ -134,7 +134,7 @@ export const MenuUpdate = () => {
                 ))}
               </Select>
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"메뉴 이름"}
@@ -150,7 +150,7 @@ export const MenuUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"메뉴 설명"}
@@ -166,7 +166,7 @@ export const MenuUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"가격"}
@@ -191,16 +191,7 @@ export const MenuUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
-              <Input
-                variant={"outlined"}
-                required={true}
-                disabled={true}
-                label={"작성일"}
-                value={dayFmt}
-              />
-            </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <InputFile
                 variant={"outlined"}
                 label={"메뉴 이미지"}
@@ -227,7 +218,7 @@ export const MenuUpdate = () => {
       );
       return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {updateFragment(0)}
           </Grid>
         </Grid>
@@ -268,7 +259,7 @@ export const MenuUpdate = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {updateSection()}

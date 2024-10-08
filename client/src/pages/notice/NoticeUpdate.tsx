@@ -95,7 +95,7 @@ export const NoticeUpdate = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               공지사항 수정
             </Div>
@@ -108,15 +108,7 @@ export const NoticeUpdate = () => {
       const updateFragment = (i: number) => (
           <Card className={"border-1 shadow-1 radius-1 p-30"}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12} className={"d-center"}>
-              <Input
-                variant={"outlined"}
-                required={true}
-                label={"작성일"}
-                value={getDayFmt(OBJECT?.notice_regDt)}
-              />
-            </Grid>
-            <Grid size={12} className={"d-center"}>
+            <Grid size={12} className={"d-column-center"}>
               <Input
                 variant={"outlined"}
                 label={"공지사항 제목"}
@@ -132,7 +124,7 @@ export const NoticeUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-center"}>
+            <Grid size={12} className={"d-column-center"}>
               <TextArea
                 label={"공지사항 내용"}
                 variant={"outlined"}
@@ -149,7 +141,7 @@ export const NoticeUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <InputFile
                 variant={"outlined"}
                 label={"공지사항 이미지"}
@@ -174,7 +166,7 @@ export const NoticeUpdate = () => {
       );
       return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {updateFragment(0)}
           </Grid>
         </Grid>
@@ -211,7 +203,7 @@ export const NoticeUpdate = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {updateSection()}

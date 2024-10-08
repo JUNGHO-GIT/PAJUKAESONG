@@ -78,7 +78,7 @@ export const Main = () => {
       const imageFragment = (i: number) => (
         <Card className={"p-0"} key={i}>
           <Grid container spacing={0} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-center"}>
               <Swiper
                 spaceBetween={0}
                 slidesPerView={LOADING ? 0 : 1}
@@ -125,7 +125,7 @@ export const Main = () => {
       const titleFragment = (i: number) => (
         <Card className={"p-0"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-center"}>
               <Div className={"fs-1-8rem fw-700"}>
                 메뉴 소개
               </Div>
@@ -164,7 +164,7 @@ export const Main = () => {
       const menuFragment = (i: number) => (
         <Card className={"p-20"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-center"}>
               <Swiper
                 spaceBetween={20}
                 slidesPerView={LOADING ? 0 : (
@@ -190,7 +190,7 @@ export const Main = () => {
                 {OBJECT_MENU?.map((item: any, index: number) => (
                   item.menu_images.length > 0 && (
                     <SwiperSlide className={"d-center"} key={index}>
-                      <Card className={"border-1 shadow-2 radius-1 p-10"}>
+                      <Card className={"border-1 shadow-1 radius-1 p-10"}>
                         <Img
                           max={200}
                           hover={true}
@@ -252,7 +252,7 @@ export const Main = () => {
       const titleFragment = (i: number) => (
         <Card className={"p-0"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-center"}>
               <Div className={"fs-1-8rem fw-700"}>
                 공지사항
               </Div>
@@ -263,7 +263,7 @@ export const Main = () => {
       const noticeFragment = (i: number) => (
         <Card className={"p-20"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-center"}>
               <Swiper
                 spaceBetween={20}
                 slidesPerView={LOADING ? 0 : 1}
@@ -287,7 +287,7 @@ export const Main = () => {
               >
                 {OBJECT_NOTICE?.map((item: any, index: number) => (
                   <SwiperSlide className={"d-center"} key={index}>
-                    <Card className={"border-1 shadow-2 radius-1 p-20"}>
+                    <Card className={"border-1 shadow-1 radius-1 p-20"}>
                       <Img
                         max={180}
                         hover={true}
@@ -347,7 +347,7 @@ export const Main = () => {
       const titleFragment = (i: number) => (
         <Card className={"p-0"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-center"}>
               <Div className={"fs-1-8rem fw-700"}>
                 오시는 길
               </Div>
@@ -378,7 +378,7 @@ export const Main = () => {
     return (
       <Paper className={"content-wrapper p-0 fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-column-center"}>
             {mainSection()}
             <Hr px={20} className={"bg-light-grey"} />
             {menuSection()}

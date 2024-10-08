@@ -58,7 +58,7 @@ export const ProductList = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-center"}>
+          <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               제품 목록
             </Div>
@@ -71,9 +71,9 @@ export const ProductList = () => {
       const imageFragment = (i: number) => (
         <Card className={"p-10"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Img
-                max={150}
+                max={40}
                 hover={true}
                 shadow={true}
                 radius={true}
@@ -94,7 +94,7 @@ export const ProductList = () => {
       const descFragment = (i: number) => (
         <Card className={"p-0"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
+            <Grid size={12} className={"d-column-center"}>
               <Div className={"fs-1-2rem fw-600"}>
                 {OBJECT[i]?.product_name}
               </Div>
@@ -118,7 +118,7 @@ export const ProductList = () => {
     const filterSection = () => (
       <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={4} className={"d-center"}>
+          <Grid size={3} className={"d-center"}>
             <Select
               label={"정렬"}
               value={PAGING?.sort}
@@ -150,7 +150,7 @@ export const ProductList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={6} className={"d-center"}>
+          <Grid size={7} className={"d-center"}>
             <TablePagination
               rowsPerPageOptions={[6]}
               rowsPerPage={6}
@@ -191,7 +191,7 @@ export const ProductList = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {listSection()}
