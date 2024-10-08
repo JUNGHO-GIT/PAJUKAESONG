@@ -133,7 +133,7 @@ export const ProductDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={300}
+                max={320}
                 hover={false}
                 shadow={true}
                 radius={true}

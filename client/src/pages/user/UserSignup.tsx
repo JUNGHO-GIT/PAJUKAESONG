@@ -167,7 +167,7 @@ export const UserSignup = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min90vh"}>
+      <Paper className={"content-wrapper h-min60vh"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}

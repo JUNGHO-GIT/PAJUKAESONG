@@ -83,7 +83,7 @@ export const ProductSave = () => {
     // 2. save
     const saveSection = () => {
       const saveFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-20"} key={`save-${i}`}>
+        <Card className={"border-1 shadow-1 radius-1 p-30"} key={`save-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Select
@@ -234,7 +234,7 @@ export const ProductSave = () => {
             {titleSection()}
             <Br px={30} />
             {saveSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
+            <Br px={30} />
             {btnSection()}
           </Grid>
         </Grid>

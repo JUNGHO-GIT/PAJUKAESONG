@@ -102,7 +102,6 @@ export const NoticeDetail = () => {
               radius={false}
               group={"notice"}
               src={OBJECT?.notice_images?.[0]}
-              className={"w-100p h-auto"}
             />
           </Grid>
           <Grid size={12} className={"d-column-center"}>

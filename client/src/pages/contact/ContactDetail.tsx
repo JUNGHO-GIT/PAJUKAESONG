@@ -93,7 +93,7 @@ export const ContactDetail = () => {
     const detailSection = () => (
       <Card className={"border-1 shadow-1 radius-1 p-30"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               {OBJECT?.contact_title}
             </Div>
@@ -106,8 +106,7 @@ export const ContactDetail = () => {
             <TextArea
               label={""}
               disabled={true}
-              inputclass={"h-35vh"}
-              className={"border-1 radius-1 p-30"}
+              inputclass={"h-35vh border-none"}
               value={OBJECT?.contact_content}
             />
           </Grid>

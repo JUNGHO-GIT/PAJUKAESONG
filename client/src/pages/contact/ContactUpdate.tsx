@@ -105,7 +105,7 @@ export const ContactUpdate = () => {
     // 2. update
     const updateSection = () => {
       const updateFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"}>
+        <Card className={"border-1 shadow-1 radius-1 p-30"} key={`update-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Select
@@ -297,7 +297,7 @@ export const ContactUpdate = () => {
             {titleSection()}
             <Br px={30} />
             {updateSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
+            <Br px={30} />
             {btnSection()}
           </Grid>
         </Grid>

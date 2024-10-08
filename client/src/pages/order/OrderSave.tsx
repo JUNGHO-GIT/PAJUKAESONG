@@ -258,7 +258,7 @@ export const OrderSave = () => {
         </Card>
       );
       const orderFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-20"} key={`order-${i}`}>
+        <Card className={"border-1 shadow-1 radius-1 p-30"} key={`order-${i}`}>
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Select
@@ -442,7 +442,7 @@ export const OrderSave = () => {
             {titleSection()}
             <Br px={30} />
             {saveSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
+            <Br px={30} />
             {btnSection()}
           </Grid>
         </Grid>

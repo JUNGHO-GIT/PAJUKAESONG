@@ -9,7 +9,7 @@ export const AuthPrivacy = () => {
   const authPrivacyNode = () => {
     // 1. privacy
     const privacySection = () => (
-      <Card key={"privacy"} className={"p-20"}>
+      <Card key={"privacy"} className={"p-30"}>
         <Grid container spacing={3} columns={12}>
 
           {/** 1. privacy */}

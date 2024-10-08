@@ -187,11 +187,11 @@ export const SideBar = (
     );
     const textSection2 = () => (
       <Grid container spacing={2} columns={12} className={"horizontal-text fs-0-8rem"}>
-        <Grid size={12} className={"d-column-center"}>
+        <Grid size={12} className={"d-row-center"}>
           <span>&copy; 2024&nbsp;&nbsp;</span>
           <b>PajuKaesong</b>
         </Grid>
-        <Grid size={12} className={"d-column-center"}>
+        <Grid size={12} className={"d-row-center"}>
           <span>Designed by&nbsp;&nbsp;</span>
           <b>JUNGHO</b>
         </Grid>
@@ -213,11 +213,11 @@ export const SideBar = (
         <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             {logoSection()}
-            <Hr px={20} className={"bg-light-grey"} />
+            <Hr px={30} className={"bg-light-grey"} />
             {sidebarSection()}
-            <Hr px={20} className={"bg-light-grey"} />
+            <Hr px={30} className={"bg-light-grey"} />
             {textSection1()}
-            <Hr px={20} className={"bg-light-grey"} />
+            <Hr px={30} className={"bg-light-grey"} />
             {textSection2()}
           </Grid>
         </Grid>
