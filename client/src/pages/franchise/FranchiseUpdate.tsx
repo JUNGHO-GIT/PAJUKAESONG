@@ -3,11 +3,10 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateFranchise } from "@imports/ImportValidates";
-import { axios } from "@imports/ImportUtils";
-import { makeFormData } from "@imports/ImportUtils";
+import { axios, makeFormData } from "@imports/ImportUtils";
 import { Loading, Empty } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
-import { Div, Btn } from "@imports/ImportComponents";
+import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
 import { Input, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -119,131 +118,146 @@ export const FranchiseUpdate = () => {
   const updateNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        가맹점 수정
-      </Div>
-    );
-    // 2. update
-    const updateSection = (i: number) => (
-      <Card className={"border-1 shadow-1 radius-1 p-30 fadeIn"} key={i}>
+      <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"가맹점 이름"}
-              required={true}
-              value={OBJECT?.franchise_name}
-              inputRef={REFS?.[i]?.franchise_name}
-              error={ERRORS?.[i]?.franchise_name}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  franchise_name: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"가맹점 주소"}
-              required={true}
-              readOnly={true}
-              className={"pointer"}
-              value={OBJECT?.franchise_address_main}
-              inputRef={REFS?.[i]?.franchise_address_main}
-              error={ERRORS?.[i]?.franchise_address_main}
-              onClick={() => {
-                handleMap();
-              }}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  franchise_address_main: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"상세주소"}
-              required={true}
-              value={OBJECT?.franchise_address_detail}
-              inputRef={REFS?.[i]?.franchise_address_detail}
-              error={ERRORS?.[i]?.franchise_address_detail}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  franchise_address_detail: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"가맹점 전화번호"}
-              required={true}
-              value={OBJECT?.franchise_phone}
-              inputRef={REFS?.[i]?.franchise_phone}
-              error={ERRORS?.[i]?.franchise_phone}
-              placeholder={"010-1234-5678"}
-              onChange={(e: any) => {
-                const value = e.target.value.replace(/[^0-9]/g, '');
-                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
-                if (value.length > 11) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    franchise_phone: prev.franchise_phone,
-                  }));
-                }
-                else {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    franchise_phone: newValue,
-                  }));
-                }
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              required={true}
-              disabled={true}
-              label={"작성일"}
-              value={dayFmt}
-            />
-          </Grid>
-          <Grid size={12}>
-            <InputFile
-              variant={"outlined"}
-              label={"가맹점 이미지"}
-              required={true}
-              limit={1}
-              existing={OBJECT?.franchise_images}
-              group={"franchise"}
-              value={fileList}
-              inputRef={REFS?.[i]?.franchise_images}
-              error={ERRORS?.[i]?.franchise_images}
-              onChange={(updatedFiles: File[] | null) => {
-                setFileList(updatedFiles);
-              }}
-              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  franchise_images: updatedExistingFiles,
-                }));
-              }}
-            />
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              가맹점 수정
+            </Div>
           </Grid>
         </Grid>
       </Card>
     );
+    // 2. update
+    const updateSection = () => {
+      const updateFragment = (i: number) => (
+          <Card className={"border-1 shadow-1 radius-1 p-30"}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"가맹점 이름"}
+                required={true}
+                value={OBJECT?.franchise_name}
+                inputRef={REFS?.[i]?.franchise_name}
+                error={ERRORS?.[i]?.franchise_name}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    franchise_name: e.target.value,
+                  }));
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"가맹점 주소"}
+                required={true}
+                readOnly={true}
+                className={"pointer"}
+                value={OBJECT?.franchise_address_main}
+                inputRef={REFS?.[i]?.franchise_address_main}
+                error={ERRORS?.[i]?.franchise_address_main}
+                onClick={() => {
+                  handleMap();
+                }}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    franchise_address_main: e.target.value,
+                  }));
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"상세주소"}
+                required={true}
+                value={OBJECT?.franchise_address_detail}
+                inputRef={REFS?.[i]?.franchise_address_detail}
+                error={ERRORS?.[i]?.franchise_address_detail}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    franchise_address_detail: e.target.value,
+                  }));
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"가맹점 전화번호"}
+                required={true}
+                value={OBJECT?.franchise_phone}
+                inputRef={REFS?.[i]?.franchise_phone}
+                error={ERRORS?.[i]?.franchise_phone}
+                placeholder={"010-1234-5678"}
+                onChange={(e: any) => {
+                  const value = e.target.value.replace(/[^0-9]/g, '');
+                  const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
+                  if (value.length > 11) {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      franchise_phone: prev.franchise_phone,
+                    }));
+                  }
+                  else {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      franchise_phone: newValue,
+                    }));
+                  }
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                required={true}
+                disabled={true}
+                label={"작성일"}
+                value={dayFmt}
+              />
+            </Grid>
+            <Grid size={12}>
+              <InputFile
+                variant={"outlined"}
+                label={"가맹점 이미지"}
+                required={true}
+                limit={1}
+                existing={OBJECT?.franchise_images}
+                group={"franchise"}
+                value={fileList}
+                inputRef={REFS?.[i]?.franchise_images}
+                error={ERRORS?.[i]?.franchise_images}
+                onChange={(updatedFiles: File[] | null) => {
+                  setFileList(updatedFiles);
+                }}
+                handleExistingFilesChange={(updatedExistingFiles: string[]) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    franchise_images: updatedExistingFiles,
+                  }));
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      return (
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12}>
+            {updateFragment(0)}
+          </Grid>
+        </Grid>
+      )
+    };
     // 3. btn
     const btnSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
@@ -270,15 +284,13 @@ export const FranchiseUpdate = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {updateSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Br px={30} />
+            {updateSection()}
+            <Hr px={40} w={90} className={"bg-grey"} />
             {btnSection()}
           </Grid>
         </Grid>

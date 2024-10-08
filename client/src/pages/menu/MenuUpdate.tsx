@@ -3,11 +3,10 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateMenu } from "@imports/ImportValidates";
-import { axios, numeral } from "@imports/ImportUtils";
-import { makeFormData } from "@imports/ImportUtils";
+import { axios, numeral, makeFormData } from "@imports/ImportUtils";
 import { Loading, Empty } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
-import { Div, Btn } from "@imports/ImportComponents";
+import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
 import { Input, Select, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
@@ -97,131 +96,146 @@ export const MenuUpdate = () => {
   const updateNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        메뉴 수정
-      </Div>
-    );
-    // 2. update
-    const updateSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+      <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
-            <Select
-              variant={"standard"}
-              label={"메뉴 카테고리"}
-              required={true}
-              value={OBJECT?.menu_category}
-              inputRef={REFS?.[i]?.menu_category}
-              error={ERRORS?.[i]?.menu_category}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  menu_category: e.target.value,
-                }));
-              }}
-            >
-              {["main", "side"].map((item: string, idx: number) => (
-                <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                  {item === "main" && "메인메뉴"}
-                  {item === "side" && "사이드메뉴"}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"메뉴 이름"}
-              required={true}
-              value={OBJECT?.menu_name}
-              inputRef={REFS?.[i]?.menu_name}
-              error={ERRORS?.[i]?.menu_name}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  menu_name: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"메뉴 설명"}
-              required={true}
-              value={OBJECT?.menu_description}
-              inputRef={REFS?.[i]?.menu_description}
-              error={ERRORS?.[i]?.menu_description}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  menu_description: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"가격"}
-              value={numeral(OBJECT?.menu_price).format("0,0")}
-              inputRef={REFS?.[i]?.menu_price}
-              error={ERRORS?.[i]?.menu_price}
-              onChange={(e: any) => {
-                const value = e.target.value.replace(/,/g, '');
-                const newValue = value === "" ? 0 : Number(value);
-                if (value === "") {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    menu_price: "0",
-                  }));
-                }
-                else if (!isNaN(newValue) && newValue <= 9999999999) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    menu_price: String(newValue),
-                  }));
-                }
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              required={true}
-              disabled={true}
-              label={"작성일"}
-              value={dayFmt}
-            />
-          </Grid>
-          <Grid size={12}>
-            <InputFile
-              variant={"outlined"}
-              label={"메뉴 이미지"}
-              required={true}
-              limit={1}
-              existing={OBJECT?.menu_images}
-              group={"menu"}
-              value={fileList}
-              inputRef={REFS?.[i]?.menu_images}
-              error={ERRORS?.[i]?.menu_images}
-              onChange={(updatedFiles: File[] | null) => {
-                setFileList(updatedFiles);
-              }}
-              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  menu_images: updatedExistingFiles,
-                }));
-              }}
-            />
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              메뉴 수정
+            </Div>
           </Grid>
         </Grid>
       </Card>
     );
+    // 2. update
+    const updateSection = () => {
+      const updateFragment = (i: number) => (
+        <Card className={"border-1 shadow-1 radius-1 p-30"}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12}>
+              <Select
+                variant={"standard"}
+                label={"메뉴 카테고리"}
+                required={true}
+                value={OBJECT?.menu_category}
+                inputRef={REFS?.[i]?.menu_category}
+                error={ERRORS?.[i]?.menu_category}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    menu_category: e.target.value,
+                  }));
+                }}
+              >
+                {["main", "side"].map((item: string, idx: number) => (
+                  <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
+                    {item === "main" && "메인메뉴"}
+                    {item === "side" && "사이드메뉴"}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"메뉴 이름"}
+                required={true}
+                value={OBJECT?.menu_name}
+                inputRef={REFS?.[i]?.menu_name}
+                error={ERRORS?.[i]?.menu_name}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    menu_name: e.target.value,
+                  }));
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"메뉴 설명"}
+                required={true}
+                value={OBJECT?.menu_description}
+                inputRef={REFS?.[i]?.menu_description}
+                error={ERRORS?.[i]?.menu_description}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    menu_description: e.target.value,
+                  }));
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"가격"}
+                value={numeral(OBJECT?.menu_price).format("0,0")}
+                inputRef={REFS?.[i]?.menu_price}
+                error={ERRORS?.[i]?.menu_price}
+                onChange={(e: any) => {
+                  const value = e.target.value.replace(/,/g, '');
+                  const newValue = value === "" ? 0 : Number(value);
+                  if (value === "") {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      menu_price: "0",
+                    }));
+                  }
+                  else if (!isNaN(newValue) && newValue <= 9999999999) {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      menu_price: String(newValue),
+                    }));
+                  }
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                required={true}
+                disabled={true}
+                label={"작성일"}
+                value={dayFmt}
+              />
+            </Grid>
+            <Grid size={12}>
+              <InputFile
+                variant={"outlined"}
+                label={"메뉴 이미지"}
+                required={true}
+                limit={1}
+                existing={OBJECT?.menu_images}
+                group={"menu"}
+                value={fileList}
+                inputRef={REFS?.[i]?.menu_images}
+                error={ERRORS?.[i]?.menu_images}
+                onChange={(updatedFiles: File[] | null) => {
+                  setFileList(updatedFiles);
+                }}
+                handleExistingFilesChange={(updatedExistingFiles: string[]) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    menu_images: updatedExistingFiles,
+                  }));
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      return (
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12}>
+            {updateFragment(0)}
+          </Grid>
+        </Grid>
+      )
+    };
     // 3. btn
     const btnSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
@@ -252,15 +266,13 @@ export const MenuUpdate = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {updateSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Br px={30} />
+            {updateSection()}
+            <Hr px={40} w={90} className={"bg-grey"} />
             {btnSection()}
           </Grid>
         </Grid>

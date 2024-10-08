@@ -30,13 +30,19 @@ export const FranchiseInfo = () => {
   const infoNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        가맹 안내
-      </Div>
+      <Card className={"p-0"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              가맹 안내
+            </Div>
+          </Grid>
+        </Grid>
+      </Card>
     );
     // 2. info
-    const infoSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+    const infoSection = () => (
+      <Card className={"border-1 shadow-1 radius-1 p-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -60,8 +66,8 @@ export const FranchiseInfo = () => {
       </Card>
     );
     // 3. step
-    const stepSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+    const stepSection = () => (
+      <Card className={"border-1 shadow-1 radius-1 p-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -157,8 +163,8 @@ export const FranchiseInfo = () => {
       </Card>
     );
     // 4. cost
-    const costSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+    const costSection = () => (
+      <Card className={"border-1 shadow-1 radius-1 p-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -296,19 +302,16 @@ export const FranchiseInfo = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {infoSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {stepSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {costSection(0)}
+            <Br px={20} />
+            {infoSection()}
+            <Br px={20} />
+            {stepSection()}
+            <Br px={20} />
+            {costSection()}
           </Grid>
         </Grid>
       </Paper>

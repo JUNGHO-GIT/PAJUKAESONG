@@ -3,11 +3,10 @@
 import { useState } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useValidateContact } from "@imports/ImportValidates";
-import { axios } from "@imports/ImportUtils";
-import { makeFormData } from "@imports/ImportUtils";
+import { axios, makeFormData } from "@imports/ImportUtils";
 import { Loading, Empty } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
-import { Div, Btn } from "@imports/ImportComponents";
+import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
 import { Select, Input, TextArea, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
@@ -71,173 +70,188 @@ export const ContactSave = () => {
   const saveNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        문의 하기
-      </Div>
-    );
-    // 2. save
-    const saveSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+      <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
-            <Select
-              variant={"standard"}
-              label={"문의 유형"}
-              required={true}
-              value={OBJECT?.contact_category}
-              inputRef={REFS?.[i]?.contact_category}
-              error={ERRORS?.[i]?.contact_category}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  contact_category: e.target.value,
-                }));
-              }}
-            >
-              {["franchise", "personal"].map((item, idx) => (
-                <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                  {item === "franchise" && "가맹 문의"}
-                  {item === "personal" && "1:1 문의"}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"이름"}
-              required={true}
-              value={OBJECT?.contact_name}
-              inputRef={REFS?.[i]?.contact_name}
-              error={ERRORS?.[i]?.contact_name}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  contact_name: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"이메일"}
-              required={true}
-              value={OBJECT?.contact_email}
-              inputRef={REFS?.[i]?.contact_email}
-              error={ERRORS?.[i]?.contact_email}
-              placeholder={"abcd@naver.com"}
-              onChange={(e: any) => {
-                const value = e.target.value;
-                if (value.length > 30) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    contact_email: prev.contact_email,
-                  }));
-                }
-                else {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    contact_email: value,
-                  }));
-                }
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"전화번호"}
-              required={true}
-              value={OBJECT?.contact_phone}
-              inputRef={REFS?.[i]?.contact_phone}
-              error={ERRORS?.[i]?.contact_phone}
-              placeholder={"010-1234-5678"}
-              onChange={(e: any) => {
-                const value = e.target.value.replace(/[^0-9]/g, '');
-                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
-                if (value.length > 11) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    contact_phone: prev.contact_phone,
-                  }));
-                }
-                else {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    contact_phone: newValue,
-                  }));
-                }
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              required={true}
-              disabled={true}
-              label={"작성일"}
-              value={dayFmt}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"standard"}
-              label={"문의 제목"}
-              required={true}
-              value={OBJECT?.contact_title}
-              inputRef={REFS?.[i]?.contact_title}
-              error={ERRORS?.[i]?.contact_title}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  contact_title: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <TextArea
-              label={"문의 내용"}
-              required={true}
-              inputclass={"h-35vh"}
-              value={OBJECT?.contact_content}
-              inputRef={REFS?.[i]?.contact_content}
-              error={ERRORS?.[i]?.contact_content}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  contact_content: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <InputFile
-              variant={"outlined"}
-              label={"문의 이미지"}
-              required={true}
-              limit={1}
-              existing={OBJECT?.contact_images}
-              group={"contact"}
-              value={fileList}
-              onChange={(updatedFiles: File[] | null) => {
-                setFileList(updatedFiles);
-              }}
-              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  contact_images: updatedExistingFiles,
-                }));
-              }}
-            />
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              문의 하기
+            </Div>
           </Grid>
         </Grid>
       </Card>
     );
+    // 2. save
+    const saveSection = () => {
+      const saveFragment = (i: number) => (
+        <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12}>
+              <Select
+                variant={"standard"}
+                label={"문의 유형"}
+                required={true}
+                value={OBJECT?.contact_category}
+                inputRef={REFS?.[i]?.contact_category}
+                error={ERRORS?.[i]?.contact_category}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_category: e.target.value,
+                  }));
+                }}
+              >
+                {["franchise", "personal"].map((item, idx) => (
+                  <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
+                    {item === "franchise" && "가맹 문의"}
+                    {item === "personal" && "1:1 문의"}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"이름"}
+                required={true}
+                value={OBJECT?.contact_name}
+                inputRef={REFS?.[i]?.contact_name}
+                error={ERRORS?.[i]?.contact_name}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_name: e.target.value,
+                  }));
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"이메일"}
+                required={true}
+                value={OBJECT?.contact_email}
+                inputRef={REFS?.[i]?.contact_email}
+                error={ERRORS?.[i]?.contact_email}
+                placeholder={"abcd@naver.com"}
+                onChange={(e: any) => {
+                  const value = e.target.value;
+                  if (value.length > 30) {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      contact_email: prev.contact_email,
+                    }));
+                  }
+                  else {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      contact_email: value,
+                    }));
+                  }
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"전화번호"}
+                required={true}
+                value={OBJECT?.contact_phone}
+                inputRef={REFS?.[i]?.contact_phone}
+                error={ERRORS?.[i]?.contact_phone}
+                placeholder={"010-1234-5678"}
+                onChange={(e: any) => {
+                  const value = e.target.value.replace(/[^0-9]/g, '');
+                  const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
+                  if (value.length > 11) {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      contact_phone: prev.contact_phone,
+                    }));
+                  }
+                  else {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      contact_phone: newValue,
+                    }));
+                  }
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                required={true}
+                disabled={true}
+                label={"작성일"}
+                value={dayFmt}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"standard"}
+                label={"문의 제목"}
+                required={true}
+                value={OBJECT?.contact_title}
+                inputRef={REFS?.[i]?.contact_title}
+                error={ERRORS?.[i]?.contact_title}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_title: e.target.value,
+                  }));
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <TextArea
+                label={"문의 내용"}
+                required={true}
+                inputclass={"h-35vh"}
+                value={OBJECT?.contact_content}
+                inputRef={REFS?.[i]?.contact_content}
+                error={ERRORS?.[i]?.contact_content}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_content: e.target.value,
+                  }));
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <InputFile
+                variant={"outlined"}
+                label={"문의 이미지"}
+                required={true}
+                limit={1}
+                existing={OBJECT?.contact_images}
+                group={"contact"}
+                value={fileList}
+                onChange={(updatedFiles: File[] | null) => {
+                  setFileList(updatedFiles);
+                }}
+                handleExistingFilesChange={(updatedExistingFiles: string[]) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_images: updatedExistingFiles,
+                  }));
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      return (
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12}>
+            {saveFragment(0)}
+          </Grid>
+        </Grid>
+      )
+    };
     // 3. btn
     const btnSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
@@ -264,15 +278,13 @@ export const ContactSave = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {saveSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Br px={30} />
+            {saveSection()}
+            <Hr px={40} w={90} className={"bg-grey"} />
             {btnSection()}
           </Grid>
         </Grid>

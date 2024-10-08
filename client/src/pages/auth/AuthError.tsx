@@ -2,7 +2,7 @@
 // Node -> Section -> Fragment
 
 import { useCommonValue } from "@imports/ImportHooks";
-import { Div, Btn } from "@imports/ImportComponents";
+import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
 import { Grid, Paper } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -134,7 +134,7 @@ export const AuthError = () => {
       </Grid>
     );
     return (
-      <Paper className={"content-wrapper-center radius-1 border h-98vh"}>
+      <Paper className={"content-wrapper radius-1 border h-98vh"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6}>
             {imageSection()}

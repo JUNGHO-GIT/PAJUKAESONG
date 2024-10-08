@@ -10,13 +10,19 @@ export const AboutGreeting = () => {
   const greetingNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        대표 인사말
-      </Div>
+      <Card className={"p-0"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              대표 인사말
+            </Div>
+          </Grid>
+        </Grid>
+      </Card>
     );
     // 2. greeting
-    const greetingSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+    const greetingSection = () => (
+      <Card className={"border-1 shadow-1 radius-1 p-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-column-left"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -60,13 +66,12 @@ export const AboutGreeting = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {greetingSection(0)}
+            <Br px={30} />
+            {greetingSection()}
           </Grid>
         </Grid>
       </Paper>

@@ -11,12 +11,13 @@ export const Select = (props: any) => (
     variant={props?.variant || "outlined"}
     size={props?.size || "small"}
     fullWidth={props?.fullWidth || true}
-    className={(props?.variant === "standard" ? `${props?.className || ""} border-bottom-1` : props?.className || "")}
+    className={props?.className || ""}
     inputRef={props?.inputRef || null}
     error={props?.error || false}
     slotProps={{
       ...props?.slotProps,
       input: {
+        ...props?.slotProps?.input,
         readOnly: (
           props?.readOnly || false
         ),

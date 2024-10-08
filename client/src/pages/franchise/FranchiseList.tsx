@@ -57,44 +57,68 @@ export const FranchiseList = () => {
   const listNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        가맹 지점
-      </Div>
-    );
-    // 2. list
-    const listSection = (item: any, i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-20 fadeIn"} key={i}>
+      <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-row-center"}>
-            <Img
-              max={110}
-              hover={true}
-              shadow={false}
-              radius={false}
-              group={"franchise"}
-              src={item?.franchise_images?.[0]}
-              className={"w-100p"}
-              onClick={() => {
-                navigate("/franchise/detail", {
-                  state: {
-                    _id: item?._id
-                  }
-                });
-              }}
-            />
-          </Grid>
-          <Hr px={20} h={2} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-4rem fw-600"}>
-              {item?.franchise_name}
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              가맹 지점
             </Div>
           </Grid>
         </Grid>
       </Card>
     );
+    // 2. list
+    const listSection = () => {
+      const imageFragment = (i: number) => (
+        <Card className={"p-0"} key={i}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12}>
+              <Img
+                max={150}
+                hover={true}
+                shadow={false}
+                radius={false}
+                group={"franchise"}
+                src={OBJECT[i]?.franchise_images?.[0]}
+                className={"w-100p"}
+                onClick={() => {
+                  navigate("/franchise/detail", {
+                    state: {
+                      _id: OBJECT[i]?._id
+                    }
+                  });
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      const descFragment = (i: number) => (
+        <Card className={"p-0"} key={i}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12}>
+              <Div className={"fs-1-2rem fw-600"}>
+                {OBJECT[i]?.franchise_name}
+              </Div>
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      return (
+        <Grid container spacing={2} columns={12}>
+          {OBJECT.map((_item: any, i: number) => (
+            <Grid size={12} key={i}>
+              {imageFragment(i)}
+              <Br px={10} />
+              {descFragment(i)}
+            </Grid>
+          ))}
+        </Grid>
+      )
+    };
     // 3. filter
     const filterSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -120,7 +144,7 @@ export const FranchiseList = () => {
                     }))
                   )}
                 >
-                  <Div className={"fs-0-9rem"}>
+                  <Div className={"fs-0-8rem"}>
                     {item === "asc" && "오름차순"}
                     {item === "desc" && "내림차순"}
                   </Div>
@@ -167,26 +191,13 @@ export const FranchiseList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {COUNT.totalCnt <= 0 ? (
-              <Empty h={"50vh"} />
-            ) : (
-              <Grid container spacing={2} columns={12}>
-                {OBJECT.map((item: any, i: number) => (
-                  <Grid size={{ xs: 12, sm: 6 }} className={"d-column-center p-0"} key={i}>
-                    {listSection(item, i)}
-                  </Grid>
-                ))}
-              </Grid>
-            )}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            <Hr px={20} className={"bg-grey"} />
+            <Br px={30} />
+            {listSection()}
+            <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>
         </Grid>

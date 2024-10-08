@@ -202,10 +202,10 @@ export const Header = () => {
             {sidebarSection()}
             {toggleSection()}
           </Grid>
-          <Grid size={{ xs: 10, sm: 12, md: 4 }} className={`${isXs ? "d-column-left" : "d-center"}`}>
+          <Grid size={{ xs: 10, sm: 12, md: 4 }} className={`${isXs ? "d-row-left" : "d-center"}`}>
             {logoSection()}
           </Grid>
-          <Grid size={{ xs: 0, sm: 12, md: 8 }} className={`${isXs ? "d-none" : "d-center"}`}>
+          <Grid size={{ xs: 0, sm: 12, md: 8 }} className={`${isXs ? "d-none" : "d-row-center"}`}>
             {tabsSection()}
           </Grid>
         </Grid>

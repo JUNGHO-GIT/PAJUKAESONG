@@ -5,7 +5,7 @@ import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading, Empty } from "@imports/ImportLayouts";
 import { Admin, Order } from "@imports/ImportSchemas";
-import { Div, Hr } from "@imports/ImportComponents";
+import { Div, Hr, Br } from "@imports/ImportComponents";
 import { PickerDay, Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
@@ -79,9 +79,15 @@ export const AdminDashboard = () => {
   const detailNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        관리자 대시보드
-      </Div>
+      <Card className={"p-0"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              관리자 대시보드
+            </Div>
+          </Grid>
+        </Grid>
+      </Card>
     );
     // 1. date
     const dateSection = () => (
@@ -94,8 +100,8 @@ export const AdminDashboard = () => {
       />
     );
     // 2. visit
-    const visitSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+    const visitSection = () => (
+      <Card className={"border-1 shadow-1 radius-1 p-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -114,8 +120,8 @@ export const AdminDashboard = () => {
       </Card>
     );
     // 3. order
-    const orderSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+    const orderSection = () => (
+      <Card className={"border-1 shadow-1 radius-1 p-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -163,7 +169,7 @@ export const AdminDashboard = () => {
     );
     // 3. filter
     const filterSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -189,7 +195,7 @@ export const AdminDashboard = () => {
                     }))
                   )}
                 >
-                  <Div className={"fs-0-9rem"}>
+                  <Div className={"fs-0-8rem"}>
                     {item === "asc" && "오름차순"}
                     {item === "desc" && "내림차순"}
                   </Div>
@@ -226,21 +232,17 @@ export const AdminDashboard = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Br px={30} />
             {dateSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {visitSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {ORDER_COUNT.totalCnt <= 0 ? <Empty h={"30vh"} /> : orderSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Br px={30} />
+            {visitSection()}
+            <Br px={30} />
+            {orderSection()}
+            <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>
         </Grid>

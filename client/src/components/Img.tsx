@@ -37,17 +37,27 @@ export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgPr
   }
 
   if (hover) {
-    imageClass += " hover";
+    imageStyle = {
+      ...imageStyle,
+      cursor: "pointer",
+      transition: "transform 0.3s ease",
+    };
   }
   if (shadow) {
-    imageClass += " shadow-4";
+    imageStyle = {
+      ...imageStyle,
+      filter: "drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3))",
+    };
   }
   if (radius) {
-    imageClass += " radius-1";
+    imageStyle = {
+      ...imageStyle,
+      borderRadius: "10px",
+    };
   }
-
   if (max) {
     imageStyle = {
+      ...imageStyle,
       maxWidth: `${max}px`,
       maxHeight: `${max}px`,
     };

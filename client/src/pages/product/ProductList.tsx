@@ -5,7 +5,7 @@ import { useCommonValue } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportUtils";
 import { Loading, Empty } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Btn } from "@imports/ImportComponents";
+import { Div, Img, Hr, Br } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
@@ -56,44 +56,67 @@ export const ProductList = () => {
   const listNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        제품 목록
-      </Div>
-    );
-    // 2. list
-    const listSection = (item: any, i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-20 fadeIn"} key={i}>
+      <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-row-center"}>
-            <Img
-              max={110}
-              hover={true}
-              shadow={false}
-              radius={false}
-              group={"product"}
-              src={item?.product_images?.[0]}
-              className={"w-100p"}
-              onClick={() => {
-                navigate("/product/detail", {
-                  state: {
-                    _id: item?._id
-                  }
-                });
-              }}
-            />
-          </Grid>
-          <Hr px={1} h={2} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-4rem fw-600"}>
-              {item?.product_name}
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              제품 목록
             </Div>
           </Grid>
         </Grid>
       </Card>
     );
+    // 2. list
+    const listSection = () => {
+      const imageFragment = (i: number) => (
+        <Card className={"p-0"} key={i}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12}>
+              <Img
+                max={150}
+                hover={true}
+                shadow={true}
+                radius={true}
+                group={"product"}
+                src={OBJECT[i]?.product_images?.[0]}
+                onClick={() => {
+                  navigate("/product/detail", {
+                    state: {
+                      _id: OBJECT[i]?._id
+                    }
+                  });
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      const descFragment = (i: number) => (
+        <Card className={"p-0"} key={i}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12}>
+              <Div className={"fs-1-2rem fw-600"}>
+                {OBJECT[i]?.product_name}
+              </Div>
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      return (
+        <Grid container spacing={2} columns={12}>
+          {OBJECT.map((_item: any, i: number) => (
+            <Grid size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }} key={i}>
+              {imageFragment(i)}
+              <Br px={10} />
+              {descFragment(i)}
+            </Grid>
+          ))}
+        </Grid>
+      )
+    };
     // 3. filter
     const filterSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -119,7 +142,7 @@ export const ProductList = () => {
                     }))
                   )}
                 >
-                  <Div className={"fs-0-9rem"}>
+                  <Div className={"fs-0-8rem"}>
                     {item === "asc" && "오름차순"}
                     {item === "desc" && "내림차순"}
                   </Div>
@@ -166,26 +189,13 @@ export const ProductList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {COUNT.totalCnt <= 0 ? (
-              <Empty h={"50vh"} />
-            ) : (
-              <Grid container spacing={2} columns={12}>
-                {OBJECT.map((item: any, i: number) => (
-                  <Grid size={{ xs: 6, md: 4 }} className={"d-column-center p-0"} key={i}>
-                    {listSection(item, i)}
-                  </Grid>
-                ))}
-              </Grid>
-            )}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            <Hr px={20} className={"bg-grey"} />
+            <Br px={30} />
+            {listSection()}
+            <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>
         </Grid>

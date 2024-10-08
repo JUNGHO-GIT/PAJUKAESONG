@@ -70,75 +70,74 @@ export const SideBar = (
       />
     );
     // 2. sidebar
-    const mainSection = () => (
-      dataArray.map((item, idx) => (
-        <List
-          key={idx}
-          component={"nav"}
-        >
-          {/* 메인 항목 */}
-          <ListItem
-            onClick={() => {
-              if (selectedTab === item?.titleEn) {
-                setSelectedTab("");
-              }
-              else {
-                setSelectedTab(item?.titleEn);
-              }
-            }}
-          >
-            <Div className={"d-center"}>
-              <Div className={`pointer-burgundy ${selectedTab === item?.titleEn ? "burgundy fs-1-1rem fw-600" : "fs-1-0rem"}`}>
-                {item?.titleKo}
+    const sidebarSection = () => (
+      <Div className={"w-100p d-column-left"}>
+        {dataArray.map((item, idx) => (
+          <List component={"nav"} key={idx}>
+            {/* 메인 항목 */}
+            <ListItem
+              onClick={() => {
+                if (selectedTab === item?.titleEn) {
+                  setSelectedTab("");
+                }
+                else {
+                  setSelectedTab(item?.titleEn);
+                }
+              }}
+            >
+              <Div className={"d-center"}>
+                <Div className={`pointer-burgundy ${selectedTab === item?.titleEn ? "burgundy fs-1-1rem fw-600" : "fs-1-0rem"}`}>
+                  {item?.titleKo}
+                </Div>
+                <Div className={"ms-2"}>
+                  {selectedTab === item?.titleEn ? (
+                    <Icons
+                      key={"ChevronUp"}
+                      name={"ChevronUp"}
+                      className={"w-12 h-12 black"}
+                    />
+                  ) : (
+                    <Icons
+                      key={"ChevronDown"}
+                      name={"ChevronDown"}
+                      className={"w-12 h-12 black"}
+                    />
+                  )}
+                </Div>
               </Div>
-              <Div className={"ms-2"}>
-                {selectedTab === item?.titleEn ? (
-                  <Icons
-                    key={"ChevronUp"}
-                    name={"ChevronUp"}
-                    className={"w-12 h-12 black"}
-                  />
-                ) : (
-                  <Icons
-                    key={"ChevronDown"}
-                    name={"ChevronDown"}
-                    className={"w-12 h-12 black"}
-                  />
-                )}
-              </Div>
-            </Div>
-          </ListItem>
-          {/* 하위 항목 */}
-          <Collapse
-            in={selectedTab === item?.titleEn}
-            timeout={"auto"}
-            unmountOnExit={true}
-          >
-            <List>
-              {item?.sub.map((subItem, subIdx) => (
-                <ListItem
-                  key={subIdx}
-                  onClick={() => {
-                    setSelectedTab(item?.titleEn);
-                    setSelectedTabVal(item?.titleEn);
-                    setSelectedListItem(subItem.titleEn);
-                    navigate(subItem.url, {
-                      state: {
-                        category: subItem?.category
-                      }
-                    });
-                    toggleSidebar();
-                  }}
-                >
-                  <Div className={`pointer-burgundy ${selectedTabVal === item?.titleEn && selectedListItem === subItem.titleEn ? "burgundy fs-1-0rem" : "fs-0-9rem"}`}>
-                    {subItem.titleKo}
-                  </Div>
-                </ListItem>
-              ))}
-            </List>
-          </Collapse>
-        </List>
-      ))
+            </ListItem>
+            {/* 하위 항목 */}
+            <Collapse
+              in={selectedTab === item?.titleEn}
+              timeout={"auto"}
+              unmountOnExit={true}
+            >
+              <List>
+                {item?.sub.map((subItem, subIdx) => (
+                  <ListItem
+                    key={subIdx}
+                    onClick={() => {
+                      setSelectedTab(item?.titleEn);
+                      setSelectedTabVal(item?.titleEn);
+                      setSelectedListItem(subItem.titleEn);
+                      navigate(subItem.url, {
+                        state: {
+                          category: subItem?.category
+                        }
+                      });
+                      toggleSidebar();
+                    }}
+                  >
+                    <Div className={`pointer-burgundy ${selectedTabVal === item?.titleEn && selectedListItem === subItem.titleEn ? "burgundy fs-1-0rem" : "fs-0-9rem"}`}>
+                      {subItem.titleKo}
+                    </Div>
+                  </ListItem>
+                ))}
+              </List>
+            </Collapse>
+          </List>
+        ))}
+      </Div>
     );
     const textSection1 = () => (
       <Grid container spacing={2} columns={12} className={`d-center horizontal-text`}>
@@ -211,20 +210,14 @@ export const SideBar = (
           },
         }}
       >
-        <Grid container spacing={0} columns={12} direction={"column"}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
             {logoSection()}
-          </Grid>
-          <Hr px={20} className={"bg-light-grey"} />
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-left"}>
-            {mainSection()}
-          </Grid>
-          <Hr px={20} className={"bg-light-grey"} />
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
+            <Hr px={20} className={"bg-light-grey"} />
+            {sidebarSection()}
+            <Hr px={20} className={"bg-light-grey"} />
             {textSection1()}
-          </Grid>
-          <Hr px={20} className={"bg-light-grey"} />
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
+            <Hr px={20} className={"bg-light-grey"} />
             {textSection2()}
           </Grid>
         </Grid>

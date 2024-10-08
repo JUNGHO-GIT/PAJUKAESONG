@@ -4,10 +4,10 @@ import { useState } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { useValidateOrder } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
-import { Div, Btn } from "@imports/ImportComponents";
 import { Input } from "@imports/ImportContainers";
+import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -64,65 +64,80 @@ export const OrderFind = () => {
   const findNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        주문 조회
-      </Div>
-    );
-    // 2. find
-    const findSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+      <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
-            <Input
-              variant={"outlined"}
-              label={"이름"}
-              required={true}
-              helperText={"주문자 이름을 입력해주세요."}
-              value={OBJECT?.order_name}
-              inputRef={REFS?.[i]?.order_name}
-              error={ERRORS?.[i]?.order_name}
-              onChange={(e: any) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  order_name: e.target.value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              variant={"outlined"}
-              label={"전화번호"}
-              required={true}
-              helperText={"주문자 전화번호를 입력해주세요."}
-              value={OBJECT?.order_phone}
-              inputRef={REFS?.[i]?.order_phone}
-              error={ERRORS?.[i]?.order_phone}
-              placeholder={"010-1234-5678"}
-              onChange={(e: any) => {
-                const value = e.target.value.replace(/[^0-9]/g, '');
-                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
-                if (value.length > 11) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_phone: prev.order_phone,
-                  }));
-                }
-                else {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_phone: newValue,
-                  }));
-                }
-              }}
-            />
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              주문 조회
+            </Div>
           </Grid>
         </Grid>
       </Card>
     );
+    // 2. find
+    const findSection = () => {
+      const findFragment = (i: number) => (
+        <Card className={"border-1 shadow-1 radius-1 p-30"} key={i}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12}>
+              <Input
+                variant={"outlined"}
+                label={"이름"}
+                required={true}
+                helperText={"주문자 이름을 입력해주세요."}
+                value={OBJECT?.order_name}
+                inputRef={REFS?.[i]?.order_name}
+                error={ERRORS?.[i]?.order_name}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    order_name: e.target.value,
+                  }));
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <Input
+                variant={"outlined"}
+                label={"전화번호"}
+                required={true}
+                helperText={"주문자 전화번호를 입력해주세요."}
+                value={OBJECT?.order_phone}
+                inputRef={REFS?.[i]?.order_phone}
+                error={ERRORS?.[i]?.order_phone}
+                placeholder={"010-1234-5678"}
+                onChange={(e: any) => {
+                  const value = e.target.value.replace(/[^0-9]/g, '');
+                  const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
+                  if (value.length > 11) {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      order_phone: prev.order_phone,
+                    }));
+                  }
+                  else {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      order_phone: newValue,
+                    }));
+                  }
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      return (
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12}>
+            {findFragment(0)}
+          </Grid>
+        </Grid>
+      );
+    };
     // 3. btn
     const btnSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Btn
@@ -139,15 +154,13 @@ export const OrderFind = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center h-min90vh"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper h-min90vh"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {findSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Br px={30} />
+            {findSection()}
+            <Hr px={40} w={90} className={"bg-grey"} />
             {btnSection()}
           </Grid>
         </Grid>

@@ -3,9 +3,9 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Btn } from "@imports/ImportComponents";
+import { Div, Img, Hr, Br } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
@@ -57,10 +57,10 @@ export const MenuList = () => {
   const listNode = () => {
     // 1. title
     const titleSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={4} className={"d-center"}>
-            <Div className={"fs-2-0rem fw-700 fadeIn"}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
               {location_category === "main" ? "대표 메뉴" : "사이드 메뉴"}
             </Div>
           </Grid>
@@ -72,15 +72,14 @@ export const MenuList = () => {
       const imageFragment = (i: number) => (
         <Card className={"p-0"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Img
                 max={150}
                 hover={true}
-                shadow={false}
+                shadow={true}
                 radius={true}
                 group={"menu"}
                 src={OBJECT[i]?.menu_images?.[0]}
-                className={"w-100p"}
                 onClick={() => {
                   navigate("/menu/detail", {
                     state: {
@@ -96,8 +95,8 @@ export const MenuList = () => {
       const descFragment = (i: number) => (
         <Card className={"p-0"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
-              <Div className={"fs-1-4rem fw-600"}>
+            <Grid size={12}>
+              <Div className={"fs-1-2rem fw-600"}>
                 {OBJECT[i]?.menu_name}
               </Div>
             </Grid>
@@ -107,9 +106,9 @@ export const MenuList = () => {
       return (
         <Grid container spacing={2} columns={12}>
           {OBJECT.map((_item: any, i: number) => (
-            <Grid size={{ xs: 6, md: 4 }} key={i} className={"d-column-center fadeIn"}>
+            <Grid size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }} key={i}>
               {imageFragment(i)}
-              <Hr px={20} h={1} w={90} className={"bg-burgundy"} />
+              <Br px={10} />
               {descFragment(i)}
             </Grid>
           ))}
@@ -118,7 +117,7 @@ export const MenuList = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -144,7 +143,7 @@ export const MenuList = () => {
                     }))
                   )}
                 >
-                  <Div className={"fs-0-9rem"}>
+                  <Div className={"fs-0-8rem"}>
                     {item === "asc" && "오름차순"}
                     {item === "desc" && "내림차순"}
                   </Div>
@@ -191,13 +190,13 @@ export const MenuList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-            <Br px={40} />
+            <Br px={30} />
             {listSection()}
-            <Hr px={20} className={"bg-grey"} />
+            <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>
         </Grid>

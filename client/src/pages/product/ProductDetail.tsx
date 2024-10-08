@@ -3,10 +3,10 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Icons, Btn } from "@imports/ImportComponents";
 import { Input } from "@imports/ImportContainers";
+import { Div, Img, Hr, Br, Icons, Btn } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -116,52 +116,73 @@ export const ProductDetail = () => {
   const detailNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        제품 상세
-      </Div>
-    );
-    // 2. detail
-    const detailSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-20 fadeIn"} key={i}>
+      <Card className={"p-0"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-row-center"}>
-            <Img
-              max={450}
-              hover={false}
-              shadow={false}
-              radius={false}
-              group={"product"}
-              src={OBJECT?.product_images?.[0]}
-              className={"w-100p"}
-            />
-          </Grid>
-          <Hr px={20} h={2} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-8rem fw-700 black"}>
-              {OBJECT?.product_name}
-            </Div>
-          </Grid>
-          <Grid size={6} className={"d-row-left"}>
-            <Div className={"fs-1-2rem fw-500 dark"}>
-              {OBJECT?.product_description}
-            </Div>
-          </Grid>
-          <Grid size={6} className={"d-row-right"}>
-            <Icons
-              key={"Won"}
-              name={"Won"}
-              className={"w-15 h-15 dark"}
-            />
-            <Div className={"fs-1-2rem fw-500 light-black"}>
-              {numeral(OBJECT?.product_price).format("0,0")}
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              제품 상세
             </Div>
           </Grid>
         </Grid>
       </Card>
     );
+    // 2. detail
+    const detailSection = () => {
+      const imageFragment = (i: number) => (
+        <Card className={"p-0"} key={i}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12}>
+              <Img
+                max={350}
+                hover={false}
+                shadow={true}
+                radius={true}
+                group={"product"}
+                src={OBJECT?.product_images?.[0]}
+              />
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      const descFragment = (i: number) => (
+        <Card className={"px-40"} key={i}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12}>
+              <Div className={"fs-1-8rem fw-700 black"}>
+                {OBJECT?.product_name}
+              </Div>
+            </Grid>
+            <Grid size={6} className={"d-row-left"}>
+              <Div className={"fs-1-2rem fw-500 dark"}>
+                {OBJECT?.product_description}
+              </Div>
+            </Grid>
+            <Grid size={6} className={"d-row-right"}>
+              <Icons
+                key={"Won"}
+                name={"Won"}
+                className={"w-15 h-15 dark"}
+              />
+              <Div className={"fs-1-2rem fw-500 light-black"}>
+                {numeral(OBJECT?.product_price).format("0,0")}
+              </Div>
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      return (
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12}>
+            {imageFragment(0)}
+            <Hr px={40} w={90} className={"bg-burgundy"} />
+            {descFragment(1)}
+          </Grid>
+        </Grid>
+      )
+    };
     // 3. btn
     const btnSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Input
@@ -247,7 +268,7 @@ export const ProductDetail = () => {
     );
     // 4. filter
     const filterSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
@@ -286,19 +307,15 @@ export const ProductDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {detailSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            <Br px={30} />
+            {detailSection()}
+            <Hr px={40} w={90} className={"bg-grey"} />
             {btnSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            <Hr px={20} className={"bg-grey"} />
+            <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>
         </Grid>

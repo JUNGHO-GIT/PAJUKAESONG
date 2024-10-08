@@ -5,7 +5,7 @@ import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportUtils";
 import { Loading, Empty } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Hr, Btn } from "@imports/ImportComponents";
+import { Div, Hr, Br } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
@@ -59,13 +59,19 @@ export const NoticeList = () => {
   const listNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        공지사항
-      </Div>
+      <Card className={"p-0"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              공지사항
+            </Div>
+          </Grid>
+        </Grid>
+      </Card>
     );
     // 2. list
-    const listSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 p-30 fadeIn"} key={i}>
+    const listSection = () => (
+      <Card className={"border-1 shadow-1 radius-1 p-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={2}>
             <Div className={"fs-0-8rem fw-500"}>
@@ -123,7 +129,7 @@ export const NoticeList = () => {
     );
     // 3. filter
     const filterSection = () => (
-      <Card className={"fadeIn"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={4} className={"d-center"}>
             <Select
@@ -149,7 +155,7 @@ export const NoticeList = () => {
                     }))
                   )}
                 >
-                  <Div className={"fs-0-9rem"}>
+                  <Div className={"fs-0-8rem"}>
                     {item === "asc" && "오름차순"}
                     {item === "desc" && "내림차순"}
                   </Div>
@@ -196,16 +202,13 @@ export const NoticeList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
-        <Grid container spacing={2} columns={12} direction={"column"}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {COUNT.totalCnt <= 0 ? <Empty h={"50vh"} /> : listSection(0)}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            <Hr px={20} className={"bg-grey"} />
+            <Br px={30} />
+            {listSection()}
+            <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>
         </Grid>

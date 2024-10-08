@@ -3,7 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { axios, numeral } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Br, Icons } from "@imports/ImportComponents";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
@@ -91,29 +91,21 @@ export const MenuDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Img
-                max={400}
+                max={350}
                 hover={false}
                 shadow={true}
                 radius={true}
                 group={"menu"}
                 src={OBJECT?.menu_images?.[0]}
-                className={"w-100p"}
-                onClick={() => {
-                  navigate("/menu/detail", {
-                    state: {
-                      _id: OBJECT?._id
-                    }
-                  });
-                }}
               />
             </Grid>
           </Grid>
         </Card>
       );
       const descFragment = (i: number) => (
-        <Card className={"p-20"} key={i}>
+        <Card className={"px-40"} key={i}>
           <Grid container spacing={2} columns={12}>
-            <Grid size={12} className={"d-row-center"}>
+            <Grid size={12}>
               <Div className={"fs-1-8rem fw-700 black"}>
                 {OBJECT?.menu_name}
               </Div>
@@ -138,17 +130,17 @@ export const MenuDetail = () => {
       );
       return (
         <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             {imageFragment(0)}
-            <Hr px={20} h={1} w={90} className={"bg-burgundy"} />
-            {descFragment(0)}
+            <Hr px={40} w={90} className={"bg-burgundy"} />
+            {descFragment(1)}
           </Grid>
         </Grid>
       )
     };
     // 4. filter
     const filterSection = () => (
-      <Card className={"p-20"}>
+      <Card className={"px-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
@@ -191,13 +183,13 @@ export const MenuDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center fadeIn"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-            <Br px={20} />
+            <Br px={30} />
             {detailSection()}
-            <Hr px={20} className={"bg-grey"} />
+            <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>
         </Grid>

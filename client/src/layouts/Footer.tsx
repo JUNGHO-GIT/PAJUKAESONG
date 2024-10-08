@@ -1,7 +1,7 @@
 // Footer.tsx
 
 import { useResponsive, useCommonValue } from "@imports/ImportHooks";
-import { Div, Img, Icons } from "@imports/ImportComponents";
+import { Div, Img, Icons, Br } from "@imports/ImportComponents";
 import { Paper, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -95,10 +95,9 @@ export const Footer = () => {
     return (
       <Paper className={"layout-wrapper bg-ivory p-relative border-top-1 p-20"}>
         <Grid container spacing={2} columns={24}>
-          <Grid size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
+          <Grid size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }}>
             {logoSection()}
-          </Grid>
-          <Grid size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
+            <Br px={20} />
             {textSection()}
           </Grid>
         </Grid>

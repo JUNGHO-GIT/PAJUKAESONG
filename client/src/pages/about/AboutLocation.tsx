@@ -1,7 +1,7 @@
 // AboutLocation.tsx
 
-import { Div } from "@imports/ImportComponents";
 import { Location } from "@imports/ImportContainers";
+import { Div, Br, Hr } from "@imports/ImportComponents";
 import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -11,28 +11,37 @@ export const AboutLocation = () => {
   const locationNode = () => {
     // 1. title
     const titleSection = () => (
-      <Div className={"fs-2-0rem fw-700 fadeIn"}>
-        오시는길
-      </Div>
+      <Card className={"p-0"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-2-0rem fw-700"}>
+              오시는길
+            </Div>
+          </Grid>
+        </Grid>
+      </Card>
     );
     // 2. location
-    const locationSection = (i: number) => (
-      <Card className={"border-1 shadow-3 radius-1 fadeIn p-0"} key={i}>
-        <Location
-          width={"100%"}
-          height={"60vh"}
-        />
+    const locationSection = () => (
+      <Card className={"border-1 shadow-3 radius-1 p-0"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Location
+              width={"100%"}
+              height={"60vh"}
+            />
+          </Grid>
+        </Grid>
       </Card>
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper-center"}>
+      <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={2} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-center"}>
+          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }}>
             {titleSection()}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-center"}>
-            {locationSection(0)}
+            <Br px={30} />
+            {locationSection()}
           </Grid>
         </Grid>
       </Paper>

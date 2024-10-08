@@ -7,45 +7,46 @@ export const PopUp = (props: any) => {
 
   const popupState = usePopupState({
     variant: 'popover',
-    popupId: 'demoPopover',
+    popupId: 'popover',
   });
 
-  let popupStyle = {};
-  if (props.type === "innerCenter") {
+  let popupStyle: any = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  if (props?.type === "innerCenter") {
     popupStyle = {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
+      ...popupStyle,
       border: '0.2px solid rgba(0, 0, 0, 0.2)',
       boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-      padding: props?.padding || "20px",
+      padding: "20px",
     };
   }
-  else if (props.type === "alert") {
+  else if (props?.type === "alert") {
     popupStyle = {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
+      ...popupStyle,
       border: '1px solid red',
       boxShadow: '0px 0px 10px rgba(255, 0, 0, 0.5)',
-      padding: props?.padding || "6px",
+      padding: "6px",
     };
   }
-  else if (props.type === "modal") {
+  else if (props?.type === "chart") {
     popupStyle = {
-      display: "flex",
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
+      ...popupStyle,
       border: '0.2px solid rgba(0, 0, 0, 0.2)',
       boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-      padding: props?.padding || "6px",
+      padding: "6px 0px 6px 12px",
+    };
+  }
+  else if (props?.type === "modal") {
+    popupStyle = {
+      ...popupStyle,
+      border: '0.2px solid rgba(0, 0, 0, 0.2)',
+      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
+      padding: "10px",
     };
   }
 
@@ -55,25 +56,24 @@ export const PopUp = (props: any) => {
     <Popover
       {...bindPopover(popupState)}
       id={"popover"}
-      className={props.className}
       open={popupState.isOpen}
       anchorEl={popupState.anchorEl}
       // @ts-ignore
       onClose={popupState.close}
       anchorOrigin={{
-        vertical: props.position === "center" ? "center" : (
-          props.position === "top" ? "top" : "bottom"
+        vertical: props?.position === "center" ? "center" : (
+          props?.position === "top" ? "top" : "bottom"
         ),
-        horizontal: props.direction === "center" ? "center" : (
-          props.direction === "right" ? "right" : "left"
+        horizontal: props?.direction === "center" ? "center" : (
+          props?.direction === "right" ? "right" : "left"
         )
       }}
       transformOrigin={{
-        vertical: props.position === "center" ? "center" : (
-          props.position === "top" ? "bottom" : "top"
+        vertical: props?.position === "center" ? "center" : (
+          props?.position === "top" ? "bottom" : "top"
         ),
-        horizontal: props.direction === "center" ? "center" : (
-          props.direction === "right" ? "left" : "right"
+        horizontal: props?.direction === "center" ? "center" : (
+          props?.direction === "right" ? "left" : "right"
         )
       }}
       slotProps={{
@@ -84,12 +84,13 @@ export const PopUp = (props: any) => {
         }
       }}
     >
-      {typeof props.contents === "function"
-        ? props.contents({ closePopup: popupState.close })
-        : props.contents
+      {
+        typeof props?.contents === "function"
+        ? props?.contents({ closePopup: popupState.close })
+        : props?.contents
       }
     </Popover>
-    {props.children({
+    {props?.children({
       openPopup: (anchorEl: any) => {
         popupState.setAnchorEl(anchorEl);
         popupState.open();
@@ -107,7 +108,6 @@ export const PopUp = (props: any) => {
     <Popover
       {...bindPopover(popupState)}
       id={"popover"}
-      className={props.className}
       open={popupState.isOpen}
       anchorEl={null}
       // @ts-ignore
@@ -133,12 +133,13 @@ export const PopUp = (props: any) => {
         }
       }}
     >
-      {typeof props.contents === "function"
-        ? props.contents({ closePopup: popupState.close })
-        : props.contents
+      {
+        typeof props?.contents === "function"
+        ? props?.contents({ closePopup: popupState.close })
+        : props?.contents
       }
     </Popover>
-    {props.children({
+    {props?.children({
       openPopup: (anchorEl: any) => {
         popupState.setAnchorEl(anchorEl);
         popupState.open();
@@ -153,9 +154,8 @@ export const PopUp = (props: any) => {
   // 15. return ------------------------------------------------------------------------------------
   return (
     <>
-      {props.type === "innerCenter" && innerCenterPopUp()}
-      {props.type === "modal" && innerCenterPopUp()}
-      {props.type !== "innerCenter" && chainedPopUp()}
+      {props?.type === "innerCenter" && innerCenterPopUp()}
+      {props?.type !== "innerCenter" && chainedPopUp()}
     </>
   );
 };

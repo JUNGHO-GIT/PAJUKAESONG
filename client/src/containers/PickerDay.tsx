@@ -23,9 +23,7 @@ export const PickerDay = (
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------
- const {
-    getDayFmt, getDayNotFmt, getPrevMonthStartFmt, getNextMonthStartFmt
-  } = useCommonDate();
+ const { getDayFmt, getDayNotFmt, getPrevMonthStartFmt, getNextMonthStartFmt } = useCommonDate();
 
   // 7. pickerNode ---------------------------------------------------------------------------------
   const pickerNode = () => {
@@ -33,14 +31,13 @@ export const PickerDay = (
     // 1. day --------------------------------------------------------------------------------------
     const daySection = () => (
       <PopUp
-        key={`${i}`}
+        key={"day"}
         type={"innerCenter"}
         position={"center"}
         direction={"center"}
-        padding={"20px"}
         contents={({closePopup}: any) => (
           <Card className={"p-0"}>
-            <Grid container spacing={3} columns={12} direction={"column"}>
+            <Grid container spacing={3} columns={12}>
               <Grid size={12} className={"d-center"}>
                 <Div className={"fs-1-2rem fw-600"}>
                   날짜 선택
