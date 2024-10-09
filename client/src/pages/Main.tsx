@@ -30,7 +30,7 @@ export const Main = () => {
   const [OBJECT_NOTICE, setOBJECT_NOTICE] = useState<any>([Notice]);
   const [category, setCategory] = useState<string>("main");
   const [PAGING, setPAGING] = useState<any>({
-    sort: "asc",
+    sort: "desc",
     page: 0,
   });
 
