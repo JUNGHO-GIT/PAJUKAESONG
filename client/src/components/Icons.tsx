@@ -244,6 +244,12 @@ export const Icons = (props: any) => {
         <path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
       </svg>
     ),
+    CircleWon: (
+      <svg {...commonValues}>
+        <circle cx="12" cy="12" r="10" stroke="black" strokeWidth="2" fill="none" />
+        <path d="M6 12L8 19L10 12M6 12L4 5M6 12H3M6 12H10M14 12L16 19L18 12M14 12L12 5L10 12M14 12H10M14 12H18M18 12L20 5M18 12H21" />
+      </svg>
+    ),
     Won: (
       <svg {...commonValues}>
         <path d="M6 12L8 19L10 12M6 12L4 5M6 12H3M6 12H10M14 12L16 19L18 12M14 12L12 5L10 12M14 12H10M14 12H18M18 12L20 5M18 12H21" />

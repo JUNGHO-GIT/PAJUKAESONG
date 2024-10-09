@@ -79,7 +79,7 @@ export const ProductSave = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               제품 등록
@@ -92,7 +92,7 @@ export const ProductSave = () => {
     const saveSection = () => {
       const saveFragment = (i: number) => (
         <Card className={"border-1 shadow-1 radius-1 p-30"} key={`save-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Select
                 variant={"outlined"}
@@ -200,7 +200,7 @@ export const ProductSave = () => {
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             {saveFragment(0)}
           </Grid>
@@ -210,7 +210,7 @@ export const ProductSave = () => {
     // 3. btn
     const btnSection = () => (
       <Card className={"px-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
               className={"w-100p fs-1-0rem bg-grey"}
@@ -237,11 +237,11 @@ export const ProductSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
-            {saveSection()}
+            {LOADING ? <Loading /> : saveSection()}
             <Br px={30} />
             {btnSection()}
           </Grid>

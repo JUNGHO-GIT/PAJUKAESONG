@@ -67,7 +67,7 @@ export const UserSignup = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               회원가입
@@ -116,7 +116,7 @@ export const UserSignup = () => {
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             {signupFragment(0)}
           </Grid>
@@ -126,7 +126,7 @@ export const UserSignup = () => {
     // 3. btn
     const btnSection = () => (
       <Card className={"px-10 fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Btn
               color={"primary"}
@@ -144,7 +144,7 @@ export const UserSignup = () => {
     // 4. link
     const linkSection = () => (
       <Card className={"px-10 fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"d-center"}>
               <Div className={"fs-0-8rem"}>
@@ -178,7 +178,7 @@ export const UserSignup = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper h-min60vh"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />

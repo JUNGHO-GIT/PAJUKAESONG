@@ -18,7 +18,7 @@ export const Img = ({ group, src, hover, shadow, radius, max, ...props }: ImgPro
   const { GCLOUD_URL } = useCommonValue();
   let fileName: string = "";
   let srcResult: string = "";
-  const defaultImage: string = "https://via.placeholder.com/150";
+  let defaultImage: string = "https://via.placeholder.com/150";
   let imageClass: string = "";
   let imageStyle: any = {};
 

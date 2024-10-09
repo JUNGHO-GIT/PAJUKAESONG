@@ -62,7 +62,7 @@ export const NoticeList = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               공지사항
@@ -75,7 +75,7 @@ export const NoticeList = () => {
     const listSection = () => {
       const listFragment = (i:number) => (
         <Card className={"border-1 radius-1 shadow-1 p-30"} key={`list-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Grid container spacing={0} columns={12}>
                 <Grid size={2}>
@@ -135,7 +135,7 @@ export const NoticeList = () => {
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             {listFragment(0)}
           </Grid>
@@ -145,7 +145,7 @@ export const NoticeList = () => {
     // 3. filter
     const filterSection = () => (
       <Card className={"px-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={3} className={"d-center"}>
             <Select
               label={"정렬"}
@@ -218,11 +218,11 @@ export const NoticeList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
-            {listSection()}
+            {LOADING ? <Loading /> : listSection()}
             <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>

@@ -62,7 +62,7 @@ export const ProductList = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               제품 목록
@@ -73,9 +73,9 @@ export const ProductList = () => {
     );
     // 2. list
     const listSection = () => {
-      const imageFragment = (i: number) => (
+      const imageFragment = (item: any, i: number) => (
         <Card className={"p-10"} key={`image-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
                 max={isXxs ? 120 : 150}
@@ -83,11 +83,11 @@ export const ProductList = () => {
                 shadow={true}
                 radius={true}
                 group={"product"}
-                src={OBJECT[i]?.product_images?.[0]}
+                src={item?.product_images?.[0]}
                 onClick={() => {
                   navigate("/product/detail", {
                     state: {
-                      _id: OBJECT[i]?._id
+                      _id: item?._id
                     }
                   });
                 }}
@@ -96,24 +96,26 @@ export const ProductList = () => {
           </Grid>
         </Card>
       );
-      const descFragment = (i: number) => (
+      const descFragment = (item: any, i: number) => (
         <Card className={"p-0"} key={`desc-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Div className={"fs-1-2rem fw-600"}>
-                {OBJECT[i]?.product_name}
+                {item?.product_name}
               </Div>
             </Grid>
           </Grid>
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
-          {OBJECT.map((_item: any, i: number) => (
-            <Grid size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }} key={i}>
-              {imageFragment(i)}
-              {descFragment(i)}
-            </Grid>
+        <Grid container spacing={1} columns={12}>
+          {OBJECT.map((item: any, i: number) => (
+            item.product_images[0] && (
+              <Grid size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }} key={i}>
+                {imageFragment(item, i)}
+                {descFragment(item, i)}
+              </Grid>
+            )
           ))}
         </Grid>
       )
@@ -121,7 +123,7 @@ export const ProductList = () => {
     // 3. filter
     const filterSection = () => (
       <Card className={"px-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={3} className={"d-center"}>
             <Select
               label={"정렬"}
@@ -194,11 +196,11 @@ export const ProductList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
-            {listSection()}
+            {LOADING ? <Loading /> : listSection()}
             <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>

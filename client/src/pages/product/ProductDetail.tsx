@@ -134,7 +134,7 @@ export const ProductDetail = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               제품 상세
@@ -147,7 +147,7 @@ export const ProductDetail = () => {
     const detailSection = () => {
       const imageFragment = (i: number) => (
         <Card className={"p-10"} key={`image-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
                 max={isXxs ? 270 : 320}
@@ -162,25 +162,32 @@ export const ProductDetail = () => {
         </Card>
       );
       const descFragment = (i: number) => (
-        <Card className={"px-40"} key={`desc-${i}`}>
-          <Grid container spacing={2} columns={12}>
+        <Card className={"px-30"} key={`desc-${i}`}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Div className={"fs-1-8rem fw-700 black"}>
                 {OBJECT?.product_name}
               </Div>
             </Grid>
-            <Grid size={6} className={"d-row-left"}>
+            <Br px={10} />
+            <Grid size={12} className={"d-row-left"}>   <Icons
+                key={"Dot"}
+                name={"Dot"}
+                fill={"grey"}
+                className={"w-15 h-15 dark"}
+              />
               <Div className={"fs-1-2rem fw-500 dark"}>
                 {OBJECT?.product_description}
               </Div>
             </Grid>
-            <Grid size={6} className={"d-row-right"}>
+            <Br px={5} />
+            <Grid size={12} className={"d-row-left"}>
               <Icons
                 key={"Won"}
                 name={"Won"}
                 className={"w-15 h-15 dark"}
               />
-              <Div className={"fs-1-2rem fw-500 light-black"}>
+              <Div className={"fs-1-1rem fw-500 dark"}>
                 {numeral(OBJECT?.product_price).format("0,0")}
               </Div>
             </Grid>
@@ -188,7 +195,7 @@ export const ProductDetail = () => {
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             {imageFragment(0)}
             <Hr px={40} w={90} className={"bg-burgundy"} />
@@ -200,7 +207,7 @@ export const ProductDetail = () => {
     // 3. btn
     const btnSection = () => (
       <Card className={"px-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Input
               label={"총 금액"}
@@ -260,6 +267,7 @@ export const ProductDetail = () => {
               }
             />
           </Grid>
+          <Br px={10} />
           <Grid size={6} className={"d-row-right"}>
             <Btn
               className={"w-100p fs-1-0rem bg-grey"}
@@ -286,7 +294,7 @@ export const ProductDetail = () => {
     // 4. filter
     const filterSection = () => (
       <Card className={"px-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy"}
@@ -325,11 +333,11 @@ export const ProductDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
-            {detailSection()}
+            {LOADING ? <Loading /> : detailSection()}
             <Hr px={40} w={90} className={"bg-grey"} />
             {btnSection()}
             <Hr px={40} w={90} className={"bg-grey"} />

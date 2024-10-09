@@ -90,7 +90,7 @@ export const NoticeDetail = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               공지사항 상세
@@ -103,7 +103,7 @@ export const NoticeDetail = () => {
     const detailSection = () => {
       const titleFragment = (i: number) => (
         <Card className={"p-0"} key={`title-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Div className={"fs-1-8rem fw-700 black"}>
                 {OBJECT?.notice_title}
@@ -114,7 +114,7 @@ export const NoticeDetail = () => {
       );
       const descFragment = (i: number) => (
         <Card className={"p-0"} key={`desc-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <TextArea
                 label={""}
@@ -149,7 +149,7 @@ export const NoticeDetail = () => {
       );
       return (
         <Card className={"border-1 shadow-1 radius-1 p-20"}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               {titleFragment(0)}
               <Hr px={40} className={"bg-burgundy"} />
@@ -162,7 +162,7 @@ export const NoticeDetail = () => {
     // 3. filter
     const filterSection = () => (
       <Card className={"px-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy"}
@@ -201,11 +201,11 @@ export const NoticeDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
-            {detailSection()}
+            {LOADING ? <Loading /> : detailSection()}
             <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>

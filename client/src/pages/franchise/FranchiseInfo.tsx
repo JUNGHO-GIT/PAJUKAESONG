@@ -31,7 +31,7 @@ export const FranchiseInfo = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               가맹 안내
@@ -43,7 +43,7 @@ export const FranchiseInfo = () => {
     // 2. info
     const infoSection = () => (
       <Card className={"border-1 shadow-1 radius-1 p-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹점 창업 안내
@@ -68,7 +68,7 @@ export const FranchiseInfo = () => {
     // 3. step
     const stepSection = () => (
       <Card className={"border-1 shadow-1 radius-1 p-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹점 창업 절차
@@ -165,7 +165,7 @@ export const FranchiseInfo = () => {
     // 4. cost
     const costSection = () => (
       <Card className={"border-1 shadow-1 radius-1 p-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               가맹비 및 창업비용
@@ -303,7 +303,7 @@ export const FranchiseInfo = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={20} />

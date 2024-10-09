@@ -75,7 +75,7 @@ export const AdminDashboard = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               관리자 대시보드
@@ -97,7 +97,7 @@ export const AdminDashboard = () => {
     // 2. visit
     const visitSection = () => (
       <Card className={"border-1 shadow-1 radius-1 p-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               방문자 수
@@ -117,7 +117,7 @@ export const AdminDashboard = () => {
     // 3. order
     const orderSection = () => (
       <Card className={"border-1 shadow-1 radius-1 p-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               주문 내역
@@ -141,7 +141,7 @@ export const AdminDashboard = () => {
         </Grid>
         <Hr px={40} className={"bg-burgundy"} />
         {OBJECT_ORDER?.map((item: any, index: number) => (
-          <Grid container spacing={2} columns={12} key={index}>
+          <Grid container spacing={1} columns={12} key={index}>
             <Grid size={3}>
               <Div className={"fs-0-8rem"}>
                 {item?.order_category === "reservation" ? "매장 예약" : "제품 구매"}
@@ -165,7 +165,7 @@ export const AdminDashboard = () => {
     // 3. filter
     const filterSection = () => (
       <Card className={"px-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={3} className={"d-center"}>
             <Select
               label={"정렬"}
@@ -228,7 +228,7 @@ export const AdminDashboard = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />

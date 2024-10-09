@@ -112,7 +112,7 @@ export const Main = () => {
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12 }}>
             {imageFragment(0)}
           </Grid>
@@ -124,7 +124,7 @@ export const Main = () => {
     const menuSection = () => {
       const titleFragment = (i: number) => (
         <Card className={"p-0"} key={`title-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Div className={"fs-1-8rem fw-700"}>
                 메뉴 소개
@@ -135,7 +135,7 @@ export const Main = () => {
       );
       const selectFragment = (i: number) => (
         <Card className={"p-10"} key={`select-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-row-center"}>
               <Div className={`${category === "main" ? "bg-burgundy" : ""} border-1 radius-50 p-10 me-1vw hover`}>
                 <Div
@@ -163,7 +163,7 @@ export const Main = () => {
       );
       const menuFragment = (i: number) => (
         <Card className={"p-20"} key={`menu-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Swiper
                 spaceBetween={20}
@@ -227,7 +227,7 @@ export const Main = () => {
       );
       const paginationFragment = (i: number) => (
         <Card className={"p-0"} key={`pagination-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Div className={"menu-pagination transform-none"} />
             </Grid>
@@ -235,7 +235,7 @@ export const Main = () => {
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 10, md: 8 }}>
             {titleFragment(0)}
             {selectFragment(0)}
@@ -250,7 +250,7 @@ export const Main = () => {
     const noticeSection = () => {
       const titleFragment = (i: number) => (
         <Card className={"p-0"} key={`title-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Div className={"fs-1-8rem fw-700"}>
                 공지사항
@@ -261,7 +261,7 @@ export const Main = () => {
       );
       const noticeFragment = (i: number) => (
         <Card className={"p-20"} key={`notice-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Swiper
                 spaceBetween={20}
@@ -324,7 +324,7 @@ export const Main = () => {
       );
       const paginationFragment = (i: number) => (
         <Card className={"p-0"} key={`pagination-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Div className={"notice-pagination transform-none"} />
             </Grid>
@@ -332,7 +332,7 @@ export const Main = () => {
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 10, md: 8 }}>
             {titleFragment(0)}
             {noticeFragment(0)}
@@ -346,7 +346,7 @@ export const Main = () => {
     const locationSection = () => {
       const titleFragment = (i: number) => (
         <Card className={"p-0"} key={`title-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Div className={"fs-1-8rem fw-700"}>
                 오시는 길
@@ -365,7 +365,7 @@ export const Main = () => {
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 10, md: 8 }}>
             {titleFragment(0)}
             {locationFragment(0)}
@@ -377,7 +377,7 @@ export const Main = () => {
     // 7-10. return
     return (
       <Paper className={"content-wrapper p-0 fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             {mainSection()}
             <Hr px={20} className={"bg-light-grey"} />

@@ -183,7 +183,7 @@ export const AuthPrivacy = () => {
     // 7-10. return
     return (
       <Paper className={"content-wrapper radius-1 border-1 h-100vh"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             {privacySection()}
           </Grid>

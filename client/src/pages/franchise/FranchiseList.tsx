@@ -63,7 +63,7 @@ export const FranchiseList = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Div className={"fs-2-0rem fw-700"}>
               가맹 지점
@@ -76,7 +76,7 @@ export const FranchiseList = () => {
     const listSection = () => {
       const imageFragment = (i: number) => (
         <Card className={"p-10"} key={`image-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
                 max={isXxs ? 120 : 150}
@@ -100,7 +100,7 @@ export const FranchiseList = () => {
       );
       const descFragment = (i: number) => (
         <Card className={"p-0"} key={`desc-${i}`}>
-          <Grid container spacing={2} columns={12}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Div className={"fs-1-2rem fw-600"}>
                 {OBJECT[i]?.franchise_name}
@@ -110,7 +110,7 @@ export const FranchiseList = () => {
         </Card>
       );
       return (
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           {OBJECT.map((_item: any, i: number) => (
             <Grid size={12} key={i}>
               {imageFragment(i)}
@@ -123,7 +123,7 @@ export const FranchiseList = () => {
     // 3. filter
     const filterSection = () => (
       <Card className={"px-30"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={3} className={"d-center"}>
             <Select
               label={"정렬"}
@@ -196,11 +196,11 @@ export const FranchiseList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
-            {listSection()}
+            {LOADING ? <Loading /> : listSection()}
             <Hr px={40} w={90} className={"bg-grey"} />
             {filterSection()}
           </Grid>

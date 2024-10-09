@@ -154,7 +154,7 @@ export const SideBar = (
       </Div>
     );
     const textSection1 = () => (
-      <Grid container spacing={2} columns={12} className={`d-center horizontal-text`}>
+      <Grid container spacing={1} columns={12} className={`d-center horizontal-text`}>
         <Grid size={12} className={"d-column-left"}>
           <Div className={"d-row-center"}>
             <Icons
@@ -200,7 +200,7 @@ export const SideBar = (
       </Grid>
     );
     const textSection2 = () => (
-      <Grid container spacing={2} columns={12} className={"horizontal-text fs-0-8rem"}>
+      <Grid container spacing={1} columns={12} className={"horizontal-text fs-0-8rem"}>
         <Grid size={12} className={"d-row-center"}>
           <span>&copy; 2024&nbsp;&nbsp;</span>
           <b>PajuKaesong</b>

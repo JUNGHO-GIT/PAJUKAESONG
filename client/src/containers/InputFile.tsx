@@ -198,7 +198,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
 
   // 7. node ---------------------------------------------------------------------------------------
   const adornmentNode = (
-    <Grid container spacing={2} columns={12}>
+    <Grid container spacing={1} columns={12}>
       <Grid size={8} className={"d-column-left"}>
         {fileList && fileList.length > 0 && fileList.map((file: any, index: number) => (
           <Div className={"d-row-center"} key={index}>
@@ -206,7 +206,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
               max={25}
               hover={false}
               shadow={true}
-              radius={true}
+              radius={false}
               group={"new"}
               src={URL.createObjectURL(file)}
               className={"me-10"}
@@ -252,7 +252,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
 
   // 7. node ---------------------------------------------------------------------------------------
   const existingNode = () => (
-    <Grid container spacing={2} columns={12}>
+    <Grid container spacing={1} columns={12}>
       <Grid size={12} className={"d-column-left"}>
         {fileExisting.map((file: any, index: number) => (
           <Div className={"d-row-center"} key={index}>
@@ -260,7 +260,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
               max={25}
               hover={false}
               shadow={true}
-              radius={true}
+              radius={false}
               group={props?.group}
               src={file}
               className={"me-10"}
