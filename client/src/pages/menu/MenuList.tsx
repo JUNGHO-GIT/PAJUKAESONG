@@ -153,8 +153,8 @@ export const MenuList = () => {
           </Grid>
           <Grid size={6} className={"d-center"}>
             <TablePagination
-              rowsPerPageOptions={[6]}
-              rowsPerPage={6}
+              rowsPerPageOptions={[10]}
+              rowsPerPage={10}
               component={"div"}
               labelRowsPerPage={""}
               count={COUNT.totalCnt}
