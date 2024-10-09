@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
@@ -13,12 +14,9 @@ import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 export const OrderDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    navigate, URL, SUBFIX, location_id, TITLE
-  } = useCommonValue();
-  const {
-    getDayFmt,
-  } = useCommonDate();
+  const { navigate, URL, SUBFIX, location_id, TITLE } = useCommonValue();
+  const { getDayFmt } = useCommonDate();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -36,7 +34,11 @@ export const OrderDetail = () => {
       setOBJECT(res.data.result || Order);
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -54,7 +56,11 @@ export const OrderDetail = () => {
     })
     .then((res: any) => {
       if (res.data.status === "success") {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "success",
+          msg: res.data.msg,
+        });
         document?.querySelector("input[type=file]")?.remove();
         sessionStorage?.removeItem(`${TITLE}_order_product`);
         navigate('/order/list', {
@@ -65,11 +71,19 @@ export const OrderDetail = () => {
         });
       }
       else {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "error",
+          msg: res.data.msg,
+        });
       }
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -274,7 +288,7 @@ export const OrderDetail = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={6} className={"d-row-left"}>
             <Div
@@ -335,7 +349,7 @@ export const OrderDetail = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {LOADING ? <Loading /> : saveNode()}
+      {saveNode()}
     </>
   );
 };

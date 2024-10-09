@@ -2,6 +2,7 @@
 
 import { useState } from "@imports/ImportReacts";
 import { useResponsive } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { Div, Hr, Br } from "@imports/ImportComponents";
 import { Paper, Card, Grid, Stepper, Step, StepLabel } from "@imports/ImportMuis";
 
@@ -9,9 +10,8 @@ import { Paper, Card, Grid, Stepper, Step, StepLabel } from "@imports/ImportMuis
 export const FranchiseInfo = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    isXs
-  } = useResponsive();
+  const { isXs } = useResponsive();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [activeStep, setActiveStep] = useState(0);

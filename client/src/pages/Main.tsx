@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { Swiper, SwiperSlide, Autoplay, axios } from "@imports/ImportUtils";
 import { Pagination } from "@imports/ImportUtils";
 import { Menu, Notice } from "@imports/ImportSchemas";
@@ -13,13 +14,10 @@ import { Grid, Card, Paper } from "@imports/ImportMuis";
 export const Main = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    URL, navigate
-  } = useCommonValue();
-  const {
-    dayFmt, getDayFmt
-  } = useCommonDate();
+  const { URL, navigate } = useCommonValue();
+  const { getDayFmt } = useCommonDate();
   const { isXxs, isXs, isSm, isMd, isLg, isXl } = useResponsive();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 1. common -------------------------------------------------------------------------------------
   const mainArray = ["main1.webp", "main2.webp", "main3.webp", "main4.webp", "main5.webp"];
@@ -51,7 +49,7 @@ export const Main = () => {
       }),
       axios.get(`${URL}/api/admin/visitSave`, {
         params: {
-          date: dayFmt
+          date: getDayFmt(),
         }
       })
     ])
@@ -60,7 +58,11 @@ export const Main = () => {
       setOBJECT_NOTICE(resNotice.data.result.length > 0 ? resNotice.data.result : [Notice]);
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {

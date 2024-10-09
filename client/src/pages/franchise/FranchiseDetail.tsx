@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
@@ -12,13 +13,10 @@ import { Paper, Card, Grid } from "@imports/ImportMuis";
 export const FranchiseDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    navigate, location_id, isAdmin, URL, SUBFIX
-  } = useCommonValue();
-  const {
-    getDayFmt,
-  } = useCommonDate();
+  const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
+  const { getDayFmt } = useCommonDate();
   const { isXxs } = useResponsive();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -36,7 +34,11 @@ export const FranchiseDetail = () => {
       setOBJECT(res.data.result || Franchise);
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -54,7 +56,11 @@ export const FranchiseDetail = () => {
     })
     .then((res: any) => {
       if (res.data.status === "success") {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "success",
+          msg: res.data.msg,
+        });
         navigate(`/franchise/list`,{
           state: {
             category: OBJECT?.franchise_category
@@ -62,11 +68,19 @@ export const FranchiseDetail = () => {
         });
       }
       else {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "error",
+          msg: res.data.msg,
+        });
       }
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -95,7 +109,7 @@ export const FranchiseDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={isXxs ? 270 : 300}
+                max={isXxs ? 270 : 320}
                 hover={false}
                 shadow={true}
                 radius={true}
@@ -167,7 +181,7 @@ export const FranchiseDetail = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
@@ -227,7 +241,7 @@ export const FranchiseDetail = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {LOADING ? <Loading /> : detailNode()}
+      {detailNode()}
     </>
   );
 };

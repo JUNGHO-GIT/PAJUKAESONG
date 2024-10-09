@@ -2,6 +2,7 @@
 
 import { useState } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { useValidateContact } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportUtils";
 import { Loading, Empty } from "@imports/ImportLayouts";
@@ -14,12 +15,9 @@ import { Paper, Card, Grid } from "@imports/ImportMuis";
 export const ContactFind = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    navigate, URL, SUBFIX
-  } = useCommonValue();
-  const {
-    REFS, ERRORS, validate,
-  } = useValidateContact();
+  const { navigate, URL, SUBFIX } = useCommonValue();
+  const { REFS, ERRORS, validate } = useValidateContact();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -48,11 +46,19 @@ export const ContactFind = () => {
         });
       }
       else {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "error",
+          msg: res.data.msg,
+        });
       }
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -137,7 +143,7 @@ export const ContactFind = () => {
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Btn
@@ -171,7 +177,7 @@ export const ContactFind = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {LOADING ? <Loading /> : findNode()}
+      {findNode()}
     </>
   );
 };

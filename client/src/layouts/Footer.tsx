@@ -1,6 +1,7 @@
 // Footer.tsx
 
 import { useResponsive, useCommonValue } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { Div, Img, Icons, Br } from "@imports/ImportComponents";
 import { Paper, Grid, Card } from "@imports/ImportMuis";
 

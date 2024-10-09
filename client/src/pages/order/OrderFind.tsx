@@ -2,6 +2,7 @@
 
 import { useState } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { useValidateOrder } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
@@ -14,12 +15,9 @@ import { Paper, Card, Grid } from "@imports/ImportMuis";
 export const OrderFind = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    navigate, URL, SUBFIX
-  } = useCommonValue();
-  const {
-    REFS, ERRORS, validate,
-  } = useValidateOrder();
+  const { navigate, URL, SUBFIX } = useCommonValue();
+  const { REFS, ERRORS, validate } = useValidateOrder();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -48,11 +46,19 @@ export const OrderFind = () => {
         });
       }
       else {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "error",
+          msg: res.data.msg,
+        });
       }
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -137,7 +143,7 @@ export const OrderFind = () => {
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             <Btn
@@ -171,7 +177,7 @@ export const OrderFind = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {LOADING ? <Loading /> : findNode()}
+      {findNode()}
     </>
   );
 };

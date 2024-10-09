@@ -1,7 +1,7 @@
 // PickerDay.tsx
 
 import { useCommonDate } from "@imports/ImportHooks";
-import { Btn, Div } from "@imports/ImportComponents";
+import { Btn, Div, Icons } from "@imports/ImportComponents";
 import { PopUp, Input } from "@imports/ImportContainers";
 import { PickersDay, Grid, Card } from "@imports/ImportMuis";
 import { DateCalendar, AdapterMoment, LocalizationProvider } from "@imports/ImportMuis";
@@ -23,7 +23,8 @@ export const PickerDay = (
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------
- const { getDayFmt, getDayNotFmt, getPrevMonthStartFmt, getNextMonthStartFmt } = useCommonDate();
+ const { getDayFmt, getDayNotFmt, getPrevDayStartFmt, getNextDayStartFmt } = useCommonDate();
+ const { getPrevMonthStartFmt, getNextMonthStartFmt } = useCommonDate();
 
   // 7. pickerNode ---------------------------------------------------------------------------------
   const pickerNode = () => {
@@ -144,6 +145,38 @@ export const PickerDay = (
             inputclass={""}
             inputRef={REFS?.[i]?.[`${extra}`]}
             error={ERRORS?.[i]?.[`${extra}`]}
+            endadornment={
+              <Div className={"d-row-center"}>
+                <Div className={"me-n10"}>
+                  <Icons
+                    key={"ChevronLeft"}
+                    name={"ChevronLeft"}
+                    className={"w-16 h-16"}
+                    onClick={(e: any) => {
+                      e.stopPropagation();
+                      setOBJECT((prev: any) => ({
+                        ...prev,
+                        [`${extra}`]: getPrevDayStartFmt(prev[`${extra}`]),
+                      }));
+                    }}
+                  />
+                </Div>
+                <Div className={"me-n15"}>
+                  <Icons
+                    key={"ChevronRight"}
+                    name={"ChevronRight"}
+                    className={"w-16 h-16"}
+                    onClick={(e: any) => {
+                      e.stopPropagation();
+                      setOBJECT((prev: any) => ({
+                        ...prev,
+                        [`${extra}`]: getNextDayStartFmt(prev[`${extra}`]),
+                      }));
+                    }}
+                  />
+                </Div>
+              </Div>
+            }
             onClick={(e: any) => {
               popTrigger.openPopup(e.currentTarget);
             }}

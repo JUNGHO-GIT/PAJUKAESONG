@@ -1,7 +1,6 @@
-// Img.tsx
-
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 
 // -------------------------------------------------------------------------------------------------
 declare type ImgProps = React.HTMLAttributes<HTMLImageElement> & {
@@ -14,27 +13,27 @@ declare type ImgProps = React.HTMLAttributes<HTMLImageElement> & {
 };
 
 // -------------------------------------------------------------------------------------------------
-export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgProps ) => {
-
+export const Img = ({ group, src, hover, shadow, radius, max, ...props }: ImgProps) => {
   // 1. common -------------------------------------------------------------------------------------
-  let { GCLOUD_URL } = useCommonValue();
+  const { GCLOUD_URL } = useCommonValue();
   let fileName: string = "";
   let srcResult: string = "";
-  let defaultImage: string = "https://via.placeholder.com/150";
-  let imageClass: any = "";
+  const defaultImage: string = "https://via.placeholder.com/150";
+  let imageClass: string = "";
   let imageStyle: any = {};
 
   if (src && typeof src === "string") {
     fileName = src.split("/").pop()?.split(".")[0] || "empty";
-    srcResult = group === "new" ? src : `${GCLOUD_URL}/${group}/${src}`;
+    srcResult = (
+      group === "new"
+      ? src
+      : !group
+      ? `${GCLOUD_URL}/main/${src}`
+      : `${GCLOUD_URL}/${group}/${src}`
+    );
   }
 
-  if (!props?.className) {
-    imageClass = `h-auto object-contain`;
-  }
-  else {
-    imageClass = `${props?.className} h-auto object-contain`;
-  }
+  imageClass = `${props?.className || ""} h-auto object-contain`;
 
   if (hover) {
     imageClass += " hover";
@@ -46,19 +45,22 @@ export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgPr
     imageClass += " radius-2";
   }
   if (max) {
-    imageClass += ` w-max${max || ""} h-max${max || ""}`
+    imageClass += ` w-max${max || ""} h-max${max || ""}`;
   }
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [imgSrc, setImgSrc] = useState(srcResult);
+  const [hasError, setHasError] = useState(false);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setImgSrc(srcResult);
+    setHasError(false);
   }, [srcResult]);
 
   // 3. handle -------------------------------------------------------------------------------------
   const handleError = () => {
+    setHasError(true);
     setImgSrc(defaultImage);
   };
 
@@ -66,7 +68,7 @@ export const Img = ( { group, src, hover, shadow, radius, max, ...props }: ImgPr
   return (
     <img
       {...props}
-      src={imgSrc}
+      src={hasError ? defaultImage : imgSrc}
       alt={fileName}
       key={fileName}
       onError={handleError}

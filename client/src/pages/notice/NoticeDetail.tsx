@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
@@ -13,13 +14,10 @@ import { Paper, Card, Grid } from "@imports/ImportMuis";
 export const NoticeDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    navigate, location_id, isAdmin, URL, SUBFIX
-  } = useCommonValue();
-  const {
-    getDayFmt,
-  } = useCommonDate();
+  const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
+  const { getDayFmt } = useCommonDate();
   const { isXxs } = useResponsive();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -37,7 +35,11 @@ export const NoticeDetail = () => {
       setOBJECT(res.data.result || Notice);
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -55,15 +57,27 @@ export const NoticeDetail = () => {
     })
     .then((res: any) => {
       if (res.data.status === "success") {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "success",
+          msg: res.data.msg,
+        });
         navigate("/notice/list");
       }
       else {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "error",
+          msg: res.data.msg,
+        });
       }
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -147,7 +161,7 @@ export const NoticeDetail = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
@@ -203,7 +217,7 @@ export const NoticeDetail = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {LOADING ? <Loading /> : detailNode()}
+      {detailNode()}
     </>
   );
 };

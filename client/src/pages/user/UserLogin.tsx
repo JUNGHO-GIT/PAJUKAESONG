@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { useValidateUser } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportUtils";
 import { User } from "@imports/ImportSchemas";
@@ -13,12 +14,9 @@ import { Paper, Card, Grid } from "@imports/ImportMuis";
 export const UserLogin = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    URL, SUBFIX, TITLE, navigate, isAdmin, adminId, adminPw, isUser, userId, userPw,
-  } = useCommonValue();
-  const {
-    REFS, ERRORS, validate,
-  } = useValidateUser();
+  const { URL, SUBFIX, TITLE, navigate, isAdmin, adminId, adminPw, isUser, userId, userPw, } = useCommonValue();
+  const { REFS, ERRORS, validate } = useValidateUser();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -57,7 +55,11 @@ export const UserLogin = () => {
     })
     .then((res: any) => {
       if (res.data.status === "success") {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "success",
+          msg: res.data.msg,
+        });
         if (res.data.admin === "admin") {
           localStorage.clear();
           localStorage.setItem(`${TITLE}_adminId`, OBJECT?.user_id);
@@ -73,12 +75,20 @@ export const UserLogin = () => {
         navigate("/main");
       }
       else {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "error",
+          msg: res.data.msg,
+        });
         localStorage.clear();
       }
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -89,7 +99,6 @@ export const UserLogin = () => {
   // 4. handle ------------------------------------------------------------------------------------
   const handleLogout = () => {
     localStorage.clear();
-    alert("로그아웃 되었습니다.");
     navigate("/main");
   }
 
@@ -162,7 +171,7 @@ export const UserLogin = () => {
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-column-center"}>
             {(isAdmin || isUser) ? (
@@ -191,7 +200,7 @@ export const UserLogin = () => {
     );
     // 4. link
     const linkSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-0-8rem"}>

@@ -25,30 +25,6 @@ export const PopUp = (props: any) => {
       padding: `${props?.padding || 20}px`,
     };
   }
-  else if (props?.type === "alert") {
-    popupStyle = {
-      ...popupStyle,
-      border: '1px solid red',
-      boxShadow: '0px 0px 10px rgba(255, 0, 0, 0.5)',
-      padding: "6px",
-    };
-  }
-  else if (props?.type === "chart") {
-    popupStyle = {
-      ...popupStyle,
-      border: '0.2px solid rgba(0, 0, 0, 0.2)',
-      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-      padding: "6px 0px 6px 12px",
-    };
-  }
-  else if (props?.type === "modal") {
-    popupStyle = {
-      ...popupStyle,
-      border: '0.2px solid rgba(0, 0, 0, 0.2)',
-      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-      padding: "10px",
-    };
-  }
 
   // 1. 팝업 고정 ----------------------------------------------------------------------------------
   const chainedPopUp = () => (

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { axios } from "@imports/ImportUtils";
 import { Loading, Empty } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
@@ -13,12 +14,9 @@ import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMui
 export const NoticeList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    URL, SUBFIX, navigate, isAdmin,
-  } = useCommonValue();
-  const {
-    getDayNotFmt,
-  } = useCommonDate();
+  const { URL, SUBFIX, navigate, isAdmin, } = useCommonValue();
+  const { getDayNotFmt } = useCommonDate();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -47,7 +45,11 @@ export const NoticeList = () => {
       }));
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -142,7 +144,7 @@ export const NoticeList = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-center"}>
             <Select
@@ -232,7 +234,7 @@ export const NoticeList = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {LOADING ? <Loading /> : listNode()}
+      {listNode()}
     </>
   );
 };

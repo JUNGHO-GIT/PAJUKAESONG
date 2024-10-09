@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
@@ -13,10 +14,9 @@ import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMui
 export const FranchiseList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    URL, SUBFIX, navigate, isAdmin, location_category
-  } = useCommonValue();
+  const { URL, SUBFIX, navigate, isAdmin, location_category } = useCommonValue();
   const { isXxs } = useResponsive();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -46,7 +46,11 @@ export const FranchiseList = () => {
       }));
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -118,7 +122,7 @@ export const FranchiseList = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-center"}>
             <Select
@@ -208,7 +212,7 @@ export const FranchiseList = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {LOADING ? <Loading /> : listNode()}
+      {listNode()}
     </>
   );
 };

@@ -2,6 +2,7 @@
 
 import { useState } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { useValidateUser } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportUtils";
 import { User } from "@imports/ImportSchemas";
@@ -13,12 +14,9 @@ import { Paper, Card, Grid } from "@imports/ImportMuis";
 export const UserSignup = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    navigate, URL, SUBFIX
-  } = useCommonValue();
-  const {
-    REFS, ERRORS, validate,
-  } = useValidateUser();
+  const { navigate, URL, SUBFIX } = useCommonValue();
+  const { REFS, ERRORS, validate } = useValidateUser();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -36,15 +34,27 @@ export const UserSignup = () => {
     })
     .then((res: any) => {
       if (res.data.status === "success") {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "success",
+          msg: res.data.msg,
+        });
         navigate("/user/login");
       }
       else {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "error",
+          msg: res.data.msg,
+        });
       }
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
+import { axios } from "@imports/ImportUtils";
 import { Icons, Div, Img, Hr, Br } from "@imports/ImportComponents";
 import { Drawer, List, ListItem, Collapse, Grid } from "@imports/ImportMuis";
 
@@ -17,14 +18,27 @@ export const SideBar = (
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    navigate, firstStr, secondStr, dataArray, PATH, location_category
-  } = useCommonValue();
+  const { URL, PATH, navigate, location_category } = useCommonValue();
+  const { firstStr, secondStr, dataArray } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
+  const [appVersion, setAppVersion] = useState<string>("");
+  const [appDate, setAppDate] = useState<string>("");
   const [selectedTab, setSelectedTab] = useState<string>("");
   const [selectedTabVal, setSelectedTabVal] = useState<string>("");
   const [selectedListItem, setSelectedListItem] = useState<string>("");
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    axios.get(`${URL}/api/admin/appInfo`)
+    .then((res: any) => {
+      setAppVersion(res.data.result.version);
+      setAppDate(res.data.result.date);
+    })
+    .catch((err: any) => {
+      console.error(err);
+    });
+  }, [URL, PATH]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화
@@ -192,8 +206,12 @@ export const SideBar = (
           <b>PajuKaesong</b>
         </Grid>
         <Grid size={12} className={"d-row-center"}>
-          <span>Designed by&nbsp;&nbsp;</span>
+          <span>&copy; Designed by&nbsp;&nbsp;</span>
           <b>JUNGHO</b>
+        </Grid>
+        <Grid size={12} className={"d-row-center"}>
+          <span>&copy; Version&nbsp;&nbsp;</span>
+          <b className={"fs-0-6rem"}>{appVersion} / {appDate}</b>
         </Grid>
       </Grid>
     );

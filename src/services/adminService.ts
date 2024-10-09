@@ -1,6 +1,49 @@
 // adminService.ts
 
+import fs from "fs";
+import path from "path";
+import dotenv from 'dotenv';
+import { fileURLToPath } from "url";
 import * as repository from "@repositories/adminRepository";
+dotenv.config();
+
+// 0. appInfo --------------------------------------------------------------------------------------
+export const appInfo = async () => {
+
+  let finalResult:any = null;
+  let statusResult:string = "";
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const markdownData = fs.readFileSync(path.join(__dirname, '../../changelog.md'), 'utf8');
+
+  const versionRegex = /(\s*)(\d+\.\d+\.\d+)(\s*)/g;
+  const dateRegex = /-\s*(\d{4}-\d{2}-\d{2})\s*\((\d{2}:\d{2}:\d{2})\)/g;
+
+  const versionMatches = [...markdownData.matchAll(versionRegex)];
+  const dateMatches = [...markdownData.matchAll(dateRegex)];
+
+  const lastVersion = versionMatches.length > 0 ? versionMatches[versionMatches.length - 1][2] : "";
+  const lastDateMatch = dateMatches.length > 0 ? dateMatches[dateMatches.length - 1] : null;
+  const lastDateTime = lastDateMatch ? `${lastDateMatch[1]}_${lastDateMatch[2]}` : "";
+
+  finalResult = {
+    version: lastVersion,
+    date: lastDateTime,
+  };
+
+  if (!finalResult) {
+    statusResult = "fail"
+  }
+  else {
+    statusResult = "success";
+  }
+
+  return {
+    status: statusResult,
+    result: finalResult
+  };
+};
 
 // 1-0. visit (count) ------------------------------------------------------------------------------
 export const visitCount = async (

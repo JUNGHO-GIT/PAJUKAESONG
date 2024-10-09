@@ -19,6 +19,7 @@ import {
 import {
   useRoot, useScrollTop, useLocale
 } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 
 import {
   Header, Footer, Alert

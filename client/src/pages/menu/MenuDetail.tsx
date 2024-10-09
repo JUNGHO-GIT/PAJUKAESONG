@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
@@ -12,10 +13,9 @@ import { Paper, Card, Grid } from "@imports/ImportMuis";
 export const MenuDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    navigate, location_id, isAdmin, URL, SUBFIX
-  } = useCommonValue();
+  const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
   const { isXxs } = useResponsive();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -33,7 +33,11 @@ export const MenuDetail = () => {
       setOBJECT(res.data.result || Menu);
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -51,7 +55,11 @@ export const MenuDetail = () => {
     })
     .then((res: any) => {
       if (res.data.status === "success") {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "success",
+          msg: res.data.msg,
+        });
         navigate(`/menu/list`,{
           state: {
             category: OBJECT?.menu_category
@@ -59,11 +67,19 @@ export const MenuDetail = () => {
         });
       }
       else {
-        alert(res.data.msg);
+        setALERT({
+          open: !ALERT.open,
+          severity: "error",
+          msg: res.data.msg,
+        });
       }
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -92,7 +108,7 @@ export const MenuDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={isXxs ? 270 : 300}
+                max={isXxs ? 270 : 320}
                 hover={false}
                 shadow={true}
                 radius={true}
@@ -141,7 +157,7 @@ export const MenuDetail = () => {
     };
     // 4. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
@@ -201,7 +217,7 @@ export const MenuDetail = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {LOADING ? <Loading /> : detailNode()}
+      {detailNode()}
     </>
   );
 };

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useAlertStore } from "@imports/ImportStores";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading, Empty } from "@imports/ImportLayouts";
 import { Admin, Order } from "@imports/ImportSchemas";
@@ -13,12 +14,9 @@ import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMui
 export const AdminDashboard = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {
-    URL, SUBFIX
-  } = useCommonValue();
-  const {
-    dayFmt, getDayFmt
-  } = useCommonDate();
+  const { URL, SUBFIX } = useCommonValue();
+  const { getDayFmt } = useCommonDate();
+  const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -32,15 +30,8 @@ export const AdminDashboard = () => {
     totalCnt: 0,
   });
   const [DATE, setDATE] = useState<any>({
-    today: dayFmt
+    today: getDayFmt(),
   });
-
-  useEffect(() => {
-    console.log("===================================");
-    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
-    console.log("OBJECT_ORDER", JSON.stringify(OBJECT_ORDER, null, 2));
-    console.log("ORDER_COUNT", JSON.stringify(ORDER_COUNT, null, 2));
-  }, [OBJECT, OBJECT_ORDER, ORDER_COUNT]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -67,7 +58,11 @@ export const AdminDashboard = () => {
       }));
     })
     .catch((err: any) => {
-      alert(err.response.data.msg);
+      setALERT({
+        open: !ALERT.open,
+        severity: "error",
+        msg: err.response.data.msg,
+      });
       console.error(err);
     })
     .finally(() => {
@@ -169,7 +164,7 @@ export const AdminDashboard = () => {
     );
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"px-30"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-center"}>
             <Select
@@ -239,11 +234,15 @@ export const AdminDashboard = () => {
             <Br px={30} />
             {dateSection()}
             <Br px={30} />
-            {visitSection()}
-            <Br px={30} />
-            {orderSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
-            {filterSection()}
+            {LOADING ? <Loading /> : (
+              <>
+                {visitSection()}
+                <Br px={30} />
+                {orderSection()}
+                <Hr px={40} w={90} className={"bg-grey"} />
+                {filterSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>
@@ -253,7 +252,7 @@ export const AdminDashboard = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {LOADING ? <Loading /> : detailNode()}
+      {detailNode()}
     </>
   );
 };
