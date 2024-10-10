@@ -3,6 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
+import { useValidateProduct } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
@@ -16,6 +17,7 @@ export const ProductDetail = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, isAdmin, URL, SUBFIX, TITLE } = useCommonValue();
   const { isXxs } = useResponsive();
+  const { validate } = useValidateProduct();
   const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -92,8 +94,12 @@ export const ProductDetail = () => {
   };
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowDelete = () => {
+  const flowDelete = async () => {
     setLOADING(true);
+    if (!await validate(OBJECT, null, "delete")) {
+      setLOADING(false);
+      return;
+    }
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
         _id: OBJECT?._id

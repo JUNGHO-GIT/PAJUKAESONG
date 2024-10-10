@@ -50,7 +50,7 @@ export const useValidateUser = () => {
   };
 
   // 2-3. useEffect --------------------------------------------------------------------------------
-  validate.current = (OBJECT: any, fileList?: any, extra?:string) => {
+  validate.current = async (OBJECT: any, fileList?: any, extra?:string) => {
     // 1. login
     if (extra === "login") {
       const target = [

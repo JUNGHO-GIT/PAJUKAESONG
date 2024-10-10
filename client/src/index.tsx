@@ -19,10 +19,9 @@ import {
 import {
   useRoot, useScrollTop, useLocale
 } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
 
 import {
-  Header, Footer, Alert
+  Header, Footer, Alert, Confirm
 } from "@imports/ImportLayouts";
 
 import {
@@ -173,7 +172,8 @@ const App = () => {
         <Route path={"/product/*"} element={<Product />} />
         <Route path={"/user/*"} element={<User />} />
       </Routes>
-      {<Alert />}
+      <Alert />
+      <Confirm />
       <Footer />
     </div>
   );

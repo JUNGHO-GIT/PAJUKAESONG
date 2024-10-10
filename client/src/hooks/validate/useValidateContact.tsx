@@ -1,13 +1,14 @@
 // useValidateContact.tsx
 
 import { useState, createRef, useRef } from "@imports/ImportReacts";
-import { useAlertStore } from "@imports/ImportStores";
+import { useAlertStore, useConfirmStore } from "@imports/ImportStores";
 
 // -------------------------------------------------------------------------------------------------
 export const useValidateContact = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { ALERT, setALERT } = useAlertStore();
+  const { CONFIRM, setCONFIRM } = useConfirmStore();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const REFS = useRef<any[]>([]);
@@ -50,9 +51,9 @@ export const useValidateContact = () => {
   };
 
   // 7. validate -----------------------------------------------------------------------------------
-  validate.current = (OBJECT: any, fileList?: any, extra?:string) => {
+  validate.current = async (OBJECT: any, fileList?: any, extra?:string) => {
 
-    // 1. save, update
+    // 1. save, update -----------------------------------------------------------------------------
     if (extra === "save" || extra === "update") {
       const target = [
         "contact_category",
@@ -105,7 +106,7 @@ export const useValidateContact = () => {
       return true;
     }
 
-    // 2. find
+    // 2. find -------------------------------------------------------------------------------------
     else if (extra === "find") {
       const target = [
         "contact_name",
@@ -137,6 +138,47 @@ export const useValidateContact = () => {
         return showAlertAndFocus('contact_phone', "전화번호 형식으로 입력해주세요.", 0);
       }
       return true;
+    }
+
+    // 3. delete -----------------------------------------------------------------------------------
+    else if (extra === "delete") {
+      const target = [
+        "_id",
+      ];
+      REFS.current = (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: createRef()
+          }), {})
+        ))
+      );
+      setERRORS (
+        Array.from({ length: 1 }, (_, _idx) => (
+          target.reduce((acc, cur) => ({
+            ...acc,
+            [cur]: false
+          }), {})
+        ))
+      );
+      const confirmResult = new Promise((resolve) => {
+        setCONFIRM({
+          open: !CONFIRM.open,
+          msg: "삭제하시겠습니까?",
+        }, (confirmed: boolean) => {
+          resolve(confirmed);
+        });
+      });
+
+      if (await confirmResult) {
+        if (!OBJECT?._id || OBJECT?._id === "") {
+          return showAlertAndFocus("", "삭제할 데이터가 없습니다.", 0);
+        }
+        return true;
+      }
+      else {
+        return false;
+      }
     }
   };
 

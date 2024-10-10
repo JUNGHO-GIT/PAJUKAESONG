@@ -3,6 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
+import { useValidateOrder } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
@@ -17,6 +18,7 @@ export const OrderDetail = () => {
   const { navigate, URL, SUBFIX, location_id, TITLE } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { ALERT, setALERT } = useAlertStore();
+  const { validate } = useValidateOrder();
 
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -47,8 +49,12 @@ export const OrderDetail = () => {
   }, [URL, SUBFIX, location_id]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowDelete = () => {
+  const flowDelete = async () => {
     setLOADING(true);
+    if (!await validate(OBJECT, null, "delete")) {
+      setLOADING(false);
+      return;
+    }
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
         _id: OBJECT?._id

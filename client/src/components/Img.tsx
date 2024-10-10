@@ -33,8 +33,12 @@ export const Img = ({ group, src, hover, shadow, radius, max, ...props }: ImgPro
     );
   }
 
-  imageClass = `${props?.className || ""} h-auto object-contain`;
-
+  if (!props?.className) {
+    imageClass = `h-auto object-contain`;
+  }
+  else {
+    imageClass = `${props?.className} h-auto object-contain`;
+  }
   if (hover) {
     imageClass += " hover";
   }
@@ -42,7 +46,7 @@ export const Img = ({ group, src, hover, shadow, radius, max, ...props }: ImgPro
     imageClass += " shadow-3";
   }
   if (radius) {
-    imageClass += " radius-2";
+    imageClass += " radius-1";
   }
   if (max) {
     imageClass += ` w-max${max || ""} h-max${max || ""}`;

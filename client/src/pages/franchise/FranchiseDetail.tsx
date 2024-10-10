@@ -3,6 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
+import { useValidateFranchise } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
@@ -17,6 +18,7 @@ export const FranchiseDetail = () => {
   const { getDayFmt } = useCommonDate();
   const { isXxs } = useResponsive();
   const { ALERT, setALERT } = useAlertStore();
+  const { validate } = useValidateFranchise();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -47,8 +49,12 @@ export const FranchiseDetail = () => {
   }, [URL, SUBFIX, location_id]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowDelete = () => {
+  const flowDelete = async () => {
     setLOADING(true);
+    if (!await validate(OBJECT, null, "delete")) {
+      setLOADING(false);
+      return;
+    }
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
         _id: OBJECT?._id

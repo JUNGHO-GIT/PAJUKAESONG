@@ -6,6 +6,7 @@ import { SideBar } from "@layouts/SideBar";
 import { Footer } from "@layouts/Footer";
 import { Loading } from "@layouts/Loading";
 import { Alert } from "@layouts/Alert";
+import { Confirm } from "@layouts/Confirm";
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -15,4 +16,5 @@ export {
   Footer,
   Loading,
   Alert,
+  Confirm,
 };

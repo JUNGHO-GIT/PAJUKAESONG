@@ -3,6 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
+import { useValidateMenu } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
@@ -16,6 +17,7 @@ export const MenuDetail = () => {
   const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
   const { isXxs } = useResponsive();
   const { ALERT, setALERT } = useAlertStore();
+  const { validate } = useValidateMenu();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -46,8 +48,12 @@ export const MenuDetail = () => {
   }, [URL, SUBFIX, location_id]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowDelete = () => {
+  const flowDelete = async () => {
     setLOADING(true);
+    if (!await validate(OBJECT, null, "delete")) {
+      setLOADING(false);
+      return;
+    }
     axios.delete(`${URL}${SUBFIX}/delete`, {
       params: {
         _id: OBJECT?._id
