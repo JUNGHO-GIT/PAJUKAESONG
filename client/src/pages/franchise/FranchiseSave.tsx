@@ -1,13 +1,13 @@
 // FranchiseSave.tsx
 
-import { useState } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useState, useEffect } from "@imports/ImportReacts";
+import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateFranchise } from "@imports/ImportValidates";
 import { axios, makeFormData } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
+import { Div, Btn, Br } from "@imports/ImportComponents";
 import { Input, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -16,7 +16,6 @@ export const FranchiseSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
-  const { getDayFmt } = useCommonDate();
   const { REFS, ERRORS, validate } = useValidateFranchise();
   const { ALERT, setALERT } = useAlertStore();
 
@@ -24,6 +23,14 @@ export const FranchiseSave = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Franchise);
   const [fileList, setFileList] = useState<File[] | null>(null);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    setLOADING(true);
+    setTimeout(() => {
+      setLOADING(false);
+    }, 500);
+  }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async () => {

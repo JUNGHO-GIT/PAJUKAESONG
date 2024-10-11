@@ -24,11 +24,6 @@ export const OrderSave = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
 
-  useEffect(() => {
-    console.log("===================================");
-    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
-  }, [OBJECT]);
-
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
@@ -40,7 +35,7 @@ export const OrderSave = () => {
       }));
     }
     setLOADING(false);
-  }, [PATH]);
+  }, []);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {

@@ -1,13 +1,13 @@
 // ContactSave.tsx
 
-import { useState } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useState, useEffect } from "@imports/ImportReacts";
+import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateContact } from "@imports/ImportValidates";
 import { axios, makeFormData } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
+import { Div, Btn, Br } from "@imports/ImportComponents";
 import { Select, Input, TextArea, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
@@ -16,7 +16,6 @@ export const ContactSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
-  const { getDayFmt } = useCommonDate();
   const { REFS, ERRORS, validate } = useValidateContact();
   const { ALERT, setALERT } = useAlertStore();
 
@@ -24,6 +23,14 @@ export const ContactSave = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Contact);
   const [fileList, setFileList] = useState<File[] | null>(null);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    setLOADING(true);
+    setTimeout(() => {
+      setLOADING(false);
+    }, 500);
+  }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async () => {
