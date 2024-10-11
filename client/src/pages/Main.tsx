@@ -173,7 +173,7 @@ export const Main = () => {
           <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Swiper
-                spaceBetween={5}
+                spaceBetween={0}
                 slidesPerView={LOADING ? 0 : (
                   isXxs ? 2 : isXs ? 2 : isSm ? 2 : isMd ? 3 : isLg ? 3 : isXl ? 3 : 3
                 )}
