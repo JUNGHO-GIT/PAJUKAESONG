@@ -161,7 +161,7 @@ export const ContactDetail = () => {
         </Card>
       );
       return (
-        <Card className={"border-1 shadow-2 radius-1 p-20"}>
+        <Card className={"border-1 shadow-1 radius-1 p-20"}>
           <Grid container spacing={0} columns={12}>
             <Grid
               size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
