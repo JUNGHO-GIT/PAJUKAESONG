@@ -95,82 +95,134 @@ export const AdminDashboard = () => {
       />
     );
     // 2. visit
-    const visitSection = () => (
-      <Card className={"border-1 shadow-1 radius-1 p-20"}>
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-8rem fw-700"}>
-              방문자 수
-            </Div>
+    const visitSection = () => {
+      const titleFragment = () => (
+        <Card className={"p-0"}>
+          <Grid container spacing={1} columns={12}>
+            <Grid size={12}>
+              <Div className={"fs-1-8rem fw-700"}>
+                방문자 수
+              </Div>
+            </Grid>
           </Grid>
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-6rem fw-600 black me-5"}>
-              {OBJECT?.admin_visit_count || 0}
-            </Div>
-            <Div className={"fs-1-3rem fw-500 grey ms-10"}>
-              명
-            </Div>
+        </Card>
+      );
+      const visitFragment = (item: any) => (
+        <Card className={"p-10"}>
+          <Grid container spacing={1} columns={12}>
+            <Grid size={12} className={"d-row-center"}>
+              <Div className={"fs-1-6rem fw-600 black me-5"}>
+                {item?.admin_visit_count || 0}
+              </Div>
+              <Div className={"fs-1-3rem fw-500 grey ms-10"}>
+                명
+              </Div>
+            </Grid>
           </Grid>
-        </Grid>
-      </Card>
-    );
-    // 3. order
-    const orderSection = () => (
-      <Card className={"border-1 shadow-1 radius-1 p-20"}>
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-8rem fw-700"}>
-              주문 내역
-            </Div>
+        </Card>
+      );
+      return (
+        <Card className={"border-1 radius-1 shadow-1 p-20"}>
+          <Grid container spacing={0} columns={12}>
+            {titleFragment()}
+            <Br px={30} />
+            {visitFragment(OBJECT)}
           </Grid>
-          <Grid size={3}>
-            <Div className={"fs-0-8rem fw-500"}>
-              유형
-            </Div>
+        </Card>
+      );
+    };
+    // 2. order
+    const orderSection = () => {
+      const titleFragment = () => (
+        <Card className={"p-0"}>
+          <Grid container spacing={1} columns={12}>
+            <Grid size={12}>
+              <Div className={"fs-1-8rem fw-700"}>
+                주문 내역
+              </Div>
+            </Grid>
           </Grid>
-          <Grid size={6}>
-            <Div className={"fs-0-8rem fw-500"}>
-              금액
-            </Div>
-          </Grid>
-          <Grid size={3}>
-            <Div className={"fs-0-8rem fw-500"}>
-              이름
-            </Div>
-          </Grid>
-        </Grid>
-        <Hr px={40} className={"bg-burgundy"} />
-        {OBJECT_ORDER?.map((item: any, index: number) => (
-          <Grid container spacing={1} columns={12} key={index}>
+        </Card>
+      );
+      const headFragment = () => (
+        <Card className={"p-10"}>
+          <Grid container spacing={1} columns={12}>
             <Grid size={3}>
-              <Div className={"fs-0-8rem"}>
-                {item?.order_category === "reservation" ? "매장 예약" : "제품 구매"}
+              <Div className={"fs-0-8rem fw-500"}>
+                유형
               </Div>
             </Grid>
             <Grid size={6}>
-              <Div max={15} className={"fs-1-0rem pointer-burgundy"}>
-                {`${numeral(item?.order_total_price).format("0,0")}`}
+              <Div className={"fs-0-8rem fw-500"}>
+                금액
               </Div>
             </Grid>
             <Grid size={3}>
-              <Div className={"fs-0-8rem"}>
+              <Div className={"fs-0-8rem fw-500"}>
+                이름
+              </Div>
+            </Grid>
+            <Grid size={12}>
+              <Hr px={40} className={"bg-burgundy"} />
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      const listFragment = (item: any, i: number) => (
+        <Card className={"p-10"}>
+          <Grid container spacing={1} columns={12}>
+            <Grid size={3}>
+              <Div className={"fs-0-7rem"}>
+                {item?.order_category === "reservation" && "매장 예약"}
+                {item?.order_category === "buy" && "제품 구매"}
+              </Div>
+            </Grid>
+            <Grid size={6}>
+              <Div max={10} className={"fs-1-0rem pointer-burgundy"}>
+                {numeral(item?.order_total_price).format("0,0")}
+              </Div>
+            </Grid>
+            <Grid size={3}>
+              <Div className={"fs-0-7rem"}>
                 {item?.order_name}
               </Div>
             </Grid>
-            <Hr px={1} className={"bg-light-grey mb-20"} />
+            {/** 마지막 항목 제외 hr 추가 */}
+            <Grid size={12}>
+              {i !== OBJECT?.length - 1 && (
+                <Hr px={30} className={"bg-light-grey"} />
+              )}
+            </Grid>
           </Grid>
-        ))}
-      </Card>
-    );
+        </Card>
+      );
+      return (
+        <Card className={"border-1 radius-1 shadow-1 p-20"}>
+          <Grid container spacing={0} columns={12}>
+            {OBJECT_ORDER.map((item: any, i: number) => (
+              <Grid
+                size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+                className={"d-column-center"}
+                key={`list-${i}`}
+              >
+                {i === 0 && titleFragment()}
+                <Br px={30} />
+                {i === 0 && headFragment()}
+                {listFragment(item, i)}
+              </Grid>
+            ))}
+          </Grid>
+        </Card>
+      )
+    };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"p-10"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={3} className={"d-row-left"}>
+          <Grid size={3} className={"d-column-center"}>
             <Select
-              label={"정렬"}
               value={ORDER_PAGING?.sort}
-              inputclass={"h-min0 h-4vh"}
+              inputclass={"h-min0 h-5vh"}
               onChange={(e: any) => (
                 setORDER_PAGING((prev: any) => ({
                   ...prev,
@@ -198,7 +250,7 @@ export const AdminDashboard = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={9} className={"d-center"}>
+          <Grid size={9} className={"d-column-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -208,6 +260,7 @@ export const AdminDashboard = () => {
               page={ORDER_PAGING.page}
               showFirstButton={true}
               showLastButton={true}
+              className={"border-right-1 border-left-1 radius-1"}
               onPageChange={(_event, newPage) => {
                 setORDER_PAGING((prev: any) => ({
                   ...prev,
@@ -234,7 +287,11 @@ export const AdminDashboard = () => {
             <Br px={30} />
             {dateSection()}
             <Br px={30} />
-            {LOADING ? <Loading /> : (
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
               <>
                 {visitSection()}
                 <Br px={30} />

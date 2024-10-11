@@ -504,13 +504,13 @@ export const OrderUpdate = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {titleSection()}
             {LOADING ? (
               <>
                 <Loading />
               </>
             ) : (
               <>
-                {titleSection()}
                 <Br px={30} />
                 {productSection()}
                 <Br px={30} />

@@ -17,9 +17,6 @@
 .MuiTabs-scroller {
   margin: 0px 0px 5px 0px !important;
 }
-.MuiToolbar-root {
-  padding: 0px 0px 0px 0px !important;
-}
 
 /** card ******************************************************************************************/
 .MuiCard-root {
@@ -167,4 +164,19 @@
 }
 .MuiStepIcon-root.Mui-active {
   color: #c30104 !important;
+}
+.MuiToolbar-root {
+  margin: 0px 0px 0px 0px !important;
+  padding: 0px 0px 0px 0px !important;
+  min-height: 0px !important;
+  height: 5vh !important;
+}
+.MuiTablePagination-root {
+  margin: 0px 0px 0px 0px !important;
+  padding: 0px 5px 0px 5px !important;
+  width: 100% !important;
+  overflow-y: hidden !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }

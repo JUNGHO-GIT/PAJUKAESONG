@@ -1,13 +1,13 @@
 // NoticeSave.tsx
 
-import { useState } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
+import { useState, useEffect } from "@imports/ImportReacts";
+import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateNotice } from "@imports/ImportValidates";
 import { axios, makeFormData } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
+import { Div, Btn, Br } from "@imports/ImportComponents";
 import { Input, TextArea, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -16,7 +16,6 @@ export const NoticeSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
-  const { getDayFmt } = useCommonDate();
   const { REFS, ERRORS, validate } = useValidateNotice();
   const { ALERT, setALERT } = useAlertStore();
 
@@ -24,6 +23,14 @@ export const NoticeSave = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Notice);
   const [fileList, setFileList] = useState<File[] | null>(null);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    setLOADING(true);
+    setTimeout(() => {
+      setLOADING(false);
+    }, 500);
+  }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async () => {
@@ -117,7 +124,7 @@ export const NoticeSave = () => {
                 value={item?.notice_content}
                 itemRef={REFS?.[i]?.notice_content}
                 error={ERRORS?.[i]?.notice_content}
-                inputclass={"h-50vh border-none"}
+                inputclass={"h-min50vh border-none"}
                 onChange={(e: any) => {
                   setOBJECT((prev: any) => ({
                     ...prev,
@@ -195,13 +202,13 @@ export const NoticeSave = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {titleSection()}
             {LOADING ? (
               <>
                 <Loading />
               </>
             ) : (
               <>
-                {titleSection()}
                 <Br px={30} />
                 {saveSection()}
                 <Br px={30} />

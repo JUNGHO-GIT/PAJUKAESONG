@@ -6,14 +6,13 @@ import { TextField } from "@imports/ImportMuis";
 export const TextArea = (props: any) => (
   <TextField
     {...props}
-    label={props?.label || ""}
-    select={props?.select || false}
+    select={false}
+    multiline={true}
+    type={props?.type || "text"}
     variant={props?.variant || "outlined"}
     className={props?.className || ""}
-    type={props?.type || "text"}
     size={props?.size || "small"}
     fullWidth={props?.fullWidth || true}
-    multiline={props?.multiline || true}
     inputRef={props?.inputRef || null}
     error={props?.error || false}
     slotProps={{

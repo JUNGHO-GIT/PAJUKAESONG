@@ -75,7 +75,7 @@ export const ContactList = () => {
     );
     // 2. list
     const listSection = () => {
-      const titleFragment = () => (
+      const headFragment = () => (
         <Card className={"p-10"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={3}>
@@ -146,7 +146,7 @@ export const ContactList = () => {
                 className={"d-column-center"}
                 key={`list-${i}`}
               >
-                {i === 0 && titleFragment()}
+                {i === 0 && headFragment()}
                 {listFragment(item, i)}
               </Grid>
             ))}
@@ -156,13 +156,13 @@ export const ContactList = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"p-10"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={3} className={"d-row-left"}>
+          <Grid size={3} className={"d-column-center"}>
             <Select
               label={"정렬"}
               value={PAGING?.sort}
-              inputclass={"h-min0 h-4vh"}
+              inputclass={"h-min0 h-5vh"}
               onChange={(e: any) => (
                 setPAGING((prev: any) => ({
                   ...prev,
@@ -190,7 +190,7 @@ export const ContactList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={9} className={"d-center"}>
+          <Grid size={9} className={"d-column-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -200,6 +200,7 @@ export const ContactList = () => {
               page={PAGING.page}
               showFirstButton={true}
               showLastButton={true}
+              className={"border-right-1 border-left-1 radius-1"}
               onPageChange={(_event, newPage) => {
                 setPAGING((prev: any) => ({
                   ...prev,
@@ -222,13 +223,13 @@ export const ContactList = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {titleSection()}
             {LOADING ? (
               <>
                 <Loading />
               </>
             ) : (
               <>
-                {titleSection()}
                 <Br px={30} />
                 {listSection()}
                 <Hr px={40} w={90} className={"bg-grey"} />

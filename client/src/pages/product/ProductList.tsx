@@ -6,7 +6,7 @@ import { useAlertStore } from "@imports/ImportStores";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br } from "@imports/ImportComponents";
+import { Div, Img, Hr, Br, Btn } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
@@ -126,13 +126,13 @@ export const ProductList = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
+      <Card className={"p-10"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={3} className={"d-row-left"}>
+          <Grid size={3} className={"d-column-center"}>
             <Select
               label={"정렬"}
               value={PAGING?.sort}
-              inputclass={"h-min0 h-4vh"}
+              inputclass={"h-min0 h-5vh"}
               onChange={(e: any) => (
                 setPAGING((prev: any) => ({
                   ...prev,
@@ -160,7 +160,7 @@ export const ProductList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={7} className={"d-row-center"}>
+          <Grid size={7} className={"d-column-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -170,6 +170,7 @@ export const ProductList = () => {
               page={PAGING.page}
               showFirstButton={true}
               showLastButton={true}
+              className={"border-right-1 border-left-1 radius-1"}
               onPageChange={(_event, newPage) => {
                 setPAGING((prev: any) => ({
                   ...prev,
@@ -184,15 +185,15 @@ export const ProductList = () => {
               }}
             />
           </Grid>
-          <Grid size={2} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
+          <Grid size={2} className={`${isAdmin ? "d-column-center" : "d-none"}`}>
+            <Btn
+              className={"bg-burgundy fs-0-7rem"}
               onClick={() => {
                 navigate("/product/save");
               }}
             >
               등록
-            </Div>
+            </Btn>
           </Grid>
         </Grid>
       </Card>
@@ -202,13 +203,13 @@ export const ProductList = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {titleSection()}
             {LOADING ? (
               <>
                 <Loading />
               </>
             ) : (
               <>
-                {titleSection()}
                 <Br px={30} />
                 {listSection()}
                 <Hr px={40} w={90} className={"bg-grey"} />

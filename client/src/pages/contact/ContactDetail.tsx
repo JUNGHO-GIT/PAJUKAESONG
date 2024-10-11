@@ -111,7 +111,7 @@ export const ContactDetail = () => {
     );
     // 2. detail
     const detailSection = () => {
-      const titleFragment = (item: any) => (
+      const headFragment = (item: any) => (
         <Card className={"p-10"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-row-center"}>
@@ -133,7 +133,7 @@ export const ContactDetail = () => {
                 label={""}
                 disabled={true}
                 value={item?.contact_content}
-                inputclass={"h-50vh border-none"}
+                inputclass={"h-min50vh border-none"}
               />
             </Grid>
             <Br px={5} />
@@ -168,7 +168,7 @@ export const ContactDetail = () => {
               className={"d-column-center"}
               key={`detail-${0}`}
             >
-              {titleFragment(OBJECT)}
+              {headFragment(OBJECT)}
               <Hr px={40} w={90} className={"bg-burgundy"} />
               {descFragment(OBJECT)}
             </Grid>
@@ -225,13 +225,13 @@ export const ContactDetail = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {titleSection()}
             {LOADING ? (
               <>
                 <Loading />
               </>
             ) : (
               <>
-                {titleSection()}
                 <Br px={30} />
                 {detailSection()}
                 <Hr px={40} w={90} className={"bg-grey"} />

@@ -64,6 +64,10 @@ export const Img = (
       key={fileName}
       className={imageClass}
       src={imgSrc}
+      onError={(e) => {
+        e.currentTarget.src = `${GCLOUD_URL}/main/empty.webp`;
+        e.currentTarget.alt = "empty";
+      }}
     />
   );
 };

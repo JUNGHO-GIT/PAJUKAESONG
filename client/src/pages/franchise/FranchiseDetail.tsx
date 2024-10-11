@@ -127,7 +127,7 @@ export const FranchiseDetail = () => {
         </Card>
       );
       const descFragment = (item: any) => (
-        <Card className={"px-30"}>
+        <Card className={"p-10"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-8rem fw-700 black"}>
@@ -240,13 +240,13 @@ export const FranchiseDetail = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {titleSection()}
             {LOADING ? (
               <>
                 <Loading />
               </>
             ) : (
               <>
-                {titleSection()}
                 <Br px={30} />
                 {detailSection()}
                 <Hr px={40} w={90} className={"bg-grey"} />

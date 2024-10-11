@@ -5,9 +5,9 @@ import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateNotice } from "@imports/ImportValidates";
 import { axios, makeFormData } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
+import { Div, Btn, Br } from "@imports/ImportComponents";
 import { Input, TextArea, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -16,7 +16,6 @@ export const NoticeUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location_id } = useCommonValue();
-  const { getDayFmt } = useCommonDate();
   const { REFS, ERRORS, validate } = useValidateNotice();
   const { ALERT, setALERT } = useAlertStore();
 
@@ -129,9 +128,10 @@ export const NoticeUpdate = () => {
                 inputRef={REFS?.[i]?.notice_title}
                 error={ERRORS?.[i]?.notice_title}
                 onChange={(e: any) => {
+                  const value = e.target.value;
                   setOBJECT((prev: any) => ({
                     ...prev,
-                    notice_title: e.target.value,
+                    notice_title: value,
                   }));
                 }}
               />
@@ -144,11 +144,12 @@ export const NoticeUpdate = () => {
                 value={item?.notice_content}
                 itemRef={REFS?.[i]?.notice_content}
                 error={ERRORS?.[i]?.notice_content}
-                inputclass={"h-50vh border-none"}
+                inputclass={"h-min50vh border-none"}
                 onChange={(e: any) => {
+                  const value = e.target.value;
                   setOBJECT((prev: any) => ({
                     ...prev,
-                    notice_content: e.target.value,
+                    notice_content: value,
                   }));
                 }}
               />
@@ -208,7 +209,7 @@ export const NoticeUpdate = () => {
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
-                flowUpdate();
+                flowUpdate()
               }}
             >
               수정하기
@@ -222,13 +223,13 @@ export const NoticeUpdate = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+            {titleSection()}
             {LOADING ? (
               <>
                 <Loading />
               </>
             ) : (
               <>
-                {titleSection()}
                 <Br px={30} />
                 {updateSection()}
                 <Br px={30} />
