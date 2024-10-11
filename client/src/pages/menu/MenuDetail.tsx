@@ -99,7 +99,7 @@ export const MenuDetail = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               메뉴 상세
             </Div>
@@ -109,8 +109,8 @@ export const MenuDetail = () => {
     );
     // 2. detail
     const detailSection = () => {
-      const imageFragment = (i: number) => (
-        <Card className={"p-10"} key={`image-${i}`}>
+      const imageFragment = (item: any) => (
+        <Card className={"p-10"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
@@ -119,29 +119,30 @@ export const MenuDetail = () => {
                 shadow={true}
                 radius={true}
                 group={"menu"}
-                src={OBJECT?.menu_images?.[0]}
+                src={item.menu_images && item.menu_images[0]}
               />
             </Grid>
           </Grid>
         </Card>
       );
-      const descFragment = (i: number) => (
-        <Card className={"px-30"} key={`desc-${i}`}>
+      const descFragment = (item: any) => (
+        <Card className={"px-30"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Div className={"fs-1-8rem fw-700 black"}>
-                {OBJECT?.menu_name}
+                {item?.menu_name}
               </Div>
             </Grid>
-            <Br px={10} />
-            <Grid size={12} className={"d-row-left"}>   <Icons
+            <Br px={5} />
+            <Grid size={12} className={"d-row-left"}>
+              <Icons
                 key={"Dot"}
                 name={"Dot"}
                 fill={"grey"}
                 className={"w-15 h-15 dark"}
               />
               <Div className={"fs-1-2rem fw-500 dark"}>
-                {OBJECT?.menu_description}
+                {item?.menu_description}
               </Div>
             </Grid>
             <Br px={5} />
@@ -152,25 +153,31 @@ export const MenuDetail = () => {
                 className={"w-15 h-15 dark"}
               />
               <Div className={"fs-1-1rem fw-500 dark"}>
-                {numeral(OBJECT?.menu_price).format("0,0")}
+                {numeral(item?.menu_price).format("0,0")}
               </Div>
             </Grid>
           </Grid>
         </Card>
       );
       return (
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            {imageFragment(0)}
-            <Hr px={40} w={90} className={"bg-burgundy"} />
-            {descFragment(0)}
+        <Card className={"p-0"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+              key={`detail-${0}`}
+            >
+              {imageFragment(OBJECT)}
+              <Hr px={40} w={90} className={"bg-burgundy"} />
+              {descFragment(OBJECT)}
+            </Grid>
           </Grid>
-        </Grid>
+        </Card>
       )
     };
     // 4. filter
     const filterSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
@@ -216,11 +223,19 @@ export const MenuDetail = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : detailSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
-            {filterSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {detailSection()}
+                <Hr px={40} w={90} className={"bg-grey"} />
+                {filterSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

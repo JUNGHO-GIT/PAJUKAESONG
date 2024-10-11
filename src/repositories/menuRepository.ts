@@ -33,6 +33,7 @@ export const list = async (
       $project: {
         _id: 1,
         menu_number: 1,
+        menu_seq: 1,
         menu_category: 1,
         menu_name: 1,
         menu_description: 1,
@@ -42,7 +43,7 @@ export const list = async (
     },
     {
       $sort: {
-        menu_number: sort_param
+        menu_seq: sort_param
       }
     },
     {
@@ -77,6 +78,7 @@ export const save = async (
   const finalResult = await Menu.create(
     {
       _id: new mongoose.Types.ObjectId(),
+      menu_seq: OBJECT_param.menu_seq,
       menu_category: OBJECT_param.menu_category,
       menu_name: OBJECT_param.menu_name,
       menu_description: OBJECT_param.menu_description,
@@ -101,6 +103,7 @@ export const update = async (
     },
     {
       $set: {
+        menu_seq: OBJECT_param.menu_seq,
         menu_category: OBJECT_param.menu_category,
         menu_name: OBJECT_param.menu_name,
         menu_description: OBJECT_param.menu_description,

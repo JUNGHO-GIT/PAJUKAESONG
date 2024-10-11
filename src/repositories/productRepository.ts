@@ -22,6 +22,7 @@ export const list = async (
     {
       $project: {
         _id: 1,
+        product_seq: 1,
         product_number: 1,
         product_category: 1,
         product_name: 1,
@@ -32,7 +33,7 @@ export const list = async (
     },
     {
       $sort: {
-        product_number: sort_param
+        product_seq: sort_param
       }
     },
     {
@@ -67,6 +68,7 @@ export const save = async (
   const finalResult = await Product.create(
     {
       _id: new mongoose.Types.ObjectId(),
+      product_seq: OBJECT_param.product_seq,
       product_category: OBJECT_param.product_category,
       product_name: OBJECT_param.product_name,
       product_description: OBJECT_param.product_description,
@@ -91,6 +93,7 @@ export const update = async (
     },
     {
       $set: {
+        product_seq: OBJECT_param.product_seq,
         product_category: OBJECT_param.product_category,
         product_name: OBJECT_param.product_name,
         product_description: OBJECT_param.product_description,

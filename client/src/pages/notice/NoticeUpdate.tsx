@@ -50,9 +50,9 @@ export const NoticeUpdate = () => {
   }, [URL, SUBFIX, location_id]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowUpdate = () => {
+  const flowUpdate = async () => {
     setLOADING(true);
-    if (!validate(OBJECT, fileList, "update")) {
+    if (!await validate(OBJECT, fileList, "update")) {
       setLOADING(false);
       return;
     }
@@ -107,7 +107,7 @@ export const NoticeUpdate = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               공지사항 수정
             </Div>
@@ -117,15 +117,15 @@ export const NoticeUpdate = () => {
     );
     // 2. update
     const updateSection = () => {
-      const updateFragment = (i: number) => (
-        <Card className={"p-0"} key={`update-${i}`}>
+      const updateFragment = (item: any, i: number) => (
+        <Card className={"p-0"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"공지사항 제목"}
                 required={true}
-                value={OBJECT?.notice_title}
+                value={item?.notice_title}
                 inputRef={REFS?.[i]?.notice_title}
                 error={ERRORS?.[i]?.notice_title}
                 onChange={(e: any) => {
@@ -136,15 +136,15 @@ export const NoticeUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <TextArea
                 label={"공지사항 내용"}
                 variant={"outlined"}
                 required={true}
-                value={OBJECT?.notice_content}
+                value={item?.notice_content}
                 itemRef={REFS?.[i]?.notice_content}
                 error={ERRORS?.[i]?.notice_content}
-                inputclass={"h-35vh border-none"}
+                inputclass={"h-50vh border-none"}
                 onChange={(e: any) => {
                   setOBJECT((prev: any) => ({
                     ...prev,
@@ -153,13 +153,13 @@ export const NoticeUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <InputFile
                 variant={"outlined"}
                 label={"공지사항 이미지"}
                 required={true}
                 limit={1}
-                existing={OBJECT?.notice_images}
+                existing={item?.notice_images}
                 group={"notice"}
                 value={fileList}
                 onChange={(updatedFiles: File[] | null) => {
@@ -178,17 +178,21 @@ export const NoticeUpdate = () => {
       );
       return (
         <Card className={"border-1 shadow-1 radius-1 p-20"}>
-          <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
-              {updateFragment(0)}
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+              key={`update-${0}`}
+            >
+              {updateFragment(OBJECT, 0)}
             </Grid>
           </Grid>
         </Card>
-      )
+      );
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
@@ -218,11 +222,19 @@ export const NoticeUpdate = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : updateSection()}
-            <Br px={30} />
-            {btnSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {updateSection()}
+                <Br px={30} />
+                {btnSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

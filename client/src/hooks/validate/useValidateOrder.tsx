@@ -89,13 +89,13 @@ export const useValidateOrder = () => {
       else if (!OBJECT?.order_email) {
         return showAlertAndFocus('order_email', "이메일을 입력해주세요.", 0);
       }
-      else if (!validateEmail(OBJECT?.order_email)) {
+      else if (!await validateEmail(OBJECT?.order_email)) {
         return showAlertAndFocus('order_email', "이메일 형식으로 입력해주세요.", 0);
       }
       else if (!OBJECT?.order_phone) {
         return showAlertAndFocus('order_phone', "전화번호를 입력해주세요.", 0);
       }
-      else if (!validatePhone(OBJECT?.order_phone)) {
+      else if (!await validatePhone(OBJECT?.order_phone)) {
         return showAlertAndFocus('order_phone', "전화번호 형식으로 입력해주세요.", 0);
       }
       else if (!OBJECT?.order_date) {

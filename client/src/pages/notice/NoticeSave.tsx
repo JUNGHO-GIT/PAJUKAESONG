@@ -26,9 +26,9 @@ export const NoticeSave = () => {
   const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = () => {
+  const flowSave = async () => {
     setLOADING(true);
-    if (!validate(OBJECT, fileList, "save")) {
+    if (!await validate(OBJECT, fileList, "save")) {
       setLOADING(false);
       return;
     }
@@ -80,7 +80,7 @@ export const NoticeSave = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               공지사항 저장
             </Div>
@@ -90,15 +90,15 @@ export const NoticeSave = () => {
     );
     // 2. save
     const saveSection = () => {
-      const saveFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={`save-${i}`}>
+      const saveFragment = (item: any, i: number) => (
+        <Card className={"p-0"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"공지사항 제목"}
                 required={true}
-                value={OBJECT?.notice_title}
+                value={item?.notice_title}
                 inputRef={REFS?.[i]?.notice_title}
                 error={ERRORS?.[i]?.notice_title}
                 onChange={(e: any) => {
@@ -109,15 +109,15 @@ export const NoticeSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <TextArea
                 label={"공지사항 내용"}
                 variant={"outlined"}
                 required={true}
-                value={OBJECT?.notice_content}
+                value={item?.notice_content}
                 itemRef={REFS?.[i]?.notice_content}
                 error={ERRORS?.[i]?.notice_content}
-                inputclass={"h-35vh border-none"}
+                inputclass={"h-50vh border-none"}
                 onChange={(e: any) => {
                   setOBJECT((prev: any) => ({
                     ...prev,
@@ -126,13 +126,13 @@ export const NoticeSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <InputFile
                 variant={"outlined"}
                 label={"공지사항 이미지"}
                 required={true}
                 limit={1}
-                existing={OBJECT?.notice_images}
+                existing={item?.notice_images}
                 group={"notice"}
                 value={fileList}
                 onChange={(updatedFiles: File[] | null) => {
@@ -150,16 +150,22 @@ export const NoticeSave = () => {
         </Card>
       );
       return (
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            {saveFragment(0)}
+        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+              key={`save-${0}`}
+            >
+              {saveFragment(OBJECT, 0)}
+            </Grid>
           </Grid>
-        </Grid>
-      )
+        </Card>
+      );
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
@@ -189,11 +195,19 @@ export const NoticeSave = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : saveSection()}
-            <Br px={30} />
-            {btnSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {saveSection()}
+                <Br px={30} />
+                {btnSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

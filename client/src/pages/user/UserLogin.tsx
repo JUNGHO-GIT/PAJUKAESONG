@@ -43,9 +43,9 @@ export const UserLogin = () => {
   }, [isAdmin, adminId, adminPw, isUser, userId, userPw]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowLogin = () => {
+  const flowLogin = async () => {
     setLOADING(true);
-    if (!validate(OBJECT, null, "login")) {
+    if (!await validate(OBJECT, null, "login")) {
       setLOADING(false);
       return;
     }
@@ -108,7 +108,7 @@ export const UserLogin = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               로그인
             </Div>
@@ -121,7 +121,7 @@ export const UserLogin = () => {
       const loginFragment = (i: number) => (
         <Card className={"border-1 shadow-1 radius-1 p-20"} key={`login-${i}`}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 required={true}
@@ -139,7 +139,7 @@ export const UserLogin = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 required={true}
@@ -163,7 +163,7 @@ export const UserLogin = () => {
       );
       return (
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             {loginFragment(0)}
           </Grid>
         </Grid>
@@ -171,9 +171,9 @@ export const UserLogin = () => {
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             {(isAdmin || isUser) ? (
               <Btn
                 className={"w-100p bg-burgundy fs-1-0rem"}
@@ -200,7 +200,7 @@ export const UserLogin = () => {
     );
     // 4. link
     const linkSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-0-8rem"}>
@@ -227,7 +227,7 @@ export const UserLogin = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min60vh"}>
+      <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}

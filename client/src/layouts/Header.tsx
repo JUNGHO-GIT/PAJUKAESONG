@@ -193,7 +193,7 @@ export const Header = () => {
       </>
     );
     return (
-      <Paper className={"layout-wrapper p-sticky top-0vh border-bottom-1 p-20"}>
+      <Paper className={"layout-wrapper p-sticky top-0vh border-bottom-1 shadow-bottom-1 p-20"}>
         <Grid container spacing={2}>
           <Grid size={{ xs: 2, sm: 0 }} className={`${isXxs || isXs ? "d-column-left" : "d-none"}`}>
             {sidebarSection()}

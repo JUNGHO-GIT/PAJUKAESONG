@@ -76,7 +76,7 @@ export const Main = () => {
     // 1. main -------------------------------------------------------------------------------------
     const mainSection = () => {
       const imageFragment = (i: number) => (
-        <Card className={"p-0"} key={`image-${i}`}>
+        <Card className={"p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Swiper
@@ -378,7 +378,7 @@ export const Main = () => {
     return (
       <Paper className={"content-wrapper p-0 fadeIn"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             {mainSection()}
             <Hr px={20} className={"bg-light-grey"} />
             {menuSection()}

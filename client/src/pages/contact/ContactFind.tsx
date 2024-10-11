@@ -24,9 +24,9 @@ export const ContactFind = () => {
   const [OBJECT, setOBJECT] = useState<any>(Contact);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSearch = () => {
+  const flowSearch = async () => {
     setLOADING(true);
-    if (!validate(OBJECT, null, "find")) {
+    if (!await validate(OBJECT, null, "find")) {
       setLOADING(false);
       return;
     }
@@ -72,7 +72,7 @@ export const ContactFind = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               문의 조회
             </Div>
@@ -82,16 +82,16 @@ export const ContactFind = () => {
     );
     // 2. find
     const findSection = () => {
-      const findFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={`find-${i}`}>
+      const findFragment = (item: any, i: number) => (
+        <Card className={"p-0"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"이름"}
                 required={true}
                 helperText={"문의자 이름을 입력해주세요."}
-                value={OBJECT?.contact_name}
+                value={item?.contact_name}
                 inputRef={REFS?.[i]?.contact_name}
                 error={ERRORS?.[i]?.contact_name}
                 onChange={(e: any) => {
@@ -102,13 +102,13 @@ export const ContactFind = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"전화번호"}
                 required={true}
                 helperText={"문의자 전화번호를 입력해주세요."}
-                value={OBJECT?.contact_phone}
+                value={item?.contact_phone}
                 inputRef={REFS?.[i]?.contact_phone}
                 error={ERRORS?.[i]?.contact_phone}
                 placeholder={"010-1234-5678"}
@@ -134,18 +134,24 @@ export const ContactFind = () => {
         </Card>
       );
       return (
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            {findFragment(0)}
+        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+              key={`find-${0}`}
+            >
+              {findFragment(OBJECT, 0)}
+            </Grid>
           </Grid>
-        </Grid>
+        </Card>
       );
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
@@ -160,14 +166,22 @@ export const ContactFind = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min60vh"}>
+      <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : findSection()}
-            <Br px={30} />
-            {btnSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {findSection()}
+                <Br px={30} />
+                {btnSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

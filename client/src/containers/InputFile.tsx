@@ -3,7 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useAlertStore } from "@imports/ImportStores";
 import { Div, Br, Img, Icons } from "@imports/ImportComponents";
-import { MuiFileInput, Grid } from "@imports/ImportMuis";
+import { MuiFileInput, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
@@ -119,12 +119,12 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
       return;
     }
 
-    // 파일이 5mb 이상인 경우
-    else if (newFiles && newFiles.some((file: File) => (file.size > 5 * 1024 * 1024))) {
+    // 파일이 3mb 이상인 경우
+    else if (newFiles && newFiles.some((file: File) => (file.size > 3 * 1024 * 1024))) {
       setALERT({
         open: !ALERT.open,
         severity: "error",
-        msg: "파일은 최대 5MB까지 업로드 가능합니다.",
+        msg: "파일은 최대 3MB까지 업로드 가능합니다.",
       });
 
       // input 요소 삭제
@@ -198,88 +198,86 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
 
   // 7. node ---------------------------------------------------------------------------------------
   const adornmentNode = (
-    <Grid container spacing={1} columns={12}>
-      <Grid size={8} className={"d-column-left"}>
-        {fileList && fileList.length > 0 && fileList.map((file: any, index: number) => (
-          <Div className={"d-row-center"} key={index}>
-            <Img
-              max={25}
-              hover={false}
-              shadow={true}
-              radius={false}
-              group={"new"}
-              src={URL.createObjectURL(file)}
-              className={"me-10"}
-            />
-            <Div className={"black fs-0-9rem fw-500"} max={12}>
-              {file?.name}
+    <Card className={"p-0"}>
+      <Grid container spacing={1} columns={12}>
+        <Grid size={8} className={"d-column-left"}>
+          {fileList && fileList.length > 0 && fileList.map((file: any, index: number) => (
+            <Div className={"d-row-center"} key={index}>
+              <Img
+                max={25}
+                hover={false}
+                shadow={true}
+                radius={false}
+                group={"new"}
+                src={URL.createObjectURL(file)}
+                className={"me-10"}
+              />
+              <Div className={"black fs-0-9rem fw-500"} max={12}>
+                {file?.name}
+              </Div>
+              <Div
+                className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
+                onClick={() => handleFileDelete(index, "single")}
+              >
+                {!file?.name ? "" : "x"}
+              </Div>
             </Div>
-            <Div
-              className={"black fs-0-9rem fw-500 pointer-burgundy ms-15"}
-              onClick={() => handleFileDelete(index, "single")}
-            >
-              {!file?.name ? "" : "x"}
-            </Div>
-          </Div>
-        ))}
+          ))}
+        </Grid>
+        <Grid size={4} className={"d-column-right me-n20"}>
+          <Icons
+            key={"CirclePlus"}
+            name={"CirclePlus"}
+            className={"w-22 h-22 pointer-burgundy"}
+            onClick={(e: any) => {
+              handleFileAdd(e);
+            }}
+          />
+          <Icons
+            key={"Trash"}
+            name={"Trash"}
+            className={"w-22 h-22 pointer-burgundy"}
+            onClick={() => {
+              handleFileDelete(0, "all");
+            }}
+          />
+        </Grid>
       </Grid>
-      <Grid size={4} className={"d-column-right"}>
-        <Div className={"me-n20"}>
-          <Div
-            className={"fs-0-9rem fw-600 pointer-burgundy"}
-            onClick={(e: any) => handleFileAdd(e)}
-          >
-            <Icons
-              key={"CirclePlus"}
-              name={"CirclePlus"}
-              className={"w-22 h-22"}
-            />
-          </Div>
-          <Div
-            className={"fs-0-9rem fw-600 pointer-burgundy"}
-            onClick={() => handleFileDelete(0, "all")}
-          >
-            <Icons
-              key={"Trash"}
-              name={"Trash"}
-              className={"w-22 h-22"}
-            />
-          </Div>
-        </Div>
-      </Grid>
-    </Grid>
+    </Card>
   );
 
   // 7. node ---------------------------------------------------------------------------------------
   const existingNode = () => (
-    <Grid container spacing={1} columns={12}>
-      <Grid size={12} className={"d-column-left"}>
-        {fileExisting.map((file: any, index: number) => (
-          <Div className={"d-row-center"} key={index}>
-            <Img
-              max={25}
-              hover={false}
-              shadow={true}
-              radius={false}
-              group={props?.group}
-              src={file}
-              className={"me-10"}
-            />
-            <Div className={"black fs-0-9rem fw-500"} max={20}>
-              {file}
+    <Card className={"ms-5"}>
+      <Grid container spacing={1} columns={12}>
+        <Grid size={12} className={"d-column-left"}>
+          {fileExisting.map((file: any, index: number) => (
+            <Div className={"d-row-center"} key={index}>
+              <Img
+                max={25}
+                hover={false}
+                shadow={true}
+                radius={false}
+                group={props?.group}
+                src={file}
+                className={"me-10"}
+              />
+              <Div className={"black fs-0-9rem fw-500"} max={20}>
+                {file}
+              </Div>
+              <Div
+                className={"black fs-0-9rem fw-500 pointer-burgundy ms-5"}
+                onClick={() => {
+                  handleExistingFileDelete(index);
+                }}
+              >
+                {!file ? "" : "x"}
+              </Div>
             </Div>
-            <Div
-              className={"black fs-0-9rem fw-500 pointer-burgundy ms-5"}
-              onClick={() => {
-                handleExistingFileDelete(index);
-              }}
-            >
-              {!file ? "" : "x"}
-            </Div>
-          </Div>
-        ))}
+          ))}
+        </Grid>
       </Grid>
-    </Grid>
+    </Card>
   );
 
   // 10. return ------------------------------------------------------------------------------------

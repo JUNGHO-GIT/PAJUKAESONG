@@ -11,6 +11,12 @@ const schema = new mongoose.Schema(
       default: 1,
       unique : true
     },
+    menu_seq: {
+      type: Number,
+      default: 0,
+      required: false
+    },
+
     menu_category: {
       type: String,
       default: "",

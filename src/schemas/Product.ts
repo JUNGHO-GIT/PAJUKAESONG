@@ -11,6 +11,12 @@ const schema = new mongoose.Schema(
       default: 1,
       unique : true
     },
+    product_seq: {
+      type: Number,
+      default: 0,
+      required: false
+    },
+
     product_category: {
       type: String,
       default: "",

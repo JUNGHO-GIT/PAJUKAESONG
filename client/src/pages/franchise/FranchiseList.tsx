@@ -64,7 +64,7 @@ export const FranchiseList = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               가맹 지점
             </Div>
@@ -74,22 +74,21 @@ export const FranchiseList = () => {
     );
     // 2. list
     const listSection = () => {
-      const imageFragment = (i: number) => (
-        <Card className={"p-10"} key={`image-${i}`}>
+      const imageFragment = (item: any) => (
+        <Card className={"p-10"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
                 max={isXxs ? 120 : 150}
                 hover={true}
-                shadow={false}
-                radius={false}
+                shadow={true}
+                radius={true}
                 group={"franchise"}
-                src={OBJECT[i]?.franchise_images?.[0]}
-                className={"w-100p"}
+                src={item.franchise_images && item.franchise_images[0]}
                 onClick={() => {
                   navigate("/franchise/detail", {
                     state: {
-                      _id: OBJECT[i]?._id
+                      _id: item?._id
                     }
                   });
                 }}
@@ -98,33 +97,39 @@ export const FranchiseList = () => {
           </Grid>
         </Card>
       );
-      const descFragment = (i: number) => (
-        <Card className={"p-0"} key={`desc-${i}`}>
+      const descFragment = (item: any) => (
+        <Card className={"mt-n5"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Div className={"fs-1-2rem fw-600"}>
-                {OBJECT[i]?.franchise_name}
+                {item?.franchise_name}
               </Div>
             </Grid>
           </Grid>
         </Card>
       );
       return (
-        <Grid container spacing={1} columns={12}>
-          {OBJECT.map((_item: any, i: number) => (
-            <Grid size={12} key={i}>
-              {imageFragment(i)}
-              {descFragment(i)}
-            </Grid>
-          ))}
-        </Grid>
+        <Card className={"p-0"}>
+          <Grid container spacing={0} columns={12}>
+            {OBJECT.map((item: any, i: number) => (
+              <Grid
+                size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }}
+                className={"d-column-center"}
+                key={`list-${i}`}
+              >
+                {imageFragment(item)}
+                {descFragment(item)}
+              </Grid>
+            ))}
+          </Grid>
+        </Card>
       )
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={3} className={"d-center"}>
+          <Grid size={3} className={"d-row-left"}>
             <Select
               label={"정렬"}
               value={PAGING?.sort}
@@ -156,7 +161,7 @@ export const FranchiseList = () => {
               ))}
             </Select>
           </Grid>
-          <Grid size={6} className={"d-center"}>
+          <Grid size={7} className={"d-row-center"}>
             <TablePagination
               rowsPerPageOptions={[10]}
               rowsPerPage={10}
@@ -180,7 +185,7 @@ export const FranchiseList = () => {
               }}
             />
           </Grid>
-          <Grid size={3} className={`${isAdmin ? "d-center" : "d-none"}`}>
+          <Grid size={2} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy"}
               onClick={() => {
@@ -198,11 +203,19 @@ export const FranchiseList = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : listSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
-            {filterSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {listSection()}
+                <Hr px={40} w={90} className={"bg-grey"} />
+                {filterSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

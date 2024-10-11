@@ -26,9 +26,9 @@ export const MenuSave = () => {
   const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = () => {
+  const flowSave = async () => {
     setLOADING(true);
-    if (!validate(OBJECT, fileList, "save")) {
+    if (!await validate(OBJECT, fileList, "save")) {
       setLOADING(false);
       return;
     }
@@ -84,7 +84,7 @@ export const MenuSave = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               메뉴 등록
             </Div>
@@ -94,15 +94,15 @@ export const MenuSave = () => {
     );
     // 2. save
     const saveSection = () => {
-      const saveFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={`save-${i}`}>
+      const saveFragment = (item: any, i: number) => (
+        <Card className={"p-0"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Select
                 variant={"outlined"}
                 label={"메뉴 카테고리"}
                 required={true}
-                value={OBJECT?.menu_category}
+                value={item?.menu_category}
                 inputRef={REFS?.[i]?.menu_category}
                 error={ERRORS?.[i]?.menu_category}
                 onChange={(e: any) => {
@@ -112,20 +112,42 @@ export const MenuSave = () => {
                   }));
                 }}
               >
-                {["main", "side"].map((item: string, idx: number) => (
-                  <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                    {item === "main" && "메인 메뉴"}
-                    {item === "side" && "사이드 메뉴"}
+                {["main", "side"].map((category: string, idx: number) => (
+                  <MenuItem key={idx} value={category} className={"fs-0-8rem"}>
+                    {category === "main" && "메인 메뉴"}
+                    {category === "side" && "사이드 메뉴"}
                   </MenuItem>
                 ))}
               </Select>
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
+              <Select
+                variant={"outlined"}
+                label={"메뉴 순서"}
+                required={true}
+                value={item?.menu_seq || 0}
+                inputRef={REFS?.[i]?.menu_seq}
+                error={ERRORS?.[i]?.menu_seq}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    menu_seq: e.target.value,
+                  }));
+                }}
+              >
+                {Array.from({ length: 30 }, (_, i) => i).map((seq: number, idx: number) => (
+                  <MenuItem key={idx} value={seq} className={"fs-0-8rem"}>
+                    {seq}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"메뉴 이름"}
                 required={true}
-                value={OBJECT?.menu_name}
+                value={item?.menu_name}
                 inputRef={REFS?.[i]?.menu_name}
                 error={ERRORS?.[i]?.menu_name}
                 onChange={(e: any) => {
@@ -136,12 +158,12 @@ export const MenuSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"메뉴 설명"}
                 required={true}
-                value={OBJECT?.menu_description}
+                value={item?.menu_description}
                 inputRef={REFS?.[i]?.menu_description}
                 error={ERRORS?.[i]?.menu_description}
                 onChange={(e: any) => {
@@ -152,12 +174,12 @@ export const MenuSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 required={true}
                 label={"가격"}
-                value={numeral(OBJECT?.menu_price).format("0,0")}
+                value={numeral(item?.menu_price).format("0,0")}
                 inputRef={REFS?.[i]?.menu_price}
                 error={ERRORS?.[i]?.menu_price}
                 onChange={(e: any) => {
@@ -178,13 +200,13 @@ export const MenuSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <InputFile
                 variant={"outlined"}
                 label={"메뉴 이미지"}
                 required={true}
                 limit={1}
-                existing={OBJECT?.menu_images}
+                existing={item?.menu_images}
                 group={"menu"}
                 value={fileList}
                 inputRef={REFS?.[i]?.menu_images}
@@ -204,16 +226,22 @@ export const MenuSave = () => {
         </Card>
       );
       return (
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            {saveFragment(0)}
+        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+              key={`save-${0}`}
+            >
+              {saveFragment(OBJECT, 0)}
+            </Grid>
           </Grid>
-        </Grid>
-      )
+        </Card>
+      );
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
@@ -247,11 +275,19 @@ export const MenuSave = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : saveSection()}
-            <Br px={30} />
-            {btnSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {saveSection()}
+                <Br px={30} />
+                {btnSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

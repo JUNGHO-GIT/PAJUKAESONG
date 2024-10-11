@@ -38,7 +38,7 @@ export const SideBar = (
     .catch((err: any) => {
       console.error(err);
     });
-  }, [URL, PATH]);
+  }, []);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화
@@ -229,7 +229,7 @@ export const SideBar = (
         }}
       >
         <Grid container spacing={0} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             {logoSection()}
             <Hr px={30} className={"bg-light-grey"} />
             {sidebarSection()}

@@ -26,9 +26,9 @@ export const FranchiseSave = () => {
   const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = () => {
+  const flowSave = async () => {
     setLOADING(true);
-    if (!validate(OBJECT, fileList, "save")) {
+    if (!await validate(OBJECT, fileList, "save")) {
       setLOADING(false);
       return;
     }
@@ -104,7 +104,7 @@ export const FranchiseSave = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               가맹점 등록
             </Div>
@@ -114,15 +114,15 @@ export const FranchiseSave = () => {
     );
     // 2. save
     const saveSection = () => {
-      const saveFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={`save-${i}`}>
+      const saveFragment = (item: any, i: number) => (
+        <Card className={"p-0"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"가맹점 이름"}
                 required={true}
-                value={OBJECT?.franchise_name}
+                value={item?.franchise_name}
                 inputRef={REFS?.[i]?.franchise_name}
                 error={ERRORS?.[i]?.franchise_name}
                 onChange={(e: any) => {
@@ -133,14 +133,14 @@ export const FranchiseSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"가맹점 주소"}
                 required={true}
                 readOnly={true}
                 className={"pointer"}
-                value={OBJECT?.franchise_address_main}
+                value={item?.franchise_address_main}
                 inputRef={REFS?.[i]?.franchise_address_main}
                 error={ERRORS?.[i]?.franchise_address_main}
                 onClick={() => {
@@ -154,12 +154,12 @@ export const FranchiseSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"상세주소"}
                 required={true}
-                value={OBJECT?.franchise_address_detail}
+                value={item?.franchise_address_detail}
                 inputRef={REFS?.[i]?.franchise_address_detail}
                 error={ERRORS?.[i]?.franchise_address_detail}
                 onChange={(e: any) => {
@@ -170,12 +170,12 @@ export const FranchiseSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"가맹점 전화번호"}
                 required={true}
-                value={OBJECT?.franchise_phone}
+                value={item?.franchise_phone}
                 inputRef={REFS?.[i]?.franchise_phone}
                 error={ERRORS?.[i]?.franchise_phone}
                 placeholder={"010-1234-5678"}
@@ -197,13 +197,13 @@ export const FranchiseSave = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <InputFile
                 variant={"outlined"}
                 label={"가맹점 이미지"}
                 required={true}
                 limit={1}
-                existing={OBJECT?.franchise_images}
+                existing={item?.franchise_images}
                 group={"franchise"}
                 value={fileList}
                 inputRef={REFS?.[i]?.franchise_images}
@@ -223,16 +223,22 @@ export const FranchiseSave = () => {
         </Card>
       );
       return (
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            {saveFragment(0)}
+        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+              key={`save-${0}`}
+            >
+              {saveFragment(OBJECT, 0)}
+            </Grid>
           </Grid>
-        </Grid>
-      )
+        </Card>
+      );
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn

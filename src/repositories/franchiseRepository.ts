@@ -23,6 +23,7 @@ export const list = async (
       $project: {
         _id: 1,
         franchise_number: 1,
+        franchise_seq: 1,
         franchise_name: 1,
         franchise_address_main: 1,
         franchise_address_detail: 1,
@@ -33,7 +34,7 @@ export const list = async (
     },
     {
       $sort: {
-        franchise_number: sort_param
+        franchise_seq: sort_param
       }
     },
     {
@@ -68,6 +69,7 @@ export const save = async (
   const finalResult = await Franchise.create(
     {
       _id: new mongoose.Types.ObjectId(),
+      franchise_seq: OBJECT_param.franchise_seq,
       franchise_name: OBJECT_param.franchise_name,
       franchise_address_main: OBJECT_param.franchise_address_main,
       franchise_address_detail: OBJECT_param.franchise_address_detail,
@@ -92,6 +94,7 @@ export const update = async (
     },
     {
       $set: {
+        franchise_seq: OBJECT_param.franchise_seq,
         franchise_name: OBJECT_param.franchise_name,
         franchise_address_main: OBJECT_param.franchise_address_main,
         franchise_address_detail: OBJECT_param.franchise_address_detail,

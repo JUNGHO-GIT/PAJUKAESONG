@@ -23,9 +23,9 @@ export const UserSignup = () => {
   const [OBJECT, setOBJECT] = useState<any>(User);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSignup = () => {
+  const flowSignup = async () => {
     setLOADING(true);
-    if (!validate(OBJECT, null, "signup")) {
+    if (!await validate(OBJECT, null, "signup")) {
       setLOADING(false);
       return;
     }
@@ -68,7 +68,7 @@ export const UserSignup = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               회원가입
             </Div>
@@ -81,7 +81,7 @@ export const UserSignup = () => {
       const signupFragment = (i: number) => (
         <Card className={"border-1 shadow-1 radius-1 p-20"} key={`signup-${i}`}>
           <Grid container spacing={3} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 label={"아이디"}
                 required={true}
@@ -96,7 +96,7 @@ export const UserSignup = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 type={"password"}
                 label={"비밀번호"}
@@ -117,7 +117,7 @@ export const UserSignup = () => {
       );
       return (
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             {signupFragment(0)}
           </Grid>
         </Grid>
@@ -127,7 +127,7 @@ export const UserSignup = () => {
     const btnSection = () => (
       <Card className={"px-10 fadeIn"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Btn
               color={"primary"}
               className={"w-100p fs-1-0rem"}
@@ -145,7 +145,7 @@ export const UserSignup = () => {
     const linkSection = () => (
       <Card className={"px-10 fadeIn"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"d-center"}>
               <Div className={"fs-0-8rem"}>
                 아이디가 있는 경우
@@ -160,7 +160,7 @@ export const UserSignup = () => {
               </Div>
             </Div>
           </Grid>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"d-center"}>
               <Div className={"fs-0-8rem"}>
                 비밀번호를 잊은 경우
@@ -177,7 +177,7 @@ export const UserSignup = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper h-min60vh"}>
+      <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}

@@ -12,7 +12,7 @@ export const AboutGreeting = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               대표 인사말
             </Div>
@@ -22,7 +22,7 @@ export const AboutGreeting = () => {
     );
     // 2. greeting
     const greetingSection = () => (
-      <Card className={"border-1 shadow-1 radius-1 p-30"}>
+      <Card className={"border-1 shadow-1 radius-1 p-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-column-left"}>
             <Div className={"fs-1-8rem fw-700"}>

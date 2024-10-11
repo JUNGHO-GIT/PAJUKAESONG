@@ -88,13 +88,13 @@ export const useValidateContact = () => {
       else if (!OBJECT?.contact_email) {
         return showAlertAndFocus('contact_email', "이메일을 입력해주세요.", 0);
       }
-      else if (!validateEmail(OBJECT?.contact_email)) {
+      else if (!await validateEmail(OBJECT?.contact_email)) {
         return showAlertAndFocus('contact_email', "이메일 형식으로 입력해주세요.", 0);
       }
       else if (!OBJECT?.contact_phone) {
         return showAlertAndFocus('contact_phone', "전화번호를 입력해주세요.", 0);
       }
-      else if (!validatePhone(OBJECT?.contact_phone)) {
+      else if (!await validatePhone(OBJECT?.contact_phone)) {
         return showAlertAndFocus('contact_phone', "전화번호 형식으로 입력해주세요.", 0);
       }
       else if (!OBJECT?.contact_title) {
@@ -134,7 +134,7 @@ export const useValidateContact = () => {
       else if (!OBJECT?.contact_phone) {
         return showAlertAndFocus('contact_phone', "전화번호를 입력해주세요.", 0);
       }
-      else if (!validatePhone(OBJECT?.contact_phone)) {
+      else if (!await validatePhone(OBJECT?.contact_phone)) {
         return showAlertAndFocus('contact_phone', "전화번호 형식으로 입력해주세요.", 0);
       }
       return true;

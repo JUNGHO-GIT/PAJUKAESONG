@@ -101,7 +101,7 @@ export const ContactDetail = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               문의 상세
             </Div>
@@ -110,52 +110,75 @@ export const ContactDetail = () => {
       </Card>
     );
     // 2. detail
-    const detailSection = () => (
-      <Card className={"border-1 shadow-1 radius-1 p-30"}>
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-8rem fw-700"}>
-              {OBJECT?.contact_title}
-            </Div>
-            <Div className={"fs-1-8rem fw-500 ms-10 grey"}>
-              {`[ ${OBJECT?.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"} ]`}
-            </Div>
+    const detailSection = () => {
+      const titleFragment = (item: any) => (
+        <Card className={"p-10"}>
+          <Grid container spacing={1} columns={12}>
+            <Grid size={12} className={"d-row-center"}>
+              <Div className={"fs-1-8rem fw-700"}>
+                {item?.contact_title}
+              </Div>
+              <Div className={"fs-1-8rem fw-500 ms-10 grey"}>
+                {`[ ${item?.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"} ]`}
+              </Div>
+            </Grid>
           </Grid>
-          <Hr px={10} className={"bg-burgundy"} />
-          <Grid size={12} className={"d-column-center"}>
-            <TextArea
-              label={""}
-              disabled={true}
-              inputclass={"h-35vh border-none"}
-              value={OBJECT?.contact_content}
-            />
+        </Card>
+      );
+      const descFragment = (item: any) => (
+        <Card className={"p-0"}>
+          <Grid container spacing={1} columns={12}>
+            <Grid size={12}>
+              <TextArea
+                label={""}
+                disabled={true}
+                value={item?.contact_content}
+                inputclass={"h-50vh border-none"}
+              />
+            </Grid>
+            <Br px={5} />
+            <Grid size={9} className={"d-row-left"}>
+              <Icons
+                key={"Calendar"}
+                name={"Calendar"}
+                className={"w-20 h-20"}
+              />
+              <Div className={"fs-1-0rem fw-500"}>
+                {getDayFmt(item?.contact_regDt)}
+              </Div>
+            </Grid>
+            <Grid size={3} className={"d-row-right"}>
+              <Icons
+                key={"Person"}
+                name={"Person"}
+                className={"w-20 h-20"}
+              />
+              <Div className={"fs-0-9rem fw-500"}>
+                {item?.contact_name}
+              </Div>
+            </Grid>
           </Grid>
-          <Grid size={6} className={"d-row-left"}>
-            <Icons
-              key={"Calendar"}
-              name={"Calendar"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-0-9rem fw-500"}>
-              {getDayFmt(OBJECT?.contact_regDt)}
-            </Div>
+        </Card>
+      );
+      return (
+        <Card className={"border-1 shadow-2 radius-1 p-20"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+              key={`detail-${0}`}
+            >
+              {titleFragment(OBJECT)}
+              <Hr px={40} w={90} className={"bg-burgundy"} />
+              {descFragment(OBJECT)}
+            </Grid>
           </Grid>
-          <Grid size={6} className={"d-row-right"}>
-            <Icons
-              key={"Person"}
-              name={"Person"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-0-9rem fw-500"}>
-              {OBJECT?.contact_name}
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
+        </Card>
+      )
+    };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-row-left"}>
             <Div
@@ -202,11 +225,19 @@ export const ContactDetail = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : detailSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
-            {filterSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {detailSection()}
+                <Hr px={40} w={90} className={"bg-grey"} />
+                {filterSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

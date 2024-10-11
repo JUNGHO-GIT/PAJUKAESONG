@@ -97,7 +97,7 @@ export const NoticeDetail = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               공지사항 상세
             </Div>
@@ -107,59 +107,63 @@ export const NoticeDetail = () => {
     );
     // 2. detail
     const detailSection = () => {
-      const titleFragment = (i: number) => (
-        <Card className={"p-0"} key={`title-${i}`}>
+      const titleFragment = (item: any) => (
+        <Card className={"p-10"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Div className={"fs-1-8rem fw-700 black"}>
-                {OBJECT?.notice_title}
+                {item?.notice_title}
               </Div>
             </Grid>
           </Grid>
         </Card>
       );
-      const descFragment = (i: number) => (
-        <Card className={"p-0"} key={`desc-${i}`}>
+      const descFragment = (item: any) => (
+        <Card className={"p-0"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <TextArea
                 label={""}
-                required={true}
                 readOnly={true}
-                value={OBJECT?.notice_content}
-                inputclass={"h-35vh border-none"}
+                value={item?.notice_content}
+                inputclass={"h-50vh border-none"}
               />
             </Grid>
-            <Grid size={10} className={"d-row-left"}>
+            <Br px={5} />
+            <Grid size={9} className={"d-row-left"}>
               <Icons
                 key={"Calendar"}
                 name={"Calendar"}
                 className={"w-20 h-20"}
               />
               <Div className={"fs-1-0rem fw-500"}>
-                {getDayFmt(OBJECT?.notice_regDt)}
+                {getDayFmt(item?.notice_regDt)}
               </Div>
             </Grid>
-            <Grid size={2} className={"d-row-right"}>
+            <Grid size={3} className={"d-row-right"}>
               <Icons
                 key={"View"}
                 name={"View"}
                 className={"w-20 h-20"}
               />
               <Div className={"fs-1-0rem fw-500"}>
-                {OBJECT?.notice_view}
+                {item?.notice_view}
               </Div>
             </Grid>
           </Grid>
         </Card>
       );
       return (
-        <Card className={"border-1 shadow-1 radius-1 p-20"}>
-          <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
-              {titleFragment(0)}
-              <Hr px={40} className={"bg-burgundy"} />
-              {descFragment(0)}
+        <Card className={"border-1 shadow-2 radius-1 p-20"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+              key={`detail-${0}`}
+            >
+              {titleFragment(OBJECT)}
+              <Hr px={40} w={90} className={"bg-burgundy"} />
+              {descFragment(OBJECT)}
             </Grid>
           </Grid>
         </Card>
@@ -167,7 +171,7 @@ export const NoticeDetail = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
@@ -209,11 +213,19 @@ export const NoticeDetail = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : detailSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
-            {filterSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {detailSection()}
+                <Hr px={40} w={90} className={"bg-grey"} />
+                {filterSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

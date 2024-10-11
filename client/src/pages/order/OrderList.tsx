@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { axios, numeral } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Div, Hr, Br } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
@@ -65,7 +65,7 @@ export const OrderList = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               주문 목록
             </Div>
@@ -75,80 +75,90 @@ export const OrderList = () => {
     );
     // 2. list
     const listSection = () => {
-      const listFragment = (i:number) => (
-        <Card className={"border-1 radius-1 shadow-1 p-30"} key={`list-${i}`}>
+      const titleFragment = () => (
+        <Card className={"p-10"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
-              <Grid container spacing={0} columns={12}>
-                <Grid size={2}>
-                  <Div className={"fs-0-8rem fw-500"}>
-                    유형
-                  </Div>
-                </Grid>
-                <Grid size={8}>
-                  <Div className={"fs-0-8rem fw-500"}>
-                    금액
-                  </Div>
-                </Grid>
-                <Grid size={2}>
-                  <Div className={"fs-0-8rem fw-500"}>
-                    날짜
-                  </Div>
-                </Grid>
-              </Grid>
-              <Hr px={50} className={"bg-burgundy"} />
-              {OBJECT?.map((item: any, index: number) => (
-                <Grid container spacing={0} columns={12} key={index}>
-                  <Grid size={2}>
-                    <Div className={"fs-0-7rem"}>
-                      {item?.order_category}
-                    </Div>
-                  </Grid>
-                  <Grid size={8}>
-                    <Div
-                      max={10}
-                      className={"fs-1-0rem pointer-burgundy"}
-                      onClick={() => {
-                        navigate('/order/detail', {
-                          state: {
-                            _id: item?._id
-                          },
-                        });
-                      }}
-                    >
-                      {numeral(item?.order_total_price).format("0,0")}
-                    </Div>
-                  </Grid>
-                  <Grid size={2}>
-                    <Div className={"fs-0-7rem"}>
-                      {getDayNotFmt(item?.order_regDt).format("MM-DD")}
-                    </Div>
-                  </Grid>
-                  <Grid size={12} className={"d-column-center"}>
-                    {/** 마지막 항목 제외 hr 추가 */}
-                    {index !== OBJECT?.length - 1 && (
-                      <Hr px={50} className={"bg-light-grey"} />
-                    )}
-                  </Grid>
-                </Grid>
-              ))}
+            <Grid size={3}>
+              <Div className={"fs-0-8rem fw-500"}>
+                유형
+              </Div>
+            </Grid>
+            <Grid size={6}>
+              <Div className={"fs-0-8rem fw-500"}>
+                금액
+              </Div>
+            </Grid>
+            <Grid size={3}>
+              <Div className={"fs-0-8rem fw-500"}>
+                날짜
+              </Div>
+            </Grid>
+            <Grid size={12}>
+              <Hr px={40} className={"bg-burgundy"} />
+            </Grid>
+          </Grid>
+        </Card>
+      );
+      const listFragment = (item: any, i: number) => (
+        <Card className={"p-0"}>
+          <Grid container spacing={1} columns={12}>
+            <Grid size={3}>
+              <Div className={"fs-0-7rem"}>
+                {item?.order_category === "reservation" && "매장 예약"}
+                {item?.order_category === "buy" && "제품 구매"}
+              </Div>
+            </Grid>
+            <Grid size={6}>
+              <Div
+                max={10}
+                className={"fs-1-0rem pointer-burgundy"}
+                onClick={() => {
+                  navigate('/order/detail', {
+                    state: {
+                      _id: item?._id
+                    },
+                  });
+                }}
+              >
+                {numeral(item?.order_total_price).format("0,0")}
+              </Div>
+            </Grid>
+            <Grid size={3}>
+              <Div className={"fs-0-7rem"}>
+                {getDayNotFmt(item?.order_regDt).format("MM-DD")}
+              </Div>
+            </Grid>
+            {/** 마지막 항목 제외 hr 추가 */}
+            <Grid size={12}>
+              {i !== OBJECT?.length - 1 && (
+                <Hr px={30} className={"bg-light-grey"} />
+              )}
             </Grid>
           </Grid>
         </Card>
       );
       return (
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            {listFragment(0)}
+        <Card className={"border-1 radius-1 shadow-1 p-20"}>
+          <Grid container spacing={0} columns={12}>
+            {OBJECT.map((item: any, i: number) => (
+              <Grid
+                size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+                className={"d-column-center"}
+                key={`list-${i}`}
+              >
+                {i === 0 && titleFragment()}
+                {listFragment(item, i)}
+              </Grid>
+            ))}
           </Grid>
-        </Grid>
-      );
+        </Card>
+      )
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={3} className={"d-center"}>
+          <Grid size={3} className={"d-row-left"}>
             <Select
               label={"정렬"}
               value={PAGING?.sort}
@@ -212,11 +222,19 @@ export const OrderList = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : listSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
-            {filterSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {listSection()}
+                <Hr px={40} w={90} className={"bg-grey"} />
+                {filterSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

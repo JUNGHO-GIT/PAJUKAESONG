@@ -11,6 +11,11 @@ const schema = new mongoose.Schema(
       default: 1,
       unique : true
     },
+    franchise_seq: {
+      type: Number,
+      default: 0,
+      required: false
+    },
 
     franchise_name: {
       type: String,

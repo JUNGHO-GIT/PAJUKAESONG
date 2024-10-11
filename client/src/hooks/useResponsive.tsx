@@ -1,13 +1,11 @@
 // useResponsive.tsx
 
-import { useTheme, useMediaQuery } from "@imports/ImportMuis";
+import { useMediaQuery } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const useResponsive = () => {
 
-  const theme = useTheme();
-
-  // Media queries
+  // 2-1. useState ---------------------------------------------------------------------------------
   const isXxs = useMediaQuery("(min-width: 0px) and (max-width: 330px)");
   const isXs = useMediaQuery("(min-width: 330px) and (max-width: 630px)");
   const isSm = useMediaQuery("(min-width: 630px) and (max-width: 930px)");

@@ -100,7 +100,7 @@ export const FranchiseDetail = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               가맹점 상세
             </Div>
@@ -110,8 +110,8 @@ export const FranchiseDetail = () => {
     );
     // 2. detail
     const detailSection = () => {
-      const imageFragment = (i: number) => (
-        <Card className={"p-10"} key={`image-${i}`}>
+      const imageFragment = (item: any) => (
+        <Card className={"p-10"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
@@ -120,20 +120,21 @@ export const FranchiseDetail = () => {
                 shadow={true}
                 radius={true}
                 group={"franchise"}
-                src={OBJECT?.franchise_images?.[0]}
+                src={item.franchise_images && item.franchise_images[0]}
               />
             </Grid>
           </Grid>
         </Card>
       );
-      const descFragment = (i: number) => (
-        <Card className={"px-20"} key={`desc-${i}`}>
+      const descFragment = (item: any) => (
+        <Card className={"px-30"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Div className={"fs-1-8rem fw-700 black"}>
-                {OBJECT?.franchise_name}
+                {item?.franchise_name}
               </Div>
             </Grid>
+            <Br px={5} />
             <Grid size={12} className={"d-column-left"}>
               <Div className={"d-row-left"}>
                 <Icons
@@ -143,10 +144,10 @@ export const FranchiseDetail = () => {
                   fill={"whitesmoke"}
                 />
                 <Div className={"fs-0-9rem ms-5"}>
-                  {OBJECT?.franchise_address_main}
+                  {item?.franchise_address_main}
                 </Div>
                 <Div className={"fs-0-9rem ms-10"}>
-                  {`(${OBJECT?.franchise_address_detail})`}
+                  {`(${item?.franchise_address_detail})`}
                 </Div>
               </Div>
               <Div className={"d-row-left"}>
@@ -157,7 +158,7 @@ export const FranchiseDetail = () => {
                   fill={"whitesmoke"}
                 />
                 <Div className={"fs-0-9rem ms-5"}>
-                  {OBJECT?.franchise_phone}
+                  {item?.franchise_phone}
                 </Div>
               </Div>
               <Div className={"d-row-left"}>
@@ -168,7 +169,7 @@ export const FranchiseDetail = () => {
                   fill={"whitesmoke"}
                 />
                 <Div className={"fs-0-9rem ms-5"}>
-                  {getDayFmt(OBJECT?.franchise_regDt)}
+                  {getDayFmt(item?.franchise_regDt)}
                 </Div>
               </Div>
             </Grid>
@@ -176,18 +177,24 @@ export const FranchiseDetail = () => {
         </Card>
       );
       return (
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            {imageFragment(0)}
-            <Hr px={40} w={90} className={"bg-burgundy"} />
-            {descFragment(0)}
+        <Card className={"p-0"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+              key={`detail-${0}`}
+            >
+              {imageFragment(OBJECT)}
+              <Hr px={40} w={90} className={"bg-burgundy"} />
+              {descFragment(OBJECT)}
+            </Grid>
           </Grid>
-        </Grid>
+        </Card>
       )
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
@@ -233,11 +240,19 @@ export const FranchiseDetail = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : detailSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
-            {filterSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {detailSection()}
+                <Hr px={40} w={90} className={"bg-grey"} />
+                {filterSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

@@ -45,9 +45,9 @@ export const ContactUpdate = () => {
   }, [URL, SUBFIX]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowUpdate = () => {
+  const flowUpdate = async () => {
     setLOADING(true);
-    if (!validate(OBJECT, fileList, "update")) {
+    if (!await validate(OBJECT, fileList, "update")) {
       setLOADING(false);
       return;
     }
@@ -102,7 +102,7 @@ export const ContactUpdate = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               문의 수정
             </Div>
@@ -112,15 +112,15 @@ export const ContactUpdate = () => {
     );
     // 2. update
     const updateSection = () => {
-      const updateFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-30"} key={`update-${i}`}>
+      const updateFragment = (item: any, i: number) => (
+        <Card className={"p-0"}>
           <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Select
                 variant={"outlined"}
                 label={"문의 유형"}
                 required={true}
-                value={OBJECT?.contact_category}
+                value={item?.contact_category}
                 inputRef={REFS?.[i]?.contact_category}
                 error={ERRORS?.[i]?.contact_category}
                 onChange={(e: any) => {
@@ -130,20 +130,20 @@ export const ContactUpdate = () => {
                   }));
                 }}
               >
-                {["franchise", "personal"].map((item, idx) => (
-                  <MenuItem key={idx} value={item} className={"fs-0-8rem"}>
-                    {item === "franchise" && "가맹 문의"}
-                    {item === "personal" && "1:1 문의"}
+                {["franchise", "personal"].map((category: string, idx: number) => (
+                  <MenuItem key={idx} value={category} className={"fs-0-8rem"}>
+                    {category === "franchise" && "가맹 문의"}
+                    {category === "personal" && "1:1 문의"}
                   </MenuItem>
                 ))}
               </Select>
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"이름"}
                 required={true}
-                value={OBJECT?.contact_name}
+                value={item?.contact_name}
                 inputRef={REFS?.[i]?.contact_name}
                 error={ERRORS?.[i]?.contact_name}
                 onChange={(e: any) => {
@@ -154,12 +154,12 @@ export const ContactUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"이메일"}
                 required={true}
-                value={OBJECT?.contact_email}
+                value={item?.contact_email}
                 inputRef={REFS?.[i]?.contact_email}
                 error={ERRORS?.[i]?.contact_email}
                 placeholder={"abcd@naver.com"}
@@ -180,12 +180,12 @@ export const ContactUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"전화번호"}
                 required={true}
-                value={OBJECT?.contact_phone}
+                value={item?.contact_phone}
                 inputRef={REFS?.[i]?.contact_phone}
                 error={ERRORS?.[i]?.contact_phone}
                 placeholder={"010-1234-5678"}
@@ -207,12 +207,12 @@ export const ContactUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <Input
                 variant={"outlined"}
                 label={"문의 제목"}
                 required={true}
-                value={OBJECT?.contact_title}
+                value={item?.contact_title}
                 inputRef={REFS?.[i]?.contact_title}
                 error={ERRORS?.[i]?.contact_title}
                 onChange={(e: any) => {
@@ -223,12 +223,12 @@ export const ContactUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <TextArea
                 label={"문의 내용"}
                 required={true}
-                inputclass={"h-35vh"}
-                value={OBJECT?.contact_content}
+                inputclass={"h-50vh"}
+                value={item?.contact_content}
                 inputRef={REFS?.[i]?.contact_content}
                 error={ERRORS?.[i]?.contact_content}
                 onChange={(e: any) => {
@@ -239,13 +239,13 @@ export const ContactUpdate = () => {
                 }}
               />
             </Grid>
-            <Grid size={12} className={"d-column-center"}>
+            <Grid size={12}>
               <InputFile
                 variant={"outlined"}
                 label={"문의 이미지"}
                 required={true}
                 limit={1}
-                existing={OBJECT?.contact_images}
+                existing={item?.contact_images}
                 group={"contact"}
                 value={fileList}
                 onChange={(updatedFiles: File[] | null) => {
@@ -263,16 +263,22 @@ export const ContactUpdate = () => {
         </Card>
       );
       return (
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            {updateFragment(0)}
+        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+              key={`update-${0}`}
+            >
+              {updateFragment(OBJECT, 0)}
+            </Grid>
           </Grid>
-        </Grid>
-      )
+        </Card>
+      );
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={6} className={"d-row-right"}>
             <Btn
@@ -302,11 +308,19 @@ export const ContactUpdate = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
-            {LOADING ? <Loading /> : updateSection()}
-            <Br px={30} />
-            {btnSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                {titleSection()}
+                <Br px={30} />
+                {updateSection()}
+                <Br px={30} />
+                {btnSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

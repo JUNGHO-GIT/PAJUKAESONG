@@ -1,8 +1,8 @@
 // AboutLocation.tsx
 
 import { Location } from "@imports/ImportContainers";
-import { Div, Br, Hr } from "@imports/ImportComponents";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { Div, Br } from "@imports/ImportComponents";
+import { Paper, Card, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutLocation = () => {
@@ -13,7 +13,7 @@ export const AboutLocation = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               오시는길
             </Div>
@@ -25,7 +25,7 @@ export const AboutLocation = () => {
     const locationSection = () => (
       <Card className={"border-1 shadow-3 radius-1 p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Location
               width={"100%"}
               height={"60vh"}

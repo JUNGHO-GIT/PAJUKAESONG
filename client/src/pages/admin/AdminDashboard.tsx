@@ -76,7 +76,7 @@ export const AdminDashboard = () => {
     const titleSection = () => (
       <Card className={"p-0"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
+          <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               관리자 대시보드
             </Div>
@@ -96,7 +96,7 @@ export const AdminDashboard = () => {
     );
     // 2. visit
     const visitSection = () => (
-      <Card className={"border-1 shadow-1 radius-1 p-30"}>
+      <Card className={"border-1 shadow-1 radius-1 p-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -116,7 +116,7 @@ export const AdminDashboard = () => {
     );
     // 3. order
     const orderSection = () => (
-      <Card className={"border-1 shadow-1 radius-1 p-30"}>
+      <Card className={"border-1 shadow-1 radius-1 p-20"}>
         <Grid container spacing={1} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700"}>
@@ -164,9 +164,9 @@ export const AdminDashboard = () => {
     );
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-30"}>
+      <Card className={"px-20"}>
         <Grid container spacing={1} columns={12}>
-          <Grid size={3} className={"d-center"}>
+          <Grid size={3} className={"d-row-left"}>
             <Select
               label={"정렬"}
               value={ORDER_PAGING?.sort}
