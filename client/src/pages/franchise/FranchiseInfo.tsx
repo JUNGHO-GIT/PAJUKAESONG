@@ -53,7 +53,7 @@ export const FranchiseInfo = () => {
       <Card className={"border-1 radius-1 shadow-1 p-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
-            <Div className={"fs-1-8rem fw-700"}>
+            <Div className={"fs-1-6rem fw-700"}>
               가맹점 창업 안내
             </Div>
           </Grid>
@@ -76,7 +76,7 @@ export const FranchiseInfo = () => {
       <Card className={"border-1 radius-1 shadow-1 p-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
-            <Div className={"fs-1-8rem fw-700"}>
+            <Div className={"fs-1-6rem fw-700"}>
               가맹점 창업 절차
             </Div>
           </Grid>
@@ -174,7 +174,7 @@ export const FranchiseInfo = () => {
       <Card className={"border-1 radius-1 shadow-1 p-20"}>
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
-            <Div className={"fs-1-8rem fw-700"}>
+            <Div className={"fs-1-6rem fw-700"}>
               가맹비 및 창업비용
             </Div>
           </Grid>

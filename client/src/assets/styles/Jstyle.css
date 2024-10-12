@@ -12198,8 +12198,8 @@
 
 /** scrollbar *************************************************************************************/
 ::-webkit-scrollbar {
-  width: 5px !important;
-  height: 5px !important;
+  width: 2px !important;
+  height: 2px !important;
   z-index: 100000;
 }
 ::-webkit-scrollbar-thumb {

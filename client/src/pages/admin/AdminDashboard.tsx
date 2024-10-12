@@ -100,7 +100,7 @@ export const AdminDashboard = () => {
         <Card className={"p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid size={12}>
-              <Div className={"fs-1-8rem fw-700"}>
+              <Div className={"fs-1-6rem fw-700"}>
                 방문자 수
               </Div>
             </Grid>
@@ -137,7 +137,7 @@ export const AdminDashboard = () => {
         <Card className={"p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid size={12}>
-              <Div className={"fs-1-8rem fw-700"}>
+              <Div className={"fs-1-6rem fw-700"}>
                 주문 내역
               </Div>
             </Grid>
@@ -256,7 +256,7 @@ export const AdminDashboard = () => {
               page={ORDER_PAGING.page}
               showFirstButton={true}
               showLastButton={true}
-              className={"border-1 radius-1"}
+              className={"border-bottom-1"}
               onPageChange={(_event, newPage) => {
                 setORDER_PAGING((prev: any) => ({
                   ...prev,

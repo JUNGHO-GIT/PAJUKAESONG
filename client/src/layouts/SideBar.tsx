@@ -3,7 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { axios } from "@imports/ImportUtils";
-import { Icons, Div, Img, Hr, Br } from "@imports/ImportComponents";
+import { Icons, Div, Img, Hr } from "@imports/ImportComponents";
 import { Drawer, List, ListItem, Collapse, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -229,13 +229,13 @@ export const SideBar = (
         }}
       >
         <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
             {logoSection()}
             <Hr px={40} className={"bg-light-grey"} />
             {sidebarSection()}
-            <Hr px={50} className={"bg-light-grey"} />
+            <Hr px={40} className={"bg-light-grey"} />
             {textSection1()}
-            <Hr px={50} className={"bg-light-grey"} />
+            <Hr px={40} className={"bg-light-grey"} />
             {textSection2()}
           </Grid>
         </Grid>

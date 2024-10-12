@@ -132,7 +132,7 @@ export const Main = () => {
         <Card className={"mt-30 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid size={12}>
-              <Div className={"fs-1-8rem fw-700"}>
+              <Div className={"fs-1-6rem fw-700"}>
                 메뉴 소개
               </Div>
             </Grid>
@@ -257,7 +257,7 @@ export const Main = () => {
         <Card className={"bg-ivory mt-30 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid size={12}>
-              <Div className={"fs-1-8rem fw-700"}>
+              <Div className={"fs-1-6rem fw-700"}>
                 공지사항
               </Div>
             </Grid>
@@ -356,7 +356,7 @@ export const Main = () => {
         <Card className={"mt-30 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid size={12}>
-              <Div className={"fs-1-8rem fw-700"}>
+              <Div className={"fs-1-6rem fw-700"}>
                 오시는 길
               </Div>
             </Grid>

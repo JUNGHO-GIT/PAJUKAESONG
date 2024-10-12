@@ -170,7 +170,7 @@ export const ProductList = () => {
               page={PAGING.page}
               showFirstButton={true}
               showLastButton={true}
-              className={"border-1 radius-1"}
+              className={"border-bottom-1"}
               onPageChange={(_event, newPage) => {
                 setPAGING((prev: any) => ({
                   ...prev,
