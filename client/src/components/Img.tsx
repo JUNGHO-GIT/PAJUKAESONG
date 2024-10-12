@@ -38,6 +38,7 @@ export const Img = (
     }
 
     let newClass = "w-100p h-auto object-contain";
+
     if (props?.className) {
       newClass += ` ${props.className}`;
     }
@@ -51,9 +52,11 @@ export const Img = (
       newClass += " radius-1";
     }
     if (max) {
-      newClass += ` w-max${max} h-max${max}`;
+      newClass += ` w-max${max} h-max${(max * 2 / 3).toFixed(0)}`;
     }
+
     setImageClass(newClass);
+
   }, [group, src, props.className, hover, shadow, radius, max]);
 
   // 10. return ------------------------------------------------------------------------------------

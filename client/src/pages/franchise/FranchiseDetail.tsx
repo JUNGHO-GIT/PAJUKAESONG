@@ -115,7 +115,7 @@ export const FranchiseDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={isXxs ? 270 : 320}
+                max={isXxs ? 290 : 340}
                 hover={false}
                 shadow={true}
                 radius={true}
@@ -143,7 +143,7 @@ export const FranchiseDetail = () => {
                   fill={"whitesmoke"}
                   className={"w-20 h-20"}
                 />
-                <Div className={"fs-0-9rem"}>
+                <Div className={"fs-0-9rem fw-500 light-black"}>
                   {`${item?.franchise_address_main} (${item?.franchise_address_detail})`}
                 </Div>
               </Div>
@@ -156,7 +156,7 @@ export const FranchiseDetail = () => {
                   fill={"whitesmoke"}
                   className={"w-20 h-20"}
                 />
-                <Div className={"fs-0-9rem"}>
+                <Div className={"fs-0-9rem fw-500 light-black"}>
                   {item?.franchise_phone}
                 </Div>
               </Div>
@@ -169,7 +169,7 @@ export const FranchiseDetail = () => {
                   fill={"whitesmoke"}
                   className={"w-20 h-20"}
                 />
-                <Div className={"fs-0-9rem"}>
+                <Div className={"fs-0-9rem fw-500 light-black"}>
                   {getDayFmt(item?.franchise_regDt)}
                 </Div>
               </Div>

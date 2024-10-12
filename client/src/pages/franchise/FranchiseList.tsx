@@ -15,7 +15,7 @@ export const FranchiseList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate, isAdmin, location_category } = useCommonValue();
-  const { isXxs } = useResponsive();
+  const { isXxs, isLg, isXl } = useResponsive();
   const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ export const FranchiseList = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={isXxs ? 120 : 150}
+                max={isXxs ? 230 : 280}
                 hover={true}
                 shadow={true}
                 radius={true}
@@ -97,14 +97,18 @@ export const FranchiseList = () => {
           </Grid>
         </Card>
       );
-      const descFragment = (item: any) => (
-        <Card className={"mt-0"}>
-          <Grid container spacing={2} columns={12}>
+      const descFragment = (item: any, i: number) => (
+        <Card className={"p-0"}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12}>
-              <Div className={"fs-1-2rem fw-600"}>
+              <Div className={"fs-1-4rem fw-600"}>
                 {item?.franchise_name}
               </Div>
             </Grid>
+            {/** 마지막 항목 제외 hr 추가 */}
+            {i !== OBJECT?.length - 1 && (
+              !(isLg || isXl) && <Hr px={60} w={80} className={"bg-grey"} />
+            )}
           </Grid>
         </Card>
       );
@@ -114,11 +118,11 @@ export const FranchiseList = () => {
             {OBJECT.map((item: any, i: number) => (
               <Grid
                 key={`list-${i}`}
-                size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }}
+                size={{ xs: 12, sm: 12, md: 12, lg: 6, xl: 6 }}
                 className={"d-column-center"}
               >
                 {imageFragment(item)}
-                {descFragment(item)}
+                {descFragment(item, i)}
               </Grid>
             ))}
           </Grid>

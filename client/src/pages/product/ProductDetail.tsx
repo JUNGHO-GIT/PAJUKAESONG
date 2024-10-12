@@ -156,7 +156,7 @@ export const ProductDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={isXxs ? 270 : 320}
+                max={isXxs ? 290 : 340}
                 hover={false}
                 shadow={true}
                 radius={true}
@@ -183,7 +183,7 @@ export const ProductDetail = () => {
                 fill={"grey"}
                 className={"w-15 h-15 dark"}
               />
-              <Div className={"fs-1-2rem fw-500 dark"}>
+              <Div className={"fs-1-2rem fw-500 light-black"}>
                 {item?.product_description}
               </Div>
             </Grid>
@@ -193,7 +193,7 @@ export const ProductDetail = () => {
                 name={"Won"}
                 className={"w-15 h-15 dark"}
               />
-              <Div className={"fs-1-1rem fw-500 dark"}>
+              <Div className={"fs-1-1rem fw-500 light-black"}>
                 {numeral(item?.product_price).format("0,0")}
               </Div>
             </Grid>

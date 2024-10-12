@@ -97,7 +97,7 @@ export const ProductList = () => {
         </Card>
       );
       const descFragment = (item: any) => (
-        <Card className={"mt-0"}>
+        <Card className={"p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-2rem fw-600"}>
