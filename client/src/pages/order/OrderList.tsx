@@ -200,7 +200,7 @@ export const OrderList = () => {
               page={PAGING.page}
               showFirstButton={true}
               showLastButton={true}
-              className={"border-right-1 border-left-1 radius-1"}
+              className={"border-1 radius-1"}
               onPageChange={(_event, newPage) => {
                 setPAGING((prev: any) => ({
                   ...prev,

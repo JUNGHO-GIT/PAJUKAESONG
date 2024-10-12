@@ -97,13 +97,12 @@ export const Main = () => {
                 {mainArray.map((item: any, index: number) => (
                   <SwiperSlide className={"d-center"} key={index}>
                     <Img
-                      max={600}
                       hover={false}
                       shadow={false}
                       radius={false}
                       group={"main"}
-                      src={item}
                       className={"w-100p"}
+                      src={item}
                     />
                   </SwiperSlide>
                 ))}
@@ -130,7 +129,7 @@ export const Main = () => {
     // 2. menu -------------------------------------------------------------------------------------
     const menuSection = () => {
       const titleFragment = () => (
-        <Card className={"p-0"}>
+        <Card className={"mt-30 p-0"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-8rem fw-700"}>
@@ -199,7 +198,7 @@ export const Main = () => {
                   <SwiperSlide className={"d-center"} key={index}>
                     <Card className={"d-column-center p-20"}>
                       <Img
-                        max={isXxs ? 100 : 150}
+                        max={isXxs ? 140 : 170}
                         hover={true}
                         shadow={true}
                         radius={true}
@@ -226,7 +225,7 @@ export const Main = () => {
         </Card>
       );
       const paginationFragment = () => (
-        <Card className={"p-0"}>
+        <Card className={"mb-30 p-0"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12}>
               <Div className={"menu-pagination transform-none"} />
@@ -235,7 +234,7 @@ export const Main = () => {
         </Card>
       );
       return (
-        <Card className={"p-0"}>
+        <Card className={"border-top-1 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
               size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
@@ -255,7 +254,7 @@ export const Main = () => {
     // 3. notice -----------------------------------------------------------------------------------
     const noticeSection = () => {
       const titleFragment = () => (
-        <Card className={"p-0"}>
+        <Card className={"bg-ivory mt-30 p-0"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-8rem fw-700"}>
@@ -266,7 +265,7 @@ export const Main = () => {
         </Card>
       );
       const noticeFragment = () => (
-        <Card className={"p-20"}>
+        <Card className={"bg-ivory p-20"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12} className={"d-center"}>
               <Swiper
@@ -326,7 +325,7 @@ export const Main = () => {
         </Card>
       );
       const paginationFragment = () => (
-        <Card className={"p-0"}>
+        <Card className={"bg-ivory mb-30 p-0"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12}>
               <Div className={"notice-pagination transform-none"} />
@@ -335,7 +334,7 @@ export const Main = () => {
         </Card>
       );
       return (
-        <Card className={"p-0"}>
+        <Card className={"bg-ivory border-top-1 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
               size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
@@ -354,7 +353,7 @@ export const Main = () => {
     // 4. location ---------------------------------------------------------------------------------
     const locationSection = () => {
       const titleFragment = () => (
-        <Card className={"p-0"}>
+        <Card className={"mt-30 p-0"}>
           <Grid container spacing={1} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-8rem fw-700"}>
@@ -374,7 +373,7 @@ export const Main = () => {
         </Card>
       );
       return (
-        <Card className={"p-0"}>
+        <Card className={"border-top-1 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
               size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
@@ -395,11 +394,8 @@ export const Main = () => {
         <Grid container spacing={1} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
             {mainSection()}
-            <Hr px={30} w={100} className={"bg-light-grey"} />
             {menuSection()}
-            <Hr px={30} w={100} className={"bg-light-grey"} />
             {noticeSection()}
-            <Hr px={30} w={100} className={"bg-light-grey"} />
             {locationSection()}
           </Grid>
         </Grid>
