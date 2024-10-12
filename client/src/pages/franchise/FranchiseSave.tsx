@@ -7,9 +7,9 @@ import { useValidateFranchise } from "@imports/ImportValidates";
 import { axios, makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
-import { Div, Btn, Br } from "@imports/ImportComponents";
-import { Input, InputFile } from "@imports/ImportContainers";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
+import { Input, InputFile, Select } from "@imports/ImportContainers";
+import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseSave = () => {
@@ -110,7 +110,7 @@ export const FranchiseSave = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               가맹점 등록
@@ -122,8 +122,30 @@ export const FranchiseSave = () => {
     // 2. save
     const saveSection = () => {
       const saveFragment = (item: any, i: number) => (
-        <Card className={"p-0"}>
-          <Grid container spacing={1} columns={12}>
+        <Card className={"p-10"}>
+          <Grid container spacing={3} columns={12}>
+            <Grid size={12} className={"mt-10"}>
+              <Select
+                variant={"outlined"}
+                label={"순서"}
+                required={true}
+                value={item?.franchise_seq || 0}
+                inputRef={REFS?.[i]?.franchise_seq}
+                error={ERRORS?.[i]?.franchise_seq}
+                onChange={(e: any) => {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    franchise_seq: e.target.value,
+                  }));
+                }}
+              >
+                {Array.from({ length: 30 }, (_, i) => i).map((seq: number, idx: number) => (
+                  <MenuItem key={idx} value={seq} className={"fs-0-8rem"}>
+                    {seq}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
             <Grid size={12}>
               <Input
                 variant={"outlined"}
@@ -230,12 +252,12 @@ export const FranchiseSave = () => {
         </Card>
       );
       return (
-        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+        <Card className={"border-1 radius-1 shadow-1 p-10"}>
           <Grid container spacing={0} columns={12}>
             <Grid
+              key={`save-${0}`}
               size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
               className={"d-column-center"}
-              key={`save-${0}`}
             >
               {saveFragment(OBJECT, 0)}
             </Grid>
@@ -245,9 +267,9 @@ export const FranchiseSave = () => {
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-20"}>
-        <Grid container spacing={1} columns={12}>
-          <Grid size={6} className={"d-row-right"}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={6} className={"d-row-center"}>
             <Btn
               className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
@@ -257,7 +279,7 @@ export const FranchiseSave = () => {
               목록으로
             </Btn>
           </Grid>
-          <Grid size={6} className={"d-row-left"}>
+          <Grid size={6} className={"d-row-center"}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
@@ -273,13 +295,21 @@ export const FranchiseSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
-            <Br px={20} />
-            {LOADING ? <Loading /> : saveSection()}
-            <Br px={30} />
-            {btnSection()}
+            {LOADING ? (
+              <>
+                <Loading />
+              </>
+            ) : (
+              <>
+                <Br px={30} />
+                {saveSection()}
+                <Br px={20} />
+                {btnSection()}
+              </>
+            )}
           </Grid>
         </Grid>
       </Paper>

@@ -71,7 +71,7 @@ export const OrderFind = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               주문 조회
@@ -83,8 +83,8 @@ export const OrderFind = () => {
     // 2. find
     const findSection = () => {
       const findFragment = (item: any, i: number) => (
-        <Card className={"p-0"}>
-          <Grid container spacing={1} columns={12}>
+        <Card className={"p-20"}>
+          <Grid container spacing={3} columns={12}>
             <Grid size={12}>
               <Input
                 variant={"outlined"}
@@ -134,12 +134,12 @@ export const OrderFind = () => {
         </Card>
       );
       return (
-        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+        <Card className={"border-1 radius-1 shadow-1 p-10"}>
           <Grid container spacing={0} columns={12}>
             <Grid
+              key={`find-${0}`}
               size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
               className={"d-column-center"}
-              key={`find-${0}`}
             >
               {findFragment(OBJECT, 0)}
             </Grid>
@@ -149,8 +149,8 @@ export const OrderFind = () => {
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-20"}>
-        <Grid container spacing={1} columns={12}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
@@ -167,7 +167,7 @@ export const OrderFind = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             {LOADING ? (
@@ -178,7 +178,7 @@ export const OrderFind = () => {
               <>
                 <Br px={30} />
                 {findSection()}
-                <Br px={30} />
+                <Br px={20} />
                 {btnSection()}
               </>
             )}

@@ -51,7 +51,6 @@ import { ProductUpdate } from "@pages/product/ProductUpdate";
 
 // user
 import { UserLogin } from "@pages/user/UserLogin";
-import { UserSignup } from "@pages/user/UserSignup";
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -64,5 +63,5 @@ export {
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate,
   OrderList, OrderFind, OrderDetail, OrderSave, OrderUpdate,
   ProductList, ProductDetail, ProductSave, ProductUpdate,
-  UserLogin, UserSignup,
+  UserLogin,
 };

@@ -64,7 +64,7 @@ export const OrderList = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               주문 목록
@@ -77,7 +77,7 @@ export const OrderList = () => {
     const listSection = () => {
       const headFragment = () => (
         <Card className={"p-10"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={2} columns={12}>
             <Grid size={3}>
               <Div className={"fs-0-8rem fw-500"}>
                 유형
@@ -93,15 +93,13 @@ export const OrderList = () => {
                 날짜
               </Div>
             </Grid>
-            <Grid size={12}>
-              <Hr px={40} className={"bg-burgundy"} />
-            </Grid>
+            <Hr px={20} className={"bg-burgundy"} />
           </Grid>
         </Card>
       );
       const listFragment = (item: any, i: number) => (
-        <Card className={"p-0"}>
-          <Grid container spacing={1} columns={12}>
+        <Card className={"p-10"}>
+          <Grid container spacing={2} columns={12}>
             <Grid size={3}>
               <Div className={"fs-0-7rem"}>
                 {item?.order_category === "reservation" && "매장 예약"}
@@ -129,22 +127,20 @@ export const OrderList = () => {
               </Div>
             </Grid>
             {/** 마지막 항목 제외 hr 추가 */}
-            <Grid size={12}>
-              {i !== OBJECT?.length - 1 && (
-                <Hr px={30} className={"bg-light-grey"} />
-              )}
-            </Grid>
+            {i !== OBJECT?.length - 1 && (
+              <Hr px={20} className={"bg-light-grey"} />
+            )}
           </Grid>
         </Card>
       );
       return (
-        <Card className={"border-1 radius-1 shadow-1 p-20"}>
+        <Card className={"border-1 radius-1 shadow-1 p-10"}>
           <Grid container spacing={0} columns={12}>
             {OBJECT.map((item: any, i: number) => (
               <Grid
+                key={`list-${i}`}
                 size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
                 className={"d-column-center"}
-                key={`list-${i}`}
               >
                 {i === 0 && headFragment()}
                 {listFragment(item, i)}
@@ -156,11 +152,11 @@ export const OrderList = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"p-10"}>
-        <Grid container spacing={1} columns={12}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-column-center"}>
             <Select
-              label={"정렬"}
+              label={""}
               value={PAGING?.sort}
               inputclass={"h-min0 h-5vh"}
               onChange={(e: any) => (
@@ -221,7 +217,7 @@ export const OrderList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             {LOADING ? (
@@ -232,7 +228,7 @@ export const OrderList = () => {
               <>
                 <Br px={30} />
                 {listSection()}
-                <Hr px={40} w={90} className={"bg-grey"} />
+                <Hr px={40} className={"bg-grey"} />
                 {filterSection()}
               </>
             )}

@@ -7,7 +7,7 @@ import { useValidateNotice } from "@imports/ImportValidates";
 import { axios, makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Btn, Br } from "@imports/ImportComponents";
+import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
 import { Input, TextArea, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid } from "@imports/ImportMuis";
 
@@ -86,7 +86,7 @@ export const NoticeSave = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               공지사항 저장
@@ -98,9 +98,9 @@ export const NoticeSave = () => {
     // 2. save
     const saveSection = () => {
       const saveFragment = (item: any, i: number) => (
-        <Card className={"p-0"}>
-          <Grid container spacing={1} columns={12}>
-            <Grid size={12}>
+        <Card className={"p-10"}>
+          <Grid container spacing={3} columns={12}>
+            <Grid size={12} className={"mt-10"}>
               <Input
                 variant={"outlined"}
                 label={"공지사항 제목"}
@@ -157,12 +157,12 @@ export const NoticeSave = () => {
         </Card>
       );
       return (
-        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+        <Card className={"border-1 radius-1 shadow-1 p-10"}>
           <Grid container spacing={0} columns={12}>
             <Grid
+              key={`save-${0}`}
               size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
               className={"d-column-center"}
-              key={`save-${0}`}
             >
               {saveFragment(OBJECT, 0)}
             </Grid>
@@ -172,9 +172,9 @@ export const NoticeSave = () => {
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-20"}>
-        <Grid container spacing={1} columns={12}>
-          <Grid size={6} className={"d-row-right"}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={6} className={"d-row-center"}>
             <Btn
               className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
@@ -184,7 +184,7 @@ export const NoticeSave = () => {
               목록으로
             </Btn>
           </Grid>
-          <Grid size={6} className={"d-row-left"}>
+          <Grid size={6} className={"d-row-center"}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
@@ -200,7 +200,7 @@ export const NoticeSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             {LOADING ? (
@@ -211,7 +211,7 @@ export const NoticeSave = () => {
               <>
                 <Br px={30} />
                 {saveSection()}
-                <Br px={30} />
+                <Br px={20} />
                 {btnSection()}
               </>
             )}

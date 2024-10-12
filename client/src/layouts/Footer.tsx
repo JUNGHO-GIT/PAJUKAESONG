@@ -17,7 +17,7 @@ export const Footer = () => {
     // 1. logo
     const logoSection = () => (
       <Card className={"bg-transparent p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Img
               hover={false}

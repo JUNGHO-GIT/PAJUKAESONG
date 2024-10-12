@@ -199,7 +199,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
   // 7. node ---------------------------------------------------------------------------------------
   const adornmentNode = (
     <Card className={"p-0"}>
-      <Grid container spacing={1} columns={12}>
+      <Grid container spacing={0} columns={12}>
         <Grid size={8} className={"d-column-left"}>
           {fileList && fileList.length > 0 && fileList.map((file: any, index: number) => (
             <Div className={"d-row-center"} key={index}>
@@ -212,7 +212,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
                 src={URL.createObjectURL(file)}
                 className={"me-10"}
               />
-              <Div className={"black fs-0-9rem fw-500"} max={12}>
+              <Div max={12} className={"black fs-0-9rem fw-500"}>
                 {file?.name}
               </Div>
               <Div
@@ -249,7 +249,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
   // 7. node ---------------------------------------------------------------------------------------
   const existingNode = () => (
     <Card className={"ms-5"}>
-      <Grid container spacing={1} columns={12}>
+      <Grid container spacing={0} columns={12}>
         <Grid size={12} className={"d-column-left"}>
           {fileExisting.map((file: any, index: number) => (
             <Div className={"d-row-center"} key={index}>
@@ -262,7 +262,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
                 src={file}
                 className={"me-10"}
               />
-              <Div className={"black fs-0-9rem fw-500"} max={20}>
+              <Div max={20} className={"black fs-0-9rem fw-500"}>
                 {file}
               </Div>
               <Div

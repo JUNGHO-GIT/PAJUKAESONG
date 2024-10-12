@@ -62,7 +62,7 @@ export const ProductList = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               제품 목록
@@ -75,7 +75,7 @@ export const ProductList = () => {
     const listSection = () => {
       const imageFragment = (item: any) => (
         <Card className={"p-10"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
                 max={isXxs ? 120 : 150}
@@ -97,8 +97,8 @@ export const ProductList = () => {
         </Card>
       );
       const descFragment = (item: any) => (
-        <Card className={"mt-n5"}>
-          <Grid container spacing={1} columns={12}>
+        <Card className={"mt-0"}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-2rem fw-600"}>
                 {item?.product_name}
@@ -108,13 +108,13 @@ export const ProductList = () => {
         </Card>
       );
       return (
-        <Card className={"p-0"}>
+        <Card className={"border-0 radius-0 shadow-0 p-10"}>
           <Grid container spacing={0} columns={12}>
             {OBJECT.map((item: any, i: number) => (
               <Grid
+                key={`list-${i}`}
                 size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }}
                 className={"d-column-center"}
-                key={`list-${i}`}
               >
                 {imageFragment(item)}
                 {descFragment(item)}
@@ -126,11 +126,11 @@ export const ProductList = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"p-10"}>
-        <Grid container spacing={1} columns={12}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-column-center"}>
             <Select
-              label={"정렬"}
+              label={""}
               value={PAGING?.sort}
               inputclass={"h-min0 h-5vh"}
               onChange={(e: any) => (
@@ -201,7 +201,7 @@ export const ProductList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             {LOADING ? (
@@ -212,7 +212,7 @@ export const ProductList = () => {
               <>
                 <Br px={30} />
                 {listSection()}
-                <Hr px={40} w={90} className={"bg-grey"} />
+                <Hr px={40} className={"bg-grey"} />
                 {filterSection()}
               </>
             )}

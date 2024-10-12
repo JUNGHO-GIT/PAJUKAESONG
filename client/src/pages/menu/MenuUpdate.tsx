@@ -105,7 +105,7 @@ export const MenuUpdate = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               메뉴 수정
@@ -117,12 +117,12 @@ export const MenuUpdate = () => {
     // 2. update
     const updateSection = () => {
       const updateFragment = (item: any, i: number) => (
-        <Card className={"p-0"}>
-          <Grid container spacing={1} columns={12}>
-            <Grid size={12}>
+        <Card className={"p-10"}>
+          <Grid container spacing={3} columns={12}>
+            <Grid size={12} className={"mt-10"}>
               <Select
                 variant={"outlined"}
-                label={"메뉴 카테고리"}
+                label={"카테고리"}
                 required={true}
                 value={item?.menu_category}
                 inputRef={REFS?.[i]?.menu_category}
@@ -145,7 +145,7 @@ export const MenuUpdate = () => {
             <Grid size={12}>
               <Select
                 variant={"outlined"}
-                label={"메뉴 순서"}
+                label={"순서"}
                 required={true}
                 value={item?.menu_seq || 0}
                 inputRef={REFS?.[i]?.menu_seq}
@@ -248,12 +248,12 @@ export const MenuUpdate = () => {
         </Card>
       );
       return (
-        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+        <Card className={"border-1 radius-1 shadow-1 p-10"}>
           <Grid container spacing={0} columns={12}>
             <Grid
+              key={`update-${0}`}
               size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
               className={"d-column-center"}
-              key={`update-${0}`}
             >
               {updateFragment(OBJECT, 0)}
             </Grid>
@@ -263,9 +263,9 @@ export const MenuUpdate = () => {
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-20"}>
-        <Grid container spacing={1} columns={12}>
-          <Grid size={6} className={"d-row-right"}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={6} className={"d-row-center"}>
             <Btn
               className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
@@ -279,7 +279,7 @@ export const MenuUpdate = () => {
               목록으로
             </Btn>
           </Grid>
-          <Grid size={6} className={"d-row-left"}>
+          <Grid size={6} className={"d-row-center"}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
@@ -295,7 +295,7 @@ export const MenuUpdate = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             {LOADING ? (
@@ -306,7 +306,7 @@ export const MenuUpdate = () => {
               <>
                 <Br px={30} />
                 {updateSection()}
-                <Br px={30} />
+                <Br px={20} />
                 {btnSection()}
               </>
             )}

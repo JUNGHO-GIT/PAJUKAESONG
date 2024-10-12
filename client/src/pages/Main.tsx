@@ -130,7 +130,7 @@ export const Main = () => {
     const menuSection = () => {
       const titleFragment = () => (
         <Card className={"mt-30 p-0"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-8rem fw-700"}>
                 메뉴 소개
@@ -141,7 +141,7 @@ export const Main = () => {
       );
       const selectFragment = () => (
         <Card className={"p-10"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12} className={"d-row-center"}>
               <Div className={`${category === "main" ? "bg-burgundy" : ""} border-1 radius-50 p-10 me-1vw hover`}>
                 <Div
@@ -169,8 +169,8 @@ export const Main = () => {
       );
       const menuFragment = () => (
         <Card className={"p-10"}>
-          <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-center"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid size={12}>
               <Swiper
                 spaceBetween={0}
                 slidesPerView={LOADING ? 0 : (
@@ -212,8 +212,8 @@ export const Main = () => {
                           });
                         }}
                       />
-                      <Br px={10} />
-                      <Div className={"fs-1-0rem fw-600"} max={10}>
+                      <Br px={5} />
+                      <Div max={10} className={"fs-1-0rem fw-600"}>
                         {item?.menu_name}
                       </Div>
                     </Card>
@@ -226,7 +226,7 @@ export const Main = () => {
       );
       const paginationFragment = () => (
         <Card className={"mb-30 p-0"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12}>
               <Div className={"menu-pagination transform-none"} />
             </Grid>
@@ -234,7 +234,7 @@ export const Main = () => {
         </Card>
       );
       return (
-        <Card className={"border-top-1 p-0"}>
+        <Card className={"border-top-1 radius-0 shadow-0 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
               size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
@@ -255,7 +255,7 @@ export const Main = () => {
     const noticeSection = () => {
       const titleFragment = () => (
         <Card className={"bg-ivory mt-30 p-0"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-8rem fw-700"}>
                 공지사항
@@ -266,8 +266,8 @@ export const Main = () => {
       );
       const noticeFragment = () => (
         <Card className={"bg-ivory p-20"}>
-          <Grid container spacing={1} columns={12}>
-            <Grid size={12} className={"d-center"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid size={12}>
               <Swiper
                 spaceBetween={20}
                 slidesPerView={LOADING ? 0 : 1}
@@ -292,7 +292,7 @@ export const Main = () => {
               >
                 {OBJECT_NOTICE?.map((item: any, index: number) => (
                   <SwiperSlide className={"d-center"} key={index}>
-                    <Card className={"d-column-left border-1 shadow-1 radius-1 p-20"}>
+                    <Card className={"d-column-left border-1 radius-1 shadow-1 p-20"}>
                       <Img
                         max={200}
                         hover={true}
@@ -308,8 +308,8 @@ export const Main = () => {
                           });
                         }}
                       />
-                      <Hr px={30} w={100} className={"bg-light-grey"} />
-                      <Div className={"fs-1-0rem fw-600"} max={20}>
+                      <Hr px={40} className={"bg-light-grey"} />
+                      <Div max={20} className={"fs-1-0rem fw-600"}>
                         {item?.notice_title}
                       </Div>
                       <Br px={5} />
@@ -326,7 +326,7 @@ export const Main = () => {
       );
       const paginationFragment = () => (
         <Card className={"bg-ivory mb-30 p-0"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12}>
               <Div className={"notice-pagination transform-none"} />
             </Grid>
@@ -334,7 +334,7 @@ export const Main = () => {
         </Card>
       );
       return (
-        <Card className={"bg-ivory border-top-1 p-0"}>
+        <Card className={"bg-ivory border-top-1 radius-0 shadow-0 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
               size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
@@ -354,7 +354,7 @@ export const Main = () => {
     const locationSection = () => {
       const titleFragment = () => (
         <Card className={"mt-30 p-0"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-8rem fw-700"}>
                 오시는 길
@@ -373,7 +373,7 @@ export const Main = () => {
         </Card>
       );
       return (
-        <Card className={"border-top-1 p-0"}>
+        <Card className={"border-top-1 radius-0 shadow-0 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
               size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
@@ -390,8 +390,8 @@ export const Main = () => {
 
     // 7-10. return
     return (
-      <Paper className={"content-wrapper p-0 fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+      <Paper className={"content-wrapper fadeIn p-0"}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
             {mainSection()}
             {menuSection()}

@@ -61,7 +61,7 @@ import {
 } from "@imports/ImportPages";
 
 import {
-  UserLogin, UserSignup,
+  UserLogin,
 } from "@imports/ImportPages";
 
 // -------------------------------------------------------------------------------------------------
@@ -146,7 +146,6 @@ const Product = () => (
 const User = () => (
   <Routes>
     <Route path={"/login"} element={<UserLogin />} />
-    <Route path={"/signup"} element={<UserSignup />} />
   </Routes>
 );
 

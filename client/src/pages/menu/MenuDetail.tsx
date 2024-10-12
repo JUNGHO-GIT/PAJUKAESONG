@@ -98,7 +98,7 @@ export const MenuDetail = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               메뉴 상세
@@ -111,7 +111,7 @@ export const MenuDetail = () => {
     const detailSection = () => {
       const imageFragment = (item: any) => (
         <Card className={"p-10"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
                 max={isXxs ? 270 : 320}
@@ -122,18 +122,18 @@ export const MenuDetail = () => {
                 src={item.menu_images && item.menu_images[0]}
               />
             </Grid>
+            <Hr px={20} className={"bg-burgundy"} />
           </Grid>
         </Card>
       );
       const descFragment = (item: any) => (
-        <Card className={"p-10"}>
-          <Grid container spacing={1} columns={12}>
+        <Card className={"p-0"}>
+          <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-8rem fw-700 black"}>
                 {item?.menu_name}
               </Div>
             </Grid>
-            <Br px={5} />
             <Grid size={12} className={"d-row-left"}>
               <Icons
                 key={"Dot"}
@@ -145,7 +145,6 @@ export const MenuDetail = () => {
                 {item?.menu_description}
               </Div>
             </Grid>
-            <Br px={5} />
             <Grid size={12} className={"d-row-left"}>
               <Icons
                 key={"Won"}
@@ -160,15 +159,14 @@ export const MenuDetail = () => {
         </Card>
       );
       return (
-        <Card className={"p-0"}>
+        <Card className={"border-0 radius-0 shadow-0 p-10"}>
           <Grid container spacing={0} columns={12}>
             <Grid
+              key={`detail-${0}`}
               size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
               className={"d-column-center"}
-              key={`detail-${0}`}
             >
               {imageFragment(OBJECT)}
-              <Hr px={40} w={90} className={"bg-burgundy"} />
               {descFragment(OBJECT)}
             </Grid>
           </Grid>
@@ -177,8 +175,8 @@ export const MenuDetail = () => {
     };
     // 4. filter
     const filterSection = () => (
-      <Card className={"px-20"}>
-        <Grid container spacing={1} columns={12}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
             <Div
               className={"fs-1-0rem fw-700 pointer-burgundy"}
@@ -221,7 +219,7 @@ export const MenuDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             {LOADING ? (
@@ -232,7 +230,7 @@ export const MenuDetail = () => {
               <>
                 <Br px={30} />
                 {detailSection()}
-                <Hr px={40} w={90} className={"bg-grey"} />
+                <Hr px={40} className={"bg-grey"} />
                 {filterSection()}
               </>
             )}

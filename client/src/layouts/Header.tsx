@@ -70,18 +70,18 @@ export const Header = () => {
 
   // 7. headerNode ---------------------------------------------------------------------------------
   const headerNode = () => {
-    const toggleSection = () => (
-      <Icons
-        name={"Hamburger"}
-        className={"w-24 h-24 black"}
-        onClick={() => toggleSidebar()}
-      />
-    );
     const sidebarSection = () => (
-      <SideBar
-        isOpen={isSidebarOpen}
-        toggleSidebar={toggleSidebar}
-      />
+      <Div className={"d-center"}>
+        <Icons
+          name={"Hamburger"}
+          className={"w-24 h-24 black"}
+          onClick={() => toggleSidebar()}
+        />
+        <SideBar
+          isOpen={isSidebarOpen}
+          toggleSidebar={toggleSidebar}
+        />
+      </Div>
     );
     const logoSection = () => (
       <Div className={"d-center"}>
@@ -96,16 +96,17 @@ export const Header = () => {
             navigate("/main");
           }}
         />
-        {isAdmin && (
-          <Div
-            className={"pointer-burgundy burgundy fw-0-8rem fw-700"}
-            onClick={() => {
-              navigate("/admin/dashboard");
-            }}
-          >
-            관리자
-          </Div>
-        )}
+      </Div>
+    );
+    const adminSection = () => (
+      isAdmin &&
+      <Div
+        className={"pointer-burgundy burgundy fw-0-8rem fw-700"}
+        onClick={() => {
+          navigate("/admin/dashboard");
+        }}
+      >
+        관리자
       </Div>
     );
     const tabsSection = () => (
@@ -194,15 +195,24 @@ export const Header = () => {
     );
     return (
       <Paper className={"layout-wrapper p-sticky top-0vh border-bottom-1 shadow-bottom-1 p-20"}>
-        <Grid container spacing={2}>
-          <Grid size={{ xs: 2, sm: 0 }} className={`${isXxs || isXs ? "d-column-left" : "d-none"}`}>
+        <Grid container spacing={0} columns={12}>
+          <Grid
+            size={{ xs: 2, sm: 0, md: 0, lg: 0, xl: 0 }}
+            className={`${(isXxs || isXs) ? "d-row-left" : "d-none"}`}
+          >
             {sidebarSection()}
-            {toggleSection()}
           </Grid>
-          <Grid size={{ xs: 10, sm: 12, md: 4 }} className={`${isXxs || isXs ? "d-row-left" : "d-center"}`}>
+          <Grid
+            size={{ xs: 10, sm: 12, md: 4, lg: 4, xl: 4 }}
+            className={`${(isXxs || isXs) ? "d-row-left" : "d-center"}`}
+          >
             {logoSection()}
+            {adminSection()}
           </Grid>
-          <Grid size={{ xs: 0, sm: 12, md: 8 }} className={`${isXxs || isXs ? "d-none" : "d-row-center"}`}>
+          <Grid
+            size={{ xs: 0, sm: 12, md: 8, lg: 8, xl: 8 }}
+            className={`${(isXxs || isXs) ? "d-none" : "d-row-center"}`}
+          >
             {tabsSection()}
           </Grid>
         </Grid>

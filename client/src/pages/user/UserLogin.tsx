@@ -107,7 +107,7 @@ export const UserLogin = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               로그인
@@ -118,23 +118,24 @@ export const UserLogin = () => {
     );
     // 2. login
     const loginSection = () => {
-      const loginFragment = (i: number) => (
-        <Card className={"border-1 shadow-1 radius-1 p-20"} key={`login-${i}`}>
-          <Grid container spacing={1} columns={12}>
+      const loginFragment = (item: any, i: number) => (
+        <Card className={"p-20"}>
+          <Grid container spacing={3} columns={12}>
             <Grid size={12}>
               <Input
                 variant={"outlined"}
                 required={true}
                 label={"아이디"}
                 helperText={"이메일 형식으로 입력해주세요."}
-                value={OBJECT?.user_id}
+                value={item?.user_id}
                 inputRef={REFS?.[i]?.user_id}
                 error={ERRORS?.[i]?.user_id}
                 disabled={isAdmin || isUser}
                 onChange={(e: any) => {
+                  const value = e.target.value;
                   setOBJECT((prev: any) => ({
                     ...prev,
-                    user_id: e.target.value,
+                    user_id: value,
                   }));
                 }}
               />
@@ -146,14 +147,15 @@ export const UserLogin = () => {
                 type={"password"}
                 label={"비밀번호"}
                 helperText={"영문, 숫자, 특수문자 포함 8자 이상 입력해주세요."}
-                value={OBJECT?.user_pw}
+                value={item?.user_pw}
                 inputRef={REFS?.[i]?.user_pw}
                 error={ERRORS?.[i]?.user_pw}
                 disabled={isAdmin || isUser}
                 onChange={(e: any) => {
+                  const value = e.target.value;
                   setOBJECT((prev: any) => ({
                     ...prev,
-                    user_pw: e.target.value,
+                    user_pw: value,
                   }));
                 }}
               />
@@ -162,17 +164,23 @@ export const UserLogin = () => {
         </Card>
       );
       return (
-        <Grid container spacing={1} columns={12}>
-          <Grid size={12}>
-            {loginFragment(0)}
+        <Card className={"border-1 radius-1 shadow-1 p-10"}>
+          <Grid container spacing={0} columns={12}>
+            <Grid
+              key={`login-${0}`}
+              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+              className={"d-column-center"}
+            >
+              {loginFragment(OBJECT, 0)}
+            </Grid>
           </Grid>
-        </Grid>
-      )
+        </Card>
+      );
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-20"}>
-        <Grid container spacing={1} columns={12}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             {(isAdmin || isUser) ? (
               <Btn
@@ -200,8 +208,8 @@ export const UserLogin = () => {
     );
     // 4. link
     const linkSection = () => (
-      <Card className={"px-20"}>
-        <Grid container spacing={1} columns={12}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-0-8rem"}>
               아이디가 없는 경우
@@ -228,14 +236,14 @@ export const UserLogin = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {loginSection()}
             <Br px={30} />
             {btnSection()}
-            <Hr px={40} w={90} className={"bg-grey"} />
+            <Hr px={40} className={"bg-grey"} />
             {linkSection()}
           </Grid>
         </Grid>

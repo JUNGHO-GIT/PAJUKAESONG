@@ -7,7 +7,7 @@ import { useValidateMenu } from "@imports/ImportValidates";
 import { axios, numeral, makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
-import { Div, Btn, Br } from "@imports/ImportComponents";
+import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
 import { Input, Select, InputFile } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem } from "@imports/ImportMuis";
 
@@ -90,7 +90,7 @@ export const MenuSave = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               메뉴 등록
@@ -102,12 +102,12 @@ export const MenuSave = () => {
     // 2. save
     const saveSection = () => {
       const saveFragment = (item: any, i: number) => (
-        <Card className={"p-0"}>
-          <Grid container spacing={1} columns={12}>
-            <Grid size={12}>
+        <Card className={"p-10"}>
+          <Grid container spacing={3} columns={12}>
+            <Grid size={12} className={"mt-10"}>
               <Select
                 variant={"outlined"}
-                label={"메뉴 카테고리"}
+                label={"카테고리"}
                 required={true}
                 value={item?.menu_category}
                 inputRef={REFS?.[i]?.menu_category}
@@ -130,7 +130,7 @@ export const MenuSave = () => {
             <Grid size={12}>
               <Select
                 variant={"outlined"}
-                label={"메뉴 순서"}
+                label={"순서"}
                 required={true}
                 value={item?.menu_seq || 0}
                 inputRef={REFS?.[i]?.menu_seq}
@@ -233,12 +233,12 @@ export const MenuSave = () => {
         </Card>
       );
       return (
-        <Card className={"border-1 shadow-1 radius-1 p-20"}>
+        <Card className={"border-1 radius-1 shadow-1 p-10"}>
           <Grid container spacing={0} columns={12}>
             <Grid
+              key={`save-${0}`}
               size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
               className={"d-column-center"}
-              key={`save-${0}`}
             >
               {saveFragment(OBJECT, 0)}
             </Grid>
@@ -248,9 +248,9 @@ export const MenuSave = () => {
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-20"}>
-        <Grid container spacing={1} columns={12}>
-          <Grid size={6} className={"d-row-right"}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={6} className={"d-row-center"}>
             <Btn
               className={"w-100p fs-1-0rem bg-grey"}
               onClick={() => {
@@ -264,7 +264,7 @@ export const MenuSave = () => {
               목록으로
             </Btn>
           </Grid>
-          <Grid size={6} className={"d-row-left"}>
+          <Grid size={6} className={"d-row-center"}>
             <Btn
               className={"w-100p fs-1-0rem bg-burgundy"}
               onClick={() => {
@@ -280,7 +280,7 @@ export const MenuSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             {LOADING ? (
@@ -291,7 +291,7 @@ export const MenuSave = () => {
               <>
                 <Br px={30} />
                 {saveSection()}
-                <Br px={30} />
+                <Br px={20} />
                 {btnSection()}
               </>
             )}

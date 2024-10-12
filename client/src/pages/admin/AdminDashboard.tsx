@@ -75,7 +75,7 @@ export const AdminDashboard = () => {
     // 1. title
     const titleSection = () => (
       <Card className={"p-0"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12}>
             <Div className={"fs-2-0rem fw-700"}>
               관리자 대시보드
@@ -98,7 +98,7 @@ export const AdminDashboard = () => {
     const visitSection = () => {
       const titleFragment = () => (
         <Card className={"p-0"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-8rem fw-700"}>
                 방문자 수
@@ -109,7 +109,7 @@ export const AdminDashboard = () => {
       );
       const visitFragment = (item: any) => (
         <Card className={"p-10"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12} className={"d-row-center"}>
               <Div className={"fs-1-6rem fw-600 black me-5"}>
                 {item?.admin_visit_count || 0}
@@ -122,10 +122,10 @@ export const AdminDashboard = () => {
         </Card>
       );
       return (
-        <Card className={"border-1 radius-1 shadow-1 p-20"}>
+        <Card className={"border-1 radius-1 shadow-1 p-10"}>
           <Grid container spacing={0} columns={12}>
             {titleFragment()}
-            <Br px={30} />
+            <Br px={20} />
             {visitFragment(OBJECT)}
           </Grid>
         </Card>
@@ -135,7 +135,7 @@ export const AdminDashboard = () => {
     const orderSection = () => {
       const titleFragment = () => (
         <Card className={"p-0"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={0} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-8rem fw-700"}>
                 주문 내역
@@ -146,7 +146,7 @@ export const AdminDashboard = () => {
       );
       const headFragment = () => (
         <Card className={"p-10"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={2} columns={12}>
             <Grid size={3}>
               <Div className={"fs-0-8rem fw-500"}>
                 유형
@@ -162,15 +162,13 @@ export const AdminDashboard = () => {
                 이름
               </Div>
             </Grid>
-            <Grid size={12}>
-              <Hr px={40} className={"bg-burgundy"} />
-            </Grid>
+            <Hr px={20} className={"bg-burgundy"} />
           </Grid>
         </Card>
       );
       const listFragment = (item: any, i: number) => (
         <Card className={"p-10"}>
-          <Grid container spacing={1} columns={12}>
+          <Grid container spacing={2} columns={12}>
             <Grid size={3}>
               <Div className={"fs-0-7rem"}>
                 {item?.order_category === "reservation" && "매장 예약"}
@@ -188,25 +186,23 @@ export const AdminDashboard = () => {
               </Div>
             </Grid>
             {/** 마지막 항목 제외 hr 추가 */}
-            <Grid size={12}>
-              {i !== OBJECT?.length - 1 && (
-                <Hr px={30} className={"bg-light-grey"} />
-              )}
-            </Grid>
+            {i !== OBJECT?.length - 1 && (
+              <Hr px={20} className={"bg-light-grey"} />
+            )}
           </Grid>
         </Card>
       );
       return (
-        <Card className={"border-1 radius-1 shadow-1 p-20"}>
+        <Card className={"border-1 radius-1 shadow-1 p-10"}>
           <Grid container spacing={0} columns={12}>
             {OBJECT_ORDER.map((item: any, i: number) => (
               <Grid
+                key={`list-${i}`}
                 size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
                 className={"d-column-center"}
-                key={`list-${i}`}
               >
                 {i === 0 && titleFragment()}
-                <Br px={30} />
+                <Br px={20} />
                 {i === 0 && headFragment()}
                 {listFragment(item, i)}
               </Grid>
@@ -217,8 +213,8 @@ export const AdminDashboard = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"p-10"}>
-        <Grid container spacing={1} columns={12}>
+      <Card className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-column-center"}>
             <Select
               value={ORDER_PAGING?.sort}
@@ -281,22 +277,22 @@ export const AdminDashboard = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={1} columns={12}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {dateSection()}
-            <Br px={30} />
             {LOADING ? (
               <>
                 <Loading />
               </>
             ) : (
               <>
+                <Br px={30} />
                 {visitSection()}
                 <Br px={30} />
                 {orderSection()}
-                <Hr px={40} w={90} className={"bg-grey"} />
+                <Hr px={40} className={"bg-grey"} />
                 {filterSection()}
               </>
             )}
