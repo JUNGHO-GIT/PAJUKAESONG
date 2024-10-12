@@ -1,8 +1,8 @@
 // Confirm.tsx
 
-import { Snackbar, Alert as MuiAlert } from "@imports/ImportMuis";
-import { Icons } from "@imports/ImportComponents";
 import { useConfirmStore } from "@imports/ImportStores";
+import { Icons } from "@imports/ImportComponents";
+import { Snackbar, Alert as MuiAlert } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Confirm = () => {

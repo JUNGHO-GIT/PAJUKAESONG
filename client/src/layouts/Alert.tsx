@@ -1,9 +1,8 @@
 // Alert.tsx
 
-import { useEffect } from "@imports/ImportReacts";
-import { Snackbar, Alert as MuiAlert } from "@imports/ImportMuis";
-import { Icons } from "@imports/ImportComponents";
 import { useAlertStore } from "@imports/ImportStores";
+import { Icons } from "@imports/ImportComponents";
+import { Snackbar, Alert as MuiAlert } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Alert = () => {
@@ -11,20 +10,11 @@ export const Alert = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { ALERT, setALERT } = useAlertStore();
 
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (ALERT.open) {
-      setALERT({
-        open: true
-      });
-    }
-  }, [ALERT.open]);
-
   // 7. alert --------------------------------------------------------------------------------------
   const alertNode = () => (
     <Snackbar
       open={ALERT.open}
-      autoHideDuration={1000}
+      autoHideDuration={10000}
       anchorOrigin={{
         vertical: "top",
         horizontal: "center"
