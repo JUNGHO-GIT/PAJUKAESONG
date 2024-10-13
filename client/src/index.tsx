@@ -9,7 +9,7 @@ import "@styles/Mui.css";
 import "@styles/Jstyle.css";
 
 import {
-  ReactDOM, BrowserRouter, Routes, Route
+  BrowserRouter, Routes, Route, StrictMode, createRoot
 } from "@imports/ImportReacts";
 
 import {
@@ -185,17 +185,14 @@ const theme = createTheme({
   },
 });
 
-const rootElement = document.getElementById("root");
-if (rootElement === null) {
-  throw new Error("root element is null");
-}
-
-const root = ReactDOM.createRoot(rootElement);
+const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <BrowserRouter basename={"/PAJUKAESONG"}>
-    <CssBaseline />
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </BrowserRouter>
+  <StrictMode>
+    <BrowserRouter basename={"/PAJUKAESONG"}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
+  </StrictMode>
 );
