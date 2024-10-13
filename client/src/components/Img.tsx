@@ -65,8 +65,9 @@ export const Img = (
       {...props}
       alt={fileName}
       key={fileName}
-      className={imageClass}
       src={imgSrc}
+      loading={"lazy"}
+      className={imageClass}
       onError={(e) => {
         e.currentTarget.src = `${GCLOUD_URL}/main/empty.webp`;
         e.currentTarget.alt = "empty";

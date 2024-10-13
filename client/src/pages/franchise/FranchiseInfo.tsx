@@ -314,20 +314,12 @@ export const FranchiseInfo = () => {
         <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
-            {LOADING ? (
-              <>
-                <Loading />
-              </>
-            ) : (
-              <>
-                <Br px={30} />
-                {infoSection()}
-                <Br px={30} />
-                {stepSection()}
-                <Br px={30} />
-                {costSection()}
-              </>
-            )}
+            <Br px={30} />
+            {LOADING ? <Loading /> : infoSection()}
+            <Br px={30} />
+            {stepSection()}
+            <Br px={30} />
+            {costSection()}
           </Grid>
         </Grid>
       </Paper>

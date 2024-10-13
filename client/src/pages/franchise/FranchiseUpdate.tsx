@@ -314,18 +314,10 @@ export const FranchiseUpdate = () => {
         <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
-            {LOADING ? (
-              <>
-                <Loading />
-              </>
-            ) : (
-              <>
-                <Br px={30} />
-                {updateSection()}
-                <Br px={20} />
-                {btnSection()}
-              </>
-            )}
+            <Br px={30} />
+            {LOADING ? <Loading /> : updateSection()}
+            <Br px={20} />
+            {btnSection()}
           </Grid>
         </Grid>
       </Paper>

@@ -282,20 +282,12 @@ export const AdminDashboard = () => {
             {titleSection()}
             <Br px={30} />
             {dateSection()}
-            {LOADING ? (
-              <>
-                <Loading />
-              </>
-            ) : (
-              <>
-                <Br px={30} />
-                {visitSection()}
-                <Br px={30} />
-                {orderSection()}
-                <Hr px={40} className={"bg-grey"} />
-                {filterSection()}
-              </>
-            )}
+            <Br px={30} />
+            {LOADING ? <Loading /> : visitSection()}
+            <Br px={30} />
+            {orderSection()}
+            <Hr px={40} className={"bg-grey"} />
+            {filterSection()}
           </Grid>
         </Grid>
       </Paper>

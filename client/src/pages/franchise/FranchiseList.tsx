@@ -107,7 +107,7 @@ export const FranchiseList = () => {
             </Grid>
             {/** 마지막 항목 제외 hr 추가 */}
             {i !== OBJECT?.length - 1 && (
-              !(isLg || isXl) && <Hr px={60} w={80} className={"bg-grey"} />
+              !(isLg || isXl) && <Br px={40} />
             )}
           </Grid>
         </Card>
@@ -209,18 +209,10 @@ export const FranchiseList = () => {
         <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
-            {LOADING ? (
-              <>
-                <Loading />
-              </>
-            ) : (
-              <>
-                <Br px={30} />
-                {listSection()}
-                <Hr px={40} className={"bg-grey"} />
-                {filterSection()}
-              </>
-            )}
+            <Br px={30} />
+            {LOADING ? <Loading /> : listSection()}
+            <Hr px={40} className={"bg-grey"} />
+            {filterSection()}
           </Grid>
         </Grid>
       </Paper>

@@ -214,18 +214,10 @@ export const NoticeDetail = () => {
         <Grid container spacing={0} columns={12}>
           <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
-            {LOADING ? (
-              <>
-                <Loading />
-              </>
-            ) : (
-              <>
-                <Br px={30} />
-                {detailSection()}
-                <Hr px={40} className={"bg-grey"} />
-                {filterSection()}
-              </>
-            )}
+            <Br px={30} />
+            {LOADING ? <Loading /> : detailSection()}
+            <Hr px={40} className={"bg-grey"} />
+            {filterSection()}
           </Grid>
         </Grid>
       </Paper>
