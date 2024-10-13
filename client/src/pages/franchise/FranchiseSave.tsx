@@ -207,11 +207,11 @@ export const FranchiseSave = () => {
                 value={item?.franchise_phone}
                 inputRef={REFS?.[i]?.franchise_phone}
                 error={ERRORS?.[i]?.franchise_phone}
-                placeholder={"010-1234-5678"}
+                placeholder={"031-124-5678"}
                 onChange={(e: any) => {
                   const value = e.target.value.replace(/[^0-9]/g, '');
-                  const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
-                  if (value.length > 11) {
+                  const newValue = value.replace(/(\d{3})(\d{1,3})(\d{1,4})/, '$1-$2-$3');
+                  if (value.length > 10) {
                     setOBJECT((prev: any) => ({
                       ...prev,
                       franchise_phone: prev.franchise_phone,

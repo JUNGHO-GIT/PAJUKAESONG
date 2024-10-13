@@ -267,11 +267,11 @@ export const OrderSave = () => {
       return (
         <Card className={"border-1 radius-1 shadow-1 p-10"}>
           <Grid container spacing={0} columns={12}>
-            {OBJECT.order_product.map((item: any, i: number) => (
+            {OBJECT?.order_product?.map((item: any, i: number) => (
               <Grid
+                key={`product-${i}`}
                 size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
                 className={"d-column-center"}
-                key={`product-${i}`}
               >
                 {productFragment(item, i)}
               </Grid>

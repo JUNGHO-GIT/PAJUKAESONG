@@ -52,7 +52,7 @@ export const ProductDetail = () => {
   }, [URL, SUBFIX, location_id]);
 
   // 3. flow ---------------------------------------------------------------------------------------
-  const flowSave = (extra: string) => {
+  const flowSave = async (extra: string) => {
     const orderProduct: any = {
       product_id: OBJECT?._id,
       product_name: OBJECT?.product_name,
@@ -60,6 +60,8 @@ export const ProductDetail = () => {
       product_price: orderPrice,
       product_images: OBJECT?.product_images,
     };
+    
+    alert(JSON.stringify(orderProduct))
 
     if (extra === "buy") {
       sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify([]));
