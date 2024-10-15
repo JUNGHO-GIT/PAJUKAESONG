@@ -17,11 +17,11 @@ import {
 } from "@imports/ImportMuis";
 
 import {
-  useRoot, useScrollTop, useLocale
+  useRoot, useScrollTop, useLocale, useCommonValue
 } from "@imports/ImportHooks";
 
 import {
-  Header, Footer, Alert, Confirm
+  Header, Footer, Alert, Confirm, Title
 } from "@imports/ImportLayouts";
 
 import {
@@ -152,6 +152,8 @@ const User = () => (
 // -------------------------------------------------------------------------------------------------
 const App = () => {
 
+  const { PATH } = useCommonValue();
+
   useRoot();
   useLocale();
   useScrollTop();
@@ -159,6 +161,7 @@ const App = () => {
   return (
     <div className={"App"}>
       <Header />
+      {!PATH.includes("/main") && <Title />}
       <Routes>
         <Route path={"/*"} element={<Main />} />
         <Route path={"/admin/*"} element={<Admin />} />

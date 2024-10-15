@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
 import { Div, Img, Icons } from "@imports/ImportComponents";
 import { Paper, Grid } from "@imports/ImportMuis";
 import { Tabs, Tab, Menu, MenuItem, tabsClasses } from "@imports/ImportMuis";
@@ -12,11 +11,13 @@ import { SideBar } from '@imports/ImportLayouts';
 export const Header = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, PATH, firstStr, secondStr, dataArray, isAdmin, location_category } = useCommonValue();
+  const { navigate, PATH, firstStr, secondStr } = useCommonValue();
+  const { dataArray, isAdmin, location_category } = useCommonValue();
   const { isXxs, isXs, isSm, isMd, isLg, isXl } = useResponsive();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [tabWidth, setTabWidth] = useState<string>("");
+  const [tabHeight, setTabHeight] = useState<string>("");
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [selectedTab, setSelectedTab] = useState<string>("");
   const [selectedTabVal, setSelectedTabVal] = useState<string>("");
@@ -25,11 +26,29 @@ export const Header = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    if (isXxs || isXs) {
+    if (isXxs) {
       setTabWidth("");
+      setTabHeight("h-12vh");
     }
-    else if (isSm || isMd || isLg || isXl) {
+    else if (isXs) {
+      setTabWidth("");
+      setTabHeight("h-13vh");
+    }
+    else if (isSm) {
       setTabWidth("w-17p");
+      setTabHeight("h-21vh");
+    }
+    else if (isMd) {
+      setTabWidth("w-17p");
+      setTabHeight("h-15vh");
+    }
+    else if (isLg) {
+      setTabWidth("w-17p");
+      setTabHeight("h-15vh");
+    }
+    else if (isXl) {
+      setTabWidth("w-17p");
+      setTabHeight("h-15vh");
     }
   }, [isXxs, isXs, isSm, isMd, isLg, isXl]);
 
@@ -194,23 +213,23 @@ export const Header = () => {
       </>
     );
     return (
-      <Paper className={"layout-wrapper p-sticky top-0vh border-bottom-1 shadow-bottom-1 p-20"}>
-        <Grid container spacing={0} columns={12}>
+      <Paper className={`layout-wrapper p-sticky top-0vh border-bottom-1 shadow-bottom-3 p-20 ${tabHeight}`}>
+        <Grid container spacing={2} columns={12}>
           <Grid
-            size={{ xs: 2, sm: 0, md: 0, lg: 0, xl: 0 }}
+            size={isXxs ? 2 : isXs ? 2 : isSm ? 0 : isMd ? 0 : isLg ? 0 : isXl ? 0 : 0}
             className={`${(isXxs || isXs) ? "d-row-left" : "d-none"}`}
           >
             {sidebarSection()}
           </Grid>
           <Grid
-            size={{ xs: 10, sm: 12, md: 4, lg: 4, xl: 4 }}
+            size={isXxs ? 10 : isXs ? 10 : isSm ? 12 : isMd ? 4 : isLg ? 4 : isXl ? 4 : 4}
             className={`${(isXxs || isXs) ? "d-row-left" : "d-center"}`}
           >
             {logoSection()}
             {adminSection()}
           </Grid>
           <Grid
-            size={{ xs: 0, sm: 12, md: 8, lg: 8, xl: 8 }}
+            size={isXxs ? 0 : isXs ? 0 : isSm ? 12 : isMd ? 8 : isLg ? 8 : isXl ? 8 : 8}
             className={`${(isXxs || isXs) ? "d-none" : "d-row-center"}`}
           >
             {tabsSection()}

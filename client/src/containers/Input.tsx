@@ -57,7 +57,7 @@ export const Input = (props: any) => (
       },
       inputLabel: {
         ...props?.slotProps?.inputLabel,
-        shrink: (props?.shrink === "shrink" ? true : undefined),
+        shrink: ((props?.shrink === "shrink" || props?.disabled) || false),
       }
     }}
   />

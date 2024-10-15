@@ -79,7 +79,7 @@ export const FranchiseList = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={isXxs ? 230 : 280}
+                max={isXxs ? 450 : 500}
                 hover={true}
                 shadow={true}
                 radius={true}
@@ -97,32 +97,28 @@ export const FranchiseList = () => {
           </Grid>
         </Card>
       );
-      const descFragment = (item: any, i: number) => (
+      const descFragment = (item: any) => (
         <Card className={"p-0"}>
-          <Grid container spacing={0} columns={12}>
+          <Grid container spacing={2} columns={12}>
             <Grid size={12}>
               <Div className={"fs-1-4rem fw-600"}>
                 {item?.franchise_name}
               </Div>
             </Grid>
-            {/** 마지막 항목 제외 hr 추가 */}
-            {i !== OBJECT?.length - 1 && (
-              !(isLg || isXl) && <Br px={40} />
-            )}
           </Grid>
         </Card>
       );
       return (
-        <Card className={"border-0 radius-0 shadow-0 p-10"}>
+        <Card className={"border-0 radius-0 shadow-0"}>
           <Grid container spacing={0} columns={12}>
             {OBJECT.map((item: any, i: number) => (
               <Grid
                 key={`list-${i}`}
-                size={{ xs: 12, sm: 12, md: 12, lg: 6, xl: 6 }}
+                size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
                 className={"d-column-center"}
               >
                 {imageFragment(item)}
-                {descFragment(item, i)}
+                {descFragment(item)}
               </Grid>
             ))}
           </Grid>
@@ -207,7 +203,7 @@ export const FranchiseList = () => {
     return (
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {LOADING ? <Loading /> : listSection()}

@@ -5,6 +5,7 @@ import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateUser } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportUtils";
+import { Loading } from "@imports/ImportLayouts";
 import { User } from "@imports/ImportSchemas";
 import { Input } from "@imports/ImportContainers";
 import { Div, Btn, Hr, Br } from "@imports/ImportComponents";
@@ -14,7 +15,8 @@ import { Paper, Card, Grid } from "@imports/ImportMuis";
 export const UserLogin = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { URL, SUBFIX, TITLE, navigate, isAdmin, adminId, adminPw, isUser, userId, userPw, } = useCommonValue();
+  const { URL, SUBFIX, TITLE, navigate } = useCommonValue();
+  const { isAdmin, adminId, adminPw, isUser, userId, userPw } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateUser();
   const { ALERT, setALERT } = useAlertStore();
 
@@ -164,7 +166,7 @@ export const UserLogin = () => {
         </Card>
       );
       return (
-        <Card className={"border-1 radius-1 shadow-1 p-10"}>
+        <Card className={"border-1 radius-1 shadow-1"}>
           <Grid container spacing={0} columns={12}>
             <Grid
               key={`login-${0}`}
@@ -235,12 +237,12 @@ export const UserLogin = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
+      <Paper className={"content-wrapper fadeIn px-20"}>
         <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
-            {loginSection()}
+            {LOADING ? <Loading /> : loginSection()}
             <Br px={30} />
             {btnSection()}
             <Hr px={40} className={"bg-grey"} />

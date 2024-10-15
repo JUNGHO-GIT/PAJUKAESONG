@@ -6,7 +6,7 @@ import { useAlertStore } from "@imports/ImportStores";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Btn } from "@imports/ImportComponents";
+import { Div, Img, Hr, Btn } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
 import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
@@ -60,18 +60,6 @@ export const MenuList = () => {
 
   // 7. listNode -----------------------------------------------------------------------------------
   const listNode = () => {
-    // 1. title
-    const titleSection = () => (
-      <Card className={"p-0"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
-            <Div className={"fs-2-0rem fw-700"}>
-              {location_category === "main" ? "대표 메뉴" : "사이드 메뉴"}
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
     // 2. list
     const listSection = () => {
       const imageFragment = (item: any) => (
@@ -79,7 +67,7 @@ export const MenuList = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={isXxs ? 110 : 150}
+                max={isXxs ? 230 : 280}
                 hover={true}
                 shadow={true}
                 radius={true}
@@ -109,7 +97,7 @@ export const MenuList = () => {
         </Card>
       );
       return (
-        <Card className={"border-0 radius-0 shadow-0 p-10"}>
+        <Card className={"border-0 radius-0 shadow-0"}>
           <Grid container spacing={0} columns={12}>
             {OBJECT.map((item: any, i: number) => (
               <Grid
@@ -201,11 +189,9 @@ export const MenuList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
+      <Paper className={"content-wrapper fadeIn px-20"}>
         <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
+          <Grid size={{ xs: 12, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
             {LOADING ? <Loading /> : listSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}

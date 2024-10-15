@@ -1,6 +1,7 @@
 // ImportLayouts.tsx
 
 import { Header } from "@layouts/Header";
+import { Title } from "@layouts/Title";
 import { Empty } from "@layouts/Empty";
 import { SideBar } from "@layouts/SideBar";
 import { Footer } from "@layouts/Footer";
@@ -11,6 +12,7 @@ import { Confirm } from "@layouts/Confirm";
 // -------------------------------------------------------------------------------------------------
 export {
   Header,
+  Title,
   Empty,
   SideBar,
   Footer,

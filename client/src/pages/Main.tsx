@@ -8,7 +8,7 @@ import { Pagination } from "@imports/ImportUtils";
 import { Menu, Notice } from "@imports/ImportSchemas";
 import { Location } from "@imports/ImportContainers";
 import { Div, Img, Br, Hr } from "@imports/ImportComponents";
-import { Grid, Card, Paper } from "@imports/ImportMuis";
+import { Grid, Card, Paper, Backdrop } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Main = () => {
@@ -94,16 +94,33 @@ export const Main = () => {
                   Autoplay,
                 ]}
               >
-                {mainArray.map((item: any, index: number) => (
-                  <SwiperSlide className={"d-center"} key={index}>
-                    <Img
-                      hover={false}
-                      shadow={false}
-                      radius={false}
-                      group={"main"}
-                      className={"w-100p"}
-                      src={item}
-                    />
+                {OBJECT_MENU?.map((item: any, index: number) => (
+                  <SwiperSlide key={index}>
+                    <Card className={"d-column-center"}>
+                      <Backdrop
+                        open={true}
+                        appear={true}
+                        className={"bg-black opacity-5"}
+                      >
+                        <Div className={"fs-1-6rem fw-700 white"}>
+                          {item?.menu_name}
+                        </Div>
+                      </Backdrop>
+                      <Img
+                        hover={false}
+                        shadow={false}
+                        radius={false}
+                        group={"menu"}
+                        src={item?.menu_images && item?.menu_images[0]}
+                        onClick={() => {
+                          navigate("/menu/detail", {
+                            state: {
+                              _id: item?._id
+                            }
+                          });
+                        }}
+                      />
+                    </Card>
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -115,9 +132,9 @@ export const Main = () => {
         <Card className={"p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
+              key={`list-${0}`}
               size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
               className={"d-column-center"}
-              key={`list-${0}`}
             >
               {imageFragment()}
             </Grid>
@@ -196,7 +213,7 @@ export const Main = () => {
               >
                 {OBJECT_MENU?.map((item: any, index: number) => (
                   <SwiperSlide className={"d-center"} key={index}>
-                    <Card className={"d-column-center p-20"}>
+                    <Card className={"d-column-center p-10"}>
                       <Img
                         max={isXxs ? 140 : 170}
                         hover={true}
@@ -237,9 +254,9 @@ export const Main = () => {
         <Card className={"border-top-1 radius-0 shadow-0 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
+              key={`list-${0}`}
               size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
               className={"d-column-center"}
-              key={`list-${0}`}
             >
               {titleFragment()}
               {selectFragment()}
@@ -337,9 +354,9 @@ export const Main = () => {
         <Card className={"bg-ivory border-top-1 radius-0 shadow-0 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
+              key={`list-${0}`}
               size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
               className={"d-column-center"}
-              key={`list-${0}`}
             >
               {titleFragment()}
               {noticeFragment()}
@@ -376,9 +393,9 @@ export const Main = () => {
         <Card className={"border-top-1 radius-0 shadow-0 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
+              key={`list-${0}`}
               size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
               className={"d-column-center"}
-              key={`list-${0}`}
             >
               {titleFragment()}
               {locationFragment()}

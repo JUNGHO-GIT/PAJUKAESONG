@@ -115,7 +115,7 @@ export const FranchiseDetail = () => {
           <Grid container spacing={2} columns={12}>
             <Grid size={12} className={"d-column-center"}>
               <Img
-                max={isXxs ? 290 : 340}
+                max={isXxs ? 600 : 700}
                 hover={false}
                 shadow={true}
                 radius={true}
@@ -178,7 +178,7 @@ export const FranchiseDetail = () => {
         </Card>
       );
       return (
-        <Card className={"border-0 radius-0 shadow-0 p-10"}>
+        <Card className={"border-0 radius-0 shadow-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
               key={`detail-${0}`}
@@ -237,9 +237,9 @@ export const FranchiseDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
+      <Paper className={"content-wrapper fadeIn px-20"}>
         <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {LOADING ? <Loading /> : detailSection()}

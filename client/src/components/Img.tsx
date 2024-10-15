@@ -37,7 +37,7 @@ export const Img = (
       setImgSrc(`${GCLOUD_URL}/main/empty.webp`);
     }
 
-    let newClass = "w-100p h-auto object-contain";
+    let newClass = "w-100p h-100p object-contain";
 
     if (props?.className) {
       newClass += ` ${props.className}`;

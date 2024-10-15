@@ -76,7 +76,7 @@ export const ContactList = () => {
     // 2. list
     const listSection = () => {
       const headFragment = () => (
-        <Card className={"p-10"}>
+        <Card className={"p-20 border-bottom-1-burgundy"}>
           <Grid container spacing={2} columns={12}>
             <Grid size={3}>
               <Div className={"fs-0-8rem fw-500"}>
@@ -93,12 +93,11 @@ export const ContactList = () => {
                 날짜
               </Div>
             </Grid>
-            <Hr px={20} className={"bg-burgundy"} />
           </Grid>
         </Card>
       );
-      const listFragment = (item: any, i: number) => (
-        <Card className={"p-10"}>
+      const listFragment = (item: any) => (
+        <Card className={"p-20 border-bottom-1"}>
           <Grid container spacing={2} columns={12}>
             <Grid size={3}>
               <Div className={"fs-0-7rem"}>
@@ -126,15 +125,11 @@ export const ContactList = () => {
                 {getDayNotFmt(item?.contact_regDt).format("MM-DD")}
               </Div>
             </Grid>
-            {/** 마지막 항목 제외 hr 추가 */}
-            {i !== OBJECT?.length - 1 && (
-              <Hr px={20} className={"bg-light-grey"} />
-            )}
           </Grid>
         </Card>
       );
       return (
-        <Card className={"border-1 radius-1 shadow-1 p-10"}>
+        <Card className={"border-1 radius-1 shadow-1"}>
           <Grid container spacing={0} columns={12}>
             {OBJECT.map((item: any, i: number) => (
               <Grid
@@ -143,7 +138,7 @@ export const ContactList = () => {
                 className={"d-column-center"}
               >
                 {i === 0 && headFragment()}
-                {listFragment(item, i)}
+                {listFragment(item)}
               </Grid>
             ))}
           </Grid>
@@ -216,9 +211,9 @@ export const ContactList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
+      <Paper className={"content-wrapper fadeIn px-20"}>
         <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 8, md: 6, lg: 6, xl: 6 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
             {titleSection()}
             <Br px={30} />
             {LOADING ? <Loading /> : listSection()}
