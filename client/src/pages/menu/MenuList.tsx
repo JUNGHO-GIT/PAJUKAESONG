@@ -62,142 +62,134 @@ export const MenuList = () => {
   const listNode = () => {
     // 2. list
     const listSection = () => {
-      const imageFragment = (item: any) => (
-        <Card className={"p-10"}>
-          <Grid container spacing={2} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
-              <Img
-                max={isXxs ? 230 : 280}
-                hover={true}
-                shadow={true}
-                radius={true}
-                group={"menu"}
-                src={item.menu_images && item.menu_images[0]}
-                onClick={() => {
-                  navigate("/menu/detail", {
-                    state: {
-                      _id: item?._id
-                    }
-                  });
-                }}
-              />
-            </Grid>
+      const imageFragment = (item: any) => (          <Grid container spacing={0} columns={12}>
+          <Grid size={12} className={"d-center p-10"}>
+            <Img
+              max={isXxs ? 230 : 280}
+              hover={true}
+              shadow={true}
+              radius={true}
+              group={"menu"}
+              src={item.menu_images && item.menu_images[0]}
+              onClick={() => {
+                navigate("/menu/detail", {
+                  state: {
+                    _id: item?._id,
+                    location_category: item?.category
+                  }
+                });
+              }}
+            />
           </Grid>
-        </Card>
+        </Grid>
       );
       const descFragment = (item: any) => (
-        <Card className={"p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid size={12}>
-              <Div className={"fs-1-2rem fw-600"}>
-                {item?.menu_name}
-              </Div>
-            </Grid>
+        <Grid container spacing={0} columns={12}>
+          <Grid size={12} className={"d-center p-0"}>
+            <Div className={"fs-1-2rem fw-600"}>
+              {item?.menu_name}
+            </Div>
           </Grid>
-        </Card>
+        </Grid>
       );
       return (
-        <Card className={"border-0 radius-0 shadow-0"}>
-          <Grid container spacing={0} columns={12}>
-            {OBJECT.map((item: any, i: number) => (
-              <Grid
-                key={`list-${i}`}
-                size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }}
-                className={"d-column-center"}
-              >
-                {imageFragment(item)}
-                {descFragment(item)}
-              </Grid>
-            ))}
-          </Grid>
-        </Card>
+        <Grid container spacing={0} columns={12}>
+          {OBJECT.map((item: any, i: number) => (
+            <Grid
+              key={`list-${i}`}
+              size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }}
+              className={"d-column-center"}
+            >
+              {imageFragment(item)}
+              {descFragment(item)}
+            </Grid>
+          ))}
+        </Grid>
       )
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-10"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={3} className={"d-column-center"}>
-            <Select
-              label={""}
-              value={PAGING?.sort}
-              inputclass={"h-min0 h-5vh"}
-              onChange={(e: any) => (
-                setPAGING((prev: any) => ({
-                  ...prev,
-                  sort: e.target.value
-                }))
-              )}
-            >
-              {["asc", "desc"]?.map((item: string) => (
-                <MenuItem
-                  key={item}
-                  value={item}
-                  selected={PAGING?.sort === item}
-                  onChange={(e: any) => (
-                    setPAGING((prev: any) => ({
-                      ...prev,
-                      sort: e.target.value
-                    }))
-                  )}
-                >
-                  <Div className={"fs-0-8rem"}>
-                    {item === "asc" && "오름차순"}
-                    {item === "desc" && "내림차순"}
-                  </Div>
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-          <Grid size={7} className={"d-column-center"}>
-            <TablePagination
-              rowsPerPageOptions={[10]}
-              rowsPerPage={10}
-              component={"div"}
-              labelRowsPerPage={""}
-              count={COUNT.totalCnt}
-              page={PAGING.page}
-              showFirstButton={true}
-              showLastButton={true}
-              className={"border-bottom-1"}
-              onPageChange={(_event, newPage) => {
-                setPAGING((prev: any) => ({
-                  ...prev,
-                  page: newPage
-                }));
-              }}
-              onRowsPerPageChange={(event) => {
-                setPAGING((prev: any) => ({
-                  ...prev,
-                  limit: parseFloat(event.target.value)
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={2} className={`${isAdmin ? "d-column-center" : "d-none"}`}>
-            <Btn
-              className={"bg-burgundy fs-0-7rem"}
-              onClick={() => {
-                navigate("/menu/save");
-              }}
-            >
-              등록
-            </Btn>
-          </Grid>
+      <Grid container spacing={2} columns={12}>
+        <Grid size={3} className={"d-column-center"}>
+          <Select
+            label={""}
+            value={PAGING?.sort}
+            inputclass={"h-min0 h-5vh"}
+            onChange={(e: any) => (
+              setPAGING((prev: any) => ({
+                ...prev,
+                sort: e.target.value
+              }))
+            )}
+          >
+            {["asc", "desc"]?.map((item: string) => (
+              <MenuItem
+                key={item}
+                value={item}
+                selected={PAGING?.sort === item}
+                onChange={(e: any) => (
+                  setPAGING((prev: any) => ({
+                    ...prev,
+                    sort: e.target.value
+                  }))
+                )}
+              >
+                <Div className={"fs-0-8rem"}>
+                  {item === "asc" && "오름차순"}
+                  {item === "desc" && "내림차순"}
+                </Div>
+              </MenuItem>
+            ))}
+          </Select>
         </Grid>
-      </Card>
+        <Grid size={7} className={"d-column-center"}>
+          <TablePagination
+            rowsPerPageOptions={[10]}
+            rowsPerPage={10}
+            component={"div"}
+            labelRowsPerPage={""}
+            count={COUNT.totalCnt}
+            page={PAGING.page}
+            showFirstButton={true}
+            showLastButton={true}
+            className={"border-bottom-1"}
+            onPageChange={(_event, newPage) => {
+              setPAGING((prev: any) => ({
+                ...prev,
+                page: newPage
+              }));
+            }}
+            onRowsPerPageChange={(event) => {
+              setPAGING((prev: any) => ({
+                ...prev,
+                limit: parseFloat(event.target.value)
+              }));
+            }}
+          />
+        </Grid>
+        <Grid size={2} className={`${isAdmin ? "d-column-center" : "d-none"}`}>
+          <Btn
+            className={"bg-burgundy fs-0-7rem"}
+            onClick={() => {
+              navigate("/menu/save");
+            }}
+          >
+            등록
+          </Btn>
+        </Grid>
+      </Grid>
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn px-20"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
+      <Grid container spacing={0} columns={12}>
+        <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
+          <Paper className={"content-wrapper fadeIn"}>
             {LOADING ? <Loading /> : listSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}
-          </Grid>
+          </Paper>
         </Grid>
-      </Paper>
+      </Grid>
     );
   };
 

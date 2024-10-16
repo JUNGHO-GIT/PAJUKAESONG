@@ -224,7 +224,8 @@ export const Main = () => {
                         onClick={() => {
                           navigate("/menu/detail", {
                             state: {
-                              _id: item?._id
+                              _id: item?._id,
+                              location_category: item?.category
                             }
                           });
                         }}
@@ -271,87 +272,81 @@ export const Main = () => {
     // 3. notice -----------------------------------------------------------------------------------
     const noticeSection = () => {
       const titleFragment = () => (
-        <Card className={"bg-ivory mt-30 p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid size={12}>
-              <Div className={"fs-1-6rem fw-700"}>
-                공지사항
-              </Div>
-            </Grid>
+        <Grid container spacing={0} columns={12}>
+          <Grid size={12} className={"mt-30 p-0"}>
+            <Div className={"fs-1-6rem fw-700"}>
+              공지사항
+            </Div>
           </Grid>
-        </Card>
+        </Grid>
       );
       const noticeFragment = () => (
-        <Card className={"bg-ivory p-20"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid size={12}>
-              <Swiper
-                spaceBetween={20}
-                slidesPerView={LOADING ? 0 : 1}
-                slidesPerGroup={1}
-                centeredSlides={false}
-                loop={true}
-                navigation={false}
-                className={"p-10"}
-                pagination={{
-                  clickable: true,
-                  enabled: true,
-                  el: '.notice-pagination',
-                }}
-                autoplay={{
-                  delay: 4000,
-                  disableOnInteraction: false,
-                }}
-                modules={[
-                  Pagination,
-                  Autoplay,
-                ]}
-              >
-                {OBJECT_NOTICE?.map((item: any, index: number) => (
-                  <SwiperSlide className={"d-center"} key={index}>
-                    <Card className={"d-column-left border-1 radius-1 shadow-1 p-20"}>
-                      <Img
-                        max={200}
-                        hover={true}
-                        shadow={false}
-                        radius={false}
-                        group={"main"}
-                        src={"logo1.webp"}
-                        onClick={() => {
-                          navigate("/notice/detail", {
-                            state: {
-                              _id: item?._id
-                            }
-                          });
-                        }}
-                      />
-                      <Hr px={40} className={"bg-light-grey"} />
-                      <Div max={20} className={"fs-1-0rem fw-600"}>
-                        {item?.notice_title}
-                      </Div>
-                      <Br px={5} />
-                      <Div className={"fs-0-8rem fw-500 grey"}>
-                        {getDayFmt(item?.notice_regDt)}
-                      </Div>
-                    </Card>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Grid>
+        <Grid container spacing={0} columns={12}>
+          <Grid size={12}>
+            <Swiper
+              spaceBetween={20}
+              slidesPerView={LOADING ? 0 : 1}
+              slidesPerGroup={1}
+              centeredSlides={false}
+              loop={true}
+              navigation={false}
+              pagination={{
+                clickable: true,
+                enabled: true,
+                el: '.notice-pagination',
+              }}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+              }}
+              modules={[
+                Pagination,
+                Autoplay,
+              ]}
+            >
+              {OBJECT_NOTICE?.map((item: any, index: number) => (
+                <SwiperSlide
+                  key={index}
+                  className={"d-column-left border-1 radius-1 shadow-1 p-20"} 
+                >
+                  <Img
+                    max={200}
+                    hover={true}
+                    shadow={false}
+                    radius={false}
+                    group={"main"}
+                    src={"logo1.webp"}
+                    onClick={() => {
+                      navigate("/notice/detail", {
+                        state: {
+                          _id: item?._id
+                        }
+                      });
+                    }}
+                  />
+                  <Hr px={40} className={"bg-light-grey"} />
+                  <Div max={20} className={"fs-1-0rem fw-600"}>
+                    {item?.notice_title}
+                  </Div>
+                  <Br px={5} />
+                  <Div className={"fs-0-8rem fw-500 grey"}>
+                    {getDayFmt(item?.notice_regDt)}
+                  </Div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </Grid>
-        </Card>
+        </Grid>
       );
       const paginationFragment = () => (
-        <Card className={"bg-ivory mb-30 p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid size={12}>
-              <Div className={"notice-pagination transform-none"} />
-            </Grid>
+        <Grid container spacing={0} columns={12}>
+          <Grid size={12} className={"mb-30 p-0"}>
+            <Div className={"notice-pagination transform-none"} />
           </Grid>
-        </Card>
+        </Grid>
       );
       return (
-        <Card className={"bg-ivory border-top-1 radius-0 shadow-0 p-0"}>
+        <Card className={"border-top-1 radius-0 shadow-0 p-0"}>
           <Grid container spacing={0} columns={12}>
             <Grid
               key={`list-${0}`}

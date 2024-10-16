@@ -28,15 +28,15 @@ export const Header = () => {
   useEffect(() => {
     if (isXxs) {
       setTabWidth("");
-      setTabHeight("h-12vh");
+      setTabHeight("h-10vh");
     }
     else if (isXs) {
       setTabWidth("");
-      setTabHeight("h-13vh");
+      setTabHeight("h-10vh");
     }
     else if (isSm) {
       setTabWidth("w-17p");
-      setTabHeight("h-21vh");
+      setTabHeight("h-20vh");
     }
     else if (isMd) {
       setTabWidth("w-17p");

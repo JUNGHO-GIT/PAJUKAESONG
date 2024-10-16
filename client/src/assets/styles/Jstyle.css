@@ -11785,16 +11785,16 @@
   border-left: 1px solid #dbdbdb !important;
 }
 .border-1-burgundy {
-  border: 1px solid #c30104 !important;
+  border: 1px solid #973131 !important;
 }
 .border-top-1-burgundy {
-  border-top: 1px solid #c30104 !important;
+  border-top: 1px solid #973131 !important;
 }
 .border-right-1-burgundy {
-  border-right: 1px solid #c30104 !important;
+  border-right: 1px solid #973131 !important;
 }
 .border-bottom-1-burgundy {
-  border-bottom: 1px solid #c30104 !important;
+  border-bottom: 1px solid #973131 !important;
 }
 .border-2 {
   border: 2px solid #dbdbdb !important;
@@ -11845,16 +11845,16 @@
 }
 
 .burgundy {
-  color: #c30104 !important;
+  color: #973131 !important;
 }
 .pointer-burgundy:hover {
   cursor: pointer !important;
-  color: #c30104 !important;
+  color: #973131 !important;
   transition: transform 0.1s ease-in-out !important;
   transform: scale(1.1) !important;
 }
 .bg-burgundy {
-  background-color: #c30104 !important;
+  background-color: #973131 !important;
 }
 
 .danger {
@@ -11910,16 +11910,16 @@
 }
 
 .ivory {
-  color: #fffcf3 !important;
+  color: #F2ECBE !important;
 }
 .pointer-ivory:hover {
   cursor: pointer !important;
-  color: #fffcf3 !important;
+  color: #F2ECBE !important;
   transition: transform 0.1s ease-in-out !important;
   transform: scale(1.1) !important;
 }
 .bg-ivory {
-  background-color: #fffcf3 !important;
+  background-color: #F2ECBE !important;
 }
 
 .success {
@@ -12204,7 +12204,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  border-top: 3px solid #c30104 !important;
+  border-top: 3px solid #973131 !important;
   border-right: 3px solid transparent;
   animation: loaderAnimation 0.7s linear infinite;
   z-index: 1000000;

@@ -23,22 +23,22 @@ export const Title = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     if (isXxs) {
-      setObjectHeight("h-18vh");
+      setObjectHeight("h-15vh");
     }
     else if (isXs) {
-      setObjectHeight("h-22vh");
+      setObjectHeight("h-15vh");
     }
     else if (isSm) {
-      setObjectHeight("h-26vh");
+      setObjectHeight("h-20vh");
     }
     else if (isMd) {
-      setObjectHeight("h-28vh");
+      setObjectHeight("h-20vh");
     }
     else if (isLg) {
-      setObjectHeight("h-30vh");
+      setObjectHeight("h-25vh");
     }
     else if (isXl) {
-      setObjectHeight("h-32vh");
+      setObjectHeight("h-25vh");
     }
   }, [isXxs, isXs, isSm, isMd, isLg, isXl]);
 
@@ -98,18 +98,10 @@ export const Title = () => {
   // 7. title --------------------------------------------------------------------------------------
   const titleNode = () => {
     const titleSection = () => (
-      <Card className={"p-0"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12} className={"d-column-center"}>
-            <Img
-              hover={true}
-              shadow={false}
-              radius={false}
-              group={imageGroup}
-              src={imageUrl}
-              className={`fadeIn`}
-            />
-            <Div className={"p-absolute d-column-center"}>
+      <Grid container spacing={0} columns={12}>
+        <Grid size={12}>
+          <Card className={"d-column-center"}>
+            <Div className={"p-absolute w-100p h-100p d-column-center"}>
               <Div className={`fs-1-2rem fw-100 ${titleColor}`}>
                 {"PAJU KAESONG"}
               </Div>
@@ -118,23 +110,23 @@ export const Title = () => {
                 {titleValue}
               </Div>
             </Div>
-          </Grid>
+          </Card>
         </Grid>
-      </Card>
+      </Grid>
     );
     return (
-      <Paper
-        className={`layout-wrapper p-relative border-bottom-1 z-100 mb-30 ${objectHeight}`}
-        style={{
-          backgroundColor: objectBgColor,
-        }}
-      >
-        <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
+      <Grid container spacing={0} columns={12}>
+        <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
+          <Paper
+            className={`layout-wrapper p-relative border-bottom-1 z-100 mb-30 ${objectHeight}`}
+            style={{
+              backgroundColor: "#973131"
+            }}
+          >
             {titleSection()}
-          </Grid>
+          </Paper>
         </Grid>
-      </Paper>
+      </Grid>
     );
   };
 
