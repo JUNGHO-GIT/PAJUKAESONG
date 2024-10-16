@@ -9,7 +9,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Div, Hr, Icons, Img, Br } from "@imports/ImportComponents";
 import { TextArea } from "@imports/ImportContainers";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Paper, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const NoticeDetail = () => {
@@ -92,129 +92,103 @@ export const NoticeDetail = () => {
 
   // 7. detailNode ---------------------------------------------------------------------------------
   const detailNode = () => {
-    // 1. title
-    const titleSection = () => (
-      <Card className={"p-0"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
-            <Div className={"fs-2-0rem fw-700"}>
-              공지사항 상세
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
     // 2. detail
     const detailSection = () => {
       const headFragment = (item: any) => (
-        <Card className={"p-10"}>
-          <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
-              <Div className={"fs-1-8rem fw-700 black"}>
-                {item?.notice_title}
-              </Div>
-            </Grid>
-            <Hr px={20} className={"bg-burgundy"} />
+        <Grid container spacing={2} columns={12} className={"p-10"}>
+          <Grid size={12}>
+            <Div className={"fs-1-8rem fw-700 black"}>
+              {item?.notice_title}
+            </Div>
           </Grid>
-        </Card>
+        </Grid>
       );
       const descFragment = (item: any) => (
-        <Card className={"p-10"}>
-          <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
-              <TextArea
-                label={""}
-                readOnly={true}
-                value={item?.notice_content}
-                inputclass={"h-min50vh border-none"}
-              />
-            </Grid>
-            <Grid size={9} className={"d-row-left"}>
-              <Icons
-                key={"Calendar"}
-                name={"Calendar"}
-                fill={"whitesmoke"}
-                className={"w-20 h-20"}
-              />
-              <Div className={"fs-1-0rem fw-500"}>
-                {getDayFmt(item?.notice_regDt)}
-              </Div>
-            </Grid>
-            <Grid size={3} className={"d-row-right"}>
-              <Icons
-                key={"View"}
-                name={"View"}
-                fill={"whitesmoke"}
-                className={"w-20 h-20"}
-              />
-              <Div className={"fs-1-0rem fw-500 me-10"}>
-                {item?.notice_view}
-              </Div>
-            </Grid>
+        <Grid container spacing={2} columns={12} className={"px-10"}>
+          <Grid size={12} className={"d-row-center"}>
+            <TextArea
+              label={""}
+              readOnly={true}
+              value={item?.notice_content}
+              inputclass={"h-min50vh border-none"}
+            />
           </Grid>
-        </Card>
+          <Grid size={9} className={"d-row-left"}>
+            <Icons
+              key={"Calendar"}
+              name={"Calendar"}
+              fill={"whitesmoke"}
+              className={"w-20 h-20"}
+            />
+            <Div className={"fs-1-0rem fw-500"}>
+              {getDayFmt(item?.notice_regDt)}
+            </Div>
+          </Grid>
+          <Grid size={3} className={"d-row-right"}>
+            <Icons
+              key={"View"}
+              name={"View"}
+              fill={"whitesmoke"}
+              className={"w-20 h-20"}
+            />
+            <Div className={"fs-1-0rem fw-500 me-10"}>
+              {item?.notice_view}
+            </Div>
+          </Grid>
+        </Grid>
       );
       return (
-        <Card className={"border-1 radius-1 shadow-1"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid
-              key={`detail-${0}`}
-              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
-              className={"d-column-center"}
-            >
-              {headFragment(OBJECT)}
-              {descFragment(OBJECT)}
-            </Grid>
+        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`detail-${0}`}>
+            {headFragment(OBJECT)}
+            <Hr px={20} className={"bg-burgundy"} />
+            {descFragment(OBJECT)}
           </Grid>
-        </Card>
+        </Grid>
       )
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-10"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
-              onClick={() => {
-                navigate("/notice/list");
-              }}
-            >
-              목록으로
-            </Div>
-          </Grid>
-          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
-              onClick={() => {
-                navigate("/notice/update", {
-                  state: {
-                    _id: OBJECT?._id
-                  }
-                });
-              }}
-            >
-              수정
-            </Div>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
-              onClick={() => {
-                flowDelete();
-              }}
-            >
-              삭제
-            </Div>
-          </Grid>
+      <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
+          <Div
+            className={"fs-1-0rem fw-700 pointer-burgundy"}
+            onClick={() => {
+              navigate("/notice/list");
+            }}
+          >
+            목록으로
+          </Div>
         </Grid>
-      </Card>
+        <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
+          <Div
+            className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
+            onClick={() => {
+              navigate("/notice/update", {
+                state: {
+                  _id: OBJECT?._id
+                }
+              });
+            }}
+          >
+            수정
+          </Div>
+          <Div
+            className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
+            onClick={() => {
+              flowDelete();
+            }}
+          >
+            삭제
+          </Div>
+        </Grid>
+      </Grid>
     );
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
+        <Grid container spacing={0} columns={12} className={"py-20"}>
+          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
             {LOADING ? <Loading /> : detailSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}

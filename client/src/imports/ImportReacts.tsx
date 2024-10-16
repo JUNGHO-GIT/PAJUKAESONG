@@ -1,6 +1,7 @@
 // ImportReacts.tsx
 
 import React from "react";
+import {Fragment} from "react";
 import ReactDOM from "react-dom/client";
 import { createRoot } from 'react-dom/client';
 import { StrictMode } from "react";
@@ -14,6 +15,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // -------------------------------------------------------------------------------------------------
 export {
   React,
+  Fragment,
   ReactDOM,
   createRoot,
   StrictMode,

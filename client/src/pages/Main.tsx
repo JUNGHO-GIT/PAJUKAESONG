@@ -8,7 +8,7 @@ import { Pagination } from "@imports/ImportUtils";
 import { Menu, Notice } from "@imports/ImportSchemas";
 import { Location } from "@imports/ImportContainers";
 import { Div, Img, Br, Hr } from "@imports/ImportComponents";
-import { Grid, Card, Paper, Backdrop } from "@imports/ImportMuis";
+import { Grid, Paper } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Main = () => {
@@ -76,220 +76,167 @@ export const Main = () => {
     // 1. main -------------------------------------------------------------------------------------
     const mainSection = () => {
       const imageFragment = () => (
-        <Card className={"p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid size={12} className={"d-center"}>
-              <Swiper
-                spaceBetween={0}
-                slidesPerView={LOADING ? 0 : 1}
-                slidesPerGroup={1}
-                centeredSlides={true}
-                loop={true}
-                autoplay={{
-                  delay: 5000,
-                  disableOnInteraction: false,
-                }}
-                navigation={false}
-                modules={[
-                  Autoplay,
-                ]}
-              >
-                {OBJECT_MENU?.map((item: any, index: number) => (
-                  <SwiperSlide key={index}>
-                    <Card className={"d-column-center"}>
-                      <Backdrop
-                        open={true}
-                        appear={true}
-                        className={"bg-black opacity-5"}
-                      >
-                        <Div className={"fs-1-6rem fw-700 white"}>
-                          {item?.menu_name}
-                        </Div>
-                      </Backdrop>
-                      <Img
-                        hover={false}
-                        shadow={false}
-                        radius={false}
-                        group={"menu"}
-                        src={item?.menu_images && item?.menu_images[0]}
-                        onClick={() => {
-                          navigate("/menu/detail", {
-                            state: {
-                              _id: item?._id
-                            }
-                          });
-                        }}
-                      />
-                    </Card>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Grid>
+        <Grid container spacing={0} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Swiper
+              spaceBetween={0}
+              slidesPerView={LOADING ? 0 : 1}
+              slidesPerGroup={1}
+              centeredSlides={true}
+              loop={true}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+              }}
+              navigation={false}
+              modules={[
+                Autoplay,
+              ]}
+            >
+              {mainArray.map((item: any, index: number) => (
+                <SwiperSlide key={index}>
+                  <Div className={"d-col-center"}>
+                    <Img
+                      hover={false}
+                      shadow={false}
+                      radius={false}
+                      group={"main"}
+                      src={item}
+                    />
+                  </Div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </Grid>
-        </Card>
+        </Grid>
       );
       return (
-        <Card className={"p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid
-              key={`list-${0}`}
-              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
-              className={"d-column-center"}
-            >
-              {imageFragment()}
-            </Grid>
+        <Grid container spacing={0} columns={12} className={"border-top-1"}>
+          <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
+            {imageFragment()}
           </Grid>
-        </Card>
+        </Grid>
       );
     };
 
     // 2. menu -------------------------------------------------------------------------------------
     const menuSection = () => {
-      const titleFragment = () => (
-        <Card className={"mt-30 p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid size={12}>
-              <Div className={"fs-1-6rem fw-700"}>
-                메뉴 소개
-              </Div>
-            </Grid>
-          </Grid>
-        </Card>
-      );
       const selectFragment = () => (
-        <Card className={"p-10"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid size={12} className={"d-row-center"}>
-              <Div className={`${category === "main" ? "bg-burgundy" : ""} border-1 radius-50 p-10 me-1vw hover`}>
-                <Div
-                  className={`fs-0-8rem fw-600 ${category === "main" ? "white" : "black"}`}
-                  onClick={() => {
-                    setCategory("main");
-                  }}
-                >
-                  메인 메뉴
-                </Div>
+        <Grid container spacing={0} columns={12} className={"p-10"}>
+          <Grid size={12} className={"d-row-center"}>
+            <Div className={`${category === "main" ? "bg-burgundy" : ""} border-1 radius-50 p-10 me-1vw hover`}>
+              <Div
+                className={`fs-0-8rem fw-600 ${category === "main" ? "white" : "black"}`}
+                onClick={() => {
+                  setCategory("main");
+                }}
+              >
+                메인 메뉴
               </Div>
-              <Div className={`${category === "side" ? "bg-burgundy" : ""} border-1 radius-50 p-10 ms-1vw hover`}>
-                <Div
-                  className={`fs-0-8rem fw-600 ${category === "side" ? "white" : "black"}`}
-                  onClick={() => {
-                    setCategory("side");
-                  }}
-                >
-                  사이드 메뉴
-                </Div>
+            </Div>
+            <Div className={`${category === "side" ? "bg-burgundy" : ""} border-1 radius-50 p-10 ms-1vw hover`}>
+              <Div
+                className={`fs-0-8rem fw-600 ${category === "side" ? "white" : "black"}`}
+                onClick={() => {
+                  setCategory("side");
+                }}
+              >
+                사이드 메뉴
               </Div>
-            </Grid>
+            </Div>
           </Grid>
-        </Card>
+        </Grid>
       );
       const menuFragment = () => (
-        <Card className={"p-10"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid size={12}>
-              <Swiper
-                spaceBetween={0}
-                slidesPerView={LOADING ? 0 : (
-                  isXxs ? 2 : isXs ? 2 : isSm ? 2 : isMd ? 3 : isLg ? 3 : isXl ? 3 : 3
-                )}
-                slidesPerGroup={1}
-                centeredSlides={false}
-                loop={true}
-                navigation={false}
-                autoplay={{
-                  delay: 2000,
-                  disableOnInteraction: false,
-                }}
-                pagination={{
-                  clickable: true,
-                  enabled: true,
-                  el: '.menu-pagination',
-                }}
-                modules={[
-                  Pagination,
-                  Autoplay,
-                ]}
-              >
-                {OBJECT_MENU?.map((item: any, index: number) => (
-                  <SwiperSlide className={"d-center"} key={index}>
-                    <Card className={"d-column-center p-10"}>
-                      <Img
-                        max={isXxs ? 140 : 170}
-                        hover={true}
-                        shadow={true}
-                        radius={true}
-                        group={"menu"}
-                        src={item?.menu_images && item?.menu_images[0]}
-                        onClick={() => {
-                          navigate("/menu/detail", {
-                            state: {
-                              _id: item?._id,
-                              location_category: item?.category
-                            }
-                          });
-                        }}
-                      />
-                      <Br px={5} />
-                      <Div max={10} className={"fs-1-0rem fw-600"}>
-                        {item?.menu_name}
-                      </Div>
-                    </Card>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Grid>
+        <Grid container spacing={0} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Swiper
+              spaceBetween={30}
+              slidesPerView={LOADING ? 0 : (
+                isXxs ? 2 : isXs ? 2 : isSm ? 3 : isMd ? 3 : isLg ? 3 : isXl ? 3 : 3
+              )}
+              slidesPerGroup={1}
+              centeredSlides={false}
+              loop={true}
+              navigation={false}
+              className={"p-20"}
+              autoplay={{
+                delay: 2000,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                clickable: true,
+                enabled: true,
+                el: '.menu-pagination',
+              }}
+              modules={[
+                Pagination,
+                Autoplay,
+              ]}
+            >
+              {OBJECT_MENU?.map((item: any, index: number) => (
+                <SwiperSlide key={index}>
+                  <Div className={"d-col-center"}>
+                    <Img
+                      max={250}
+                      hover={true}
+                      shadow={true}
+                      radius={true}
+                      group={"menu"}
+                      src={item?.menu_images && item?.menu_images[0]}
+                      onClick={() => {
+                        navigate("/menu/detail", {
+                          state: {
+                            _id: item?._id,
+                            location_category: item?.category
+                          }
+                        });
+                      }}
+                    />
+                    <Br px={5} />
+                    <Div max={10} className={"fs-1-0rem fw-600"}>
+                      {item?.menu_name}
+                    </Div>
+                  </Div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </Grid>
-        </Card>
+        </Grid>
       );
       const paginationFragment = () => (
-        <Card className={"mb-30 p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid size={12}>
-              <Div className={"menu-pagination transform-none"} />
-            </Grid>
+        <Grid container spacing={0} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"menu-pagination transform-none"} />
           </Grid>
-        </Card>
+        </Grid>
       );
       return (
-        <Card className={"border-top-1 radius-0 shadow-0 p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid
-              key={`list-${0}`}
-              size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
-              className={"d-column-center"}
-            >
-              {titleFragment()}
-              {selectFragment()}
-              {menuFragment()}
-              {paginationFragment()}
-            </Grid>
+        <Grid container spacing={0} columns={12} className={"border-top-1 py-20"}>
+          <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
+            {selectFragment()}
+            {menuFragment()}
+            {paginationFragment()}
           </Grid>
-        </Card>
+        </Grid>
       );
     };
 
     // 3. notice -----------------------------------------------------------------------------------
     const noticeSection = () => {
-      const titleFragment = () => (
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12} className={"mt-30 p-0"}>
-            <Div className={"fs-1-6rem fw-700"}>
-              공지사항
-            </Div>
-          </Grid>
-        </Grid>
-      );
       const noticeFragment = () => (
         <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
+          <Grid size={12} className={"d-center"}>
             <Swiper
-              spaceBetween={20}
-              slidesPerView={LOADING ? 0 : 1}
+              spaceBetween={30}
+              slidesPerView={LOADING ? 0 : (
+                isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : 1
+              )}
               slidesPerGroup={1}
               centeredSlides={false}
               loop={true}
               navigation={false}
+              className={"p-20"}
               pagination={{
                 clickable: true,
                 enabled: true,
@@ -305,32 +252,31 @@ export const Main = () => {
               ]}
             >
               {OBJECT_NOTICE?.map((item: any, index: number) => (
-                <SwiperSlide
-                  key={index}
-                  className={"d-column-left border-1 radius-1 shadow-1 p-20"} 
-                >
-                  <Img
-                    max={200}
-                    hover={true}
-                    shadow={false}
-                    radius={false}
-                    group={"main"}
-                    src={"logo1.webp"}
-                    onClick={() => {
-                      navigate("/notice/detail", {
-                        state: {
-                          _id: item?._id
-                        }
-                      });
-                    }}
-                  />
-                  <Hr px={40} className={"bg-light-grey"} />
-                  <Div max={20} className={"fs-1-0rem fw-600"}>
-                    {item?.notice_title}
-                  </Div>
-                  <Br px={5} />
-                  <Div className={"fs-0-8rem fw-500 grey"}>
-                    {getDayFmt(item?.notice_regDt)}
+                <SwiperSlide key={index}>
+                  <Div className={"d-col-left bg-white border-1 radius-1 shadow-1 p-20"}>
+                    <Img
+                      max={200}
+                      hover={true}
+                      shadow={false}
+                      radius={false}
+                      group={"main"}
+                      src={"logo1.webp"}
+                      onClick={() => {
+                        navigate("/notice/detail", {
+                          state: {
+                            _id: item?._id
+                          }
+                        });
+                      }}
+                    />
+                    <Hr px={40} className={"bg-light-grey"} />
+                    <Div max={20} className={"fs-1-0rem fw-600"}>
+                      {item?.notice_title}
+                    </Div>
+                    <Br px={5} />
+                    <Div className={"fs-0-8rem fw-500 grey"}>
+                      {getDayFmt(item?.notice_regDt)}
+                    </Div>
                   </Div>
                 </SwiperSlide>
               ))}
@@ -340,71 +286,48 @@ export const Main = () => {
       );
       const paginationFragment = () => (
         <Grid container spacing={0} columns={12}>
-          <Grid size={12} className={"mb-30 p-0"}>
+          <Grid size={12} className={"d-center"}>
             <Div className={"notice-pagination transform-none"} />
           </Grid>
         </Grid>
       );
       return (
-        <Card className={"border-top-1 radius-0 shadow-0 p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid
-              key={`list-${0}`}
-              size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
-              className={"d-column-center"}
-            >
-              {titleFragment()}
-              {noticeFragment()}
-              {paginationFragment()}
-            </Grid>
+        <Grid container spacing={0} columns={12} className={"bg-ivory border-top-1 py-20"}>
+          <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
+            {noticeFragment()}
+            {paginationFragment()}
           </Grid>
-        </Card>
+        </Grid>
       );
     };
 
     // 4. location ---------------------------------------------------------------------------------
     const locationSection = () => {
-      const titleFragment = () => (
-        <Card className={"mt-30 p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid size={12}>
-              <Div className={"fs-1-6rem fw-700"}>
-                오시는 길
-              </Div>
-            </Grid>
-          </Grid>
-        </Card>
-      );
       const locationFragment = () => (
-        <Card className={"p-20"}>
-          <Location
-            width={"100%"}
-            height={"60vh"}
-            className={"border-1 shadow-3 radius-1"}
-          />
-        </Card>
+        <Grid container spacing={0} columns={12} className={"p-20"}>
+          <Grid size={12} className={"d-center"}>
+            <Location
+              width={"100%"}
+              height={"60vh"}
+              className={"border-1 shadow-3 radius-1"}
+            />
+          </Grid>
+        </Grid>
       );
       return (
-        <Card className={"border-top-1 radius-0 shadow-0 p-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid
-              key={`list-${0}`}
-              size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }}
-              className={"d-column-center"}
-            >
-              {titleFragment()}
-              {locationFragment()}
-            </Grid>
+        <Grid container spacing={0} columns={12} className={"border-top-1 py-20"}>
+          <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
+            {locationFragment()}
           </Grid>
-        </Card>
+        </Grid>
       );
     };
 
-    // 7-10. return
+    // 10. return ----------------------------------------------------------------------------------
     return (
-      <Paper className={"content-wrapper fadeIn p-0"}>
+      <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-col-center"}>
             {mainSection()}
             {menuSection()}
             {noticeSection()}
@@ -414,7 +337,6 @@ export const Main = () => {
       </Paper>
     );
   };
-
 
   // 10. return ------------------------------------------------------------------------------------
   return (

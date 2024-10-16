@@ -5,11 +5,11 @@ import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateContact } from "@imports/ImportValidates";
 import { axios } from "@imports/ImportUtils";
-import { Loading, Empty } from "@imports/ImportLayouts";
+import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
 import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
 import { Input } from "@imports/ImportContainers";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Paper, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ContactFind = () => {
@@ -68,109 +68,85 @@ export const ContactFind = () => {
 
   // 7. findNode -----------------------------------------------------------------------------------
   const findNode = () => {
-    // 1. title
-    const titleSection = () => (
-      <Card className={"p-0"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
-            <Div className={"fs-2-0rem fw-700"}>
-              문의 조회
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
     // 2. find
     const findSection = () => {
       const findFragment = (item: any, i: number) => (
-        <Card className={"p-20"}>
-          <Grid container spacing={3} columns={12}>
-            <Grid size={12}>
-              <Input
-                variant={"outlined"}
-                label={"이름"}
-                required={true}
-                helperText={"문의자 이름을 입력해주세요."}
-                value={item?.contact_name}
-                inputRef={REFS?.[i]?.contact_name}
-                error={ERRORS?.[i]?.contact_name}
-                onChange={(e: any) => {
+        <Grid container spacing={3} columns={12} className={"p-20"}>
+          <Grid size={12}>
+            <Input
+              variant={"outlined"}
+              label={"이름"}
+              required={true}
+              helperText={"문의자 이름을 입력해주세요."}
+              value={item?.contact_name}
+              inputRef={REFS?.[i]?.contact_name}
+              error={ERRORS?.[i]?.contact_name}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  contact_name: e.target.value,
+                }));
+              }}
+            />
+          </Grid>
+          <Grid size={12}>
+            <Input
+              variant={"outlined"}
+              label={"전화번호"}
+              required={true}
+              helperText={"문의자 전화번호를 입력해주세요."}
+              value={item?.contact_phone}
+              inputRef={REFS?.[i]?.contact_phone}
+              error={ERRORS?.[i]?.contact_phone}
+              placeholder={"010-1234-5678"}
+              onChange={(e: any) => {
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
+                if (value.length > 11) {
                   setOBJECT((prev: any) => ({
                     ...prev,
-                    contact_name: e.target.value,
+                    contact_phone: prev.contact_phone,
                   }));
-                }}
-              />
-            </Grid>
-            <Grid size={12}>
-              <Input
-                variant={"outlined"}
-                label={"전화번호"}
-                required={true}
-                helperText={"문의자 전화번호를 입력해주세요."}
-                value={item?.contact_phone}
-                inputRef={REFS?.[i]?.contact_phone}
-                error={ERRORS?.[i]?.contact_phone}
-                placeholder={"010-1234-5678"}
-                onChange={(e: any) => {
-                  const value = e.target.value.replace(/[^0-9]/g, '');
-                  const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
-                  if (value.length > 11) {
-                    setOBJECT((prev: any) => ({
-                      ...prev,
-                      contact_phone: prev.contact_phone,
-                    }));
-                  }
-                  else {
-                    setOBJECT((prev: any) => ({
-                      ...prev,
-                      contact_phone: newValue,
-                    }));
-                  }
-                }}
-              />
-            </Grid>
+                }
+                else {
+                  setOBJECT((prev: any) => ({
+                    ...prev,
+                    contact_phone: newValue,
+                  }));
+                }
+              }}
+            />
           </Grid>
-        </Card>
+        </Grid>
       );
       return (
-        <Card className={"border-1 radius-1 shadow-1"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid
-              key={`find-${0}`}
-              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
-              className={"d-column-center"}
-            >
-              {findFragment(OBJECT, 0)}
-            </Grid>
+        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`find-${0}`}>
+            {findFragment(OBJECT, 0)}
           </Grid>
-        </Card>
+        </Grid>
       );
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-10"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
-            <Btn
-              className={"w-100p fs-1-0rem bg-burgundy"}
-              onClick={() => {
-                flowSearch();
-              }}
-            >
-              조회하기
-            </Btn>
-          </Grid>
+      <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid size={12}>
+          <Btn
+            className={"w-100p fs-1-0rem bg-burgundy"}
+            onClick={() => {
+              flowSearch();
+            }}
+          >
+            조회하기
+          </Btn>
         </Grid>
-      </Card>
+      </Grid>
     );
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
+        <Grid container spacing={0} columns={12} className={"py-20"}>
+          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
             {LOADING ? <Loading /> : findSection()}
             <Br px={20} />
             {btnSection()}

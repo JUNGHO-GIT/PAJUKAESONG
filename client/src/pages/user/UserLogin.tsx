@@ -9,7 +9,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { User } from "@imports/ImportSchemas";
 import { Input } from "@imports/ImportContainers";
 import { Div, Btn, Hr, Br } from "@imports/ImportComponents";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Paper, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const UserLogin = () => {
@@ -106,142 +106,116 @@ export const UserLogin = () => {
 
   // 7. loginNode ----------------------------------------------------------------------------------
   const loginNode = () => {
-    // 1. title
-    const titleSection = () => (
-      <Card className={"p-0"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
-            <Div className={"fs-2-0rem fw-700"}>
-              로그인
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
     // 2. login
     const loginSection = () => {
       const loginFragment = (item: any, i: number) => (
-        <Card className={"p-20"}>
-          <Grid container spacing={3} columns={12}>
-            <Grid size={12}>
-              <Input
-                variant={"outlined"}
-                required={true}
-                label={"아이디"}
-                helperText={"이메일 형식으로 입력해주세요."}
-                value={item?.user_id}
-                inputRef={REFS?.[i]?.user_id}
-                error={ERRORS?.[i]?.user_id}
-                disabled={isAdmin || isUser}
-                onChange={(e: any) => {
-                  const value = e.target.value;
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    user_id: value,
-                  }));
-                }}
-              />
-            </Grid>
-            <Grid size={12}>
-              <Input
-                variant={"outlined"}
-                required={true}
-                type={"password"}
-                label={"비밀번호"}
-                helperText={"영문, 숫자, 특수문자 포함 8자 이상 입력해주세요."}
-                value={item?.user_pw}
-                inputRef={REFS?.[i]?.user_pw}
-                error={ERRORS?.[i]?.user_pw}
-                disabled={isAdmin || isUser}
-                onChange={(e: any) => {
-                  const value = e.target.value;
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    user_pw: value,
-                  }));
-                }}
-              />
-            </Grid>
+        <Grid container spacing={3} columns={12} className={"p-20"}>
+          <Grid size={12}>
+            <Input
+              variant={"outlined"}
+              required={true}
+              label={"아이디"}
+              helperText={"이메일 형식으로 입력해주세요."}
+              value={item?.user_id}
+              inputRef={REFS?.[i]?.user_id}
+              error={ERRORS?.[i]?.user_id}
+              disabled={isAdmin || isUser}
+              onChange={(e: any) => {
+                const value = e.target.value;
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  user_id: value,
+                }));
+              }}
+            />
           </Grid>
-        </Card>
+          <Grid size={12}>
+            <Input
+              variant={"outlined"}
+              required={true}
+              type={"password"}
+              label={"비밀번호"}
+              helperText={"영문, 숫자, 특수문자 포함 8자 이상 입력해주세요."}
+              value={item?.user_pw}
+              inputRef={REFS?.[i]?.user_pw}
+              error={ERRORS?.[i]?.user_pw}
+              disabled={isAdmin || isUser}
+              onChange={(e: any) => {
+                const value = e.target.value;
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  user_pw: value,
+                }));
+              }}
+            />
+          </Grid>
+        </Grid>
       );
       return (
-        <Card className={"border-1 radius-1 shadow-1"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid
-              key={`login-${0}`}
-              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
-              className={"d-column-center"}
-            >
-              {loginFragment(OBJECT, 0)}
-            </Grid>
+        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`login-${0}`}>
+            {loginFragment(OBJECT, 0)}
           </Grid>
-        </Card>
+        </Grid>
       );
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-10"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12}>
-            {(isAdmin || isUser) ? (
-              <Btn
-                className={"w-100p bg-burgundy fs-1-0rem"}
-                onClick={() => {
-                  handleLogout();
-                }}
-              >
-                로그아웃
-              </Btn>
-            ) : (
-              <Btn
-                color={"primary"}
-                className={"w-100p bg-primary fs-1-0rem"}
-                onClick={() => {
-                  flowLogin();
-                }}
-              >
-                로그인
-              </Btn>
-            )}
-          </Grid>
+      <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid size={12}>
+          {(isAdmin || isUser) ? (
+            <Btn
+              className={"w-100p bg-burgundy fs-1-0rem"}
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              로그아웃
+            </Btn>
+          ) : (
+            <Btn
+              color={"primary"}
+              className={"w-100p bg-primary fs-1-0rem"}
+              onClick={() => {
+                flowLogin();
+              }}
+            >
+              로그인
+            </Btn>
+          )}
         </Grid>
-      </Card>
+      </Grid>
     );
     // 4. link
     const linkSection = () => (
-      <Card className={"px-10"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-0-8rem"}>
-              아이디가 없는 경우
-            </Div>
-            <Div
-              className={"blue pointer fs-0-8rem ms-10"}
-            >
-              회원가입
-            </Div>
-          </Grid>
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-0-8rem"}>
-              비밀번호를 잊은 경우
-            </Div>
-            <Div
-              className={"blue pointer fs-0-8rem ms-10"}
-            >
-              비밀번호 찾기
-            </Div>
-          </Grid>
+      <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid size={12} className={"d-row-center"}>
+          <Div className={"fs-0-8rem"}>
+            아이디가 없는 경우
+          </Div>
+          <Div
+            className={"blue pointer fs-0-8rem ms-10"}
+          >
+            회원가입
+          </Div>
         </Grid>
-      </Card>
+        <Grid size={12} className={"d-row-center"}>
+          <Div className={"fs-0-8rem"}>
+            비밀번호를 잊은 경우
+          </Div>
+          <Div
+            className={"blue pointer fs-0-8rem ms-10"}
+          >
+            비밀번호 찾기
+          </Div>
+        </Grid>
+      </Grid>
     );
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
+        <Grid container spacing={0} columns={12} className={"py-20"}>
+          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
             {LOADING ? <Loading /> : loginSection()}
             <Br px={30} />
             {btnSection()}

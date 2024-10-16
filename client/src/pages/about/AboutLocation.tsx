@@ -1,46 +1,30 @@
 // AboutLocation.tsx
 
 import { Location } from "@imports/ImportContainers";
-import { Div, Br } from "@imports/ImportComponents";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Paper, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutLocation = () => {
 
   // 7. locationNode -------------------------------------------------------------------------------
   const locationNode = () => {
-    // 1. title
-    const titleSection = () => (
-      <Card className={"p-0"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
-            <Div className={"fs-2-0rem fw-700"}>
-              오시는길
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
     // 2. location
     const locationSection = () => (
-      <Card className={"border-1 shadow-3 radius-1 p-0"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
-            <Location
-              width={"100%"}
-              height={"60vh"}
-            />
-          </Grid>
+      <Grid container spacing={0} columns={12}>
+        <Grid size={12} className={"d-center"}>
+          <Location
+            width={"100%"}
+            height={"60vh"}
+            className={"border-1 shadow-3 radius-1"}
+          />
         </Grid>
-      </Card>
+      </Grid>
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn p-20"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={0} columns={12} className={"py-20"}>
+          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
             {locationSection()}
           </Grid>
         </Grid>

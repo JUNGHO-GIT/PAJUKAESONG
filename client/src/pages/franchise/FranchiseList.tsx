@@ -6,9 +6,9 @@ import { useAlertStore } from "@imports/ImportStores";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Btn } from "@imports/ImportComponents";
+import { Div, Img, Hr, Btn } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
-import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
+import { Paper, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseList = () => {
@@ -60,152 +60,126 @@ export const FranchiseList = () => {
 
   // 7. listNode -----------------------------------------------------------------------------------
   const listNode = () => {
-    // 1. title
-    const titleSection = () => (
-      <Card className={"p-0"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
-            <Div className={"fs-2-0rem fw-700"}>
-              가맹 지점
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
     // 2. list
     const listSection = () => {
       const imageFragment = (item: any) => (
-        <Card className={"p-10"}>
-          <Grid container spacing={2} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
-              <Img
-                max={isXxs ? 450 : 500}
-                hover={true}
-                shadow={true}
-                radius={true}
-                group={"franchise"}
-                src={item.franchise_images && item.franchise_images[0]}
-                onClick={() => {
-                  navigate("/franchise/detail", {
-                    state: {
-                      _id: item?._id
-                    }
-                  });
-                }}
-              />
-            </Grid>
+        <Grid container spacing={0} columns={12} className={"p-10"}>
+          <Grid size={12} className={"d-col-center"}>
+            <Img
+              max={isXxs ? 450 : 500}
+              hover={true}
+              shadow={true}
+              radius={true}
+              group={"franchise"}
+              src={item.franchise_images && item.franchise_images[0]}
+              onClick={() => {
+                navigate("/franchise/detail", {
+                  state: {
+                    _id: item?._id
+                  }
+                });
+              }}
+            />
           </Grid>
-        </Card>
+        </Grid>
       );
       const descFragment = (item: any) => (
-        <Card className={"p-0"}>
-          <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
-              <Div className={"fs-1-4rem fw-600"}>
-                {item?.franchise_name}
-              </Div>
-            </Grid>
+        <Grid container spacing={0} columns={12}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-1-2rem fw-600"}>
+              {item?.franchise_name}
+            </Div>
           </Grid>
-        </Card>
+        </Grid>
       );
       return (
-        <Card className={"border-0 radius-0 shadow-0"}>
-          <Grid container spacing={0} columns={12}>
-            {OBJECT.map((item: any, i: number) => (
-              <Grid
-                key={`list-${i}`}
-                size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
-                className={"d-column-center"}
-              >
-                {imageFragment(item)}
-                {descFragment(item)}
-              </Grid>
-            ))}
-          </Grid>
-        </Card>
+        <Grid container spacing={0} columns={12}>
+          {OBJECT?.map((item: any, i: number) => (
+            <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`list-${i}`}>
+              {imageFragment(item)}
+              {descFragment(item)}
+            </Grid>
+          ))}
+        </Grid>
       )
     };
     // 3. filter
     const filterSection = () => (
-      <Card className={"px-10"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={3} className={"d-column-center"}>
-            <Select
-              label={""}
-              value={PAGING?.sort}
-              inputclass={"h-min0 h-5vh"}
-              onChange={(e: any) => (
-                setPAGING((prev: any) => ({
-                  ...prev,
-                  sort: e.target.value
-                }))
-              )}
-            >
-              {["asc", "desc"]?.map((item: string) => (
-                <MenuItem
-                  key={item}
-                  value={item}
-                  selected={PAGING?.sort === item}
-                  onChange={(e: any) => (
-                    setPAGING((prev: any) => ({
-                      ...prev,
-                      sort: e.target.value
-                    }))
-                  )}
-                >
-                  <Div className={"fs-0-8rem"}>
-                    {item === "asc" && "오름차순"}
-                    {item === "desc" && "내림차순"}
-                  </Div>
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-          <Grid size={7} className={"d-column-center"}>
-            <TablePagination
-              rowsPerPageOptions={[10]}
-              rowsPerPage={10}
-              component={"div"}
-              labelRowsPerPage={""}
-              count={COUNT.totalCnt}
-              page={PAGING.page}
-              showFirstButton={true}
-              showLastButton={true}
-              className={"border-bottom-1"}
-              onPageChange={(_event, newPage) => {
-                setPAGING((prev: any) => ({
-                  ...prev,
-                  page: newPage
-                }));
-              }}
-              onRowsPerPageChange={(event) => {
-                setPAGING((prev: any) => ({
-                  ...prev,
-                  limit: parseFloat(event.target.value)
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={2} className={`${isAdmin ? "d-column-center" : "d-none"}`}>
-            <Btn
-              className={"bg-burgundy fs-0-7rem"}
-              onClick={() => {
-                navigate("/franchise/save");
-              }}
-            >
-              등록
-            </Btn>
-          </Grid>
+      <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid size={3} className={"d-col-center"}>
+          <Select
+            label={""}
+            value={PAGING?.sort}
+            inputclass={"h-min0 h-5vh"}
+            onChange={(e: any) => (
+              setPAGING((prev: any) => ({
+                ...prev,
+                sort: e.target.value
+              }))
+            )}
+          >
+            {["asc", "desc"]?.map((item: string) => (
+              <MenuItem
+                key={item}
+                value={item}
+                selected={PAGING?.sort === item}
+                onChange={(e: any) => (
+                  setPAGING((prev: any) => ({
+                    ...prev,
+                    sort: e.target.value
+                  }))
+                )}
+              >
+                <Div className={"fs-0-8rem"}>
+                  {item === "asc" && "오름차순"}
+                  {item === "desc" && "내림차순"}
+                </Div>
+              </MenuItem>
+            ))}
+          </Select>
         </Grid>
-      </Card>
+        <Grid size={7} className={"d-col-center"}>
+          <TablePagination
+            rowsPerPageOptions={[10]}
+            rowsPerPage={10}
+            component={"div"}
+            labelRowsPerPage={""}
+            count={COUNT.totalCnt}
+            page={PAGING.page}
+            showFirstButton={true}
+            showLastButton={true}
+            className={"border-bottom-1 p-2"}
+            onPageChange={(_event, newPage) => {
+              setPAGING((prev: any) => ({
+                ...prev,
+                page: newPage
+              }));
+            }}
+            onRowsPerPageChange={(event) => {
+              setPAGING((prev: any) => ({
+                ...prev,
+                limit: parseFloat(event.target.value)
+              }));
+            }}
+          />
+        </Grid>
+        <Grid size={2} className={`${isAdmin ? "d-col-center" : "d-none"}`}>
+          <Btn
+            className={"bg-burgundy fs-0-7rem"}
+            onClick={() => {
+              navigate("/franchise/save");
+            }}
+          >
+            등록
+          </Btn>
+        </Grid>
+      </Grid>
     );
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
+        <Grid container spacing={0} columns={12} className={"py-20"}>
+          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
             {LOADING ? <Loading /> : listSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}

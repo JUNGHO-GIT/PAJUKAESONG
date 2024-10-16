@@ -9,7 +9,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
 import { Input } from "@imports/ImportContainers";
 import { Div, Img, Hr, Br, Icons, Btn } from "@imports/ImportComponents";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Paper, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ProductDetail = () => {
@@ -139,226 +139,197 @@ export const ProductDetail = () => {
 
   // 7. detailNode ---------------------------------------------------------------------------------
   const detailNode = () => {
-    // 1. title
-    const titleSection = () => (
-      <Card className={"p-0"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
-            <Div className={"fs-2-0rem fw-700"}>
-              제품 상세
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
     // 2. detail
     const detailSection = () => {
       const imageFragment = (item: any) => (
-        <Card className={"p-10"}>
-          <Grid container spacing={2} columns={12}>
-            <Grid size={12} className={"d-column-center"}>
-              <Img
-                max={isXxs ? 600 : 700}
-                hover={false}
-                shadow={true}
-                radius={true}
-                group={"product"}
-                src={item.product_images && item.product_images[0]}
-              />
-            </Grid>
-            <Hr px={20} className={"bg-burgundy"} />
+        <Grid container spacing={0} columns={12} className={"p-10"}>
+          <Grid size={12} className={"d-col-center"}>
+            <Img
+              max={isXxs ? 600 : 700}
+              hover={false}
+              shadow={true}
+              radius={true}
+              group={"product"}
+              src={item.product_images && item.product_images[0]}
+            />
           </Grid>
-        </Card>
+        </Grid>
       );
       const descFragment = (item: any) => (
-        <Card className={"p-0"}>
-          <Grid container spacing={2} columns={12}>
-            <Grid size={12}>
-              <Div className={"fs-1-8rem fw-700 black"}>
-                {item?.product_name}
-              </Div>
-            </Grid>
-            <Grid size={12} className={"d-row-left"}>
-              <Icons
-                key={"Dot"}
-                name={"Dot"}
-                fill={"grey"}
-                className={"w-15 h-15 dark"}
-              />
-              <Div className={"fs-1-2rem fw-500 light-black"}>
-                {item?.product_description}
-              </Div>
-            </Grid>
-            <Grid size={12} className={"d-row-left"}>
-              <Icons
-                key={"Won"}
-                name={"Won"}
-                className={"w-15 h-15 dark"}
-              />
-              <Div className={"fs-1-1rem fw-500 light-black"}>
-                {numeral(item?.product_price).format("0,0")}
-              </Div>
-            </Grid>
+        <Grid container spacing={2} columns={12} className={"px-10"}>
+          <Grid size={12} className={"d-row-center"}>
+            <Div className={"fs-1-8rem fw-700 black"}>
+              {item?.product_name}
+            </Div>
           </Grid>
-        </Card>
+          <Grid size={12} className={"d-row-left"}>
+            <Icons
+              key={"Dot"}
+              name={"Dot"}
+              fill={"grey"}
+              className={"w-15 h-15 dark"}
+            />
+            <Div className={"fs-1-2rem fw-500 light-black"}>
+              {item?.product_description}
+            </Div>
+          </Grid>
+          <Grid size={12} className={"d-row-left"}>
+            <Icons
+              key={"Won"}
+              name={"Won"}
+              className={"w-15 h-15 dark"}
+            />
+            <Div className={"fs-1-1rem fw-500 light-black"}>
+              {numeral(item?.product_price).format("0,0")}
+            </Div>
+          </Grid>
+        </Grid>
       );
       return (
-        <Card className={"border-0 radius-0 shadow-0"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid
-              key={`detail-${0}`}
-              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
-              className={"d-column-center"}
-            >
-              {imageFragment(OBJECT)}
-              {descFragment(OBJECT)}
-            </Grid>
+        <Grid container spacing={0} columns={12}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`detail-${0}`}>
+            {imageFragment(OBJECT)}
+            <Hr px={20} className={"bg-burgundy"} />
+            {descFragment(OBJECT)}
           </Grid>
-        </Card>
+        </Grid>
       )
     };
     // 3. price
     const priceSection = () => (
-      <Card className={"p-10"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={6}>
-            <Input
-              label={"총 금액"}
-              value={numeral(orderPrice).format("0,0")}
-              readOnly={true}
-              error={orderPrice < 0}
-              startadornment={
-                <Icons
-                  key={"Won"}
-                  name={"Won"}
-                  className={"w-15 h-15"}
-                />
-              }
-            />
-          </Grid>
-          <Grid size={6}>
-            <Input
-              label={"수량"}
-              value={orderCount}
-              readOnly={true}
-              error={orderCount < 0}
-              endadornment={
-                <Div className={"d-center"}>
-                  <Icons
-                    name={"Minus"}
-                    className={"w-15 h-15"}
-                    onClick={() => {
-                      const value = orderCount;
-                      const newValue = value < 1 ? 1 : value - 1;
-                      if (newValue <= 1) {
-                        setOrderCount(1);
-                        setOrderPrice(Number(OBJECT?.product_price));
-                      }
-                      else if (!isNaN(newValue) && newValue <= 30) {
-                        setOrderCount(newValue);
-                        setOrderPrice(Number(OBJECT?.product_price) * newValue);
-                      }
-                    }}
-                  />
-                  <Icons
-                    name={"Plus"}
-                    className={"w-15 h-15"}
-                    onClick={() => {
-                      const value = orderCount;
-                      const newValue = value < 1 ? 1 : value + 1;
-                      if (newValue <= 1) {
-                        setOrderCount(1);
-                        setOrderPrice(Number(OBJECT?.product_price));
-                      }
-                      else if (!isNaN(newValue) && newValue <= 30) {
-                        setOrderCount(newValue);
-                        setOrderPrice(Number(OBJECT?.product_price) * newValue);
-                      }
-                    }}
-                  />
-                </Div>
-              }
-            />
-          </Grid>
+      <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid size={6}>
+          <Input
+            label={"총 금액"}
+            value={numeral(orderPrice).format("0,0")}
+            readOnly={true}
+            error={orderPrice < 0}
+            startadornment={
+              <Icons
+                key={"Won"}
+                name={"Won"}
+                className={"w-15 h-15"}
+              />
+            }
+          />
         </Grid>
-      </Card>
+        <Grid size={6}>
+          <Input
+            label={"수량"}
+            value={orderCount}
+            readOnly={true}
+            error={orderCount < 0}
+            endadornment={
+              <Div className={"d-center"}>
+                <Icons
+                  name={"Minus"}
+                  className={"w-15 h-15"}
+                  onClick={() => {
+                    const value = orderCount;
+                    const newValue = value < 1 ? 1 : value - 1;
+                    if (newValue <= 1) {
+                      setOrderCount(1);
+                      setOrderPrice(Number(OBJECT?.product_price));
+                    }
+                    else if (!isNaN(newValue) && newValue <= 30) {
+                      setOrderCount(newValue);
+                      setOrderPrice(Number(OBJECT?.product_price) * newValue);
+                    }
+                  }}
+                />
+                <Icons
+                  name={"Plus"}
+                  className={"w-15 h-15"}
+                  onClick={() => {
+                    const value = orderCount;
+                    const newValue = value < 1 ? 1 : value + 1;
+                    if (newValue <= 1) {
+                      setOrderCount(1);
+                      setOrderPrice(Number(OBJECT?.product_price));
+                    }
+                    else if (!isNaN(newValue) && newValue <= 30) {
+                      setOrderCount(newValue);
+                      setOrderPrice(Number(OBJECT?.product_price) * newValue);
+                    }
+                  }}
+                />
+              </Div>
+            }
+          />
+        </Grid>
+      </Grid>
     );
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-10"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-row-center"}>
-            <Btn
-              className={"w-100p fs-1-0rem bg-grey"}
-              onClick={() => {
-                flowSave("cart");
-              }}
-            >
-              장바구니
-            </Btn>
-          </Grid>
-          <Grid size={6} className={"d-row-center"}>
-            <Btn
-              className={"w-100p fs-1-0rem bg-burgundy"}
-              onClick={() => {
-                flowSave("buy");
-              }}
-            >
-              주문하기
-            </Btn>
-          </Grid>
+      <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid size={6} className={"d-row-center"}>
+          <Btn
+            className={"w-100p fs-1-0rem bg-grey"}
+            onClick={() => {
+              flowSave("cart");
+            }}
+          >
+            장바구니
+          </Btn>
         </Grid>
-      </Card>
+        <Grid size={6} className={"d-row-center"}>
+          <Btn
+            className={"w-100p fs-1-0rem bg-burgundy"}
+            onClick={() => {
+              flowSave("buy");
+            }}
+          >
+            주문하기
+          </Btn>
+        </Grid>
+      </Grid>
     );
     // 4. filter
     const filterSection = () => (
-      <Card className={"px-10"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy"}
-              onClick={() => {
-                navigate(`/product/list`);
-              }}
-            >
-              목록으로
-            </Div>
-          </Grid>
-          <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
-              onClick={() => {
-                navigate("/product/update", {
-                  state: {
-                    _id: OBJECT?._id
-                  }
-                });
-              }}
-            >
-              수정
-            </Div>
-            <Div
-              className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
-              onClick={() => {
-                flowDelete();
-              }}
-            >
-              삭제
-            </Div>
-          </Grid>
+      <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
+          <Div
+            className={"fs-1-0rem fw-700 pointer-burgundy"}
+            onClick={() => {
+              navigate(`/product/list`);
+            }}
+          >
+            목록으로
+          </Div>
         </Grid>
-      </Card>
+        <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
+          <Div
+            className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
+            onClick={() => {
+              navigate("/product/update", {
+                state: {
+                  _id: OBJECT?._id
+                }
+              });
+            }}
+          >
+            수정
+          </Div>
+          <Div
+            className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
+            onClick={() => {
+              flowDelete();
+            }}
+          >
+            삭제
+          </Div>
+        </Grid>
+      </Grid>
     );
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
+        <Grid container spacing={0} columns={12} className={"py-20"}>
+          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
             {LOADING ? <Loading /> : detailSection()}
             <Hr px={40} className={"bg-grey"} />
             {priceSection()}
+            <Br px={20} />
             {btnSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}

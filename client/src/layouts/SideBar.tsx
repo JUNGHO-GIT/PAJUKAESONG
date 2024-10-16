@@ -22,7 +22,6 @@ export const SideBar = (
   const { firstStr, secondStr, dataArray } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
-  const [appVersion, setAppVersion] = useState<string>("");
   const [appDate, setAppDate] = useState<string>("");
   const [selectedTab, setSelectedTab] = useState<string>("");
   const [selectedTabVal, setSelectedTabVal] = useState<string>("");
@@ -32,7 +31,6 @@ export const SideBar = (
   useEffect(() => {
     axios.get(`${URL}/api/admin/appInfo`)
     .then((res: any) => {
-      setAppVersion(res.data.result.version);
       setAppDate(res.data.result.date);
     })
     .catch((err: any) => {
@@ -71,91 +69,97 @@ export const SideBar = (
   const sideBarNode = () => {
     // 1. logo
     const logoSection = () => (
-      <Img
-        hover={false}
-        shadow={false}
-        radius={false}
-        group={"main"}
-        src={"logo1.webp"}
-        className={"pointer m-10 h-max50"}
-        onClick={() => {
-          navigate("/main");
-        }}
-      />
+      <Grid container spacing={0} columns={12}>
+        <Grid size={12} className={"d-center"}>
+          <Img
+            hover={false}
+            shadow={false}
+            radius={false}
+            group={"main"}
+            src={"logo1.webp"}
+            className={"pointer m-10 h-max50"}
+            onClick={() => {
+              navigate("/main");
+            }}
+          />
+        </Grid>
+      </Grid>
     );
     // 2. sidebar
     const sidebarSection = () => (
-      <Div className={"w-100p d-column-left"}>
-        {dataArray.map((item, idx) => (
-          <List component={"nav"} key={idx}>
-            {/* 메인 항목 */}
-            <ListItem
-              onClick={() => {
-                if (selectedTab === item?.titleEn) {
-                  setSelectedTab("");
-                }
-                else {
-                  setSelectedTab(item?.titleEn);
-                }
-              }}
-            >
-              <Div className={"d-center"}>
-                <Div className={`pointer-burgundy ${selectedTab === item?.titleEn ? "burgundy fs-1-1rem fw-600" : "fs-1-0rem"}`}>
-                  {item?.titleKo}
+      <Grid container spacing={0} columns={12}>
+        <Grid size={12} className={"d-col-left"}>
+          {dataArray.map((item, idx) => (
+            <List component={"nav"} key={idx}>
+              {/* 메인 항목 */}
+              <ListItem
+                onClick={() => {
+                  if (selectedTab === item?.titleEn) {
+                    setSelectedTab("");
+                  }
+                  else {
+                    setSelectedTab(item?.titleEn);
+                  }
+                }}
+              >
+                <Div className={"d-center"}>
+                  <Div className={`pointer-burgundy ${selectedTab === item?.titleEn ? "burgundy fs-1-1rem fw-600" : "fs-1-0rem"}`}>
+                    {item?.titleKo}
+                  </Div>
+                  <Div className={"ms-2"}>
+                    {selectedTab === item?.titleEn ? (
+                      <Icons
+                        key={"ChevronUp"}
+                        name={"ChevronUp"}
+                        className={"w-12 h-12 black"}
+                      />
+                    ) : (
+                      <Icons
+                        key={"ChevronDown"}
+                        name={"ChevronDown"}
+                        className={"w-12 h-12 black"}
+                      />
+                    )}
+                  </Div>
                 </Div>
-                <Div className={"ms-2"}>
-                  {selectedTab === item?.titleEn ? (
-                    <Icons
-                      key={"ChevronUp"}
-                      name={"ChevronUp"}
-                      className={"w-12 h-12 black"}
-                    />
-                  ) : (
-                    <Icons
-                      key={"ChevronDown"}
-                      name={"ChevronDown"}
-                      className={"w-12 h-12 black"}
-                    />
-                  )}
-                </Div>
-              </Div>
-            </ListItem>
-            {/* 하위 항목 */}
-            <Collapse
-              in={selectedTab === item?.titleEn}
-              timeout={"auto"}
-              unmountOnExit={true}
-            >
-              <List>
-                {item?.sub.map((subItem, subIdx) => (
-                  <ListItem
-                    key={subIdx}
-                    onClick={() => {
-                      setSelectedTab(item?.titleEn);
-                      setSelectedTabVal(item?.titleEn);
-                      setSelectedListItem(subItem.titleEn);
-                      navigate(subItem.url, {
-                        state: {
-                          category: subItem?.category
-                        }
-                      });
-                      toggleSidebar();
-                    }}
-                  >
-                    <Div className={`pointer-burgundy ${selectedTabVal === item?.titleEn && selectedListItem === subItem.titleEn ? "burgundy fs-1-0rem" : "fs-0-9rem"}`}>
-                      {subItem.titleKo}
-                    </Div>
-                  </ListItem>
-                ))}
-              </List>
-            </Collapse>
-          </List>
-        ))}
-      </Div>
+              </ListItem>
+              {/* 하위 항목 */}
+              <Collapse
+                in={selectedTab === item?.titleEn}
+                timeout={"auto"}
+                unmountOnExit={true}
+              >
+                <List>
+                  {item?.sub.map((subItem, subIdx) => (
+                    <ListItem
+                      key={subIdx}
+                      onClick={() => {
+                        setSelectedTab(item?.titleEn);
+                        setSelectedTabVal(item?.titleEn);
+                        setSelectedListItem(subItem.titleEn);
+                        navigate(subItem.url, {
+                          state: {
+                            category: subItem?.category
+                          }
+                        });
+                        toggleSidebar();
+                      }}
+                    >
+                      <Div className={`pointer-burgundy ${selectedTabVal === item?.titleEn && selectedListItem === subItem.titleEn ? "burgundy fs-1-0rem" : "fs-0-9rem"}`}>
+                        {subItem.titleKo}
+                      </Div>
+                    </ListItem>
+                  ))}
+                </List>
+              </Collapse>
+            </List>
+          ))}
+        </Grid>
+      </Grid>
     );
     const textSection1 = () => (
-      <Grid container spacing={1} columns={12} className={`d-center horizontal-text`}>
-        <Grid size={12} className={"d-column-left"}>
+      <Grid container spacing={2} columns={12}>
+        <Grid size={12} className={"d-col-left horizontal-text"}>
           <Div className={"d-row-center"}>
             <Icons
               key={"Info"}
@@ -200,18 +204,47 @@ export const SideBar = (
       </Grid>
     );
     const textSection2 = () => (
-      <Grid container spacing={1} columns={12} className={"horizontal-text fs-0-8rem"}>
-        <Grid size={12} className={"d-row-center"}>
-          <span>&copy; 2024&nbsp;&nbsp;</span>
-          <b>PajuKaesong</b>
-        </Grid>
-        <Grid size={12} className={"d-row-center"}>
-          <span>&copy; Designed by&nbsp;&nbsp;</span>
-          <b>JUNGHO</b>
-        </Grid>
-        <Grid size={12} className={"d-row-center"}>
-          <span>&copy; Version&nbsp;&nbsp;</span>
-          <b className={"fs-0-6rem"}>{appVersion} / {appDate}</b>
+      <Grid container spacing={2} columns={12}>
+        <Grid size={12} className={"d-col-left horizontal-text"}>
+          <Div className={"d-row-center"}>
+            <Icons
+              key={"Copyright"}
+              name={"Copyright"}
+              className={"w-10 h-10"}
+            />
+            <Div className={"fs-0-8rem fw-400 ms-n5"}>
+              2024
+            </Div>
+            <Div className={"fs-0-8rem fw-600 ms-5"}>
+              PajuKaesong
+            </Div>
+          </Div>
+          <Div className={"d-row-center"}>
+            <Icons
+              key={"Copyright"}
+              name={"Copyright"}
+              className={"w-10 h-10"}
+            />
+            <Div className={"fs-0-8rem fw-400 ms-n5"}>
+              Designed by
+            </Div>
+            <Div className={"fs-0-8rem fw-600 ms-5"}>
+              JUNGHO
+            </Div>
+          </Div>
+          <Div className={"d-row-center"}>
+            <Icons
+              key={"Copyright"}
+              name={"Copyright"}
+              className={"w-10 h-10"}
+            />
+            <Div className={"fs-0-8rem fw-400 ms-n5"}>
+              Version
+            </Div>
+            <Div className={"fs-0-8rem fw-600 ms-5"}>
+              {appDate}
+            </Div>
+          </Div>
         </Grid>
       </Grid>
     );
@@ -229,7 +262,7 @@ export const SideBar = (
         }}
       >
         <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-column-center"}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-col-center"}>
             {logoSection()}
             <Hr px={40} className={"bg-light-grey"} />
             {sidebarSection()}

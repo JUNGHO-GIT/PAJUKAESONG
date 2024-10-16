@@ -9,7 +9,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
 import { Input, TextArea, InputFile } from "@imports/ImportContainers";
-import { Paper, Card, Grid } from "@imports/ImportMuis";
+import { Paper, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const NoticeSave = () => {
@@ -83,127 +83,103 @@ export const NoticeSave = () => {
 
   // 7. saveNode -----------------------------------------------------------------------------------
   const saveNode = () => {
-    // 1. title
-    const titleSection = () => (
-      <Card className={"p-0"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12}>
-            <Div className={"fs-2-0rem fw-700"}>
-              공지사항 저장
-            </Div>
-          </Grid>
-        </Grid>
-      </Card>
-    );
     // 2. save
     const saveSection = () => {
       const saveFragment = (item: any, i: number) => (
-        <Card className={"p-10"}>
-          <Grid container spacing={3} columns={12}>
-            <Grid size={12} className={"mt-10"}>
-              <Input
-                variant={"outlined"}
-                label={"공지사항 제목"}
-                required={true}
-                value={item?.notice_title}
-                inputRef={REFS?.[i]?.notice_title}
-                error={ERRORS?.[i]?.notice_title}
-                onChange={(e: any) => {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    notice_title: e.target.value,
-                  }));
-                }}
-              />
-            </Grid>
-            <Grid size={12}>
-              <TextArea
-                label={"공지사항 내용"}
-                variant={"outlined"}
-                required={true}
-                value={item?.notice_content}
-                itemRef={REFS?.[i]?.notice_content}
-                error={ERRORS?.[i]?.notice_content}
-                inputclass={"h-min50vh border-none"}
-                onChange={(e: any) => {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    notice_content: e.target.value,
-                  }));
-                }}
-              />
-            </Grid>
-            <Grid size={12}>
-              <InputFile
-                variant={"outlined"}
-                label={"공지사항 이미지"}
-                required={true}
-                limit={1}
-                existing={item?.notice_images}
-                group={"notice"}
-                value={fileList}
-                onChange={(updatedFiles: File[] | null) => {
-                  setFileList(updatedFiles);
-                }}
-                handleExistingFilesChange={(updatedExistingFiles: string[]) => {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    notice_images: updatedExistingFiles,
-                  }));
-                }}
-              />
-            </Grid>
+        <Grid container spacing={3} columns={12} className={"p-20"}>
+          <Grid size={12} className={"mt-10"}>
+            <Input
+              variant={"outlined"}
+              label={"공지사항 제목"}
+              required={true}
+              value={item?.notice_title}
+              inputRef={REFS?.[i]?.notice_title}
+              error={ERRORS?.[i]?.notice_title}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  notice_title: e.target.value,
+                }));
+              }}
+            />
           </Grid>
-        </Card>
+          <Grid size={12}>
+            <TextArea
+              label={"공지사항 내용"}
+              variant={"outlined"}
+              required={true}
+              value={item?.notice_content}
+              itemRef={REFS?.[i]?.notice_content}
+              error={ERRORS?.[i]?.notice_content}
+              inputclass={"h-min50vh border-none"}
+              onChange={(e: any) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  notice_content: e.target.value,
+                }));
+              }}
+            />
+          </Grid>
+          <Grid size={12}>
+            <InputFile
+              variant={"outlined"}
+              label={"공지사항 이미지"}
+              required={true}
+              limit={1}
+              existing={item?.notice_images}
+              group={"notice"}
+              value={fileList}
+              onChange={(updatedFiles: File[] | null) => {
+                setFileList(updatedFiles);
+              }}
+              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  notice_images: updatedExistingFiles,
+                }));
+              }}
+            />
+          </Grid>
+        </Grid>
       );
       return (
-        <Card className={"border-1 radius-1 shadow-1"}>
-          <Grid container spacing={0} columns={12}>
-            <Grid
-              key={`save-${0}`}
-              size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
-              className={"d-column-center"}
-            >
-              {saveFragment(OBJECT, 0)}
-            </Grid>
+        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
+          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`save-${0}`}>
+            {saveFragment(OBJECT, 0)}
           </Grid>
-        </Card>
+        </Grid>
       );
     };
     // 3. btn
     const btnSection = () => (
-      <Card className={"px-10"}>
-        <Grid container spacing={2} columns={12}>
-          <Grid size={6} className={"d-row-center"}>
-            <Btn
-              className={"w-100p fs-1-0rem bg-grey"}
-              onClick={() => {
-                navigate(`/notice/list`);
-              }}
-            >
-              목록으로
-            </Btn>
-          </Grid>
-          <Grid size={6} className={"d-row-center"}>
-            <Btn
-              className={"w-100p fs-1-0rem bg-burgundy"}
-              onClick={() => {
-                flowSave()
-              }}
-            >
-              저장하기
-            </Btn>
-          </Grid>
+      <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid size={6} className={"d-row-center"}>
+          <Btn
+            className={"w-100p fs-1-0rem bg-grey"}
+            onClick={() => {
+              navigate(`/notice/list`);
+            }}
+          >
+            목록으로
+          </Btn>
         </Grid>
-      </Card>
+        <Grid size={6} className={"d-row-center"}>
+          <Btn
+            className={"w-100p fs-1-0rem bg-burgundy"}
+            onClick={() => {
+              flowSave()
+            }}
+          >
+            저장하기
+          </Btn>
+        </Grid>
+      </Grid>
     );
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
-            {titleSection()}
-            <Br px={30} />
+        <Grid container spacing={0} columns={12} className={"py-20"}>
+          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
             {LOADING ? <Loading /> : saveSection()}
             <Br px={20} />
             {btnSection()}

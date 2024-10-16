@@ -21,7 +21,7 @@ import {
 } from "@imports/ImportHooks";
 
 import {
-  Header, Footer, Alert, Confirm, Title
+  Header, Footer, Alert, Confirm, TitleBar
 } from "@imports/ImportLayouts";
 
 import {
@@ -161,7 +161,7 @@ const App = () => {
   return (
     <div className={"App"}>
       <Header />
-      {!PATH.includes("/main") && <Title />}
+      {!PATH.includes("/main") && <TitleBar />}
       <Routes>
         <Route path={"/*"} element={<Main />} />
         <Route path={"/admin/*"} element={<Admin />} />

@@ -8,7 +8,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Btn } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
-import { Paper, Card, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
+import { Paper, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuList = () => {
@@ -62,8 +62,9 @@ export const MenuList = () => {
   const listNode = () => {
     // 2. list
     const listSection = () => {
-      const imageFragment = (item: any) => (          <Grid container spacing={0} columns={12}>
-          <Grid size={12} className={"d-center p-10"}>
+      const imageFragment = (item: any) => (
+        <Grid container spacing={0} columns={12} className={"p-10"}>
+          <Grid size={12} className={"d-col-center"}>
             <Img
               max={isXxs ? 230 : 280}
               hover={true}
@@ -85,7 +86,7 @@ export const MenuList = () => {
       );
       const descFragment = (item: any) => (
         <Grid container spacing={0} columns={12}>
-          <Grid size={12} className={"d-center p-0"}>
+          <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-2rem fw-600"}>
               {item?.menu_name}
             </Div>
@@ -94,12 +95,8 @@ export const MenuList = () => {
       );
       return (
         <Grid container spacing={0} columns={12}>
-          {OBJECT.map((item: any, i: number) => (
-            <Grid
-              key={`list-${i}`}
-              size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }}
-              className={"d-column-center"}
-            >
+          {OBJECT?.map((item: any, i: number) => (
+            <Grid size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }} key={`list-${i}`}>
               {imageFragment(item)}
               {descFragment(item)}
             </Grid>
@@ -109,8 +106,8 @@ export const MenuList = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Grid container spacing={2} columns={12}>
-        <Grid size={3} className={"d-column-center"}>
+      <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid size={3} className={"d-col-center"}>
           <Select
             label={""}
             value={PAGING?.sort}
@@ -142,7 +139,7 @@ export const MenuList = () => {
             ))}
           </Select>
         </Grid>
-        <Grid size={7} className={"d-column-center"}>
+        <Grid size={7} className={"d-col-center"}>
           <TablePagination
             rowsPerPageOptions={[10]}
             rowsPerPage={10}
@@ -152,7 +149,7 @@ export const MenuList = () => {
             page={PAGING.page}
             showFirstButton={true}
             showLastButton={true}
-            className={"border-bottom-1"}
+            className={"border-bottom-1 p-2"}
             onPageChange={(_event, newPage) => {
               setPAGING((prev: any) => ({
                 ...prev,
@@ -167,9 +164,9 @@ export const MenuList = () => {
             }}
           />
         </Grid>
-        <Grid size={2} className={`${isAdmin ? "d-column-center" : "d-none"}`}>
+        <Grid size={2} className={`${isAdmin ? "d-col-center" : "d-none"}`}>
           <Btn
-            className={"bg-burgundy fs-0-7rem"}
+            className={"bg-burgundy"}
             onClick={() => {
               navigate("/menu/save");
             }}
@@ -181,15 +178,15 @@ export const MenuList = () => {
     );
     // 10. return
     return (
-      <Grid container spacing={0} columns={12}>
-        <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-column-center"}>
-          <Paper className={"content-wrapper fadeIn"}>
+      <Paper className={"content-wrapper fadeIn"}>
+        <Grid container spacing={0} columns={12} className={"py-20"}>
+          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
             {LOADING ? <Loading /> : listSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}
-          </Paper>
+          </Grid>
         </Grid>
-      </Grid>
+      </Paper>
     );
   };
 

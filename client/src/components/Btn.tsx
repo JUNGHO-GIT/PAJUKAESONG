@@ -11,7 +11,6 @@ export const Btn = (props: any) => (
     variant={props?.variant || "contained"}
     style={{
       ...props?.style,
-      margin: props?.style?.margin || "5px",
       padding: props?.style?.padding || "4px 10px",
       textTransform: props?.style?.textTransform || "none",
       whiteSpace: props?.style?.whiteSpace || "nowrap",

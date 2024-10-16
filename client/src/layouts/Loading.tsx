@@ -6,16 +6,11 @@ import { Div } from "@imports/ImportComponents";
 export const Loading = () => {
 
   // 7.loading -------------------------------------------------------------------------------------
-  const loadingNode = () => {
-    const nonWrapperSection = () => (
-      <Div className={`h-min70vh d-center`}>
-        <Div className={"loader"} />
-      </Div>
-    );
-    return (
-      nonWrapperSection()
-    );
-  };
+  const loadingNode = () => (
+    <Div className={`h-min70vh d-center`}>
+      <Div className={"loader"} />
+    </Div>
+  );
 
   // 10. return ------------------------------------------------------------------------------------
   return (

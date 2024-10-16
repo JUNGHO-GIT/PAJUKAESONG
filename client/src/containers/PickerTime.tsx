@@ -2,7 +2,7 @@
 
 import { moment } from "@imports/ImportUtils";
 import { PopUp, Input } from "@imports/ImportContainers";
-import { Card } from "@imports/ImportMuis";
+import { Grid } from "@imports/ImportMuis";
 import { DigitalClock, AdapterMoment, LocalizationProvider } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -30,27 +30,29 @@ export const PickerTime = (
         direction={"center"}
         padding={20}
         contents={({closePopup}: any) => (
-          <Card className={"w-50vw p-0"}>
-            <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"ko"}>
-              <DigitalClock
-                ampm={false}
-                autoFocus={true}
-                timeStep={20}
-                timezone={"Asia/Seoul"}
-                minTime={moment("11:00", "HH:mm")}
-                maxTime={moment("20:00", "HH:mm")}
-                value={moment(OBJECT?.[`${extra}`], "HH:mm")}
-                skipDisabled={true}
-                onChange={(e: any) => {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    [`${extra}`]: moment(e).format("HH:mm")
-                  }));
-                  closePopup();
-                }}
-              />
-            </LocalizationProvider>
-          </Card>
+          <Grid container spacing={3} columns={12} className={"w-50vw p-0"}>
+            <Grid size={12} className={"d-col-left"}>
+              <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"ko"}>
+                <DigitalClock
+                  ampm={false}
+                  autoFocus={true}
+                  timeStep={20}
+                  timezone={"Asia/Seoul"}
+                  minTime={moment("11:00", "HH:mm")}
+                  maxTime={moment("20:00", "HH:mm")}
+                  value={moment(OBJECT?.[`${extra}`], "HH:mm")}
+                  skipDisabled={true}
+                  onChange={(e: any) => {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      [`${extra}`]: moment(e).format("HH:mm")
+                    }));
+                    closePopup();
+                  }}
+                />
+              </LocalizationProvider>
+            </Grid>
+          </Grid>
         )}
       >
         {(popTrigger: any) => (
