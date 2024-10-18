@@ -19,9 +19,6 @@ export const Main = () => {
   const { isXxs, isXs, isSm, isMd, isLg, isXl } = useResponsive();
   const { ALERT, setALERT } = useAlertStore();
 
-  // 1. common -------------------------------------------------------------------------------------
-  const mainArray = ["main1.webp", "main2.webp", "main3.webp", "main4.webp", "main5.webp"];
-
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT_MENU, setOBJECT_MENU] = useState<any>([Menu]);
@@ -73,52 +70,6 @@ export const Main = () => {
   // 7. main ---------------------------------------------------------------------------------------
   const mainNode = () => {
 
-    // 1. main -------------------------------------------------------------------------------------
-    const mainSection = () => {
-      const imageFragment = () => (
-        <Grid container spacing={0} columns={12}>
-          <Grid size={12} className={"d-center"}>
-            <Swiper
-              spaceBetween={0}
-              slidesPerView={LOADING ? 0 : 1}
-              slidesPerGroup={1}
-              centeredSlides={true}
-              loop={true}
-              autoplay={{
-                delay: 5000,
-                disableOnInteraction: false,
-              }}
-              navigation={false}
-              modules={[
-                Autoplay,
-              ]}
-            >
-              {mainArray.map((item: any, index: number) => (
-                <SwiperSlide key={index}>
-                  <Div className={"d-col-center"}>
-                    <Img
-                      hover={false}
-                      shadow={false}
-                      radius={false}
-                      group={"main"}
-                      src={item}
-                    />
-                  </Div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Grid>
-        </Grid>
-      );
-      return (
-        <Grid container spacing={0} columns={12} className={"border-top-1"}>
-          <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
-            {imageFragment()}
-          </Grid>
-        </Grid>
-      );
-    };
-
     // 2. menu -------------------------------------------------------------------------------------
     const menuSection = () => {
       const selectFragment = () => (
@@ -153,7 +104,7 @@ export const Main = () => {
             <Swiper
               spaceBetween={30}
               slidesPerView={LOADING ? 0 : (
-                isXxs ? 2 : isXs ? 2 : isSm ? 3 : isMd ? 3 : isLg ? 3 : isXl ? 3 : 3
+                isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : 2
               )}
               slidesPerGroup={1}
               centeredSlides={false}
@@ -178,7 +129,6 @@ export const Main = () => {
                 <SwiperSlide key={index}>
                   <Div className={"d-col-center"}>
                     <Img
-                      max={250}
                       hover={true}
                       shadow={true}
                       radius={true}
@@ -188,13 +138,13 @@ export const Main = () => {
                         navigate("/menu/detail", {
                           state: {
                             _id: item?._id,
-                            location_category: item?.category
+                            category: item?.menu_category
                           }
                         });
                       }}
                     />
-                    <Br px={5} />
-                    <Div max={10} className={"fs-1-0rem fw-600"}>
+                    <Br px={20} />
+                    <Div max={10} className={"fs-1-2rem fw-600"}>
                       {item?.menu_name}
                     </Div>
                   </Div>
@@ -212,7 +162,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-top-1 py-20"}>
+        <Grid container spacing={0} columns={12} className={"border-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {selectFragment()}
             {menuFragment()}
@@ -230,7 +180,7 @@ export const Main = () => {
             <Swiper
               spaceBetween={30}
               slidesPerView={LOADING ? 0 : (
-                isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : 1
+                isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : 2
               )}
               slidesPerGroup={1}
               centeredSlides={false}
@@ -292,7 +242,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"bg-ivory border-top-1 py-20"}>
+        <Grid container spacing={0} columns={12} className={"bg-ivory border-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {noticeFragment()}
             {paginationFragment()}
@@ -315,7 +265,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-top-1 py-20"}>
+        <Grid container spacing={0} columns={12} className={"border-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {locationFragment()}
           </Grid>
@@ -328,7 +278,6 @@ export const Main = () => {
       <Paper className={"content-wrapper fadeIn"}>
         <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
-            {mainSection()}
             {menuSection()}
             {noticeSection()}
             {locationSection()}

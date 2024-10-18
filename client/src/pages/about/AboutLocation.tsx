@@ -15,7 +15,7 @@ export const AboutLocation = () => {
           <Location
             width={"100%"}
             height={"60vh"}
-            className={"border-1 shadow-3 radius-1"}
+            className={"border-2 shadow-1 radius-1"}
           />
         </Grid>
       </Grid>

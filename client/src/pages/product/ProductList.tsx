@@ -75,7 +75,7 @@ export const ProductList = () => {
                 navigate("/product/detail", {
                   state: {
                     _id: item?._id,
-                    location_category: item?.category
+                    category: item?.product_category
                   }
                 });
               }}

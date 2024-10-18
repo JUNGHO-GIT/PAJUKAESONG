@@ -293,7 +293,7 @@ export const OrderUpdate = () => {
               {["reservation", "buy"].map((category: string, idx: number) => (
                 <MenuItem key={idx} value={category} className={"fs-0-8rem"}>
                   {category === "reservation" && "매장 예약"}
-                  {category === "buy" && "제품 구매"}
+                  {category === "buy" && "상품 구매"}
                 </MenuItem>
               ))}
             </Select>

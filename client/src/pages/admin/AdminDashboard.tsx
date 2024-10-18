@@ -154,7 +154,7 @@ export const AdminDashboard = () => {
           <Grid size={3}>
             <Div className={"fs-0-7rem"}>
               {item?.order_category === "reservation" && "매장 예약"}
-              {item?.order_category === "buy" && "제품 구매"}
+              {item?.order_category === "buy" && "상품 구매"}
             </Div>
           </Grid>
           <Grid size={6}>

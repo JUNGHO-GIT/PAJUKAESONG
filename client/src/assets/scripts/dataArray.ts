@@ -42,7 +42,7 @@ export const dataArray = [
     titleEn: "order",
     sub: [
       {
-        titleKo: "제품 목록",
+        titleKo: "상품 목록",
         titleEn: "list",
         url: "/product/list",
         category: "",

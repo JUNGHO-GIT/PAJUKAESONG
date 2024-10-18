@@ -192,26 +192,19 @@ export const OrderDetail = () => {
       const orderFragment = (item: any) => (
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
-            <Select
+            <Input
               variant={"outlined"}
               label={"주문 유형"}
               disabled={true}
-              value={item?.order_category}
-            >
-              {["reservation", "buy"].map((category: string, idx: number) => (
-                <MenuItem key={idx} value={category} className={"fs-0-8rem"}>
-                  {category === "reservation" && "매장 예약"}
-                  {category === "buy" && "제품 구매"}
-                </MenuItem>
-              ))}
-            </Select>
+              value={item?.order_category === "reservation" ? "매장 예약" : "상품 구매"}
+            />
           </Grid>
           <Grid size={12}>
             <Input
               variant={"outlined"}
               label={"이름"}
               disabled={true}
-              value={item?.order_name}
+              value={item?.order_name ?? ""}
             />
           </Grid>
           <Grid size={12}>
@@ -219,7 +212,7 @@ export const OrderDetail = () => {
               variant={"outlined"}
               label={"이메일"}
               disabled={true}
-              value={item?.order_email}
+              value={item?.order_email ?? ""}
             />
           </Grid>
           <Grid size={12}>
@@ -227,7 +220,7 @@ export const OrderDetail = () => {
               variant={"outlined"}
               label={"전화번호"}
               disabled={true}
-              value={item?.order_phone}
+              value={item?.order_phone ?? ""}
             />
           </Grid>
           <Grid size={12}>
@@ -235,7 +228,7 @@ export const OrderDetail = () => {
               variant={"outlined"}
               label={"인원"}
               disabled={true}
-              value={item?.order_headcount}
+              value={item?.order_headcount ?? ""}
             />
           </Grid>
           <Grid size={12}>
@@ -243,7 +236,7 @@ export const OrderDetail = () => {
               variant={"outlined"}
               disabled={true}
               label={"주문 날짜"}
-              value={getDayFmt(item?.order_date)}
+              value={getDayFmt(item?.order_date ?? "")}
             />
           </Grid>
           <Grid size={12}>
@@ -251,7 +244,7 @@ export const OrderDetail = () => {
               variant={"outlined"}
               disabled={true}
               label={"예약 시간"}
-              value={item?.order_time}
+              value={item?.order_time ?? ""}
             />
           </Grid>
         </Grid>

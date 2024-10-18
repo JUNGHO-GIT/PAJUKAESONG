@@ -9,7 +9,7 @@ import "@styles/Mui.css";
 import "@styles/Jstyle.css";
 
 import {
-  BrowserRouter, Routes, Route, StrictMode, createRoot
+  BrowserRouter, Routes, Route, createRoot
 } from "@imports/ImportReacts";
 
 import {
@@ -152,8 +152,6 @@ const User = () => (
 // -------------------------------------------------------------------------------------------------
 const App = () => {
 
-  const { PATH } = useCommonValue();
-
   useRoot();
   useLocale();
   useScrollTop();
@@ -161,7 +159,7 @@ const App = () => {
   return (
     <div className={"App"}>
       <Header />
-      {!PATH.includes("/main") && <TitleBar />}
+      <TitleBar />
       <Routes>
         <Route path={"/*"} element={<Main />} />
         <Route path={"/admin/*"} element={<Admin />} />

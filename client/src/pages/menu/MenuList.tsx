@@ -76,7 +76,7 @@ export const MenuList = () => {
                 navigate("/menu/detail", {
                   state: {
                     _id: item?._id,
-                    location_category: item?.category
+                    category: item?.menu_category
                   }
                 });
               }}

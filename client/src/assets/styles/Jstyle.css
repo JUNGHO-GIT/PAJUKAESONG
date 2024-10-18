@@ -11528,6 +11528,41 @@
   text-align: right !important;
 }
 
+/** 95. letter spacing ***************************************************************************/
+.ls-0 {
+  letter-spacing: 0px !important;
+}
+.ls-1 {
+  letter-spacing: 1px !important;
+}
+.ls-2 {
+  letter-spacing: 2px !important;
+}
+.ls-3 {
+  letter-spacing: 3px !important;
+}
+.ls-4 {
+  letter-spacing: 4px !important;
+}
+.ls-5 {
+  letter-spacing: 5px !important;
+}
+.ls-6 {
+  letter-spacing: 6px !important;
+}
+.ls-7 {
+  letter-spacing: 7px !important;
+}
+.ls-8 {
+  letter-spacing: 8px !important;
+}
+.ls-9 {
+  letter-spacing: 9px !important;
+}
+.ls-10 {
+  letter-spacing: 10px !important;
+}
+
 /** 96. flex *************************************************************************************/
 .flex-grow {
   flex-grow: 1 !important;
@@ -11642,37 +11677,37 @@
 
 /** 99. opacity ***********************************************************************************/
 .opacity-0 {
-  opacity: 0 !important;
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 .opacity-1 {
-  opacity: 0.1 !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
 }
 .opacity-2 {
-  opacity: 0.2 !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 .opacity-3 {
-  opacity: 0.3 !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
 }
 .opacity-4 {
-  opacity: 0.4 !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
 }
 .opacity-5 {
-  opacity: 0.5 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .opacity-6 {
-  opacity: 0.6 !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
 }
 .opacity-7 {
-  opacity: 0.7 !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
 }
 .opacity-8 {
-  opacity: 0.8 !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
 }
 .opacity-9 {
-  opacity: 0.9 !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
 }
 .opacity-10 {
-  opacity: 1 !important;
+  background-color: rgba(0, 0, 0, 1.0) !important;
 }
 
 /** 97. radius ************************************************************************************/
@@ -11919,6 +11954,18 @@
 }
 .bg-ivory {
   background-color: #F2ECBE !important;
+}
+.ivory-light {
+  color: #fffef6 !important;
+}
+.pointer-ivory-light:hover {
+  cursor: pointer !important;
+  color: #fffef6 !important;
+  transition: transform 0.1s ease-in-out !important;
+  transform: scale(1.1) !important;
+}
+.bg-ivory-light {
+  background-color: #fffef6 !important;
 }
 
 .success {

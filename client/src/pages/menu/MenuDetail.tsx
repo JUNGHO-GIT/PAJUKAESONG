@@ -7,14 +7,14 @@ import { useValidateMenu } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Icons } from "@imports/ImportComponents";
+import { Div, Img, Hr, Icons } from "@imports/ImportComponents";
 import { Paper, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
+  const { navigate, location, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
   const { isXxs } = useResponsive();
   const { ALERT, setALERT } = useAlertStore();
   const { validate } = useValidateMenu();
