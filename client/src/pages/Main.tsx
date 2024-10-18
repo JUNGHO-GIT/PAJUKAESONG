@@ -242,7 +242,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"bg-ivory border-1 py-20"}>
+        <Grid container spacing={0} columns={12} className={"bg-ivory-light border-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {noticeFragment()}
             {paginationFragment()}
