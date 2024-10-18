@@ -190,12 +190,10 @@ const theme = createTheme({
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <StrictMode>
-    <BrowserRouter basename={"/PAJUKAESONG"}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
-  </StrictMode>
+  <BrowserRouter basename={"/PAJUKAESONG"}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  </BrowserRouter>
 );

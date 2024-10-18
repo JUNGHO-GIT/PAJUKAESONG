@@ -11,7 +11,7 @@ export const AboutGreeting = () => {
     // 2. greeting
     const greetingSection = () => {
       const greetingFragment = () => (
-        <Grid container spacing={3} columns={12} className={"p-20"}>
+        <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"d-col-left"}>
             <Div className={"fs-1-8rem fw-700"}>
               여러분 반갑습니다.
@@ -53,8 +53,8 @@ export const AboutGreeting = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-2"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`save-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`save-${0}`}>
             {greetingFragment()}
           </Grid>
         </Grid>

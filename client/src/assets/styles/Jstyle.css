@@ -11783,16 +11783,16 @@
 .border-left-1 {
   border-left: 1px solid #dbdbdb !important;
 }
-.border-1-burgundy {
+.border-burgundy-1 {
   border: 1px solid #973131 !important;
 }
-.border-top-1-burgundy {
+.border-top-burgundy-1 {
   border-top: 1px solid #973131 !important;
 }
-.border-right-1-burgundy {
+.border-right-burgundy-1 {
   border-right: 1px solid #973131 !important;
 }
-.border-bottom-1-burgundy {
+.border-bottom-burgundy-1 {
   border-bottom: 1px solid #973131 !important;
 }
 .border-2 {
@@ -12078,16 +12078,16 @@
 }
 
 .light-black {
-  color: #2a2a2a !important;
+  color: #343131 !important;
 }
 .pointer-light-black:hover {
   cursor: pointer !important;
-  color: #2a2a2a !important;
+  color: #343131 !important;
   transition: transform 0.1s ease-in-out !important;
   transform: scale(1.1) !important;
 }
 .bg-light-black {
-  background-color: #2a2a2a !important;
+  background-color: #343131 !important;
 }
 
 .black {

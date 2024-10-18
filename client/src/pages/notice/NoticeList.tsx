@@ -62,7 +62,7 @@ export const NoticeList = () => {
     // 2. list
     const listSection = () => {
       const headFragment = () => (
-        <Grid container spacing={2} columns={12} className={"p-20"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={3}>
             <Div className={"fs-0-8rem fw-500"}>
               번호
@@ -81,7 +81,7 @@ export const NoticeList = () => {
         </Grid>
       );
       const listFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"p-20"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={3}>
             <Div className={"fs-0-7rem"}>
               {item?.notice_number}
@@ -110,11 +110,21 @@ export const NoticeList = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
           {OBJECT?.map((item: any, i: number) => (
-            <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`list-${i}`}>
-              {i === 0 && headFragment()}
+            <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
+              {i === 0 && (
+                <>
+                  {headFragment()}
+                  <Hr px={40} className={"bg-burgundy"} />
+                </>
+              )}
               {listFragment(item)}
+              {i < OBJECT.length - 1 && (
+                <>
+                  <Hr px={40} className={"bg-light-grey"} />
+                </>
+              )}
             </Grid>
           ))}
         </Grid>

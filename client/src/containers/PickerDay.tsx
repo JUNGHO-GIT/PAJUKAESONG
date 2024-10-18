@@ -35,12 +35,14 @@ export const PickerDay = (
         type={"innerCenter"}
         position={"center"}
         direction={"center"}
-        padding={10}
         contents={({closePopup}: any) => (
-          <Grid container spacing={3} columns={12}>
-            <Grid size={12} className={"d-row-center"}>
-              <Div className={"fs-1-2rem fw-600"}>
+          <Grid container spacing={2} columns={12}>
+            <Grid size={12} className={"d-col-center"}>
+              <Div className={"fs-1-2rem fw-600 black"}>
                 날짜 선택
+              </Div>
+              <Div className={"fs-1-0rem fw-500 grey"}>
+                {`[${getDayFmt(OBJECT?.[`${extra}`])}]`}
               </Div>
             </Grid>
             <Grid size={12}>

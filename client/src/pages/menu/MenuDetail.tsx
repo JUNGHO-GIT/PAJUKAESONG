@@ -95,10 +95,10 @@ export const MenuDetail = () => {
 
   // 7. detailNode ---------------------------------------------------------------------------------
   const detailNode = () => {
-    // 2. detail
+    // 1. detail
     const detailSection = () => {
       const imageFragment = (item: any) => (
-        <Grid container spacing={0} columns={12} className={"p-10"}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
             <Img
               max={isXxs ? 600 : 700}
@@ -112,7 +112,7 @@ export const MenuDetail = () => {
         </Grid>
       );
       const descFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {item?.menu_name}
@@ -142,10 +142,10 @@ export const MenuDetail = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`detail-${0}`}>
+        <Grid container spacing={0} columns={12} className={"p-10"}>
+          <Grid size={12} className={"d-col-center"} key={`detail-${0}`}>
             {imageFragment(OBJECT)}
-            <Hr px={20} className={"bg-burgundy"} />
+            <Hr px={40} className={"bg-burgundy"} />
             {descFragment(OBJECT)}
           </Grid>
         </Grid>

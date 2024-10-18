@@ -1,12 +1,12 @@
 // OrderUpdate.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateOrder } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
-import { Order } from "@imports/ImportSchemas";
+import { Order, Product } from "@imports/ImportSchemas";
 import { Input, Select, PickerDay, PickerTime } from "@imports/ImportContainers";
 import { Div, Hr, Br, Btn, Img, Icons } from "@imports/ImportComponents";
 import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
@@ -15,8 +15,7 @@ import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
 export const OrderUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, URL, SUBFIX, TITLE, PATH, location_id } = useCommonValue();
-  const { getDayFmt } = useCommonDate();
+  const { navigate, URL, SUBFIX, TITLE, location_id } = useCommonValue();
   const { isXxs } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateOrder();
   const { ALERT, setALERT } = useAlertStore();
@@ -24,6 +23,7 @@ export const OrderUpdate = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
+  const [PRODUCT, setPRODUCT] = useState<any>([Product]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -35,6 +35,7 @@ export const OrderUpdate = () => {
     })
     .then((res: any) => {
       setOBJECT(res.data.result || Order);
+      setPRODUCT(res.data.result?.order_product || [Product]);
     })
     .catch((err: any) => {
       setALERT({
@@ -50,32 +51,22 @@ export const OrderUpdate = () => {
   }, [URL, SUBFIX, location_id]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
+  // PRODUCT 변경 시 세션 저장 및 총 가격 계산
   useEffect(() => {
-    setLOADING(true);
-    const existOrderProduct = sessionStorage.getItem(`${TITLE}_order_product`);
-    if (existOrderProduct) {
-      setOBJECT((prev: any) => ({
-        ...prev,
-        order_product: JSON.parse(existOrderProduct),
-        order_date: getDayFmt(),
-      }));
-    }
-    setLOADING(false);
-  }, [PATH]);
+    const totalPrice = PRODUCT.reduce((acc: number, cur: any) => (
+      acc + Number(cur.product_price)
+    ), 0);
 
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    const updatedOrderProduct = OBJECT?.order_product;
-    sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(updatedOrderProduct));
     setOBJECT((prev: any) => ({
       ...prev,
-      order_total_price: String(
-        OBJECT?.order_product?.reduce((acc: number, cur: any) => (
-          acc + Number(cur.product_price)
-        ), 0)
-      ),
+      order_total_price: String(totalPrice),
+      order_product: PRODUCT,
     }));
-  }, [OBJECT?.order_product]);
+
+    // 세션에 저장
+    sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(PRODUCT));
+
+  }, [PRODUCT]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowUpdate = async () => {
@@ -85,6 +76,7 @@ export const OrderUpdate = () => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`, {
+      _id: OBJECT?._id,
       OBJECT: OBJECT,
     })
     .then((res: any) => {
@@ -124,20 +116,20 @@ export const OrderUpdate = () => {
     // 2. product
     const productSection = () => {
       const productFragment = (item: any, i: number) => (
-        <Grid container spacing={2} columns={12} className={"p-20"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-col-center"}>
             <Img
               max={isXxs ? 50 : 60}
               hover={false}
               shadow={true}
-              radius={true}
+              radius={false}
               group={"product"}
               src={item.product_images && item.product_images[0]}
             />
           </Grid>
           <Grid size={4} className={"d-col-center"}>
             <Div className={"d-row-center"}>
-              <Div className={"fs-1-4rem fw-600 ms-5"}>
+              <Div className={"fs-1-2rem fw-600 ms-5"}>
                 {item?.product_name}
               </Div>
             </Div>
@@ -159,36 +151,30 @@ export const OrderUpdate = () => {
                 name={"Minus"}
                 className={"w-12 h-12 black"}
                 onClick={() => {
-                  const value = item?.product_count;
+                  const value = Number(item?.product_count);
                   const newValue = value < 1 ? 1 : value - 1;
                   const originalPrice = Number(item?.product_price) / value;
                   if (newValue <= 1) {
-                    setOBJECT((prev: any) => ({
-                      ...prev,
-                      order_product: prev.order_product.map((product: any, idx: number) => (
-                        idx === i ? {
-                          ...product,
-                          product_count: 1,
-                          product_price: originalPrice,
-                        } : (
-                          product
-                        )
-                      )),
-                    }));
+                    setPRODUCT((prev: any) => [
+                      ...prev.slice(0, i),
+                      {
+                        ...item,
+                        product_count: "1",
+                        product_price: String(originalPrice),
+                      },
+                      ...prev.slice(i + 1),
+                    ]);
                   }
                   else if (!isNaN(newValue) && newValue <= 30) {
-                    setOBJECT((prev: any) => ({
-                      ...prev,
-                      order_product: prev.order_product.map((product: any, idx: number) => (
-                        idx === i ? {
-                          ...product,
-                          product_count: newValue,
-                          product_price: originalPrice * newValue,
-                        } : (
-                          product
-                        )
-                      )),
-                    }));
+                    setPRODUCT((prev: any) => [
+                      ...prev.slice(0, i),
+                      {
+                        ...item,
+                        product_count: String(newValue),
+                        product_price: String(originalPrice * newValue),
+                      },
+                      ...prev.slice(i + 1),
+                    ]);
                   }
                 }}
               />
@@ -200,36 +186,30 @@ export const OrderUpdate = () => {
                 name={"Plus"}
                 className={"w-12 h-12 black"}
                 onClick={() => {
-                  const value = item?.product_count;
+                  const value = Number(item?.product_count);
                   const newValue = value < 1 ? 1 : value + 1;
                   const originalPrice = Number(item?.product_price) / value;
                   if (newValue <= 1) {
-                    setOBJECT((prev: any) => ({
-                      ...prev,
-                      order_product: prev.order_product.map((product: any, idx: number) => (
-                        idx === i ? {
-                          ...product,
-                          product_count: 1,
-                          product_price: originalPrice,
-                        } : (
-                          product
-                        )
-                      )),
-                    }));
+                    setPRODUCT((prev: any) => [
+                      ...prev.slice(0, i),
+                      {
+                        ...item,
+                        product_count: "1",
+                        product_price: String(originalPrice),
+                      },
+                      ...prev.slice(i + 1),
+                    ]);
                   }
                   else if (!isNaN(newValue) && newValue <= 30) {
-                    setOBJECT((prev: any) => ({
-                      ...prev,
-                      order_product: prev.order_product.map((product: any, idx: number) => (
-                        idx === i ? {
-                          ...product,
-                          product_count: newValue,
-                          product_price: originalPrice * newValue,
-                        } : (
-                          product
-                        )
-                      )),
-                    }));
+                    setPRODUCT((prev: any) => [
+                      ...prev.slice(0, i),
+                      {
+                        ...item,
+                        product_count: String(newValue),
+                        product_price: String(originalPrice * newValue),
+                      },
+                      ...prev.slice(i + 1),
+                    ]);
                   }
                 }}
               />
@@ -254,7 +234,7 @@ export const OrderUpdate = () => {
         </Grid>
       );
       const priceFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"p-20"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-0rem"}>
               총 금액  :
@@ -271,20 +251,29 @@ export const OrderUpdate = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          {OBJECT?.order_product?.map((item: any, i: number) => (
-            <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`product-${i}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          {PRODUCT?.map((item: any, i: number) => (
+            <Grid size={12} className={"d-col-center"} key={`product-${i}`}>
               {productFragment(item, i)}
+              {i < PRODUCT.length - 1 ? (
+                <>
+                  <Hr px={40} className={"bg-light-grey"} />
+                </>
+              ) : (
+                <>
+                  <Hr px={40} className={"bg-burgundy"} />
+                  {priceFragment(OBJECT)}
+                </>
+              )}
             </Grid>
           ))}
-          {priceFragment(OBJECT)}
         </Grid>
       );
     };
     // 3. order
     const orderSection = () => {
       const orderFragment = (item: any, i: number) => (
-        <Grid container spacing={3} columns={12} className={"p-20"}>
+        <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Select
               variant={"outlined"}
@@ -425,8 +414,8 @@ export const OrderUpdate = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`order-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`order-${0}`}>
             {orderFragment(OBJECT, 0)}
           </Grid>
         </Grid>
@@ -447,7 +436,7 @@ export const OrderUpdate = () => {
         </Grid>
         <Grid size={6} className={"d-row-center"}>
           <Btn
-            className={"w-100p fs-1-0rem bg-burgundy"}
+            className={"w-100p fs-1-0rem bg-light-black"}
             onClick={() => {
               flowUpdate();
             }}

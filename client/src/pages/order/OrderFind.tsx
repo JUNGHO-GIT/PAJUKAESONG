@@ -71,7 +71,7 @@ export const OrderFind = () => {
     // 2. find
     const findSection = () => {
       const findFragment = (item: any, i: number) => (
-        <Grid container spacing={3} columns={12} className={"p-20"}>
+        <Grid container spacing={3} columns={12}>
           <Grid size={12}>
             <Input
               variant={"outlined"}
@@ -120,8 +120,8 @@ export const OrderFind = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`find-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} key={`find-${0}`}>
             {findFragment(OBJECT, 0)}
           </Grid>
         </Grid>
@@ -132,7 +132,7 @@ export const OrderFind = () => {
       <Grid container spacing={2} columns={12} className={"px-10"}>
         <Grid size={12}>
           <Btn
-            className={"w-100p fs-1-0rem bg-burgundy"}
+            className={"w-100p fs-1-0rem bg-light-black"}
             onClick={() => {
               flowSearch();
             }}

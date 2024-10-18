@@ -51,13 +51,7 @@ export const ProductUpdate = () => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      makeFormData(
-        OBJECT,
-        fileList,
-        {
-          _id: location_id
-        }
-      ),
+      makeFormData( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -100,7 +94,7 @@ export const ProductUpdate = () => {
     // 2. update
     const updateSection = () => {
       const updateFragment = (item: any, i: number) => (
-        <Grid container spacing={3} columns={12} className={"p-20"}>
+        <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Select
               variant={"outlined"}
@@ -229,8 +223,8 @@ export const ProductUpdate = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-2"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`update-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`update-${0}`}>
             {updateFragment(OBJECT, 0)}
           </Grid>
         </Grid>
@@ -255,7 +249,7 @@ export const ProductUpdate = () => {
         </Grid>
         <Grid size={6} className={"d-row-center"}>
           <Btn
-            className={"w-100p fs-1-0rem bg-burgundy"}
+            className={"w-100p fs-1-0rem bg-light-black"}
             onClick={() => {
               flowUpdate();
             }}

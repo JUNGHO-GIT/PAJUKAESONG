@@ -5,8 +5,8 @@ import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateOrder } from "@imports/ImportValidates";
 import { axios, numeral } from "@imports/ImportUtils";
+import { Order, Product } from "@imports/ImportSchemas";
 import { Loading } from "@imports/ImportLayouts";
-import { Order } from "@imports/ImportSchemas";
 import { Input, Select, PickerDay, PickerTime } from "@imports/ImportContainers";
 import { Div, Hr, Br, Btn, Img, Icons } from "@imports/ImportComponents";
 import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
@@ -23,33 +23,44 @@ export const OrderSave = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
+  const [PRODUCT, setPRODUCT] = useState<any>([Product]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
+  // 초기 로딩 시 세션에서 데이터 불러오기
   useEffect(() => {
     setLOADING(true);
+
     const existOrderProduct = sessionStorage.getItem(`${TITLE}_order_product`);
-    if (existOrderProduct) {
+
+    // 세션에 데이터가 있으면 불러오기
+    if (existOrderProduct && JSON.parse(existOrderProduct).length > 0) {
+      setPRODUCT(JSON.parse(existOrderProduct));
       setOBJECT((prev: any) => ({
         ...prev,
         order_product: JSON.parse(existOrderProduct),
       }));
     }
+
     setLOADING(false);
   }, []);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
+  // PRODUCT 변경 시 세션 저장 및 총 가격 계산
   useEffect(() => {
-    const updatedOrderProduct = OBJECT?.order_product;
-    sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(updatedOrderProduct));
+    const totalPrice = PRODUCT.reduce((acc: number, cur: any) => (
+      acc + Number(cur.product_price)
+    ), 0);
+
     setOBJECT((prev: any) => ({
       ...prev,
-      order_total_price: String(
-        OBJECT?.order_product?.reduce((acc: number, cur: any) => (
-          acc + Number(cur.product_price)
-        ), 0)
-      ),
+      order_total_price: String(totalPrice),
+      order_product: PRODUCT,
     }));
-  }, [OBJECT?.order_product]);
+
+    // 세션에 저장
+    sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(PRODUCT));
+
+  }, [PRODUCT]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async () => {
@@ -98,20 +109,20 @@ export const OrderSave = () => {
     // 2. product
     const productSection = () => {
       const productFragment = (item: any, i: number) => (
-        <Grid container spacing={2} columns={12} className={"p-20"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-col-center"}>
             <Img
               max={isXxs ? 50 : 60}
               hover={false}
               shadow={true}
-              radius={true}
+              radius={false}
               group={"product"}
               src={item.product_images && item.product_images[0]}
             />
           </Grid>
           <Grid size={4} className={"d-col-center"}>
             <Div className={"d-row-center"}>
-              <Div className={"fs-1-4rem fw-600 ms-5"}>
+              <Div className={"fs-1-2rem fw-600 ms-5"}>
                 {item?.product_name}
               </Div>
             </Div>
@@ -133,36 +144,30 @@ export const OrderSave = () => {
                 name={"Minus"}
                 className={"w-12 h-12 black"}
                 onClick={() => {
-                  const value = item?.product_count;
+                  const value = Number(item?.product_count);
                   const newValue = value < 1 ? 1 : value - 1;
                   const originalPrice = Number(item?.product_price) / value;
                   if (newValue <= 1) {
-                    setOBJECT((prev: any) => ({
-                      ...prev,
-                      order_product: prev.order_product.map((product: any, idx: number) => (
-                        idx === i ? {
-                          ...product,
-                          product_count: 1,
-                          product_price: originalPrice,
-                        } : (
-                          product
-                        )
-                      )),
-                    }));
+                    setPRODUCT((prev: any) => [
+                      ...prev.slice(0, i),
+                      {
+                        ...item,
+                        product_count: "1",
+                        product_price: String(originalPrice),
+                      },
+                      ...prev.slice(i + 1),
+                    ]);
                   }
                   else if (!isNaN(newValue) && newValue <= 30) {
-                    setOBJECT((prev: any) => ({
-                      ...prev,
-                      order_product: prev.order_product.map((product: any, idx: number) => (
-                        idx === i ? {
-                          ...product,
-                          product_count: newValue,
-                          product_price: originalPrice * newValue,
-                        } : (
-                          product
-                        )
-                      )),
-                    }));
+                    setPRODUCT((prev: any) => [
+                      ...prev.slice(0, i),
+                      {
+                        ...item,
+                        product_count: String(newValue),
+                        product_price: String(originalPrice * newValue),
+                      },
+                      ...prev.slice(i + 1),
+                    ]);
                   }
                 }}
               />
@@ -174,36 +179,30 @@ export const OrderSave = () => {
                 name={"Plus"}
                 className={"w-12 h-12 black"}
                 onClick={() => {
-                  const value = item?.product_count;
+                  const value = Number(item?.product_count);
                   const newValue = value < 1 ? 1 : value + 1;
                   const originalPrice = Number(item?.product_price) / value;
                   if (newValue <= 1) {
-                    setOBJECT((prev: any) => ({
-                      ...prev,
-                      order_product: prev.order_product.map((product: any, idx: number) => (
-                        idx === i ? {
-                          ...product,
-                          product_count: 1,
-                          product_price: originalPrice,
-                        } : (
-                          product
-                        )
-                      )),
-                    }));
+                    setPRODUCT((prev: any) => [
+                      ...prev.slice(0, i),
+                      {
+                        ...item,
+                        product_count: "1",
+                        product_price: String(originalPrice),
+                      },
+                      ...prev.slice(i + 1),
+                    ]);
                   }
                   else if (!isNaN(newValue) && newValue <= 30) {
-                    setOBJECT((prev: any) => ({
-                      ...prev,
-                      order_product: prev.order_product.map((product: any, idx: number) => (
-                        idx === i ? {
-                          ...product,
-                          product_count: newValue,
-                          product_price: originalPrice * newValue,
-                        } : (
-                          product
-                        )
-                      )),
-                    }));
+                    setPRODUCT((prev: any) => [
+                      ...prev.slice(0, i),
+                      {
+                        ...item,
+                        product_count: String(newValue),
+                        product_price: String(originalPrice * newValue),
+                      },
+                      ...prev.slice(i + 1),
+                    ]);
                   }
                 }}
               />
@@ -215,20 +214,17 @@ export const OrderSave = () => {
               name={"X"}
               className={"w-16 h-16 black"}
               onClick={() => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  order_product: [
-                    ...prev.order_product.slice(0, i),
-                    ...prev.order_product.slice(i + 1),
-                  ],
-                }));
+                setPRODUCT((prev: any) => [
+                  ...prev.slice(0, i),
+                  ...prev.slice(i + 1),
+                ]);
               }}
             />
           </Grid>
         </Grid>
       );
       const priceFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"p-20"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-0rem"}>
               총 금액  :
@@ -245,20 +241,29 @@ export const OrderSave = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          {OBJECT?.order_product?.map((item: any, i: number) => (
-            <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`product-${i}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          {PRODUCT?.map((item: any, i: number) => (
+            <Grid size={12} className={"d-col-center"} key={`product-${i}`}>
               {productFragment(item, i)}
+              {i < PRODUCT.length - 1 ? (
+                <>
+                  <Hr px={40} className={"bg-light-grey"} />
+                </>
+              ) : (
+                <>
+                  <Hr px={40} className={"bg-burgundy"} />
+                  {priceFragment(OBJECT)}
+                </>
+              )}
             </Grid>
           ))}
-          {priceFragment(OBJECT)}
         </Grid>
       );
     };
     // 3. order
     const orderSection = () => {
       const orderFragment = (item: any, i: number) => (
-        <Grid container spacing={3} columns={12} className={"p-20"}>
+        <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Select
               variant={"outlined"}
@@ -399,8 +404,8 @@ export const OrderSave = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`order-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`order-${0}`}>
             {orderFragment(OBJECT, 0)}
           </Grid>
         </Grid>
@@ -421,7 +426,7 @@ export const OrderSave = () => {
         </Grid>
         <Grid size={6} className={"d-row-center"}>
           <Btn
-            className={"w-100p fs-1-0rem bg-burgundy"}
+            className={"w-100p fs-1-0rem bg-light-black"}
             onClick={() => {
               flowSave();
             }}

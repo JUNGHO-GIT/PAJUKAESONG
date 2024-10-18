@@ -25,11 +25,6 @@ export const OrderDetail = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
 
-  useEffect(() => {
-    console.log("===================================");
-    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
-  }, [OBJECT]);
-
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
@@ -108,20 +103,20 @@ export const OrderDetail = () => {
     // 2. product
     const productSection = () => {
       const productFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"p-20"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-col-center"}>
             <Img
               max={isXxs ? 50 : 60}
               hover={false}
               shadow={true}
-              radius={true}
+              radius={false}
               group={"product"}
               src={item.product_images && item.product_images[0]}
             />
           </Grid>
           <Grid size={4} className={"d-col-center"}>
             <Div className={"d-row-center"}>
-              <Div className={"fs-1-4rem fw-600 ms-5"}>
+              <Div className={"fs-1-2rem fw-600 ms-5"}>
                 {item?.product_name}
               </Div>
             </Div>
@@ -156,7 +151,7 @@ export const OrderDetail = () => {
         </Grid>
       );
       const priceFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"p-20"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-0rem"}>
               총 금액  :
@@ -173,20 +168,29 @@ export const OrderDetail = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
           {OBJECT?.order_product?.map((item: any, i: number) => (
-            <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`detail-${i}`}>
+            <Grid size={12} className={"d-col-center"} key={`product-${i}`}>
               {productFragment(item)}
+              {i < OBJECT?.order_product?.length - 1 ? (
+                <>
+                  <Hr px={40} className={"bg-light-grey"} />
+                </>
+              ) : (
+                <>
+                  <Hr px={40} className={"bg-burgundy"} />
+                  {priceFragment(OBJECT)}
+                </>
+              )}
             </Grid>
           ))}
-          {priceFragment(OBJECT)}
         </Grid>
       );
     };
     // 3. order
     const orderSection = () => {
       const orderFragment = (item: any) => (
-        <Grid container spacing={3} columns={12} className={"p-20"}>
+        <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Select
               variant={"outlined"}
@@ -253,8 +257,8 @@ export const OrderDetail = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`order-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`order-${0}`}>
             {orderFragment(OBJECT)}
           </Grid>
         </Grid>

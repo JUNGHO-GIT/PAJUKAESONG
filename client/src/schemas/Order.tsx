@@ -16,12 +16,14 @@ export const Order: any = {
   order_time: "11:00",
   order_headcount: "1",
   order_total_price: "",
-  order_product: [{
-    product_name: "",
-    product_count: "",
-    product_price: "1",
-    product_images: [],
-  }],
+  order_product: [
+    {
+      product_name: "",
+      product_count: "",
+      product_price: "1",
+      product_images: [],
+    }
+  ],
 
   order_regDt: null,
   order_updateDt: null,

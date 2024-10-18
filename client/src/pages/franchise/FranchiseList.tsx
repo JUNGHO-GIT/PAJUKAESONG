@@ -93,9 +93,9 @@ export const FranchiseList = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12}>
+        <Grid container spacing={2} columns={12}>
           {OBJECT?.map((item: any, i: number) => (
-            <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`list-${i}`}>
+            <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
               {imageFragment(item)}
               {descFragment(item)}
             </Grid>

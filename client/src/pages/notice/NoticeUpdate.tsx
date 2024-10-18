@@ -7,7 +7,7 @@ import { useValidateNotice } from "@imports/ImportValidates";
 import { axios, makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
+import { Btn, Br } from "@imports/ImportComponents";
 import { Input, TextArea, InputFile } from "@imports/ImportContainers";
 import { Paper, Grid } from "@imports/ImportMuis";
 
@@ -56,13 +56,7 @@ export const NoticeUpdate = () => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      makeFormData(
-        OBJECT,
-        fileList,
-        {
-          _id: location_id
-        }
-      ),
+      makeFormData( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -100,12 +94,12 @@ export const NoticeUpdate = () => {
     });
   };
 
-  // 7. saveNode -----------------------------------------------------------------------------------
-  const saveNode = () => {
-    // 2. update
+  // 7. updateNode ---------------------------------------------------------------------------------
+  const updateNode = () => {
+    // 1. update
     const updateSection = () => {
       const updateFragment = (item: any, i: number) => (
-        <Grid container spacing={3} columns={12} className={"p-20"}>
+        <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Input
               variant={"outlined"}
@@ -164,8 +158,8 @@ export const NoticeUpdate = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`update-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`update-${0}`}>
             {updateFragment(OBJECT, 0)}
           </Grid>
         </Grid>
@@ -186,7 +180,7 @@ export const NoticeUpdate = () => {
         </Grid>
         <Grid size={6} className={"d-row-center"}>
           <Btn
-            className={"w-100p fs-1-0rem bg-burgundy"}
+            className={"w-100p fs-1-0rem bg-light-black"}
             onClick={() => {
               flowUpdate()
             }}
@@ -213,7 +207,7 @@ export const NoticeUpdate = () => {
   // 10. return ------------------------------------------------------------------------------------
   return (
     <>
-      {saveNode()}
+      {updateNode()}
     </>
   );
 };

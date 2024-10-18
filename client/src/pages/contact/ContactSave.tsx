@@ -86,7 +86,7 @@ export const ContactSave = () => {
     // 2. save
     const saveSection = () => {
       const saveFragment = (item: any, i: number) => (
-        <Grid container spacing={3} columns={12} className={"p-20"}>
+        <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Select
               variant={"outlined"}
@@ -234,8 +234,8 @@ export const ContactSave = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`save-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`save-${0}`}>
             {saveFragment(OBJECT, 0)}
           </Grid>
         </Grid>
@@ -256,7 +256,7 @@ export const ContactSave = () => {
         </Grid>
         <Grid size={6} className={"d-row-center"}>
           <Btn
-            className={"w-100p fs-1-0rem bg-burgundy"}
+            className={"w-100p fs-1-0rem bg-light-black"}
             onClick={() => {
               flowSave();
             }}

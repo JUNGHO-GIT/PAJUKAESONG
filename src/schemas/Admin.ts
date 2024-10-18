@@ -2,6 +2,7 @@
 
 import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
+
 // -------------------------------------------------------------------------------------------------
 const schema = new mongoose.Schema(
   {
@@ -16,16 +17,16 @@ const schema = new mongoose.Schema(
       default: "",
       required: false
     },
-    admin_visit_ip: {
-      type: String,
-      default: "",
-      required: false
-    },
-    admin_visit_count: {
-      type: Number,
-      default: 0,
-      required: false
-    },
+    adminSection: [
+      {
+        _id: false,
+        admin_visit_ip: {
+          type: String,
+          default: "",
+          required: false
+        },
+      }
+    ],
 
     admin_regDt: {
       type: Date,

@@ -100,11 +100,13 @@ export const ContactDetail = () => {
     // 2. detail
     const detailSection = () => {
       const headFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"p-10"}>
-          <Grid size={12} className={"d-col-center"}>
-            <Div className={"fs-1-6rem fw-700"}>
+        <Grid container spacing={2} columns={12}>
+          <Grid size={12} className={"d-row-center"}>
+            <Div className={"fs-1-8rem fw-700"}>
               {item?.contact_title}
             </Div>
+          </Grid>
+          <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-2rem fw-500 grey"}>
               {`[${item?.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"}]`}
             </Div>
@@ -112,7 +114,7 @@ export const ContactDetail = () => {
         </Grid>
       );
       const descFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <TextArea
               label={""}
@@ -146,9 +148,10 @@ export const ContactDetail = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`detail-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`detail-${0}`}>
             {headFragment(OBJECT)}
+            <Hr px={40} className={"bg-burgundy"} />
             {descFragment(OBJECT)}
           </Grid>
         </Grid>

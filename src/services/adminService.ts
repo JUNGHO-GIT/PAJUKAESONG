@@ -17,26 +17,23 @@ export const appInfo = async () => {
   const __dirname = path.dirname(__filename);
   const markdownData = fs.readFileSync(path.join(__dirname, '../../changelog.md'), 'utf8');
 
-  const versionRegex = /(\s*)(\d+\.\d+\.\d+)(\s*)/g;
   const dateRegex = /-\s*(\d{4}-\d{2}-\d{2})\s*\((\d{2}:\d{2}:\d{2})\)/g;
-
-  const versionMatches = [...markdownData.matchAll(versionRegex)];
   const dateMatches = [...markdownData.matchAll(dateRegex)];
 
-  const lastVersion = versionMatches.length > 0 ? versionMatches[versionMatches.length - 1][2] : "";
   const lastDateMatch = dateMatches.length > 0 ? dateMatches[dateMatches.length - 1] : null;
   const lastDateTime = lastDateMatch ? `${lastDateMatch[1]}_${lastDateMatch[2]}` : "";
 
   finalResult = {
-    version: lastVersion,
     date: lastDateTime,
   };
 
   if (!finalResult) {
     statusResult = "fail"
+    finalResult = null;
   }
   else {
     statusResult = "success";
+    finalResult = finalResult;
   }
 
   return {
@@ -47,27 +44,27 @@ export const appInfo = async () => {
 
 // 1-0. visit (count) ------------------------------------------------------------------------------
 export const visitCount = async (
-  date_param: string,
+  DATE_param: string,
 ) => {
 
   // result 변수 선언
-  let cntResult: any = null;
+  let findResult: any = null;
   let finalResult: any = null;
   let statusResult: string = "fail";
 
-  cntResult = await repository.visitCount(
-    date_param
+  findResult = await repository.visitCount(
+    DATE_param
   );
 
-  if (!cntResult) {
+  if (!findResult) {
     statusResult = "fail";
     finalResult = null;
   }
   else {
     statusResult = "success";
     finalResult = {
-      admin_visit_count: cntResult,
-      admin_date: date_param,
+      admin_visit_count: findResult?.[0]?.adminSection.length,
+      admin_date: findResult?.[0]?.admin_date,
     };
   }
 
@@ -80,7 +77,7 @@ export const visitCount = async (
 // 1-3. visit (save) -------------------------------------------------------------------------------
 export const visitSave = async (
   req_param: any,
-  date_param: string,
+  DATE_param: string,
 ) => {
 
   // result 변수 선언
@@ -93,15 +90,15 @@ export const visitSave = async (
 
   headerResult = req_param.headers['x-forwarded-for'];
   ipResult = headerResult ? headerResult.split(',')[0] : req_param.connection.remoteAddress;
-  ipResult === "::1" ? ipResult = "127.0.0.1" : ipResult;
+  ipResult = ipResult === "::1" ? "127.0.0.1" : ipResult;
 
   findResult = await repository.visitDetail(
-    ipResult, date_param
+    ipResult, DATE_param
   );
 
   if (!findResult) {
     createResult = await repository.visitSave(
-      ipResult, date_param
+      ipResult, DATE_param
     );
 
     if (!createResult) {
@@ -126,7 +123,7 @@ export const visitSave = async (
 
 // 2-1. order (list) -------------------------------------------------------------------------------
 export const orderList = async (
-  date_param: string,
+  DATE_param: string,
   PAGING_param: any,
 ) => {
 
@@ -141,11 +138,11 @@ export const orderList = async (
   const page = PAGING_param.page || 0;
 
   totalCntResult = await repository.orderCount(
-    date_param
+    DATE_param
   );
 
   findResult = await repository.orderList(
-    date_param, sort, page
+    DATE_param, sort, page
   );
 
   if (!findResult || findResult.length <= 0) {

@@ -62,7 +62,7 @@ export const ProductList = () => {
     // 2. list
     const listSection = () => {
       const imageFragment = (item: any) => (
-        <Grid container spacing={0} columns={12} className={"p-10"}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
             <Img
               max={isXxs ? 230 : 280}
@@ -93,9 +93,9 @@ export const ProductList = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12}>
+        <Grid container spacing={2} columns={12}>
           {OBJECT?.map((item: any, i: number) => (
-            <Grid size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }} key={`list-${i}`}>
+            <Grid size={{ xs: 6, md: 5, xl: 4 }} className={"d-col-center"} key={`list-${i}`}>
               {imageFragment(item)}
               {descFragment(item)}
             </Grid>

@@ -96,7 +96,7 @@ export const MenuList = () => {
       return (
         <Grid container spacing={0} columns={12}>
           {OBJECT?.map((item: any, i: number) => (
-            <Grid size={{ xs: 6, sm: 6, md: 5, lg: 4, xl: 4 }} key={`list-${i}`}>
+            <Grid size={{ xs: 6, md: 5, xl: 4 }} className={"d-col-center"} key={`list-${i}`}>
               {imageFragment(item)}
               {descFragment(item)}
             </Grid>

@@ -5,7 +5,7 @@ import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { axios, numeral } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
-import { Admin, Order } from "@imports/ImportSchemas";
+import { Order } from "@imports/ImportSchemas";
 import { Div, Hr, Br } from "@imports/ImportComponents";
 import { PickerDay, Select } from "@imports/ImportContainers";
 import { Paper, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
@@ -20,9 +20,9 @@ export const AdminDashboard = () => {
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [OBJECT, setOBJECT] = useState<any>(Admin);
+  const [visitCount, setVisitCount] = useState<any>(0);
   const [OBJECT_ORDER, setOBJECT_ORDER] = useState<any>([Order]);
-  const [ORDER_PAGING, setORDER_PAGING] = useState<any>({
+  const [PAGING_ORDER, setPAGING_ORDER] = useState<any>({
     sort: "asc",
     page: 0,
   });
@@ -39,18 +39,18 @@ export const AdminDashboard = () => {
     Promise.all([
       axios.get(`${URL}${SUBFIX}/visitCount`, {
         params: {
-          date: DATE?.today
+          DATE: DATE?.today
         }
       }),
       axios.get(`${URL}${SUBFIX}/orderList`, {
         params: {
-          date: DATE?.today,
-          PAGING: ORDER_PAGING
+          DATE: DATE?.today,
+          PAGING: PAGING_ORDER
         }
       })
     ])
     .then(([resCount, resOrder]: any) => {
-      setOBJECT(resCount.data.result || Admin);
+      setVisitCount(resCount.data.result?.admin_visit_count || 0);
       setOBJECT_ORDER(resOrder.data.result.length > 0 ? resOrder.data.result : [Order]);
       setORDER_COUNT((prev: any) => ({
         ...prev,
@@ -68,24 +68,28 @@ export const AdminDashboard = () => {
     .finally(() => {
       setLOADING(false);
     });
-  }, [URL, SUBFIX, ORDER_PAGING, DATE?.today]);
+  }, [URL, SUBFIX, PAGING_ORDER, DATE?.today]);
 
   // 7. detailNode ---------------------------------------------------------------------------------
   const detailNode = () => {
     // 1. date
     const dateSection = () => (
-      <PickerDay
-        OBJECT={DATE}
-        setOBJECT={setDATE}
-        extra={"today"}
-        variant={"outlined"}
-        i={0}
-      />
+      <Grid container spacing={0} columns={12}>
+        <Grid size={12} className={"d-col-center"}>
+          <PickerDay
+            OBJECT={DATE}
+            setOBJECT={setDATE}
+            extra={"today"}
+            variant={"outlined"}
+            i={0}
+          />
+        </Grid>
+      </Grid>
     );
     // 2. visit
     const visitSection = () => {
       const titleFragment = () => (
-        <Grid container spacing={0} columns={12} className={"p-10"}>
+        <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
             <Div className={"fs-1-6rem fw-700"}>
               방문자 수
@@ -93,11 +97,11 @@ export const AdminDashboard = () => {
           </Grid>
         </Grid>
       );
-      const visitFragment = (item: any) => (
-        <Grid container spacing={0} columns={12} className={"p-10"}>
+      const visitFragment = () => (
+        <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-6rem fw-600 black me-5"}>
-              {item?.admin_visit_count || 0}
+              {visitCount}
             </Div>
             <Div className={"fs-1-3rem fw-500 grey ms-10"}>
               명
@@ -106,10 +110,11 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`list-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`visit-${0}`}>
             {titleFragment()}
-            {visitFragment(OBJECT)}
+            <Br px={30} />
+            {visitFragment()}
           </Grid>
         </Grid>
       );
@@ -117,7 +122,7 @@ export const AdminDashboard = () => {
     // 3. list
     const orderSection = () => {
       const titleFragment = () => (
-        <Grid container spacing={2} columns={12} className={"p-20"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Div className={"fs-1-6rem fw-700"}>
               주문 내역
@@ -125,8 +130,8 @@ export const AdminDashboard = () => {
           </Grid>
         </Grid>
       );
-      const headerFragment = () => (
-        <Grid container spacing={2} columns={12} className={"p-20 border-bottom-1-burgundy"}>
+      const headFragment = () => (
+        <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem fw-500"}>
               유형
@@ -139,13 +144,13 @@ export const AdminDashboard = () => {
           </Grid>
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem fw-500"}>
-              이름
+              주문자
             </Div>
           </Grid>
         </Grid>
       );
       const listFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"p-20"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={3}>
             <Div className={"fs-0-7rem"}>
               {item?.order_category === "reservation" && "매장 예약"}
@@ -165,12 +170,23 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
           {OBJECT_ORDER.map((item: any, i: number) => (
-            <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`list-${i}`}>
-              {i === 0 && titleFragment()}
-              {i === 0 && headerFragment()}
+            <Grid size={12} className={"d-col-center"} key={`order-${i}`}>
+              {i === 0 && (
+                <>
+                  {titleFragment()}
+                  <Br px={30} />
+                  {headFragment()}
+                  <Hr px={40} className={"bg-burgundy"} />
+                </>
+              )}
               {listFragment(item)}
+              {i < OBJECT_ORDER.length - 1 && (
+                <>
+                  <Hr px={40} className={"bg-light-grey"} />
+                </>
+              )}
             </Grid>
           ))}
         </Grid>
@@ -181,10 +197,10 @@ export const AdminDashboard = () => {
       <Grid container spacing={2} columns={12} className={"px-10"}>
         <Grid size={3} className={"d-col-center"}>
           <Select
-            value={ORDER_PAGING?.sort}
+            value={PAGING_ORDER?.sort}
             inputclass={"h-min0 h-5vh"}
             onChange={(e: any) => (
-              setORDER_PAGING((prev: any) => ({
+              setPAGING_ORDER((prev: any) => ({
                 ...prev,
                 sort: e.target.value
               }))
@@ -194,9 +210,9 @@ export const AdminDashboard = () => {
               <MenuItem
                 key={item}
                 value={item}
-                selected={ORDER_PAGING?.sort === item}
+                selected={PAGING_ORDER?.sort === item}
                 onChange={(e: any) => (
-                  setORDER_PAGING((prev: any) => ({
+                  setPAGING_ORDER((prev: any) => ({
                     ...prev,
                     sort: e.target.value
                   }))
@@ -217,18 +233,18 @@ export const AdminDashboard = () => {
             component={"div"}
             labelRowsPerPage={""}
             count={ORDER_COUNT.totalCnt}
-            page={ORDER_PAGING.page}
+            page={PAGING_ORDER.page}
             showFirstButton={true}
             showLastButton={true}
             className={"border-bottom-1 p-2"}
             onPageChange={(_event, newPage) => {
-              setORDER_PAGING((prev: any) => ({
+              setPAGING_ORDER((prev: any) => ({
                 ...prev,
                 page: newPage
               }));
             }}
             onRowsPerPageChange={(event) => {
-              setORDER_PAGING((prev: any) => ({
+              setPAGING_ORDER((prev: any) => ({
                 ...prev,
                 limit: parseFloat(event.target.value)
               }));

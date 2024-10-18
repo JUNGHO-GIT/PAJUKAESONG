@@ -6,13 +6,22 @@ import { newDate } from "@scripts/date";
 
 // 1-0. visit (count) ------------------------------------------------------------------------------
 export const visitCount = async (
-  date_param: string,
+  DATE_param: string,
 ) => {
-  const finalResult = await Admin.countDocuments(
+  const finalResult = await Admin.aggregate([
     {
-      admin_date: date_param
+      $match: {
+        admin_date: DATE_param
+      }
+    },
+    {
+      $project: {
+        _id: 1,
+        admin_date: 1,
+        adminSection: 1,
+      }
     }
-  );
+  ]);
 
   return finalResult;
 };
@@ -20,16 +29,15 @@ export const visitCount = async (
 // 1-2. visit (detail) -----------------------------------------------------------------------------
 export const visitDetail = async (
   ip_param: string,
-  date_param: string,
+  DATE_param: string,
 ) => {
 
   const finalResult:any = await Admin.findOne(
     {
-      admin_visit_ip: ip_param,
-      admin_date: date_param,
+      admin_date: DATE_param,
+      "adminSection.admin_visit_ip": ip_param
     }
-  )
-  .lean();
+  );
 
   return finalResult;
 };
@@ -37,16 +45,19 @@ export const visitDetail = async (
 // 1-3. visit (save) -------------------------------------------------------------------------------
 export const visitSave = async (
   ip_param: string,
-  date_param: string,
+  DATE_param: string,
 ) => {
 
   const finalResult:any = await Admin.create(
     {
-      admin_date: date_param,
-      admin_visit_ip: ip_param,
-      admin_visit_count: 1,
+      admin_date: DATE_param,
+      adminSection: [
+        {
+          admin_visit_ip: ip_param
+        }
+      ],
       admin_regDt: newDate,
-      admin_updateDt: null,
+      admin_updateDt: null
     }
   );
 
@@ -55,11 +66,11 @@ export const visitSave = async (
 
 // 2-0. order (count) ------------------------------------------------------------------------------
 export const orderCount = async (
-  date_param: string,
+  DATE_param: string,
 ) => {
   const finalResult = await Order.countDocuments(
     {
-      order_date: date_param
+      order_date: DATE_param
     }
   );
 
@@ -68,14 +79,14 @@ export const orderCount = async (
 
 // 2-1. order (list) -------------------------------------------------------------------------------
 export const orderList = async (
-  date_param: string,
+  DATE_param: string,
   sort_param: 1 | -1,
   page_param: number,
 ) => {
   const finalResult:any = await Order.aggregate([
     {
       $match: {
-        order_date: date_param
+        order_date: DATE_param
       }
     },
     {

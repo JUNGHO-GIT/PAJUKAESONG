@@ -44,7 +44,7 @@ router.get("/appInfo", async (req: Request, res: Response) => {
 router.get("/visitCount", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.visitCount(
-      req.query.date as string,
+      req.query.DATE as string,
     );
     if (finalResult.status === "success") {
       res.json({
@@ -85,7 +85,7 @@ router.get("/visitSave", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.visitSave(
       req as any,
-      req.query.date as string,
+      req.query.DATE as string,
     );
     if (finalResult.status === "success") {
       res.json({
@@ -123,7 +123,7 @@ router.get("/visitSave", async (req: Request, res: Response) => {
 router.get("/orderList", async (req: Request, res: Response) => {
   try {
     let finalResult = await service.orderList(
-      req.query.date as string,
+      req.query.DATE as string,
       req.query.PAGING as any,
     );
     if (finalResult.status === "success") {

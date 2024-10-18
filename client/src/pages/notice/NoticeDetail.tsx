@@ -95,7 +95,7 @@ export const NoticeDetail = () => {
     // 2. detail
     const detailSection = () => {
       const headFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"p-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {item?.notice_title}
@@ -104,7 +104,7 @@ export const NoticeDetail = () => {
         </Grid>
       );
       const descFragment = (item: any) => (
-        <Grid container spacing={2} columns={12} className={"px-10"}>
+        <Grid container spacing={2} columns={12}>
           <Grid size={12} className={"d-row-center"}>
             <TextArea
               label={""}
@@ -138,10 +138,10 @@ export const NoticeDetail = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 radius-1 shadow-1"}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} key={`detail-${0}`}>
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`detail-${0}`}>
             {headFragment(OBJECT)}
-            <Hr px={20} className={"bg-burgundy"} />
+            <Hr px={40} className={"bg-burgundy"} />
             {descFragment(OBJECT)}
           </Grid>
         </Grid>

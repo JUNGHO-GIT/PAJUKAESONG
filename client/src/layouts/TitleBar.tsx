@@ -98,7 +98,7 @@ export const TitleBar = () => {
     return (
       <Paper className={`layout-wrapper p-relative border-bottom-1 z-100 bg-burgundy ${objectHeight}`}>
         <Grid container spacing={0} columns={12}>
-          <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
+          <Grid size={12} className={"d-center"}>
             {titleSection()}
           </Grid>
         </Grid>
