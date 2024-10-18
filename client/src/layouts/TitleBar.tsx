@@ -32,10 +32,10 @@ export const TitleBar = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     if (isXxs || isXs) {
-      setObjectHeight(PATH.includes("main") ? "" : "h-15vh");
+      setObjectHeight(PATH.includes("main") ? "" : "h-18vh");
     }
     else if (isSm || isMd) {
-      setObjectHeight(PATH.includes("main") ? "" : "h-20vh");
+      setObjectHeight(PATH.includes("main") ? "" : "h-21vh");
     }
     else if (isLg || isXl) {
       setObjectHeight(PATH.includes("main") ? "" : "h-25vh");
@@ -153,6 +153,15 @@ export const TitleBar = () => {
       setTitleBreadcrumb(`관리자`);
       if (PATH.includes("admin/dashboard")) {
         setTitleValue("대시보드");
+      }
+    }
+    else if (PATH.includes("user")) {
+      setTitleBreadcrumb(`사용자`);
+      if (PATH.includes("user/login")) {
+        setTitleValue("로그인");
+      }
+      else if (PATH.includes("user/signup")) {
+        setTitleValue("회원가입");
       }
     }
   }, [PATH, location_category]);
