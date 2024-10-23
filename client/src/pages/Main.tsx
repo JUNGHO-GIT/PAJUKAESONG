@@ -3,8 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
-import { Swiper, SwiperSlide, Autoplay, axios } from "@imports/ImportUtils";
-import { Pagination } from "@imports/ImportUtils";
+import { Swiper, SwiperSlide, Autoplay, axios, Pagination } from "@imports/ImportUtils";
 import { Menu, Notice } from "@imports/ImportSchemas";
 import { Location } from "@imports/ImportContainers";
 import { Div, Img, Br, Hr } from "@imports/ImportComponents";
@@ -25,7 +24,7 @@ export const Main = () => {
   const [OBJECT_NOTICE, setOBJECT_NOTICE] = useState<any>([Notice]);
   const [category, setCategory] = useState<string>("main");
   const [PAGING, setPAGING] = useState<any>({
-    sort: "desc",
+    sort: "asc",
     page: 0,
   });
 
@@ -106,14 +105,12 @@ export const Main = () => {
               slidesPerView={LOADING ? 0 : (
                 isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : 2
               )}
-              slidesPerGroup={1}
               centeredSlides={false}
               loop={true}
               navigation={false}
               className={"p-20"}
               autoplay={{
                 delay: 2000,
-                disableOnInteraction: false,
               }}
               pagination={{
                 clickable: true,

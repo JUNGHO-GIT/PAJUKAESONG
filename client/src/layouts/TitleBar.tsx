@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { Swiper, SwiperSlide, Autoplay } from "@imports/ImportUtils";
+import { useAlertStore } from "@imports/ImportStores";
+import { Swiper, SwiperSlide } from "@imports/ImportUtils";
 import { Div, Img, Icons } from "@imports/ImportComponents";
 import { Grid, Paper } from "@imports/ImportMuis";
 
@@ -174,32 +175,25 @@ export const TitleBar = () => {
           <Swiper
             spaceBetween={0}
             slidesPerView={1}
-            slidesPerGroup={1}
             centeredSlides={true}
             loop={true}
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-            }}
             navigation={false}
-            modules={[
-              Autoplay,
-            ]}
           >
-            <SwiperSlide className={"d-col-center w-100p h-100p"}>
+            <SwiperSlide className={"w-100p h-100p d-center"}>
               <Img
+                max={isXxs ? 600 : 700}
                 hover={false}
                 shadow={false}
                 radius={false}
                 group={"new"}
-                src={"/images/main/main1.jpg"}
+                src={"https://cdn.pixabay.com/photo/2017/07/28/18/25/pancake-2554104_960_720.jpg"}
               />
               <Div className={"d-col-center w-100p h-100p p-absolute opacity-4"}>
-                <Div className={"fs-2-1rem fw-600 white"}>
-                  정성을 담은 메밀 요리로
+                <Div className={"fs-1-6rem fw-400 ls-4 white"}>
+                  정성을 담은 <strong>메밀 요리</strong>로
                 </Div>
-                <Div className={"fs-2-1rem fw-600 white"}>
-                  건강한 맛을 선사합니다.
+                <Div className={"fs-1-6rem fw-400 ls-4 white"}>
+                  <strong>건강한 맛</strong>을 선사합니다.
                 </Div>
               </Div>
             </SwiperSlide>
