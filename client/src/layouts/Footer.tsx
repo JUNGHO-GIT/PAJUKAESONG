@@ -94,7 +94,7 @@ export const Footer = () => {
     // 4. return
     return (
       <Paper className={"layout-wrapper p-relative border-top-1 shadow-top-4 p-10 bg-ivory"}>
-        <Grid container spacing={2} columns={24}>
+        <Grid container spacing={1} columns={24}>
           <Grid size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {logoSection()}
           </Grid>
