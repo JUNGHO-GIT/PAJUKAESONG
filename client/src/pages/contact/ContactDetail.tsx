@@ -202,7 +202,7 @@ export const ContactDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-50"}>
+        <Grid container spacing={0} columns={12} className={"py-20"}>
           <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
             {LOADING ? <Loading /> : detailSection()}
             <Hr px={40} className={"bg-grey"} />

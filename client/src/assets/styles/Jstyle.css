@@ -11956,16 +11956,16 @@
   background-color: #F2ECBE !important;
 }
 .ivory-light {
-  color: #f5f3dc !important;
+  color: #fffef6 !important;
 }
 .pointer-ivory-light:hover {
   cursor: pointer !important;
-  color: #f5f3dc !important;
+  color: #fffef6 !important;
   transition: transform 0.1s ease-in-out !important;
   transform: scale(1.1) !important;
 }
 .bg-ivory-light {
-  background-color: #f5f3dc !important;
+  background-color: #fffef6 !important;
 }
 
 .success {

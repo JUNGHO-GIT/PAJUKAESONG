@@ -32,10 +32,10 @@ export const TitleBar = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     if (isXxs || isXs) {
-      setObjectHeight(PATH.includes("main") ? "" : "h-15vh");
+      setObjectHeight(PATH.includes("main") ? "" : "h-18vh");
     }
     else if (isSm || isMd) {
-      setObjectHeight(PATH.includes("main") ? "" : "h-20vh");
+      setObjectHeight(PATH.includes("main") ? "" : "h-21vh");
     }
     else if (isLg || isXl) {
       setObjectHeight(PATH.includes("main") ? "" : "h-25vh");
@@ -195,10 +195,10 @@ export const TitleBar = () => {
                 src={"/images/main/main1.jpg"}
               />
               <Div className={"d-col-center w-100p h-100p p-absolute opacity-4"}>
-                <Div className={"fs-1-8rem fw-700 white ls-2"}>
+                <Div className={"fs-2-1rem fw-600 white"}>
                   정성을 담은 메밀 요리로
                 </Div>
-                <Div className={"fs-1-8rem fw-700 white ls-2"}>
+                <Div className={"fs-2-1rem fw-600 white"}>
                   건강한 맛을 선사합니다.
                 </Div>
               </Div>
