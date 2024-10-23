@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { Swiper, SwiperSlide, Autoplay, axios } from "@imports/ImportUtils";
+import { Swiper, SwiperSlide, Autoplay } from "@imports/ImportUtils";
 import { Div, Img, Icons } from "@imports/ImportComponents";
 import { Grid, Paper } from "@imports/ImportMuis";
 
@@ -192,7 +192,7 @@ export const TitleBar = () => {
                 shadow={false}
                 radius={false}
                 group={"new"}
-                src={"https://cdn.pixabay.com/photo/2020/06/19/16/03/food-5318001_960_720.jpg"}
+                src={"/images/main/main1.jpg"}
               />
               <Div className={"d-col-center w-100p h-100p p-absolute opacity-4"}>
                 <Div className={"fs-2-1rem fw-600 white"}>
@@ -210,18 +210,15 @@ export const TitleBar = () => {
     const titleSection = () => (
       <Grid container spacing={0} columns={12}>
         <Grid size={12} className={"d-row-center"}>
-          <Icons
-            key={"Home"}
-            name={"Home"}
-            color={"indigo"}
-            className={"w-24 h-24"}
-          />
-          <Div style={{
-            fontSize: '0.9rem',
-            fontWeight: 300,
-            color: "rgb(255 255 255 / 80%)",
-            letterSpacing: 2,
-          }}>
+          <Div className={`mt-n3 me-n5`}>
+            <Icons
+              key={"Home"}
+              name={"Home"}
+              color={"indigo"}
+              className={"w-20 h-20"}
+            />
+          </Div>
+          <Div className={"fs-0-9rem fw-300 white ls-2"}>
             {`PAJU KAESONG`}
           </Div>
           <Div className={`fs-1-1rem fw-400 white ms-10 me-10`}>

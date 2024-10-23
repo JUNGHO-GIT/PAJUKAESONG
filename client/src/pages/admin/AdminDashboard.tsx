@@ -73,25 +73,45 @@ export const AdminDashboard = () => {
   // 7. detailNode ---------------------------------------------------------------------------------
   const detailNode = () => {
     // 1. date
-    const dateSection = () => (
-      <Grid container spacing={0} columns={12}>
-        <Grid size={12} className={"d-col-center"}>
-          <PickerDay
-            OBJECT={DATE}
-            setOBJECT={setDATE}
-            extra={"today"}
-            variant={"outlined"}
-            i={0}
-          />
+    const dateSection = () => {
+      const titleFragment = () => (
+        <Grid container spacing={0} columns={12}>
+          <Grid size={12} className={"d-col-center"}>
+            <Div className={"fs-1-4rem fw-700"}>
+              날짜
+            </Div>
+          </Grid>
         </Grid>
-      </Grid>
-    );
+      );
+      const pickerFragment = () => (
+        <Grid container spacing={0} columns={12}>
+          <Grid size={12} className={"d-col-center"}>
+            <PickerDay
+              OBJECT={DATE}
+              setOBJECT={setDATE}
+              extra={"today"}
+              variant={"outlined"}
+              i={0}
+            />
+          </Grid>
+        </Grid>
+      );
+      return (
+        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+          <Grid size={12} className={"d-col-center"} key={`date-${0}`}>
+            {titleFragment()}
+            <Br px={30} />
+            {pickerFragment()}
+          </Grid>
+        </Grid>
+      );
+    };
     // 2. visit
     const visitSection = () => {
       const titleFragment = () => (
         <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
-            <Div className={"fs-1-6rem fw-700"}>
+            <Div className={"fs-1-4rem fw-700"}>
               방문자 수
             </Div>
           </Grid>
@@ -124,7 +144,7 @@ export const AdminDashboard = () => {
       const titleFragment = () => (
         <Grid container spacing={2} columns={12}>
           <Grid size={12}>
-            <Div className={"fs-1-6rem fw-700"}>
+            <Div className={"fs-1-4rem fw-700"}>
               주문 내역
             </Div>
           </Grid>

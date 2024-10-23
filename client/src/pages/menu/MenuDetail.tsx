@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateMenu } from "@imports/ImportValidates";
-import { axios, numeral } from "@imports/ImportUtils";
+import { axios, numeral, Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Icons } from "@imports/ImportComponents";
@@ -14,7 +14,7 @@ import { Paper, Grid } from "@imports/ImportMuis";
 export const MenuDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, location, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
+  const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
   const { isXxs } = useResponsive();
   const { ALERT, setALERT } = useAlertStore();
   const { validate } = useValidateMenu();
@@ -100,14 +100,34 @@ export const MenuDetail = () => {
       const imageFragment = (item: any) => (
         <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
-            <Img
-              max={isXxs ? 600 : 700}
-              hover={false}
-              shadow={true}
-              radius={true}
-              group={"menu"}
-              src={item.menu_images && item.menu_images[0]}
-            />
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={1}
+              pagination={{
+                clickable: true,
+                enabled: true,
+                el: ".menu-pagination",
+              }}
+              modules={[
+                Pagination,
+              ]}
+            >
+              {item?.menu_images?.map((image: string, index: number) => (
+                <SwiperSlide className={"w-100p h-100p d-center"} key={`image-${index}`}>
+                  <Img
+                    max={isXxs ? 600 : 700}
+                    hover={false}
+                    shadow={true}
+                    radius={true}
+                    group={"menu"}
+                    src={image}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
+          <Grid size={12} className={"d-row-center"}>
+            <Div className={"menu-pagination transform-none"} />
           </Grid>
         </Grid>
       );

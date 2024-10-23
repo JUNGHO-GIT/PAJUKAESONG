@@ -1,22 +1,21 @@
-// useLocale.tsx
+// useLanguageSetting.tsx
 
 import { useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { moment, getCountryForTimezone, getAllInfoByISO } from "@imports/ImportUtils";
+import { moment, setLocal, getCountryForTimezone, getAllInfoByISO } from "@imports/ImportUtils";
 
 // -------------------------------------------------------------------------------------------------
-export const useLocale = () => {
+export const useLanguageSetting = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { TITLE } = useCommonValue();
+  const { PATH, localLang } = useCommonValue();
 
   // 2. declare ------------------------------------------------------------------------------------
   let timeZone: string = "";
   let zoneName: string = "";
   let isoCode: string = "";
   let currency: string = "";
-  let locale: string = "";
+  let lang: string = "";
 
   // 3. useEffect ----------------------------------------------------------------------------------
   useEffect(() => {
@@ -34,30 +33,26 @@ export const useLocale = () => {
       currency = getAllInfoByISO(isoCode).currency;
 
       // ex. ko
-      const existedLocale = localStorage.getItem(`${TITLE}_localeSetting`) || "{}";
-      const parsedLocale = JSON.parse(existedLocale).locale;
-      locale = parsedLocale || (navigator.language && navigator.language.split("-")[0]);
+      lang = localLang || (navigator.language && navigator.language.split("-")[0]);
 
-      // Load locale for moment if necessary
-      if (locale && locale !== "en") {
-        require(`moment/locale/${locale}`);
+      // Load lang for moment if necessary
+      if (lang && lang !== "en") {
+        require(`moment/locale/${lang}`);
       }
 
       // Save to local storage
-      const localeSetting = {
+      setLocal("setting", "locale", "", {
         timeZone: timeZone,
-        locale: locale,
+        lang: lang,
         zoneName: zoneName,
         isoCode: isoCode,
         currency: currency,
-      };
-      localStorage.setItem(`${TITLE}_localeSetting`, JSON.stringify(localeSetting));
-
+      });
     }
     catch (err: any) {
       console.error(err);
     }
 
     // 종속성에 locale은 추가하지 않음
-  }, [TITLE, timeZone, zoneName, isoCode, currency]);
+  }, [PATH, timeZone, zoneName, isoCode, currency]);
 };

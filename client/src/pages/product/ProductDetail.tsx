@@ -4,7 +4,8 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateProduct } from "@imports/ImportValidates";
-import { axios, numeral } from "@imports/ImportUtils";
+import { axios, numeral, setSession, getSession } from "@imports/ImportUtils";
+import { Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
 import { Input } from "@imports/ImportContainers";
@@ -15,7 +16,7 @@ import { Paper, Grid } from "@imports/ImportMuis";
 export const ProductDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, location_id, isAdmin, URL, SUBFIX, TITLE } = useCommonValue();
+  const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
   const { isXxs } = useResponsive();
   const { validate } = useValidateProduct();
   const { ALERT, setALERT } = useAlertStore();
@@ -53,41 +54,39 @@ export const ProductDetail = () => {
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async (extra: string) => {
-    const orderProduct: any = {
+    const orderProduct = {
       product_id: OBJECT?._id,
       product_name: OBJECT?.product_name,
       product_count: orderCount,
       product_price: orderPrice,
       product_images: OBJECT?.product_images,
     };
+    const existOrderProduct = getSession("order_product", "", "");
 
     if (extra === "buy") {
-      sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify([]));
-    }
-
-    const existOrderProduct = sessionStorage.getItem(`${TITLE}_order_product`);
-
-    if (existOrderProduct) {
-      const orderProducts = JSON.parse(existOrderProduct);
-
-      // 기존에 같은 product_id가 있는지 확인
-      const productIndex = orderProducts.findIndex(
-        (product: any) => product.product_id === orderProduct.product_id
-      );
-
-      // 중복된 항목이 있으면 덮어씌움
-      if (productIndex > -1) {
-        orderProducts[productIndex] = orderProduct;
-      }
-      // 중복된 항목이 없으면 새로운 항목 추가
-      else {
-        orderProducts.push(orderProduct);
-      }
-
-      sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(orderProducts));
+      setSession("order_product", "", "", [orderProduct]);
     }
     else {
-      sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify([orderProduct]));
+      if (existOrderProduct && existOrderProduct.length > 0) {
+
+        // 기존에 같은 product_id가 있는지 확인
+        const productIndex = existOrderProduct.findIndex((item: any) => (
+          item.product_id === orderProduct.product_id
+        ));
+
+        // 중복된 항목이 있으면 덮어씌움
+        if (productIndex > -1) {
+          existOrderProduct[productIndex] = orderProduct;
+        }
+        // 중복된 항목이 없으면 새로운 항목 추가
+        else {
+          existOrderProduct.push(orderProduct);
+        }
+        setSession("order_product", "", "", existOrderProduct);
+      }
+      else {
+        setSession("order_product", "", "", [orderProduct]);
+      }
     }
 
     navigate(`/order/save`);
@@ -142,14 +141,34 @@ export const ProductDetail = () => {
       const imageFragment = (item: any) => (
         <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
-            <Img
-              max={isXxs ? 600 : 700}
-              hover={false}
-              shadow={true}
-              radius={true}
-              group={"product"}
-              src={item.product_images && item.product_images[0]}
-            />
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={1}
+              pagination={{
+                clickable: true,
+                enabled: true,
+                el: ".product-pagination",
+              }}
+              modules={[
+                Pagination,
+              ]}
+            >
+              {item?.product_images?.map((image: string, index: number) => (
+                <SwiperSlide className={"w-100p h-100p d-center"} key={`image-${index}`}>
+                  <Img
+                    max={isXxs ? 600 : 700}
+                    hover={false}
+                    shadow={true}
+                    radius={true}
+                    group={"product"}
+                    src={image}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
+          <Grid size={12} className={"d-row-center"}>
+            <Div className={"product-pagination transform-none"} />
           </Grid>
         </Grid>
       );

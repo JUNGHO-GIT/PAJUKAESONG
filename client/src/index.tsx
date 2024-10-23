@@ -17,7 +17,7 @@ import {
 } from "@imports/ImportMuis";
 
 import {
-  useRoot, useScrollTop, useLocale, useCommonValue
+  useRoot, useScrollTop, useLanguageSetting
 } from "@imports/ImportHooks";
 
 import {
@@ -153,8 +153,8 @@ const User = () => (
 const App = () => {
 
   useRoot();
-  useLocale();
   useScrollTop();
+  useLanguageSetting();
 
   return (
     <div className={"App"}>

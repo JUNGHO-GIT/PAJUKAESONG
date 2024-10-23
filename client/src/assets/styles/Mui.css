@@ -6,13 +6,13 @@
   min-width: 0px !important;
 }
 .MuiTab-root.Mui-selected {
-  color: #EF4444 !important;
+  color: #973131 !important;
   font-weight: bold !important;
   text-decoration: none !important;
   scale: 1.2 !important;
 }
 .MuiTabs-indicator {
-  background-color: #EF4444 !important;
+  background-color: #973131 !important;
 }
 .MuiTabs-scroller {
   margin: 0px 0px 5px 0px !important;
@@ -111,7 +111,7 @@
   min-width: 14vw !important;
 }
 .MuiBottomNavigationAction-root.Mui-selected {
-  color: #EF4444 !important;
+  color: #973131 !important;
   font-weight: bold !important;
   text-decoration: none !important;
   scale: 1.2 !important;
@@ -150,10 +150,10 @@
   margin-right: 0px !important;
 }
 .MuiStepIcon-root.Mui-completed {
-  color: #EF4444 !important;
+  color: #973131 !important;
 }
 .MuiStepIcon-root.Mui-active {
-  color: #EF4444 !important;
+  color: #973131 !important;
 }
 .MuiToolbar-root {
   margin: 0px 0px 0px 0px !important;

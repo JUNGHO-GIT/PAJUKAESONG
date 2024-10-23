@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateOrder } from "@imports/ImportValidates";
-import { axios, numeral } from "@imports/ImportUtils";
+import { axios, numeral, setSession, getSession } from "@imports/ImportUtils";
 import { Order, Product } from "@imports/ImportSchemas";
 import { Loading } from "@imports/ImportLayouts";
 import { Input, Select, PickerDay, PickerTime } from "@imports/ImportContainers";
@@ -15,7 +15,7 @@ import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
 export const OrderSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, URL, SUBFIX, TITLE } = useCommonValue();
+  const { navigate, URL, SUBFIX } = useCommonValue();
   const { isXxs } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateOrder();
   const { ALERT, setALERT } = useAlertStore();
@@ -30,14 +30,14 @@ export const OrderSave = () => {
   useEffect(() => {
     setLOADING(true);
 
-    const existOrderProduct = sessionStorage.getItem(`${TITLE}_order_product`);
+    const existOrderProduct = getSession("order_product", "", "");
 
     // 세션에 데이터가 있으면 불러오기
-    if (existOrderProduct && JSON.parse(existOrderProduct).length > 0) {
-      setPRODUCT(JSON.parse(existOrderProduct));
+    if (existOrderProduct && existOrderProduct.length > 0) {
+      setPRODUCT(existOrderProduct);
       setOBJECT((prev: any) => ({
         ...prev,
-        order_product: JSON.parse(existOrderProduct),
+        order_product: existOrderProduct,
       }));
     }
 
@@ -58,7 +58,7 @@ export const OrderSave = () => {
     }));
 
     // 세션에 저장
-    sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(PRODUCT));
+    setSession("order_product", "", "", PRODUCT);
 
   }, [PRODUCT]);
 
@@ -80,7 +80,7 @@ export const OrderSave = () => {
           msg: res.data.msg,
         });
         document?.querySelector("input[type=file]")?.remove();
-        sessionStorage?.removeItem(`${TITLE}_order_product`);
+        setSession("order_product", "", "", []);
         navigate("/order/find");
       }
       else {

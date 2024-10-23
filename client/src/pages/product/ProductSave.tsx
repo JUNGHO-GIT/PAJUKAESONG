@@ -195,7 +195,7 @@ export const ProductSave = () => {
               variant={"outlined"}
               label={"메뉴 이미지"}
               required={true}
-              limit={1}
+              limit={3}
               existing={item?.product_images}
               group={"product"}
               value={fileList}

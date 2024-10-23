@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateOrder } from "@imports/ImportValidates";
-import { axios, numeral } from "@imports/ImportUtils";
+import { axios, numeral, setSession } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Order, Product } from "@imports/ImportSchemas";
 import { Input, Select, PickerDay, PickerTime } from "@imports/ImportContainers";
@@ -64,7 +64,7 @@ export const OrderUpdate = () => {
     }));
 
     // 세션에 저장
-    sessionStorage.setItem(`${TITLE}_order_product`, JSON.stringify(PRODUCT));
+    setSession("order_product", "", "", JSON.stringify(PRODUCT));
 
   }, [PRODUCT]);
 
@@ -87,7 +87,7 @@ export const OrderUpdate = () => {
           msg: res.data.msg,
         });
         document?.querySelector("input[type=file]")?.remove();
-        sessionStorage?.removeItem(`${TITLE}_order_product`);
+        setSession("order_product", "", "", []);
         navigate("/order/find");
       }
       else {

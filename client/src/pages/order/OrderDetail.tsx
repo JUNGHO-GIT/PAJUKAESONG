@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateOrder } from "@imports/ImportValidates";
-import { axios, numeral } from "@imports/ImportUtils";
+import { axios, numeral, setSession } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Div, Hr, Br, Img, Icons } from "@imports/ImportComponents";
@@ -69,7 +69,7 @@ export const OrderDetail = () => {
           msg: res.data.msg,
         });
         document?.querySelector("input[type=file]")?.remove();
-        sessionStorage?.removeItem(`${TITLE}_order_product`);
+        setSession("order_product", "", "", []);
         navigate('/order/list', {
           state: {
             order_name: OBJECT?.order_name,

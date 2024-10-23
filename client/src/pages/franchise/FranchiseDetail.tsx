@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateFranchise } from "@imports/ImportValidates";
-import { axios } from "@imports/ImportUtils";
+import { axios, Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Icons } from "@imports/ImportComponents";
@@ -101,14 +101,34 @@ export const FranchiseDetail = () => {
       const imageFragment = (item: any) => (
         <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
-            <Img
-              max={isXxs ? 600 : 700}
-              hover={false}
-              shadow={true}
-              radius={true}
-              group={"franchise"}
-              src={item.franchise_images && item.franchise_images[0]}
-            />
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={1}
+              pagination={{
+                clickable: true,
+                enabled: true,
+                el: ".franchise-pagination",
+              }}
+              modules={[
+                Pagination,
+              ]}
+            >
+              {item?.franchise_images?.map((image: string, index: number) => (
+                <SwiperSlide className={"w-100p h-100p d-center"} key={`image-${index}`}>
+                  <Img
+                    max={isXxs ? 600 : 700}
+                    hover={false}
+                    shadow={true}
+                    radius={true}
+                    group={"franchise"}
+                    src={image}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
+          <Grid size={12} className={"d-row-center"}>
+            <Div className={"franchise-pagination transform-none"} />
           </Grid>
         </Grid>
       );
@@ -124,7 +144,7 @@ export const FranchiseDetail = () => {
               key={"Location"}
               name={"Location"}
               fill={"whitesmoke"}
-              className={"w-20 h-20"}
+              className={"w-15 h-15 dark"}
             />
             <Div className={"fs-0-9rem fw-500 light-black"}>
               {`${item?.franchise_address_main} (${item?.franchise_address_detail})`}
@@ -135,7 +155,7 @@ export const FranchiseDetail = () => {
               key={"Phone"}
               name={"Phone"}
               fill={"whitesmoke"}
-              className={"w-20 h-20"}
+              className={"w-15 h-15 dark"}
             />
             <Div className={"fs-0-9rem fw-500 light-black"}>
               {item?.franchise_phone}
@@ -146,7 +166,7 @@ export const FranchiseDetail = () => {
               key={"Calendar"}
               name={"Calendar"}
               fill={"whitesmoke"}
-              className={"w-20 h-20"}
+              className={"w-15 h-15 dark"}
             />
             <Div className={"fs-0-9rem fw-500 light-black"}>
               {getDayFmt(item?.franchise_regDt)}

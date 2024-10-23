@@ -208,7 +208,7 @@ export const MenuUpdate = () => {
               variant={"outlined"}
               label={"메뉴 이미지"}
               required={true}
-              limit={1}
+              limit={3}
               existing={item?.menu_images}
               group={"menu"}
               value={fileList}

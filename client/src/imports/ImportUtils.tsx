@@ -1,7 +1,9 @@
 // ImportUtils.tsx
 
 import { dataArray } from "@scripts/dataArray";
-import { randomNumber, randomTime, calcDate, strToDecimal, decimalToStr } from "@scripts/utils";
+import { randomNumber, randomTime } from "@scripts/utils";
+import { calcDate, strToDecimal, decimalToStr } from "@scripts/utils";
+import { getLocal, setLocal, getSession, setSession } from "@scripts/storage";
 import { makeFormData } from "@scripts/form";
 
 import axios from "axios";
@@ -21,7 +23,15 @@ import { Autoplay } from 'swiper/modules';
 // -------------------------------------------------------------------------------------------------
 export {
   dataArray,
-  randomNumber, randomTime, calcDate, strToDecimal, decimalToStr,
+  randomNumber,
+  randomTime,
+  calcDate,
+  strToDecimal,
+  decimalToStr,
+  getLocal,
+  setLocal,
+  getSession,
+  setSession,
   makeFormData,
   axios,
   create,

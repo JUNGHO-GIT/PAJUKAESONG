@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateUser } from "@imports/ImportValidates";
-import { axios } from "@imports/ImportUtils";
+import { axios, setLocal } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { User } from "@imports/ImportSchemas";
 import { Input } from "@imports/ImportContainers";
@@ -15,7 +15,7 @@ import { Paper, Grid } from "@imports/ImportMuis";
 export const UserLogin = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { URL, SUBFIX, TITLE, navigate } = useCommonValue();
+  const { URL, SUBFIX, navigate } = useCommonValue();
   const { isAdmin, adminId, adminPw, isUser, userId, userPw } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateUser();
   const { ALERT, setALERT } = useAlertStore();
@@ -63,16 +63,20 @@ export const UserLogin = () => {
           msg: res.data.msg,
         });
         if (res.data.admin === "admin") {
-          localStorage.clear();
-          localStorage.setItem(`${TITLE}_adminId`, OBJECT?.user_id);
-          localStorage.setItem(`${TITLE}_adminPw`, OBJECT?.user_pw);
-          localStorage.setItem(`${TITLE}_admin`, "true");
+          setLocal("setting", "id", "", {
+            adminId: OBJECT?.user_id,
+            adminPw: OBJECT?.user_pw,
+            admin: "true",
+            user: "false",
+          });
         }
         else {
-          localStorage.clear();
-          localStorage.setItem(`${TITLE}_userId`, OBJECT?.user_id);
-          localStorage.setItem(`${TITLE}_userPw`, OBJECT?.user_pw);
-          localStorage.setItem(`${TITLE}_user`, "true");
+          setLocal("setting", "id", "", {
+            userId: OBJECT?.user_id,
+            userPw: OBJECT?.user_pw,
+            admin: "false",
+            user: "true",
+          });
         }
         navigate("/main");
       }

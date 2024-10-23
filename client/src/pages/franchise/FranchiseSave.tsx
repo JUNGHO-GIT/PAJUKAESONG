@@ -218,7 +218,7 @@ export const FranchiseSave = () => {
               variant={"outlined"}
               label={"가맹점 이미지"}
               required={true}
-              limit={1}
+              limit={3}
               existing={item?.franchise_images}
               group={"franchise"}
               value={fileList}

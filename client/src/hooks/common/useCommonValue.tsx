@@ -6,27 +6,39 @@ import { dataArray } from "@imports/ImportUtils";
 // -------------------------------------------------------------------------------------------------
 export const useCommonValue = () => {
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const location_id = location?.state?._id;
-  const location_category = location?.state?.category;
+  // location
+  const navigate: any = useNavigate();
+  const location: any = useLocation();
+  const location_id: string = location?.state?._id;
+  const location_category: string = location?.state?.category;
+  const PATH: string = location?.pathname;
+  const firstStr: string = PATH?.split("/")[1] || "";
+  const secondStr: string = PATH?.split("/")[2] || "";
+  const thirdStr: string = PATH?.split("/")[3] || "";
 
-  const PATH = location?.pathname;
-  const firstStr = PATH?.split("/")[1] || "";
-  const secondStr = PATH?.split("/")[2] || "";
-  const thirdStr = PATH?.split("/")[3] || "";
-
+  // env
   const TITLE = process.env.REACT_APP_TITLE || "";
   const URL = process.env.REACT_APP_SERVER_URL || "";
   const SUBFIX = process.env[`REACT_APP_${firstStr.toUpperCase()}_URL`] || "";
   const GCLOUD_URL = process.env.REACT_APP_GCLOUD_URL || "";
 
-  const isAdmin = localStorage.getItem(`${TITLE}_admin`) === "true" ? true : false;
-  const adminId = localStorage.getItem(`${TITLE}_adminId`);
-  const adminPw = localStorage.getItem(`${TITLE}_adminPw`);
-  const isUser = localStorage.getItem(`${TITLE}_user`) === "true" ? true : false;
-  const userId = localStorage.getItem(`${TITLE}_userId`);
-  const userPw = localStorage.getItem(`${TITLE}_userPw`);
+  // local storage (object 타입)
+  const localTitle: any = JSON.parse(localStorage.getItem(TITLE) || "{}");
+
+  // local storage (boolean 타입)
+  const isAdmin: boolean = localTitle?.setting?.id?.admin === "true" ? true : false;
+  const isUser: boolean = localTitle?.setting?.id?.user === "true" ? true : false;
+
+  // local storage (string 타입)
+  const adminId: string = localTitle?.setting?.id?.adminId;
+  const adminPw: string = localTitle?.setting?.id?.adminPw;
+  const userId: string = localTitle?.setting?.id?.userId;
+  const userPw: string = localTitle?.setting?.id?.userPw;
+  const localTimeZone: string = localTitle?.setting?.locale?.timeZone;
+  const localZoneName: string = localTitle?.setting?.locale?.zoneName;
+  const localLang: string = localTitle?.setting?.locale?.lang;
+  const localIsoCode: string = localTitle?.setting?.locale?.isoCode;
+  const localCurrency: string = localTitle?.setting?.locale?.currency;
 
   // -----------------------------------------------------------------------------------------------
   return {
@@ -49,5 +61,11 @@ export const useCommonValue = () => {
     userId,
     userPw,
     dataArray,
+    localTitle,
+    localTimeZone,
+    localZoneName,
+    localLang,
+    localIsoCode,
+    localCurrency,
   };
 };
