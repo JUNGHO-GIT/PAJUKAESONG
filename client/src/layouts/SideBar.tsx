@@ -212,10 +212,10 @@ export const SideBar = (
               name={"Copyright"}
               className={"w-10 h-10"}
             />
-            <Div className={"fs-0-8rem fw-400 ms-n5"}>
+            <Div className={"fs-0-7rem fw-400 ms-n5"}>
               2024
             </Div>
-            <Div className={"fs-0-8rem fw-600 ms-5"}>
+            <Div className={"fs-0-7rem fw-600 ms-5 dark"}>
               PajuKaesong
             </Div>
           </Div>
@@ -225,10 +225,10 @@ export const SideBar = (
               name={"Copyright"}
               className={"w-10 h-10"}
             />
-            <Div className={"fs-0-8rem fw-400 ms-n5"}>
+            <Div className={"fs-0-7rem fw-400 ms-n5"}>
               Designed by
             </Div>
-            <Div className={"fs-0-8rem fw-600 ms-5"}>
+            <Div className={"fs-0-7rem fw-600 ms-5 dark"}>
               JUNGHO
             </Div>
           </Div>
@@ -238,10 +238,10 @@ export const SideBar = (
               name={"Copyright"}
               className={"w-10 h-10"}
             />
-            <Div className={"fs-0-8rem fw-400 ms-n5"}>
+            <Div className={"fs-0-7rem fw-400 ms-n5"}>
               Version
             </Div>
-            <Div className={"fs-0-8rem fw-600 ms-5"}>
+            <Div className={"fs-0-7rem fw-600 ms-5 dark"}>
               {appDate}
             </Div>
           </Div>
