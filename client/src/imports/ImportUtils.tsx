@@ -3,11 +3,12 @@
 import { dataArray } from "@scripts/dataArray";
 import { randomNumber, randomTime } from "@scripts/utils";
 import { calcDate, strToDecimal, decimalToStr } from "@scripts/utils";
+import { insertComma } from "@scripts/utils";
+import { makePhoneNumber } from "@scripts/utils";
 import { getLocal, setLocal, getSession, setSession } from "@scripts/storage";
 import { makeFormData } from "@scripts/form";
 
 import axios from "axios";
-import numeral from 'numeral';
 import { create } from 'zustand';
 import { parseISO, formatISO } from "date-fns";
 import moment, { Moment } from "moment-timezone";
@@ -25,7 +26,9 @@ export {
   dataArray,
   randomNumber,
   randomTime,
+  insertComma,
   calcDate,
+  makePhoneNumber,
   strToDecimal,
   decimalToStr,
   getLocal,
@@ -37,7 +40,6 @@ export {
   create,
   parseISO,
   formatISO,
-  numeral,
   moment,
   Moment,
   getCountryForTimezone,

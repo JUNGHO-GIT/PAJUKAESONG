@@ -1,7 +1,7 @@
 // FranchiseList.tsx
 
 import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
+import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { axios } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
@@ -15,7 +15,6 @@ export const FranchiseList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate, isAdmin, location_category } = useCommonValue();
-  const { isXxs, isLg, isXl } = useResponsive();
   const { ALERT, setALERT } = useAlertStore();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -66,7 +65,7 @@ export const FranchiseList = () => {
         <Grid container spacing={0} columns={12} className={"p-10"}>
           <Grid size={12} className={"d-col-center"}>
             <Img
-              max={isXxs ? 450 : 500}
+              max={600}
               hover={true}
               shadow={true}
               radius={true}

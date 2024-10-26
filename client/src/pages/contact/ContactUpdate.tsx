@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateContact } from "@imports/ImportValidates";
-import { axios, makeFormData } from "@imports/ImportUtils";
+import { axios, insertComma, makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
 import { Select, Input, TextArea, InputFile } from "@imports/ImportContainers";
@@ -98,7 +98,6 @@ export const ContactUpdate = () => {
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Select
-              variant={"outlined"}
               label={"문의 유형"}
               required={true}
               value={item?.contact_category}
@@ -112,7 +111,11 @@ export const ContactUpdate = () => {
               }}
             >
               {["franchise", "personal"].map((category: string, idx: number) => (
-                <MenuItem key={idx} value={category} className={"fs-0-8rem"}>
+                <MenuItem
+                  key={idx}
+                  value={category}
+                  className={"fs-0-8rem"}
+                >
                   {category === "franchise" && "가맹 문의"}
                   {category === "personal" && "1:1 문의"}
                 </MenuItem>
@@ -121,7 +124,6 @@ export const ContactUpdate = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"이름"}
               required={true}
               value={item?.contact_name}
@@ -137,7 +139,6 @@ export const ContactUpdate = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"이메일"}
               required={true}
               value={item?.contact_email}
@@ -145,25 +146,22 @@ export const ContactUpdate = () => {
               error={ERRORS?.[i]?.contact_email}
               placeholder={"abcd@naver.com"}
               onChange={(e: any) => {
-                const value = e.target.value;
+                // 빈값 처리
+                let value = e.target.value === "" ? "" : e.target.value;
+                // 30자 제한
                 if (value.length > 30) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    contact_email: prev.contact_email,
-                  }));
+                  return;
                 }
-                else {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    contact_email: value,
-                  }));
-                }
+                // object 설정
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  contact_email: value,
+                }));
               }}
             />
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"전화번호"}
               required={true}
               value={item?.contact_phone}
@@ -171,26 +169,32 @@ export const ContactUpdate = () => {
               error={ERRORS?.[i]?.contact_phone}
               placeholder={"010-1234-5678"}
               onChange={(e: any) => {
-                const value = e.target.value.replace(/[^0-9]/g, '');
-                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
-                if (value.length > 11) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    contact_phone: prev.contact_phone,
-                  }));
+                // 빈값 처리
+                let value = e.target.value === "" ? "" : e.target.value.replace(/[^0-9]/g, "")
+                // 11자 제한 + 정수
+                if (value.length > 11 || !/^\d+$/.test(value)) {
+                  return;
                 }
-                else {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    contact_phone: newValue,
-                  }));
+                // 010-1234-5678 형식으로 변경
+                if (7 <= value.length && value.length < 12) {
+                  value = value.replace(/(\d{3})(\d{4})(\d{0,4})/, "$1-$2-$3");
                 }
+                else if (4 <= value.length && value.length < 7) {
+                  value = value.replace(/(\d{3})(\d{1,4})/, "$1-$2");
+                }
+                else if (0 <= value.length && value.length < 4) {
+                  value = value.replace(/(\d{0,3})/, "$1");
+                }
+                // object 설정
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  contact_phone: value,
+                }));
               }}
             />
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"문의 제목"}
               required={true}
               value={item?.contact_title}
@@ -222,7 +226,6 @@ export const ContactUpdate = () => {
           </Grid>
           <Grid size={12}>
             <InputFile
-              variant={"outlined"}
               label={"문의 이미지"}
               required={true}
               limit={1}

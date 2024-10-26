@@ -4,10 +4,10 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateProduct } from "@imports/ImportValidates";
-import { axios, numeral, makeFormData } from "@imports/ImportUtils";
+import { axios, makeFormData, insertComma } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
+import { Btn, Br } from "@imports/ImportComponents";
 import { Input, InputFile, Select } from "@imports/ImportContainers";
 import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
 
@@ -89,7 +89,6 @@ export const ProductSave = () => {
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Select
-              variant={"outlined"}
               label={"카테고리"}
               required={true}
               value={item?.product_category}
@@ -103,7 +102,11 @@ export const ProductSave = () => {
               }}
             >
               {["main", "side"].map((category: string, idx: number) => (
-                <MenuItem key={idx} value={category} className={"fs-0-8rem"}>
+                <MenuItem
+                  key={idx}
+                  value={category}
+                  className={"fs-0-8rem"}
+                >
                   {category === "main" && "메인 메뉴"}
                   {category === "side" && "사이드 메뉴"}
                 </MenuItem>
@@ -112,7 +115,6 @@ export const ProductSave = () => {
           </Grid>
           <Grid size={12}>
             <Select
-              variant={"outlined"}
               label={"순서"}
               required={true}
               value={item?.product_seq || 0}
@@ -126,7 +128,11 @@ export const ProductSave = () => {
               }}
             >
               {Array.from({ length: 30 }, (_, i) => i).map((seq: number, idx: number) => (
-                <MenuItem key={idx} value={seq} className={"fs-0-8rem"}>
+                <MenuItem
+                  key={idx}
+                  value={seq}
+                  className={"fs-0-8rem"}
+                >
                   {seq}
                 </MenuItem>
               ))}
@@ -134,7 +140,6 @@ export const ProductSave = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"메뉴 이름"}
               required={true}
               value={item?.product_name}
@@ -150,7 +155,6 @@ export const ProductSave = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"메뉴 설명"}
               required={true}
               value={item?.product_description}
@@ -166,33 +170,32 @@ export const ProductSave = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               required={true}
               label={"가격"}
-              value={numeral(item?.product_price).format("0,0")}
+              value={insertComma(item?.product_price || "0")}
               inputRef={REFS?.[i]?.product_price}
               error={ERRORS?.[i]?.product_price}
               onChange={(e: any) => {
-                const value = e.target.value.replace(/,/g, '');
-                const newValue = value === "" ? 0 : Number(value);
-                if (value === "") {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    product_price: "0",
-                  }));
+                // 빈값 처리
+                let value = e.target.value === "" ? "0" : e.target.value.replace(/,/g, '');
+                // 999999999 제한 + 정수
+                if (Number(value) > 999999999 || !/^\d+$/.test(value)) {
+                  return;
                 }
-                else if (!isNaN(newValue) && newValue <= 9999999999) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    product_price: String(newValue),
-                  }));
+                // 01, 05 같은 숫자는 1, 5로 변경
+                if (/^0(?!\.)/.test(value)) {
+                  value = value.replace(/^0+/, '');
                 }
+                // object 설정
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  product_price: value,
+                }));
               }}
             />
           </Grid>
           <Grid size={12}>
             <InputFile
-              variant={"outlined"}
               label={"메뉴 이미지"}
               required={true}
               limit={3}

@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateFranchise } from "@imports/ImportValidates";
-import { axios, Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
+import { axios, insertComma, Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Icons } from "@imports/ImportComponents";
@@ -102,8 +102,10 @@ export const FranchiseDetail = () => {
         <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
             <Swiper
-              spaceBetween={10}
+              spaceBetween={20}
               slidesPerView={1}
+              slidesPerGroup={1}
+              className={"p-5"}
               pagination={{
                 clickable: true,
                 enabled: true,
@@ -114,9 +116,8 @@ export const FranchiseDetail = () => {
               ]}
             >
               {item?.franchise_images?.map((image: string, index: number) => (
-                <SwiperSlide className={"w-100p h-100p d-center"} key={`image-${index}`}>
+                <SwiperSlide className={"w-100p h-100p"} key={`image-${index}`}>
                   <Img
-                    max={isXxs ? 600 : 700}
                     hover={false}
                     shadow={true}
                     radius={true}

@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateUser } from "@imports/ImportValidates";
-import { axios, setLocal } from "@imports/ImportUtils";
+import { axios, insertComma, setLocal } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { User } from "@imports/ImportSchemas";
 import { Input } from "@imports/ImportContainers";
@@ -116,7 +116,6 @@ export const UserLogin = () => {
         <Grid container spacing={3} columns={12}>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               required={true}
               label={"아이디"}
               helperText={"이메일 형식으로 입력해주세요."}
@@ -125,7 +124,13 @@ export const UserLogin = () => {
               error={ERRORS?.[i]?.user_id}
               disabled={isAdmin || isUser}
               onChange={(e: any) => {
-                const value = e.target.value;
+                // 빈값 처리
+                let value = e.target.value === "" ? "" : e.target.value;
+                // 30자 제한
+                if (value.length > 30) {
+                  return;
+                }
+                // object 설정
                 setOBJECT((prev: any) => ({
                   ...prev,
                   user_id: value,
@@ -135,7 +140,6 @@ export const UserLogin = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               required={true}
               type={"password"}
               label={"비밀번호"}
@@ -145,7 +149,13 @@ export const UserLogin = () => {
               error={ERRORS?.[i]?.user_pw}
               disabled={isAdmin || isUser}
               onChange={(e: any) => {
-                const value = e.target.value;
+                // 빈값 처리
+                let value = e.target.value === "" ? "" : e.target.value;
+                // 30자 제한
+                if (value.length > 30) {
+                  return;
+                }
+                // object 설정
                 setOBJECT((prev: any) => ({
                   ...prev,
                   user_pw: value,

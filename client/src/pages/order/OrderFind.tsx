@@ -74,7 +74,6 @@ export const OrderFind = () => {
         <Grid container spacing={3} columns={12}>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"이름"}
               required={true}
               helperText={"주문자 이름을 입력해주세요."}
@@ -91,7 +90,6 @@ export const OrderFind = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"전화번호"}
               required={true}
               helperText={"주문자 전화번호를 입력해주세요."}
@@ -100,20 +98,27 @@ export const OrderFind = () => {
               error={ERRORS?.[i]?.order_phone}
               placeholder={"010-1234-5678"}
               onChange={(e: any) => {
-                const value = e.target.value.replace(/[^0-9]/g, '');
-                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
-                if (value.length > 11) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_phone: prev.order_phone,
-                  }));
+                // 빈값 처리
+                let value = e.target.value === "" ? "" : e.target.value.replace(/[^0-9]/g, "")
+                // 11자 제한 + 정수
+                if (value.length > 11 || !/^\d+$/.test(value)) {
+                  return;
                 }
-                else {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_phone: newValue,
-                  }));
+                // 010-1234-5678 형식으로 변경
+                if (7 <= value.length && value.length < 12) {
+                  value = value.replace(/(\d{3})(\d{4})(\d{0,4})/, "$1-$2-$3");
                 }
+                else if (4 <= value.length && value.length < 7) {
+                  value = value.replace(/(\d{3})(\d{1,4})/, "$1-$2");
+                }
+                else if (0 <= value.length && value.length < 4) {
+                  value = value.replace(/(\d{0,3})/, "$1");
+                }
+                // object 설정
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  order_phone: value,
+                }));
               }}
             />
           </Grid>

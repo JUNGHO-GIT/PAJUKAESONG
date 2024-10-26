@@ -4,18 +4,18 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateOrder } from "@imports/ImportValidates";
-import { axios, numeral, setSession } from "@imports/ImportUtils";
+import { axios, insertComma, setSession } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Div, Hr, Br, Img, Icons } from "@imports/ImportComponents";
-import { Input, Select } from "@imports/ImportContainers";
-import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
+import { Input } from "@imports/ImportContainers";
+import { Paper, Grid } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, URL, SUBFIX, location_id, TITLE } = useCommonValue();
+  const { navigate, URL, SUBFIX, location_id } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { isXxs } = useResponsive();
   const { ALERT, setALERT } = useAlertStore();
@@ -106,7 +106,7 @@ export const OrderDetail = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-col-center"}>
             <Img
-              max={isXxs ? 50 : 60}
+              max={isXxs ? 80 : 120}
               hover={false}
               shadow={true}
               radius={false}
@@ -127,11 +127,11 @@ export const OrderDetail = () => {
                 className={"w-15 h-15 dark"}
               />
               <Div className={"fs-1-0rem ms-n5"}>
-                {numeral(item?.product_price).format("0,0")}
+                {insertComma(item?.product_price || "0")}
               </Div>
             </Div>
           </Grid>
-          <Grid size={4} className={"d-col-center"}>
+          <Grid size={5} className={"d-col-center"}>
             <Div className={"d-row-center border-1"}>
               <Icons
                 key={"Minus"}
@@ -162,7 +162,7 @@ export const OrderDetail = () => {
               className={"w-15 h-15 dark"}
             />
             <Div className={"fs-1-2rem fw-600"}>
-              {numeral(item?.order_total_price).format("0,0")}
+              {insertComma(item?.order_price || "0")}
             </Div>
           </Grid>
         </Grid>
@@ -193,7 +193,6 @@ export const OrderDetail = () => {
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Input
-              variant={"outlined"}
               label={"주문 유형"}
               disabled={true}
               value={item?.order_category === "reservation" ? "매장 예약" : "상품 구매"}
@@ -201,7 +200,6 @@ export const OrderDetail = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"이름"}
               disabled={true}
               value={item?.order_name ?? ""}
@@ -209,7 +207,6 @@ export const OrderDetail = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"이메일"}
               disabled={true}
               value={item?.order_email ?? ""}
@@ -217,7 +214,6 @@ export const OrderDetail = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"전화번호"}
               disabled={true}
               value={item?.order_phone ?? ""}
@@ -225,7 +221,6 @@ export const OrderDetail = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"인원"}
               disabled={true}
               value={item?.order_headcount ?? ""}
@@ -233,7 +228,6 @@ export const OrderDetail = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               disabled={true}
               label={"주문 날짜"}
               value={getDayFmt(item?.order_date ?? "")}
@@ -241,7 +235,6 @@ export const OrderDetail = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               disabled={true}
               label={"예약 시간"}
               value={item?.order_time ?? ""}

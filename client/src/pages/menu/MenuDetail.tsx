@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateMenu } from "@imports/ImportValidates";
-import { axios, numeral, Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
+import { axios, insertComma, Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Icons } from "@imports/ImportComponents";
@@ -101,8 +101,10 @@ export const MenuDetail = () => {
         <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
             <Swiper
-              spaceBetween={10}
+              spaceBetween={20}
               slidesPerView={1}
+              slidesPerGroup={1}
+              className={"p-5"}
               pagination={{
                 clickable: true,
                 enabled: true,
@@ -113,7 +115,7 @@ export const MenuDetail = () => {
               ]}
             >
               {item?.menu_images?.map((image: string, index: number) => (
-                <SwiperSlide className={"w-100p h-100p d-center"} key={`image-${index}`}>
+                <SwiperSlide className={"w-100p h-100p"} key={`image-${index}`}>
                   <Img
                     max={isXxs ? 600 : 700}
                     hover={false}
@@ -156,7 +158,7 @@ export const MenuDetail = () => {
               className={"w-15 h-15 dark"}
             />
             <Div className={"fs-1-1rem fw-500 light-black"}>
-              {numeral(item?.menu_price).format("0,0")}
+              {insertComma(item?.menu_price || "0")}
             </Div>
           </Grid>
         </Grid>

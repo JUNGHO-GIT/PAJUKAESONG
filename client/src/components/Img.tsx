@@ -37,7 +37,7 @@ export const Img = (
       setImgSrc(`${GCLOUD_URL}/main/empty.webp`);
     }
 
-    let newClass = "w-100p h-100p object-contain fadeIn";
+    let newClass = "w-100p h-100p object-contain";
 
     if (props?.className) {
       newClass += ` ${props.className}`;
@@ -51,8 +51,9 @@ export const Img = (
     if (radius) {
       newClass += " radius-1";
     }
+
     if (max) {
-      newClass += ` w-max${max} h-max${(max * 2 / 3).toFixed(0)}`;
+      newClass += ` w-max${max} h-max${max}`;
     }
 
     setImageClass(newClass);
@@ -71,6 +72,7 @@ export const Img = (
       onError={(e) => {
         e.currentTarget.src = `${GCLOUD_URL}/main/empty.webp`;
         e.currentTarget.alt = "empty";
+        e.currentTarget.className = "w-20 h-20";
       }}
     />
   );

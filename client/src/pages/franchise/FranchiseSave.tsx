@@ -7,7 +7,7 @@ import { useValidateFranchise } from "@imports/ImportValidates";
 import { axios, makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
-import { Div, Btn, Br } from "@imports/ImportComponents";
+import { Btn, Br } from "@imports/ImportComponents";
 import { Input, InputFile, Select } from "@imports/ImportContainers";
 import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
 
@@ -113,9 +113,8 @@ export const FranchiseSave = () => {
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Select
-              variant={"outlined"}
-              label={"순서"}
               required={true}
+              label={"순서"}
               value={item?.franchise_seq || 0}
               inputRef={REFS?.[i]?.franchise_seq}
               error={ERRORS?.[i]?.franchise_seq}
@@ -127,7 +126,11 @@ export const FranchiseSave = () => {
               }}
             >
               {Array.from({ length: 30 }, (_, i) => i).map((seq: number, idx: number) => (
-                <MenuItem key={idx} value={seq} className={"fs-0-8rem"}>
+                <MenuItem
+                  key={idx}
+                  value={seq}
+                  className={"fs-0-8rem"}
+                >
                   {seq}
                 </MenuItem>
               ))}
@@ -135,9 +138,8 @@ export const FranchiseSave = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
-              label={"가맹점 이름"}
               required={true}
+              label={"가맹점 이름"}
               value={item?.franchise_name}
               inputRef={REFS?.[i]?.franchise_name}
               error={ERRORS?.[i]?.franchise_name}
@@ -151,10 +153,9 @@ export const FranchiseSave = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
-              label={"가맹점 주소"}
               required={true}
               readOnly={true}
+              label={"가맹점 주소"}
               className={"pointer"}
               value={item?.franchise_address_main}
               inputRef={REFS?.[i]?.franchise_address_main}
@@ -172,9 +173,8 @@ export const FranchiseSave = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
-              label={"상세주소"}
               required={true}
+              label={"상세주소"}
               value={item?.franchise_address_detail}
               inputRef={REFS?.[i]?.franchise_address_detail}
               error={ERRORS?.[i]?.franchise_address_detail}
@@ -188,34 +188,39 @@ export const FranchiseSave = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
-              label={"가맹점 전화번호"}
               required={true}
+              label={"가맹점 전화번호"}
               value={item?.franchise_phone}
               inputRef={REFS?.[i]?.franchise_phone}
               error={ERRORS?.[i]?.franchise_phone}
               placeholder={"031-124-5678"}
               onChange={(e: any) => {
-                const value = e.target.value.replace(/[^0-9]/g, '');
-                const newValue = value.replace(/(\d{3})(\d{1,3})(\d{1,4})/, '$1-$2-$3');
-                if (value.length > 10) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    franchise_phone: prev.franchise_phone,
-                  }));
+                // 빈값 처리
+                let value = e.target.value === "" ? "" : e.target.value.replace(/[^0-9]/g, "")
+                // 11자 제한 + 정수
+                if (value.length > 11 || !/^\d+$/.test(value)) {
+                  return;
                 }
-                else {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    franchise_phone: newValue,
-                  }));
+                // 010-1234-5678 형식으로 변경
+                if (7 <= value.length && value.length < 12) {
+                  value = value.replace(/(\d{3})(\d{4})(\d{0,4})/, "$1-$2-$3");
                 }
+                else if (4 <= value.length && value.length < 7) {
+                  value = value.replace(/(\d{3})(\d{1,4})/, "$1-$2");
+                }
+                else if (0 <= value.length && value.length < 4) {
+                  value = value.replace(/(\d{0,3})/, "$1");
+                }
+                // object 설정
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  franchise_phone: value,
+                }));
               }}
             />
           </Grid>
           <Grid size={12}>
             <InputFile
-              variant={"outlined"}
               label={"가맹점 이미지"}
               required={true}
               limit={3}

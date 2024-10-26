@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateNotice } from "@imports/ImportValidates";
-import { axios, makeFormData } from "@imports/ImportUtils";
+import { axios, insertComma, makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Btn, Br } from "@imports/ImportComponents";
@@ -102,14 +102,19 @@ export const NoticeUpdate = () => {
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Input
-              variant={"outlined"}
-              label={"공지사항 제목"}
               required={true}
+              label={"공지사항 제목"}
               value={item?.notice_title}
               inputRef={REFS?.[i]?.notice_title}
               error={ERRORS?.[i]?.notice_title}
               onChange={(e: any) => {
-                const value = e.target.value;
+                // 빈값 처리
+                let value = e.target.value || "";
+                // 100자 제한
+                if (value.length > 100) {
+                  return;
+                }
+                // object 설정
                 setOBJECT((prev: any) => ({
                   ...prev,
                   notice_title: value,
@@ -119,15 +124,16 @@ export const NoticeUpdate = () => {
           </Grid>
           <Grid size={12}>
             <TextArea
-              label={"공지사항 내용"}
-              variant={"outlined"}
               required={true}
+              label={"공지사항 내용"}
               value={item?.notice_content}
               itemRef={REFS?.[i]?.notice_content}
               error={ERRORS?.[i]?.notice_content}
               inputclass={"h-min50vh border-none"}
               onChange={(e: any) => {
-                const value = e.target.value;
+                // 빈값 처리
+                let value = e.target.value || "";
+                // object 설정
                 setOBJECT((prev: any) => ({
                   ...prev,
                   notice_content: value,
@@ -137,13 +143,12 @@ export const NoticeUpdate = () => {
           </Grid>
           <Grid size={12}>
             <InputFile
-              variant={"outlined"}
-              label={"공지사항 이미지"}
               required={true}
               limit={1}
-              existing={item?.notice_images}
+              label={"공지사항 이미지"}
               group={"notice"}
               value={fileList}
+              existing={item?.notice_images}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}

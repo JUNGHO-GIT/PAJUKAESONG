@@ -4,10 +4,10 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateMenu } from "@imports/ImportValidates";
-import { axios, numeral, makeFormData } from "@imports/ImportUtils";
+import { axios, makeFormData, insertComma } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
+import { Btn, Br } from "@imports/ImportComponents";
 import { Input, Select, InputFile } from "@imports/ImportContainers";
 import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
 
@@ -102,9 +102,8 @@ export const MenuUpdate = () => {
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Select
-              variant={"outlined"}
-              label={"카테고리"}
               required={true}
+              label={"카테고리"}
               value={item?.menu_category}
               inputRef={REFS?.[i]?.menu_category}
               error={ERRORS?.[i]?.menu_category}
@@ -116,7 +115,11 @@ export const MenuUpdate = () => {
               }}
             >
               {["main", "side"].map((category: string, idx: number) => (
-                <MenuItem key={idx} value={category} className={"fs-0-8rem"}>
+                <MenuItem
+                  key={idx}
+                  value={category}
+                  className={"fs-0-8rem"}
+                >
                   {category === "main" && "메인 메뉴"}
                   {category === "side" && "사이드 메뉴"}
                 </MenuItem>
@@ -125,9 +128,8 @@ export const MenuUpdate = () => {
           </Grid>
           <Grid size={12}>
             <Select
-              variant={"outlined"}
-              label={"순서"}
               required={true}
+              label={"순서"}
               value={item?.menu_seq || 0}
               inputRef={REFS?.[i]?.menu_seq}
               error={ERRORS?.[i]?.menu_seq}
@@ -139,7 +141,11 @@ export const MenuUpdate = () => {
               }}
             >
               {Array.from({ length: 30 }, (_, i) => i).map((seq: number, idx: number) => (
-                <MenuItem key={idx} value={seq} className={"fs-0-8rem"}>
+                <MenuItem
+                  key={idx}
+                  value={seq}
+                  className={"fs-0-8rem"}
+                >
                   {seq}
                 </MenuItem>
               ))}
@@ -147,9 +153,8 @@ export const MenuUpdate = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
-              label={"메뉴 이름"}
               required={true}
+              label={"메뉴 이름"}
               value={item?.menu_name}
               inputRef={REFS?.[i]?.menu_name}
               error={ERRORS?.[i]?.menu_name}
@@ -163,9 +168,8 @@ export const MenuUpdate = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
-              label={"메뉴 설명"}
               required={true}
+              label={"메뉴 설명"}
               value={item?.menu_description}
               inputRef={REFS?.[i]?.menu_description}
               error={ERRORS?.[i]?.menu_description}
@@ -179,38 +183,37 @@ export const MenuUpdate = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               required={true}
               label={"가격"}
-              value={numeral(item?.menu_price).format("0,0")}
+              value={insertComma(item?.menu_price || "0")}
               inputRef={REFS?.[i]?.menu_price}
               error={ERRORS?.[i]?.menu_price}
               onChange={(e: any) => {
-                const value = e.target.value.replace(/,/g, '');
-                const newValue = value === "" ? 0 : Number(value);
-                if (value === "") {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    menu_price: "0",
-                  }));
+                // 빈값 처리
+                let value = e.target.value === "" ? "0" : e.target.value.replace(/,/g, '');
+                // 999999999 제한 + 정수
+                if (Number(value) > 999999999 || !/^\d+$/.test(value)) {
+                  return;
                 }
-                else if (!isNaN(newValue) && newValue <= 9999999999) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    menu_price: String(newValue),
-                  }));
+                // 01, 05 같은 숫자는 1, 5로 변경
+                if (/^0(?!\.)/.test(value)) {
+                  value = value.replace(/^0+/, '');
                 }
+                // object 설정
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  menu_price: value,
+                }));
               }}
             />
           </Grid>
           <Grid size={12}>
             <InputFile
-              variant={"outlined"}
-              label={"메뉴 이미지"}
               required={true}
               limit={3}
-              existing={item?.menu_images}
+              label={"메뉴 이미지"}
               group={"menu"}
+              existing={item?.menu_images}
               value={fileList}
               inputRef={REFS?.[i]?.menu_images}
               error={ERRORS?.[i]?.menu_images}

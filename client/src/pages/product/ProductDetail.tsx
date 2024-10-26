@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateProduct } from "@imports/ImportValidates";
-import { axios, numeral, setSession, getSession } from "@imports/ImportUtils";
+import { axios, insertComma, setSession, getSession } from "@imports/ImportUtils";
 import { Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Product } from "@imports/ImportSchemas";
@@ -142,8 +142,10 @@ export const ProductDetail = () => {
         <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-col-center"}>
             <Swiper
-              spaceBetween={10}
+              spaceBetween={20}
               slidesPerView={1}
+              slidesPerGroup={1}
+              className={"p-5"}
               pagination={{
                 clickable: true,
                 enabled: true,
@@ -154,7 +156,7 @@ export const ProductDetail = () => {
               ]}
             >
               {item?.product_images?.map((image: string, index: number) => (
-                <SwiperSlide className={"w-100p h-100p d-center"} key={`image-${index}`}>
+                <SwiperSlide className={"w-100p h-100p"} key={`image-${index}`}>
                   <Img
                     max={isXxs ? 600 : 700}
                     hover={false}
@@ -197,7 +199,7 @@ export const ProductDetail = () => {
               className={"w-15 h-15 dark"}
             />
             <Div className={"fs-1-1rem fw-500 light-black"}>
-              {numeral(item?.product_price).format("0,0")}
+              {insertComma(item?.product_price || "0")}
             </Div>
           </Grid>
         </Grid>
@@ -217,9 +219,9 @@ export const ProductDetail = () => {
       <Grid container spacing={2} columns={12} className={"px-10"}>
         <Grid size={6}>
           <Input
-            label={"총 금액"}
-            value={numeral(orderPrice).format("0,0")}
             readOnly={true}
+            label={"총 금액"}
+            value={insertComma(String(orderPrice || "0"))}
             error={orderPrice < 0}
             startadornment={
               <Icons
@@ -232,9 +234,9 @@ export const ProductDetail = () => {
         </Grid>
         <Grid size={6}>
           <Input
-            label={"수량"}
-            value={orderCount}
             readOnly={true}
+            label={"수량"}
+            value={insertComma(String(orderCount || "0"))}
             error={orderCount < 0}
             endadornment={
               <Div className={"d-center"}>
@@ -242,32 +244,26 @@ export const ProductDetail = () => {
                   name={"Minus"}
                   className={"w-15 h-15"}
                   onClick={() => {
-                    const value = orderCount;
-                    const newValue = value < 1 ? 1 : value - 1;
-                    if (newValue <= 1) {
-                      setOrderCount(1);
-                      setOrderPrice(Number(OBJECT?.product_price));
-                    }
-                    else if (!isNaN(newValue) && newValue <= 30) {
-                      setOrderCount(newValue);
-                      setOrderPrice(Number(OBJECT?.product_price) * newValue);
-                    }
+                    // 빈값 처리
+                    let value = orderCount < 1 ? 1 : orderCount - 1;
+                    // 최소값 처리
+                    value = value < 1 ? 1 : value;
+                    // object 설정
+                    setOrderCount(value);
+                    setOrderPrice(Number(OBJECT?.product_price) * value);
                   }}
                 />
                 <Icons
                   name={"Plus"}
                   className={"w-15 h-15"}
                   onClick={() => {
-                    const value = orderCount;
-                    const newValue = value < 1 ? 1 : value + 1;
-                    if (newValue <= 1) {
-                      setOrderCount(1);
-                      setOrderPrice(Number(OBJECT?.product_price));
-                    }
-                    else if (!isNaN(newValue) && newValue <= 30) {
-                      setOrderCount(newValue);
-                      setOrderPrice(Number(OBJECT?.product_price) * newValue);
-                    }
+                    // 빈값 처리
+                    let value = orderCount < 1 ? 1 : orderCount + 1;
+                    // 최대값 처리
+                    value = value > 20 ? 20 : value;
+                    // object 설정
+                    setOrderCount(value);
+                    setOrderPrice(Number(OBJECT?.product_price) * value);
                   }}
                 />
               </Div>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
-import { axios, numeral } from "@imports/ImportUtils";
+import { axios, insertComma } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Div, Hr, Br } from "@imports/ImportComponents";
@@ -102,7 +102,7 @@ export const OrderList = () => {
                 });
               }}
             >
-              {numeral(item?.order_total_price).format("0,0")}
+              {insertComma(item?.order_total_price || "0")}
             </Div>
           </Grid>
           <Grid size={3}>

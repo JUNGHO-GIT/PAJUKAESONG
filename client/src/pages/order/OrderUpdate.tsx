@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateOrder } from "@imports/ImportValidates";
-import { axios, numeral, setSession } from "@imports/ImportUtils";
+import { axios, insertComma, setSession } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Order, Product } from "@imports/ImportSchemas";
 import { Input, Select, PickerDay, PickerTime } from "@imports/ImportContainers";
@@ -15,7 +15,7 @@ import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
 export const OrderUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, URL, SUBFIX, TITLE, location_id } = useCommonValue();
+  const { navigate, URL, SUBFIX, location_id } = useCommonValue();
   const { isXxs } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateOrder();
   const { ALERT, setALERT } = useAlertStore();
@@ -119,7 +119,7 @@ export const OrderUpdate = () => {
         <Grid container spacing={2} columns={12}>
           <Grid size={3} className={"d-col-center"}>
             <Img
-              max={isXxs ? 50 : 60}
+              max={isXxs ? 80 : 120}
               hover={false}
               shadow={true}
               radius={false}
@@ -140,7 +140,7 @@ export const OrderUpdate = () => {
                 className={"w-15 h-15 dark"}
               />
               <Div className={"fs-1-0rem ms-n5"}>
-                {numeral(item?.product_price).format("0,0")}
+                {insertComma(item?.product_price || "0")}
               </Div>
             </Div>
           </Grid>
@@ -245,7 +245,7 @@ export const OrderUpdate = () => {
               className={"w-15 h-15 dark"}
             />
             <Div className={"fs-1-2rem fw-600"}>
-              {numeral(item?.order_total_price).format("0,0")}
+              {insertComma(item?.order_total_price || "0")}
             </Div>
           </Grid>
         </Grid>
@@ -276,22 +276,24 @@ export const OrderUpdate = () => {
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Select
-              variant={"outlined"}
               label={"주문 유형"}
               required={true}
               value={item?.order_category}
               inputRef={REFS?.[i]?.order_category}
               error={ERRORS?.[i]?.order_category}
               onChange={(e: any) => {
-                const value = e.target.value;
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  order_category: value,
+                  order_category: e.target.value,
                 }));
               }}
             >
               {["reservation", "buy"].map((category: string, idx: number) => (
-                <MenuItem key={idx} value={category} className={"fs-0-8rem"}>
+                <MenuItem
+                  key={idx}
+                  value={category}
+                  className={"fs-0-8rem"}
+                >
                   {category === "reservation" && "매장 예약"}
                   {category === "buy" && "상품 구매"}
                 </MenuItem>
@@ -300,24 +302,21 @@ export const OrderUpdate = () => {
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"이름"}
               required={true}
               value={item?.order_name}
               inputRef={REFS?.[i]?.order_name}
               error={ERRORS?.[i]?.order_name}
               onChange={(e: any) => {
-                const value = e.target.value;
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  order_name: value,
+                  order_name: e.target.value,
                 }));
               }}
             />
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"이메일"}
               required={true}
               value={item?.order_email}
@@ -325,25 +324,22 @@ export const OrderUpdate = () => {
               error={ERRORS?.[i]?.order_email}
               placeholder={"abcd@naver.com"}
               onChange={(e: any) => {
-                const value = e.target.value;
+                // 빈값 처리
+                let value = e.target.value === "" ? "" : e.target.value;
+                // 30자 제한
                 if (value.length > 30) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_email: prev.order_email,
-                  }));
+                  return;
                 }
-                else {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_email: value,
-                  }));
-                }
+                // object 설정
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  order_email: value,
+                }));
               }}
             />
           </Grid>
           <Grid size={12}>
             <Input
-              variant={"outlined"}
               label={"전화번호"}
               required={true}
               value={item?.order_phone}
@@ -351,41 +347,50 @@ export const OrderUpdate = () => {
               error={ERRORS?.[i]?.order_phone}
               placeholder={"010-1234-5678"}
               onChange={(e: any) => {
-                const value = e.target.value.replace(/[^0-9]/g, '');
-                const newValue = value.replace(/(\d{3})(\d{1,4})(\d{1,4})/, '$1-$2-$3');
-                if (value.length > 11) {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_phone: prev.order_phone,
-                  }));
+                // 빈값 처리
+                let value = e.target.value === "" ? "" : e.target.value.replace(/[^0-9]/g, "")
+                // 11자 제한 + 정수
+                if (value.length > 11 || !/^\d+$/.test(value)) {
+                  return;
                 }
-                else {
-                  setOBJECT((prev: any) => ({
-                    ...prev,
-                    order_phone: newValue,
-                  }));
+                // 010-1234-5678 형식으로 변경
+                if (7 <= value.length && value.length < 12) {
+                  value = value.replace(/(\d{3})(\d{4})(\d{0,4})/, "$1-$2-$3");
                 }
+                else if (4 <= value.length && value.length < 7) {
+                  value = value.replace(/(\d{3})(\d{1,4})/, "$1-$2");
+                }
+                else if (0 <= value.length && value.length < 4) {
+                  value = value.replace(/(\d{0,3})/, "$1");
+                }
+                // object 설정
+                setOBJECT((prev: any) => ({
+                  ...prev,
+                  order_phone: value,
+                }));
               }}
             />
           </Grid>
           <Grid size={12}>
             <Select
-              variant={"outlined"}
               required={true}
               label={"인원"}
               value={item?.order_headcount}
               inputRef={REFS?.[i]?.order_headcount}
               error={ERRORS?.[i]?.order_headcount}
               onChange={(e: any) => {
-                const value = e.target.value;
                 setOBJECT((prev: any) => ({
                   ...prev,
-                  order_headcount: value,
+                  order_headcount: e.target.value,
                 }));
               }}
             >
               {Array.from({ length: 30 }, (_, i) => i).map((seq: number, idx: number) => (
-                <MenuItem key={idx} value={seq} className={"fs-0-8rem"}>
+                <MenuItem
+                  key={idx}
+                  value={seq}
+                  className={"fs-0-8rem"}
+                >
                   {seq}
                 </MenuItem>
               ))}

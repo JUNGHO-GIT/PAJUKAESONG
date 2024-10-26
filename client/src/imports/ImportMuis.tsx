@@ -38,7 +38,7 @@ import {
   Stepper, Step, StepLabel,
 
   // t
-  Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton,  Toolbar, Tooltip, Tabs, Tab, tabsClasses,
+  Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton, Toolbar, Tooltip, Tabs, Tab, tabsClasses,
   TextField, TextareaAutosize,
 
   // u

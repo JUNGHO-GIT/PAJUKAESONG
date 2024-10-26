@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue } from "@imports/ImportHooks";
 import { useAlertStore } from "@imports/ImportStores";
 import { useValidateNotice } from "@imports/ImportValidates";
-import { axios, makeFormData } from "@imports/ImportUtils";
+import { axios, insertComma, makeFormData } from "@imports/ImportUtils";
 import { Loading } from "@imports/ImportLayouts";
 import { Notice } from "@imports/ImportSchemas";
 import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
@@ -89,7 +89,6 @@ export const NoticeSave = () => {
         <Grid container spacing={3} columns={12}>
           <Grid size={12} className={"mt-10"}>
             <Input
-              variant={"outlined"}
               label={"공지사항 제목"}
               required={true}
               value={item?.notice_title}
@@ -106,7 +105,6 @@ export const NoticeSave = () => {
           <Grid size={12}>
             <TextArea
               label={"공지사항 내용"}
-              variant={"outlined"}
               required={true}
               value={item?.notice_content}
               itemRef={REFS?.[i]?.notice_content}
@@ -122,7 +120,6 @@ export const NoticeSave = () => {
           </Grid>
           <Grid size={12}>
             <InputFile
-              variant={"outlined"}
               label={"공지사항 이미지"}
               required={true}
               limit={1}
