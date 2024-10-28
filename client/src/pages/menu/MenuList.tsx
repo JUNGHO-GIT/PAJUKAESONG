@@ -62,41 +62,41 @@ export const MenuList = () => {
   const listNode = () => {
     // 2. list
     const listSection = () => {
-      const imageFragment = (item: any) => (
-        <Grid container={true} spacing={0} className={"p-10"}>
-          <Grid size={12} className={"d-col-center"}>
-            <Img
-              hover={true}
-              shadow={true}
-              radius={true}
-              group={"menu"}
-              src={item.menu_images && item.menu_images[0]}
-              onClick={() => {
-                navigate("/menu/detail", {
-                  state: {
-                    _id: item?._id,
-                    category: item?.menu_category
-                  }
-                });
-              }}
-            />
-          </Grid>
-          <Grid size={12} className={"d-center"}>
-            <Div className={"fs-1-2rem fw-600"}>
-              {item?.menu_name}
-            </Div>
-          </Grid>
+      const listFragment = () => (
+        <Grid container={true} spacing={0}>
+          {OBJECT.map((item: any, i: number) => (
+            <Grid size={{ xs: 6, md: 4 }} className={"d-col-center p-10"} key={`list-${i}`}>
+              <Grid container={true} spacing={2}>
+                <Grid size={12}>
+                  <Img
+                    hover={true}
+                    shadow={true}
+                    radius={true}
+                    group={"menu"}
+                    src={item.menu_images && item.menu_images[0]}
+                    onClick={() => {
+                      navigate("/menu/detail", {
+                        state: {
+                          _id: item?._id,
+                          category: item?.menu_category
+                        }
+                      });
+                    }}
+                  />
+                </Grid>
+                <Grid size={12}>
+                  <Div className={"fs-1-2rem fw-600"}>
+                    {item?.menu_name}
+                  </Div>
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       return (
         <Card className={"d-col-center"}>
-          <Grid container={true} spacing={0}>
-            {OBJECT?.map((item: any, i: number) => (
-              <Grid size={{ xs: 6, sm: 4 }} className={"d-col-center"} key={`list-${i}`}>
-                {imageFragment(item)}
-              </Grid>
-            ))}
-          </Grid>
+          {listFragment()}
         </Card>
       );
     };

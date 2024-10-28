@@ -46,37 +46,6 @@ export const decimalToStr = (time: number) => {
 };
 
 // -------------------------------------------------------------------------------------------------
-export const insertComma = (str: string) => {
-  try {
-    // 변환이 실패하면 그대로 반환
-    if (isNaN(Number(str))) {
-      return str;
-    }
-
-    // 맨 앞에 + 또는 - 기호가 있는 경우 제거하고 부호를 기억
-    const isNegative = str.charAt(0) === "-";
-    const isPositive = str.charAt(0) === "+";
-    if (isNegative || isPositive) {
-      str = str.slice(1);
-    }
-
-    // 소수점 이하 포함하여 문자열로 변환 후 3자리마다 콤마 추가
-    const [integerPart, decimalPart] = str.split(".");
-    const formattedNum = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    // 최종 반환 문자열 구성 (소수점 이하가 있는 경우 포함)
-    return (
-      (isNegative ? "-" : "") + (isPositive ? "+" : "") +
-      formattedNum +
-      (decimalPart !== undefined ? "." + decimalPart : "")
-    );
-  }
-  catch (error) {
-    console.error("insertComma error", error);
-  }
-};
-
-// -------------------------------------------------------------------------------------------------
 export const makePhoneNumber = (str: string) => {
   try {
     // 숫자만 남기고 모두 제거
@@ -103,3 +72,35 @@ export const makePhoneNumber = (str: string) => {
     console.error("makePhoneNumber error", error);
   }
 }
+
+// -------------------------------------------------------------------------------------------------
+export const insertComma = (str: string | number) => {
+  try {
+    // 만약 number 형식이면 string 으로 변환
+    if (typeof str === "number") {
+      str = str.toString();
+    }
+    // 변환이 실패하면 그대로 반환
+    if (isNaN(Number(str))) {
+      return str;
+    }
+
+    // 맨 앞에 + 또는 - 기호가 있는 경우 제거하고 부호를 기억
+    const isNegative = str.charAt(0) === "-";
+    if (isNegative) {
+      str = str.slice(1);
+    }
+
+    // 소수점 이하 포함하여 문자열로 변환 후 3자리마다 콤마 추가
+    const [integerPart, decimalPart] = str.split(".");
+    const formattedNum = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // 최종 반환 문자열 구성 (소수점 이하가 있는 경우 포함)
+    return (
+      (isNegative ? "-" : "") + formattedNum + (decimalPart ? `.${decimalPart}`: "")
+    );
+  }
+  catch (error) {
+    console.error("insertComma error", error);
+  }
+};

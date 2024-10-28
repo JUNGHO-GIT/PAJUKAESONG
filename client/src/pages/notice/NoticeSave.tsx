@@ -120,12 +120,12 @@ export const NoticeSave = () => {
           </Grid>
           <Grid size={12}>
             <InputFile
-              label={"공지사항 이미지"}
               required={true}
               limit={1}
-              existing={item?.notice_images}
+              label={"공지사항 이미지"}
               group={"notice"}
               value={fileList}
+              existing={item?.notice_images}
               onChange={(updatedFiles: File[] | null) => {
                 setFileList(updatedFiles);
               }}

@@ -82,48 +82,48 @@ export const OrderList = () => {
           </Grid>
         </Grid>
       );
-      const listFragment = (item: any) => (
+      const listFragment = () => (
         <Grid container={true} spacing={2}>
-          <Grid size={3}>
-            <Div className={"fs-0-7rem"}>
-              {item?.order_category === "reservation" && "매장 예약"}
-              {item?.order_category === "buy" && "상품 구매"}
-            </Div>
-          </Grid>
-          <Grid size={6}>
-            <Div
-              max={10}
-              className={"fs-1-0rem pointer-burgundy"}
-              onClick={() => {
-                navigate('/order/detail', {
-                  state: {
-                    _id: item?._id
-                  },
-                });
-              }}
-            >
-              {insertComma(item?.order_total_price || "0")}
-            </Div>
-          </Grid>
-          <Grid size={3}>
-            <Div className={"fs-0-7rem"}>
-              {getDayNotFmt(item?.order_regDt).format("MM-DD")}
-            </Div>
-          </Grid>
+          {OBJECT.map((item: any, i: number) => (
+            <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
+              <Grid container={true} spacing={2}>
+                <Grid size={3}>
+                  <Div className={"fs-0-7rem"}>
+                    {item?.order_category === "reservation" && "매장 예약"}
+                    {item?.order_category === "buy" && "상품 구매"}
+                  </Div>
+                </Grid>
+                <Grid size={6}>
+                  <Div className={"fs-1-0rem pointer-burgundy"} max={10} onClick={() => {
+                    navigate('/order/detail', {
+                      state: {
+                        _id: item?._id
+                      },
+                    });
+                  }}>
+                    {insertComma(item?.order_total_price || "0")}
+                  </Div>
+                </Grid>
+                <Grid size={3}>
+                  <Div className={"fs-0-7rem"}>
+                    {getDayNotFmt(item?.order_regDt).format("MM-DD")}
+                  </Div>
+                </Grid>
+                <Grid size={12}>
+                  {i < OBJECT.length - 1 && (
+                    <Hr px={20} className={"bg-light-grey"} />
+                  )}
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       return (
         <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
           {headFragment()}
           <Hr px={40} className={"bg-burgundy"} />
-          <Grid container={true} spacing={0}>
-            {OBJECT?.map((item: any, i: number) => (
-              <Grid size={12} className={"d-col-center"} key={`notice-${i}`}>
-                {listFragment(item)}
-                {i < OBJECT.length - 1 && <Hr px={40} className={"bg-light-grey"} />}
-              </Grid>
-            ))}
-          </Grid>
+          {listFragment()}
         </Card>
       );
     };

@@ -108,119 +108,128 @@ export const OrderSave = () => {
   const saveNode = () => {
     // 2. product
     const productSection = () => {
-      const productFragment = (item: any, i: number) => (
+      const productFragment = () => (
         <Grid container={true} spacing={2}>
-          <Grid size={3} className={"d-col-center"}>
-            <Img
-              max={isXxs ? 80 : 120}
-              hover={false}
-              shadow={true}
-              radius={false}
-              group={"product"}
-              src={item.product_images && item.product_images[0]}
-            />
-          </Grid>
-          <Grid size={4} className={"d-col-center"}>
-            <Div className={"d-row-center"}>
-              <Div className={"fs-1-2rem fw-600 ms-5"}>
-                {item?.product_name}
-              </Div>
-            </Div>
-            <Div className={"d-row-center"}>
-              <Icons
-                key={"Won"}
-                name={"Won"}
-                className={"w-15 h-15 dark"}
-              />
-              <Div className={"fs-1-0rem ms-n5"}>
-                {insertComma(item?.product_price || "0")}
-              </Div>
-            </Div>
-          </Grid>
-          <Grid size={4} className={"d-col-center"}>
-            <Div className={"d-row-center border-1"}>
-              <Icons
-                key={"Minus"}
-                name={"Minus"}
-                className={"w-12 h-12 black"}
-                onClick={() => {
-                  const value = Number(item?.product_count);
-                  const newValue = value < 1 ? 1 : value - 1;
-                  const originalPrice = Number(item?.product_price) / value;
-                  if (newValue <= 1) {
+          {OBJECT?.order_product?.map((item: any, i: number) => (
+            <Grid container={true} spacing={2} key={`product-${i}`}>
+              <Grid size={3} className={"d-col-center"}>
+                <Img
+                  max={isXxs ? 80 : 120}
+                  hover={false}
+                  shadow={true}
+                  radius={false}
+                  group={"product"}
+                  src={item.product_images && item.product_images[0]}
+                />
+              </Grid>
+              <Grid size={4} className={"d-col-center"}>
+                <Div className={"d-row-center"}>
+                  <Div className={"fs-1-2rem fw-600 ms-5"}>
+                    {item?.product_name}
+                  </Div>
+                </Div>
+                <Div className={"d-row-center"}>
+                  <Icons
+                    key={"Won"}
+                    name={"Won"}
+                    className={"w-15 h-15 dark"}
+                  />
+                  <Div className={"fs-1-0rem ms-n5"}>
+                    {insertComma(item?.product_price || "0")}
+                  </Div>
+                </Div>
+              </Grid>
+              <Grid size={4} className={"d-col-center"}>
+                <Div className={"d-row-center border-1"}>
+                  <Icons
+                    key={"Minus"}
+                    name={"Minus"}
+                    className={"w-12 h-12 black"}
+                    onClick={() => {
+                      const value = Number(item?.product_count);
+                      const newValue = value < 1 ? 1 : value - 1;
+                      const originalPrice = Number(item?.product_price) / value;
+                      if (newValue <= 1) {
+                        setPRODUCT((prev: any) => [
+                          ...prev.slice(0, i),
+                          {
+                            ...item,
+                            product_count: "1",
+                            product_price: String(originalPrice),
+                          },
+                          ...prev.slice(i + 1),
+                        ]);
+                      }
+                      else if (!isNaN(newValue) && newValue <= 30) {
+                        setPRODUCT((prev: any) => [
+                          ...prev.slice(0, i),
+                          {
+                            ...item,
+                            product_count: String(newValue),
+                            product_price: String(originalPrice * newValue),
+                          },
+                          ...prev.slice(i + 1),
+                        ]);
+                      }
+                    }}
+                  />
+                  <Div className={"fs-0-7rem"}>
+                    {item?.product_count}
+                  </Div>
+                  <Icons
+                    key={"Plus"}
+                    name={"Plus"}
+                    className={"w-12 h-12 black"}
+                    onClick={() => {
+                      const value = Number(item?.product_count);
+                      const newValue = value < 1 ? 1 : value + 1;
+                      const originalPrice = Number(item?.product_price) / value;
+                      if (newValue <= 1) {
+                        setPRODUCT((prev: any) => [
+                          ...prev.slice(0, i),
+                          {
+                            ...item,
+                            product_count: "1",
+                            product_price: String(originalPrice),
+                          },
+                          ...prev.slice(i + 1),
+                        ]);
+                      }
+                      else if (!isNaN(newValue) && newValue <= 30) {
+                        setPRODUCT((prev: any) => [
+                          ...prev.slice(0, i),
+                          {
+                            ...item,
+                            product_count: String(newValue),
+                            product_price: String(originalPrice * newValue),
+                          },
+                          ...prev.slice(i + 1),
+                        ]);
+                      }
+                    }}
+                  />
+                </Div>
+              </Grid>
+              <Grid size={1} className={"d-col-center"}>
+                <Icons
+                  key={"X"}
+                  name={"X"}
+                  className={"w-16 h-16 black"}
+                  onClick={() => {
                     setPRODUCT((prev: any) => [
                       ...prev.slice(0, i),
-                      {
-                        ...item,
-                        product_count: "1",
-                        product_price: String(originalPrice),
-                      },
                       ...prev.slice(i + 1),
                     ]);
-                  }
-                  else if (!isNaN(newValue) && newValue <= 30) {
-                    setPRODUCT((prev: any) => [
-                      ...prev.slice(0, i),
-                      {
-                        ...item,
-                        product_count: String(newValue),
-                        product_price: String(originalPrice * newValue),
-                      },
-                      ...prev.slice(i + 1),
-                    ]);
-                  }
-                }}
-              />
-              <Div className={"fs-0-7rem"}>
-                {item?.product_count}
-              </Div>
-              <Icons
-                key={"Plus"}
-                name={"Plus"}
-                className={"w-12 h-12 black"}
-                onClick={() => {
-                  const value = Number(item?.product_count);
-                  const newValue = value < 1 ? 1 : value + 1;
-                  const originalPrice = Number(item?.product_price) / value;
-                  if (newValue <= 1) {
-                    setPRODUCT((prev: any) => [
-                      ...prev.slice(0, i),
-                      {
-                        ...item,
-                        product_count: "1",
-                        product_price: String(originalPrice),
-                      },
-                      ...prev.slice(i + 1),
-                    ]);
-                  }
-                  else if (!isNaN(newValue) && newValue <= 30) {
-                    setPRODUCT((prev: any) => [
-                      ...prev.slice(0, i),
-                      {
-                        ...item,
-                        product_count: String(newValue),
-                        product_price: String(originalPrice * newValue),
-                      },
-                      ...prev.slice(i + 1),
-                    ]);
-                  }
-                }}
-              />
-            </Div>
-          </Grid>
-          <Grid size={1} className={"d-col-center"}>
-            <Icons
-              key={"X"}
-              name={"X"}
-              className={"w-16 h-16 black"}
-              onClick={() => {
-                setPRODUCT((prev: any) => [
-                  ...prev.slice(0, i),
-                  ...prev.slice(i + 1),
-                ]);
-              }}
-            />
-          </Grid>
+                  }}
+                />
+              </Grid>
+              <Grid size={12}>
+                {i < OBJECT?.order_product?.length - 1 && (
+                  <Hr px={20} className={"bg-light-grey"} />
+                )}
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       const priceFragment = (item: any) => (
@@ -241,29 +250,17 @@ export const OrderSave = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"border-2 radius-1 shadow-1 p-20"}>
-          {PRODUCT?.map((item: any, i: number) => (
-            <Grid size={12} className={"d-col-center"} key={`product-${i}`}>
-              {productFragment(item, i)}
-              {i < PRODUCT.length - 1 ? (
-                <>
-                  <Hr px={40} className={"bg-light-grey"} />
-                </>
-              ) : (
-                <>
-                  <Hr px={40} className={"bg-burgundy"} />
-                  {priceFragment(OBJECT)}
-                </>
-              )}
-            </Grid>
-          ))}
-        </Grid>
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {productFragment()}
+          <Hr px={40} className={"bg-burgundy"} />
+          {priceFragment(OBJECT)}
+        </Card>
       );
     };
     // 3. order
     const orderSection = () => {
       const orderFragment = (item: any, i: number) => (
-        <Grid container={true} spacing={3}>
+        <Grid container={true} spacing={3} key={`order-${i}`}>
           <Grid size={12} className={"mt-10"}>
             <Select
               required={true}
@@ -409,11 +406,9 @@ export const OrderSave = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"border-2 radius-1 shadow-1 p-20"}>
-          <Grid size={12} className={"d-col-center"} key={`order-${0}`}>
-            {orderFragment(OBJECT, 0)}
-          </Grid>
-        </Grid>
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {orderFragment(OBJECT, 0)}
+        </Card>
       );
     };
     // 4. btn

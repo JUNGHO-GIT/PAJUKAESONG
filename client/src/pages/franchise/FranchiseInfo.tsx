@@ -94,8 +94,8 @@ export const FranchiseInfo = () => {
           </Grid>
         </Grid>
       );
-      const stepFragment = (item: any, i: number) => (
-        <Grid container={true} spacing={2} key={`step-${i}`}>
+      const stepFragment = () => (
+        <Grid container={true} spacing={2}>
           {isXxs || isXs ? (
             <Grid size={12}>
               <Stepper
@@ -104,7 +104,7 @@ export const FranchiseInfo = () => {
                 orientation={"vertical"}
                 className={"w-100p"}
               >
-                {item.map((step: any, index: number) => (
+                {OBJECT_STEP.map((step: any, index: number) => (
                   <Step key={index}>
                     <StepLabel
                       icon={index + 1}
@@ -133,7 +133,7 @@ export const FranchiseInfo = () => {
                 orientation={"horizontal"}
                 className={"w-100p"}
               >
-                {item.slice(0, 4).map((step: any, index: number) => (
+                {OBJECT_STEP.slice(0, 4).map((step: any, index: number) => (
                   <Step key={index}>
                     <StepLabel
                       icon={index + 1}
@@ -161,7 +161,7 @@ export const FranchiseInfo = () => {
                 alternativeLabel={true}
                 className={"w-100p"}
               >
-                {item.slice(4, 8).map((step: any, index: number) => (
+                {OBJECT_STEP.slice(4).map((step: any, index: number) => (
                   <Step key={index}>
                     <StepLabel
                       icon={index + 5}
@@ -191,7 +191,7 @@ export const FranchiseInfo = () => {
         <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
           {titleFragment()}
           <Br px={20} />
-          {stepFragment(OBJECT_STEP, 0)}
+          {stepFragment()}
         </Card>
       );
     };
@@ -226,23 +226,34 @@ export const FranchiseInfo = () => {
           </Grid>
         </Grid>
       );
-      const costFragment = (item: any) => (
-        <Grid container={true} spacing={2}>
-          <Grid size={3}>
-            <Div className={"fs-0-8rem"}>
-              {item.label}
-            </Div>
-          </Grid>
-          <Grid size={6}>
-            <Div className={"fs-0-8rem"}>
-              {item.desc}
-            </Div>
-          </Grid>
-          <Grid size={3}>
-            <Div className={"fs-0-8rem"}>
-              {item.cost}
-            </Div>
-          </Grid>
+      const costFragment = () => (
+        <Grid container={true} spacing={0}>
+          {OBJECT_COST.map((item: any, i: number) => (
+            <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
+              <Grid container={true} spacing={2}>
+                <Grid size={3}>
+                  <Div className={"fs-0-8rem"}>
+                    {item.label}
+                  </Div>
+                </Grid>
+                <Grid size={6}>
+                  <Div className={"fs-0-8rem"}>
+                    {item.desc}
+                  </Div>
+                </Grid>
+                <Grid size={3}>
+                  <Div className={"fs-0-8rem"}>
+                    {item.cost}
+                  </Div>
+                </Grid>
+                <Grid size={12}>
+                  {i < OBJECT_COST.length - 1 && (
+                    <Hr px={20} className={"bg-light-grey"} />
+                  )}
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       return (
@@ -251,14 +262,7 @@ export const FranchiseInfo = () => {
           <Br px={20} />
           {headFragment()}
           <Hr px={40} className={"bg-burgundy"} />
-          <Grid container={true} spacing={0}>
-            {OBJECT_COST?.map((item: any, i: number) => (
-              <Grid size={12} className={"d-col-center"} key={`cost-${i}`}>
-                {costFragment(item)}
-                {i < OBJECT_COST.length - 1 && <Hr px={40} className={"bg-light-grey"} />}
-              </Grid>
-            ))}
-          </Grid>
+          {costFragment()}
         </Card>
       );
     };

@@ -151,7 +151,7 @@ export const OrderDetail = () => {
                 </Div>
               </Grid>
               <Grid size={12}>
-                {item.length - 1 !== i && (
+                {i < OBJECT?.order_product?.length - 1 && (
                   <Hr px={20} className={"bg-light-grey"} />
                 )}
               </Grid>
@@ -199,42 +199,42 @@ export const OrderDetail = () => {
             <Input
               label={"이름"}
               disabled={true}
-              value={item?.order_name ?? ""}
+              value={item?.order_name || ""}
             />
           </Grid>
           <Grid size={12}>
             <Input
               label={"이메일"}
               disabled={true}
-              value={item?.order_email ?? ""}
+              value={item?.order_email || ""}
             />
           </Grid>
           <Grid size={12}>
             <Input
               label={"전화번호"}
               disabled={true}
-              value={item?.order_phone ?? ""}
+              value={item?.order_phone || ""}
             />
           </Grid>
           <Grid size={12}>
             <Input
               label={"인원"}
               disabled={true}
-              value={item?.order_headcount ?? ""}
+              value={item?.order_headcount || ""}
             />
           </Grid>
           <Grid size={12}>
             <Input
               disabled={true}
               label={"주문 날짜"}
-              value={getDayFmt(item?.order_date ?? "")}
+              value={getDayFmt(item?.order_date || "")}
             />
           </Grid>
           <Grid size={12}>
             <Input
               disabled={true}
               label={"예약 시간"}
-              value={item?.order_time ?? ""}
+              value={item?.order_time || ""}
             />
           </Grid>
         </Grid>
