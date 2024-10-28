@@ -3,7 +3,7 @@
 import { useState, useEffect } from "@imports/ImportReacts";
 import { useCommonValue, useResponsive } from "@imports/ImportHooks";
 import { Div, Img, Icons } from "@imports/ImportComponents";
-import { Paper, Grid } from "@imports/ImportMuis";
+import { Paper, Grid, Card } from "@imports/ImportMuis";
 import { Tabs, Tab, Menu, MenuItem, tabsClasses } from "@imports/ImportMuis";
 import { SideBar } from '@imports/ImportLayouts';
 
@@ -90,7 +90,7 @@ export const Header = () => {
   // 7. headerNode ---------------------------------------------------------------------------------
   const headerNode = () => {
     const sidebarSection = () => (
-      <Grid container spacing={0} columns={12}>
+      <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-center"}>
           <Icons
             name={"Hamburger"}
@@ -105,7 +105,7 @@ export const Header = () => {
       </Grid>
     );
     const logoSection = () => (
-      <Grid container spacing={0} columns={12}>
+      <Grid container={true} spacing={0}>
         <Grid size={12} className={isSm ? "d-row-center" : "d-row-left"}>
           <Img
             max={isXxs ? 150 : 200}
@@ -133,7 +133,7 @@ export const Header = () => {
       </Grid>
     );
     const tabsSection = () => (
-      <Grid container spacing={0} columns={12}>
+      <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-center"}>
           <Tabs
             value={selectedTab || false}
@@ -220,7 +220,7 @@ export const Header = () => {
     );
     return (
       <Paper className={`layout-wrapper bg-ivory-light p-sticky top-0vh border-bottom-1 shadow-bottom-4 p-20 ${tabHeight}`}>
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid
             size={isXxs ? 2 : isXs ? 2 : isSm ? 0 : isMd ? 0 : isLg ? 0 : isXl ? 0 : 0}
             className={`${(isXxs || isXs) ? "d-row-left" : "d-none"}`}

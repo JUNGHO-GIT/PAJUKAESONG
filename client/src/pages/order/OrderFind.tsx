@@ -9,7 +9,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Input } from "@imports/ImportContainers";
 import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
-import { Paper, Grid } from "@imports/ImportMuis";
+import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderFind = () => {
@@ -71,7 +71,7 @@ export const OrderFind = () => {
     // 2. find
     const findSection = () => {
       const findFragment = (item: any, i: number) => (
-        <Grid container spacing={3} columns={12}>
+        <Grid container={true} spacing={3} key={`find-${i}`}>
           <Grid size={12}>
             <Input
               label={"이름"}
@@ -125,16 +125,14 @@ export const OrderFind = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          <Grid size={12} key={`find-${0}`}>
-            {findFragment(OBJECT, 0)}
-          </Grid>
-        </Grid>
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {findFragment(OBJECT, 0)}
+        </Card>
       );
     };
     // 3. btn
     const btnSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={12}>
           <Btn
             className={"w-100p fs-1-0rem bg-light-black"}
@@ -149,14 +147,14 @@ export const OrderFind = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {LOADING ? <Loading /> : findSection()}
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
+            {findSection()}
             <Br px={20} />
             {btnSection()}
-          </Grid>
-        </Grid>
+          </>
+        )}
       </Paper>
     );
   };

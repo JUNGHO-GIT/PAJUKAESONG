@@ -1,7 +1,7 @@
 // AboutGreeting.tsx
 
 import { Div, Img } from "@imports/ImportComponents";
-import { Paper, Grid } from "@imports/ImportMuis";
+import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutGreeting = () => {
@@ -11,7 +11,7 @@ export const AboutGreeting = () => {
     // 2. greeting
     const greetingSection = () => {
       const greetingFragment = () => (
-        <Grid container spacing={3} columns={12}>
+        <Grid container={true} spacing={3}>
           <Grid size={12} className={"d-col-left"}>
             <Div className={"fs-1-8rem fw-700"}>
               여러분 반갑습니다.
@@ -58,21 +58,15 @@ export const AboutGreeting = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          <Grid size={12} className={"d-col-center"} key={`save-${0}`}>
-            {greetingFragment()}
-          </Grid>
-        </Grid>
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {greetingFragment()}
+        </Card>
       );
     };
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {greetingSection()}
-          </Grid>
-        </Grid>
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {greetingSection()}
       </Paper>
     );
   };

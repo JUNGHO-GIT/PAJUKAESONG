@@ -8,7 +8,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Div, Hr, Br } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
-import { Paper, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
+import { Paper, Grid, Card, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderList = () => {
@@ -64,7 +64,7 @@ export const OrderList = () => {
     // 2. list
     const listSection = () => {
       const headFragment = () => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={3}>
             <Div className={"fs-0-8rem fw-500"}>
               유형
@@ -83,7 +83,7 @@ export const OrderList = () => {
         </Grid>
       );
       const listFragment = (item: any) => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={3}>
             <Div className={"fs-0-7rem"}>
               {item?.order_category === "reservation" && "매장 예약"}
@@ -113,29 +113,23 @@ export const OrderList = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          {OBJECT?.map((item: any, i: number) => (
-            <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
-              {i === 0 && (
-                <>
-                  {headFragment()}
-                  <Hr px={40} className={"bg-burgundy"} />
-                </>
-              )}
-              {listFragment(item)}
-              {i < OBJECT.length - 1 && (
-                <>
-                  <Hr px={40} className={"bg-light-grey"} />
-                </>
-              )}
-            </Grid>
-          ))}
-        </Grid>
-      )
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {headFragment()}
+          <Hr px={40} className={"bg-burgundy"} />
+          <Grid container={true} spacing={0}>
+            {OBJECT?.map((item: any, i: number) => (
+              <Grid size={12} className={"d-col-center"} key={`notice-${i}`}>
+                {listFragment(item)}
+                {i < OBJECT.length - 1 && <Hr px={40} className={"bg-light-grey"} />}
+              </Grid>
+            ))}
+          </Grid>
+        </Card>
+      );
     };
     // 3. filter
     const filterSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={3} className={"d-col-center"}>
           <Select
             label={""}
@@ -197,14 +191,14 @@ export const OrderList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {LOADING ? <Loading /> : listSection()}
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
+            {listSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}
-          </Grid>
-        </Grid>
+          </>
+        )}
       </Paper>
     );
   };

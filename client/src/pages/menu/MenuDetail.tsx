@@ -8,7 +8,7 @@ import { axios, insertComma, Swiper, SwiperSlide, Pagination } from "@imports/Im
 import { Loading } from "@imports/ImportLayouts";
 import { Menu } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Icons } from "@imports/ImportComponents";
-import { Paper, Grid } from "@imports/ImportMuis";
+import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuDetail = () => {
@@ -97,8 +97,8 @@ export const MenuDetail = () => {
   const detailNode = () => {
     // 1. detail
     const detailSection = () => {
-      const imageFragment = (item: any) => (
-        <Grid container spacing={0} columns={12}>
+      const imageFragment = (item: any, i: number) => (
+        <Grid container={true} spacing={0} key={`image-${i}`}>
           <Grid size={12} className={"d-col-center"}>
             <Swiper
               spaceBetween={20}
@@ -133,8 +133,8 @@ export const MenuDetail = () => {
           </Grid>
         </Grid>
       );
-      const descFragment = (item: any) => (
-        <Grid container spacing={2} columns={12}>
+      const descFragment = (item: any, i: number) => (
+        <Grid container={true} spacing={2} key={`desc-${i}`}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700 black"}>
               {item?.menu_name}
@@ -164,18 +164,16 @@ export const MenuDetail = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"p-10"}>
-          <Grid size={12} className={"d-col-center"} key={`detail-${0}`}>
-            {imageFragment(OBJECT)}
-            <Hr px={40} className={"bg-burgundy"} />
-            {descFragment(OBJECT)}
-          </Grid>
-        </Grid>
+        <Card className={"d-col-center"}>
+          {imageFragment(OBJECT, 0)}
+          <Hr px={40} className={"bg-burgundy"} />
+          {descFragment(OBJECT, 0)}
+        </Card>
       )
     };
     // 4. filter
     const filterSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
           <Div
             className={"fs-1-0rem fw-700 pointer-burgundy"}
@@ -216,14 +214,14 @@ export const MenuDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {LOADING ? <Loading /> : detailSection()}
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
+            {detailSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}
-          </Grid>
-        </Grid>
+          </>
+        )}
       </Paper>
     );
   };

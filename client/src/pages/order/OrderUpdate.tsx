@@ -9,7 +9,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Order, Product } from "@imports/ImportSchemas";
 import { Input, Select, PickerDay, PickerTime } from "@imports/ImportContainers";
 import { Div, Hr, Br, Btn, Img, Icons } from "@imports/ImportComponents";
-import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
+import { Paper, Grid, Card, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderUpdate = () => {
@@ -116,7 +116,7 @@ export const OrderUpdate = () => {
     // 2. product
     const productSection = () => {
       const productFragment = (item: any, i: number) => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={3} className={"d-col-center"}>
             <Img
               max={isXxs ? 80 : 120}
@@ -234,7 +234,7 @@ export const OrderUpdate = () => {
         </Grid>
       );
       const priceFragment = (item: any) => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-0rem"}>
               총 금액  :
@@ -251,7 +251,7 @@ export const OrderUpdate = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+        <Grid container={true} spacing={0} className={"border-2 radius-1 shadow-1 p-20"}>
           {PRODUCT?.map((item: any, i: number) => (
             <Grid size={12} className={"d-col-center"} key={`product-${i}`}>
               {productFragment(item, i)}
@@ -273,7 +273,7 @@ export const OrderUpdate = () => {
     // 3. order
     const orderSection = () => {
       const orderFragment = (item: any, i: number) => (
-        <Grid container spacing={3} columns={12}>
+        <Grid container={true} spacing={3}>
           <Grid size={12} className={"mt-10"}>
             <Select
               label={"주문 유형"}
@@ -419,7 +419,7 @@ export const OrderUpdate = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
+        <Grid container={true} spacing={0} className={"border-2 radius-1 shadow-1 p-20"}>
           <Grid size={12} className={"d-col-center"} key={`order-${0}`}>
             {orderFragment(OBJECT, 0)}
           </Grid>
@@ -428,7 +428,7 @@ export const OrderUpdate = () => {
     };
     // 4. btn
     const btnSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={6} className={"d-row-center"}>
           <Btn
             className={"w-100p fs-1-0rem bg-grey"}
@@ -453,16 +453,16 @@ export const OrderUpdate = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {LOADING ? <Loading /> : productSection()}
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
+            {productSection()}
             <Br px={30} />
             {orderSection()}
             <Br px={20} />
             {btnSection()}
-          </Grid>
-        </Grid>
+          </>
+        )}
       </Paper>
     );
   };

@@ -9,7 +9,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
 import { Input, InputFile, Select } from "@imports/ImportContainers";
 import { Btn, Br } from "@imports/ImportComponents";
-import { Paper, Grid, MenuItem } from "@imports/ImportMuis";
+import { Paper, Grid, Card, MenuItem } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseUpdate = () => {
@@ -21,7 +21,7 @@ export const FranchiseUpdate = () => {
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
-  const [mapAddress, setMapAddress] = useState<string>("");
+  const [_mapAddress, setMapAddress] = useState<string>("");
   const [OBJECT, setOBJECT] = useState<any>(Franchise);
   const [fileList, setFileList] = useState<File[] | null>(null);
 
@@ -120,7 +120,7 @@ export const FranchiseUpdate = () => {
     // 2. update
     const updateSection = () => {
       const updateFragment = (item: any, i: number) => (
-        <Grid container spacing={3} columns={12}>
+        <Grid container={true} spacing={3} key={`update-${i}`}>
           <Grid size={12} className={"mt-10"}>
             <Select
               label={"순서"}
@@ -253,16 +253,14 @@ export const FranchiseUpdate = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          <Grid size={12} className={"d-col-center"} key={`update-${0}`}>
-            {updateFragment(OBJECT, 0)}
-          </Grid>
-        </Grid>
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {updateFragment(OBJECT, 0)}
+        </Card>
       );
     };
     // 3. btn
     const btnSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={6} className={"d-row-center"}>
           <Btn
             className={"w-100p fs-1-0rem bg-grey"}
@@ -287,14 +285,14 @@ export const FranchiseUpdate = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {LOADING ? <Loading /> : updateSection()}
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
+            {updateSection()}
             <Br px={20} />
             {btnSection()}
-          </Grid>
-        </Grid>
+          </>
+        )}
       </Paper>
     );
   };

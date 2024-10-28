@@ -72,7 +72,7 @@ export const Main = () => {
     // 2. menu -------------------------------------------------------------------------------------
     const menuSection = () => {
       const selectFragment = () => (
-        <Grid container spacing={0} columns={12} className={"p-10"}>
+        <Grid container={true} spacing={0} className={"p-10"}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={`${category === "main" ? "bg-burgundy" : ""} border-1 radius-50 p-10 me-1vw hover`}>
               <Div
@@ -98,7 +98,7 @@ export const Main = () => {
         </Grid>
       );
       const menuFragment = () => (
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-center"}>
             <Swiper
               spaceBetween={30}
@@ -152,14 +152,14 @@ export const Main = () => {
         </Grid>
       );
       const paginationFragment = () => (
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-center"}>
             <Div className={"menu-pagination transform-none"} />
           </Grid>
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 py-20"}>
+        <Grid container={true} spacing={0} className={"border-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {selectFragment()}
             {menuFragment()}
@@ -172,7 +172,7 @@ export const Main = () => {
     // 3. notice -----------------------------------------------------------------------------------
     const noticeSection = () => {
       const noticeFragment = () => (
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-center"}>
             <Swiper
               spaceBetween={30}
@@ -232,14 +232,14 @@ export const Main = () => {
         </Grid>
       );
       const paginationFragment = () => (
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-center"}>
             <Div className={"notice-pagination transform-none"} />
           </Grid>
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"bg-ivory border-1 py-20"}>
+        <Grid container={true} spacing={0} className={"bg-ivory border-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {noticeFragment()}
             {paginationFragment()}
@@ -251,7 +251,7 @@ export const Main = () => {
     // 4. location ---------------------------------------------------------------------------------
     const locationSection = () => {
       const locationFragment = () => (
-        <Grid container spacing={0} columns={12} className={"p-20"}>
+        <Grid container={true} spacing={0} className={"p-20"}>
           <Grid size={12} className={"d-center"}>
             <Location
               width={"100%"}
@@ -262,7 +262,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-1 py-20"}>
+        <Grid container={true} spacing={0} className={"border-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {locationFragment()}
           </Grid>
@@ -273,7 +273,7 @@ export const Main = () => {
     // 10. return ----------------------------------------------------------------------------------
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-col-center"}>
             {menuSection()}
             {noticeSection()}

@@ -36,7 +36,7 @@ export const PickerDay = (
         position={"center"}
         direction={"center"}
         contents={({closePopup}: any) => (
-          <Grid container spacing={2} columns={12}>
+          <Grid container={true} spacing={2}>
             <Grid size={12} className={"d-col-center"}>
               <Div className={"fs-1-2rem fw-600 black"}>
                 날짜 선택

@@ -69,7 +69,7 @@ export const SideBar = (
   const sideBarNode = () => {
     // 1. logo
     const logoSection = () => (
-      <Grid container spacing={0} columns={12}>
+      <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-center"}>
           <Img
             hover={false}
@@ -87,7 +87,7 @@ export const SideBar = (
     );
     // 2. sidebar
     const sidebarSection = () => (
-      <Grid container spacing={0} columns={12}>
+      <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-col-left"}>
           {dataArray.map((item, idx) => (
             <List component={"nav"} key={idx}>
@@ -158,7 +158,7 @@ export const SideBar = (
       </Grid>
     );
     const textSection1 = () => (
-      <Grid container spacing={2} columns={12}>
+      <Grid container={true} spacing={2}>
         <Grid size={12} className={"d-col-left horizontal-text"}>
           <Div className={"d-row-center"}>
             <Icons
@@ -204,7 +204,7 @@ export const SideBar = (
       </Grid>
     );
     const textSection2 = () => (
-      <Grid container spacing={2} columns={12}>
+      <Grid container={true} spacing={2}>
         <Grid size={12} className={"d-col-left horizontal-text"}>
           <Div className={"d-row-center"}>
             <Icons
@@ -261,7 +261,7 @@ export const SideBar = (
           },
         }}
       >
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-col-center"}>
             {logoSection()}
             <Hr px={40} className={"bg-light-grey"} />

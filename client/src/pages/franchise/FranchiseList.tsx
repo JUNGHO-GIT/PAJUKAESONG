@@ -8,7 +8,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Franchise } from "@imports/ImportSchemas";
 import { Div, Img, Hr, Btn } from "@imports/ImportComponents";
 import { Select } from "@imports/ImportContainers";
-import { Paper, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
+import { Paper, Grid, Card, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseList = () => {
@@ -62,7 +62,7 @@ export const FranchiseList = () => {
     // 2. list
     const listSection = () => {
       const imageFragment = (item: any) => (
-        <Grid container spacing={0} columns={12} className={"p-10"}>
+        <Grid container={true} spacing={2} className={"p-10"}>
           <Grid size={12} className={"d-col-center"}>
             <Img
               max={600}
@@ -80,10 +80,6 @@ export const FranchiseList = () => {
               }}
             />
           </Grid>
-        </Grid>
-      );
-      const descFragment = (item: any) => (
-        <Grid container spacing={0} columns={12}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-2rem fw-600"}>
               {item?.franchise_name}
@@ -92,19 +88,20 @@ export const FranchiseList = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={2} columns={12}>
-          {OBJECT?.map((item: any, i: number) => (
-            <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
-              {imageFragment(item)}
-              {descFragment(item)}
-            </Grid>
-          ))}
-        </Grid>
-      )
+        <Card className={"d-col-center"}>
+          <Grid container={true} spacing={0}>
+            {OBJECT?.map((item: any, i: number) => (
+              <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
+                {imageFragment(item)}
+              </Grid>
+            ))}
+          </Grid>
+        </Card>
+      );
     };
     // 3. filter
     const filterSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={3} className={"d-col-center"}>
           <Select
             label={""}
@@ -176,14 +173,14 @@ export const FranchiseList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {LOADING ? <Loading /> : listSection()}
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
+            {listSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}
-          </Grid>
-        </Grid>
+          </>
+        )}
       </Paper>
     );
   };

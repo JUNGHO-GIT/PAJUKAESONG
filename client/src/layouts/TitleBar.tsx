@@ -64,9 +64,11 @@ export const TitleBar = () => {
       }
       else if (PATH.includes("menu/save")) {
         setTitleValue("메뉴 등록");
+        setTitleBreadcrumb(`메뉴 등록`);
       }
       else if (PATH.includes("menu/update")) {
         setTitleValue("메뉴 수정");
+        setTitleBreadcrumb(`메뉴 수정`);
       }
     }
     else if (PATH.includes("order")) {
@@ -170,7 +172,7 @@ export const TitleBar = () => {
   // 7. title --------------------------------------------------------------------------------------
   const titleNode = () => {
     const mainSection = () => (
-      <Grid container spacing={0} columns={12}>
+      <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-col-center"}>
           <Swiper
             spaceBetween={0}
@@ -181,12 +183,11 @@ export const TitleBar = () => {
           >
             <SwiperSlide className={"w-100p h-100p d-center"}>
               <Img
-                max={isXxs ? 600 : 700}
                 hover={false}
                 shadow={false}
                 radius={false}
-                group={"new"}
-                src={"https://cdn.pixabay.com/photo/2017/07/28/18/25/pancake-2554104_960_720.jpg"}
+                group={"main"}
+                src={"foodmain2.webp"}
               />
               <Div className={"d-col-center w-100p h-100p p-absolute opacity-4"}>
                 <Div className={"fs-1-6rem fw-400 ls-4 white"}>
@@ -202,7 +203,7 @@ export const TitleBar = () => {
       </Grid>
     );
     const titleSection = () => (
-      <Grid container spacing={0} columns={12}>
+      <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-row-center"}>
           <Div className={`mt-n3 me-n5`}>
             <Icons
@@ -236,7 +237,7 @@ export const TitleBar = () => {
     );
     return (
       <Paper className={`layout-wrapper p-relative border-bottom-1 border-top-1 z-100 fadeIn ${objectHeight} ${objectBgColor}`}>
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-col-center"}>
             {PATH.includes("main") ? mainSection() : titleSection()}
           </Grid>

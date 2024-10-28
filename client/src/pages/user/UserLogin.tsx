@@ -9,7 +9,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { User } from "@imports/ImportSchemas";
 import { Input } from "@imports/ImportContainers";
 import { Div, Btn, Hr, Br } from "@imports/ImportComponents";
-import { Paper, Grid } from "@imports/ImportMuis";
+import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const UserLogin = () => {
@@ -113,7 +113,7 @@ export const UserLogin = () => {
     // 2. login
     const loginSection = () => {
       const loginFragment = (item: any, i: number) => (
-        <Grid container spacing={3} columns={12}>
+        <Grid container={true} spacing={3} key={`login-${i}`}>
           <Grid size={12}>
             <Input
               required={true}
@@ -166,16 +166,14 @@ export const UserLogin = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          <Grid size={12} key={`login-${0}`}>
-            {loginFragment(OBJECT, 0)}
-          </Grid>
-        </Grid>
+        <Card className={"border-2 radius-1 shadow-1 p-20"}>
+          {loginFragment(OBJECT, 0)}
+        </Card>
       );
     };
     // 3. btn
     const btnSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={12}>
           {(isAdmin || isUser) ? (
             <Btn
@@ -201,7 +199,7 @@ export const UserLogin = () => {
     );
     // 4. link
     const linkSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={12} className={"d-row-center"}>
           <Div className={"fs-0-8rem"}>
             아이디가 없는 경우
@@ -226,16 +224,16 @@ export const UserLogin = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {LOADING ? <Loading /> : loginSection()}
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
+            {loginSection()}
             <Br px={30} />
             {btnSection()}
             <Hr px={40} className={"bg-grey"} />
             {linkSection()}
-          </Grid>
-        </Grid>
+          </>
+        )}
       </Paper>
     );
   };

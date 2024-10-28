@@ -2,7 +2,7 @@
 
 import { useResponsive, useCommonValue } from "@imports/ImportHooks";
 import { Div, Img, Icons } from "@imports/ImportComponents";
-import { Paper, Grid } from "@imports/ImportMuis";
+import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Footer = () => {
@@ -15,7 +15,7 @@ export const Footer = () => {
   const footerNode = () => {
     // 1. logo
     const logoSection = () => (
-      <Grid container spacing={0} columns={12}>
+      <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-center"}>
           <Img
             max={200}
@@ -33,7 +33,7 @@ export const Footer = () => {
     );
     // 3. text
     const textSection = () => (
-      <Grid container spacing={0} columns={12} className={`horizontal-text`}>
+      <Grid container={true} spacing={0} className={`horizontal-text`}>
         <Grid size={12} className={`d-row-${isXxs || isXs ? "center" : "left"}`}>
           <Icons
             key={"Info"}

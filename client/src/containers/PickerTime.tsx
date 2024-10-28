@@ -30,7 +30,7 @@ export const PickerTime = (
         direction={"center"}
         padding={20}
         contents={({closePopup}: any) => (
-          <Grid container spacing={3} columns={12} className={"w-50vw p-0"}>
+          <Grid container={true} spacing={3} className={"w-50vw p-0"}>
             <Grid size={12} className={"d-col-left"}>
               <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"ko"}>
                 <DigitalClock

@@ -4,7 +4,7 @@ import { useState, useEffect } from "@imports/ImportReacts";
 import { useResponsive } from "@imports/ImportHooks";
 import { Loading } from "@imports/ImportLayouts";
 import { Div, Br, Hr } from "@imports/ImportComponents";
-import { Paper, Grid, Stepper, Step, StepLabel } from "@imports/ImportMuis";
+import { Paper, Grid, Card, Stepper, Step, StepLabel } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseInfo = () => {
@@ -83,10 +83,10 @@ export const FranchiseInfo = () => {
   // 7. infoNode -----------------------------------------------------------------------------------
   const infoNode = () => {
 
-    // 2. step
+    // 1. step
     const stepSection = () => {
       const titleFragment = () => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={12}>
             <Div className={"fs-1-6rem fw-700"}>
               가맹점 창업 절차
@@ -94,8 +94,8 @@ export const FranchiseInfo = () => {
           </Grid>
         </Grid>
       );
-      const stepFragment = (item: any) => (
-        <Grid container spacing={2} columns={12}>
+      const stepFragment = (item: any, i: number) => (
+        <Grid container={true} spacing={2} key={`step-${i}`}>
           {isXxs || isXs ? (
             <Grid size={12}>
               <Stepper
@@ -188,20 +188,18 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          <Grid size={12} className={"d-col-center"} key={`step-${0}`}>
-            {titleFragment()}
-            {<Br px={20} />}
-            {stepFragment(OBJECT_STEP)}
-          </Grid>
-        </Grid>
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {titleFragment()}
+          <Br px={20} />
+          {stepFragment(OBJECT_STEP, 0)}
+        </Card>
       );
     };
 
-    // 4. cost
+    // 2. cost
     const costSection = () => {
       const titleFragment = () => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={12}>
             <Div className={"fs-1-6rem fw-700"}>
               가맹비 및 창업비용
@@ -210,7 +208,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       const headFragment = () => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem fw-500"}>
               구분
@@ -229,7 +227,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       const costFragment = (item: any) => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={3}>
             <Div className={"fs-0-8rem"}>
               {item.label}
@@ -248,38 +246,32 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          {OBJECT_COST?.map((item: any, i: number) => (
-            <Grid size={12} className={"d-col-center"} key={`cost-${i}`}>
-              {i === 0 && (
-                <>
-                  {titleFragment()}
-                  <Br px={20} />
-                  {headFragment()}
-                  <Hr px={40} className={"bg-burgundy"} />
-                </>
-              )}
-              {costFragment(item)}
-              {i < OBJECT_COST.length - 1 && <Hr px={40} className={"bg-light-grey"} />}
-            </Grid>
-          ))}
-        </Grid>
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {titleFragment()}
+          <Br px={20} />
+          {headFragment()}
+          <Hr px={40} className={"bg-burgundy"} />
+          <Grid container={true} spacing={0}>
+            {OBJECT_COST?.map((item: any, i: number) => (
+              <Grid size={12} className={"d-col-center"} key={`cost-${i}`}>
+                {costFragment(item)}
+                {i < OBJECT_COST.length - 1 && <Hr px={40} className={"bg-light-grey"} />}
+              </Grid>
+            ))}
+          </Grid>
+        </Card>
       );
     };
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {LOADING ? <Loading /> : (
-              <>
-                {stepSection()}
-                <Br px={30} />
-                {costSection()}
-              </>
-            )}
-          </Grid>
-        </Grid>
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
+            {stepSection()}
+            <Br px={30} />
+            {costSection()}
+          </>
+        )}
       </Paper>
     );
   };

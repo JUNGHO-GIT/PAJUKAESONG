@@ -9,7 +9,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Contact } from "@imports/ImportSchemas";
 import { Div, Hr, Icons } from "@imports/ImportComponents";
 import { TextArea } from "@imports/ImportContainers";
-import { Paper, Grid } from "@imports/ImportMuis";
+import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ContactDetail = () => {
@@ -99,8 +99,8 @@ export const ContactDetail = () => {
   const detailNode = () => {
     // 2. detail
     const detailSection = () => {
-      const headFragment = (item: any) => (
-        <Grid container spacing={2} columns={12}>
+      const headFragment = (item: any, i: number) => (
+        <Grid container={true} spacing={1} key={`head-${i}`}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-8rem fw-700"}>
               {item?.contact_title}
@@ -113,8 +113,8 @@ export const ContactDetail = () => {
           </Grid>
         </Grid>
       );
-      const descFragment = (item: any) => (
-        <Grid container spacing={2} columns={12}>
+      const descFragment = (item: any, i: number) => (
+        <Grid container={true} spacing={2} key={`desc-${i}`}>
           <Grid size={12}>
             <TextArea
               label={""}
@@ -148,18 +148,16 @@ export const ContactDetail = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          <Grid size={12} className={"d-col-center"} key={`detail-${0}`}>
-            {headFragment(OBJECT)}
-            <Hr px={40} className={"bg-burgundy"} />
-            {descFragment(OBJECT)}
-          </Grid>
-        </Grid>
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {headFragment(OBJECT, 0)}
+          <Hr px={40} className={"bg-burgundy"} />
+          {descFragment(OBJECT, 0)}
+        </Card>
       )
     };
     // 3. filter
     const filterSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={6} className={"d-row-left"}>
           <Div
             className={"fs-1-0rem fw-700 pointer-burgundy"}
@@ -201,14 +199,14 @@ export const ContactDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {LOADING ? <Loading /> : detailSection()}
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
+            {detailSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}
-          </Grid>
-        </Grid>
+          </>
+        )}
       </Paper>
     );
   };

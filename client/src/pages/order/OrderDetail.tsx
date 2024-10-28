@@ -9,7 +9,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Div, Hr, Br, Img, Icons } from "@imports/ImportComponents";
 import { Input } from "@imports/ImportContainers";
-import { Paper, Grid } from "@imports/ImportMuis";
+import { Paper, Grid, Card } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderDetail = () => {
@@ -102,56 +102,65 @@ export const OrderDetail = () => {
   const saveNode = () => {
     // 2. product
     const productSection = () => {
-      const productFragment = (item: any) => (
-        <Grid container spacing={2} columns={12}>
-          <Grid size={3} className={"d-col-center"}>
-            <Img
-              max={isXxs ? 80 : 120}
-              hover={false}
-              shadow={true}
-              radius={false}
-              group={"product"}
-              src={item.product_images && item.product_images[0]}
-            />
-          </Grid>
-          <Grid size={4} className={"d-col-center"}>
-            <Div className={"d-row-center"}>
-              <Div className={"fs-1-2rem fw-600 ms-5"}>
-                {item?.product_name}
-              </Div>
-            </Div>
-            <Div className={"d-row-center"}>
-              <Icons
-                key={"Won"}
-                name={"Won"}
-                className={"w-15 h-15 dark"}
-              />
-              <Div className={"fs-1-0rem ms-n5"}>
-                {insertComma(item?.product_price || "0")}
-              </Div>
-            </Div>
-          </Grid>
-          <Grid size={5} className={"d-col-center"}>
-            <Div className={"d-row-center border-1"}>
-              <Icons
-                key={"Minus"}
-                name={"Minus"}
-                className={"w-12 h-12 black"}
-              />
-              <Div className={"fs-0-7rem"}>
-                {item?.product_count}
-              </Div>
-              <Icons
-                key={"Plus"}
-                name={"Plus"}
-                className={"w-12 h-12 black"}
-              />
-            </Div>
-          </Grid>
+      const productFragment = () => (
+        <Grid container={true} spacing={2}>
+          {OBJECT?.order_product?.map((item: any, i: number) => (
+            <Grid container={true} spacing={2} key={`product-${i}`}>
+              <Grid size={3} className={"d-col-center"}>
+                <Img
+                  max={isXxs ? 80 : 120}
+                  hover={false}
+                  shadow={true}
+                  radius={false}
+                  group={"product"}
+                  src={item.product_images && item.product_images[0]}
+                />
+              </Grid>
+              <Grid size={4} className={"d-col-center"}>
+                <Div className={"d-row-center"}>
+                  <Div className={"fs-1-2rem fw-600 ms-5"}>
+                    {item?.product_name}
+                  </Div>
+                </Div>
+                <Div className={"d-row-center"}>
+                  <Icons
+                    key={"Won"}
+                    name={"Won"}
+                    className={"w-15 h-15 dark"}
+                  />
+                  <Div className={"fs-1-0rem ms-n5"}>
+                    {insertComma(item?.product_price || "0")}
+                  </Div>
+                </Div>
+              </Grid>
+              <Grid size={5} className={"d-col-center"}>
+                <Div className={"d-row-center border-1"}>
+                  <Icons
+                    key={"Minus"}
+                    name={"Minus"}
+                    className={"w-12 h-12 black"}
+                  />
+                  <Div className={"fs-0-7rem"}>
+                    {item?.product_count}
+                  </Div>
+                  <Icons
+                    key={"Plus"}
+                    name={"Plus"}
+                    className={"w-12 h-12 black"}
+                  />
+                </Div>
+              </Grid>
+              <Grid size={12}>
+                {item.length - 1 !== i && (
+                  <Hr px={20} className={"bg-light-grey"} />
+                )}
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       const priceFragment = (item: any) => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-0rem"}>
               총 금액  :
@@ -168,29 +177,17 @@ export const OrderDetail = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          {OBJECT?.order_product?.map((item: any, i: number) => (
-            <Grid size={12} className={"d-col-center"} key={`product-${i}`}>
-              {productFragment(item)}
-              {i < OBJECT?.order_product?.length - 1 ? (
-                <>
-                  <Hr px={40} className={"bg-light-grey"} />
-                </>
-              ) : (
-                <>
-                  <Hr px={40} className={"bg-burgundy"} />
-                  {priceFragment(OBJECT)}
-                </>
-              )}
-            </Grid>
-          ))}
-        </Grid>
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {productFragment()}
+          <Hr px={40} className={"bg-burgundy"} />
+          {priceFragment(OBJECT)}
+        </Card>
       );
     };
     // 3. order
     const orderSection = () => {
-      const orderFragment = (item: any) => (
-        <Grid container spacing={3} columns={12}>
+      const orderFragment = (item: any, i: number) => (
+        <Grid container={true} spacing={3} key={`order-${i}`}>
           <Grid size={12} className={"mt-10"}>
             <Input
               label={"주문 유형"}
@@ -243,16 +240,14 @@ export const OrderDetail = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          <Grid size={12} className={"d-col-center"} key={`order-${0}`}>
-            {orderFragment(OBJECT)}
-          </Grid>
-        </Grid>
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {orderFragment(OBJECT, 0)}
+        </Card>
       );
     };
     // 3. filter
     const filterSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={6} className={"d-row-left"}>
           <Div
             className={"fs-1-0rem fw-700 pointer-burgundy"}
@@ -294,16 +289,16 @@ export const OrderDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
-            {LOADING ? <Loading /> : productSection()}
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
+            {productSection()}
             <Br px={30} />
             {orderSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}
-          </Grid>
-        </Grid>
+          </>
+        )}
       </Paper>
     );
   };

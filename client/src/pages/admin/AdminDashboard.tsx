@@ -8,7 +8,7 @@ import { Loading } from "@imports/ImportLayouts";
 import { Order } from "@imports/ImportSchemas";
 import { Div, Hr, Br } from "@imports/ImportComponents";
 import { PickerDay, Select } from "@imports/ImportContainers";
-import { Paper, Grid, MenuItem, TablePagination } from "@imports/ImportMuis";
+import { Paper, Grid, Card, MenuItem, TablePagination } from "@imports/ImportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AdminDashboard = () => {
@@ -75,7 +75,7 @@ export const AdminDashboard = () => {
     // 1. date
     const dateSection = () => {
       const titleFragment = () => (
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-col-center"}>
             <Div className={"fs-1-4rem fw-700"}>
               날짜
@@ -84,7 +84,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       const pickerFragment = () => (
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-col-center"}>
             <PickerDay
               OBJECT={DATE}
@@ -96,19 +96,17 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          <Grid size={12} className={"d-col-center"} key={`date-${0}`}>
-            {titleFragment()}
-            <Br px={30} />
-            {pickerFragment()}
-          </Grid>
-        </Grid>
+        <Card className={"border-2 radius-1 shadow-1 p-20"}>
+          {titleFragment()}
+          <Br px={30} />
+          {pickerFragment()}
+        </Card>
       );
     };
     // 2. visit
     const visitSection = () => {
       const titleFragment = () => (
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-col-center"}>
             <Div className={"fs-1-4rem fw-700"}>
               방문자 수
@@ -117,7 +115,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       const visitFragment = () => (
-        <Grid container spacing={0} columns={12}>
+        <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-row-center"}>
             <Div className={"fs-1-6rem fw-600 black me-5"}>
               {visitCount}
@@ -129,19 +127,17 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          <Grid size={12} className={"d-col-center"} key={`visit-${0}`}>
-            {titleFragment()}
-            <Br px={30} />
-            {visitFragment()}
-          </Grid>
-        </Grid>
+        <Card className={"border-2 radius-1 shadow-1 p-20"}>
+          {titleFragment()}
+          <Br px={30} />
+          {visitFragment()}
+        </Card>
       );
     };
     // 3. list
     const orderSection = () => {
       const titleFragment = () => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={12}>
             <Div className={"fs-1-4rem fw-700"}>
               주문 내역
@@ -150,7 +146,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       const headFragment = () => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={3} className={"d-center"}>
             <Div className={"fs-0-8rem fw-500"}>
               유형
@@ -169,7 +165,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       const listFragment = (item: any) => (
-        <Grid container spacing={2} columns={12}>
+        <Grid container={true} spacing={2}>
           <Grid size={3}>
             <Div className={"fs-0-7rem"}>
               {item?.order_category === "reservation" && "매장 예약"}
@@ -195,31 +191,25 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Grid container spacing={0} columns={12} className={"border-2 radius-1 shadow-1 p-20"}>
-          {OBJECT_ORDER.map((item: any, i: number) => (
-            <Grid size={12} className={"d-col-center"} key={`order-${i}`}>
-              {i === 0 && (
-                <>
-                  {titleFragment()}
-                  <Br px={30} />
-                  {headFragment()}
-                  <Hr px={40} className={"bg-burgundy"} />
-                </>
-              )}
-              {listFragment(item)}
-              {i < OBJECT_ORDER.length - 1 && (
-                <>
-                  <Hr px={40} className={"bg-light-grey"} />
-                </>
-              )}
-            </Grid>
-          ))}
-        </Grid>
-      )
+        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+          {titleFragment()}
+          <Br px={30} />
+          {headFragment()}
+          <Hr px={40} className={"bg-burgundy"} />
+          <Grid container={true} spacing={0}>
+            {OBJECT_ORDER?.map((item: any, i: number) => (
+              <Grid size={12} className={"d-col-center"} key={`order-${i}`}>
+                {listFragment(item)}
+                {i < OBJECT_ORDER.length - 1 && <Hr px={40} className={"bg-light-grey"} />}
+              </Grid>
+            ))}
+          </Grid>
+        </Card>
+      );
     };
     // 3. filter
     const filterSection = () => (
-      <Grid container spacing={2} columns={12} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={3} className={"d-col-center"}>
           <Select
             value={PAGING_ORDER?.sort}
@@ -280,18 +270,18 @@ export const AdminDashboard = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn"}>
-        <Grid container spacing={0} columns={12} className={"py-20"}>
-          <Grid size={{ xs: 11, sm: 9, md: 8, lg: 7, xl: 6 }} className={"d-col-center"}>
+      <Paper className={"content-wrapper fadeIn p-20"}>
+        {LOADING ? <Loading /> : (
+          <>
             {dateSection()}
             <Br px={30} />
-            {LOADING ? <Loading /> : visitSection()}
+            {visitSection()}
             <Br px={30} />
             {orderSection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}
-          </Grid>
-        </Grid>
+          </>
+        )}
       </Paper>
     );
   };
