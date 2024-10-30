@@ -1,14 +1,14 @@
 // AdminDashboard.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { axios, insertComma } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Order } from "@imports/ImportSchemas";
-import { Div, Hr, Br } from "@imports/ImportComponents";
-import { PickerDay, Select } from "@imports/ImportContainers";
-import { Paper, Grid, Card, MenuItem, TablePagination } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useCommonDate, useStoreAlert } from "@importHooks";
+import { axios } from "@importLibs";
+import { insertComma } from "@importScripts";
+import { Loader, Filter } from "@importLayouts";
+import { Order } from "@importSchemas";
+import { PickerDay, Select } from "@importContainers";
+import { Div, Hr, Br } from "@importComponents";
+import { Paper, Grid, Card, MenuItem, TablePagination } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AdminDashboard = () => {
@@ -16,7 +16,7 @@ export const AdminDashboard = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate } = useCommonValue();
   const { getDayFmt } = useCommonDate();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -213,69 +213,16 @@ export const AdminDashboard = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={3} className={"d-col-center"}>
-          <Select
-            value={PAGING_ORDER?.sort}
-            inputclass={"h-min0 h-5vh"}
-            onChange={(e: any) => (
-              setPAGING_ORDER((prev: any) => ({
-                ...prev,
-                sort: e.target.value
-              }))
-            )}
-          >
-            {["asc", "desc"]?.map((item: string) => (
-              <MenuItem
-                key={item}
-                value={item}
-                selected={PAGING_ORDER?.sort === item}
-                onChange={(e: any) => (
-                  setPAGING_ORDER((prev: any) => ({
-                    ...prev,
-                    sort: e.target.value
-                  }))
-                )}
-              >
-                <Div className={"fs-0-8rem"}>
-                  {item === "asc" && "오름차순"}
-                  {item === "desc" && "내림차순"}
-                </Div>
-              </MenuItem>
-            ))}
-          </Select>
-        </Grid>
-        <Grid size={9} className={"d-col-center"}>
-          <TablePagination
-            rowsPerPageOptions={[10]}
-            rowsPerPage={10}
-            component={"div"}
-            labelRowsPerPage={""}
-            count={ORDER_COUNT.totalCnt}
-            page={PAGING_ORDER.page}
-            showFirstButton={true}
-            showLastButton={true}
-            className={"border-bottom-1 p-2"}
-            onPageChange={(_event, newPage) => {
-              setPAGING_ORDER((prev: any) => ({
-                ...prev,
-                page: newPage
-              }));
-            }}
-            onRowsPerPageChange={(event) => {
-              setPAGING_ORDER((prev: any) => ({
-                ...prev,
-                limit: parseFloat(event.target.value)
-              }));
-            }}
-          />
-        </Grid>
-      </Grid>
+      <Filter
+        PAGING={PAGING_ORDER}
+        setPAGING={setPAGING_ORDER}
+        COUNT={ORDER_COUNT}
+      />
     );
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {dateSection()}
             <Br px={30} />

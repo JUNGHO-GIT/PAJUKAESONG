@@ -1,14 +1,13 @@
 // FranchiseDetail.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateFranchise } from "@imports/ImportValidates";
-import { axios, insertComma, Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Franchise } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Icons } from "@imports/ImportComponents";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
+import { useStoreAlert, useValidateFranchise } from "@importHooks";
+import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
+import { Loader } from "@importLayouts";
+import { Franchise } from "@importSchemas";
+import { Div, Img, Hr, Icons } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseDetail = () => {
@@ -17,7 +16,7 @@ export const FranchiseDetail = () => {
   const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { isXxs } = useResponsive();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
   const { validate } = useValidateFranchise();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -228,7 +227,7 @@ export const FranchiseDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {detailSection()}
             <Hr px={40} className={"bg-grey"} />

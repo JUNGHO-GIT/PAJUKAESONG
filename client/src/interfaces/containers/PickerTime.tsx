@@ -1,0 +1,87 @@
+// Time.tsx
+
+import { moment } from "@importLibs";
+import { PopUp, Input } from "@importContainers";
+import { DigitalClock, AdapterMoment, LocalizationProvider } from "@importMuis";
+import { Grid } from "@importMuis";
+
+// -------------------------------------------------------------------------------------------------
+declare type PickerTimeProps = {
+  OBJECT: any;
+  setOBJECT: any;
+  REFS: any;
+  ERRORS: any;
+  extra: string;
+  i: number;
+}
+
+// -------------------------------------------------------------------------------------------------
+export const PickerTime = (
+  { OBJECT, setOBJECT, REFS, ERRORS, extra, i }: PickerTimeProps
+) => {
+
+  // 7. time ---------------------------------------------------------------------------------------
+  const timeNode = () => {
+    const timeSection = () => (
+      <PopUp
+        key={"time"}
+        type={"innerCenter"}
+        position={"center"}
+        direction={"center"}
+        padding={20}
+        contents={({closePopup}: any) => (
+          <Grid container={true} spacing={3} className={"w-50vw p-0"}>
+            <Grid size={12} className={"d-col-left"}>
+              <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"ko"}>
+                <DigitalClock
+                  ampm={false}
+                  autoFocus={true}
+                  timeStep={20}
+                  timezone={"Asia/Seoul"}
+                  minTime={moment("11:00", "HH:mm")}
+                  maxTime={moment("20:00", "HH:mm")}
+                  value={moment(OBJECT?.[`${extra}`], "HH:mm")}
+                  skipDisabled={true}
+                  onChange={(e: any) => {
+                    setOBJECT((prev: any) => ({
+                      ...prev,
+                      [`${extra}`]: moment(e).format("HH:mm")
+                    }));
+                    closePopup();
+                  }}
+                />
+              </LocalizationProvider>
+            </Grid>
+          </Grid>
+        )}
+      >
+        {(popTrigger: any) => (
+          <Input
+            label={"시간"}
+            shrink={"shrink"}
+            variant={"outlined"}
+            value={OBJECT?.[`${extra}`]}
+            inputRef={REFS?.[i]?.[`${extra}`]}
+            error={ERRORS?.[i]?.[`${extra}`]}
+            readOnly={true}
+            onClick={(e: any) => {
+              popTrigger.openPopup(e.currentTarget)
+            }}
+          />
+        )}
+      </PopUp>
+    );
+    return (
+      <>
+        {timeSection()}
+      </>
+    );
+  };
+
+  // 15. return ------------------------------------------------------------------------------------
+  return (
+    <>
+      {timeNode()}
+    </>
+  );
+};

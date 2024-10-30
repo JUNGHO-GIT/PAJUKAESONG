@@ -1,14 +1,13 @@
 // NoticeList.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { axios } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Notice } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Br, Btn } from "@imports/ImportComponents";
-import { Select } from "@imports/ImportContainers";
-import { Paper, Grid, Card, MenuItem, TablePagination } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useCommonDate, useStoreAlert } from "@importHooks";
+import { axios } from "@importLibs";
+import { Notice } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Select } from "@importContainers";
+import { Div, Hr, Btn } from "@importComponents";
+import { Paper, Grid, Card, MenuItem, TablePagination } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const NoticeList = () => {
@@ -16,7 +15,7 @@ export const NoticeList = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate, isAdmin, } = useCommonValue();
   const { getDayNotFmt } = useCommonDate();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -203,7 +202,7 @@ export const NoticeList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {listSection()}
             <Hr px={40} className={"bg-grey"} />

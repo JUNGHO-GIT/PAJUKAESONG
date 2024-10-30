@@ -1,7 +1,7 @@
 // productService.ts
 
 import * as repository from "@repositories/productRepository";
-import { uploadCloud } from "@scripts/upload";
+import { uploadCloud } from "@assets/scripts/upload";
 
 const title = "product";
 

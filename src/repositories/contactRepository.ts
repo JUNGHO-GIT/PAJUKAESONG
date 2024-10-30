@@ -2,7 +2,6 @@
 
 import mongoose from "mongoose";
 import { Contact } from "@schemas/Contact";
-import { newDate } from "@scripts/date";
 
 // 0. cnt ------------------------------------------------------------------------------------------
 export const cnt = async (
@@ -124,7 +123,7 @@ export const save = async (
       contact_title: OBJECT_param.contact_title,
       contact_content: OBJECT_param.contact_content,
       contact_images: OBJECT_param.contact_images,
-      contact_regDt: newDate,
+      contact_regDt: new Date(),
       contact_updateDt: null,
     },
   );
@@ -150,7 +149,7 @@ export const update = async (
         contact_title: OBJECT_param.contact_title,
         contact_content: OBJECT_param.contact_content,
         contact_images: OBJECT_param.contact_images,
-        contact_updateDt: newDate,
+        contact_updateDt: new Date(),
       }
     },
     {

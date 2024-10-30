@@ -1,14 +1,14 @@
 // useValidateNotice.tsx
 
-import { useState, createRef, useRef } from "@imports/ImportReacts";
-import { useAlertStore, useConfirmStore } from "@imports/ImportStores";
+import { useState, createRef, useRef } from "@importReacts";
+import { useStoreAlert, useStoreConfirm } from "@importHooks";
 
 // -------------------------------------------------------------------------------------------------
 export const useValidateNotice = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { ALERT, setALERT } = useAlertStore();
-  const { CONFIRM, setCONFIRM } = useConfirmStore();
+  const { ALERT, setALERT } = useStoreAlert();
+  const { CONFIRM, setCONFIRM } = useStoreConfirm();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const REFS = useRef<any[]>([]);

@@ -1,14 +1,14 @@
 // MenuDetail.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateMenu } from "@imports/ImportValidates";
-import { axios, insertComma, Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Menu } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Icons } from "@imports/ImportComponents";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useResponsive } from "@importHooks";
+import { useStoreAlert, useValidateMenu } from "@importHooks";
+import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
+import { insertComma } from "@importScripts";
+import { Loader } from "@importLayouts";
+import { Menu } from "@importSchemas";
+import { Div, Img, Hr, Icons } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuDetail = () => {
@@ -16,7 +16,7 @@ export const MenuDetail = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
   const { isXxs } = useResponsive();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
   const { validate } = useValidateMenu();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -215,7 +215,7 @@ export const MenuDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {detailSection()}
             <Hr px={40} className={"bg-grey"} />

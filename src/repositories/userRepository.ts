@@ -2,7 +2,6 @@
 
 import mongoose from "mongoose";
 import { User } from "@schemas/User";
-import { newDate } from "@assets/scripts/date";
 
 // 0. checkId --------------------------------------------------------------------------------------
 export const checkId = async (
@@ -58,7 +57,7 @@ export const save = async (
       user_id: OBJECT_param.user_id,
       user_token: OBJECT_param.user_token,
       user_pw: OBJECT_param.user_pw,
-      user_regDt: newDate,
+      user_regDt: new Date(),
       user_updateDt: null
     }
   );
@@ -79,7 +78,7 @@ export const update = async (
       $set: {
         user_id: OBJECT_param.user_id,
         user_pw: OBJECT_param.user_pw,
-        user_updateDt: newDate
+        user_updateDt: new Date(),
       }
     },
     {

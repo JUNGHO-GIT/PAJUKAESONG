@@ -1,13 +1,13 @@
 // useValidateUser.tsx
 
-import { useState, createRef, useRef } from "@imports/ImportReacts";
-import { useAlertStore } from "@imports/ImportStores";
+import { useState, createRef, useRef } from "@importReacts";
+import { useStoreAlert } from "@importHooks";
 
 // -------------------------------------------------------------------------------------------------
 export const useValidateUser = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const REFS = useRef<any[]>([]);

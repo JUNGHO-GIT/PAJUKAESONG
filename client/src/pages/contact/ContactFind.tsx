@@ -1,15 +1,13 @@
 // ContactFind.tsx
 
-import { useState } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateContact } from "@imports/ImportValidates";
-import { axios } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Contact } from "@imports/ImportSchemas";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
-import { Input } from "@imports/ImportContainers";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { useState } from "@importReacts";
+import { useCommonValue, useStoreAlert, useValidateContact } from "@importHooks";
+import { axios } from "@importLibs";
+import { Contact } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Input } from "@importContainers";
+import { Btn, Br } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ContactFind = () => {
@@ -17,7 +15,7 @@ export const ContactFind = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateContact();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -148,7 +146,7 @@ export const ContactFind = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {findSection()}
             <Br px={20} />

@@ -1,7 +1,7 @@
 // franchiseRouter.ts
 
 import express, { Request, Response } from "express";
-import { uploadMemory } from "@scripts/upload";
+import { uploadMemory } from "@assets/scripts/upload";
 import * as service from "@services/franchiseService";
 export const router = express.Router();
 

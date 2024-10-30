@@ -1,14 +1,14 @@
 // OrderList.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { axios, insertComma } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Order } from "@imports/ImportSchemas";
-import { Div, Hr, Br } from "@imports/ImportComponents";
-import { Select } from "@imports/ImportContainers";
-import { Paper, Grid, Card, MenuItem, TablePagination } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useCommonDate, useStoreAlert } from "@importHooks";
+import { axios } from "@importLibs";
+import { insertComma } from "@importScripts";
+import { Order } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Select } from "@importContainers";
+import { Div, Hr } from "@importComponents";
+import { Paper, Grid, Card, MenuItem, TablePagination } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderList = () => {
@@ -16,7 +16,7 @@ export const OrderList = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location, } = useCommonValue();
   const { getDayNotFmt } = useCommonDate();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -192,7 +192,7 @@ export const OrderList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {listSection()}
             <Hr px={40} className={"bg-grey"} />

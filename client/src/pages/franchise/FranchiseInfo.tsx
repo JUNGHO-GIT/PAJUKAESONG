@@ -1,10 +1,10 @@
 // FranchiseInfo.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useResponsive } from "@imports/ImportHooks";
-import { Loading } from "@imports/ImportLayouts";
-import { Div, Br, Hr } from "@imports/ImportComponents";
-import { Paper, Grid, Card, Stepper, Step, StepLabel } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useResponsive } from "@importHooks";
+import { Loader } from "@importLayouts";
+import { Div, Br, Hr } from "@importComponents";
+import { Paper, Grid, Card, Stepper, Step, StepLabel } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseInfo = () => {
@@ -269,7 +269,7 @@ export const FranchiseInfo = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {stepSection()}
             <Br px={30} />

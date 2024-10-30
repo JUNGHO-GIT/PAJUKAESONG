@@ -1,7 +1,7 @@
 // franchiseService.ts
 
 import * as repository from "@repositories/franchiseRepository";
-import { uploadCloud } from "@scripts/upload";
+import { uploadCloud } from "@assets/scripts/upload";
 
 const title = "franchise";
 

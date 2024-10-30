@@ -1,7 +1,7 @@
 // noticeRouter.ts
 
 import express, { Request, Response } from "express";
-import { uploadMemory } from "@scripts/upload";
+import { uploadMemory } from "@assets/scripts/upload";
 import * as service from "@services/noticeService";
 export const router = express.Router();
 

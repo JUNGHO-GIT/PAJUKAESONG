@@ -1,153 +1,68 @@
 // index.tsx
 
-import "./index.css";
 import "swiper/css";
 import 'swiper/css/pagination';
-import '@styles/Components.css';
-import "@styles/Core.css";
-import "@styles/Mui.css";
-import "@styles/Jstyle.css";
+import '@assets/styles/Components.css';
+import "@assets/styles/Core.css";
+import "@assets/styles/Mui.css";
+import "@assets/styles/Jstyle.css";
+import "./index.css";
 
 import {
-  BrowserRouter, Routes, Route, createRoot
-} from "@imports/ImportReacts";
+  BrowserRouter, Routes, Route, createRoot, Suspense
+} from "@importReacts";
 
 import {
   CssBaseline, createTheme, ThemeProvider
-} from "@imports/ImportMuis";
+} from "@importMuis";
 
 import {
   useRoot, useScrollTop, useLanguageSetting
-} from "@imports/ImportHooks";
+} from "@importHooks";
 
 import {
-  Header, Footer, Alert, Confirm, TitleBar
-} from "@imports/ImportLayouts";
+  Header, Footer, Alert, Confirm, TitleBar, Loader
+} from "@importLayouts";
 
 import {
   Main
-} from "@imports/ImportPages";
+} from "@importPages";
 
 import {
   AdminDashboard,
-} from "@imports/ImportPages";
+} from "@importPages";
 
 import {
   AboutGreeting, AboutLocation
-} from "@imports/ImportPages";
+} from "@importPages";
 
 import {
   ContactList, ContactFind, ContactDetail, ContactSave, ContactUpdate
-} from "@imports/ImportPages";
+} from "@importPages";
 
 import {
   FranchiseInfo, FranchiseList, FranchiseDetail, FranchiseSave, FranchiseUpdate
-} from "@imports/ImportPages";
+} from "@importPages";
 
 import {
   MenuList, MenuDetail, MenuSave, MenuUpdate
-} from "@imports/ImportPages";
+} from "@importPages";
 
 import {
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate
-} from "@imports/ImportPages";
+} from "@importPages";
 
 import {
   OrderList, OrderFind, OrderDetail, OrderSave, OrderUpdate
-} from "@imports/ImportPages";
+} from "@importPages";
 
 import {
   ProductList, ProductDetail, ProductSave, ProductUpdate
-} from "@imports/ImportPages";
+} from "@importPages";
 
 import {
-  UserLogin,
-} from "@imports/ImportPages";
-
-// -------------------------------------------------------------------------------------------------
-const Admin = () => (
-  <Routes>
-    <Route path={"/dashboard"} element={<AdminDashboard />} />
-  </Routes>
-);
-
-// -------------------------------------------------------------------------------------------------
-const About = () => (
-  <Routes>
-    <Route path={"/greeting"} element={<AboutGreeting />} />
-    <Route path={"/location"} element={<AboutLocation />} />
-  </Routes>
-);
-
-// -------------------------------------------------------------------------------------------------
-const Contact = () => (
-  <Routes>
-    <Route path={"/find"} element={<ContactFind />} />
-    <Route path={"/list"} element={<ContactList />} />
-    <Route path={"/detail"} element={<ContactDetail />} />
-    <Route path={"/save"} element={<ContactSave />} />
-    <Route path={"/update"} element={<ContactUpdate />} />
-  </Routes>
-);
-
-// -------------------------------------------------------------------------------------------------
-const Franchise = () => (
-  <Routes>
-    <Route path={"/info"} element={<FranchiseInfo />} />
-    <Route path={"/list"} element={<FranchiseList />} />
-    <Route path={"/detail"} element={<FranchiseDetail />} />
-    <Route path={"/save"} element={<FranchiseSave />} />
-    <Route path={"/update"} element={<FranchiseUpdate />} />
-  </Routes>
-);
-
-// -------------------------------------------------------------------------------------------------
-const Menu = () => (
-  <Routes>
-    <Route path={"/list"} element={<MenuList />} />
-    <Route path={"/save"} element={<MenuSave />} />
-    <Route path={"/update"} element={<MenuUpdate />} />
-    <Route path={"/detail"} element={<MenuDetail />} />
-  </Routes>
-);
-
-// -------------------------------------------------------------------------------------------------
-const Notice = () => (
-  <Routes>
-    <Route path={"/list"} element={<NoticeList />} />
-    <Route path={"/detail"} element={<NoticeDetail />} />
-    <Route path={"/save"} element={<NoticeSave />} />
-    <Route path={"/update"} element={<NoticeUpdate />} />
-  </Routes>
-);
-
-// -------------------------------------------------------------------------------------------------
-const Order = () => (
-  <Routes>
-    <Route path={"/list"} element={<OrderList />} />
-    <Route path={"/find"} element={<OrderFind />} />
-    <Route path={"/detail"} element={<OrderDetail />} />
-    <Route path={"/save"} element={<OrderSave />} />
-    <Route path={"/update"} element={<OrderUpdate />} />
-  </Routes>
-);
-
-// -------------------------------------------------------------------------------------------------
-const Product = () => (
-  <Routes>
-    <Route path={"/list"} element={<ProductList />} />
-    <Route path={"/detail"} element={<ProductDetail />} />
-    <Route path={"/save"} element={<ProductSave />} />
-    <Route path={"/update"} element={<ProductUpdate />} />
-  </Routes>
-);
-
-// -------------------------------------------------------------------------------------------------
-const User = () => (
-  <Routes>
-    <Route path={"/login"} element={<UserLogin />} />
-  </Routes>
-);
+  UserLogin, AuthError, AuthPrivacy
+} from "@importPages";
 
 // -------------------------------------------------------------------------------------------------
 const App = () => {
@@ -158,38 +73,76 @@ const App = () => {
 
   return (
     <div className={"App"}>
-      <Header />
-      <TitleBar />
-      <Routes>
-        <Route path={"/*"} element={<Main />} />
-        <Route path={"/admin/*"} element={<Admin />} />
-        <Route path={"/about/*"} element={<About />} />
-        <Route path={"/contact/*"} element={<Contact />} />
-        <Route path={"/franchise/*"} element={<Franchise />} />
-        <Route path={"/menu/*"} element={<Menu />} />
-        <Route path={"/notice/*"} element={<Notice />} />
-        <Route path={"/order/*"} element={<Order />} />
-        <Route path={"/product/*"} element={<Product />} />
-        <Route path={"/user/*"} element={<User />} />
-      </Routes>
-      <Alert />
-      <Confirm />
-      <Footer />
+      <Suspense>
+        <Header />
+        <TitleBar />
+      </Suspense>
+      <Suspense>
+        <Alert />
+        <Confirm />
+      </Suspense>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          {/** root **/}
+          <Route path={"/*"} element={<Main />} />
+          {/** auth **/}
+          <Route path={"/auth/error/*"} element={<AuthError />} />
+          <Route path={"/auth/privacy/*"} element={<AuthPrivacy />} />
+          {/** admin **/}
+          <Route path={"/admin/dashboard/*"} element={<AdminDashboard />} />
+          {/** about **/}
+          <Route path={"/about/greeting/*"} element={<AboutGreeting />} />
+          <Route path={"/about/location/*"} element={<AboutLocation />} />
+          {/** contact **/}
+          <Route path={"/contact/find/*"} element={<ContactFind />} />
+          <Route path={"/contact/list/*"} element={<ContactList />} />
+          <Route path={"/contact/detail/*"} element={<ContactDetail />} />
+          <Route path={"/contact/save/*"} element={<ContactSave />} />
+          <Route path={"/contact/update/*"} element={<ContactUpdate />} />
+          {/** franchise **/}
+          <Route path={"/franchise/info/*"} element={<FranchiseInfo />} />
+          <Route path={"/franchise/list/*"} element={<FranchiseList />} />
+          <Route path={"/franchise/detail/*"} element={<FranchiseDetail />} />
+          <Route path={"/franchise/save/*"} element={<FranchiseSave />} />
+          <Route path={"/franchise/update/*"} element={<FranchiseUpdate />} />
+          {/** menu **/}
+          <Route path={"/menu/list/*"} element={<MenuList />} />
+          <Route path={"/menu/save/*"} element={<MenuSave />} />
+          <Route path={"/menu/update/*"} element={<MenuUpdate />} />
+          <Route path={"/menu/detail/*"} element={<MenuDetail />} />
+          {/** notice **/}
+          <Route path={"/notice/list/*"} element={<NoticeList />} />
+          <Route path={"/notice/detail/*"} element={<NoticeDetail />} />
+          <Route path={"/notice/save/*"} element={<NoticeSave />} />
+          <Route path={"/notice/update/*"} element={<NoticeUpdate />} />
+          {/** order **/}
+          <Route path={"/order/list/*"} element={<OrderList />} />
+          <Route path={"/order/find/*"} element={<OrderFind />} />
+          <Route path={"/order/detail/*"} element={<OrderDetail />} />
+          <Route path={"/order/save/*"} element={<OrderSave />} />
+          <Route path={"/order/update/*"} element={<OrderUpdate />} />
+          {/** product **/}
+          <Route path={"/product/list/*"} element={<ProductList />} />
+          <Route path={"/product/detail/*"} element={<ProductDetail />} />
+          <Route path={"/product/save/*"} element={<ProductSave />} />
+          <Route path={"/product/update/*"} element={<ProductUpdate />} />
+          {/** user **/}
+          <Route path={"/user/login/*"} element={<UserLogin />} />
+        </Routes>
+      </Suspense>
+      <Suspense>
+        <Footer />
+      </Suspense>
     </div>
   );
 };
 
 // -------------------------------------------------------------------------------------------------
-const theme = createTheme({
-  typography: {
-    fontFamily: "Pretendard, 'Noto Sans KR', sans-serif",
-  },
-});
-
-const root = createRoot(document.getElementById('root') as HTMLElement);
-root.render(
+createRoot(document.getElementById('root') as HTMLDivElement).render(
   <BrowserRouter basename={"/PAJUKAESONG"}>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={createTheme({
+      typography: { fontFamily: "Pretendard, 'Noto Sans KR', sans-serif" }
+    })}>
       <CssBaseline />
       <App />
     </ThemeProvider>

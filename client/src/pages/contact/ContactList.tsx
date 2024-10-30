@@ -1,14 +1,13 @@
 // ContactList.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { axios } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Contact } from "@imports/ImportSchemas";
-import { Div, Hr, Br } from "@imports/ImportComponents";
-import { Select } from "@imports/ImportContainers";
-import { Paper, Grid, Card, MenuItem, TablePagination } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useCommonDate, useStoreAlert } from "@importHooks";
+import { axios } from "@importLibs";
+import { Contact } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Select } from "@importContainers";
+import { Div, Hr } from "@importComponents";
+import { Paper, Grid, Card, MenuItem, TablePagination } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ContactList = () => {
@@ -16,7 +15,7 @@ export const ContactList = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location, } = useCommonValue();
   const { getDayNotFmt } = useCommonDate();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -196,7 +195,7 @@ export const ContactList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {listSection()}
             <Hr px={40} className={"bg-grey"} />

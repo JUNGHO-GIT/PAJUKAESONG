@@ -1,7 +1,7 @@
 // AboutGreeting.tsx
 
-import { Div, Img } from "@imports/ImportComponents";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { Div, Img } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutGreeting = () => {

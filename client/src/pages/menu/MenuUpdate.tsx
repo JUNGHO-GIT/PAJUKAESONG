@@ -1,24 +1,22 @@
 // MenuUpdate.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateMenu } from "@imports/ImportValidates";
-import { axios, makeFormData, insertComma } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Menu } from "@imports/ImportSchemas";
-import { Btn, Br } from "@imports/ImportComponents";
-import { Input, Select, InputFile } from "@imports/ImportContainers";
-import { Paper, Grid, Card, MenuItem } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useStoreAlert, useValidateMenu } from "@importHooks";
+import { axios } from "@importLibs";
+import { makeForm, insertComma } from "@importScripts";
+import { Menu } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Input, Select, InputFile } from "@importContainers";
+import { Btn, Br } from "@importComponents";
+import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location_id, } = useCommonValue();
-  const { getDayFmt } = useCommonDate();
   const { REFS, ERRORS, validate } = useValidateMenu();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -52,7 +50,7 @@ export const MenuUpdate = () => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      makeFormData( OBJECT, fileList, { _id: location_id } ),
+      makeForm( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -268,7 +266,7 @@ export const MenuUpdate = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {updateSection()}
             <Br px={20} />

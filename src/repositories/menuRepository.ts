@@ -2,7 +2,6 @@
 
 import mongoose from "mongoose";
 import { Menu } from "@schemas/Menu";
-import { newDate } from "@scripts/date";
 
 // 0. cnt ------------------------------------------------------------------------------------------
 export const cnt = async (
@@ -84,7 +83,7 @@ export const save = async (
       menu_description: OBJECT_param.menu_description,
       menu_price: OBJECT_param.menu_price,
       menu_images: OBJECT_param.menu_images,
-      menu_regDt: newDate,
+      menu_regDt: new Date(),
       menu_updateDt: null,
     },
   );
@@ -109,7 +108,7 @@ export const update = async (
         menu_description: OBJECT_param.menu_description,
         menu_price: OBJECT_param.menu_price,
         menu_images: OBJECT_param.menu_images,
-        menu_updateDt: newDate,
+        menu_updateDt: new Date(),
       }
     },
     {

@@ -1,15 +1,15 @@
 // OrderDetail.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateOrder } from "@imports/ImportValidates";
-import { axios, insertComma, setSession } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Order } from "@imports/ImportSchemas";
-import { Div, Hr, Br, Img, Icons } from "@imports/ImportComponents";
-import { Input } from "@imports/ImportContainers";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
+import { useStoreAlert, useValidateOrder } from "@importHooks";
+import { axios } from "@importLibs";
+import { insertComma, setSession } from "@importScripts";
+import { Order } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Input } from "@importContainers";
+import { Div, Hr, Br, Img, Icons } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderDetail = () => {
@@ -18,7 +18,7 @@ export const OrderDetail = () => {
   const { navigate, URL, SUBFIX, location_id } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { isXxs } = useResponsive();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
   const { validate } = useValidateOrder();
 
   // 1. common -------------------------------------------------------------------------------------
@@ -290,7 +290,7 @@ export const OrderDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {productSection()}
             <Br px={30} />

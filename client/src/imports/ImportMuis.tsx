@@ -13,7 +13,7 @@ import {
   Card, Checkbox, Collapse, CssBaseline, Container, createTheme, ThemeProvider,
 
   // d
-  Drawer,
+  Drawer, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
 
   // f
   FormControl, FormControlLabel, FormGroup,
@@ -21,25 +21,25 @@ import {
   // g
   Grid2 as Grid,
 
-  // h ~ k
+  // h - k
   InputAdornment, InputBase, InputLabel, IconButton,
 
   // l
   Link, List, ListItem,
 
-  // m ~ o
+  // m - o
   Menu, MenuItem, MenuList, Modal,
 
-  // p ~ r
+  // p - r
   Pagination, Paper, Popover, Popper,
 
   // s
-  Select, Snackbar, SnackbarContent, Switch, SpeedDial, SpeedDialAction, SpeedDialIcon,
-  Stepper, Step, StepLabel,
+  Select, Switch, SpeedDial, SpeedDialAction, SpeedDialIcon, Stepper, Step, StepLabel,
+  Snackbar, SnackbarContent,
 
   // t
-  Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton, Toolbar, Tooltip, Tabs, Tab, tabsClasses,
-  TextField, TextareaAutosize,
+  Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton,  Toolbar, Tooltip, Tabs, Tab, tabsClasses,
+  TextField, TextareaAutosize as TextArea,
 
   // u
   useMediaQuery, useTheme,
@@ -64,8 +64,6 @@ import PopupState, {
   bindMenu,
   bindPopover
 } from 'material-ui-popup-state';
-
-// usePopupState -----------------------------------------------------------------------------------
 import {
   usePopupState
 } from 'material-ui-popup-state/hooks';
@@ -88,7 +86,7 @@ export {
   Card, Checkbox, Collapse, CssBaseline, Container, createTheme, ThemeProvider,
 
   // d
-  Drawer,
+  Drawer, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
 
   // f
   FormControl, FormControlLabel, FormGroup,
@@ -96,39 +94,36 @@ export {
   // g
   Grid,
 
-  // h ~ k
+  // h - k
   InputAdornment, InputBase, InputLabel, IconButton,
 
   // l
   Link, List, ListItem,
 
-  // m ~ o
+  // m - o
   Menu, MenuItem, MenuList, Modal,
 
-  // p ~ r
+  // p - r
   Pagination, Paper, Popover, Popper,
 
   // s
-  Select, Snackbar, SnackbarContent, Switch, SpeedDial, SpeedDialAction, SpeedDialIcon,
-  Stepper, Step, StepLabel,
+  Select, Switch, SpeedDial, SpeedDialAction, SpeedDialIcon, Stepper, Step, StepLabel,
+  Snackbar, SnackbarContent,
 
   // t
   Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton, Toolbar, Tooltip, Tabs, Tab, tabsClasses,
-  TextField, TextareaAutosize,
+  TextField, TextArea,
 
   // u
   useMediaQuery, useTheme,
-}
-export {
+
+  // datePickers
   AdapterMoment, DateCalendar, DigitalClock, PickersDay, DayCalendarSkeleton,
   LocalizationProvider,
-};
-export {
-  PopupState, bindTrigger, bindMenu, bindPopover,
-};
-export {
-  usePopupState
-};
-export {
+
+  // popupState
+  PopupState, bindTrigger, bindMenu, bindPopover, usePopupState,
+
+  // fileInput
   MuiFileInput
 };

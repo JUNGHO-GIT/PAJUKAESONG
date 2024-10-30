@@ -1,14 +1,13 @@
 // MenuList.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { axios } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Menu } from "@imports/ImportSchemas";
-import { Div, Img, Hr, Btn } from "@imports/ImportComponents";
-import { Select } from "@imports/ImportContainers";
-import { Paper, Grid, Card, MenuItem, TablePagination } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useResponsive, useStoreAlert } from "@importHooks";
+import { axios } from "@importLibs";
+import { Menu } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Select } from "@importContainers";
+import { Div, Img, Hr, Btn } from "@importComponents";
+import { Paper, Grid, Card, MenuItem, TablePagination } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuList = () => {
@@ -16,7 +15,7 @@ export const MenuList = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate, isAdmin, location_category } = useCommonValue();
   const { isXxs } = useResponsive();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -175,7 +174,7 @@ export const MenuList = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {listSection()}
             <Hr px={40} className={"bg-grey"} />

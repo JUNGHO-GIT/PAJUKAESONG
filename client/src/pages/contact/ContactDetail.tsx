@@ -1,15 +1,14 @@
 // ContactDetail.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateContact } from "@imports/ImportValidates";
-import { axios } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Contact } from "@imports/ImportSchemas";
-import { Div, Hr, Icons } from "@imports/ImportComponents";
-import { TextArea } from "@imports/ImportContainers";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useCommonDate } from "@importHooks";
+import { useStoreAlert, useValidateContact } from "@importHooks";
+import { axios } from "@importLibs";
+import { Contact } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { TextArea } from "@importContainers";
+import { Div, Hr, Icons } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ContactDetail = () => {
@@ -17,7 +16,7 @@ export const ContactDetail = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, URL, SUBFIX } = useCommonValue();
   const { getDayFmt } = useCommonDate();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
   const { validate } = useValidateContact();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -200,7 +199,7 @@ export const ContactDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {detailSection()}
             <Hr px={40} className={"bg-grey"} />

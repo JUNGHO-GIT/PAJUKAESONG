@@ -1,13 +1,12 @@
 // Main.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { Swiper, SwiperSlide, Autoplay, axios, Pagination } from "@imports/ImportUtils";
-import { Menu, Notice } from "@imports/ImportSchemas";
-import { Location } from "@imports/ImportContainers";
-import { Div, Img, Br, Hr } from "@imports/ImportComponents";
-import { Grid, Paper } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useCommonDate, useResponsive, useStoreAlert } from "@importHooks";
+import { Swiper, SwiperSlide, Autoplay, axios, Pagination } from "@importLibs";
+import { Menu, Notice } from "@importSchemas";
+import { Location } from "@importContainers";
+import { Div, Img, Br, Hr } from "@importComponents";
+import { Grid, Paper } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Main = () => {
@@ -16,7 +15,7 @@ export const Main = () => {
   const { URL, navigate } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { isXxs, isXs, isSm, isMd, isLg, isXl } = useResponsive();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);

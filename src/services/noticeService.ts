@@ -1,7 +1,7 @@
 // noticeService.ts
 
 import * as repository from "@repositories/noticeRepository";
-import { uploadCloud } from "@scripts/upload";
+import { uploadCloud } from "@assets/scripts/upload";
 
 const title = "notice";
 

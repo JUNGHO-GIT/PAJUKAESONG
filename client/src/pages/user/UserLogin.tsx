@@ -1,15 +1,14 @@
 // UserLogin.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateUser } from "@imports/ImportValidates";
-import { axios, insertComma, setLocal } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { User } from "@imports/ImportSchemas";
-import { Input } from "@imports/ImportContainers";
-import { Div, Btn, Hr, Br } from "@imports/ImportComponents";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useStoreAlert, useValidateUser } from "@importHooks";
+import { axios } from "@importLibs";
+import { setLocal } from "@importScripts";
+import { User } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Input } from "@importContainers";
+import { Div, Btn, Hr, Br } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const UserLogin = () => {
@@ -18,7 +17,7 @@ export const UserLogin = () => {
   const { URL, SUBFIX, navigate } = useCommonValue();
   const { isAdmin, adminId, adminPw, isUser, userId, userPw } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateUser();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -225,7 +224,7 @@ export const UserLogin = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {loginSection()}
             <Br px={30} />

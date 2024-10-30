@@ -1,7 +1,7 @@
 // contactService.ts
 
 import * as repository from "@repositories/contactRepository";
-import { uploadCloud } from "@scripts/upload";
+import { uploadCloud } from "@assets/scripts/upload";
 
 const title = "contact";
 

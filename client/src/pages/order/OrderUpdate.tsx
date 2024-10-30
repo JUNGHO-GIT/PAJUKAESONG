@@ -1,15 +1,15 @@
 // OrderUpdate.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateOrder } from "@imports/ImportValidates";
-import { axios, insertComma, setSession } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Order, Product } from "@imports/ImportSchemas";
-import { Input, Select, PickerDay, PickerTime } from "@imports/ImportContainers";
-import { Div, Hr, Br, Btn, Img, Icons } from "@imports/ImportComponents";
-import { Paper, Grid, Card, MenuItem } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useResponsive } from "@importHooks";
+import { useStoreAlert, useValidateOrder } from "@importHooks";
+import { axios } from "@importLibs";
+import { insertComma, setSession } from "@importScripts";
+import { Order, Product } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Input, Select, PickerDay, PickerTime } from "@importContainers";
+import { Div, Hr, Br, Btn, Img, Icons } from "@importComponents";
+import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderUpdate = () => {
@@ -18,7 +18,7 @@ export const OrderUpdate = () => {
   const { navigate, URL, SUBFIX, location_id } = useCommonValue();
   const { isXxs } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateOrder();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -446,7 +446,7 @@ export const OrderUpdate = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {productSection()}
             <Br px={30} />

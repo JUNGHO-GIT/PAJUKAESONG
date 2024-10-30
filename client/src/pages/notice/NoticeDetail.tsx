@@ -1,15 +1,14 @@
 // NoticeDetail.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate, useResponsive } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateNotice } from "@imports/ImportValidates";
-import { axios } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Notice } from "@imports/ImportSchemas";
-import { Div, Hr, Icons, Img, Br } from "@imports/ImportComponents";
-import { TextArea } from "@imports/ImportContainers";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useCommonDate } from "@importHooks";
+import { useStoreAlert, useValidateNotice } from "@importHooks";
+import { axios } from "@importLibs";
+import { Notice } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { TextArea } from "@importContainers";
+import { Div, Hr, Icons } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const NoticeDetail = () => {
@@ -18,7 +17,7 @@ export const NoticeDetail = () => {
   const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { validate } = useValidateNotice();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -185,7 +184,7 @@ export const NoticeDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {detailSection()}
             <Hr px={40} className={"bg-grey"} />

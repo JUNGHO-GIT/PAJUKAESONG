@@ -1,7 +1,7 @@
 // userService.ts
 
 import * as repository from "@repositories/userRepository";
-import { token, adminCheck, combinePw, hashPw, comparePw } from "@scripts/utils";
+import { token, adminCheck, combinePw, hashPw, comparePw } from "@assets/scripts/utils";
 
 // 2-1. login --------------------------------------------------------------------------------------
 export const login = async (

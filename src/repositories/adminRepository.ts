@@ -2,7 +2,6 @@
 
 import { Admin } from "@schemas/Admin";
 import { Order } from "@schemas/Order";
-import { newDate } from "@scripts/date";
 
 // 1-0. visit (count) ------------------------------------------------------------------------------
 export const visitCount = async (
@@ -56,7 +55,7 @@ export const visitSave = async (
           admin_visit_ip: ip_param
         }
       ],
-      admin_regDt: newDate,
+      admin_regDt: new Date(),
       admin_updateDt: null
     }
   );

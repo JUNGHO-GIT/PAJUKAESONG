@@ -2,7 +2,6 @@
 
 import mongoose from "mongoose";
 import { Order } from "@schemas/Order";
-import { newDate } from "@scripts/date";
 
 // 0. cnt ------------------------------------------------------------------------------------------
 export const cnt = async (
@@ -130,7 +129,7 @@ export const save = async (
       order_headcount: OBJECT_param.order_headcount,
       order_total_price: OBJECT_param.order_total_price,
       order_product: OBJECT_param.order_product,
-      order_regDt: newDate,
+      order_regDt: new Date(),
       order_updateDt: null,
     },
   );
@@ -158,7 +157,7 @@ export const update = async (
         order_headcount: OBJECT_param.order_headcount,
         order_total_price: OBJECT_param.order_total_price,
         order_product: OBJECT_param.order_product,
-        order_updateDt: newDate,
+        order_updateDt: new Date(),
       }
     },
     {

@@ -1,7 +1,7 @@
 // AboutLocation.tsx
 
-import { Location } from "@imports/ImportContainers";
-import { Paper } from "@imports/ImportMuis";
+import { Location } from "@importContainers";
+import { Paper } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutLocation = () => {

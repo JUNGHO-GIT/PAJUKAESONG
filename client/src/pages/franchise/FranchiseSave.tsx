@@ -1,15 +1,14 @@
 // FranchiseSave.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateFranchise } from "@imports/ImportValidates";
-import { axios, makeFormData } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Franchise } from "@imports/ImportSchemas";
-import { Btn, Br } from "@imports/ImportComponents";
-import { Input, InputFile, Select } from "@imports/ImportContainers";
-import { Paper, Grid, Card, MenuItem } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useStoreAlert, useValidateFranchise } from "@importHooks";
+import { axios } from "@importLibs";
+import { makeForm } from "@importScripts";
+import { Franchise } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Input, InputFile, Select } from "@importContainers";
+import { Btn, Br } from "@importComponents";
+import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseSave = () => {
@@ -17,7 +16,7 @@ export const FranchiseSave = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateFranchise();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -40,7 +39,7 @@ export const FranchiseSave = () => {
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
-      makeFormData(
+      makeForm(
         OBJECT,
         fileList
       ),
@@ -276,7 +275,7 @@ export const FranchiseSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {saveSection()}
             <Br px={20} />

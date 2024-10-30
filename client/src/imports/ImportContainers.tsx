@@ -1,13 +1,32 @@
 // ImportContainers.tsx
 
-import { PopUp } from "@containers/PopUp";
-import { Location } from "@containers/Location";
-import { Input } from "@containers/Input";
-import { Select } from "@containers/Select";
-import { TextArea } from "@containers/TextArea";
-import { InputFile } from "@containers/InputFile";
-import { PickerTime } from "../containers/PickerTime";
-import { PickerDay } from "../containers/PickerDay";
+import { lazy } from "@importReacts";
+
+// -------------------------------------------------------------------------------------------------
+const PopUp = lazy(() => import("@interfaces/containers/PopUp").then((module) => ({
+  default: module.PopUp
+})));
+const Location = lazy(() => import("@interfaces/containers/Location").then((module) => ({
+  default: module.Location
+})));
+const Input = lazy(() => import("@interfaces/containers/Input").then((module) => ({
+  default: module.Input
+})));
+const Select = lazy(() => import("@interfaces/containers/Select").then((module) => ({
+  default: module.Select
+})));
+const TextArea = lazy(() => import("@interfaces/containers/TextArea").then((module) => ({
+  default: module.TextArea
+})));
+const InputFile = lazy(() => import("@interfaces/containers/InputFile").then((module) => ({
+  default: module.InputFile
+})));
+const PickerTime = lazy(() => import("@interfaces/containers/PickerTime").then((module) => ({
+  default: module.PickerTime
+})));
+const PickerDay = lazy(() => import("@interfaces/containers/PickerDay").then((module) => ({
+  default: module.PickerDay
+})));
 
 // -------------------------------------------------------------------------------------------------
 export {

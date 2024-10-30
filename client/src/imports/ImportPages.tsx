@@ -1,60 +1,136 @@
 // ImportPages.tsx
 
-// main
-import { Main } from "@pages/Main";
+import { lazy } from "@importReacts";
 
-// admin
-import { AdminDashboard } from "@pages/admin/AdminDashboard";
+// main --------------------------------------------------------------------------------------------
+const Main = lazy(() => import("@pages/Main").then((module) => ({
+  default: module.Main
+})));
 
-// about
-import { AboutGreeting } from "@pages/about/AboutGreeting";
-import { AboutLocation } from "@pages/about/AboutLocation";
+// auth --------------------------------------------------------------------------------------------
+const AuthError = lazy(() => import("@pages/auth/AuthError").then((module) => ({
+  default: module.AuthError
+})));
+const AuthPrivacy = lazy(() => import("@pages/auth/AuthPrivacy").then((module) => ({
+  default: module.AuthPrivacy
+})));
 
-// contact
-import { ContactList } from "@pages/contact/ContactList";
-import { ContactFind } from "@pages/contact/ContactFind";
-import { ContactDetail } from "@pages/contact/ContactDetail";
-import { ContactSave } from "@pages/contact/ContactSave";
-import { ContactUpdate } from "@pages/contact/ContactUpdate";
+// admin -------------------------------------------------------------------------------------------
+const AdminDashboard = lazy(() => import("@pages/admin/AdminDashboard").then((module) => ({
+  default: module.AdminDashboard
+})));
 
-// franchise
-import { FranchiseInfo } from "@pages/franchise/FranchiseInfo";
-import { FranchiseList } from "@pages/franchise/FranchiseList";
-import { FranchiseDetail } from "@pages/franchise/FranchiseDetail";
-import { FranchiseSave } from "@pages/franchise/FranchiseSave";
-import { FranchiseUpdate } from "@pages/franchise/FranchiseUpdate";
+// about -------------------------------------------------------------------------------------------
+const AboutGreeting = lazy(() => import("@pages/about/AboutGreeting").then((module) => ({
+  default: module.AboutGreeting
+})));
+const AboutLocation = lazy(() => import("@pages/about/AboutLocation").then((module) => ({
+  default: module.AboutLocation
+})));
 
-// menu
-import { MenuList } from "@pages/menu/MenuList";
-import { MenuDetail } from "@pages/menu/MenuDetail";
-import { MenuSave } from "@pages/menu/MenuSave";
-import { MenuUpdate } from "@pages/menu/MenuUpdate";
+// contact -----------------------------------------------------------------------------------------
+const ContactList = lazy(() => import("@pages/contact/ContactList").then((module) => ({
+  default: module.ContactList
+})));
+const ContactFind = lazy(() => import("@pages/contact/ContactFind").then((module) => ({
+  default: module.ContactFind
+})));
+const ContactDetail = lazy(() => import("@pages/contact/ContactDetail").then((module) => ({
+  default: module.ContactDetail
+})));
+const ContactSave = lazy(() => import("@pages/contact/ContactSave").then((module) => ({
+  default: module.ContactSave
+})));
+const ContactUpdate = lazy(() => import("@pages/contact/ContactUpdate").then((module) => ({
+  default: module.ContactUpdate
+})));
 
-// notice
-import { NoticeList } from "@pages/notice/NoticeList";
-import { NoticeDetail } from "@pages/notice/NoticeDetail";
-import { NoticeSave } from "@pages/notice/NoticeSave";
-import { NoticeUpdate } from "@pages/notice/NoticeUpdate";
+// franchise ---------------------------------------------------------------------------------------
+const FranchiseInfo = lazy(() => import("@pages/franchise/FranchiseInfo").then((module) => ({
+  default: module.FranchiseInfo
+})));
+const FranchiseList = lazy(() => import("@pages/franchise/FranchiseList").then((module) => ({
+  default: module.FranchiseList
+})));
+const FranchiseDetail = lazy(() => import("@pages/franchise/FranchiseDetail").then((module) => ({
+  default: module.FranchiseDetail
+})));
+const FranchiseSave = lazy(() => import("@pages/franchise/FranchiseSave").then((module) => ({
+  default: module.FranchiseSave
+})));
+const FranchiseUpdate = lazy(() => import("@pages/franchise/FranchiseUpdate").then((module) => ({
+  default: module.FranchiseUpdate
+})));
 
-// order
-import { OrderList } from "@pages/order/OrderList";
-import { OrderFind } from "@pages/order/OrderFind";
-import { OrderDetail } from "@pages/order/OrderDetail";
-import { OrderSave } from "@pages/order/OrderSave";
-import { OrderUpdate } from "@pages/order/OrderUpdate";
+// menu --------------------------------------------------------------------------------------------
+const MenuList = lazy(() => import("@pages/menu/MenuList").then((module) => ({
+  default: module.MenuList
+})));
+const MenuDetail = lazy(() => import("@pages/menu/MenuDetail").then((module) => ({
+  default: module.MenuDetail
+})));
+const MenuSave = lazy(() => import("@pages/menu/MenuSave").then((module) => ({
+  default: module.MenuSave
+})));
+const MenuUpdate = lazy(() => import("@pages/menu/MenuUpdate").then((module) => ({
+  default: module.MenuUpdate
+})));
 
-// product
-import { ProductList } from "@pages/product/ProductList";
-import { ProductDetail } from "@pages/product/ProductDetail";
-import { ProductSave } from "@pages/product/ProductSave";
-import { ProductUpdate } from "@pages/product/ProductUpdate";
+// notice ------------------------------------------------------------------------------------------
+const NoticeList = lazy(() => import("@pages/notice/NoticeList").then((module) => ({
+  default: module.NoticeList
+})));
+const NoticeDetail = lazy(() => import("@pages/notice/NoticeDetail").then((module) => ({
+  default: module.NoticeDetail
+})));
+const NoticeSave = lazy(() => import("@pages/notice/NoticeSave").then((module) => ({
+  default: module.NoticeSave
+})));
+const NoticeUpdate = lazy(() => import("@pages/notice/NoticeUpdate").then((module) => ({
+  default: module.NoticeUpdate
+})));
 
-// user
-import { UserLogin } from "@pages/user/UserLogin";
+// order -------------------------------------------------------------------------------------------
+const OrderList = lazy(() => import("@pages/order/OrderList").then((module) => ({
+  default: module.OrderList
+})));
+const OrderFind = lazy(() => import("@pages/order/OrderFind").then((module) => ({
+  default: module.OrderFind
+})));
+
+const OrderDetail = lazy(() => import("@pages/order/OrderDetail").then((module) => ({
+  default: module.OrderDetail
+})));
+const OrderSave = lazy(() => import("@pages/order/OrderSave").then((module) => ({
+  default: module.OrderSave
+})));
+const OrderUpdate = lazy(() => import("@pages/order/OrderUpdate").then((module) => ({
+  default: module.OrderUpdate
+})));
+
+// product -----------------------------------------------------------------------------------------
+const ProductList = lazy(() => import("@pages/product/ProductList").then((module) => ({
+  default: module.ProductList
+})));
+const ProductDetail = lazy(() => import("@pages/product/ProductDetail").then((module) => ({
+  default: module.ProductDetail
+})));
+const ProductSave = lazy(() => import("@pages/product/ProductSave").then((module) => ({
+  default: module.ProductSave
+})));
+const ProductUpdate = lazy(() => import("@pages/product/ProductUpdate").then((module) => ({
+  default: module.ProductUpdate
+})));
+
+// user --------------------------------------------------------------------------------------------
+const UserLogin = lazy(() => import("@pages/user/UserLogin").then((module) => ({
+  default: module.UserLogin
+})));
 
 // -------------------------------------------------------------------------------------------------
 export {
   Main,
+  AuthError, AuthPrivacy,
   AdminDashboard,
   AboutGreeting, AboutLocation,
   ContactList, ContactFind, ContactDetail, ContactSave, ContactUpdate,

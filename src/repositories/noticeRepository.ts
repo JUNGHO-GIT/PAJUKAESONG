@@ -2,7 +2,6 @@
 
 import mongoose from "mongoose";
 import { Notice } from "@schemas/Notice";
-import { newDate } from "@scripts/date";
 
 // 0. cnt ------------------------------------------------------------------------------------------
 export const cnt = async (
@@ -94,7 +93,7 @@ export const save = async (
       notice_content: OBJECT_param.notice_content,
       notice_view: 0,
       notice_images: OBJECT_param.notice_images,
-      notice_regDt: newDate,
+      notice_regDt: new Date(),
       notice_updateDt: null,
     },
   );
@@ -116,7 +115,7 @@ export const update = async (
         notice_title: OBJECT_param.notice_title,
         notice_content: OBJECT_param.notice_content,
         notice_images: OBJECT_param.notice_images,
-        notice_updateDt: newDate,
+        notice_updateDt: new Date(),
       }
     },
     {

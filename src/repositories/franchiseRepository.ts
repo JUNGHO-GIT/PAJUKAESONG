@@ -2,7 +2,6 @@
 
 import mongoose from "mongoose";
 import { Franchise } from "@schemas/Franchise";
-import { newDate } from "@scripts/date";
 
 // 0. cnt ------------------------------------------------------------------------------------------
 export const cnt = async (
@@ -75,7 +74,7 @@ export const save = async (
       franchise_address_detail: OBJECT_param.franchise_address_detail,
       franchise_phone: OBJECT_param.franchise_phone,
       franchise_images: OBJECT_param.franchise_images,
-      franchise_regDt: newDate,
+      franchise_regDt: new Date(),
       franchise_updateDt: null,
     },
   );
@@ -100,7 +99,7 @@ export const update = async (
         franchise_address_detail: OBJECT_param.franchise_address_detail,
         franchise_phone: OBJECT_param.franchise_phone,
         franchise_images: OBJECT_param.franchise_images,
-        franchise_updateDt: newDate,
+        franchise_updateDt: new Date(),
       }
     },
     {

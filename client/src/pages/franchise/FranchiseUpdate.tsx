@@ -1,15 +1,14 @@
 // FranchiseUpdate.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateFranchise } from "@imports/ImportValidates";
-import { axios, insertComma, makeFormData } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Franchise } from "@imports/ImportSchemas";
-import { Input, InputFile, Select } from "@imports/ImportContainers";
-import { Btn, Br } from "@imports/ImportComponents";
-import { Paper, Grid, Card, MenuItem } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useStoreAlert, useValidateFranchise } from "@importHooks";
+import { axios } from "@importLibs";
+import { makeForm } from "@importScripts";
+import { Franchise } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Input, InputFile, Select } from "@importContainers";
+import { Btn, Br } from "@importComponents";
+import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseUpdate = () => {
@@ -17,7 +16,7 @@ export const FranchiseUpdate = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location_id, } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateFranchise();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -52,7 +51,7 @@ export const FranchiseUpdate = () => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      makeFormData( OBJECT, fileList, { _id: location_id } ),
+      makeForm( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -286,7 +285,7 @@ export const FranchiseUpdate = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {updateSection()}
             <Br px={20} />

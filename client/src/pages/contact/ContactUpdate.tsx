@@ -1,15 +1,14 @@
 // ContactUpdate.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useCommonDate } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateContact } from "@imports/ImportValidates";
-import { axios, insertComma, makeFormData } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Contact } from "@imports/ImportSchemas";
-import { Select, Input, TextArea, InputFile } from "@imports/ImportContainers";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
-import { Paper, Grid, Card, MenuItem } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useCommonDate, useStoreAlert, useValidateContact } from "@importHooks";
+import { axios } from "@importLibs";
+import { makeForm } from "@importScripts";
+import { Contact } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Select, Input, TextArea, InputFile } from "@importContainers";
+import { Btn, Br } from "@importComponents";
+import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ContactUpdate = () => {
@@ -18,7 +17,7 @@ export const ContactUpdate = () => {
   const { navigate, URL, SUBFIX, location_id, } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { REFS, ERRORS, validate } = useValidateContact();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 1. common -------------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -52,7 +51,7 @@ export const ContactUpdate = () => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      makeFormData( OBJECT, fileList, { _id: location_id } ),
+      makeForm( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -279,7 +278,7 @@ export const ContactUpdate = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {updateSection()}
             <Br px={20} />

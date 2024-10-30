@@ -1,15 +1,14 @@
 // ProductUpdate.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateProduct } from "@imports/ImportValidates";
-import { axios, makeFormData, insertComma } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Product } from "@imports/ImportSchemas";
-import { Btn, Br } from "@imports/ImportComponents";
-import { Input, InputFile, Select } from "@imports/ImportContainers";
-import { Paper, Grid, Card, MenuItem } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useStoreAlert, useValidateProduct } from "@importHooks";
+import { axios } from "@importLibs";
+import { makeForm, insertComma } from "@importScripts";
+import { Product } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Input, InputFile, Select } from "@importContainers";
+import { Btn, Br } from "@importComponents";
+import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ProductUpdate = () => {
@@ -17,7 +16,7 @@ export const ProductUpdate = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location_id } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateProduct();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -51,7 +50,7 @@ export const ProductUpdate = () => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      makeFormData( OBJECT, fileList, { _id: location_id } ),
+      makeForm( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -263,7 +262,7 @@ export const ProductUpdate = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {updateSection()}
             <Br px={20} />

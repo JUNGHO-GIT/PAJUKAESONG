@@ -1,16 +1,15 @@
 // ProductDetail.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue, useResponsive } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateProduct } from "@imports/ImportValidates";
-import { axios, insertComma, setSession, getSession } from "@imports/ImportUtils";
-import { Swiper, SwiperSlide, Pagination } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Product } from "@imports/ImportSchemas";
-import { Input } from "@imports/ImportContainers";
-import { Div, Img, Hr, Br, Icons, Btn } from "@imports/ImportComponents";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useResponsive } from "@importHooks";
+import { useStoreAlert, useValidateProduct } from "@importHooks";
+import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
+import { insertComma, getSession, setSession } from "@importScripts";
+import { Product } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Input } from "@importContainers";
+import { Div, Img, Hr, Br, Icons, Btn } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ProductDetail = () => {
@@ -19,7 +18,7 @@ export const ProductDetail = () => {
   const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
   const { isXxs } = useResponsive();
   const { validate } = useValidateProduct();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -335,7 +334,7 @@ export const ProductDetail = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {detailSection()}
             <Hr px={40} className={"bg-grey"} />

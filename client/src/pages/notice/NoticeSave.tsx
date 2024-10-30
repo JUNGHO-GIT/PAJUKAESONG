@@ -1,15 +1,14 @@
 // NoticeSave.tsx
 
-import { useState, useEffect } from "@imports/ImportReacts";
-import { useCommonValue } from "@imports/ImportHooks";
-import { useAlertStore } from "@imports/ImportStores";
-import { useValidateNotice } from "@imports/ImportValidates";
-import { axios, insertComma, makeFormData } from "@imports/ImportUtils";
-import { Loading } from "@imports/ImportLayouts";
-import { Notice } from "@imports/ImportSchemas";
-import { Div, Btn, Br, Hr } from "@imports/ImportComponents";
-import { Input, TextArea, InputFile } from "@imports/ImportContainers";
-import { Paper, Grid, Card } from "@imports/ImportMuis";
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue, useStoreAlert, useValidateNotice } from "@importHooks";
+import { axios } from "@importLibs";
+import { makeForm } from "@importScripts";
+import { Notice } from "@importSchemas";
+import { Loader } from "@importLayouts";
+import { Input, TextArea, InputFile } from "@importContainers";
+import { Btn, Br } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const NoticeSave = () => {
@@ -17,7 +16,7 @@ export const NoticeSave = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateNotice();
-  const { ALERT, setALERT } = useAlertStore();
+  const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -40,7 +39,7 @@ export const NoticeSave = () => {
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
-      makeFormData(
+      makeForm(
         OBJECT,
         fileList
       ),
@@ -173,7 +172,7 @@ export const NoticeSave = () => {
     // 10. return
     return (
       <Paper className={"content-wrapper fadeIn p-20"}>
-        {LOADING ? <Loading /> : (
+        {LOADING ? <Loader /> : (
           <>
             {saveSection()}
             <Br px={20} />
