@@ -14,7 +14,6 @@ export const MenuList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate, isAdmin, location_category } = useCommonValue();
-  const { isXxs } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------

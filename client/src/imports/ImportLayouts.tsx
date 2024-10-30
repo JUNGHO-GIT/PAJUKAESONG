@@ -18,6 +18,9 @@ const Footer = lazy(() => import("@interfaces/layouts/Footer").then((module) => 
 const Loader = lazy(() => import("@interfaces/layouts/Loader").then((module) => ({
   default: module.Loader
 })));
+const FallBack = lazy(() => import("@interfaces/layouts/FallBack").then((module) => ({
+  default: module.FallBack
+})));
 const Alert = lazy(() => import("@interfaces/layouts/Alert").then((module) => ({
   default: module.Alert
 })));
@@ -35,6 +38,7 @@ export {
   SideBar,
   Footer,
   Loader,
+  FallBack,
   Alert,
   Confirm,
   Filter

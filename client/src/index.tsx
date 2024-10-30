@@ -21,7 +21,7 @@ import {
 } from "@importHooks";
 
 import {
-  Header, Footer, Alert, Confirm, TitleBar, Loader
+  Header, Footer, Alert, Confirm, TitleBar, FallBack
 } from "@importLayouts";
 
 import {
@@ -76,15 +76,15 @@ const App = () => {
       <Suspense>
         <Header />
         <TitleBar />
-      </Suspense>
-      <Suspense>
         <Alert />
         <Confirm />
       </Suspense>
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<FallBack />}>
         <Routes>
           {/** root **/}
           <Route path={"/*"} element={<Main />} />
+          {/** user **/}
+          <Route path={"/user/login/*"} element={<UserLogin />} />
           {/** auth **/}
           <Route path={"/auth/error/*"} element={<AuthError />} />
           <Route path={"/auth/privacy/*"} element={<AuthPrivacy />} />
@@ -126,8 +126,6 @@ const App = () => {
           <Route path={"/product/detail/*"} element={<ProductDetail />} />
           <Route path={"/product/save/*"} element={<ProductSave />} />
           <Route path={"/product/update/*"} element={<ProductUpdate />} />
-          {/** user **/}
-          <Route path={"/user/login/*"} element={<UserLogin />} />
         </Routes>
       </Suspense>
       <Suspense>
@@ -141,7 +139,9 @@ const App = () => {
 createRoot(document.getElementById('root') as HTMLDivElement).render(
   <BrowserRouter basename={"/PAJUKAESONG"}>
     <ThemeProvider theme={createTheme({
-      typography: { fontFamily: "Pretendard, 'Noto Sans KR', sans-serif" }
+      typography: {
+        fontFamily: "Pretendard Variable, Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif"
+      }
     })}>
       <CssBaseline />
       <App />
