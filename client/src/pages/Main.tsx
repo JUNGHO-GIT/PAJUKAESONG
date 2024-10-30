@@ -207,7 +207,7 @@ export const Main = () => {
                       shadow={false}
                       radius={false}
                       group={"main"}
-                      src={"logo1.webp"}
+                      src={"logo1_2.webp"}
                       onClick={() => {
                         navigate("/notice/detail", {
                           state: {

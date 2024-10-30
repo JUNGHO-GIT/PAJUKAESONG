@@ -113,7 +113,7 @@ export const Header = () => {
             shadow={false}
             radius={false}
             group={"main"}
-            src={"logo1.webp"}
+            src={"logo1_2.webp"}
             className={"w-80p"}
             onClick={() => {
               navigate("/main");

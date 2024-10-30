@@ -109,6 +109,9 @@ export const TitleBar = () => {
       if (PATH.includes("franchise/list")) {
         setTitleValue("가맹점 목록");
       }
+      else if (PATH.includes("franchise/info")) {
+        setTitleValue("가맹 안내");
+      }
       else if (PATH.includes("franchise/detail")) {
         setTitleValue("가맹점 상세");
       }

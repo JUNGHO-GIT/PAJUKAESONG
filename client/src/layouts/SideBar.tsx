@@ -76,7 +76,7 @@ export const SideBar = (
             shadow={false}
             radius={false}
             group={"main"}
-            src={"logo1.webp"}
+            src={"logo1_2.webp"}
             className={"pointer m-10 h-max50"}
             onClick={() => {
               navigate("/main");
