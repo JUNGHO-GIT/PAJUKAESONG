@@ -7,4 +7,5 @@ declare global {
     google: any;
   }
 }
+
 export {};

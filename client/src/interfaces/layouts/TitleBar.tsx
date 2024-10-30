@@ -21,10 +21,7 @@ export const TitleBar = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    if (PATH.includes("main")) {
-      setObjectBgColor("bg-transparent");
-    }
-    else {
+    if (!PATH.includes("main")) {
       setObjectBgColor("bg-burgundy");
     }
   }, [PATH]);
@@ -179,27 +176,23 @@ export const TitleBar = () => {
           <Swiper
             spaceBetween={0}
             slidesPerView={1}
-            centeredSlides={true}
+            centeredSlides={false}
             loop={true}
             navigation={false}
+            speed={1500}
+            fadeEffect={{ crossFade: true }}
           >
-            <SwiperSlide className={"w-100p h-100p d-center"}>
-              <Img
-                hover={false}
-                shadow={false}
-                radius={false}
-                group={"main"}
-                src={"title_main.webp"}
-              />
-              <Div className={"d-col-center w-100p h-100p p-absolute opacity-4"}>
-                <Div className={"fs-1-6rem fw-400 ls-4 white"}>
-                  정성을 담은 <strong>메밀 요리</strong>로
-                </Div>
-                <Div className={"fs-1-6rem fw-400 ls-4 white"}>
-                  <strong>건강한 맛</strong>을 선사합니다.
-                </Div>
-              </Div>
-            </SwiperSlide>
+            {["title_main3.webp", "title_main4.webp"].map((item: string, i: number) => (
+              <SwiperSlide key={`slide-${i}`} className={"w-100p h-100p d-center"}>
+                <Img
+                  hover={false}
+                  shadow={false}
+                  radius={false}
+                  group={"main"}
+                  src={item}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </Grid>
       </Grid>

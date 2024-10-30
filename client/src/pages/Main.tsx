@@ -125,6 +125,7 @@ export const Main = () => {
                 <SwiperSlide key={index}>
                   <Div className={"d-col-center"}>
                     <Img
+                      max={600}
                       hover={true}
                       shadow={true}
                       radius={true}

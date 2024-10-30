@@ -36,7 +36,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@mui/material": "^6.1.5",
+    "@mui/material": "^6.1.6",
     "@mui/x-date-pickers": "^7.22.0",
     "@react-hooks-library/core": "^0.6.2",
     "@types/navermaps": "^3.7.8",
@@ -45,6 +45,7 @@
     "axios": "^1.7.7",
     "countries-and-timezones": "^3.7.2",
     "date-fns": "^4.1.0",
+    "fast-average-color": "^9.4.0",
     "iso-country-currency": "^0.7.2",
     "material-ui-popup-state": "^5.3.1",
     "moment-timezone": "^0.5.46",

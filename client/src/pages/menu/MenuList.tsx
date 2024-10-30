@@ -67,6 +67,7 @@ export const MenuList = () => {
               <Grid container={true} spacing={2}>
                 <Grid size={12}>
                   <Img
+                    max={400}
                     hover={true}
                     shadow={true}
                     radius={true}
