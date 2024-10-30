@@ -6,9 +6,9 @@ import { axios } from "@importLibs";
 import { insertComma } from "@importScripts";
 import { Loader, Filter } from "@importLayouts";
 import { Order } from "@importSchemas";
-import { PickerDay, Select } from "@importContainers";
+import { PickerDay } from "@importContainers";
 import { Div, Hr, Br } from "@importComponents";
-import { Paper, Grid, Card, MenuItem, TablePagination } from "@importMuis";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AdminDashboard = () => {
@@ -166,7 +166,7 @@ export const AdminDashboard = () => {
       );
       const listFragment = () => (
         <Grid container={true} spacing={2}>
-          {OBJECT_ORDER.map((item: any, i: number) => (
+          {OBJECT_ORDER.filter((filter: any) => !!filter._id).map((item: any, i: number) => (
             <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
               <Grid container={true} spacing={2}>
                 <Grid size={3}>
