@@ -7,6 +7,7 @@ import { Footer } from "@interfaces/layouts/Footer";
 import { Loader } from "@interfaces/layouts/Loader";
 import { Alert } from "@interfaces/layouts/Alert";
 import { Confirm } from "@interfaces/layouts/Confirm";
+import { Filter } from "@interfaces/layouts/Filter";
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -17,4 +18,5 @@ export {
   Loader,
   Alert,
   Confirm,
+  Filter
 };
