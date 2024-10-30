@@ -6,6 +6,10 @@ import { Main } from "@pages/Main";
 // admin
 import { AdminDashboard } from "@pages/admin/AdminDashboard";
 
+// admin
+import { AuthError } from "@pages/auth/AuthError";
+import { AuthPrivacy } from "@pages/auth/AuthPrivacy";
+
 // about
 import { AboutGreeting } from "@pages/about/AboutGreeting";
 import { AboutLocation } from "@pages/about/AboutLocation";
@@ -55,6 +59,7 @@ import { UserLogin } from "@pages/user/UserLogin";
 // -------------------------------------------------------------------------------------------------
 export {
   Main,
+  AuthError, AuthPrivacy,
   AdminDashboard,
   AboutGreeting, AboutLocation,
   ContactList, ContactFind, ContactDetail, ContactSave, ContactUpdate,
