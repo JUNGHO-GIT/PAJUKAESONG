@@ -1,12 +1,12 @@
 // ImportLayouts.tsx
 
-import { Header } from "@layouts/Header";
-import { TitleBar } from "@layouts/TitleBar";
-import { SideBar } from "@layouts/SideBar";
-import { Footer } from "@layouts/Footer";
-import { Loader } from "@layouts/Loader";
-import { Alert } from "@layouts/Alert";
-import { Confirm } from "@layouts/Confirm";
+import { Header } from "@interfaces/layouts/Header";
+import { TitleBar } from "@interfaces/layouts/TitleBar";
+import { SideBar } from "@interfaces/layouts/SideBar";
+import { Footer } from "@interfaces/layouts/Footer";
+import { Loader } from "@interfaces/layouts/Loader";
+import { Alert } from "@interfaces/layouts/Alert";
+import { Confirm } from "@interfaces/layouts/Confirm";
 
 // -------------------------------------------------------------------------------------------------
 export {
