@@ -21,7 +21,7 @@ import {
 } from "@importHooks";
 
 import {
-  Header, Footer, Alert, Confirm, TitleBar, FallBack
+  Header, Footer, Alert, Confirm, TitleBar
 } from "@importLayouts";
 
 import {
@@ -73,64 +73,58 @@ const App = () => {
 
   return (
     <div className={"App"}>
-      <Suspense>
-        <Header />
-        <TitleBar />
-        <Alert />
-        <Confirm />
-      </Suspense>
-      <Suspense fallback={<FallBack />}>
-        <Routes>
-          {/** root **/}
-          <Route path={"/*"} element={<Main />} />
-          {/** user **/}
-          <Route path={"/user/login/*"} element={<UserLogin />} />
-          {/** auth **/}
-          <Route path={"/auth/error/*"} element={<AuthError />} />
-          <Route path={"/auth/privacy/*"} element={<AuthPrivacy />} />
-          {/** admin **/}
-          <Route path={"/admin/dashboard/*"} element={<AdminDashboard />} />
-          {/** about **/}
-          <Route path={"/about/greeting/*"} element={<AboutGreeting />} />
-          <Route path={"/about/location/*"} element={<AboutLocation />} />
-          {/** contact **/}
-          <Route path={"/contact/find/*"} element={<ContactFind />} />
-          <Route path={"/contact/list/*"} element={<ContactList />} />
-          <Route path={"/contact/detail/*"} element={<ContactDetail />} />
-          <Route path={"/contact/save/*"} element={<ContactSave />} />
-          <Route path={"/contact/update/*"} element={<ContactUpdate />} />
-          {/** franchise **/}
-          <Route path={"/franchise/info/*"} element={<FranchiseInfo />} />
-          <Route path={"/franchise/list/*"} element={<FranchiseList />} />
-          <Route path={"/franchise/detail/*"} element={<FranchiseDetail />} />
-          <Route path={"/franchise/save/*"} element={<FranchiseSave />} />
-          <Route path={"/franchise/update/*"} element={<FranchiseUpdate />} />
-          {/** menu **/}
-          <Route path={"/menu/list/*"} element={<MenuList />} />
-          <Route path={"/menu/save/*"} element={<MenuSave />} />
-          <Route path={"/menu/update/*"} element={<MenuUpdate />} />
-          <Route path={"/menu/detail/*"} element={<MenuDetail />} />
-          {/** notice **/}
-          <Route path={"/notice/list/*"} element={<NoticeList />} />
-          <Route path={"/notice/detail/*"} element={<NoticeDetail />} />
-          <Route path={"/notice/save/*"} element={<NoticeSave />} />
-          <Route path={"/notice/update/*"} element={<NoticeUpdate />} />
-          {/** order **/}
-          <Route path={"/order/list/*"} element={<OrderList />} />
-          <Route path={"/order/find/*"} element={<OrderFind />} />
-          <Route path={"/order/detail/*"} element={<OrderDetail />} />
-          <Route path={"/order/save/*"} element={<OrderSave />} />
-          <Route path={"/order/update/*"} element={<OrderUpdate />} />
-          {/** product **/}
-          <Route path={"/product/list/*"} element={<ProductList />} />
-          <Route path={"/product/detail/*"} element={<ProductDetail />} />
-          <Route path={"/product/save/*"} element={<ProductSave />} />
-          <Route path={"/product/update/*"} element={<ProductUpdate />} />
-        </Routes>
-      </Suspense>
-      <Suspense>
-        <Footer />
-      </Suspense>
+      <Header />
+      <TitleBar />
+      <Alert />
+      <Confirm />
+      <Routes>
+        {/** root **/}
+        <Route path={"/*"} element={<Main />} />
+        {/** user **/}
+        <Route path={"/user/login/*"} element={<UserLogin />} />
+        {/** auth **/}
+        <Route path={"/auth/error/*"} element={<AuthError />} />
+        <Route path={"/auth/privacy/*"} element={<AuthPrivacy />} />
+        {/** admin **/}
+        <Route path={"/admin/dashboard/*"} element={<AdminDashboard />} />
+        {/** about **/}
+        <Route path={"/about/greeting/*"} element={<AboutGreeting />} />
+        <Route path={"/about/location/*"} element={<AboutLocation />} />
+        {/** contact **/}
+        <Route path={"/contact/find/*"} element={<ContactFind />} />
+        <Route path={"/contact/list/*"} element={<ContactList />} />
+        <Route path={"/contact/detail/*"} element={<ContactDetail />} />
+        <Route path={"/contact/save/*"} element={<ContactSave />} />
+        <Route path={"/contact/update/*"} element={<ContactUpdate />} />
+        {/** franchise **/}
+        <Route path={"/franchise/info/*"} element={<FranchiseInfo />} />
+        <Route path={"/franchise/list/*"} element={<FranchiseList />} />
+        <Route path={"/franchise/detail/*"} element={<FranchiseDetail />} />
+        <Route path={"/franchise/save/*"} element={<FranchiseSave />} />
+        <Route path={"/franchise/update/*"} element={<FranchiseUpdate />} />
+        {/** menu **/}
+        <Route path={"/menu/list/*"} element={<MenuList />} />
+        <Route path={"/menu/save/*"} element={<MenuSave />} />
+        <Route path={"/menu/update/*"} element={<MenuUpdate />} />
+        <Route path={"/menu/detail/*"} element={<MenuDetail />} />
+        {/** notice **/}
+        <Route path={"/notice/list/*"} element={<NoticeList />} />
+        <Route path={"/notice/detail/*"} element={<NoticeDetail />} />
+        <Route path={"/notice/save/*"} element={<NoticeSave />} />
+        <Route path={"/notice/update/*"} element={<NoticeUpdate />} />
+        {/** order **/}
+        <Route path={"/order/list/*"} element={<OrderList />} />
+        <Route path={"/order/find/*"} element={<OrderFind />} />
+        <Route path={"/order/detail/*"} element={<OrderDetail />} />
+        <Route path={"/order/save/*"} element={<OrderSave />} />
+        <Route path={"/order/update/*"} element={<OrderUpdate />} />
+        {/** product **/}
+        <Route path={"/product/list/*"} element={<ProductList />} />
+        <Route path={"/product/detail/*"} element={<ProductDetail />} />
+        <Route path={"/product/save/*"} element={<ProductSave />} />
+        <Route path={"/product/update/*"} element={<ProductUpdate />} />
+      </Routes>
+      <Footer />
     </div>
   );
 };
