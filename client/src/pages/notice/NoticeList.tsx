@@ -81,7 +81,7 @@ export const NoticeList = () => {
       );
       const listFragment = () => (
         <Grid container={true} spacing={2}>
-          {OBJECT.map((item: any, i: number) => (
+          {OBJECT.filter((f: any) => f._id).map((item: any, i: number) => (
             <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
               <Grid container={true} spacing={2}>
                 <Grid size={3}>

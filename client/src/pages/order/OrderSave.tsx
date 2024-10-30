@@ -25,6 +25,11 @@ export const OrderSave = () => {
   const [OBJECT, setOBJECT] = useState<any>(Order);
   const [PRODUCT, setPRODUCT] = useState<any>([Product]);
 
+  useEffect(() => {
+    console.log("===================================");
+    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
+  }, [OBJECT]);
+
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 초기 로딩 시 세션에서 데이터 불러오기
   useEffect(() => {
@@ -110,7 +115,7 @@ export const OrderSave = () => {
     const productSection = () => {
       const productFragment = () => (
         <Grid container={true} spacing={2}>
-          {OBJECT?.order_product?.map((item: any, i: number) => (
+          {OBJECT?.order_product?.filter((f: any) => f._id).map((item: any, i: number) => (
             <Grid container={true} spacing={2} key={`product-${i}`}>
               <Grid size={3} className={"d-col-center"}>
                 <Img

@@ -62,7 +62,7 @@ export const MenuList = () => {
     const listSection = () => {
       const listFragment = () => (
         <Grid container={true} spacing={0}>
-          {OBJECT.map((item: any, i: number) => (
+          {OBJECT.filter((f: any) => f._id).map((item: any, i: number) => (
             <Grid size={{ xs: 6, md: 4 }} className={"d-col-center p-10"} key={`list-${i}`}>
               <Grid container={true} spacing={2}>
                 <Grid size={12}>

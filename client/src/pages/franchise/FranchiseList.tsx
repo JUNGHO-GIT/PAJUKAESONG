@@ -62,7 +62,7 @@ export const FranchiseList = () => {
     const listSection = () => {
       const listFragment = () => (
         <Grid container={true} spacing={0}>
-          {OBJECT.map((item: any, i: number) => (
+          {OBJECT.filter((f: any) => f._id).map((item: any, i: number) => (
             <Grid size={12} className={"d-col-center p-10"} key={`list-${i}`}>
               <Grid container={true} spacing={2}>
                 <Grid size={12}>
