@@ -2,8 +2,7 @@
 
 import { moment } from "@importLibs";
 import { PopUp, Input } from "@importContainers";
-import { DigitalClock, AdapterMoment, LocalizationProvider } from "@importMuis";
-import { Grid } from "@importMuis";
+import { DigitalClock, AdapterMoment, LocalizationProvider, Grid } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 declare type PickerTimeProps = {
@@ -24,14 +23,12 @@ export const PickerTime = (
   const timeNode = () => {
     const timeSection = () => (
       <PopUp
-        key={"time"}
         type={"innerCenter"}
         position={"center"}
         direction={"center"}
-        padding={20}
         contents={({closePopup}: any) => (
-          <Grid container={true} spacing={3} className={"w-50vw p-0"}>
-            <Grid size={12} className={"d-col-left"}>
+          <Grid container={true} spacing={2} className={"w-max40vw h-max40vh"}>
+            <Grid size={12} className={"d-center"}>
               <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"ko"}>
                 <DigitalClock
                   ampm={false}
@@ -54,8 +51,7 @@ export const PickerTime = (
             </Grid>
           </Grid>
         )}
-      >
-        {(popTrigger: any) => (
+        children={(popTrigger: any) => (
           <Input
             label={"시간"}
             shrink={"shrink"}
@@ -69,7 +65,7 @@ export const PickerTime = (
             }}
           />
         )}
-      </PopUp>
+      />
     );
     return (
       <>

@@ -36,16 +36,16 @@ export const PickerDay = (
         position={"center"}
         direction={"center"}
         contents={({closePopup}: any) => (
-          <Grid container={true} spacing={2}>
-            <Grid size={12} className={"d-col-center"}>
-              <Div className={"fs-1-2rem fw-600 black"}>
+          <Grid container={true} spacing={2} className={"w-min70vw"}>
+            <Grid size={12} className={"d-row-center"}>
+              <Div className={"fs-1-2rem fw-600 me-10"}>
                 날짜 선택
               </Div>
-              <Div className={"fs-1-0rem fw-500 grey"}>
+              <Div className={"fs-0-8rem fw-500 dark"}>
                 {`[${getDayFmt(OBJECT?.[`${extra}`])}]`}
               </Div>
             </Grid>
-            <Grid size={12}>
+            <Grid size={12} className={"d-center"}>
               <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"ko"}>
                 <DateCalendar
                   timezone={"Asia/Seoul"}
@@ -133,8 +133,7 @@ export const PickerDay = (
             </Grid>
           </Grid>
         )}
-      >
-        {(popTrigger: any) => (
+        children={(popTrigger: any) => (
           <Input
             label={"날짜"}
             shrink={"shrink"}
@@ -181,7 +180,7 @@ export const PickerDay = (
             }}
           />
         )}
-      </PopUp>
+      />
     );
 
     // 10. return
