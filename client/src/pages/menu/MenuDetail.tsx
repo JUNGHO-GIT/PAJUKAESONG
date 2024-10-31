@@ -164,7 +164,7 @@ export const MenuDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center"}>
+        <Card className={"d-col-center bg-ivory-light"}>
           {imageFragment(OBJECT, 0)}
           <Hr px={40} className={"bg-burgundy"} />
           {descFragment(OBJECT, 0)}
@@ -214,7 +214,7 @@ export const MenuDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn p-20"}>
+      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}

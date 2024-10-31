@@ -245,7 +245,7 @@ export const ContactUpdate = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
           {updateFragment(OBJECT, 0)}
         </Card>
       );
@@ -277,7 +277,7 @@ export const ContactUpdate = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn p-20"}>
+      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
         {LOADING ? <Loader /> : (
           <>
             {updateSection()}

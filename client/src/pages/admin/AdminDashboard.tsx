@@ -96,7 +96,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Card className={"border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
           {titleFragment()}
           <Br px={30} />
           {pickerFragment()}
@@ -127,7 +127,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Card className={"border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
           {titleFragment()}
           <Br px={30} />
           {visitFragment()}
@@ -202,7 +202,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
           {titleFragment()}
           <Br px={30} />
           {headFragment()}
@@ -221,7 +221,7 @@ export const AdminDashboard = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn p-20"}>
+      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
         {LOADING ? <Loader /> : (
           <>
             {dateSection()}

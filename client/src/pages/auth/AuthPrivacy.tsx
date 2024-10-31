@@ -181,7 +181,7 @@ export const AuthPrivacy = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center"}>
+        <Card className={"d-col-center bg-ivory-light"}>
           {privacyFragment()}
         </Card>
       );

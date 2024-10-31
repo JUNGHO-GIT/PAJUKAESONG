@@ -123,7 +123,7 @@ export const ContactList = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
           {headFragment()}
           <Hr px={40} className={"bg-burgundy"} />
           {listFragment()}
@@ -194,7 +194,7 @@ export const ContactList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn p-20"}>
+      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
         {LOADING ? <Loader /> : (
           <>
             {listSection()}

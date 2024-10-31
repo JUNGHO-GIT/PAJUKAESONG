@@ -137,7 +137,7 @@ export const NoticeDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
           {headFragment(OBJECT, 0)}
           <Hr px={40} className={"bg-burgundy"} />
           {descFragment(OBJECT, 0)}
@@ -183,7 +183,7 @@ export const NoticeDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn p-20"}>
+      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}

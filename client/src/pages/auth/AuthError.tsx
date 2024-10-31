@@ -132,7 +132,7 @@ export const AuthError = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center"}>
+        <Card className={"d-col-center bg-ivory-light"}>
           {imageFragment()}
           {textFragment()}
         </Card>

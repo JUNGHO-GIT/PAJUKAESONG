@@ -2,20 +2,19 @@
 
 import { useEffect } from "@importReacts";
 import { useCommonValue } from "@importHooks";
-import { useStoreAlert } from "@importHooks";
 
 // -------------------------------------------------------------------------------------------------
 export const useRoot = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const {navigate, location} = useCommonValue();
+  const { PATH, navigate } = useCommonValue();
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
 
     // '/'경로로 진입했을때의 처리
-    if (location.pathname === '/') {
+    if (PATH === "/") {
       navigate("/main");
     }
-  }, [location, navigate]);
+  }, [PATH]);
 };

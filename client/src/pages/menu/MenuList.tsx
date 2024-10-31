@@ -94,7 +94,7 @@ export const MenuList = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center"}>
+        <Card className={"d-col-center bg-ivory-light"}>
           {listFragment()}
         </Card>
       );
@@ -173,7 +173,7 @@ export const MenuList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn p-20"}>
+      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
         {LOADING ? <Loader /> : (
           <>
             {listSection()}
