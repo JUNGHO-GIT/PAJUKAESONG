@@ -57,7 +57,7 @@ export const Img = (
 
     setImageClass(newClass);
 
-  }, [group, src, props.className, hover, shadow, radius, max]);
+  }, [GCLOUD_URL, group, props.className, hover, shadow, radius, max, src]);
 
   // 10. return ------------------------------------------------------------------------------------
   return (

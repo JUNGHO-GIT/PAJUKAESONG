@@ -5,15 +5,15 @@ import { useCommonValue, useResponsive, useStoreAlert } from "@importHooks";
 import { axios } from "@importLibs";
 import { Menu } from "@importSchemas";
 import { Loader, Filter } from "@importLayouts";
-import { Select } from "@importContainers";
-import { Div, Img, Hr, Btn } from "@importComponents";
-import { Paper, Grid, Card, MenuItem, TablePagination } from "@importMuis";
+import { Div, Img, Hr } from "@importComponents";
+import { Paper, Grid, Card } from "@importMuis";
+import { Skeleton } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { URL, SUBFIX, navigate, isAdmin, location_category } = useCommonValue();
+  const { URL, SUBFIX, navigate, location_category } = useCommonValue();
   const { paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
@@ -69,6 +69,11 @@ export const MenuList = () => {
             <Grid size={{ xs: 6, md: 4 }} className={"d-col-center p-10"} key={`list-${i}`}>
               <Grid container={true} spacing={2}>
                 <Grid size={12}>
+                  {/* <Skeleton
+                    width={"100%"}
+                    height={"100%"}
+                    animation={"wave"}
+                  /> */}
                   <Img
                     max={400}
                     hover={true}
