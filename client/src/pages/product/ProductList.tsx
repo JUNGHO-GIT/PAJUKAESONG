@@ -1,7 +1,8 @@
 // ProductList.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useResponsive, useStoreAlert } from "@importHooks";
+import { useCommonValue, useStoreAlert } from "@importHooks";
+import { useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { Product } from "@importSchemas";
 import { Loader } from "@importLayouts";
@@ -14,7 +15,7 @@ export const ProductList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate, isAdmin, } = useCommonValue();
-  const { isXxs } = useResponsive();
+  const { paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -52,7 +53,9 @@ export const ProductList = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   }, [URL, SUBFIX, PAGING]);
 
@@ -72,7 +75,7 @@ export const ProductList = () => {
                     shadow={true}
                     radius={true}
                     group={"product"}
-                    src={item.product_images && item.product_images[0]}
+                    src={item.product_images[0]}
                     onClick={() => {
                       navigate("/product/detail", {
                         state: {
@@ -94,7 +97,7 @@ export const ProductList = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light"}>
+        <Card className={"d-col-center"}>
           {listFragment()}
         </Card>
       );
@@ -173,7 +176,7 @@ export const ProductList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {listSection()}

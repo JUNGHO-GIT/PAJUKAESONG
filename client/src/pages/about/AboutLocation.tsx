@@ -1,10 +1,14 @@
 // AboutLocation.tsx
 
+import { useResponsive } from "@importHooks";
 import { Location } from "@importContainers";
 import { Paper } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutLocation = () => {
+
+  // 1. common -------------------------------------------------------------------------------------
+  const { paperClass } = useResponsive();
 
   // 7. locationNode -------------------------------------------------------------------------------
   const locationNode = () => {
@@ -13,12 +17,12 @@ export const AboutLocation = () => {
       <Location
         width={"100%"}
         height={"60vh"}
-        className={"border-2 shadow-2 radius-1"}
+        className={"border-1 shadow-2 radius-1"}
       />
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {locationSection()}
       </Paper>
     );

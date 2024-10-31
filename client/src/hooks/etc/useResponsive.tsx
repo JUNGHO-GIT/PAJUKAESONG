@@ -11,7 +11,10 @@ export const useResponsive = () => {
   const isSm = useMediaQuery("(min-width: 630px) and (max-width: 930px)");
   const isMd = useMediaQuery("(min-width: 930px) and (max-width: 1200px)");
   const isLg = useMediaQuery("(min-width: 1200px) and (max-width: 1500px)");
-  const isXl = useMediaQuery("(min-width: 1500px)");
+  const isXl = useMediaQuery("(min-width: 1500px) and (max-width: 1800px)");
+  const isXxl = useMediaQuery("(min-width: 1800px)");
+
+  const paperClass = `content-wrapper fadeIn p-20 ${isXxs ? "w-100p" : isXs ? "w-100p" : isSm ? "w-90p" : isMd ? "w-70p" : isLg ? "w-60p" : isXl ? "w-50p" : isXxl ? "w-40p" : ""}`;
 
   // -----------------------------------------------------------------------------------------------
   return {
@@ -20,6 +23,8 @@ export const useResponsive = () => {
     isSm,
     isMd,
     isLg,
-    isXl
+    isXl,
+    isXxl,
+    paperClass
   };
 };

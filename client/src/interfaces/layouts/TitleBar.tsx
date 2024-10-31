@@ -29,13 +29,13 @@ export const TitleBar = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     if (isXxs || isXs) {
-      setObjectHeight(PATH.includes("main") ? "" : "h-18vh");
+      setObjectHeight(PATH.includes("main") ? "" : "h-15vh");
     }
     else if (isSm || isMd) {
-      setObjectHeight(PATH.includes("main") ? "" : "h-21vh");
+      setObjectHeight(PATH.includes("main") ? "" : "h-18vh");
     }
     else if (isLg || isXl) {
-      setObjectHeight(PATH.includes("main") ? "" : "h-25vh");
+      setObjectHeight(PATH.includes("main") ? "" : "h-23vh");
     }
   }, [PATH, isXxs, isXs, isSm, isMd, isLg, isXl]);
 
@@ -231,7 +231,7 @@ export const TitleBar = () => {
       </Grid>
     );
     return (
-      <Paper className={`layout-wrapper p-relative border-bottom-1 border-top-1 z-100 fadeIn ${objectHeight} ${objectBgColor}`}>
+      <Paper className={`layout-wrapper p-relative border-dark-bottom-1 border-dark-top-1 z-100 fadeIn ${objectHeight} ${objectBgColor}`}>
         {PATH.includes("main") ? mainSection() : titleSection()}
       </Paper>
     );

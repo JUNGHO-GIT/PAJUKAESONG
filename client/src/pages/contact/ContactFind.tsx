@@ -1,7 +1,8 @@
 // ContactFind.tsx
 
 import { useState } from "@importReacts";
-import { useCommonValue, useStoreAlert, useValidateContact } from "@importHooks";
+import { useCommonValue, useStoreAlert } from "@importHooks";
+import { useValidateContact, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { Contact } from "@importSchemas";
 import { Loader } from "@importLayouts";
@@ -14,6 +15,7 @@ export const ContactFind = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
+  const { paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateContact();
   const { ALERT, setALERT } = useStoreAlert();
 
@@ -60,7 +62,9 @@ export const ContactFind = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -123,7 +127,7 @@ export const ContactFind = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {findFragment(OBJECT, 0)}
         </Card>
       );
@@ -145,7 +149,7 @@ export const ContactFind = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {findSection()}

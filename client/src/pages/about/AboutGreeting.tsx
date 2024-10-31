@@ -1,10 +1,14 @@
 // AboutGreeting.tsx
 
+import { useResponsive } from "@importHooks";
 import { Div, Img } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutGreeting = () => {
+
+  // 1. common -------------------------------------------------------------------------------------
+  const { paperClass } = useResponsive();
 
   // 7. greetingNode -------------------------------------------------------------------------------
   const greetingNode = () => {
@@ -58,14 +62,14 @@ export const AboutGreeting = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {greetingFragment()}
         </Card>
       );
     };
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {greetingSection()}
       </Paper>
     );

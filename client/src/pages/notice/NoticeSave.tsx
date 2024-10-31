@@ -1,7 +1,8 @@
 // NoticeSave.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert, useValidateNotice } from "@importHooks";
+import { useCommonValue, useValidateNotice } from "@importHooks";
+import { useStoreAlert, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm } from "@importScripts";
 import { Notice } from "@importSchemas";
@@ -16,6 +17,7 @@ export const NoticeSave = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateNotice();
+  const { paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -76,7 +78,9 @@ export const NoticeSave = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -139,7 +143,7 @@ export const NoticeSave = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {saveFragment(OBJECT, 0)}
         </Card>
       );
@@ -171,7 +175,7 @@ export const NoticeSave = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {saveSection()}

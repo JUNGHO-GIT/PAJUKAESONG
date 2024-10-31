@@ -1,7 +1,8 @@
 // ProductSave.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert, useValidateProduct } from "@importHooks";
+import { useCommonValue, useStoreAlert } from "@importHooks";
+import { useValidateProduct, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm, insertComma } from "@importScripts";
 import { Loader } from "@importLayouts";
@@ -15,6 +16,7 @@ export const ProductSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
+  const { paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateProduct();
   const { ALERT, setALERT } = useStoreAlert();
 
@@ -76,7 +78,9 @@ export const ProductSave = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -217,7 +221,7 @@ export const ProductSave = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {saveFragment(OBJECT, 0)}
         </Card>
       );
@@ -253,7 +257,7 @@ export const ProductSave = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {saveSection()}

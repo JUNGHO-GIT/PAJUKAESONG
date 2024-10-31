@@ -10,7 +10,7 @@ import { Paper, Grid, Card, Stepper, Step, StepLabel } from "@importMuis";
 export const FranchiseInfo = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { isXxs, isXs } = useResponsive();
+  const { isXxs, isXs, paperClass } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -188,7 +188,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
           <Br px={20} />
           {stepFragment()}
@@ -257,7 +257,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
           <Br px={20} />
           {headFragment()}
@@ -268,7 +268,7 @@ export const FranchiseInfo = () => {
     };
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {stepSection()}

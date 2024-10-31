@@ -22,7 +22,7 @@ export const Main = () => {
   const [OBJECT_MENU, setOBJECT_MENU] = useState<any>([Menu]);
   const [OBJECT_NOTICE, setOBJECT_NOTICE] = useState<any>([Notice]);
   const [category, setCategory] = useState<string>("main");
-  const [PAGING, setPAGING] = useState<any>({
+  const [PAGING, _setPAGING] = useState<any>({
     sort: "asc",
     page: 0,
   });
@@ -61,7 +61,9 @@ export const Main = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   }, [URL, PAGING, category]);
 
@@ -159,7 +161,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"border-1 py-20"}>
+        <Grid container={true} spacing={0} className={"border-dark-bottom-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {selectFragment()}
             {menuFragment()}
@@ -239,7 +241,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"bg-ivory border-1 py-20"}>
+        <Grid container={true} spacing={0} className={"bg-ivory border-dark-bottom-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {noticeFragment()}
             {paginationFragment()}
@@ -262,7 +264,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"border-1 py-20"}>
+        <Grid container={true} spacing={0} className={"py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {locationFragment()}
           </Grid>

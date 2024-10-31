@@ -14,6 +14,7 @@ export const MenuList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate, isAdmin, location_category } = useCommonValue();
+  const { paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -52,7 +53,9 @@ export const MenuList = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 500);
     });
   }, [URL, SUBFIX, PAGING, location_category]);
 
@@ -62,7 +65,7 @@ export const MenuList = () => {
     const listSection = () => {
       const listFragment = () => (
         <Grid container={true} spacing={0}>
-          {OBJECT.filter((f: any) => f._id).map((item: any, i: number) => (
+          {OBJECT.filter((f: any) => f.menu_images.length > 0).map((item: any, i: number) => (
             <Grid size={{ xs: 6, md: 4 }} className={"d-col-center p-10"} key={`list-${i}`}>
               <Grid container={true} spacing={2}>
                 <Grid size={12}>
@@ -72,7 +75,7 @@ export const MenuList = () => {
                     shadow={true}
                     radius={true}
                     group={"menu"}
-                    src={item.menu_images && item.menu_images[0]}
+                    src={item.menu_images[0]}
                     onClick={() => {
                       navigate("/menu/detail", {
                         state: {
@@ -94,7 +97,7 @@ export const MenuList = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light"}>
+        <Card className={"d-col-center"}>
           {listFragment()}
         </Card>
       );
@@ -173,7 +176,7 @@ export const MenuList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {listSection()}

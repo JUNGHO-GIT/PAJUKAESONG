@@ -15,7 +15,7 @@ export const MenuDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
-  const { isXxs } = useResponsive();
+  const { isXxs, paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
   const { validate } = useValidateMenu();
 
@@ -43,7 +43,9 @@ export const MenuDetail = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -89,7 +91,9 @@ export const MenuDetail = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -164,7 +168,7 @@ export const MenuDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light"}>
+        <Card className={"d-col-center"}>
           {imageFragment(OBJECT, 0)}
           <Hr px={40} className={"bg-burgundy"} />
           {descFragment(OBJECT, 0)}
@@ -214,7 +218,7 @@ export const MenuDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}

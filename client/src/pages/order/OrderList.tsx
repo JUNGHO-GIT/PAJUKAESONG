@@ -1,7 +1,8 @@
 // OrderList.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useCommonDate, useStoreAlert } from "@importHooks";
+import { useCommonValue, useCommonDate } from "@importHooks";
+import { useStoreAlert, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { insertComma } from "@importScripts";
 import { Order } from "@importSchemas";
@@ -16,6 +17,7 @@ export const OrderList = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location, } = useCommonValue();
   const { getDayNotFmt } = useCommonDate();
+  const { paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -55,7 +57,9 @@ export const OrderList = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   }, [URL, SUBFIX, PAGING]);
 
@@ -120,7 +124,7 @@ export const OrderList = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {headFragment()}
           <Hr px={40} className={"bg-burgundy"} />
           {listFragment()}
@@ -191,7 +195,7 @@ export const OrderList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {listSection()}

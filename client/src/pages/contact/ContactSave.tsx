@@ -1,7 +1,8 @@
 // ContactSave.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert, useValidateContact } from "@importHooks";
+import { useCommonValue, useStoreAlert } from "@importHooks";
+import { useValidateContact, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm } from "@importScripts";
 import { Contact } from "@importSchemas";
@@ -15,6 +16,7 @@ export const ContactSave = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
+  const { paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateContact();
   const { ALERT, setALERT } = useStoreAlert();
 
@@ -76,7 +78,9 @@ export const ContactSave = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -236,7 +240,7 @@ export const ContactSave = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {saveFragment(OBJECT, 0)}
         </Card>
       );
@@ -268,7 +272,7 @@ export const ContactSave = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {saveSection()}

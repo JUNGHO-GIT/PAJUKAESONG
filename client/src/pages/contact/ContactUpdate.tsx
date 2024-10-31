@@ -1,7 +1,8 @@
 // ContactUpdate.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useCommonDate, useStoreAlert, useValidateContact } from "@importHooks";
+import { useCommonValue, useStoreAlert } from "@importHooks";
+import { useValidateContact, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm } from "@importScripts";
 import { Contact } from "@importSchemas";
@@ -14,8 +15,8 @@ import { Paper, Grid, Card, MenuItem } from "@importMuis";
 export const ContactUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, URL, SUBFIX, location_id, } = useCommonValue();
-  const { getDayFmt } = useCommonDate();
+  const { navigate, URL, SUBFIX, location_id } = useCommonValue();
+  const { paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateContact();
   const { ALERT, setALERT } = useStoreAlert();
 
@@ -39,7 +40,9 @@ export const ContactUpdate = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   }, [URL, SUBFIX]);
 
@@ -85,7 +88,9 @@ export const ContactUpdate = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -245,7 +250,7 @@ export const ContactUpdate = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {updateFragment(OBJECT, 0)}
         </Card>
       );
@@ -277,7 +282,7 @@ export const ContactUpdate = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {updateSection()}

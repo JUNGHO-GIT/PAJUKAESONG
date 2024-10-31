@@ -16,7 +16,7 @@ export const ProductDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
-  const { isXxs } = useResponsive();
+  const { isXxs, paperClass } = useResponsive();
   const { validate } = useValidateProduct();
   const { ALERT, setALERT } = useStoreAlert();
 
@@ -47,7 +47,9 @@ export const ProductDetail = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -129,7 +131,9 @@ export const ProductDetail = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -204,7 +208,7 @@ export const ProductDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light"}>
+        <Card className={"d-col-center"}>
           {imageFragment(OBJECT, 0)}
           <Hr px={40} className={"bg-burgundy"} />
           {descFragment(OBJECT, 0)}
@@ -333,7 +337,7 @@ export const ProductDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}

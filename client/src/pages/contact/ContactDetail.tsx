@@ -1,7 +1,7 @@
 // ContactDetail.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useCommonDate } from "@importHooks";
+import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
 import { useStoreAlert, useValidateContact } from "@importHooks";
 import { axios } from "@importLibs";
 import { Contact } from "@importSchemas";
@@ -16,6 +16,7 @@ export const ContactDetail = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, URL, SUBFIX } = useCommonValue();
   const { getDayFmt } = useCommonDate();
+  const { paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
   const { validate } = useValidateContact();
 
@@ -43,7 +44,9 @@ export const ContactDetail = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -90,7 +93,9 @@ export const ContactDetail = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -147,7 +152,7 @@ export const ContactDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {headFragment(OBJECT, 0)}
           <Hr px={40} className={"bg-burgundy"} />
           {descFragment(OBJECT, 0)}
@@ -198,7 +203,7 @@ export const ContactDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}

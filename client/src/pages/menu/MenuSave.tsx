@@ -1,7 +1,8 @@
 // MenuSave.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert, useValidateMenu } from "@importHooks";
+import { useCommonValue, useStoreAlert } from "@importHooks";
+import { useResponsive, useValidateMenu } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm, insertComma } from "@importScripts";
 import { Menu } from "@importSchemas";
@@ -16,6 +17,7 @@ export const MenuSave = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateMenu();
+  const { paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -80,7 +82,9 @@ export const MenuSave = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -221,7 +225,7 @@ export const MenuSave = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {saveFragment(OBJECT, 0)}
         </Card>
       );
@@ -257,7 +261,7 @@ export const MenuSave = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {saveSection()}

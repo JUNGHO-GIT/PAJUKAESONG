@@ -1,7 +1,8 @@
 // UserLogin.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert, useValidateUser } from "@importHooks";
+import { useCommonValue, useStoreAlert } from "@importHooks";
+import { useResponsive, useValidateUser } from "@importHooks";
 import { axios } from "@importLibs";
 import { setLocal } from "@importScripts";
 import { User } from "@importSchemas";
@@ -16,6 +17,7 @@ export const UserLogin = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate } = useCommonValue();
   const { isAdmin, adminId, adminPw, isUser, userId, userPw } = useCommonValue();
+  const { paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateUser();
   const { ALERT, setALERT } = useStoreAlert();
 
@@ -97,7 +99,9 @@ export const UserLogin = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -165,7 +169,7 @@ export const UserLogin = () => {
         </Grid>
       );
       return (
-        <Card className={"border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"border-1 radius-1 shadow-1 p-20"}>
           {loginFragment(OBJECT, 0)}
         </Card>
       );
@@ -223,7 +227,7 @@ export const UserLogin = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {loginSection()}

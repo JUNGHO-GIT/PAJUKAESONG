@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useCommonDate } from "@importHooks";
-import { useStoreAlert, useValidateNotice } from "@importHooks";
+import { useStoreAlert, useValidateNotice, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { Notice } from "@importSchemas";
 import { Loader } from "@importLayouts";
@@ -17,6 +17,7 @@ export const NoticeDetail = () => {
   const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { validate } = useValidateNotice();
+  const { paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -43,7 +44,9 @@ export const NoticeDetail = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -85,7 +88,9 @@ export const NoticeDetail = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   };
 
@@ -137,7 +142,7 @@ export const NoticeDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {headFragment(OBJECT, 0)}
           <Hr px={40} className={"bg-burgundy"} />
           {descFragment(OBJECT, 0)}
@@ -183,7 +188,7 @@ export const NoticeDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}

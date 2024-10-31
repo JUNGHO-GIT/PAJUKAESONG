@@ -51,7 +51,6 @@ export const Img = (
     if (radius) {
       newClass += " radius-1";
     }
-
     if (max) {
       newClass += ` w-max${max} h-max${max}`;
     }

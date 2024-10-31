@@ -1,7 +1,8 @@
 // AdminDashboard.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useCommonDate, useStoreAlert } from "@importHooks";
+import { useCommonValue, useCommonDate } from "@importHooks";
+import { useStoreAlert, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { insertComma } from "@importScripts";
 import { Loader, Filter } from "@importLayouts";
@@ -16,6 +17,7 @@ export const AdminDashboard = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate } = useCommonValue();
   const { getDayFmt } = useCommonDate();
+  const { paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -66,7 +68,9 @@ export const AdminDashboard = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   }, [URL, SUBFIX, PAGING_ORDER, DATE?.today]);
 
@@ -96,7 +100,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
           <Br px={30} />
           {pickerFragment()}
@@ -127,7 +131,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
           <Br px={30} />
           {visitFragment()}
@@ -202,7 +206,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light border-2 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
           <Br px={30} />
           {headFragment()}
@@ -221,7 +225,7 @@ export const AdminDashboard = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {dateSection()}

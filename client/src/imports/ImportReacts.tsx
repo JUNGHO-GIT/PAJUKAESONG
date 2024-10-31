@@ -5,7 +5,6 @@ import {Fragment} from "react";
 import ReactDOM from "react-dom/client";
 import { createRoot } from 'react-dom/client';
 import { StrictMode } from "react";
-import { Suspense, lazy } from "react";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { useCallback, useMemo, useRef, createRef } from "react";
 import { createContext, useContext } from "react";
@@ -19,8 +18,6 @@ export {
   ReactDOM,
   createRoot,
   StrictMode,
-  Suspense,
-  lazy,
   useState,
   useEffect,
   useLayoutEffect,

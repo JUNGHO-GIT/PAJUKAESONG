@@ -1,7 +1,7 @@
 // FranchiseList.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert } from "@importHooks";
+import { useCommonValue, useStoreAlert, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { Franchise } from "@importSchemas";
 import { Loader } from "@importLayouts";
@@ -14,6 +14,7 @@ export const FranchiseList = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate, isAdmin, location_category } = useCommonValue();
+  const { paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -52,7 +53,9 @@ export const FranchiseList = () => {
       console.error(err);
     })
     .finally(() => {
-      setLOADING(false);
+      setTimeout(() => {
+        setLOADING(false);
+      }, 300);
     });
   }, [URL, SUBFIX, PAGING, location_category]);
 
@@ -72,7 +75,7 @@ export const FranchiseList = () => {
                     shadow={true}
                     radius={true}
                     group={"franchise"}
-                    src={item.franchise_images && item.franchise_images[0]}
+                    src={item.franchise_images[0]}
                     onClick={() => {
                       navigate("/franchise/detail", {
                         state: {
@@ -93,7 +96,7 @@ export const FranchiseList = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center bg-ivory-light"}>
+        <Card className={"d-col-center"}>
           {listFragment()}
         </Card>
       );
@@ -172,7 +175,7 @@ export const FranchiseList = () => {
     );
     // 10. return
     return (
-      <Paper className={"content-wrapper fadeIn bg-ivory-light p-20"}>
+      <Paper className={paperClass}>
         {LOADING ? <Loader /> : (
           <>
             {listSection()}

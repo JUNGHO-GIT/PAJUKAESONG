@@ -9,7 +9,7 @@ import "@assets/styles/Jstyle.css";
 import "./index.css";
 
 import {
-  BrowserRouter, Routes, Route, createRoot, Suspense
+  BrowserRouter, Routes, Route, createRoot
 } from "@importReacts";
 
 import {
