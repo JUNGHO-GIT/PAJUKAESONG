@@ -14,7 +14,7 @@ export const useResponsive = () => {
   const isXl = useMediaQuery("(min-width: 1500px) and (max-width: 1800px)");
   const isXxl = useMediaQuery("(min-width: 1800px)");
 
-  const paperClass = `content-wrapper fadeIn p-20 ${isXxs ? "w-100p" : isXs ? "w-100p" : isSm ? "w-90p" : isMd ? "w-70p" : isLg ? "w-60p" : isXl ? "w-50p" : isXxl ? "w-40p" : ""}`;
+  const paperClass = `content-wrapper fadeIn px-10 py-20 h-min80vh ${isXxs ? "w-100p" : isXs ? "w-100p" : isSm ? "w-90p" : isMd ? "w-70p" : isLg ? "w-60p" : isXl ? "w-50p" : isXxl ? "w-40p" : ""}`;
 
   // -----------------------------------------------------------------------------------------------
   return {

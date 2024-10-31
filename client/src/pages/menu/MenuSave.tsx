@@ -6,9 +6,9 @@ import { useResponsive, useValidateMenu } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm, insertComma } from "@importScripts";
 import { Menu } from "@importSchemas";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Input, Select, InputFile } from "@importContainers";
-import { Btn, Br } from "@importComponents";
+import { Br } from "@importComponents";
 import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -230,34 +230,17 @@ export const MenuSave = () => {
         </Card>
       );
     };
-    // 3. btn
-    const btnSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={6} className={"d-row-center"}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-grey"}
-            onClick={() => {
-              navigate(`/menu/list`, {
-                state: {
-                  category: OBJECT?.menu_category,
-                },
-              });
-            }}
-          >
-            목록으로
-          </Btn>
-        </Grid>
-        <Grid size={6} className={"d-row-center"}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
-            onClick={() => {
-              flowSave();
-            }}
-          >
-            저장하기
-          </Btn>
-        </Grid>
-      </Grid>
+    // 4. filter
+    const filterSection = () => (
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={null}
+        setPAGING={null}
+        COUNT={null}
+        flow={{
+          flowSave
+        }}
+      />
     );
     // 10. return
     return (
@@ -266,7 +249,7 @@ export const MenuSave = () => {
           <>
             {saveSection()}
             <Br px={20} />
-            {btnSection()}
+            {filterSection()}
           </>
         )}
       </Paper>

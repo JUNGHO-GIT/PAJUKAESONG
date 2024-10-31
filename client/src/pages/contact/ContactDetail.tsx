@@ -5,7 +5,7 @@ import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
 import { useStoreAlert, useValidateContact } from "@importHooks";
 import { axios } from "@importLibs";
 import { Contact } from "@importSchemas";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { TextArea } from "@importContainers";
 import { Div, Hr, Icons } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -159,47 +159,17 @@ export const ContactDetail = () => {
         </Card>
       )
     };
-    // 3. filter
+    // 4. filter
     const filterSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={6} className={"d-row-left"}>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy"}
-            onClick={() => {
-              navigate("/contact/list", {
-                state: {
-                  contact_name: OBJECT?.contact_name,
-                  contact_phone: OBJECT?.contact_phone
-                }
-              });
-            }}
-          >
-            목록으로
-          </Div>
-        </Grid>
-        <Grid size={6} className={"d-row-right"}>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
-            onClick={() => {
-              navigate("/contact/update", {
-                state: {
-                  _id: OBJECT?._id
-                }
-              });
-            }}
-          >
-            수정
-          </Div>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
-            onClick={() => {
-              flowDelete();
-            }}
-          >
-            삭제
-          </Div>
-        </Grid>
-      </Grid>
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={null}
+        setPAGING={null}
+        COUNT={null}
+        flow={{
+          flowDelete
+        }}
+      />
     );
     // 10. return
     return (

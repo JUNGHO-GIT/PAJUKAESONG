@@ -246,11 +246,9 @@ export const FranchiseInfo = () => {
                     {item.cost}
                   </Div>
                 </Grid>
-                <Grid size={12}>
-                  {i < OBJECT_COST.length - 1 && (
-                    <Hr px={20} className={"bg-light-grey"} />
-                  )}
-                </Grid>
+                {i < OBJECT_COST.length - 1 && (
+                  <Hr px={20} className={"bg-light-grey"} />
+                )}
               </Grid>
             </Grid>
           ))}

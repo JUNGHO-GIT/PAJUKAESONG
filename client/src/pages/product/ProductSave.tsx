@@ -5,10 +5,10 @@ import { useCommonValue, useStoreAlert } from "@importHooks";
 import { useValidateProduct, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm, insertComma } from "@importScripts";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Product } from "@importSchemas";
 import { Input, InputFile, Select } from "@importContainers";
-import { Btn, Br } from "@importComponents";
+import { Br } from "@importComponents";
 import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -226,34 +226,17 @@ export const ProductSave = () => {
         </Card>
       );
     };
-    // 3. btn
-    const btnSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={6} className={"d-row-center"}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-grey"}
-            onClick={() => {
-              navigate(`/product/list`, {
-                state: {
-                  category: OBJECT?.product_category,
-                },
-              });
-            }}
-          >
-            목록으로
-          </Btn>
-        </Grid>
-        <Grid size={6} className={"d-row-center"}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
-            onClick={() => {
-              flowSave();
-            }}
-          >
-            저장하기
-          </Btn>
-        </Grid>
-      </Grid>
+    // 4. filter
+    const filterSection = () => (
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={null}
+        setPAGING={null}
+        COUNT={null}
+        flow={{
+          flowSave
+        }}
+      />
     );
     // 10. return
     return (
@@ -262,7 +245,7 @@ export const ProductSave = () => {
           <>
             {saveSection()}
             <Br px={20} />
-            {btnSection()}
+            {filterSection()}
           </>
         )}
       </Paper>

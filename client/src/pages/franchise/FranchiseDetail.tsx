@@ -4,7 +4,7 @@ import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
 import { useStoreAlert, useValidateFranchise } from "@importHooks";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Franchise } from "@importSchemas";
 import { Div, Img, Hr, Icons } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -13,7 +13,7 @@ import { Paper, Grid, Card } from "@importMuis";
 export const FranchiseDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
+  const { navigate, location_id, URL, SUBFIX } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { isXxs, paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
@@ -187,46 +187,17 @@ export const FranchiseDetail = () => {
         </Card>
       )
     };
-    // 3. filter
+    // 4. filter
     const filterSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy"}
-            onClick={() => {
-              navigate(`/franchise/list`,{
-                state: {
-                  category: OBJECT?.franchise_category
-                }
-              });
-            }}
-          >
-            목록으로
-          </Div>
-        </Grid>
-        <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
-            onClick={() => {
-              navigate("/franchise/update", {
-                state: {
-                  _id: OBJECT?._id
-                }
-              });
-            }}
-          >
-            수정
-          </Div>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
-            onClick={() => {
-              flowDelete();
-            }}
-          >
-            삭제
-          </Div>
-        </Grid>
-      </Grid>
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={null}
+        setPAGING={null}
+        COUNT={null}
+        flow={{
+          flowDelete
+        }}
+      />
     );
     // 10. return
     return (

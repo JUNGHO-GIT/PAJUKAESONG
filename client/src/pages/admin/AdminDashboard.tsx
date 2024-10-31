@@ -72,7 +72,7 @@ export const AdminDashboard = () => {
         setLOADING(false);
       }, 300);
     });
-  }, [URL, SUBFIX, PAGING_ORDER, DATE?.today]);
+  }, [URL, SUBFIX, DATE, PAGING_ORDER]);
 
   // 7. detailNode ---------------------------------------------------------------------------------
   const detailNode = () => {
@@ -195,11 +195,9 @@ export const AdminDashboard = () => {
                     {item?.order_name}
                   </Div>
                 </Grid>
-                <Grid size={12}>
-                  {i < OBJECT_ORDER.length - 1 && (
-                    <Hr px={20} className={"bg-light-grey"} />
-                  )}
-                </Grid>
+                {i < OBJECT_ORDER.length - 1 && (
+                  <Hr px={20} className={"bg-light-grey"} />
+                )}
               </Grid>
             </Grid>
           ))}
@@ -218,6 +216,7 @@ export const AdminDashboard = () => {
     // 3. filter
     const filterSection = () => (
       <Filter
+        OBJECT={OBJECT_ORDER}
         PAGING={PAGING_ORDER}
         setPAGING={setPAGING_ORDER}
         COUNT={ORDER_COUNT}

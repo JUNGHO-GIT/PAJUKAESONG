@@ -6,9 +6,9 @@ import { useStoreAlert, useValidateOrder } from "@importHooks";
 import { axios } from "@importLibs";
 import { insertComma, getSession, setSession } from "@importScripts";
 import { Order, Product } from "@importSchemas";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Input, Select, PickerDay, PickerTime } from "@importContainers";
-import { Div, Hr, Br, Btn, Img, Icons } from "@importComponents";
+import { Div, Hr, Br, Img, Icons } from "@importComponents";
 import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -24,11 +24,6 @@ export const OrderSave = () => {
   const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
   const [PRODUCT, setPRODUCT] = useState<any>([Product]);
-
-  useEffect(() => {
-    console.log("===================================");
-    console.log("OBJECT", JSON.stringify(OBJECT, null, 2));
-  }, [OBJECT]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 초기 로딩 시 세션에서 데이터 불러오기
@@ -117,7 +112,7 @@ export const OrderSave = () => {
     const productSection = () => {
       const productFragment = () => (
         <Grid container={true} spacing={2}>
-          {OBJECT?.order_product?.filter((f: any) => f._id).map((item: any, i: number) => (
+          {OBJECT?.order_product?.filter((f: any) => f.product_name).map((item: any, i: number) => (
             <Grid container={true} spacing={2} key={`product-${i}`}>
               <Grid size={3} className={"d-col-center"}>
                 <Img
@@ -239,28 +234,30 @@ export const OrderSave = () => {
           ))}
         </Grid>
       );
-      const priceFragment = (item: any) => (
+      const priceFragment = () => (
         <Grid container={true} spacing={2}>
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-0rem"}>
-              총 금액  :
-            </Div>
-            <Icons
-              key={"Won"}
-              name={"Won"}
-              className={"w-15 h-15 dark"}
-            />
-            <Div className={"fs-1-2rem fw-600"}>
-              {insertComma(item?.order_total_price || "0")}
-            </Div>
-          </Grid>
+          {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
+            <Grid size={12} className={"d-row-center"} key={`price-${i}`}>
+              <Div className={"fs-1-0rem"}>
+                총 금액  :
+              </Div>
+              <Icons
+                key={"Won"}
+                name={"Won"}
+                className={"w-15 h-15 dark"}
+              />
+              <Div className={"fs-1-2rem fw-600"}>
+                {insertComma(item?.order_total_price || "0")}
+              </Div>
+            </Grid>
+          ))}
         </Grid>
       );
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {productFragment()}
           <Hr px={40} className={"bg-burgundy"} />
-          {priceFragment(OBJECT)}
+          {priceFragment()}
         </Card>
       );
     };
@@ -419,29 +416,16 @@ export const OrderSave = () => {
       );
     };
     // 4. btn
-    const btnSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={6} className={"d-row-center"}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-grey"}
-            onClick={() => {
-              navigate("/product/list");
-            }}
-          >
-            더 찾기
-          </Btn>
-        </Grid>
-        <Grid size={6} className={"d-row-center"}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
-            onClick={() => {
-              flowSave();
-            }}
-          >
-            주문하기
-          </Btn>
-        </Grid>
-      </Grid>
+    const filterSection = () => (
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={null}
+        setPAGING={null}
+        COUNT={null}
+        flow={{
+          flowSave
+        }}
+      />
     );
     // 10. return
     return (
@@ -452,7 +436,7 @@ export const OrderSave = () => {
             <Br px={30} />
             {orderSection()}
             <Br px={20} />
-            {btnSection()}
+            {filterSection()}
           </>
         )}
       </Paper>

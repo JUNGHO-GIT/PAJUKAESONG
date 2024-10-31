@@ -6,7 +6,7 @@ import { useStoreAlert, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { insertComma } from "@importScripts";
 import { Order } from "@importSchemas";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Select } from "@importContainers";
 import { Div, Hr } from "@importComponents";
 import { Paper, Grid, Card, MenuItem, TablePagination } from "@importMuis";
@@ -113,11 +113,9 @@ export const OrderList = () => {
                     {getDayNotFmt(item?.order_regDt).format("MM-DD")}
                   </Div>
                 </Grid>
-                <Grid size={12}>
-                  {i < OBJECT.length - 1 && (
-                    <Hr px={20} className={"bg-light-grey"} />
-                  )}
-                </Grid>
+                {i < OBJECT.length - 1 && (
+                  <Hr px={20} className={"bg-light-grey"} />
+                )}
               </Grid>
             </Grid>
           ))}
@@ -133,65 +131,12 @@ export const OrderList = () => {
     };
     // 3. filter
     const filterSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={3} className={"d-col-center"}>
-          <Select
-            label={""}
-            value={PAGING?.sort}
-            inputclass={"h-min0 h-5vh"}
-            onChange={(e: any) => (
-              setPAGING((prev: any) => ({
-                ...prev,
-                sort: e.target.value
-              }))
-            )}
-          >
-            {["asc", "desc"]?.map((item: string) => (
-              <MenuItem
-                key={item}
-                value={item}
-                selected={PAGING?.sort === item}
-                onChange={(e: any) => (
-                  setPAGING((prev: any) => ({
-                    ...prev,
-                    sort: e.target.value
-                  }))
-                )}
-              >
-                <Div className={"fs-0-8rem"}>
-                  {item === "asc" && "오름차순"}
-                  {item === "desc" && "내림차순"}
-                </Div>
-              </MenuItem>
-            ))}
-          </Select>
-        </Grid>
-        <Grid size={9} className={"d-col-center"}>
-          <TablePagination
-            rowsPerPageOptions={[10]}
-            rowsPerPage={10}
-            component={"div"}
-            labelRowsPerPage={""}
-            count={COUNT.totalCnt}
-            page={PAGING.page}
-            showFirstButton={true}
-            showLastButton={true}
-            className={"border-bottom-1 p-2"}
-            onPageChange={(_event, newPage) => {
-              setPAGING((prev: any) => ({
-                ...prev,
-                page: newPage
-              }));
-            }}
-            onRowsPerPageChange={(event) => {
-              setPAGING((prev: any) => ({
-                ...prev,
-                limit: parseFloat(event.target.value)
-              }));
-            }}
-          />
-        </Grid>
-      </Grid>
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={PAGING}
+        setPAGING={setPAGING}
+        COUNT={COUNT}
+      />
     );
     // 10. return
     return (

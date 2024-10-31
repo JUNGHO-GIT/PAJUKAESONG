@@ -6,9 +6,9 @@ import { useValidateProduct, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm, insertComma } from "@importScripts";
 import { Product } from "@importSchemas";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Input, InputFile, Select } from "@importContainers";
-import { Btn, Br } from "@importComponents";
+import { Br } from "@importComponents";
 import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ export const ProductUpdate = () => {
         setLOADING(false);
       }, 300);
     });
-  }, [URL, SUBFIX]);
+  }, [URL, SUBFIX, location_id]);
 
   // 3. flow ---------------------------------------------------------------------------------------
   const flowUpdate = async () => {
@@ -236,34 +236,17 @@ export const ProductUpdate = () => {
         </Card>
       );
     };
-    // 3. btn
-    const btnSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={6} className={"d-row-center"}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-grey"}
-            onClick={() => {
-              navigate(`/product/list`, {
-                state: {
-                  category: OBJECT?.product_category,
-                },
-              });
-            }}
-          >
-            목록으로
-          </Btn>
-        </Grid>
-        <Grid size={6} className={"d-row-center"}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
-            onClick={() => {
-              flowUpdate();
-            }}
-          >
-            수정하기
-          </Btn>
-        </Grid>
-      </Grid>
+    // 4. filter
+    const filterSection = () => (
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={null}
+        setPAGING={null}
+        COUNT={null}
+        flow={{
+          flowUpdate
+        }}
+      />
     );
     // 10. return
     return (
@@ -272,7 +255,7 @@ export const ProductUpdate = () => {
           <>
             {updateSection()}
             <Br px={20} />
-            {btnSection()}
+            {filterSection()}
           </>
         )}
       </Paper>

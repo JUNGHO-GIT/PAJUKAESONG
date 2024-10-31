@@ -6,9 +6,9 @@ import { useStoreAlert, useValidateOrder } from "@importHooks";
 import { axios } from "@importLibs";
 import { insertComma, setSession } from "@importScripts";
 import { Order, Product } from "@importSchemas";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Input, Select, PickerDay, PickerTime } from "@importContainers";
-import { Div, Hr, Br, Btn, Img, Icons } from "@importComponents";
+import { Div, Hr, Br, Img, Icons } from "@importComponents";
 import { Paper, Grid, Card, MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ export const OrderUpdate = () => {
         setLOADING(false);
       }, 300);
     });
-  }, [URL, SUBFIX, location_id]);
+  },  [URL, SUBFIX, location_id]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // PRODUCT 변경 시 세션 저장 및 총 가격 계산
@@ -422,30 +422,17 @@ export const OrderUpdate = () => {
         </Card>
       );
     };
-    // 4. btn
-    const btnSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={6} className={"d-row-center"}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-grey"}
-            onClick={() => {
-              navigate("/product/list");
-            }}
-          >
-            더 찾기
-          </Btn>
-        </Grid>
-        <Grid size={6} className={"d-row-center"}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
-            onClick={() => {
-              flowUpdate();
-            }}
-          >
-            수정하기
-          </Btn>
-        </Grid>
-      </Grid>
+    // 4. filter
+    const filterSection = () => (
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={null}
+        setPAGING={null}
+        COUNT={null}
+        flow={{
+          flowUpdate
+        }}
+      />
     );
     // 10. return
     return (
@@ -456,7 +443,7 @@ export const OrderUpdate = () => {
             <Br px={30} />
             {orderSection()}
             <Br px={20} />
-            {btnSection()}
+            {filterSection()}
           </>
         )}
       </Paper>

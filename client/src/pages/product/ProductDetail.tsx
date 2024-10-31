@@ -6,7 +6,7 @@ import { useStoreAlert, useValidateProduct } from "@importHooks";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
 import { insertComma, getSession, setSession } from "@importScripts";
 import { Product } from "@importSchemas";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Input } from "@importContainers";
 import { Div, Img, Hr, Br, Icons, Btn } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -15,7 +15,7 @@ import { Paper, Grid, Card } from "@importMuis";
 export const ProductDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
+  const { navigate, location_id, URL, SUBFIX } = useCommonValue();
   const { isXxs, paperClass } = useResponsive();
   const { validate } = useValidateProduct();
   const { ALERT, setALERT } = useStoreAlert();
@@ -273,8 +273,8 @@ export const ProductDetail = () => {
         </Grid>
       </Grid>
     );
-    // 3. btn
-    const btnSection = () => (
+    // 3. buy
+    const buySection = () => (
       <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={6} className={"d-row-center"}>
           <Btn
@@ -300,40 +300,15 @@ export const ProductDetail = () => {
     );
     // 4. filter
     const filterSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy"}
-            onClick={() => {
-              navigate(`/product/list`);
-            }}
-          >
-            목록으로
-          </Div>
-        </Grid>
-        <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
-            onClick={() => {
-              navigate("/product/update", {
-                state: {
-                  _id: OBJECT?._id
-                }
-              });
-            }}
-          >
-            수정
-          </Div>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
-            onClick={() => {
-              flowDelete();
-            }}
-          >
-            삭제
-          </Div>
-        </Grid>
-      </Grid>
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={null}
+        setPAGING={null}
+        COUNT={null}
+        flow={{
+          flowDelete
+        }}
+      />
     );
     // 10. return
     return (
@@ -344,7 +319,7 @@ export const ProductDetail = () => {
             <Hr px={40} className={"bg-grey"} />
             {priceSection()}
             <Br px={20} />
-            {btnSection()}
+            {buySection()}
             <Hr px={40} className={"bg-grey"} />
             {filterSection()}
           </>

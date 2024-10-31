@@ -6,7 +6,7 @@ import { useResponsive, useValidateUser } from "@importHooks";
 import { axios } from "@importLibs";
 import { setLocal } from "@importScripts";
 import { User } from "@importSchemas";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Input } from "@importContainers";
 import { Div, Btn, Hr, Br } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -174,8 +174,8 @@ export const UserLogin = () => {
         </Card>
       );
     };
-    // 3. btn
-    const btnSection = () => (
+    // 3. filter
+    const filterSection = () => (
       <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={12}>
           {(isAdmin || isUser) ? (
@@ -232,7 +232,7 @@ export const UserLogin = () => {
           <>
             {loginSection()}
             <Br px={30} />
-            {btnSection()}
+            {filterSection()}
             <Hr px={40} className={"bg-grey"} />
             {linkSection()}
           </>

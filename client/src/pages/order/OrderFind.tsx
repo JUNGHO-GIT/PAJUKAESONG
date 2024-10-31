@@ -5,7 +5,7 @@ import { useCommonValue, useStoreAlert } from "@importHooks";
 import { useValidateOrder, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { Order } from "@importSchemas";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Input } from "@importContainers";
 import { Btn, Br } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -132,20 +132,17 @@ export const OrderFind = () => {
         </Card>
       );
     };
-    // 3. btn
-    const btnSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={12}>
-          <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
-            onClick={() => {
-              flowSearch();
-            }}
-          >
-            조회하기
-          </Btn>
-        </Grid>
-      </Grid>
+    // 3. filter
+    const filterSection = () => (
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={null}
+        setPAGING={null}
+        COUNT={null}
+        flow={{
+          flowSearch,
+        }}
+      />
     );
     // 10. return
     return (
@@ -154,7 +151,7 @@ export const OrderFind = () => {
           <>
             {findSection()}
             <Br px={20} />
-            {btnSection()}
+            {filterSection()}
           </>
         )}
       </Paper>

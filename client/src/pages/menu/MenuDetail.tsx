@@ -5,7 +5,7 @@ import { useCommonValue, useResponsive } from "@importHooks";
 import { useStoreAlert, useValidateMenu } from "@importHooks";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
 import { insertComma } from "@importScripts";
-import { Loader } from "@importLayouts";
+import { Loader, Filter } from "@importLayouts";
 import { Menu } from "@importSchemas";
 import { Div, Img, Hr, Icons } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -14,7 +14,7 @@ import { Paper, Grid, Card } from "@importMuis";
 export const MenuDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { navigate, location_id, isAdmin, URL, SUBFIX } = useCommonValue();
+  const { navigate, location_id, URL, SUBFIX } = useCommonValue();
   const { isXxs, paperClass } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
   const { validate } = useValidateMenu();
@@ -177,44 +177,15 @@ export const MenuDetail = () => {
     };
     // 4. filter
     const filterSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy"}
-            onClick={() => {
-              navigate(`/menu/list`,{
-                state: {
-                  category: OBJECT?.menu_category
-                }
-              });
-            }}
-          >
-            목록으로
-          </Div>
-        </Grid>
-        <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
-            onClick={() => {
-              navigate("/menu/update", {
-                state: {
-                  _id: OBJECT?._id
-                }
-              });
-            }}
-          >
-            수정
-          </Div>
-          <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
-            onClick={() => {
-              flowDelete();
-            }}
-          >
-            삭제
-          </Div>
-        </Grid>
-      </Grid>
+      <Filter
+        OBJECT={OBJECT}
+        PAGING={null}
+        setPAGING={null}
+        COUNT={null}
+        flow={{
+          flowDelete
+        }}
+      />
     );
     // 10. return
     return (
