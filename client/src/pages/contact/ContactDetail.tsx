@@ -103,59 +103,75 @@ export const ContactDetail = () => {
   const detailNode = () => {
     // 2. detail
     const detailSection = () => {
-      const headFragment = (item: any, i: number) => (
-        <Grid container={true} spacing={1} key={`head-${i}`}>
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-8rem fw-700"}>
-              {item?.contact_title}
-            </Div>
-          </Grid>
-          <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-2rem fw-500 grey"}>
-              {`[${item?.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"}]`}
-            </Div>
-          </Grid>
+      const headFragment = () => (
+        <Grid container={true} spacing={0}>
+          {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
+            <Grid container={true} spacing={1} key={`head-${i}`}>
+              <Grid container={true} spacing={0}>
+                <Grid size={12} className={"d-row-center"}>
+                  <Div className={"fs-1-8rem fw-700"}>
+                    {item?.contact_title}
+                  </Div>
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={12} className={"d-row-center"}>
+                  <Div className={"fs-1-2rem fw-500 grey"}>
+                    {`[${item?.contact_category === "franchise" ? "가맹 문의" : "1:1 문의"}]`}
+                  </Div>
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
-      const descFragment = (item: any, i: number) => (
-        <Grid container={true} spacing={2} key={`desc-${i}`}>
-          <Grid size={12}>
-            <TextArea
-              label={""}
-              disabled={true}
-              value={item?.contact_content}
-              inputclass={"h-min50vh border-none"}
-            />
-          </Grid>
-          <Grid size={9} className={"d-row-left"}>
-            <Icons
-              key={"Calendar"}
-              name={"Calendar"}
-              fill={"whitesmoke"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500"}>
-              {getDayFmt(item?.contact_regDt)}
-            </Div>
-          </Grid>
-          <Grid size={3} className={"d-row-right"}>
-            <Icons
-              key={"Person"}
-              name={"Person"}
-              fill={"whitesmoke"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-0-9rem fw-500 me-10"}>
-              {item?.contact_name}
-            </Div>
-          </Grid>
+      const descFragment = () => (
+        <Grid container={true} spacing={0}>
+          {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
+            <Grid container={true} spacing={2} key={`desc-${i}`}>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <TextArea
+                    label={""}
+                    disabled={true}
+                    value={item?.contact_content}
+                    inputclass={"h-min50vh border-none"}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={9} className={"d-row-left"}>
+                  <Icons
+                    key={"Calendar"}
+                    name={"Calendar"}
+                    fill={"whitesmoke"}
+                    className={"w-20 h-20"}
+                  />
+                  <Div className={"fs-1-0rem fw-500"}>
+                    {getDayFmt(item?.contact_regDt)}
+                  </Div>
+                </Grid>
+                <Grid size={3} className={"d-row-right"}>
+                  <Icons
+                    key={"Person"}
+                    name={"Person"}
+                    fill={"whitesmoke"}
+                    className={"w-20 h-20"}
+                  />
+                  <Div className={"fs-0-9rem fw-500 me-10"}>
+                    {item?.contact_name}
+                  </Div>
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
-          {headFragment(OBJECT, 0)}
+          {headFragment()}
           <Hr px={40} className={"bg-burgundy"} />
-          {descFragment(OBJECT, 0)}
+          {descFragment()}
         </Card>
       )
     };

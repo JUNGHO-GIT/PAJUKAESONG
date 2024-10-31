@@ -7,9 +7,8 @@ import { axios } from "@importLibs";
 import { insertComma } from "@importScripts";
 import { Order } from "@importSchemas";
 import { Loader, Filter } from "@importLayouts";
-import { Select } from "@importContainers";
 import { Div, Hr } from "@importComponents";
-import { Paper, Grid, Card, MenuItem, TablePagination } from "@importMuis";
+import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderList = () => {

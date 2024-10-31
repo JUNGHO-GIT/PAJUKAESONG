@@ -6,7 +6,7 @@ import { useResponsive, useValidateUser } from "@importHooks";
 import { axios } from "@importLibs";
 import { setLocal } from "@importScripts";
 import { User } from "@importSchemas";
-import { Loader, Filter } from "@importLayouts";
+import { Loader } from "@importLayouts";
 import { Input } from "@importContainers";
 import { Div, Btn, Hr, Br } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -115,62 +115,70 @@ export const UserLogin = () => {
   const loginNode = () => {
     // 2. login
     const loginSection = () => {
-      const loginFragment = (item: any, i: number) => (
-        <Grid container={true} spacing={3} key={`login-${i}`}>
-          <Grid size={12}>
-            <Input
-              required={true}
-              label={"아이디"}
-              helperText={"이메일 형식으로 입력해주세요."}
-              value={item?.user_id}
-              inputRef={REFS?.[i]?.user_id}
-              error={ERRORS?.[i]?.user_id}
-              disabled={isAdmin || isUser}
-              onChange={(e: any) => {
-                // 빈값 처리
-                let value = e.target.value === "" ? "" : e.target.value;
-                // 30자 제한
-                if (value.length > 30) {
-                  return;
-                }
-                // object 설정
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  user_id: value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              required={true}
-              type={"password"}
-              label={"비밀번호"}
-              helperText={"영문, 숫자, 특수문자 포함 8자 이상 입력해주세요."}
-              value={item?.user_pw}
-              inputRef={REFS?.[i]?.user_pw}
-              error={ERRORS?.[i]?.user_pw}
-              disabled={isAdmin || isUser}
-              onChange={(e: any) => {
-                // 빈값 처리
-                let value = e.target.value === "" ? "" : e.target.value;
-                // 30자 제한
-                if (value.length > 30) {
-                  return;
-                }
-                // object 설정
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  user_pw: value,
-                }));
-              }}
-            />
-          </Grid>
+      const loginFragment = () => (
+        <Grid container={true} spacing={0}>
+          {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
+            <Grid container={true} spacing={3} key={`login-${i}`}>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <Input
+                    required={true}
+                    label={"아이디"}
+                    helperText={"이메일 형식으로 입력해주세요."}
+                    value={item?.user_id}
+                    inputRef={REFS?.[i]?.user_id}
+                    error={ERRORS?.[i]?.user_id}
+                    disabled={isAdmin || isUser}
+                    onChange={(e: any) => {
+                      // 빈값 처리
+                      let value = e.target.value === "" ? "" : e.target.value;
+                      // 30자 제한
+                      if (value.length > 30) {
+                        return;
+                      }
+                      // object 설정
+                      setOBJECT((prev: any) => ({
+                        ...prev,
+                        user_id: value,
+                      }));
+                    }}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <Input
+                    required={true}
+                    type={"password"}
+                    label={"비밀번호"}
+                    helperText={"영문, 숫자, 특수문자 포함 8자 이상 입력해주세요."}
+                    value={item?.user_pw}
+                    inputRef={REFS?.[i]?.user_pw}
+                    error={ERRORS?.[i]?.user_pw}
+                    disabled={isAdmin || isUser}
+                    onChange={(e: any) => {
+                      // 빈값 처리
+                      let value = e.target.value === "" ? "" : e.target.value;
+                      // 30자 제한
+                      if (value.length > 30) {
+                        return;
+                      }
+                      // object 설정
+                      setOBJECT((prev: any) => ({
+                        ...prev,
+                        user_pw: value,
+                      }));
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       return (
         <Card className={"border-1 radius-1 shadow-1 p-20"}>
-          {loginFragment(OBJECT, 0)}
+          {loginFragment()}
         </Card>
       );
     };

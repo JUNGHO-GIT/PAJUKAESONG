@@ -98,54 +98,68 @@ export const NoticeDetail = () => {
   const detailNode = () => {
     // 2. detail
     const detailSection = () => {
-      const headFragment = (item: any, i: number) => (
-        <Grid container={true} spacing={2} key={`head-${i}`}>
-          <Grid size={12}>
-            <Div className={"fs-1-8rem fw-700 black"}>
-              {item?.notice_title}
-            </Div>
-          </Grid>
+      const headFragment = () => (
+        <Grid container={true} spacing={0}>
+          {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
+            <Grid container={true} spacing={2} key={`head-${i}`}>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <Div className={"fs-1-8rem fw-700 black"}>
+                    {item?.notice_title}
+                  </Div>
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
-      const descFragment = (item: any, i: number) => (
-        <Grid container={true} spacing={2} key={`desc-${i}`}>
-          <Grid size={12} className={"d-row-center"}>
-            <TextArea
-              label={""}
-              readOnly={true}
-              value={item?.notice_content}
-              inputclass={"h-min50vh border-none"}
-            />
-          </Grid>
-          <Grid size={9} className={"d-row-left"}>
-            <Icons
-              key={"Calendar"}
-              name={"Calendar"}
-              fill={"whitesmoke"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500"}>
-              {getDayFmt(item?.notice_regDt)}
-            </Div>
-          </Grid>
-          <Grid size={3} className={"d-row-right"}>
-            <Icons
-              key={"View"}
-              name={"View"}
-              fill={"whitesmoke"}
-              className={"w-20 h-20"}
-            />
-            <Div className={"fs-1-0rem fw-500 me-10"}>
-              {item?.notice_view}
-            </Div>
-          </Grid>
+      const descFragment = () => (
+        <Grid container={true} spacing={0}>
+          {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
+            <Grid container={true} spacing={2} key={`desc-${i}`}>
+              <Grid container={true} spacing={0}>
+                <Grid size={12} className={"d-row-center"}>
+                  <TextArea
+                    label={""}
+                    readOnly={true}
+                    value={item?.notice_content}
+                    inputclass={"h-min50vh border-none"}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={9} className={"d-row-left"}>
+                  <Icons
+                    key={"Calendar"}
+                    name={"Calendar"}
+                    fill={"whitesmoke"}
+                    className={"w-20 h-20"}
+                  />
+                  <Div className={"fs-1-0rem fw-500"}>
+                    {getDayFmt(item?.notice_regDt)}
+                  </Div>
+                </Grid>
+                <Grid size={3} className={"d-row-right"}>
+                  <Icons
+                    key={"View"}
+                    name={"View"}
+                    fill={"whitesmoke"}
+                    className={"w-20 h-20"}
+                  />
+                  <Div className={"fs-1-0rem fw-500 me-10"}>
+                    {item?.notice_view}
+                  </Div>
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
-          {headFragment(OBJECT, 0)}
+          {headFragment()}
           <Hr px={40} className={"bg-burgundy"} />
-          {descFragment(OBJECT, 0)}
+          {descFragment()}
         </Card>
       )
     };

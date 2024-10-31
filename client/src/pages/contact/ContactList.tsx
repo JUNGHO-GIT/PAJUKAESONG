@@ -85,10 +85,10 @@ export const ContactList = () => {
         </Grid>
       );
       const listFragment = () => (
-        <Grid container={true} spacing={2}>
+        <Grid container={true} spacing={0}>
           {OBJECT.filter((f: any) => f._id).map((item: any, i: number) => (
-            <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
-              <Grid container={true} spacing={2}>
+            <Grid container={true} spacing={2} key={`list-${i}`}>
+              <Grid container={true} spacing={0}>
                 <Grid size={3}>
                   <Div className={"fs-0-7rem"}>
                     {item?.contact_category === "franchise" && "가맹 문의"}
@@ -116,7 +116,7 @@ export const ContactList = () => {
                   </Div>
                 </Grid>
               </Grid>
-              <Grid size={12}>
+              <Grid container={true} spacing={0}>
                 {i < OBJECT.length - 1 && (
                   <Hr px={20} className={"bg-light-grey"} />
                 )}

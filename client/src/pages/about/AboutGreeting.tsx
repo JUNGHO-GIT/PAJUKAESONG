@@ -55,7 +55,7 @@ export const AboutGreeting = () => {
                 shadow={false}
                 radius={false}
                 group={"main"}
-                src={"stamp.webp"}
+                src={"stamp_6.webp"}
               />
             </Div>
           </Grid>

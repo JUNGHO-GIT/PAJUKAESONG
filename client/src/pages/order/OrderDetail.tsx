@@ -190,62 +190,80 @@ export const OrderDetail = () => {
     };
     // 3. order
     const orderSection = () => {
-      const orderFragment = (item: any, i: number) => (
-        <Grid container={true} spacing={3} key={`order-${i}`}>
-          <Grid size={12} className={"mt-10"}>
-            <Input
-              label={"주문 유형"}
-              disabled={true}
-              value={item?.order_category === "reservation" ? "매장 예약" : "상품 구매"}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              label={"이름"}
-              disabled={true}
-              value={item?.order_name || ""}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              label={"이메일"}
-              disabled={true}
-              value={item?.order_email || ""}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              label={"전화번호"}
-              disabled={true}
-              value={item?.order_phone || ""}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              label={"인원"}
-              disabled={true}
-              value={item?.order_headcount || ""}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              disabled={true}
-              label={"주문 날짜"}
-              value={getDayFmt(item?.order_date || "")}
-            />
-          </Grid>
-          <Grid size={12}>
-            <Input
-              disabled={true}
-              label={"예약 시간"}
-              value={item?.order_time || ""}
-            />
-          </Grid>
+      const orderFragment = () => (
+        <Grid container={true} spacing={0}>
+          {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
+            <Grid container={true} spacing={3} key={`order-${i}`}>
+              <Grid container={true} spacing={0}>
+                <Grid size={12} className={"mt-10"}>
+                  <Input
+                    label={"주문 유형"}
+                    disabled={true}
+                    value={item?.order_category === "reservation" ? "매장 예약" : "상품 구매"}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <Input
+                    label={"이름"}
+                    disabled={true}
+                    value={item?.order_name || ""}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <Input
+                    label={"이메일"}
+                    disabled={true}
+                    value={item?.order_email || ""}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <Input
+                    label={"전화번호"}
+                    disabled={true}
+                    value={item?.order_phone || ""}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <Input
+                    label={"인원"}
+                    disabled={true}
+                    value={item?.order_headcount || ""}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <Input
+                    disabled={true}
+                    label={"주문 날짜"}
+                    value={getDayFmt(item?.order_date || "")}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <Input
+                    disabled={true}
+                    label={"예약 시간"}
+                    value={item?.order_time || ""}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
-          {orderFragment(OBJECT, 0)}
+          {orderFragment()}
         </Card>
       );
     };

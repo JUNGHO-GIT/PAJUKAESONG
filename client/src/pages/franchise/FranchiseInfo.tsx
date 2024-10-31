@@ -229,8 +229,8 @@ export const FranchiseInfo = () => {
       const costFragment = () => (
         <Grid container={true} spacing={0}>
           {OBJECT_COST.map((item: any, i: number) => (
-            <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
-              <Grid container={true} spacing={2}>
+            <Grid container={true} spacing={2} key={`list-${i}`}>
+              <Grid container={true} spacing={0}>
                 <Grid size={3}>
                   <Div className={"fs-0-8rem"}>
                     {item.label}

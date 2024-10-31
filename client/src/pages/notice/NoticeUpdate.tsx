@@ -103,73 +103,83 @@ export const NoticeUpdate = () => {
   const updateNode = () => {
     // 1. update
     const updateSection = () => {
-      const updateFragment = (item: any, i: number) => (
-        <Grid container={true} spacing={3} key={`update-${i}`}>
-          <Grid size={12} className={"mt-10"}>
-            <Input
-              required={true}
-              label={"공지사항 제목"}
-              value={item?.notice_title}
-              inputRef={REFS?.[i]?.notice_title}
-              error={ERRORS?.[i]?.notice_title}
-              onChange={(e: any) => {
-                // 빈값 처리
-                let value = e.target.value || "";
-                // 100자 제한
-                if (value.length > 100) {
-                  return;
-                }
-                // object 설정
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  notice_title: value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <TextArea
-              required={true}
-              label={"공지사항 내용"}
-              value={item?.notice_content}
-              itemRef={REFS?.[i]?.notice_content}
-              error={ERRORS?.[i]?.notice_content}
-              inputclass={"h-min50vh border-none"}
-              onChange={(e: any) => {
-                // 빈값 처리
-                let value = e.target.value || "";
-                // object 설정
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  notice_content: value,
-                }));
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <InputFile
-              required={true}
-              limit={1}
-              label={"공지사항 이미지"}
-              group={"notice"}
-              value={fileList}
-              existing={item?.notice_images}
-              onChange={(updatedFiles: File[] | null) => {
-                setFileList(updatedFiles);
-              }}
-              handleExistingFilesChange={(updatedExistingFiles: string[]) => {
-                setOBJECT((prev: any) => ({
-                  ...prev,
-                  notice_images: updatedExistingFiles,
-                }));
-              }}
-            />
-          </Grid>
+      const updateFragment = () => (
+        <Grid container={true} spacing={0}>
+          {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
+            <Grid container={true} spacing={3} key={`update-${i}`}>
+              <Grid container={true} spacing={0}>
+                <Grid size={12} className={"mt-10"}>
+                  <Input
+                    required={true}
+                    label={"공지사항 제목"}
+                    value={item?.notice_title}
+                    inputRef={REFS?.[i]?.notice_title}
+                    error={ERRORS?.[i]?.notice_title}
+                    onChange={(e: any) => {
+                      // 빈값 처리
+                      let value = e.target.value || "";
+                      // 100자 제한
+                      if (value.length > 100) {
+                        return;
+                      }
+                      // object 설정
+                      setOBJECT((prev: any) => ({
+                        ...prev,
+                        notice_title: value,
+                      }));
+                    }}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <TextArea
+                    required={true}
+                    label={"공지사항 내용"}
+                    value={item?.notice_content}
+                    itemRef={REFS?.[i]?.notice_content}
+                    error={ERRORS?.[i]?.notice_content}
+                    inputclass={"h-min50vh border-none"}
+                    onChange={(e: any) => {
+                      // 빈값 처리
+                      let value = e.target.value || "";
+                      // object 설정
+                      setOBJECT((prev: any) => ({
+                        ...prev,
+                        notice_content: value,
+                      }));
+                    }}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
+                <Grid size={12}>
+                  <InputFile
+                    required={true}
+                    limit={1}
+                    label={"공지사항 이미지"}
+                    group={"notice"}
+                    value={fileList}
+                    existing={item?.notice_images}
+                    onChange={(updatedFiles: File[] | null) => {
+                      setFileList(updatedFiles);
+                    }}
+                    handleExistingFilesChange={(updatedExistingFiles: string[]) => {
+                      setOBJECT((prev: any) => ({
+                        ...prev,
+                        notice_images: updatedExistingFiles,
+                      }));
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </Grid>
       );
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
-          {updateFragment(OBJECT, 0)}
+          {updateFragment()}
         </Card>
       );
     };

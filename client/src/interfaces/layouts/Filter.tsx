@@ -178,6 +178,9 @@ export const Filter = (
             {firstStr === "order" && "주문하기"}
             {firstStr === "notice" && "등록하기"}
             {firstStr === "contact" && "문의하기"}
+            {firstStr === "menu" && "등록하기"}
+            {firstStr === "product" && "등록하기"}
+            {firstStr === "franchise" && "등록하기"}
           </Btn>
         </Grid>
       </Grid>
