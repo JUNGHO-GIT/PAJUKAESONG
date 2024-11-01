@@ -72,6 +72,15 @@ export const Main = () => {
 
     // 2. menu -------------------------------------------------------------------------------------
     const menuSection = () => {
+      const titleFragment = () => (
+        <Grid container={true} spacing={0} className={"p-0"}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-1-6rem fw-700"}>
+              메뉴 소개
+            </Div>
+          </Grid>
+        </Grid>
+      );
       const selectFragment = () => (
         <Grid container={true} spacing={0} className={"p-10"}>
           <Grid size={12} className={"d-row-center"}>
@@ -143,7 +152,7 @@ export const Main = () => {
                       }}
                     />
                     <Br px={20} />
-                    <Div max={10} className={"fs-1-2rem fw-600"}>
+                    <Div max={10} className={"fs-1-2rem fw-700"}>
                       {item?.menu_name}
                     </Div>
                   </Div>
@@ -161,8 +170,9 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"border-dark-bottom-1 py-20"}>
+        <Grid container={true} spacing={0} className={"bg-ivory-light border-dark-bottom-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
+            {titleFragment()}
             {selectFragment()}
             {menuFragment()}
             {paginationFragment()}
@@ -173,6 +183,15 @@ export const Main = () => {
 
     // 3. notice -----------------------------------------------------------------------------------
     const noticeSection = () => {
+      const titleFragment = () => (
+        <Grid container={true} spacing={0} className={"p-0"}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-1-6rem fw-700"}>
+              공지사항
+            </Div>
+          </Grid>
+        </Grid>
+      );
       const noticeFragment = () => (
         <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-center"}>
@@ -202,7 +221,7 @@ export const Main = () => {
             >
               {OBJECT_NOTICE?.map((item: any, index: number) => (
                 <SwiperSlide key={index}>
-                  <Div className={"d-col-left bg-white border-1 radius-1 shadow-1 p-20"}>
+                  <Div className={"d-col-center bg-white border-1 radius-1 shadow-1 p-20"}>
                     <Img
                       max={200}
                       hover={true}
@@ -219,12 +238,14 @@ export const Main = () => {
                       }}
                     />
                     <Hr px={40} className={"bg-light-grey"} />
-                    <Div max={20} className={"fs-1-0rem fw-600"}>
-                      {item?.notice_title}
-                    </Div>
-                    <Br px={5} />
-                    <Div className={"fs-0-8rem fw-500 grey"}>
-                      {getDayFmt(item?.notice_regDt)}
+                    <Div className={"w-100p d-col-left"}>
+                      <Div max={20} className={"fs-1-0rem fw-700"}>
+                        {item?.notice_title}
+                      </Div>
+                      <Br px={5} />
+                      <Div className={"fs-0-8rem fw-500 grey"}>
+                        {getDayFmt(item?.notice_regDt)}
+                      </Div>
                     </Div>
                   </Div>
                 </SwiperSlide>
@@ -243,6 +264,7 @@ export const Main = () => {
       return (
         <Grid container={true} spacing={0} className={"bg-ivory border-dark-bottom-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
+            {titleFragment()}
             {noticeFragment()}
             {paginationFragment()}
           </Grid>
@@ -252,6 +274,15 @@ export const Main = () => {
 
     // 4. location ---------------------------------------------------------------------------------
     const locationSection = () => {
+      const titleFragment = () => (
+        <Grid container={true} spacing={0} className={"p-0"}>
+          <Grid size={12} className={"d-center"}>
+            <Div className={"fs-1-6rem fw-700"}>
+              오시는 길
+            </Div>
+          </Grid>
+        </Grid>
+      );
       const locationFragment = () => (
         <Grid container={true} spacing={0} className={"p-20"}>
           <Grid size={12} className={"d-center"}>
@@ -264,8 +295,9 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"py-20"}>
+        <Grid container={true} spacing={0} className={"bg-ivory-light py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
+            {titleFragment()}
             {locationFragment()}
           </Grid>
         </Grid>

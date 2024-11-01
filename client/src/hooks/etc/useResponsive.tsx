@@ -1,11 +1,14 @@
 // useResponsive.tsx
 
+import { useState, useEffect } from "@importReacts";
+import { useCommonValue } from "@importHooks";
 import { useMediaQuery } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const useResponsive = () => {
 
-  // 2-1. useState ---------------------------------------------------------------------------------
+  // 1. common -------------------------------------------------------------------------------------
+  const { PATH } = useCommonValue();
   const isXxs = useMediaQuery("(min-width: 0px) and (max-width: 330px)");
   const isXs = useMediaQuery("(min-width: 330px) and (max-width: 630px)");
   const isSm = useMediaQuery("(min-width: 630px) and (max-width: 930px)");
@@ -14,7 +17,30 @@ export const useResponsive = () => {
   const isXl = useMediaQuery("(min-width: 1500px) and (max-width: 1800px)");
   const isXxl = useMediaQuery("(min-width: 1800px)");
 
-  const paperClass = `content-wrapper fadeIn px-10 py-20 h-min60vh ${isXxs ? "w-100p" : isXs ? "w-100p" : isSm ? "w-90p" : isMd ? "w-70p" : isLg ? "w-60p" : isXl ? "w-50p" : isXxl ? "w-40p" : ""}`;
+  // 2. useState -----------------------------------------------------------------------------------
+  const [paperClass, setPaperClass] = useState("");
+
+  // 3. useEffect ----------------------------------------------------------------------------------
+  useEffect(() => {
+    let baseClass = "content-wrapper fadeIn h-min50vh";
+    baseClass += PATH.includes("list") ? " px-10 py-20" : " px-20 py-20";
+
+    if (isXxs || isXs) {
+      baseClass += " w-100p";
+    } else if (isSm) {
+      baseClass += " w-90p";
+    } else if (isMd) {
+      baseClass += " w-70p";
+    } else if (isLg) {
+      baseClass += " w-60p";
+    } else if (isXl) {
+      baseClass += " w-50p";
+    } else if (isXxl) {
+      baseClass += " w-40p";
+    }
+
+    setPaperClass(baseClass);
+  }, [PATH, isXxs, isXs, isSm, isMd, isLg, isXl, isXxl]);
 
   // -----------------------------------------------------------------------------------------------
   return {

@@ -23,7 +23,7 @@ export const Footer = () => {
             shadow={false}
             radius={false}
             group={"main"}
-            src={"logo1_4.webp"}
+            src={"logo1_5.webp"}
             onClick={() => {
               navigate("/main");
             }}
