@@ -21,10 +21,10 @@ const modifyEnvAndIndex = () => {
 
     const updatedEnv = linesEnv.map(line => {
       if (line.startsWith('CLIENT_URL=')) {
-        return `CLIENT_URL=https://www.pajukaesong.com/PAJUKAESONG`;
+        return 'CLIENT_URL=https://www.junghomun.com/JPAGE';
       }
       if (line.startsWith('GOOGLE_CALLBACK_URL=')) {
-        return `GOOGLE_CALLBACK_URL=https://www.pajukaesong.com/PAJUKAESONG/api/auth/google/callback`;
+        return 'GOOGLE_CALLBACK_URL=https://www.junghomun.com/JPAGE/api/auth/google/callback';
       }
       // 다른 줄은 그대로 유지
       return line;
@@ -103,7 +103,7 @@ const gitPush = () => {
       : 'git commit -m \"$(date +%Y-%m-%d) $(date +%H:%M:%S)\"'
     );
     const gitPush = (
-      'git push origin main'
+      'git push origin master'
     );
 
     execSync(gitAdd, { stdio: 'inherit' });
@@ -132,11 +132,11 @@ const runRemoteScript = () => {
     );
 
     const ipAddr = "34.23.233.23";
-    const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/server';
+    const cmdCd = 'cd /var/www/junghomun.com/JPAGE/server';
     const cmdGitFetch = 'sudo git fetch --all';
-    const cmdGitReset = 'sudo git reset --hard origin/main';
+    const cmdGitReset = 'sudo git reset --hard origin/master';
     const cmdRmClient = 'sudo rm -rf client';
-    const cmdCh = 'sudo chmod -R 755 /var/www/pajukaesong.com/PAJUKAESONG/server';
+    const cmdCh = 'sudo chmod -R 755 /var/www/junghomun.com/JPAGE/server';
     const cmdNpm = 'sudo npm install';
     const cmdRestart = 'sudo pm2 restart all';
     const cmdSave = 'sudo pm2 save';
@@ -167,10 +167,10 @@ const restoreEnvAndIndex = () => {
 
     const updatedEnv = linesEnv.map(line => {
       if (line.startsWith('CLIENT_URL=')) {
-        return `CLIENT_URL=http://localhost:3000/PAJUKAESONG`;
+        return 'CLIENT_URL=http://localhost:3000/JPAGE';
       }
       if (line.startsWith('GOOGLE_CALLBACK_URL=')) {
-        return `GOOGLE_CALLBACK_URL=http://localhost:4100/PAJUKAESONG/api/auth/google/callback`;
+        return 'GOOGLE_CALLBACK_URL=http://localhost:4000/JPAGE/api/auth/google/callback';
       }
       // 다른 줄은 그대로 유지
       return line;
