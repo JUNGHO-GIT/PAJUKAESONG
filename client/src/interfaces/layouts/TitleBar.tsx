@@ -1,7 +1,7 @@
 // TitleBar.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useResponsive } from "@importHooks";
+import { useCommonValue } from "@importHooks";
 import { Swiper, SwiperSlide } from "@importLibs";
 import { Div, Img, Icons } from "@importComponents";
 import { Grid, Paper } from "@importMuis";
@@ -11,10 +11,8 @@ export const TitleBar = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { PATH, location_category } = useCommonValue();
-  const { isXxs, isXs, isSm, isMd, isLg, isXl, isXxl } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [objectHeight, setObjectHeight] = useState<string>("");
   const [objectBgColor, setObjectBgColor] = useState<string>("");
   const [titleBreadcrumb, setTitleBreadcrumb] = useState<string>("");
   const [titleValue, setTitleValue] = useState<string>("");
@@ -25,13 +23,6 @@ export const TitleBar = () => {
       setObjectBgColor("bg-burgundy");
     }
   }, [PATH]);
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
-    if (isXxs || isXs || isSm || isMd || isLg || isXl || isXxl) {
-      setObjectHeight(PATH.includes("main") ? "" : "h-15vh");
-    }
-  }, [PATH, isXxs, isXs, isSm, isMd, isLg, isXl, isXxl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
@@ -225,7 +216,7 @@ export const TitleBar = () => {
       </Grid>
     );
     return (
-      <Paper className={`layout-wrapper p-relative border-dark-bottom-1 border-dark-top-1 z-100 fadeIn ${objectHeight} ${objectBgColor}`}>
+      <Paper className={`layout-wrapper p-relative border-dark-bottom-1 border-dark-top-1 z-100 fadeIn h-15vh ${objectBgColor}`}>
         {PATH.includes("main") ? mainSection() : titleSection()}
       </Paper>
     );
