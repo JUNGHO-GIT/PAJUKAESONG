@@ -114,7 +114,7 @@ export const NoticeDetail = () => {
         </Grid>
       );
       const descFragment = () => (
-        <Grid container={true} spacing={0}>
+        <Grid container={true} spacing={0} className={"px-10"}>
           {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
             <Grid container={true} spacing={2} key={`desc-${i}`}>
               <Grid container={true} spacing={0}>
@@ -177,7 +177,7 @@ export const NoticeDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={paperClass}>
+      <Paper className={`${paperClass}`}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}

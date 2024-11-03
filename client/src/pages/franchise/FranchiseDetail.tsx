@@ -146,7 +146,7 @@ export const FranchiseDetail = () => {
         </Grid>
       );
       const descFragment = () => (
-        <Grid container={true} spacing={2}>
+        <Grid container={true} spacing={0} className={"px-10"}>
           {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
             <Grid container={true} spacing={2} key={`desc-${i}`}>
               <Grid container={true} spacing={0}>
@@ -164,7 +164,7 @@ export const FranchiseDetail = () => {
                     fill={"whitesmoke"}
                     className={"w-15 h-15 dark"}
                   />
-                  <Div className={"fs-0-9rem fw-500 light-black"}>
+                  <Div className={"fs-0-9rem fw-500 black"}>
                     {`${item?.franchise_address_main} (${item?.franchise_address_detail})`}
                   </Div>
                 </Grid>
@@ -177,7 +177,7 @@ export const FranchiseDetail = () => {
                     fill={"whitesmoke"}
                     className={"w-15 h-15 dark"}
                   />
-                  <Div className={"fs-0-9rem fw-500 light-black"}>
+                  <Div className={"fs-0-9rem fw-500 black"}>
                     {item?.franchise_phone}
                   </Div>
                 </Grid>
@@ -190,7 +190,7 @@ export const FranchiseDetail = () => {
                     fill={"whitesmoke"}
                     className={"w-15 h-15 dark"}
                   />
-                  <Div className={"fs-0-9rem fw-500 light-black"}>
+                  <Div className={"fs-0-9rem fw-500 black"}>
                     {getDayFmt(item?.franchise_regDt)}
                   </Div>
                 </Grid>
@@ -221,7 +221,7 @@ export const FranchiseDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={paperClass}>
+      <Paper className={`${paperClass}`}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}

@@ -11,7 +11,7 @@ export const TitleBar = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { PATH, location_category } = useCommonValue();
-  const { isXxs, isXs, isSm, isMd, isLg, isXl } = useResponsive();
+  const { isXxs, isXs, isSm, isMd, isLg, isXl, isXxl } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [objectHeight, setObjectHeight] = useState<string>("");
@@ -28,16 +28,10 @@ export const TitleBar = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    if (isXxs || isXs) {
+    if (isXxs || isXs || isSm || isMd || isLg || isXl || isXxl) {
       setObjectHeight(PATH.includes("main") ? "" : "h-15vh");
     }
-    else if (isSm || isMd) {
-      setObjectHeight(PATH.includes("main") ? "" : "h-18vh");
-    }
-    else if (isLg || isXl) {
-      setObjectHeight(PATH.includes("main") ? "" : "h-23vh");
-    }
-  }, [PATH, isXxs, isXs, isSm, isMd, isLg, isXl]);
+  }, [PATH, isXxs, isXs, isSm, isMd, isLg, isXl, isXxl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {

@@ -2,6 +2,7 @@
 
 import { Admin } from "@schemas/Admin";
 import { Order } from "@schemas/Order";
+import { Contact } from "@schemas/Contact";
 
 // 1-0. visit (count) ------------------------------------------------------------------------------
 export const visitCount = async (
@@ -63,7 +64,52 @@ export const visitSave = async (
   return finalResult;
 };
 
-// 2-0. order (count) ------------------------------------------------------------------------------
+// 2-0. contact (count) ----------------------------------------------------------------------------
+export const contactCount = async (
+) => {
+  const finalResult = await Contact.countDocuments();
+
+  return finalResult;
+};
+
+// 2-1. contact (list) -----------------------------------------------------------------------------
+export const contactList = async (
+  sort_param: 1 | -1,
+  page_param: number,
+) => {
+  const finalResult:any = await Contact.aggregate([
+    {
+      $project: {
+        _id: 1,
+        contact_number: 1,
+        contact_category: 1,
+        contact_name: 1,
+        contact_email: 1,
+        contact_phone: 1,
+        contact_title: 1,
+        contact_content: 1,
+        contact_images: 1,
+        contact_regDt: 1,
+        contact_updateDt: 1,
+      }
+    },
+    {
+      $sort: {
+        contact_number: sort_param
+      }
+    },
+    {
+      $skip: (page_param) * 10
+    },
+    {
+      $limit: 10
+    }
+  ]);
+
+  return finalResult;
+};
+
+// 3-0. order (count) ------------------------------------------------------------------------------
 export const orderCount = async (
   DATE_param: string,
 ) => {
@@ -76,7 +122,7 @@ export const orderCount = async (
   return finalResult;
 };
 
-// 2-1. order (list) -------------------------------------------------------------------------------
+// 3-1. order (list) -------------------------------------------------------------------------------
 export const orderList = async (
   DATE_param: string,
   sort_param: 1 | -1,

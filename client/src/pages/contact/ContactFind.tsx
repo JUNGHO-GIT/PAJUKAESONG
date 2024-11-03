@@ -154,7 +154,7 @@ export const ContactFind = () => {
     );
     // 10. return
     return (
-      <Paper className={paperClass}>
+      <Paper className={`${paperClass}`}>
         {LOADING ? <Loader /> : (
           <>
             {findSection()}

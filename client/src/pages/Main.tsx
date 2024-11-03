@@ -14,7 +14,7 @@ export const Main = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { URL, navigate } = useCommonValue();
   const { getDayFmt } = useCommonDate();
-  const { isXxs, isXs, isSm, isMd, isLg, isXl } = useResponsive();
+  const { isXxs, isXs, isSm, isMd, isLg, isXl, isXxl } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ export const Main = () => {
             <Swiper
               spaceBetween={30}
               slidesPerView={LOADING ? 0 : (
-                isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : 2
+                isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : isXxl ? 2 : 2
               )}
               centeredSlides={false}
               loop={true}
@@ -198,7 +198,7 @@ export const Main = () => {
             <Swiper
               spaceBetween={30}
               slidesPerView={LOADING ? 0 : (
-                isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : 2
+                isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : isXxl ? 2 : 2
               )}
               slidesPerGroup={1}
               centeredSlides={false}
@@ -307,13 +307,9 @@ export const Main = () => {
     // 10. return ----------------------------------------------------------------------------------
     return (
       <Paper className={"content-wrapper fadeIn"}>
-        <Grid container={true} spacing={0}>
-          <Grid size={12} className={"d-col-center"}>
-            {menuSection()}
-            {noticeSection()}
-            {locationSection()}
-          </Grid>
-        </Grid>
+        {menuSection()}
+        {noticeSection()}
+        {locationSection()}
       </Paper>
     );
   };

@@ -225,11 +225,9 @@ export const OrderSave = () => {
                   }}
                 />
               </Grid>
-              <Grid size={12}>
-                {i < OBJECT?.order_product?.length - 1 && (
-                  <Hr px={20} className={"bg-light-grey"} />
-                )}
-              </Grid>
+              {i < OBJECT?.order_product?.length - 1 && (
+                <Hr px={20} className={"bg-light-grey"} />
+              )}
             </Grid>
           ))}
         </Grid>
@@ -449,7 +447,7 @@ export const OrderSave = () => {
     );
     // 10. return
     return (
-      <Paper className={paperClass}>
+      <Paper className={`${paperClass}`}>
         {LOADING ? <Loader /> : (
           <>
             {productSection()}

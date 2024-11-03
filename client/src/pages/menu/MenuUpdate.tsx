@@ -270,7 +270,7 @@ export const MenuUpdate = () => {
     );
     // 10. return
     return (
-      <Paper className={paperClass}>
+      <Paper className={`${paperClass}`}>
         {LOADING ? <Loader /> : (
           <>
             {updateSection()}

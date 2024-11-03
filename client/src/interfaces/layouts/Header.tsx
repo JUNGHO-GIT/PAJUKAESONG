@@ -12,7 +12,7 @@ export const Header = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, PATH, firstStr, secondStr } = useCommonValue();
   const { dataArray, isAdmin, location_category } = useCommonValue();
-  const { isXxs, isXs, isSm, isMd, isLg, isXl } = useResponsive();
+  const { isXxs, isXs, isSm, isMd, isLg, isXl, isXxl } = useResponsive();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [tabWidth, setTabWidth] = useState<string>("");
@@ -49,7 +49,11 @@ export const Header = () => {
       setTabWidth("w-17p");
       setTabHeight("h-15vh");
     }
-  }, [isXxs, isXs, isSm, isMd, isLg, isXl]);
+    else if (isXxl) {
+      setTabWidth("w-17p");
+      setTabHeight("h-15vh");
+    }
+  }, [isXxs, isXs, isSm, isMd, isLg, isXl, isXxl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화

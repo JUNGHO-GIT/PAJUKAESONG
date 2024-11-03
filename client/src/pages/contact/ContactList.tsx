@@ -116,11 +116,9 @@ export const ContactList = () => {
                   </Div>
                 </Grid>
               </Grid>
-              <Grid container={true} spacing={0}>
-                {i < OBJECT.length - 1 && (
-                  <Hr px={20} className={"bg-light-grey"} />
-                )}
-              </Grid>
+              {i < OBJECT.length - 1 && (
+                <Hr px={20} className={"bg-light-grey"} />
+              )}
             </Grid>
           ))}
         </Grid>
@@ -144,7 +142,7 @@ export const ContactList = () => {
     );
     // 10. return
     return (
-      <Paper className={paperClass}>
+      <Paper className={`${paperClass}`}>
         {LOADING ? <Loader /> : (
           <>
             {listSection()}

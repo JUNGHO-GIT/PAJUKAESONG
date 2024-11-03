@@ -83,10 +83,10 @@ export const NoticeList = () => {
         </Grid>
       );
       const listFragment = () => (
-        <Grid container={true} spacing={2}>
+        <Grid container={true} spacing={0}>
           {OBJECT.filter((f: any) => f._id).map((item: any, i: number) => (
-            <Grid size={12} className={"d-col-center"} key={`list-${i}`}>
-              <Grid container={true} spacing={2}>
+            <Grid container={true} spacing={2} key={`list-${i}`}>
+              <Grid container={true} spacing={0}>
                 <Grid size={3}>
                   <Div className={"fs-0-7rem"}>
                     {item?.notice_number}
@@ -112,6 +112,8 @@ export const NoticeList = () => {
                     {getDayNotFmt(item?.notice_regDt).format("MM-DD")}
                   </Div>
                 </Grid>
+              </Grid>
+              <Grid container={true} spacing={0}>
                 {i < OBJECT.length - 1 && (
                   <Hr px={20} className={"bg-light-grey"} />
                 )}
@@ -139,7 +141,7 @@ export const NoticeList = () => {
     );
     // 10. return
     return (
-      <Paper className={paperClass}>
+      <Paper className={`${paperClass}`}>
         {LOADING ? <Loader /> : (
           <>
             {listSection()}

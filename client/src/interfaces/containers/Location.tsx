@@ -45,9 +45,9 @@ export const Location = (props: any) => {
           anchorColor: "#ffffff",
           content: `
           <div style="display: block; padding: 10px;">
-            <p style="font-size: 1.1rem; font-weight: 700;">파주개성면옥</p>
-            <p style="font-size: 0.8rem;" font-weight: 500;>⊙ 경기 파주시 문산읍 방촌로 1675-34</p>
-            <p style="font-size: 0.8rem;" font-weight: 500;>☎ 031-952-8083</p>
+            <p style="display: flex; justify-content: center; font-size: 1.2rem; font-weight: 700;">파주개성면옥</p>
+            <p style="display: flex; justify-content: center; font-size: 0.8rem;" font-weight: 500;>⊙ 경기 파주시 문산읍 방촌로 1675-34</p>
+            <p style="display: flex; justify-content: center; font-size: 0.8rem;" font-weight: 500;>☎ 031-952-8083</p>
           </div>
           `,
         });

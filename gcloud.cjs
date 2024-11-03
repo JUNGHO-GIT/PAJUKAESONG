@@ -10,27 +10,41 @@ const winOrLinux = os.platform() === 'win32' ? "win" : "linux";
 console.log(`Activated OS is : ${winOrLinux}`);
 
 // env 파일 수정 -----------------------------------------------------------------------------------
-const modifyEnv = () => {
+const modifyEnvAndIndex = () => {
   try {
-    // 파일을 줄 단위로 나눔
     const envFile = readFileSync('.env', 'utf8');
-    const lines = envFile.split(/\r?\n/);
+    const indexFile = readFileSync('index.ts', 'utf8');
 
-    const updatedLines = lines.map(line => {
+    // 파일을 줄 단위로 나눔
+    const linesEnv = envFile.split(/\r?\n/);
+    const linesIndex = indexFile.split(/\r?\n/);
+
+    const updatedEnv = linesEnv.map(line => {
       if (line.startsWith('CLIENT_URL=')) {
         return `CLIENT_URL=https://www.pajukaesong.com/PAJUKAESONG`;
       }
       if (line.startsWith('GOOGLE_CALLBACK_URL=')) {
         return `GOOGLE_CALLBACK_URL=https://www.pajukaesong.com/PAJUKAESONG/api/auth/google/callback`;
       }
+    });
+
+    const updatedIndex = linesIndex.map(line => {
+      if (line.startsWith(`// const db = process.env.DB_NAME`)) {
+        return `const db = process.env.DB_NAME`;
+      }
+      if (line.startsWith(`const db = process.env.DB_TEST`)) {
+        return `// const db = process.env.DB_TEST`;
+      }
       // 다른 줄은 그대로 유지
       return line;
     });
 
     // 줄을 다시 합쳐서 저장
-    const newEnvFile = updatedLines.join(os.EOL);
+    const newEnvFile = updatedEnv.join(os.EOL);
+    const newIndexFile = updatedIndex.join(os.EOL);
 
     writeFileSync('.env', newEnvFile);
+    writeFileSync('index.ts', newIndexFile);
   }
   catch (error) {
     console.error(error);
@@ -140,27 +154,41 @@ const runRemoteScript = () => {
 };
 
 // env 파일 복원 -----------------------------------------------------------------------------------
-const restoreEnv = () => {
+const restoreEnvAndIndex = () => {
   try {
-    // 파일을 줄 단위로 나눔
     const envFile = readFileSync('.env', 'utf8');
-    const lines = envFile.split(/\r?\n/);
+    const indexFile = readFileSync('index.ts', 'utf8');
 
-    const updatedLines = lines.map(line => {
+    // 파일을 줄 단위로 나눔
+    const linesEnv = envFile.split(/\r?\n/);
+    const linesIndex = indexFile.split(/\r?\n/);
+
+    const updatedEnv = linesEnv.map(line => {
       if (line.startsWith('CLIENT_URL=')) {
         return `CLIENT_URL=http://localhost:3000/PAJUKAESONG`;
       }
       if (line.startsWith('GOOGLE_CALLBACK_URL=')) {
-        return `GOOGLE_CALLBACK_URL=http://localhost:4100/PAJUKAESONG/api/google/callback`;
+        return `GOOGLE_CALLBACK_URL=http://localhost:4100/PAJUKAESONG/api/auth/google/callback`;
+      }
+    });
+
+    const updatedIndex = linesIndex.map(line => {
+      if (line.startsWith(`const db = process.env.DB_NAME`)) {
+        return `// const db = process.env.DB_NAME`;
+      }
+      if (line.startsWith(`// const db = process.env.DB_TEST`)) {
+        return `const db = process.env.DB_TEST`;
       }
       // 다른 줄은 그대로 유지
       return line;
     });
 
     // 줄을 다시 합쳐서 저장
-    const newEnvFile = updatedLines.join(os.EOL);
+    const newEnvFile = updatedEnv.join(os.EOL);
+    const newIndexFile = updatedIndex.join(os.EOL);
 
     writeFileSync('.env', newEnvFile);
+    writeFileSync('index.ts', newIndexFile);
   }
   catch (error) {
     console.error(error);
@@ -169,9 +197,9 @@ const restoreEnv = () => {
 };
 
 // -------------------------------------------------------------------------------------------------
-modifyEnv();
+modifyEnvAndIndex();
 modifyChangelog();
 gitPush();
 runRemoteScript();
-restoreEnv();
+restoreEnvAndIndex();
 process.exit(0);

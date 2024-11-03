@@ -12,11 +12,12 @@ declare type FilterProps = {
   setPAGING: any;
   COUNT: any;
   flow?: any;
+  extra?: any;
 }
 
 // -------------------------------------------------------------------------------------------------
 export const Filter = (
-  { OBJECT, PAGING, setPAGING, COUNT, flow }: FilterProps
+  { OBJECT, PAGING, setPAGING, COUNT, flow, extra }: FilterProps
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------
@@ -29,13 +30,74 @@ export const Filter = (
       <Grid container={true} spacing={2} className={"px-10"}>
         <Grid size={12}>
           <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
+            className={"w-100p fs-1-0rem bg-black"}
             onClick={() => {
               flow.flowSearch();
             }}
           >
             조회하기
           </Btn>
+        </Grid>
+      </Grid>
+    );
+    // 1. admin
+    const isAdminSection = () => (
+      <Grid container={true} spacing={2} className={"px-10"}>
+        <Grid size={3} className={"d-col-center"}>
+          <Select
+            value={PAGING?.sort}
+            inputclass={"h-min0 h-5vh"}
+            onChange={(e: any) => (
+              setPAGING((prev: any) => ({
+                ...prev,
+                sort: e.target.value
+              }))
+            )}
+          >
+            {["asc", "desc"]?.map((item: string) => (
+              <MenuItem
+                key={item}
+                value={item}
+                selected={PAGING?.sort === item}
+                onChange={(e: any) => (
+                  setPAGING((prev: any) => ({
+                    ...prev,
+                    sort: e.target.value
+                  }))
+                )}
+              >
+                <Div className={"fs-0-8rem"}>
+                  {item === "asc" && "오름차순"}
+                  {item === "desc" && "내림차순"}
+                </Div>
+              </MenuItem>
+            ))}
+          </Select>
+        </Grid>
+        <Grid size={7} className={"d-col-center"}>
+          <TablePagination
+            rowsPerPageOptions={[10]}
+            rowsPerPage={10}
+            component={"div"}
+            labelRowsPerPage={""}
+            count={COUNT.totalCnt}
+            page={PAGING.page}
+            showFirstButton={true}
+            showLastButton={true}
+            className={"border-bottom-1 p-2"}
+            onPageChange={(_event, newPage) => {
+              setPAGING((prev: any) => ({
+                ...prev,
+                page: newPage
+              }));
+            }}
+            onRowsPerPageChange={(event) => {
+              setPAGING((prev: any) => ({
+                ...prev,
+                limit: parseFloat(event.target.value)
+              }));
+            }}
+          />
         </Grid>
       </Grid>
     );
@@ -170,7 +232,7 @@ export const Filter = (
         </Grid>
         <Grid size={6} className={"d-row-center"}>
           <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
+            className={"w-100p fs-1-0rem bg-black"}
             onClick={() => {
               flow.flowSave();
             }}
@@ -204,7 +266,7 @@ export const Filter = (
         </Grid>
         <Grid size={6} className={"d-row-center"}>
           <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
+            className={"w-100p fs-1-0rem bg-black"}
             onClick={() => {
               flow.flowUpdate();
             }}
@@ -229,7 +291,7 @@ export const Filter = (
         </Grid>
         <Grid size={6} className={"d-row-center"}>
           <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
+            className={"w-100p fs-1-0rem bg-black"}
             onClick={() => {
               flow.flowSave();
             }}
@@ -242,25 +304,29 @@ export const Filter = (
     // 10. return
     return (
       <Paper className={"layout-wrapper p-relative"}>
-        {secondStr === "find" ? (
-          isFindSection()
-        )
-        : secondStr === "list" ? (
-          isListSection()
-        )
-        : firstStr === "order" ? (
-          isOrderSection()
-        )
-        : secondStr === "detail" ? (
-          isDetailSection()
-        )
-        : secondStr === "save" ? (
-          isSaveSection()
-        )
-        : secondStr === "update" ? (
-          isUpdateSection()
+        {extra ? (
+          isAdminSection()
         ) : (
-          null
+          secondStr === "find" ? (
+            isFindSection()
+          )
+          : secondStr === "list" ? (
+            isListSection()
+          )
+          : firstStr === "order" ? (
+            isOrderSection()
+          )
+          : secondStr === "detail" ? (
+            isDetailSection()
+          )
+          : secondStr === "save" ? (
+            isSaveSection()
+          )
+          : secondStr === "update" ? (
+            isUpdateSection()
+          ) : (
+            null
+          )
         )}
       </Paper>
     );

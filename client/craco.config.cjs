@@ -27,7 +27,9 @@ module.exports = {
       ['@babel/plugin-proposal-nullish-coalescing-operator'],
       ['@babel/plugin-transform-react-inline-elements'],
       ['@babel/plugin-transform-react-constant-elements'],
-      ['babel-plugin-transform-remove-console', { exclude: ['error', 'warn'] }],
+      ...(process.env.NODE_ENV === 'production' ? [
+        ['babel-plugin-transform-remove-console', { exclude: ['error', 'warn'] }]
+      ] : []),
     ],
   },
 
@@ -82,11 +84,7 @@ module.exports = {
 
       // 공통 cache 설정
       webpackConfig.cache = {
-        type: 'filesystem',
-        buildDependencies: {
-          config: [__filename],
-        },
-        cacheDirectory: path.resolve(process.cwd(), '.cache/webpack_cache'),
+        type: 'memory',
       };
 
       // 2. dev 설정 -------------------------------------------------------------------------------

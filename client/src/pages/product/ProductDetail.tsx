@@ -186,7 +186,7 @@ export const ProductDetail = () => {
         </Grid>
       );
       const descFragment = () => (
-        <Grid container={true} spacing={2}>
+        <Grid container={true} spacing={0} className={"px-10"}>
           {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
             <Grid container={true} spacing={2} key={`desc-${i}`}>
               <Grid container={true} spacing={0}>
@@ -204,7 +204,7 @@ export const ProductDetail = () => {
                     fill={"grey"}
                     className={"w-15 h-15 dark"}
                   />
-                  <Div className={"fs-1-2rem fw-500 light-black"}>
+                  <Div className={"fs-1-2rem fw-500 black"}>
                     {item?.product_description}
                   </Div>
                 </Grid>
@@ -216,7 +216,7 @@ export const ProductDetail = () => {
                     name={"Won"}
                     className={"w-15 h-15 dark"}
                   />
-                  <Div className={"fs-1-1rem fw-500 light-black"}>
+                  <Div className={"fs-1-1rem fw-500 black"}>
                     {insertComma(item?.product_price || "0")}
                   </Div>
                 </Grid>
@@ -306,7 +306,7 @@ export const ProductDetail = () => {
         </Grid>
         <Grid size={6} className={"d-row-center"}>
           <Btn
-            className={"w-100p fs-1-0rem bg-light-black"}
+            className={"w-100p fs-1-0rem bg-black"}
             onClick={() => {
               flowSave("buy");
             }}
@@ -330,7 +330,7 @@ export const ProductDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={paperClass}>
+      <Paper className={`${paperClass}`}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}

@@ -146,7 +146,7 @@ export const MenuDetail = () => {
         </Grid>
       );
       const descFragment = () => (
-        <Grid container={true} spacing={0}>
+        <Grid container={true} spacing={0} className={"px-10"}>
           {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
             <Grid container={true} spacing={2} key={`desc-${i}`}>
               <Grid container={true} spacing={0}>
@@ -164,7 +164,7 @@ export const MenuDetail = () => {
                     fill={"grey"}
                     className={"w-15 h-15 dark"}
                   />
-                  <Div className={"fs-1-2rem fw-500 light-black"}>
+                  <Div className={"fs-1-2rem fw-500 black"}>
                     {item?.menu_description}
                   </Div>
                 </Grid>
@@ -176,7 +176,7 @@ export const MenuDetail = () => {
                     name={"Won"}
                     className={"w-15 h-15 dark"}
                   />
-                  <Div className={"fs-1-1rem fw-500 light-black"}>
+                  <Div className={"fs-1-1rem fw-500 black"}>
                     {insertComma(item?.menu_price || "0")}
                   </Div>
                 </Grid>
@@ -207,7 +207,7 @@ export const MenuDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={paperClass}>
+      <Paper className={`${paperClass}`}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}

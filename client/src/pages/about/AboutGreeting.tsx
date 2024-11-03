@@ -69,7 +69,7 @@ export const AboutGreeting = () => {
     };
     // 10. return
     return (
-      <Paper className={paperClass}>
+      <Paper className={`${paperClass}`}>
         {greetingSection()}
       </Paper>
     );
