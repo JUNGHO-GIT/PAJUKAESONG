@@ -14,6 +14,7 @@ export const TitleBar = () => {
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [objectBgColor, setObjectBgColor] = useState<string>("");
+  const [objectHeight, setObjectHeight] = useState<string>("");
   const [titleBreadcrumb, setTitleBreadcrumb] = useState<string>("");
   const [titleValue, setTitleValue] = useState<string>("");
 
@@ -21,6 +22,11 @@ export const TitleBar = () => {
   useEffect(() => {
     if (!PATH.includes("main")) {
       setObjectBgColor("bg-burgundy");
+      setObjectHeight("h-15vh");
+    }
+    else {
+      setObjectBgColor("transparent");
+      setObjectHeight("");
     }
   }, [PATH]);
 
@@ -216,7 +222,7 @@ export const TitleBar = () => {
       </Grid>
     );
     return (
-      <Paper className={`layout-wrapper p-relative border-dark-bottom-1 border-dark-top-1 z-100 fadeIn h-15vh ${objectBgColor}`}>
+      <Paper className={`layout-wrapper p-relative border-dark-bottom-1 border-dark-top-1 z-100 fadeIn ${objectHeight} ${objectBgColor}`}>
         {PATH.includes("main") ? mainSection() : titleSection()}
       </Paper>
     );
