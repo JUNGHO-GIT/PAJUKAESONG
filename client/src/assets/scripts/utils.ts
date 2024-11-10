@@ -79,7 +79,6 @@ export const insertComma = (str: string | number) => {
   }
 };
 
-
 // -------------------------------------------------------------------------------------------------
 export const makePhoneNumber = (str: string) => {
   try {

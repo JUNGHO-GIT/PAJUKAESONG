@@ -17,7 +17,7 @@ export const useLanguageSetting = () => {
   let isoCode: string = "";
   let currency: string = "";
   let unit: string = "";
-  let lang: string = "";
+  let lang: string | undefined = "";
 
   // 3. useEffect ----------------------------------------------------------------------------------
   useEffect(() => {

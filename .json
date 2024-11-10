@@ -57,7 +57,7 @@
     "noImplicitOverride": true,
     "noEmitHelpers": false,
     "noErrorTruncation": true,
-    "noUncheckedIndexedAccess": false,
+    "noUncheckedIndexedAccess": true,
     "noPropertyAccessFromIndexSignature": false,
     "disableReferencedProjectLoad": false,
     "disableSolutionSearching": false,
