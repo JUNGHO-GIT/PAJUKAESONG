@@ -31,7 +31,7 @@
     "fetch": "git fetch --all && git reset --hard origin/master",
     "push": "git add . && git commit -m 'update' && git push origin master",
     "npm-clean": "npm cache clean --force",
-    "npm-reset": "powershell -Command \"Remove-Item -Recurse -Force package-lock.json, node_modules; npm install\"",
+    "npm-reset": "powershell -Command \"Remove-Item -Recurse -Force package-lock.json, node_modules; npm install --legacy-peer-deps\"",
     "gcloud": "node gcloud.cjs"
   },
   "dependencies": {

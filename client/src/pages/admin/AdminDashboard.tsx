@@ -89,7 +89,7 @@ export const AdminDashboard = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, SUBFIX, DATE, PAGING_CONTACT, PAGING_ORDER]);
 

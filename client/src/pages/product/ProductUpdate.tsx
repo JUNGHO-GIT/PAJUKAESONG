@@ -42,7 +42,7 @@ export const ProductUpdate = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -90,7 +90,7 @@ export const ProductUpdate = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 
@@ -123,8 +123,8 @@ export const ProductUpdate = () => {
                         value={category}
                         className={"fs-0-8rem"}
                       >
-                        {category === "main" && "메인 메뉴"}
-                        {category === "side" && "사이드 메뉴"}
+                        {category === "main" && "메인 상품"}
+                        {category === "side" && "사이드 상품"}
                       </MenuItem>
                     ))}
                   </Select>

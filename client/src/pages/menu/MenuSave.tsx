@@ -30,7 +30,7 @@ export const MenuSave = () => {
     setLOADING(true);
     setTimeout(() => {
       setLOADING(false);
-    }, 500);
+    }, 100);
   }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ export const MenuSave = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 
@@ -128,8 +128,8 @@ export const MenuSave = () => {
                 <Grid size={12}>
                   <Select
                     required={true}
-                    label={"순서"}
-                    value={item?.menu_seq || 0}
+                    label={"메뉴 순서"}
+                    value={item?.menu_seq || 1}
                     inputRef={REFS?.[i]?.menu_seq}
                     error={ERRORS?.[i]?.menu_seq}
                     onChange={(e: any) => {

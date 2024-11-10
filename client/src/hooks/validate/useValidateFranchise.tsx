@@ -87,7 +87,7 @@ export const useValidateFranchise = () => {
       else if (!await validatePhone(OBJECT?.franchise_phone)) {
         return showAlertAndFocus('franchise_phone', "전화번호 형식으로 입력해주세요.", 0);
       }
-      else if (OBJECT?.franchise_images.length === 0 && fileList.length === 0) {
+      else if (OBJECT?.franchise_images?.length === 0 && (!fileList || fileList?.length === 0)) {
         return showAlertAndFocus('franchise_images', "메뉴 이미지를 등록해주세요.", 0);
       }
       return true;

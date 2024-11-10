@@ -102,7 +102,7 @@ export const OrderSave = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 

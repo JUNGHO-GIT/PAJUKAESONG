@@ -63,7 +63,7 @@ export const Main = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, PAGING, category]);
 

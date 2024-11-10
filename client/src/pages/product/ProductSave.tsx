@@ -30,7 +30,7 @@ export const ProductSave = () => {
     setLOADING(true);
     setTimeout(() => {
       setLOADING(false);
-    }, 500);
+    }, 100);
   }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ export const ProductSave = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 
@@ -113,8 +113,8 @@ export const ProductSave = () => {
                         value={category}
                         className={"fs-0-8rem"}
                       >
-                        {category === "main" && "메인 메뉴"}
-                        {category === "side" && "사이드 메뉴"}
+                        {category === "main" && "메인 상품"}
+                        {category === "side" && "사이드 상품"}
                       </MenuItem>
                     ))}
                   </Select>

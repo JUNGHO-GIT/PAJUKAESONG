@@ -46,7 +46,7 @@ export const ContactDetail = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -95,7 +95,7 @@ export const ContactDetail = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 

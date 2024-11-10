@@ -30,7 +30,7 @@ export const FranchiseSave = () => {
     setLOADING(true);
     setTimeout(() => {
       setLOADING(false);
-    }, 500);
+    }, 100);
   }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ export const FranchiseSave = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 

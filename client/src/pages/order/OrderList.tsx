@@ -58,7 +58,7 @@ export const OrderList = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, SUBFIX, PAGING]);
 

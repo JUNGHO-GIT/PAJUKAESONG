@@ -78,7 +78,7 @@ export const useValidateMenu = () => {
       else if (!OBJECT?.menu_price) {
         return showAlertAndFocus('menu_price', "메뉴 가격을 입력해주세요.", 0);
       }
-      else if (OBJECT?.menu_images.length === 0 && fileList.length === 0) {
+      else if (OBJECT?.menu_images?.length === 0 && (!fileList || fileList?.length === 0)) {
         return showAlertAndFocus('menu_images', "메뉴 이미지를 등록해주세요.", 0);
       }
       return true;

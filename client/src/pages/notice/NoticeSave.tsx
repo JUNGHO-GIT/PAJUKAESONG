@@ -30,7 +30,7 @@ export const NoticeSave = () => {
     setLOADING(true);
     setTimeout(() => {
       setLOADING(false);
-    }, 500);
+    }, 100);
   }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ export const NoticeSave = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 

@@ -7,7 +7,6 @@ import { Menu } from "@importSchemas";
 import { Loader, Filter } from "@importLayouts";
 import { Div, Img, Hr } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
-import { Skeleton } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuList = () => {
@@ -55,7 +54,7 @@ export const MenuList = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, SUBFIX, PAGING, location_category]);
 
@@ -65,15 +64,10 @@ export const MenuList = () => {
     const listSection = () => {
       const listFragment = () => (
         <Grid container={true} spacing={0}>
-          {OBJECT.filter((f: any) => f.menu_images.length > 0).map((item: any, i: number) => (
+          {OBJECT.filter((f: any) => f).map((item: any, i: number) => (
             <Grid size={{ xs: 6, md: 4 }} className={"d-col-center p-10"} key={`list-${i}`}>
               <Grid container={true} spacing={2}>
                 <Grid size={12}>
-                  {/* <Skeleton
-                    width={"100%"}
-                    height={"100%"}
-                    animation={"wave"}
-                  /> */}
                   <Img
                     max={400}
                     hover={true}

@@ -42,7 +42,7 @@ export const ContactUpdate = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -90,7 +90,7 @@ export const ContactUpdate = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 

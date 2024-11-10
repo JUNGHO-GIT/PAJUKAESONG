@@ -78,7 +78,7 @@ export const useValidateProduct = () => {
       else if (!OBJECT?.product_price) {
         return showAlertAndFocus('product_price', "상품 가격을 입력해주세요.", 0);
       }
-      else if (OBJECT?.product_images.length === 0 && fileList.length === 0) {
+      else if (OBJECT?.product_images?.length === 0 && (!fileList || fileList?.length === 0)) {
         return showAlertAndFocus('product_images', "상품 이미지를 등록해주세요.", 0);
       }
       return true;

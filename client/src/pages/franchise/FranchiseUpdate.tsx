@@ -43,7 +43,7 @@ export const FranchiseUpdate = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, SUBFIX]);
 
@@ -91,7 +91,7 @@ export const FranchiseUpdate = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 

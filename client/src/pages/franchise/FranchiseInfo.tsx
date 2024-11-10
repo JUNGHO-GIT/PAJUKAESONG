@@ -77,7 +77,7 @@ export const FranchiseInfo = () => {
     setLOADING(true);
     setTimeout(() => {
       setLOADING(false);
-    }, 500);
+    }, 100);
   }, []);
 
   // 7. infoNode -----------------------------------------------------------------------------------

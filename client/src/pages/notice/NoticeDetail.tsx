@@ -46,7 +46,7 @@ export const NoticeDetail = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -90,7 +90,7 @@ export const NoticeDetail = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 

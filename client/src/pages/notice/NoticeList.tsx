@@ -55,7 +55,7 @@ export const NoticeList = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, SUBFIX, PAGING]);
 
@@ -113,11 +113,9 @@ export const NoticeList = () => {
                   </Div>
                 </Grid>
               </Grid>
-              <Grid container={true} spacing={0}>
-                {i < OBJECT.length - 1 && (
-                  <Hr px={20} className={"bg-light-grey"} />
-                )}
-              </Grid>
+              {i < OBJECT.length - 1 && (
+                <Hr px={20} className={"bg-light-grey"} />
+              )}
             </Grid>
           ))}
         </Grid>

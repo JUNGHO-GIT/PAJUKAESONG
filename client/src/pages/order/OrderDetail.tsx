@@ -47,7 +47,7 @@ export const OrderDetail = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -98,7 +98,7 @@ export const OrderDetail = () => {
     .finally(() => {
       setTimeout(() => {
         setLOADING(false);
-      }, 300);
+      }, 100);
     });
   };
 
