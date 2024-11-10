@@ -109,4 +109,22 @@ export const dataArray = [
       },
     ],
   },
+  {
+    titleKo: "관리자",
+    titleEn: "admin",
+    sub: [
+      {
+        titleKo: "관리자 로그인",
+        titleEn: "login",
+        url: "/user/login",
+        category: "",
+      },
+      {
+        titleKo: "관리자 대시보드",
+        titleEn: "dashboard",
+        url: "/admin/dashboard",
+        category: "",
+      },
+    ],
+  },
 ];

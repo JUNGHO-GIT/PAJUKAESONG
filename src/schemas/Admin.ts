@@ -27,7 +27,6 @@ const schema = new mongoose.Schema(
         },
       }
     ],
-
     admin_regDt: {
       type: Date,
       default: Date.now,

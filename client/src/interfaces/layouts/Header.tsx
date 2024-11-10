@@ -123,12 +123,7 @@ export const Header = () => {
             }}
           />
           {isAdmin && (
-            <Div
-              className={"pointer-burgundy burgundy fs-0-8rem fw-700"}
-              onClick={() => {
-                navigate("/admin/dashboard");
-              }}
-            >
+            <Div className={"pointer-burgundy burgundy fs-0-8rem fw-700"}>
               관리자
             </Div>
           )}

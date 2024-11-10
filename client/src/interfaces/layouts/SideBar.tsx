@@ -18,7 +18,7 @@ export const SideBar = (
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { URL, PATH, navigate, location_category } = useCommonValue();
+  const { URL, PATH, navigate, location_category, isAdmin } = useCommonValue();
   const { firstStr, secondStr, dataArray } = useCommonValue();
 
   // 2-2. useState ---------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ export const SideBar = (
     const sidebarSection = () => (
       <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-col-left"}>
-          {dataArray.map((item, idx) => (
+          {dataArray.filter((f: any) => f).map((item, idx) => (
             <List component={"nav"} key={idx}>
               {/* 메인 항목 */}
               <ListItem
@@ -134,6 +134,10 @@ export const SideBar = (
                     <ListItem
                       key={subIdx}
                       onClick={() => {
+                        if (subItem.titleEn === "dashboard" && subItem.url === "/admin/dashboard" && !isAdmin) {
+                          alert("관리자만 접근 가능합니다.");
+                          return;
+                        }
                         setSelectedTab(item?.titleEn);
                         setSelectedTabVal(item?.titleEn);
                         setSelectedListItem(subItem.titleEn);

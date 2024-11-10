@@ -121,44 +121,8 @@ export const visitSave = async (
   };
 };
 
-// 2-1. contact (list) -----------------------------------------------------------------------------
-export const contactList = async (
-  PAGING_param: any,
-) => {
 
-  // result 변수 선언
-  let findResult: any = null;
-  let finalResult: any = null;
-  let statusResult: string = "fail";
-  let totalCntResult: any = null;
-
-  // sort, page 변수 선언
-  const sort = PAGING_param.sort === "asc" ? 1 : -1;
-  const page = PAGING_param.page || 0;
-
-  totalCntResult = await repository.contactCount();
-
-  findResult = await repository.contactList(
-    sort, page
-  );
-
-  if (!findResult || findResult.length <= 0) {
-    statusResult = "fail";
-    finalResult = [];
-  }
-  else {
-    statusResult = "success";
-    finalResult = findResult;
-  }
-
-  return {
-    status: statusResult,
-    totalCnt: totalCntResult,
-    result: finalResult,
-  };
-};
-
-// 3-1. order (list) -------------------------------------------------------------------------------
+// 2-1. order (list) -------------------------------------------------------------------------------
 export const orderList = async (
   DATE_param: string,
   PAGING_param: any,
@@ -180,6 +144,43 @@ export const orderList = async (
 
   findResult = await repository.orderList(
     DATE_param, sort, page
+  );
+
+  if (!findResult || findResult.length <= 0) {
+    statusResult = "fail";
+    finalResult = [];
+  }
+  else {
+    statusResult = "success";
+    finalResult = findResult;
+  }
+
+  return {
+    status: statusResult,
+    totalCnt: totalCntResult,
+    result: finalResult,
+  };
+};
+
+// 3-1. contact (list) -----------------------------------------------------------------------------
+export const contactList = async (
+  PAGING_param: any,
+) => {
+
+  // result 변수 선언
+  let findResult: any = null;
+  let finalResult: any = null;
+  let statusResult: string = "fail";
+  let totalCntResult: any = null;
+
+  // sort, page 변수 선언
+  const sort = PAGING_param.sort === "asc" ? 1 : -1;
+  const page = PAGING_param.page || 0;
+
+  totalCntResult = await repository.contactCount();
+
+  findResult = await repository.contactList(
+    sort, page
   );
 
   if (!findResult || findResult.length <= 0) {

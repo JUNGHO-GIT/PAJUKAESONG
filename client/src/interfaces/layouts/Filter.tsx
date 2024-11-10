@@ -43,7 +43,7 @@ export const Filter = (
     // 1. admin
     const isAdminSection = () => (
       <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={3} className={"d-col-center"}>
+        <Grid size={4} className={"d-row-center"}>
           <Select
             value={PAGING?.sort}
             inputclass={"h-min0 h-5vh"}
@@ -74,7 +74,7 @@ export const Filter = (
             ))}
           </Select>
         </Grid>
-        <Grid size={7} className={"d-col-center"}>
+        <Grid size={8} className={"d-row-center"}>
           <TablePagination
             rowsPerPageOptions={[10]}
             rowsPerPage={10}
@@ -104,7 +104,7 @@ export const Filter = (
     // 1. list
     const isListSection = () => (
       <Grid container={true} spacing={2} className={"px-10"}>
-        <Grid size={3} className={"d-col-center"}>
+        <Grid size={3} className={"d-row-center"}>
           <Select
             value={PAGING?.sort}
             inputclass={"h-min0 h-5vh"}
@@ -135,7 +135,7 @@ export const Filter = (
             ))}
           </Select>
         </Grid>
-        <Grid size={7} className={"d-col-center"}>
+        <Grid size={7} className={"d-row-center"}>
           <TablePagination
             rowsPerPageOptions={[10]}
             rowsPerPage={10}
@@ -160,7 +160,7 @@ export const Filter = (
             }}
           />
         </Grid>
-        <Grid size={2} className={`${isAdmin ? "d-col-center" : "d-none"}`}>
+        <Grid size={2} className={`${isAdmin ? "d-row-center" : "d-none"}`}>
           <Btn
             className={"bg-burgundy"}
             onClick={() => {

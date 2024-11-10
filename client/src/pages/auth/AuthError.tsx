@@ -123,7 +123,7 @@ export const AuthError = () => {
               size={"large"}
               color={"error"}
               onClick={() => {
-                navigate("/user/login");
+                navigate("/");
               }}
             >
               Go back

@@ -88,7 +88,7 @@ app.use(`${preFix}/product`, productRouter);
 app.use(`${preFix}/user`, userRouter);
 
 // 에러 처리 미들웨어 ------------------------------------------------------------------------------
-app.use((err: Error, _req: Request, res: Response) => {
+app.use((err: Error, req: Request, res: Response, next: Function) => {
   console.error(err.stack);
   res.status(500).send({
     status: 500,

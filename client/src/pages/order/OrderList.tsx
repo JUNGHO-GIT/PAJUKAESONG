@@ -7,7 +7,7 @@ import { axios } from "@importLibs";
 import { insertComma } from "@importScripts";
 import { Order } from "@importSchemas";
 import { Loader, Filter } from "@importLayouts";
-import { Div, Hr } from "@importComponents";
+import { Div, Hr, Br } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -112,8 +112,10 @@ export const OrderList = () => {
                     {getDayNotFmt(item?.order_regDt).format("MM-DD")}
                   </Div>
                 </Grid>
-                {i < OBJECT.length - 1 && (
-                  <Hr px={20} className={"bg-light-grey"} />
+                {i < OBJECT.length - 1 ? (
+                  <Hr px={40} className={"bg-light"} />
+                ) : (
+                  <Br px={10} />
                 )}
               </Grid>
             </Grid>

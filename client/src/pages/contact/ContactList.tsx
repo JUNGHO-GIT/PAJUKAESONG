@@ -6,7 +6,7 @@ import { useCommonDate, useResponsive } from "@importHooks";
 import { axios } from "@importLibs";
 import { Contact } from "@importSchemas";
 import { Loader, Filter } from "@importLayouts";
-import { Div, Hr } from "@importComponents";
+import { Div, Hr, Br } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
@@ -115,10 +115,12 @@ export const ContactList = () => {
                     {getDayNotFmt(item?.contact_regDt).format("MM-DD")}
                   </Div>
                 </Grid>
+                {i < OBJECT.length - 1 ? (
+                  <Hr px={40} className={"bg-light"} />
+                ) : (
+                  <Br px={10} />
+                )}
               </Grid>
-              {i < OBJECT.length - 1 && (
-                <Hr px={20} className={"bg-light-grey"} />
-              )}
             </Grid>
           ))}
         </Grid>

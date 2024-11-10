@@ -80,12 +80,7 @@ export const Footer = () => {
             name={"Copyright"}
             className={"w-12 h-12"}
           />
-          <Div
-            className={"fs-0-8rem pointer"}
-            onClick={() => {
-              navigate("/user/login");
-            }}
-          >
+          <Div className={"fs-0-8rem pointer"}>
             2024 파주개성면옥. All rights reserved.
           </Div>
         </Grid>
@@ -93,7 +88,7 @@ export const Footer = () => {
     );
     // 4. return
     return (
-      <Paper className={"layout-wrapper p-relative border-top-1 shadow-top-4 p-10 bg-ivory"}>
+      <Paper className={"layout-wrapper p-relative border-dark-top-1 shadow-top-4 p-10 bg-ivory"}>
         <Grid container spacing={2} columns={24}>
           <Grid size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {logoSection()}
