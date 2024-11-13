@@ -69,7 +69,7 @@ const runRemoteScript = () => {
       ? 'junghomun00'
       : 'junghomun1234'
     );
-    const ipAddr = "34.23.233.23";
+    const ipAddr = "104.196.212.101";
     const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/client'
     const cmdGs = 'sudo gcloud storage cp gs://jungho-bucket/PAJUKAESONG/SERVER/build.tar.gz .';
     const cmdTar = 'sudo tar -zvxf build.tar.gz --strip-components=1';
