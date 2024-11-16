@@ -15,7 +15,6 @@ export const Header = () => {
   const { isXxs, isXs, isSm, isMd, isLg, isXl, isXxl } = useResponsive();
 
   // 2-2. useState ---------------------------------------------------------------------------------
-  const [tabWidth, setTabWidth] = useState<string>("");
   const [tabHeight, setTabHeight] = useState<string>("");
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [selectedTab, setSelectedTab] = useState<string>("");
@@ -26,31 +25,24 @@ export const Header = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     if (isXxs) {
-      setTabWidth("");
       setTabHeight("h-10vh");
     }
     else if (isXs) {
-      setTabWidth("");
       setTabHeight("h-10vh");
     }
     else if (isSm) {
-      setTabWidth("w-17p");
       setTabHeight("h-20vh");
     }
     else if (isMd) {
-      setTabWidth("w-17p");
       setTabHeight("h-15vh");
     }
     else if (isLg) {
-      setTabWidth("w-17p");
       setTabHeight("h-15vh");
     }
     else if (isXl) {
-      setTabWidth("w-17p");
       setTabHeight("h-15vh");
     }
     else if (isXxl) {
-      setTabWidth("w-17p");
       setTabHeight("h-15vh");
     }
   }, [isXxs, isXs, isSm, isMd, isLg, isXl, isXxl]);
@@ -157,7 +149,7 @@ export const Header = () => {
                 key={`tab-${idx}`}
                 label={item?.titleKo}
                 value={item?.titleEn}
-                className={`pointer-burgundy fs-1-1rem horizontal-text ${tabWidth} ${selectedTab === item?.titleEn ? "burgundy fw-600" : ""}`}
+                className={`pointer-burgundy fs-1-1rem horizontal-text mx-auto ${selectedTab === item?.titleEn ? "burgundy fw-600" : ""}`}
                 onClick={(e) => {
                   setSelectedTab(item?.titleEn);
                   setSelectedAnchorEl({
@@ -195,7 +187,11 @@ export const Header = () => {
                 key={`menuItem-${subIdx}`}
                 selected={selectedMenuItem === subItem.titleEn}
                 className={`pointer-burgundy fs-1-1rem p-20 ${selectedTabVal === selectedTab && selectedMenuItem === subItem.titleEn ? "burgundy fw-600" : ""}`}
+                disabled={subItem?.titleEn === "dashboard" && !isAdmin}
                 onClick={() => {
+                  if (subItem?.titleEn === "dashboard" && !isAdmin) {
+                    return;
+                  }
                   setSelectedTabVal(selectedTab);
                   setSelectedMenuItem(subItem.titleEn);
                   setSelectedAnchorEl((prev) => ({
