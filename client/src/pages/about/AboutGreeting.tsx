@@ -43,7 +43,7 @@ export const AboutGreeting = () => {
           </Grid>
           <Grid size={12} className={"d-row-left"}>
             <Div className={"fs-1-5rem fw-500 me-20"}>
-              대표이사
+              대표
             </Div>
             <Div className={"fs-1-5rem fw-700 me-10"}>
               강 민 서
