@@ -96,7 +96,7 @@ export const MenuList = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center"}>
+        <Card className={"d-col-center border-0 shadow-0"}>
           {listFragment()}
         </Card>
       );
@@ -112,7 +112,7 @@ export const MenuList = () => {
     );
     // 10. return
     return (
-      <Paper className={`${paperClass}`}>
+      <Paper className={`${paperClass} border-0 shadow-0`}>
         {LOADING ? <Loader /> : (
           <>
             {listSection()}

@@ -3,12 +3,9 @@
 import "swiper/css";
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import '@assets/styles/Reset.css';
-import '@assets/styles/Components.css';
 import "@assets/styles/Core.css";
 import "@assets/styles/Mui.css";
-import "@assets/styles/Jstyle.css";
-import "./index.css";
+import '@assets/styles/Components.css';
 
 import {
   BrowserRouter, Routes, Route, createRoot, useState, useEffect
@@ -68,9 +65,7 @@ import {
 
 // -------------------------------------------------------------------------------------------------
 const App = () => {
-
   const [loading, setLoading] = useState<boolean>(true);
-
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 100);
     return () => clearTimeout(timer);
@@ -146,7 +141,7 @@ createRoot(document.getElementById('root') as HTMLDivElement).render(
     <ThemeProvider theme={
       createTheme({
         typography: {
-          fontFamily: "Pretendard Variable, Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif"
+          fontFamily: "Pretendard Variable, Pretendard, Noto Sans KR, Roboto, sans-serif"
         }
       })
     }>

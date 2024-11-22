@@ -46,7 +46,7 @@ export const Img = (
       newClass += " hover";
     }
     if (shadow) {
-      newClass += " shadow-3";
+      newClass += " shadow-2";
     }
     if (radius) {
       newClass += " radius-3";

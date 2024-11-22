@@ -24,10 +24,11 @@ import { useStorageLocal } from "@hooks/storage/useStorageLocal";
 import { useStoreAlert } from "@hooks/store/useStoreAlert";
 import { useStoreConfirm } from "@hooks/store/useStoreConfirm";
 
-// etc
-import { useRoot } from "@hooks/etc/useRoot";
-import { useScrollTop } from "@hooks/etc/useScrollTop";
-import { useResponsive } from "@hooks/etc/useResponsive";
+// utils
+import { useRoot } from "@hooks/utils/useRoot";
+import { useScrollTop } from "@hooks/utils/useScrollTop";
+import { useResponsive } from "@hooks/utils/useResponsive";
+import { useCdn } from "@hooks/utils/useCdn";
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -50,8 +51,9 @@ export {
   // store
   useStoreAlert,
   useStoreConfirm,
-  // etc
+  // utils
   useRoot,
   useScrollTop,
   useResponsive,
+  useCdn
 };

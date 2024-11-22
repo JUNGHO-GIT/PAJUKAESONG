@@ -17,12 +17,12 @@ export const AboutLocation = () => {
       <Location
         width={"100%"}
         height={"60vh"}
-        className={"border-1 shadow-2 radius-2"}
+        className={"border-2 shadow-1 radius-2"}
       />
     );
     // 10. return
     return (
-      <Paper className={`${paperClass}`}>
+      <Paper className={`${paperClass} border-0 shadow-0`}>
         {locationSection()}
       </Paper>
     );

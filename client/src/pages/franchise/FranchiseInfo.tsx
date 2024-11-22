@@ -268,7 +268,7 @@ export const FranchiseInfo = () => {
     };
     // 10. return
     return (
-      <Paper className={`${paperClass}`}>
+      <Paper className={`${paperClass} border-0 shadow-0`}>
         {LOADING ? <Loader /> : (
           <>
             {stepSection()}

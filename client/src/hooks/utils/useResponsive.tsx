@@ -25,7 +25,7 @@ export const useResponsive = () => {
   // 3. useEffect ----------------------------------------------------------------------------------
   useEffect(() => {
     let baseClass = "content-wrapper fadeIn h-min50vh";
-    baseClass += PATH.includes("list") ? " px-10 py-40" : " px-20 py-40";
+    baseClass += PATH.includes("list") ? " px-10 py-30" : " px-20 py-30";
 
     if (xxs || xs) {
       baseClass += " w-100p";

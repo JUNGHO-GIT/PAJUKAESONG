@@ -21,11 +21,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: none !important;
-  border-radius: 0px !important;
+  border: none;
+  border-radius: 0px;
+  box-shadow: none;
   overflow-x: hidden;
   overflow-y: hidden;
-  box-shadow: none !important;
   z-index: 500;
 }
 .content-wrapper {
@@ -37,10 +37,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: none !important;
-  border-radius: 0px !important;
+  border: none;
+  border-radius: 0px;
+  box-shadow: none;
   overflow-x: hidden;
   overflow-y: hidden;
-  box-shadow: none !important;
   z-index: 100;
 }

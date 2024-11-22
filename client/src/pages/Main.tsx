@@ -170,7 +170,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"bg-ivory-light border-dark-bottom-1 py-20"}>
+        <Grid container={true} spacing={0} className={"bg-ivory-light border-dark-top-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {titleFragment()}
             {selectFragment()}
@@ -262,7 +262,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"bg-ivory border-dark-bottom-1 py-20"}>
+        <Grid container={true} spacing={0} className={"bg-ivory border-dark-top-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {titleFragment()}
             {noticeFragment()}
@@ -295,7 +295,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"bg-ivory-light py-20"}>
+        <Grid container={true} spacing={0} className={"bg-ivory-light border-dark-top-1 py-20"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {titleFragment()}
             {locationFragment()}

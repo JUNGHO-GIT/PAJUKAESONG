@@ -303,7 +303,7 @@ export const Filter = (
     );
     // 10. return
     return (
-      <Paper className={"layout-wrapper p-relative"}>
+      <Paper className={"layout-wrapper p-relative border-0 shadow-0"}>
         {extra ? (
           isAdminSection()
         ) : (

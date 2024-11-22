@@ -226,7 +226,7 @@ export const ProductDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center"}>
+        <Card className={"d-col-center border-0 shadow-0"}>
           {imageFragment()}
           <Hr m={40} className={"bg-burgundy h-2"} />
           {descFragment()}
@@ -330,7 +330,7 @@ export const ProductDetail = () => {
     );
     // 10. return
     return (
-      <Paper className={`${paperClass}`}>
+      <Paper className={`${paperClass} border-0 shadow-0`}>
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}
