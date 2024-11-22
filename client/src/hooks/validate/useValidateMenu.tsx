@@ -7,7 +7,7 @@ import { useStoreAlert, useStoreConfirm } from "@importHooks";
 export const useValidateMenu = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
   const { CONFIRM, setCONFIRM } = useStoreConfirm();
 
   // 2-2. useState ---------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ export const useValidateMenu = () => {
   // alert 표시 및 focus ---------------------------------------------------------------------------
   const showAlertAndFocus = (field: string, msg: string, idx: number) => {
     setALERT({
-      open: !ALERT.open,
+      open: true,
       msg: msg,
       severity: "error",
     });

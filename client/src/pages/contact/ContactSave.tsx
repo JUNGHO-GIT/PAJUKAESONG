@@ -1,12 +1,12 @@
 // ContactSave.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert } from "@importHooks";
-import { useValidateContact, useResponsive } from "@importHooks";
+import { useCommonValue, useResponsive } from "@importHooks";
+import { useStoreAlert, useStoreLoading, useValidateContact } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm } from "@importScripts";
 import { Contact } from "@importSchemas";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { Select, Input, TextArea, InputFile } from "@importContainers";
 import { Br } from "@importComponents";
 import { Paper, Grid, Card, MenuItem } from "@importMuis";
@@ -18,19 +18,16 @@ export const ContactSave = () => {
   const { navigate, URL, SUBFIX } = useCommonValue();
   const { paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateContact();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 1. common -------------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Contact);
   const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-    setTimeout(() => {
-      setLOADING(false);
-    }, 100);
   }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
@@ -54,7 +51,7 @@ export const ContactSave = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "success",
           msg: res.data.msg,
         });
@@ -63,7 +60,7 @@ export const ContactSave = () => {
       }
       else {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "error",
           msg: res.data.msg,
         });
@@ -71,16 +68,14 @@ export const ContactSave = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   };
 
@@ -278,13 +273,9 @@ export const ContactSave = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {saveSection()}
-            <Br m={20} />
-            {filterSection()}
-          </>
-        )}
+        {saveSection()}
+        <Br m={20} />
+        {filterSection()}
       </Paper>
     );
   };

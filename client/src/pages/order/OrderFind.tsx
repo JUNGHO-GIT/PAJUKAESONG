@@ -1,11 +1,11 @@
 // OrderFind.tsx
 
 import { useState } from "@importReacts";
-import { useCommonValue, useStoreAlert } from "@importHooks";
-import { useValidateOrder, useResponsive } from "@importHooks";
+import { useCommonValue, useResponsive, useValidateOrder } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { Order } from "@importSchemas";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { Input } from "@importContainers";
 import { Br } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -17,10 +17,10 @@ export const OrderFind = () => {
   const { navigate, URL, SUBFIX } = useCommonValue();
   const { paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateOrder();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
 
   // 3. flow ---------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ export const OrderFind = () => {
       }
       else {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "error",
           msg: res.data.msg,
         });
@@ -55,16 +55,14 @@ export const OrderFind = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   };
 
@@ -155,13 +153,9 @@ export const OrderFind = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {findSection()}
-            <Br m={30} />
-            {filterSection()}
-          </>
-        )}
+        {findSection()}
+        <Br m={30} />
+        {filterSection()}
       </Paper>
     );
   };

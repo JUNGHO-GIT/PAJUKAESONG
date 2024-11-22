@@ -1,12 +1,12 @@
 // AdminDashboard.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useCommonDate } from "@importHooks";
-import { useStoreAlert, useResponsive } from "@importHooks";
+import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { insertComma } from "@importScripts";
 import { Order, Contact } from "@importSchemas";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { PickerDay } from "@importContainers";
 import { Div, Hr, Br } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -18,10 +18,10 @@ export const AdminDashboard = () => {
   const { URL, SUBFIX, navigate } = useCommonValue();
   const { getDayFmt, getDayNotFmt } = useCommonDate();
   const { paperClass } = useResponsive();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [visitCount, setVisitCount] = useState<any>(0);
   const [OBJECT_CONTACT, setOBJECT_CONTACT] = useState<any>([Contact]);
   const [OBJECT_ORDER, setOBJECT_ORDER] = useState<any>([Order]);
@@ -80,16 +80,14 @@ export const AdminDashboard = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   }, [URL, SUBFIX, DATE, PAGING_CONTACT, PAGING_ORDER]);
 
@@ -334,21 +332,17 @@ export const AdminDashboard = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {dateSection()}
-            <Br m={30} />
-            {visitSection()}
-            <Br m={30} />
-            {orderSection()}
-            <Br m={30} />
-            {filterOrderSection()}
-            <Br m={30} />
-            {contactSection()}
-            <Br m={30} />
-            {filterContactSection()}
-          </>
-        )}
+        {dateSection()}
+        <Br m={30} />
+        {visitSection()}
+        <Br m={30} />
+        {orderSection()}
+        <Br m={30} />
+        {filterOrderSection()}
+        <Br m={30} />
+        {contactSection()}
+        <Br m={30} />
+        {filterContactSection()}
       </Paper>
     );
   };

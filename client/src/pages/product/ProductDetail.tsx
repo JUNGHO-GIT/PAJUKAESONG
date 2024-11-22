@@ -1,12 +1,12 @@
 // ProductDetail.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useResponsive } from "@importHooks";
-import { useStoreAlert, useValidateProduct } from "@importHooks";
+import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
 import { insertComma, getSession, setSession } from "@importScripts";
 import { Product } from "@importSchemas";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { Input } from "@importContainers";
 import { Div, Img, Hr, Br, Icons, Btn } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -18,10 +18,10 @@ export const ProductDetail = () => {
   const { navigate, location_id, URL, SUBFIX } = useCommonValue();
   const { xxs, paperClass } = useResponsive();
   const { validate } = useValidateProduct();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Product);
   const [orderCount, setOrderCount] = useState<number>(1);
   const [orderPrice, setOrderPrice] = useState<number>(1);
@@ -40,16 +40,14 @@ export const ProductDetail = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -108,7 +106,7 @@ export const ProductDetail = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "success",
           msg: res.data.msg,
         });
@@ -116,7 +114,7 @@ export const ProductDetail = () => {
       }
       else {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "error",
           msg: res.data.msg,
         });
@@ -124,16 +122,14 @@ export const ProductDetail = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   };
 
@@ -331,17 +327,13 @@ export const ProductDetail = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {detailSection()}
-            <Hr m={60} className={"bg-light h-5"} />
-            {priceSection()}
-            <Br m={20} />
-            {buySection()}
-            <Hr m={60} className={"bg-light h-5"} />
-            {filterSection()}
-          </>
-        )}
+        {detailSection()}
+        <Hr m={60} className={"bg-light h-5"} />
+        {priceSection()}
+        <Br m={20} />
+        {buySection()}
+        <Hr m={60} className={"bg-light h-5"} />
+        {filterSection()}
       </Paper>
     );
   };

@@ -23,6 +23,7 @@ import { useStorageLocal } from "@hooks/storage/useStorageLocal";
 // store
 import { useStoreAlert } from "@hooks/store/useStoreAlert";
 import { useStoreConfirm } from "@hooks/store/useStoreConfirm";
+import { useStoreLoading } from "@hooks/store/useStoreLoading";
 
 // utils
 import { useRoot } from "@hooks/utils/useRoot";
@@ -32,11 +33,14 @@ import { useCdn } from "@hooks/utils/useCdn";
 
 // -------------------------------------------------------------------------------------------------
 export {
+
   // common
   useCommonValue,
   useCommonDate,
+
   // language
   useLanguageSetting,
+
   // validate
   useValidateContact,
   useValidateFranchise,
@@ -45,12 +49,16 @@ export {
   useValidateOrder,
   useValidateProduct,
   useValidateUser,
+
   // storage
   useStorageSession,
   useStorageLocal,
+
   // store
   useStoreAlert,
   useStoreConfirm,
+  useStoreLoading,
+
   // utils
   useRoot,
   useScrollTop,

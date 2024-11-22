@@ -1,11 +1,11 @@
 // ContactList.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert } from "@importHooks";
-import { useCommonDate, useResponsive } from "@importHooks";
+import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { Contact } from "@importSchemas";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { Div, Hr, Br } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
 
@@ -16,10 +16,10 @@ export const ContactList = () => {
   const { navigate, URL, SUBFIX, location } = useCommonValue();
   const { getDayNotFmt } = useCommonDate();
   const { paperClass } = useResponsive();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>([Contact]);
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
@@ -48,16 +48,14 @@ export const ContactList = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   }, [URL, SUBFIX, PAGING, location]);
 
@@ -145,13 +143,9 @@ export const ContactList = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {listSection()}
-            <Hr m={60} className={"bg-light h-5"} />
-            {filterSection()}
-          </>
-        )}
+        {listSection()}
+        <Hr m={60} className={"bg-light h-5"} />
+        {filterSection()}
       </Paper>
     );
   };

@@ -1,7 +1,7 @@
 // FranchiseInfo.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useResponsive } from "@importHooks";
+import { useResponsive, useStoreLoading } from "@importHooks";
 import { Loader } from "@importLayouts";
 import { Div, Br, Hr } from "@importComponents";
 import { Paper, Grid, Card, Stepper, Step, StepLabel } from "@importMuis";
@@ -11,9 +11,9 @@ export const FranchiseInfo = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { xxs, xs, paperClass } = useResponsive();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [activeStep, setActiveStep] = useState(0);
   const OBJECT_STEP = [
     {
@@ -75,9 +75,6 @@ export const FranchiseInfo = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-    setTimeout(() => {
-      setLOADING(false);
-    }, 100);
   }, []);
 
   // 7. infoNode -----------------------------------------------------------------------------------
@@ -269,13 +266,9 @@ export const FranchiseInfo = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {stepSection()}
-            <Br m={30} />
-            {costSection()}
-          </>
-        )}
+        {stepSection()}
+        <Br m={30} />
+        {costSection()}
       </Paper>
     );
   };

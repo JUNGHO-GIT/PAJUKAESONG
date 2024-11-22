@@ -1,11 +1,11 @@
 // ProductSave.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert } from "@importHooks";
-import { useValidateProduct, useResponsive } from "@importHooks";
+import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm, insertComma } from "@importScripts";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { Product } from "@importSchemas";
 import { Input, InputFile, Select } from "@importContainers";
 import { Br } from "@importComponents";
@@ -18,19 +18,16 @@ export const ProductSave = () => {
   const { navigate, URL, SUBFIX } = useCommonValue();
   const { paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateProduct();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Product);
   const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-    setTimeout(() => {
-      setLOADING(false);
-    }, 100);
   }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
@@ -54,7 +51,7 @@ export const ProductSave = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "success",
           msg: res.data.msg,
         });
@@ -63,7 +60,7 @@ export const ProductSave = () => {
       }
       else {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "error",
           msg: res.data.msg,
         });
@@ -71,16 +68,14 @@ export const ProductSave = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   };
 
@@ -257,13 +252,9 @@ export const ProductSave = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {saveSection()}
-            <Br m={20} />
-            {filterSection()}
-          </>
-        )}
+        {saveSection()}
+        <Br m={20} />
+        {filterSection()}
       </Paper>
     );
   };

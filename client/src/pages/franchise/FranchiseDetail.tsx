@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
-import { useStoreAlert, useValidateFranchise } from "@importHooks";
+import { useStoreAlert, useStoreLoading, useValidateFranchise } from "@importHooks";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { Franchise } from "@importSchemas";
 import { Div, Img, Hr, Icons } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -16,11 +16,11 @@ export const FranchiseDetail = () => {
   const { navigate, location_id, URL, SUBFIX } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { xxs, paperClass } = useResponsive();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
   const { validate } = useValidateFranchise();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Franchise);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
@@ -36,16 +36,14 @@ export const FranchiseDetail = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -64,7 +62,7 @@ export const FranchiseDetail = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "success",
           msg: res.data.msg,
         });
@@ -76,7 +74,7 @@ export const FranchiseDetail = () => {
       }
       else {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "error",
           msg: res.data.msg,
         });
@@ -84,16 +82,14 @@ export const FranchiseDetail = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   };
 
@@ -222,13 +218,9 @@ export const FranchiseDetail = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {detailSection()}
-            <Hr m={60} className={"bg-light h-5"} />
-            {filterSection()}
-          </>
-        )}
+        {detailSection()}
+        <Hr m={60} className={"bg-light h-5"} />
+        {filterSection()}
       </Paper>
     );
   };

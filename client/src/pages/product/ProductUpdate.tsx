@@ -1,12 +1,12 @@
 // ProductUpdate.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert } from "@importHooks";
-import { useValidateProduct, useResponsive } from "@importHooks";
+import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm, insertComma } from "@importScripts";
 import { Product } from "@importSchemas";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { Input, InputFile, Select } from "@importContainers";
 import { Br } from "@importComponents";
 import { Paper, Grid, Card, MenuItem } from "@importMuis";
@@ -18,10 +18,10 @@ export const ProductUpdate = () => {
   const { navigate, URL, SUBFIX, location_id } = useCommonValue();
   const { paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateProduct();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Product);
   const [fileList, setFileList] = useState<File[] | null>(null);
 
@@ -40,9 +40,7 @@ export const ProductUpdate = () => {
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -64,7 +62,7 @@ export const ProductUpdate = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "success",
           msg: res.data.msg,
         });
@@ -73,7 +71,7 @@ export const ProductUpdate = () => {
       }
       else {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "error",
           msg: res.data.msg,
         });
@@ -81,16 +79,14 @@ export const ProductUpdate = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   };
 
@@ -267,13 +263,9 @@ export const ProductUpdate = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {updateSection()}
-            <Br m={20} />
-            {filterSection()}
-          </>
-        )}
+        {updateSection()}
+        <Br m={20} />
+        {filterSection()}
       </Paper>
     );
   };

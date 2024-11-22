@@ -1,7 +1,8 @@
 // Main.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useCommonDate, useResponsive, useStoreAlert } from "@importHooks";
+import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { Swiper, SwiperSlide, Autoplay, axios, Pagination } from "@importLibs";
 import { Menu, Notice } from "@importSchemas";
 import { Location } from "@importContainers";
@@ -15,10 +16,10 @@ export const Main = () => {
   const { URL, navigate } = useCommonValue();
   const { getDayFmt } = useCommonDate();
   const { xxs, xs, sm, md, lg, xl, isXxl } = useResponsive();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT_MENU, setOBJECT_MENU] = useState<any>([Menu]);
   const [OBJECT_NOTICE, setOBJECT_NOTICE] = useState<any>([Notice]);
   const [category, setCategory] = useState<string>("main");
@@ -54,16 +55,14 @@ export const Main = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   }, [URL, PAGING, category]);
 
@@ -112,9 +111,7 @@ export const Main = () => {
           <Grid size={12} className={"d-center"}>
             <Swiper
               spaceBetween={30}
-              slidesPerView={LOADING ? 0 : (
-                xxs ? 1 : xs ? 1 : sm ? 1 : md ? 1 : lg ? 2 : xl ? 2 : isXxl ? 2 : 2
-              )}
+              slidesPerView={xxs ? 1 : xs ? 1 : sm ? 1 : md ? 1 : lg ? 2 : xl ? 2 : isXxl ? 2 : 2}
               centeredSlides={false}
               loop={true}
               navigation={false}
@@ -197,9 +194,7 @@ export const Main = () => {
           <Grid size={12} className={"d-center"}>
             <Swiper
               spaceBetween={30}
-              slidesPerView={LOADING ? 0 : (
-                xxs ? 1 : xs ? 1 : sm ? 1 : md ? 1 : lg ? 2 : xl ? 2 : isXxl ? 2 : 2
-              )}
+              slidesPerView={xxs ? 1 : xs ? 1 : sm ? 1 : md ? 1 : lg ? 2 : xl ? 2 : isXxl ? 2 : 2}
               slidesPerGroup={1}
               centeredSlides={false}
               loop={true}

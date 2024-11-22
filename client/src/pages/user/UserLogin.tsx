@@ -1,12 +1,11 @@
 // UserLogin.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert } from "@importHooks";
-import { useResponsive, useValidateUser } from "@importHooks";
+import { useCommonValue, useResponsive, useValidateUser } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { setLocal } from "@importScripts";
 import { User } from "@importSchemas";
-import { Loader } from "@importLayouts";
 import { Input } from "@importContainers";
 import { Div, Btn, Hr, Br } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
@@ -19,10 +18,10 @@ export const UserLogin = () => {
   const { isAdmin, adminId, adminPw, isUser, userId, userPw } = useCommonValue();
   const { paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateUser();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(User);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
@@ -59,7 +58,7 @@ export const UserLogin = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "success",
           msg: res.data.msg,
         });
@@ -83,7 +82,7 @@ export const UserLogin = () => {
       }
       else {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "error",
           msg: res.data.msg,
         });
@@ -92,16 +91,14 @@ export const UserLogin = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   };
 
@@ -236,15 +233,11 @@ export const UserLogin = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {loginSection()}
-            <Br m={30} />
-            {filterSection()}
-            <Hr m={60} className={"bg-light h-5"} />
-            {linkSection()}
-          </>
-        )}
+        {loginSection()}
+        <Br m={30} />
+        {filterSection()}
+        <Hr m={60} className={"bg-light h-5"} />
+        {linkSection()}
       </Paper>
     );
   };

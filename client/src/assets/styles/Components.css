@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/** swiper ****************************************************************************************/
 .swiper-pagination-bullet-active {
   background-color: #973131 !important;
 }
@@ -13,4 +14,9 @@
   transition-property: transform;
   transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
   box-sizing: content-box;
+}
+
+/** loader ****************************************************************************************/
+.loader {
+  border-top: 4px solid #973131 !important
 }

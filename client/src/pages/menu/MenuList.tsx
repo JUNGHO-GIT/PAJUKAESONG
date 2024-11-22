@@ -1,10 +1,11 @@
 // MenuList.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useResponsive, useStoreAlert } from "@importHooks";
+import { useCommonValue, useResponsive } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { Menu } from "@importSchemas";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { Div, Img, Hr } from "@importComponents";
 import { Paper, Grid, Card } from "@importMuis";
 
@@ -14,10 +15,10 @@ export const MenuList = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate, location_category } = useCommonValue();
   const { paperClass } = useResponsive();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>([Menu]);
   const [PAGING, setPAGING] = useState<any>({
     sort: "asc",
@@ -45,16 +46,14 @@ export const MenuList = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   }, [URL, SUBFIX, PAGING, location_category]);
 
@@ -113,13 +112,9 @@ export const MenuList = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {listSection()}
-            <Hr m={60} className={"bg-light h-5"} />
-            {filterSection()}
-          </>
-        )}
+        {listSection()}
+        <Hr m={60} className={"bg-light h-5"} />
+        {filterSection()}
       </Paper>
     );
   };

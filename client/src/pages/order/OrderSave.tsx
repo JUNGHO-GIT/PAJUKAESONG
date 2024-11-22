@@ -1,12 +1,12 @@
 // OrderSave.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useResponsive } from "@importHooks";
-import { useStoreAlert, useValidateOrder } from "@importHooks";
+import { useCommonValue, useResponsive, useValidateOrder } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { insertComma, getSession, setSession } from "@importScripts";
 import { Order, Product } from "@importSchemas";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { Input, Select, PickerDay, PickerTime } from "@importContainers";
 import { Div, Hr, Br, Img, Icons } from "@importComponents";
 import { Paper, Grid, Card, MenuItem } from "@importMuis";
@@ -18,10 +18,10 @@ export const OrderSave = () => {
   const { navigate, URL, SUBFIX } = useCommonValue();
   const { xxs, paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateOrder();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Order);
   const [PRODUCT, setPRODUCT] = useState<any>([Product]);
 
@@ -75,7 +75,7 @@ export const OrderSave = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "success",
           msg: res.data.msg,
         });
@@ -85,7 +85,7 @@ export const OrderSave = () => {
       }
       else {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "error",
           msg: res.data.msg,
         });
@@ -93,16 +93,14 @@ export const OrderSave = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   };
 
@@ -448,15 +446,11 @@ export const OrderSave = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {productSection()}
-            <Br m={30} />
-            {orderSection()}
-            <Br m={20} />
-            {filterSection()}
-          </>
-        )}
+        {productSection()}
+        <Br m={30} />
+        {orderSection()}
+        <Br m={20} />
+        {filterSection()}
       </Paper>
     );
   };

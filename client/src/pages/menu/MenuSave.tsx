@@ -1,12 +1,12 @@
 // MenuSave.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useStoreAlert } from "@importHooks";
-import { useResponsive, useValidateMenu } from "@importHooks";
+import { useCommonValue, useResponsive, useValidateMenu } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { makeForm, insertComma } from "@importScripts";
 import { Menu } from "@importSchemas";
-import { Loader, Filter } from "@importLayouts";
+import { Filter } from "@importLayouts";
 import { Input, Select, InputFile } from "@importContainers";
 import { Br } from "@importComponents";
 import { Paper, Grid, Card, MenuItem } from "@importMuis";
@@ -18,19 +18,16 @@ export const MenuSave = () => {
   const { navigate, URL, SUBFIX } = useCommonValue();
   const { REFS, ERRORS, validate } = useValidateMenu();
   const { paperClass } = useResponsive();
-  const { ALERT, setALERT } = useStoreAlert();
+  const { setALERT } = useStoreAlert();
+  const { setLOADING } = useStoreLoading();
 
   // 2-1. useState ---------------------------------------------------------------------------------
-  const [LOADING, setLOADING] = useState<boolean>(false);
   const [OBJECT, setOBJECT] = useState<any>(Menu);
   const [fileList, setFileList] = useState<File[] | null>(null);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-    setTimeout(() => {
-      setLOADING(false);
-    }, 100);
   }, []);
 
   // 3. flow ---------------------------------------------------------------------------------------
@@ -54,7 +51,7 @@ export const MenuSave = () => {
     .then((res: any) => {
       if (res.data.status === "success") {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "success",
           msg: res.data.msg,
         });
@@ -67,7 +64,7 @@ export const MenuSave = () => {
       }
       else {
         setALERT({
-          open: !ALERT.open,
+          open: true,
           severity: "error",
           msg: res.data.msg,
         });
@@ -75,16 +72,14 @@ export const MenuSave = () => {
     })
     .catch((err: any) => {
       setALERT({
-        open: !ALERT.open,
+        open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
     })
     .finally(() => {
-      setTimeout(() => {
-        setLOADING(false);
-      }, 100);
+      setLOADING(false);
     });
   };
 
@@ -261,13 +256,9 @@ export const MenuSave = () => {
     // 10. return
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
-        {LOADING ? <Loader /> : (
-          <>
-            {saveSection()}
-            <Br m={20} />
-            {filterSection()}
-          </>
-        )}
+        {saveSection()}
+        <Br m={20} />
+        {filterSection()}
       </Paper>
     );
   };
