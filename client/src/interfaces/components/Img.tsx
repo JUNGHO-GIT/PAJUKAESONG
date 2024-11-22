@@ -49,7 +49,7 @@ export const Img = (
       newClass += " shadow-3";
     }
     if (radius) {
-      newClass += " radius-1";
+      newClass += " radius-3";
     }
     if (max) {
       newClass += ` w-max${max} h-max${max}`;

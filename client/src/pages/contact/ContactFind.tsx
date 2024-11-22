@@ -158,7 +158,7 @@ export const ContactFind = () => {
         {LOADING ? <Loader /> : (
           <>
             {findSection()}
-            <Br px={30} />
+            <Br m={30} />
             {filterSection()}
           </>
         )}

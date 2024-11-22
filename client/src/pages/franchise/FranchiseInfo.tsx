@@ -10,7 +10,7 @@ import { Paper, Grid, Card, Stepper, Step, StepLabel } from "@importMuis";
 export const FranchiseInfo = () => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const { isXxs, isXs, paperClass } = useResponsive();
+  const { xxs, xs, paperClass } = useResponsive();
 
   // 2-1. useState ---------------------------------------------------------------------------------
   const [LOADING, setLOADING] = useState<boolean>(false);
@@ -96,7 +96,7 @@ export const FranchiseInfo = () => {
       );
       const stepFragment = () => (
         <Grid container={true} spacing={2}>
-          {isXxs || isXs ? (
+          {xxs || xs ? (
             <Grid size={12}>
               <Stepper
                 activeStep={activeStep}
@@ -117,7 +117,7 @@ export const FranchiseInfo = () => {
                         {step.label}
                       </Div>
                     </StepLabel>
-                    <Br px={10} />
+                    <Br m={10} />
                     <Div className={"fs-0-8rem fw-400 d-fit ms-30"}>
                       {step.desc}
                     </Div>
@@ -146,7 +146,7 @@ export const FranchiseInfo = () => {
                         <Div className={"fs-1-2rem fw-700"}>
                           {step.label}
                         </Div>
-                        <Br px={20} />
+                        <Br m={20} />
                         <Div className={"fs-0-8rem"}>
                           {step.desc}
                         </Div>
@@ -155,7 +155,7 @@ export const FranchiseInfo = () => {
                   </Step>
                 ))}
               </Stepper>
-              <Br px={40} />
+              <Br m={40} />
               <Stepper
                 activeStep={activeStep - 4}
                 alternativeLabel={true}
@@ -174,7 +174,7 @@ export const FranchiseInfo = () => {
                         <Div className={"fs-1-2rem fw-700"}>
                           {step.label}
                         </Div>
-                        <Br px={20} />
+                        <Br m={20} />
                         <Div className={"fs-0-8rem"}>
                           {step.desc}
                         </Div>
@@ -190,7 +190,7 @@ export const FranchiseInfo = () => {
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
-          <Br px={20} />
+          <Br m={20} />
           {stepFragment()}
         </Card>
       );
@@ -247,9 +247,9 @@ export const FranchiseInfo = () => {
                   </Div>
                 </Grid>
                 {i < OBJECT_COST.length - 1 ? (
-                  <Hr px={40} className={"bg-light"} />
+                  <Hr m={40} className={"bg-light"} />
                 ) : (
-                  <Br px={10} />
+                  <Br m={10} />
                 )}
               </Grid>
             </Grid>
@@ -259,9 +259,9 @@ export const FranchiseInfo = () => {
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
-          <Br px={20} />
+          <Br m={20} />
           {headFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr m={40} className={"bg-burgundy h-2"} />
           {costFragment()}
         </Card>
       );
@@ -272,7 +272,7 @@ export const FranchiseInfo = () => {
         {LOADING ? <Loader /> : (
           <>
             {stepSection()}
-            <Br px={30} />
+            <Br m={30} />
             {costSection()}
           </>
         )}

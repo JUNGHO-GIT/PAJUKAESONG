@@ -16,7 +16,7 @@ export const ProductDetail = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, URL, SUBFIX } = useCommonValue();
-  const { isXxs, paperClass } = useResponsive();
+  const { xxs, paperClass } = useResponsive();
   const { validate } = useValidateProduct();
   const { ALERT, setALERT } = useStoreAlert();
 
@@ -164,7 +164,7 @@ export const ProductDetail = () => {
                     {item?.product_images?.map((image: string, index: number) => (
                       <SwiperSlide className={"w-100p h-100p"} key={`image-${index}`}>
                         <Img
-                          max={isXxs ? 600 : 700}
+                          max={xxs ? 600 : 700}
                           hover={false}
                           shadow={true}
                           radius={true}
@@ -186,7 +186,7 @@ export const ProductDetail = () => {
         </Grid>
       );
       const descFragment = () => (
-        <Grid container={true} spacing={0} className={"px-10"}>
+        <Grid container={true} spacing={0}>
           {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
             <Grid container={true} spacing={2} key={`desc-${i}`}>
               <Grid container={true} spacing={0}>
@@ -228,7 +228,7 @@ export const ProductDetail = () => {
       return (
         <Card className={"d-col-center"}>
           {imageFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr m={40} className={"bg-burgundy h-2"} />
           {descFragment()}
         </Card>
       )
@@ -334,11 +334,11 @@ export const ProductDetail = () => {
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}
-            <Hr px={40} className={"bg-grey"} />
+            <Hr m={60} className={"bg-light h-5"} />
             {priceSection()}
-            <Br px={20} />
+            <Br m={20} />
             {buySection()}
-            <Hr px={40} className={"bg-grey"} />
+            <Hr m={60} className={"bg-light h-5"} />
             {filterSection()}
           </>
         )}

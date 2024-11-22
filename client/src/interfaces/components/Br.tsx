@@ -3,12 +3,12 @@
 // -------------------------------------------------------------------------------------------------
 export const Br = (props: any) => (
   <div
-    style={{
-      "width": "100%",
-      "background": "none",
-      "height": "0.1px",
-      "margin": `${props?.px/2}px 0px`,
-    }}
     className={props?.className || ""}
+    style={{
+      "background": "none",
+      "width": "100%",
+      "height": "0.1px",
+      "margin": `${props?.m / 2}px 0px`,
+    }}
   />
 );

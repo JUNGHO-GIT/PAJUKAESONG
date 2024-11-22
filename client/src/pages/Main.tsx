@@ -14,7 +14,7 @@ export const Main = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { URL, navigate } = useCommonValue();
   const { getDayFmt } = useCommonDate();
-  const { isXxs, isXs, isSm, isMd, isLg, isXl, isXxl } = useResponsive();
+  const { xxs, xs, sm, md, lg, xl, isXxl } = useResponsive();
   const { ALERT, setALERT } = useStoreAlert();
 
   // 2-1. useState ---------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ export const Main = () => {
             <Swiper
               spaceBetween={30}
               slidesPerView={LOADING ? 0 : (
-                isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : isXxl ? 2 : 2
+                xxs ? 1 : xs ? 1 : sm ? 1 : md ? 1 : lg ? 2 : xl ? 2 : isXxl ? 2 : 2
               )}
               centeredSlides={false}
               loop={true}
@@ -151,7 +151,7 @@ export const Main = () => {
                         });
                       }}
                     />
-                    <Br px={20} />
+                    <Br m={20} />
                     <Div max={10} className={"fs-1-2rem fw-700"}>
                       {item?.menu_name}
                     </Div>
@@ -198,7 +198,7 @@ export const Main = () => {
             <Swiper
               spaceBetween={30}
               slidesPerView={LOADING ? 0 : (
-                isXxs ? 1 : isXs ? 1 : isSm ? 1 : isMd ? 1 : isLg ? 2 : isXl ? 2 : isXxl ? 2 : 2
+                xxs ? 1 : xs ? 1 : sm ? 1 : md ? 1 : lg ? 2 : xl ? 2 : isXxl ? 2 : 2
               )}
               slidesPerGroup={1}
               centeredSlides={false}
@@ -228,7 +228,7 @@ export const Main = () => {
                       shadow={false}
                       radius={false}
                       group={"main"}
-                      src={"logo1_2.webp"}
+                      src={"logo1_1.webp"}
                       onClick={() => {
                         navigate("/notice/detail", {
                           state: {
@@ -237,12 +237,12 @@ export const Main = () => {
                         });
                       }}
                     />
-                    <Hr px={40} className={"bg-light-grey"} />
+                    <Hr m={40} className={"bg-light-grey"} />
                     <Div className={"w-100p d-col-left"}>
                       <Div max={20} className={"fs-1-0rem fw-700"}>
                         {item?.notice_title}
                       </Div>
-                      <Br px={5} />
+                      <Br m={5} />
                       <Div className={"fs-0-8rem fw-500 grey"}>
                         {getDayFmt(item?.notice_regDt)}
                       </Div>

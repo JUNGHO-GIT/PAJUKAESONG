@@ -170,7 +170,7 @@ export const ContactDetail = () => {
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {headFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr m={40} className={"bg-burgundy h-2"} />
           {descFragment()}
         </Card>
       )
@@ -193,7 +193,7 @@ export const ContactDetail = () => {
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}
-            <Hr px={40} className={"bg-grey"} />
+            <Hr m={60} className={"bg-light h-5"} />
             {filterSection()}
           </>
         )}

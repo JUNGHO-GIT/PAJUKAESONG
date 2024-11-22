@@ -176,7 +176,7 @@ export const NoticeSave = () => {
         {LOADING ? <Loader /> : (
           <>
             {saveSection()}
-            <Br px={20} />
+            <Br m={20} />
             {filterSection()}
           </>
         )}

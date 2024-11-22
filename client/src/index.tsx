@@ -2,6 +2,8 @@
 
 import "swiper/css";
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import '@assets/styles/Reset.css';
 import '@assets/styles/Components.css';
 import "@assets/styles/Core.css";
 import "@assets/styles/Mui.css";

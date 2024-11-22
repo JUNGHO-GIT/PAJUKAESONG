@@ -42,7 +42,7 @@ export const AboutGreeting = () => {
             </Div>
           </Grid>
           <Grid size={12} className={"d-row-left"}>
-            <Div className={"fs-1-5rem fw-500 me-20"}>
+            <Div className={"fs-1-5rem fw-500 me-10"}>
               대표
             </Div>
             <Div className={"fs-1-5rem fw-700 me-10"}>
@@ -55,7 +55,7 @@ export const AboutGreeting = () => {
                 shadow={false}
                 radius={false}
                 group={"main"}
-                src={"stamp_6.webp"}
+                src={"stamp.webp"}
               />
             </Div>
           </Grid>

@@ -281,7 +281,7 @@ export const ContactSave = () => {
         {LOADING ? <Loader /> : (
           <>
             {saveSection()}
-            <Br px={20} />
+            <Br m={20} />
             {filterSection()}
           </>
         )}

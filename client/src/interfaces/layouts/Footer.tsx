@@ -9,7 +9,7 @@ export const Footer = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate } = useCommonValue();
-  const { isXxs, isXs } = useResponsive();
+  const { xxs, xs } = useResponsive();
 
   // 7. footer -------------------------------------------------------------------------------------
   const footerNode = () => {
@@ -23,7 +23,7 @@ export const Footer = () => {
             shadow={false}
             radius={false}
             group={"main"}
-            src={"logo1_5.webp"}
+            src={"logo1_2.webp"}
             onClick={() => {
               navigate("/main");
             }}
@@ -34,7 +34,7 @@ export const Footer = () => {
     // 3. text
     const textSection = () => (
       <Grid container={true} spacing={0} className={`horizontal-text`}>
-        <Grid size={12} className={`d-row-${isXxs || isXs ? "center" : "left"}`}>
+        <Grid size={12} className={`d-row-${xxs || xs ? "center" : "left"}`}>
           <Icons
             key={"Info"}
             name={"Info"}
@@ -44,7 +44,7 @@ export const Footer = () => {
             대표: 강민서 | 사업자 등록번호: 883-03-03096
           </Div>
         </Grid>
-        <Grid size={12} className={`d-row-${isXxs || isXs ? "center" : "left"}`}>
+        <Grid size={12} className={`d-row-${xxs || xs ? "center" : "left"}`}>
           <Icons
             key={"Location"}
             name={"Location"}
@@ -54,7 +54,7 @@ export const Footer = () => {
             경기 파주시 문산읍 방촌로 1675-34 1층
           </Div>
         </Grid>
-        <Grid size={12} className={`d-row-${isXxs || isXs ? "center" : "left"}`}>
+        <Grid size={12} className={`d-row-${xxs || xs ? "center" : "left"}`}>
           <Icons
             key={"Phone"}
             name={"Phone"}
@@ -64,7 +64,7 @@ export const Footer = () => {
             031-952-8083
           </Div>
         </Grid>
-        <Grid size={12} className={`d-row-${isXxs || isXs ? "center" : "left"}`}>
+        <Grid size={12} className={`d-row-${xxs || xs ? "center" : "left"}`}>
           <Icons
             key={"Mail"}
             name={"Mail"}
@@ -74,7 +74,7 @@ export const Footer = () => {
             sooookee@naver.com
           </Div>
         </Grid>
-        <Grid size={12} className={`d-row-${isXxs || isXs ? "center" : "left"}`}>
+        <Grid size={12} className={`d-row-${xxs || xs ? "center" : "left"}`}>
           <Icons
             key={"Copyright"}
             name={"Copyright"}

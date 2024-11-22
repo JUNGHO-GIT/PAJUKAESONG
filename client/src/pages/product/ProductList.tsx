@@ -116,7 +116,7 @@ export const ProductList = () => {
         {LOADING ? <Loader /> : (
           <>
             {listSection()}
-            <Hr px={40} className={"bg-grey"} />
+            <Hr m={60} className={"bg-light h-5"} />
             {filterSection()}
           </>
         )}

@@ -291,7 +291,7 @@ export const ContactUpdate = () => {
         {LOADING ? <Loader /> : (
           <>
             {updateSection()}
-            <Br px={20} />
+            <Br m={20} />
             {filterSection()}
           </>
         )}

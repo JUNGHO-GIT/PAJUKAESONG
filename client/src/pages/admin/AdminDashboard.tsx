@@ -121,7 +121,7 @@ export const AdminDashboard = () => {
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
-          <Br px={30} />
+          <Br m={30} />
           {pickerFragment()}
         </Card>
       );
@@ -152,7 +152,7 @@ export const AdminDashboard = () => {
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
-          <Br px={30} />
+          <Br m={30} />
           {visitFragment()}
         </Card>
       );
@@ -215,9 +215,9 @@ export const AdminDashboard = () => {
                   </Div>
                 </Grid>
                 {i < OBJECT_ORDER.length - 1 ? (
-                  <Hr px={40} className={"bg-light"} />
+                  <Hr m={40} className={"bg-light"} />
                 ) : (
-                  <Br px={10} />
+                  <Br m={10} />
                 )}
               </Grid>
             </Grid>
@@ -227,9 +227,9 @@ export const AdminDashboard = () => {
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
-          <Br px={30} />
+          <Br m={30} />
           {headFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr m={40} className={"bg-burgundy h-2"} />
           {listFragment()}
         </Card>
       );
@@ -302,9 +302,9 @@ export const AdminDashboard = () => {
                   </Div>
                 </Grid>
                 {i < OBJECT_CONTACT.length - 1 ? (
-                  <Hr px={40} className={"bg-light"} />
+                  <Hr m={40} className={"bg-light"} />
                 ) : (
-                  <Br px={10} />
+                  <Br m={10} />
                 )}
               </Grid>
             </Grid>
@@ -314,9 +314,9 @@ export const AdminDashboard = () => {
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {titleFragment()}
-          <Br px={30} />
+          <Br m={30} />
           {headFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr m={40} className={"bg-burgundy h-2"} />
           {listFragment()}
         </Card>
       );
@@ -337,15 +337,15 @@ export const AdminDashboard = () => {
         {LOADING ? <Loader /> : (
           <>
             {dateSection()}
-            <Br px={30} />
+            <Br m={30} />
             {visitSection()}
-            <Br px={30} />
+            <Br m={30} />
             {orderSection()}
-            <Br px={30} />
+            <Br m={30} />
             {filterOrderSection()}
-            <Br px={30} />
+            <Br m={30} />
             {contactSection()}
-            <Br px={30} />
+            <Br m={30} />
             {filterContactSection()}
           </>
         )}

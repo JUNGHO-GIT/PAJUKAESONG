@@ -114,7 +114,7 @@ export const NoticeDetail = () => {
         </Grid>
       );
       const descFragment = () => (
-        <Grid container={true} spacing={0} className={"px-10"}>
+        <Grid container={true} spacing={0}>
           {[OBJECT].filter((_:any, idx: number) => idx === 0).map((item: any, i: number) => (
             <Grid container={true} spacing={2} key={`desc-${i}`}>
               <Grid container={true} spacing={0}>
@@ -156,9 +156,9 @@ export const NoticeDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-1 shadow-1 p-50"}>
           {headFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr m={40} className={"bg-burgundy h-2"} />
           {descFragment()}
         </Card>
       )
@@ -181,7 +181,7 @@ export const NoticeDetail = () => {
         {LOADING ? <Loader /> : (
           <>
             {detailSection()}
-            <Hr px={40} className={"bg-grey"} />
+            <Hr m={60} className={"bg-light h-5"} />
             {filterSection()}
           </>
         )}

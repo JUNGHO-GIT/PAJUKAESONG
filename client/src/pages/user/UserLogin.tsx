@@ -239,9 +239,9 @@ export const UserLogin = () => {
         {LOADING ? <Loader /> : (
           <>
             {loginSection()}
-            <Br px={30} />
+            <Br m={30} />
             {filterSection()}
-            <Hr px={40} className={"bg-grey"} />
+            <Hr m={60} className={"bg-light h-5"} />
             {linkSection()}
           </>
         )}

@@ -8,7 +8,7 @@ export const Hr = (props : any) => (
       "background": "rgb(207 207 207)",
       "width": `${props?.w || 100}%`,
       "height": `${props?.h || 1.0}px`,
-      "margin": `${props?.px/2}px 0px`,
+      "margin": `${props?.m / 2}px 0px`,
     }}
   />
 );

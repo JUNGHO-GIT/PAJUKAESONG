@@ -173,7 +173,7 @@ export const TitleBar = () => {
             speed={1500}
             fadeEffect={{ crossFade: true }}
           >
-            {["title_main3.webp", "title_main4.webp"].map((item: string, i: number) => (
+            {["title_main1.webp", "title_main2.webp"].map((item: string, i: number) => (
               <SwiperSlide key={`slide-${i}`} className={"w-100p h-100p d-center"}>
                 <Img
                   hover={false}

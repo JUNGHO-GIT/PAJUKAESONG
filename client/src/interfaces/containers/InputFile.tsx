@@ -311,7 +311,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
         startAdornment: adornmentNode,
       }}
     />
-    <Br px={20} />
+    <Br m={20} />
     {/** 기존 이미지 표시하기 **/}
     {fileExisting.length > 0 && existingNode()}
     </>

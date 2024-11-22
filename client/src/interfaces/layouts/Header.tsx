@@ -12,7 +12,7 @@ export const Header = () => {
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, PATH, firstStr, secondStr } = useCommonValue();
   const { dataArray, isAdmin, location_category } = useCommonValue();
-  const { isXxs, isXs, isSm, isMd, isLg, isXl, isXxl } = useResponsive();
+  const { xxs, xs, sm, md, lg, xl, isXxl } = useResponsive();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [tabHeight, setTabHeight] = useState<string>("");
@@ -24,28 +24,28 @@ export const Header = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    if (isXxs) {
+    if (xxs) {
       setTabHeight("h-10vh");
     }
-    else if (isXs) {
+    else if (xs) {
       setTabHeight("h-10vh");
     }
-    else if (isSm) {
+    else if (sm) {
       setTabHeight("h-20vh");
     }
-    else if (isMd) {
+    else if (md) {
       setTabHeight("h-15vh");
     }
-    else if (isLg) {
+    else if (lg) {
       setTabHeight("h-15vh");
     }
-    else if (isXl) {
+    else if (xl) {
       setTabHeight("h-15vh");
     }
     else if (isXxl) {
       setTabHeight("h-15vh");
     }
-  }, [isXxs, isXs, isSm, isMd, isLg, isXl, isXxl]);
+  }, [xxs, xs, sm, md, lg, xl, isXxl]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 페이지 변경시 초기화
@@ -101,14 +101,14 @@ export const Header = () => {
     );
     const logoSection = () => (
       <Grid container={true} spacing={0}>
-        <Grid size={12} className={isSm ? "d-row-center" : "d-row-left"}>
+        <Grid size={12} className={sm ? "d-row-center" : "d-row-left"}>
           <Img
-            max={isXxs ? 150 : 200}
+            max={xxs ? 150 : 200}
             hover={false}
             shadow={false}
             radius={false}
             group={"main"}
-            src={"logo1_2.webp"}
+            src={"logo1_1.webp"}
             className={"w-80p"}
             onClick={() => {
               navigate("/main");
@@ -216,20 +216,20 @@ export const Header = () => {
       <Paper className={`layout-wrapper p-sticky top-0vh border-bottom-1 shadow-bottom-4 p-20 ${tabHeight}`}>
         <Grid container={true} spacing={2}>
           <Grid
-            size={isXxs ? 2 : isXs ? 2 : isSm ? 0 : isMd ? 0 : isLg ? 0 : isXl ? 0 : 0}
-            className={`${(isXxs || isXs) ? "d-row-left" : "d-none"}`}
+            size={xxs ? 2 : xs ? 2 : sm ? 0 : md ? 0 : lg ? 0 : xl ? 0 : 0}
+            className={`${(xxs || xs) ? "d-row-left" : "d-none"}`}
           >
             {sidebarSection()}
           </Grid>
           <Grid
-            size={isXxs ? 10 : isXs ? 10 : isSm ? 12 : isMd ? 4 : isLg ? 4 : isXl ? 4 : 4}
-            className={`${(isXxs || isXs) ? "d-row-left" : "d-center"}`}
+            size={xxs ? 10 : xs ? 10 : sm ? 12 : md ? 2 : lg ? 2 : xl ? 2 : 2}
+            className={`${(xxs || xs) ? "d-row-left" : "d-center"}`}
           >
             {logoSection()}
           </Grid>
           <Grid
-            size={isXxs ? 0 : isXs ? 0 : isSm ? 12 : isMd ? 8 : isLg ? 8 : isXl ? 8 : 8}
-            className={`${(isXxs || isXs) ? "d-none" : "d-row-center"}`}
+            size={xxs ? 0 : xs ? 0 : sm ? 12 : md ? 10 : lg ? 10 : xl ? 10 : 10}
+            className={`${(xxs || xs) ? "d-none" : "d-row-center"}`}
           >
             {tabsSection()}
           </Grid>

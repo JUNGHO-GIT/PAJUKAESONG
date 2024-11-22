@@ -113,9 +113,9 @@ export const OrderList = () => {
                   </Div>
                 </Grid>
                 {i < OBJECT.length - 1 ? (
-                  <Hr px={40} className={"bg-light"} />
+                  <Hr m={40} className={"bg-light"} />
                 ) : (
-                  <Br px={10} />
+                  <Br m={10} />
                 )}
               </Grid>
             </Grid>
@@ -125,7 +125,7 @@ export const OrderList = () => {
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {headFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr m={40} className={"bg-burgundy h-2"} />
           {listFragment()}
         </Card>
       );
@@ -145,7 +145,7 @@ export const OrderList = () => {
         {LOADING ? <Loader /> : (
           <>
             {listSection()}
-            <Hr px={40} className={"bg-grey"} />
+            <Hr m={60} className={"bg-light h-5"} />
             {filterSection()}
           </>
         )}

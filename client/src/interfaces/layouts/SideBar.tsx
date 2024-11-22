@@ -1,7 +1,7 @@
 // SideBar.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue } from "@importHooks";
+import { useCommonValue, useStoreAlert } from "@importHooks";
 import { axios } from "@importLibs";
 import { Icons, Div, Img, Hr } from "@importComponents";
 import { Drawer, List, ListItem, Collapse, Grid } from "@importMuis";
@@ -20,6 +20,7 @@ export const SideBar = (
   // 1. common -------------------------------------------------------------------------------------
   const { URL, PATH, navigate, location_category, isAdmin } = useCommonValue();
   const { firstStr, secondStr, dataArray } = useCommonValue();
+  const { setALERT } = useStoreAlert();
 
   // 2-2. useState ---------------------------------------------------------------------------------
   const [appDate, setAppDate] = useState<string>("");
@@ -76,7 +77,7 @@ export const SideBar = (
             shadow={false}
             radius={false}
             group={"main"}
-            src={"logo1_2.webp"}
+            src={"logo1_1.webp"}
             className={"pointer m-10 h-max50"}
             onClick={() => {
               navigate("/main");
@@ -134,8 +135,16 @@ export const SideBar = (
                     <ListItem
                       key={subIdx}
                       onClick={() => {
-                        if (subItem.titleEn === "dashboard" && subItem.url === "/admin/dashboard" && !isAdmin) {
-                          alert("관리자만 접근 가능합니다.");
+                        if (
+                          subItem.titleEn === "dashboard" &&
+                          subItem.url === "/admin/dashboard" &&
+                          !isAdmin
+                        ) {
+                          setALERT({
+                            open: true,
+                            severity: "error",
+                            msg: "관리자만 접근 가능합니다."
+                          });
                           return;
                         }
                         setSelectedTab(item?.titleEn);
@@ -268,11 +277,11 @@ export const SideBar = (
         <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-col-center"}>
             {logoSection()}
-            <Hr px={40} className={"bg-light-grey"} />
+            <Hr m={40} className={"bg-light-grey"} />
             {sidebarSection()}
-            <Hr px={40} className={"bg-light-grey"} />
+            <Hr m={40} className={"bg-light-grey"} />
             {textSection1()}
-            <Hr px={40} className={"bg-light-grey"} />
+            <Hr m={40} className={"bg-light-grey"} />
             {textSection2()}
           </Grid>
         </Grid>

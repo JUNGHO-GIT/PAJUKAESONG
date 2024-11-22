@@ -16,7 +16,7 @@ export const OrderUpdate = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location_id } = useCommonValue();
-  const { isXxs, paperClass } = useResponsive();
+  const { xxs, paperClass } = useResponsive();
   const { REFS, ERRORS, validate } = useValidateOrder();
   const { ALERT, setALERT } = useStoreAlert();
 
@@ -125,7 +125,7 @@ export const OrderUpdate = () => {
             <Grid container={true} spacing={2} key={`product-${i}`}>
               <Grid size={3} className={"d-col-center"}>
                 <Img
-                  max={isXxs ? 80 : 120}
+                  max={xxs ? 80 : 120}
                   hover={false}
                   shadow={true}
                   radius={false}
@@ -235,7 +235,7 @@ export const OrderUpdate = () => {
                 />
               </Grid>
               {i < OBJECT?.order_product?.length - 1 && (
-                <Hr px={20} className={"bg-light-grey"} />
+                <Hr m={20} className={"bg-light-grey"} />
               )}
             </Grid>
           ))}
@@ -261,7 +261,7 @@ export const OrderUpdate = () => {
       return (
         <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
           {productFragment()}
-          <Hr px={40} className={"bg-burgundy"} />
+          <Hr m={40} className={"bg-burgundy h-2"} />
           {priceFragment(OBJECT)}
         </Card>
       );
@@ -456,9 +456,9 @@ export const OrderUpdate = () => {
         {LOADING ? <Loader /> : (
           <>
             {productSection()}
-            <Br px={30} />
+            <Br m={30} />
             {orderSection()}
-            <Br px={20} />
+            <Br m={20} />
             {filterSection()}
           </>
         )}
