@@ -268,7 +268,7 @@ export const ContactUpdate = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-1 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
           {updateFragment()}
         </Card>
       );

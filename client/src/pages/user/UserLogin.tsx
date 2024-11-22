@@ -177,7 +177,7 @@ export const UserLogin = () => {
         </Grid>
       );
       return (
-        <Card className={"border-1 radius-1 shadow-1 p-20"}>
+        <Card className={"border-1 radius-2 shadow-1 p-20"}>
           {loginFragment()}
         </Card>
       );

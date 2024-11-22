@@ -221,7 +221,7 @@ export const Main = () => {
             >
               {OBJECT_NOTICE?.map((item: any, index: number) => (
                 <SwiperSlide key={index}>
-                  <Div className={"d-col-center bg-white border-1 radius-1 shadow-1 p-20"}>
+                  <Div className={"d-col-center bg-white border-1 radius-3 shadow-1 p-20"}>
                     <Img
                       max={200}
                       hover={true}
@@ -289,7 +289,7 @@ export const Main = () => {
             <Location
               width={"100%"}
               height={"60vh"}
-              className={"border-1 shadow-3 radius-1"}
+              className={"border-2 shadow-1 radius-2"}
             />
           </Grid>
         </Grid>
