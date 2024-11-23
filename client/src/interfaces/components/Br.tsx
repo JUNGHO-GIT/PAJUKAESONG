@@ -6,9 +6,9 @@ export const Br = (props: any) => (
     className={props?.className || ""}
     style={{
       "background": "none",
-      "width": "100%",
-      "height": "0.1px",
-      "margin": `${props?.m / 2}px 0px`,
+      "width": `${(props?.w) || 100}%`,
+      "height": `${(props?.h) || 0}px`,
+      "margin": `${(props?.m / 2) || 0}px 0px`,
     }}
   />
 );

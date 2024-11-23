@@ -66,7 +66,7 @@ import {
 // -------------------------------------------------------------------------------------------------
 const App = () => {
 
-  const { LOADING, setLOADING } = useStoreLoading();
+  const { setLOADING } = useStoreLoading();
 
   useEffect(() => {
     setLOADING(true);
@@ -78,7 +78,7 @@ const App = () => {
 
   return (
     <div className={"App"}>
-      {LOADING && <Loader />}
+      <Loader />
       <Header />
       <TitleBar />
       <Alert />

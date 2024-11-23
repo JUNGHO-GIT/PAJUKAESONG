@@ -12,11 +12,13 @@ export const Loader = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLOADING(false);
-    }, 800);
-    return () => clearTimeout(timer);
-  }, [setLOADING]);
+    if (LOADING) {
+      const timer = setTimeout(() => {
+        setLOADING(false);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [LOADING, setLOADING]);
 
   // 7.loader --------------------------------------------------------------------------------------
   const loaderNode = () => (
