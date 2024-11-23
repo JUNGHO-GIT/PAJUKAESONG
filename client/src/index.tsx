@@ -141,7 +141,7 @@ createRoot(document.getElementById('root') as HTMLDivElement).render(
     <ThemeProvider theme={
       createTheme({
         typography: {
-          fontFamily: "Pretendard Variable, Pretendard, Noto Sans KR, Roboto, sans-serif"
+          fontFamily: "Pretendard, Noto Sans KR, Roboto, sans-serif"
         }
       })
     }>
