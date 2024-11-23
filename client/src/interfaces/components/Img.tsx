@@ -12,11 +12,12 @@ declare type ImgProps = React.HTMLAttributes<HTMLImageElement> & {
   radius?: boolean;
   border?: boolean;
   max?: number;
+  loading?: "eager" | "lazy";
 };
 
 // -------------------------------------------------------------------------------------------------
 export const Img = (
-  { group, src, hover, shadow, radius, border, max, ...props }: ImgProps
+  { group, src, hover, shadow, radius, border, max, loading, ...props }: ImgProps
 ) => {
 
   // 1. common -------------------------------------------------------------------------------------
@@ -70,12 +71,13 @@ export const Img = (
       alt={fileName}
       key={fileName}
       src={imgSrc}
-      loading={"lazy"}
+      loading={loading || "lazy"}
       className={imageClass}
       onError={(e) => {
+        e.currentTarget.style.width = "100%";
+        e.currentTarget.style.height = "100%";
         e.currentTarget.src = `${GCLOUD_URL}/main/empty.webp`;
         e.currentTarget.alt = "empty";
-        e.currentTarget.className = "w-20 h-20";
       }}
     />
   );
