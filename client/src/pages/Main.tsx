@@ -30,6 +30,11 @@ export const Main = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
+    setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     Promise.all([
       axios.get(`${URL}/api/menu/list`, {
         params: {
