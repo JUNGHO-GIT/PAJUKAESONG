@@ -191,18 +191,18 @@ export const TitleBar = () => {
     const titleSection = () => (
       <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-row-center"}>
-          <Div className={`mt-n3 me-n5`}>
+          <Div className={`mt-n3 mr-n5`}>
             <Icons
               key={"Home"}
               name={"Home"}
               color={"indigo"}
-              className={"w-20 h-20"}
+              className={"w-20px h-20px"}
             />
           </Div>
           <Div className={"fs-0-9rem fw-300 white ls-2"}>
             {`PAJU KAESONG`}
           </Div>
-          <Div className={`fs-1-1rem fw-400 white ms-10 me-10`}>
+          <Div className={`fs-1-1rem fw-400 white ml-10pxmr-10px`}>
             {`/`}
           </Div>
           <Div style={{
@@ -222,7 +222,7 @@ export const TitleBar = () => {
       </Grid>
     );
     return (
-      <Paper className={`layout-wrapper p-relative border-dark-bottom-1 border-dark-top-1 z-100 fadeIn radius-0 ${objectHeight} ${objectBgColor}`}>
+      <Paper className={`layout-wrapper p-relative border-dark-bottom-1px border-dark-top-1px z-100 fadeIn radius-0 ${objectHeight} ${objectBgColor}`}>
         {PATH.includes("main") ? mainSection() : titleSection()}
       </Paper>
     );

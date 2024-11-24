@@ -34,7 +34,6 @@ export const MenuSave = () => {
   const flowSave = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, fileList, "save")) {
-      setLOADING(false);
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
@@ -77,9 +76,6 @@ export const MenuSave = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   };
 
@@ -236,7 +232,7 @@ export const MenuSave = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {saveFragment()}
         </Card>
       );

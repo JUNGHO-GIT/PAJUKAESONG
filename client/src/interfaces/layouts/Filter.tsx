@@ -27,7 +27,7 @@ export const Filter = (
   const filterNode = () => {
     // 0. find
     const isFindSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10px"}>
         <Grid size={12}>
           <Btn
             className={"w-100p fs-1-0rem bg-black"}
@@ -42,11 +42,11 @@ export const Filter = (
     );
     // 1. admin
     const isAdminSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10px"}>
         <Grid size={4} className={"d-row-center"}>
           <Select
             value={PAGING?.sort}
-            inputclass={"h-min0 h-5vh"}
+            inputclass={"h-min-0px h-5vh"}
             onChange={(e: any) => (
               setPAGING((prev: any) => ({
                 ...prev,
@@ -84,7 +84,7 @@ export const Filter = (
             page={PAGING.page}
             showFirstButton={true}
             showLastButton={true}
-            className={"border-bottom-1 p-2"}
+            className={"border-bottom-1px p-2px"}
             onPageChange={(_event, newPage) => {
               setPAGING((prev: any) => ({
                 ...prev,
@@ -103,11 +103,11 @@ export const Filter = (
     );
     // 1. list
     const isListSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10px"}>
         <Grid size={3} className={"d-row-center"}>
           <Select
             value={PAGING?.sort}
-            inputclass={"h-min0 h-5vh"}
+            inputclass={"h-min-0px h-5vh"}
             onChange={(e: any) => (
               setPAGING((prev: any) => ({
                 ...prev,
@@ -145,7 +145,7 @@ export const Filter = (
             page={PAGING.page}
             showFirstButton={true}
             showLastButton={true}
-            className={"border-bottom-1 p-2"}
+            className={"border-bottom-1px p-2px"}
             onPageChange={(_event, newPage) => {
               setPAGING((prev: any) => ({
                 ...prev,
@@ -174,7 +174,7 @@ export const Filter = (
     );
     // 2. detail
     const isDetailSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10px"}>
         <Grid size={isAdmin ? 6 : 12} className={"d-row-left"}>
           <Div
             className={"fs-1-0rem fw-700 pointer-burgundy"}
@@ -191,7 +191,7 @@ export const Filter = (
         </Grid>
         <Grid size={isAdmin ? 6 : 0} className={`${isAdmin ? "d-row-right" : "d-none"}`}>
           <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy me-10"}
+            className={"fs-1-0rem fw-700 pointer-burgundy mr-10px"}
             onClick={() => {
               navigate(`/${firstStr}/update`, {
                 state: {
@@ -203,7 +203,7 @@ export const Filter = (
             수정
           </Div>
           <Div
-            className={"fs-1-0rem fw-700 pointer-burgundy ms-10"}
+            className={"fs-1-0rem fw-700 pointer-burgundy ml-10px"}
             onClick={() => {
               flow.flowDelete();
             }}
@@ -215,7 +215,7 @@ export const Filter = (
     );
     // 3. save
     const isSaveSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10px"}>
         <Grid size={6} className={"d-row-center"}>
           <Btn
             className={"w-100p fs-1-0rem bg-grey"}
@@ -249,7 +249,7 @@ export const Filter = (
     );
     // 4. update
     const isUpdateSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10px"}>
         <Grid size={6} className={"d-row-center"}>
           <Btn
             className={"w-100p fs-1-0rem bg-grey"}
@@ -278,7 +278,7 @@ export const Filter = (
     );
     // 5. order
     const isOrderSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10px"}>
         <Grid size={6} className={"d-row-center"}>
           <Btn
             className={"w-100p fs-1-0rem bg-grey"}

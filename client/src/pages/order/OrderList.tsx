@@ -33,6 +33,10 @@ export const OrderList = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
         order_name: location.state?.order_name || "",
@@ -54,9 +58,6 @@ export const OrderList = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   }, [URL, SUBFIX, PAGING]);
 
@@ -121,9 +122,9 @@ export const OrderList = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {headFragment()}
-          <Hr m={40} className={"bg-burgundy h-2"} />
+          <Hr m={40} className={"bg-burgundy h-2px"} />
           {listFragment()}
         </Card>
       );
@@ -141,7 +142,7 @@ export const OrderList = () => {
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
         {listSection()}
-        <Hr m={60} className={"bg-light h-5"} />
+        <Hr m={60} className={"bg-light h-5px"} />
         {filterSection()}
       </Paper>
     );

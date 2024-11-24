@@ -34,7 +34,6 @@ export const NoticeSave = () => {
   const flowSave = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, fileList, "save")) {
-      setLOADING(false);
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
@@ -73,9 +72,6 @@ export const NoticeSave = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   };
 
@@ -112,7 +108,7 @@ export const NoticeSave = () => {
                     value={item?.notice_content}
                     itemRef={REFS?.[i]?.notice_content}
                     error={ERRORS?.[i]?.notice_content}
-                    inputclass={"h-min50vh border-none"}
+                    inputclass={"h-min-50vh border-none"}
                     onChange={(e: any) => {
                       setOBJECT((prev: any) => ({
                         ...prev,
@@ -148,7 +144,7 @@ export const NoticeSave = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {saveFragment()}
         </Card>
       );

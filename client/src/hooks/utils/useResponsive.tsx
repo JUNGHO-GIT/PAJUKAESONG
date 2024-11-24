@@ -24,20 +24,25 @@ export const useResponsive = () => {
 
   // 3. useEffect ----------------------------------------------------------------------------------
   useEffect(() => {
-    let baseClass = "content-wrapper fadeIn h-min50vh";
-    baseClass += PATH.includes("list") ? " px-10 py-30" : " px-20 py-30";
+    let baseClass = "content-wrapper fadeIn h-min-50vh";
+    baseClass += PATH.includes("list") ? " px-10px py-30px" : " px-20px py-30px";
 
     if (xxs || xs) {
       baseClass += " w-100p";
-    } else if (sm) {
+    }
+    else if (sm) {
       baseClass += " w-90p";
-    } else if (md) {
+    }
+    else if (md) {
       baseClass += " w-70p";
-    } else if (lg) {
+    }
+    else if (lg) {
       baseClass += " w-60p";
-    } else if (xl) {
+    }
+    else if (xl) {
       baseClass += " w-50p";
-    } else if (isXxl) {
+    }
+    else if (isXxl) {
       baseClass += " w-40p";
     }
 

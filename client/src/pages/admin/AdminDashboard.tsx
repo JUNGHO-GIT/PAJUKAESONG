@@ -46,6 +46,10 @@ export const AdminDashboard = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     Promise.all([
       axios.get(`${URL}${SUBFIX}/visitCount`, {
         params: {
@@ -85,9 +89,6 @@ export const AdminDashboard = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   }, [URL, SUBFIX, DATE, PAGING_CONTACT, PAGING_ORDER]);
 
@@ -117,7 +118,7 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {titleFragment()}
           <Br m={30} />
           {pickerFragment()}
@@ -138,17 +139,17 @@ export const AdminDashboard = () => {
       const visitFragment = () => (
         <Grid container={true} spacing={0}>
           <Grid size={12} className={"d-row-center"}>
-            <Div className={"fs-1-6rem fw-600 black me-5"}>
+            <Div className={"fs-1-6rem fw-600 black mr-5px"}>
               {visitCount}
             </Div>
-            <Div className={"fs-1-3rem fw-500 grey ms-10"}>
+            <Div className={"fs-1-3rem fw-500 grey ml-10px"}>
               명
             </Div>
           </Grid>
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {titleFragment()}
           <Br m={30} />
           {visitFragment()}
@@ -223,11 +224,11 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {titleFragment()}
           <Br m={30} />
           {headFragment()}
-          <Hr m={40} className={"bg-burgundy h-2"} />
+          <Hr m={40} className={"bg-burgundy h-2px"} />
           {listFragment()}
         </Card>
       );
@@ -310,11 +311,11 @@ export const AdminDashboard = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {titleFragment()}
           <Br m={30} />
           {headFragment()}
-          <Hr m={40} className={"bg-burgundy h-2"} />
+          <Hr m={40} className={"bg-burgundy h-2px"} />
           {listFragment()}
         </Card>
       );

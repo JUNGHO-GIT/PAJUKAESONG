@@ -1,6 +1,6 @@
 // ContactFind.tsx
 
-import { useState } from "@importReacts";
+import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useResponsive } from "@importHooks";
 import { useStoreAlert, useStoreLoading, useValidateContact } from "@importHooks";
 import { axios } from "@importLibs";
@@ -23,11 +23,15 @@ export const ContactFind = () => {
   // 2-1. useState ---------------------------------------------------------------------------------
   const [OBJECT, setOBJECT] = useState<any>(Contact);
 
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    setLOADING(true);
+  }, []);
+
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSearch = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "find")) {
-      setLOADING(false);
       return;
     }
     axios.get(`${URL}${SUBFIX}/find`, {
@@ -60,9 +64,6 @@ export const ContactFind = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   };
 
@@ -133,7 +134,7 @@ export const ContactFind = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {findFragment()}
         </Card>
       );

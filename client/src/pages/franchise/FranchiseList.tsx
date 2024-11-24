@@ -31,6 +31,10 @@ export const FranchiseList = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
         PAGING: PAGING,
@@ -51,9 +55,6 @@ export const FranchiseList = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   }, [URL, SUBFIX, PAGING, location_category]);
 
@@ -64,7 +65,7 @@ export const FranchiseList = () => {
       const listFragment = () => (
         <Grid container={true} spacing={0}>
           {OBJECT.filter((f: any) => f).map((item: any, i: number) => (
-            <Grid size={12} className={"d-col-center p-10"} key={`list-${i}`}>
+            <Grid size={12} className={"d-col-center p-10px"} key={`list-${i}`}>
               <Grid container={true} spacing={2}>
                 <Grid size={12}>
                   <Img
@@ -112,7 +113,7 @@ export const FranchiseList = () => {
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
         {listSection()}
-        <Hr m={60} className={"bg-light h-5"} />
+        <Hr m={60} className={"bg-light h-5px"} />
         {filterSection()}
       </Paper>
     );

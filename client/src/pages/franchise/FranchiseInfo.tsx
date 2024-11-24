@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "@importReacts";
 import { useResponsive, useStoreLoading } from "@importHooks";
-import { Loader } from "@importLayouts";
 import { Div, Br, Hr } from "@importComponents";
 import { Paper, Grid, Card, Stepper, Step, StepLabel } from "@importMuis";
 
@@ -115,7 +114,7 @@ export const FranchiseInfo = () => {
                       </Div>
                     </StepLabel>
                     <Br m={10} />
-                    <Div className={"fs-0-8rem fw-400 d-fit ms-30"}>
+                    <Div className={"fs-0-8rem fw-400 d-left ml-30px"}>
                       {step.desc}
                     </Div>
                   </Step>
@@ -185,7 +184,7 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {titleFragment()}
           <Br m={20} />
           {stepFragment()}
@@ -254,11 +253,11 @@ export const FranchiseInfo = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {titleFragment()}
           <Br m={20} />
           {headFragment()}
-          <Hr m={40} className={"bg-burgundy h-2"} />
+          <Hr m={40} className={"bg-burgundy h-2px"} />
           {costFragment()}
         </Card>
       );

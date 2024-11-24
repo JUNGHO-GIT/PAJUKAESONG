@@ -89,7 +89,7 @@ export const Header = () => {
         <Grid size={12} className={"d-center"}>
           <Icons
             name={"Hamburger"}
-            className={"w-24 h-24 black"}
+            className={"w-24px h-24px black"}
             onClick={() => toggleSidebar()}
           />
           <SideBar
@@ -172,7 +172,7 @@ export const Header = () => {
             }}
             slotProps={{
               paper: {
-                className: "py-0 px-5",
+                className: "py-0px px-5px",
               }
             }}
             onClose={() => {
@@ -186,7 +186,7 @@ export const Header = () => {
               <MenuItem
                 key={`menuItem-${subIdx}`}
                 selected={selectedMenuItem === subItem.titleEn}
-                className={`pointer-burgundy fs-1-1rem p-20 ${selectedTabVal === selectedTab && selectedMenuItem === subItem.titleEn ? "burgundy fw-600" : ""}`}
+                className={`pointer-burgundy fs-1-1rem p-20px ${selectedTabVal === selectedTab && selectedMenuItem === subItem.titleEn ? "burgundy fw-600" : ""}`}
                 disabled={subItem?.titleEn === "dashboard" && !isAdmin}
                 onClick={() => {
                   if (subItem?.titleEn === "dashboard" && !isAdmin) {
@@ -213,7 +213,7 @@ export const Header = () => {
       </Grid>
     );
     return (
-      <Paper className={`layout-wrapper p-sticky top-0vh border-bottom-1 shadow-bottom-4 radius-0 p-20 ${tabHeight}`}>
+      <Paper className={`layout-wrapper p-sticky top-0vh border-bottom-1px shadow-bottom-4px radius-0 p-20px ${tabHeight}`}>
         <Grid container={true} spacing={2}>
           <Grid
             size={xxs ? 2 : xs ? 2 : sm ? 0 : md ? 0 : lg ? 0 : xl ? 0 : 0}

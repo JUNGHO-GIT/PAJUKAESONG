@@ -34,7 +34,7 @@ export const Alert = () => {
             <Icons
               key={"Check"}
               name={"Check"}
-              className={"w-24 h-24 black"}
+              className={"w-24px h-24px black"}
               onClick={() => {
                 setALERT({
                   open: false

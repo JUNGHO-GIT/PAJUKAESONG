@@ -28,6 +28,10 @@ export const ProductUpdate = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/detail`, {
       params: {
         _id: location_id
@@ -38,9 +42,6 @@ export const ProductUpdate = () => {
     })
     .catch((err: any) => {
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -48,7 +49,6 @@ export const ProductUpdate = () => {
   const flowUpdate = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, fileList, "update")) {
-      setLOADING(false);
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
@@ -84,9 +84,6 @@ export const ProductUpdate = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   };
 
@@ -243,7 +240,7 @@ export const ProductUpdate = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {updateFragment()}
         </Card>
       );

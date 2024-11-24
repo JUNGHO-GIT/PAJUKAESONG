@@ -31,6 +31,10 @@ export const ProductList = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
         PAGING: PAGING
@@ -50,9 +54,6 @@ export const ProductList = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   }, [URL, SUBFIX, PAGING]);
 
@@ -63,7 +64,7 @@ export const ProductList = () => {
       const listFragment = () => (
         <Grid container={true} spacing={0}>
           {OBJECT.filter((f: any) => f).map((item: any, i: number) => (
-            <Grid size={{ xs: 6, md: 4 }} className={"d-col-center p-10"} key={`list-${i}`}>
+            <Grid size={{ xs: 6, md: 4 }} className={"d-col-center p-10px"} key={`list-${i}`}>
               <Grid container={true} spacing={2}>
                 <Grid size={12}>
                   <Img
@@ -112,7 +113,7 @@ export const ProductList = () => {
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
         {listSection()}
-        <Hr m={60} className={"bg-light h-5"} />
+        <Hr m={60} className={"bg-light h-5px"} />
         {filterSection()}
       </Paper>
     );

@@ -28,6 +28,10 @@ export const OrderDetail = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/detail`, {
       params: {
         _id: location_id
@@ -43,9 +47,6 @@ export const OrderDetail = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -53,7 +54,6 @@ export const OrderDetail = () => {
   const flowDelete = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "delete")) {
-      setLOADING(false);
       return;
     }
     axios.delete(`${URL}${SUBFIX}/delete`, {
@@ -92,9 +92,6 @@ export const OrderDetail = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   };
 
@@ -118,7 +115,7 @@ export const OrderDetail = () => {
               </Grid>
               <Grid size={4} className={"d-col-center"}>
                 <Div className={"d-row-center"}>
-                  <Div className={"fs-1-2rem fw-600 ms-5"}>
+                  <Div className={"fs-1-2rem fw-600 ml-5px"}>
                     {item?.product_name}
                   </Div>
                 </Div>
@@ -126,9 +123,9 @@ export const OrderDetail = () => {
                   <Icons
                     key={"Won"}
                     name={"Won"}
-                    className={"w-15 h-15 dark"}
+                    className={"w-15px h-15px dark"}
                   />
-                  <Div className={"fs-1-0rem ms-n5"}>
+                  <Div className={"fs-1-0rem ml-n5"}>
                     {insertComma(item?.product_price || "0")}
                   </Div>
                 </Div>
@@ -138,7 +135,7 @@ export const OrderDetail = () => {
                   <Icons
                     key={"Minus"}
                     name={"Minus"}
-                    className={"w-12 h-12 black"}
+                    className={"w-12px h-12px black"}
                   />
                   <Div className={"fs-0-7rem"}>
                     {item?.product_count}
@@ -146,7 +143,7 @@ export const OrderDetail = () => {
                   <Icons
                     key={"Plus"}
                     name={"Plus"}
-                    className={"w-12 h-12 black"}
+                    className={"w-12px h-12px black"}
                   />
                 </Div>
               </Grid>
@@ -166,7 +163,7 @@ export const OrderDetail = () => {
             <Icons
               key={"Won"}
               name={"Won"}
-              className={"w-15 h-15 dark"}
+              className={"w-15px h-15px dark"}
             />
             <Div className={"fs-1-2rem fw-600"}>
               {insertComma(item?.order_price || "0")}
@@ -175,9 +172,9 @@ export const OrderDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {productFragment()}
-          <Hr m={40} className={"bg-burgundy h-2"} />
+          <Hr m={40} className={"bg-burgundy h-2px"} />
           {priceFragment(OBJECT)}
         </Card>
       );
@@ -256,7 +253,7 @@ export const OrderDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {orderFragment()}
         </Card>
       );
@@ -279,7 +276,7 @@ export const OrderDetail = () => {
         {productSection()}
         <Br m={30} />
         {orderSection()}
-        <Hr m={60} className={"bg-light h-5"} />
+        <Hr m={60} className={"bg-light h-5px"} />
         {filterSection()}
       </Paper>
     );

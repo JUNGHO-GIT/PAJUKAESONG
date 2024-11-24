@@ -26,6 +26,10 @@ export const FranchiseDetail = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/detail`, {
       params: {
         _id: location_id
@@ -41,9 +45,6 @@ export const FranchiseDetail = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -51,7 +52,6 @@ export const FranchiseDetail = () => {
   const flowDelete = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "delete")) {
-      setLOADING(false);
       return;
     }
     axios.delete(`${URL}${SUBFIX}/delete`, {
@@ -87,9 +87,6 @@ export const FranchiseDetail = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   };
 
@@ -107,7 +104,7 @@ export const FranchiseDetail = () => {
                     spaceBetween={20}
                     slidesPerView={1}
                     slidesPerGroup={1}
-                    className={"p-5"}
+                    className={"p-5px"}
                     pagination={{
                       clickable: true,
                       enabled: true,
@@ -158,7 +155,7 @@ export const FranchiseDetail = () => {
                     key={"Location"}
                     name={"Location"}
                     fill={"whitesmoke"}
-                    className={"w-15 h-15 dark"}
+                    className={"w-15px h-15px dark"}
                   />
                   <Div className={"fs-0-9rem fw-500 black"}>
                     {`${item?.franchise_address_main} (${item?.franchise_address_detail})`}
@@ -171,7 +168,7 @@ export const FranchiseDetail = () => {
                     key={"Phone"}
                     name={"Phone"}
                     fill={"whitesmoke"}
-                    className={"w-15 h-15 dark"}
+                    className={"w-15px h-15px dark"}
                   />
                   <Div className={"fs-0-9rem fw-500 black"}>
                     {item?.franchise_phone}
@@ -184,7 +181,7 @@ export const FranchiseDetail = () => {
                     key={"Calendar"}
                     name={"Calendar"}
                     fill={"whitesmoke"}
-                    className={"w-15 h-15 dark"}
+                    className={"w-15px h-15px dark"}
                   />
                   <Div className={"fs-0-9rem fw-500 black"}>
                     {getDayFmt(item?.franchise_regDt)}
@@ -198,7 +195,7 @@ export const FranchiseDetail = () => {
       return (
         <Card className={"d-col-center border-0 shadow-0"}>
           {imageFragment()}
-          <Hr m={40} className={"bg-burgundy h-2"} />
+          <Hr m={40} className={"bg-burgundy h-2px"} />
           {descFragment()}
         </Card>
       )
@@ -219,7 +216,7 @@ export const FranchiseDetail = () => {
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
         {detailSection()}
-        <Hr m={60} className={"bg-light h-5"} />
+        <Hr m={60} className={"bg-light h-5px"} />
         {filterSection()}
       </Paper>
     );

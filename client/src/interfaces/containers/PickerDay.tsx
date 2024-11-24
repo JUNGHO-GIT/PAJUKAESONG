@@ -36,9 +36,9 @@ export const PickerDay = (
         position={"center"}
         direction={"center"}
         contents={({closePopup}: any) => (
-          <Grid container={true} spacing={2} className={"w-min70vw"}>
+          <Grid container={true} spacing={2} className={"w-min-70vw"}>
             <Grid size={12} className={"d-row-center"}>
-              <Div className={"fs-1-2rem fw-600 me-10"}>
+              <Div className={"fs-1-2rem fw-600 mr-10px"}>
                 날짜 선택
               </Div>
               <Div className={"fs-0-8rem fw-500 dark"}>
@@ -145,11 +145,11 @@ export const PickerDay = (
             error={ERRORS?.[i]?.[`${extra}`]}
             endadornment={
               <Div className={"d-row-center"}>
-                <Div className={"me-n10"}>
+                <Div className={"mr-n10"}>
                   <Icons
                     key={"ChevronLeft"}
                     name={"ChevronLeft"}
-                    className={"w-16 h-16"}
+                    className={"w-16px h-16px"}
                     onClick={(e: any) => {
                       e.stopPropagation();
                       setOBJECT((prev: any) => ({
@@ -159,11 +159,11 @@ export const PickerDay = (
                     }}
                   />
                 </Div>
-                <Div className={"me-n15"}>
+                <Div className={"mr-n15"}>
                   <Icons
                     key={"ChevronRight"}
                     name={"ChevronRight"}
-                    className={"w-16 h-16"}
+                    className={"w-16px h-16px"}
                     onClick={(e: any) => {
                       e.stopPropagation();
                       setOBJECT((prev: any) => ({

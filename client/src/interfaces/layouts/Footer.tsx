@@ -38,7 +38,7 @@ export const Footer = () => {
           <Icons
             key={"Info"}
             name={"Info"}
-            className={"w-12 h-12"}
+            className={"w-12px h-12px"}
           />
           <Div className={"fs-0-8rem"}>
             대표: 강민서 | 사업자 등록번호: 883-03-03096
@@ -48,7 +48,7 @@ export const Footer = () => {
           <Icons
             key={"Location"}
             name={"Location"}
-            className={"w-12 h-12"}
+            className={"w-12px h-12px"}
           />
           <Div className={"fs-0-8rem"}>
             경기 파주시 문산읍 방촌로 1675-34 1층
@@ -58,7 +58,7 @@ export const Footer = () => {
           <Icons
             key={"Phone"}
             name={"Phone"}
-            className={"w-12 h-12"}
+            className={"w-12px h-12px"}
           />
           <Div className={"fs-0-8rem"}>
             031-952-8083
@@ -68,7 +68,7 @@ export const Footer = () => {
           <Icons
             key={"Mail"}
             name={"Mail"}
-            className={"w-12 h-12"}
+            className={"w-12px h-12px"}
           />
           <Div className={"fs-0-8rem"}>
             sooookee@naver.com
@@ -78,7 +78,7 @@ export const Footer = () => {
           <Icons
             key={"Copyright"}
             name={"Copyright"}
-            className={"w-12 h-12"}
+            className={"w-12px h-12px"}
           />
           <Div className={"fs-0-8rem pointer"}>
             2024 파주개성면옥. All rights reserved.
@@ -88,7 +88,7 @@ export const Footer = () => {
     );
     // 4. return
     return (
-      <Paper className={"layout-wrapper p-relative shadow-top-4 border-0 radius-0 p-10 bg-ivory"}>
+      <Paper className={"layout-wrapper p-relative shadow-top-4px border-0 radius-0 p-10px bg-ivory"}>
         <Grid container spacing={2} columns={24}>
           <Grid size={{ xs: 24, sm: 10, md: 12, lg: 12, xl: 12 }} className={"d-center"}>
             {logoSection()}

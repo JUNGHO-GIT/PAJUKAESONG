@@ -26,6 +26,11 @@ export const UserLogin = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
+    setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     // 관리자로 로그인 한 경우
     if (isAdmin && adminId && adminPw) {
       setOBJECT((prev: any) => ({
@@ -48,7 +53,6 @@ export const UserLogin = () => {
   const flowLogin = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "login")) {
-      setLOADING(false);
       return;
     }
     axios.post(`${URL}${SUBFIX}/login`, {
@@ -96,9 +100,6 @@ export const UserLogin = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   };
 
@@ -174,14 +175,14 @@ export const UserLogin = () => {
         </Grid>
       );
       return (
-        <Card className={"border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"border-1 radius-2 shadow-1 p-20px"}>
           {loginFragment()}
         </Card>
       );
     };
     // 3. filter
     const filterSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10px"}>
         <Grid size={12}>
           {(isAdmin || isUser) ? (
             <Btn
@@ -207,13 +208,13 @@ export const UserLogin = () => {
     );
     // 4. link
     const linkSection = () => (
-      <Grid container={true} spacing={2} className={"px-10"}>
+      <Grid container={true} spacing={2} className={"px-10px"}>
         <Grid size={12} className={"d-row-center"}>
           <Div className={"fs-0-8rem"}>
             아이디가 없는 경우
           </Div>
           <Div
-            className={"blue pointer fs-0-8rem ms-10"}
+            className={"blue pointer fs-0-8rem ml-10px"}
           >
             회원가입
           </Div>
@@ -223,7 +224,7 @@ export const UserLogin = () => {
             비밀번호를 잊은 경우
           </Div>
           <Div
-            className={"blue pointer fs-0-8rem ms-10"}
+            className={"blue pointer fs-0-8rem ml-10px"}
           >
             비밀번호 찾기
           </Div>
@@ -236,7 +237,7 @@ export const UserLogin = () => {
         {loginSection()}
         <Br m={30} />
         {filterSection()}
-        <Hr m={60} className={"bg-light h-5"} />
+        <Hr m={60} className={"bg-light h-5px"} />
         {linkSection()}
       </Paper>
     );

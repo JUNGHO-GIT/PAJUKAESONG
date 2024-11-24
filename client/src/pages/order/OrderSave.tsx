@@ -26,10 +26,13 @@ export const OrderSave = () => {
   const [PRODUCT, setPRODUCT] = useState<any>([Product]);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
-  // 초기 로딩 시 세션에서 데이터 불러오기
   useEffect(() => {
     setLOADING(true);
+  }, []);
 
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  // 초기 로딩 시 세션에서 데이터 불러오기
+  useEffect(() => {
     const existOrderProduct = getSession("order_product", "", "");
 
     // 세션에 데이터가 있으면 불러오기
@@ -40,8 +43,6 @@ export const OrderSave = () => {
         order_product: existOrderProduct,
       }));
     }
-
-    setLOADING(false);
   }, []);
 
   // 2-3. useEffect --------------------------------------------------------------------------------
@@ -66,7 +67,6 @@ export const OrderSave = () => {
   const flowSave = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "save")) {
-      setLOADING(false);
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`, {
@@ -98,9 +98,6 @@ export const OrderSave = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   };
 
@@ -124,7 +121,7 @@ export const OrderSave = () => {
               </Grid>
               <Grid size={4} className={"d-col-center"}>
                 <Div className={"d-row-center"}>
-                  <Div className={"fs-1-2rem fw-600 ms-5"}>
+                  <Div className={"fs-1-2rem fw-600 ml-5px"}>
                     {item?.product_name}
                   </Div>
                 </Div>
@@ -132,9 +129,9 @@ export const OrderSave = () => {
                   <Icons
                     key={"Won"}
                     name={"Won"}
-                    className={"w-15 h-15 dark"}
+                    className={"w-15px h-15px dark"}
                   />
-                  <Div className={"fs-1-0rem ms-n5"}>
+                  <Div className={"fs-1-0rem ml-n5"}>
                     {insertComma(item?.product_price || "0")}
                   </Div>
                 </Div>
@@ -144,7 +141,7 @@ export const OrderSave = () => {
                   <Icons
                     key={"Minus"}
                     name={"Minus"}
-                    className={"w-12 h-12 black"}
+                    className={"w-12px h-12px black"}
                     onClick={() => {
                       const value = Number(item?.product_count);
                       const newValue = value < 1 ? 1 : value - 1;
@@ -179,7 +176,7 @@ export const OrderSave = () => {
                   <Icons
                     key={"Plus"}
                     name={"Plus"}
-                    className={"w-12 h-12 black"}
+                    className={"w-12px h-12px black"}
                     onClick={() => {
                       const value = Number(item?.product_count);
                       const newValue = value < 1 ? 1 : value + 1;
@@ -214,7 +211,7 @@ export const OrderSave = () => {
                 <Icons
                   key={"X"}
                   name={"X"}
-                  className={"w-16 h-16 black"}
+                  className={"w-16px h-16px black"}
                   onClick={() => {
                     setPRODUCT((prev: any) => [
                       ...prev.slice(0, i),
@@ -241,7 +238,7 @@ export const OrderSave = () => {
                 <Icons
                   key={"Won"}
                   name={"Won"}
-                  className={"w-15 h-15 dark"}
+                  className={"w-15px h-15px dark"}
                 />
                 <Div className={"fs-1-2rem fw-600"}>
                   {insertComma(item?.order_total_price || "0")}
@@ -252,9 +249,9 @@ export const OrderSave = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {productFragment()}
-          <Hr m={40} className={"bg-burgundy h-2"} />
+          <Hr m={40} className={"bg-burgundy h-2px"} />
           {priceFragment()}
         </Card>
       );
@@ -426,7 +423,7 @@ export const OrderSave = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {orderFragment()}
         </Card>
       );

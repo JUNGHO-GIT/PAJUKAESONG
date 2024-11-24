@@ -26,6 +26,10 @@ export const MenuDetail = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/detail`, {
       params: {
         _id: location_id
@@ -48,7 +52,6 @@ export const MenuDetail = () => {
   const flowDelete = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "delete")) {
-      setLOADING(false);
       return;
     }
     axios.delete(`${URL}${SUBFIX}/delete`, {
@@ -101,7 +104,7 @@ export const MenuDetail = () => {
                     spaceBetween={20}
                     slidesPerView={1}
                     slidesPerGroup={1}
-                    className={"p-5"}
+                    className={"p-5px"}
                     pagination={{
                       clickable: true,
                       enabled: true,
@@ -152,7 +155,7 @@ export const MenuDetail = () => {
                     key={"Dot"}
                     name={"Dot"}
                     fill={"grey"}
-                    className={"w-15 h-15 dark"}
+                    className={"w-15px h-15px dark"}
                   />
                   <Div className={"fs-1-2rem fw-500 black"}>
                     {item?.menu_description}
@@ -164,7 +167,7 @@ export const MenuDetail = () => {
                   <Icons
                     key={"Won"}
                     name={"Won"}
-                    className={"w-15 h-15 dark"}
+                    className={"w-15px h-15px dark"}
                   />
                   <Div className={"fs-1-1rem fw-500 black"}>
                     {insertComma(item?.menu_price || "0")}
@@ -178,7 +181,7 @@ export const MenuDetail = () => {
       return (
         <Card className={"d-col-center border-0 shadow-0"}>
           {imageFragment()}
-          <Hr m={40} className={"bg-burgundy h-2"} />
+          <Hr m={40} className={"bg-burgundy h-2px"} />
           {descFragment()}
         </Card>
       )
@@ -199,7 +202,7 @@ export const MenuDetail = () => {
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
         {detailSection()}
-        <Hr m={60} className={"bg-light h-5"} />
+        <Hr m={60} className={"bg-light h-5px"} />
         {filterSection()}
       </Paper>
     );

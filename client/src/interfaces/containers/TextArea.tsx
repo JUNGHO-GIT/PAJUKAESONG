@@ -36,7 +36,7 @@ export const TextArea = (props: any) => (
                 {props?.startadornment}
               </div>
             ) : (
-              <div className={`d-center ${props?.adornmentclass || ""} me-2vw`}>
+              <div className={`d-center ${props?.adornmentclass || ""} mr-2vw`}>
                 {props?.startadornment}
               </div>
             )
@@ -49,7 +49,7 @@ export const TextArea = (props: any) => (
                 {props?.endadornment}
               </div>
             ) : (
-              <div className={`d-center ${props?.adornmentclass || ""} ms-2vw`}>
+              <div className={`d-center ${props?.adornmentclass || ""} ml-2vw`}>
                 {props?.endadornment}
               </div>
             )

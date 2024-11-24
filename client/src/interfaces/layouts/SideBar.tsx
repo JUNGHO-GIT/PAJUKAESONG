@@ -78,7 +78,7 @@ export const SideBar = (
             radius={false}
             group={"main"}
             src={"logo1_1.webp"}
-            className={"pointer m-10 h-max50"}
+            className={"pointer m-10px h-max-50px"}
             onClick={() => {
               navigate("/main");
             }}
@@ -107,18 +107,18 @@ export const SideBar = (
                   <Div className={`pointer-burgundy ${selectedTab === item?.titleEn ? "burgundy fs-1-1rem fw-600" : "fs-1-0rem"}`}>
                     {item?.titleKo}
                   </Div>
-                  <Div className={"ms-2"}>
+                  <Div className={"ml-2px"}>
                     {selectedTab === item?.titleEn ? (
                       <Icons
                         key={"ChevronUp"}
                         name={"ChevronUp"}
-                        className={"w-12 h-12 black"}
+                        className={"w-12px h-12px black"}
                       />
                     ) : (
                       <Icons
                         key={"ChevronDown"}
                         name={"ChevronDown"}
-                        className={"w-12 h-12 black"}
+                        className={"w-12px h-12px black"}
                       />
                     )}
                   </Div>
@@ -177,7 +177,7 @@ export const SideBar = (
             <Icons
               key={"Info"}
               name={"Info"}
-              className={"w-12 h-12"}
+              className={"w-12px h-12px"}
             />
             <Div className={"fs-0-7rem"}>
               사업자 등록번호: 883-03-03096
@@ -187,7 +187,7 @@ export const SideBar = (
             <Icons
               key={"Location"}
               name={"Location"}
-              className={"w-12 h-12"}
+              className={"w-12px h-12px"}
             />
             <Div className={"fs-0-7rem"}>
               경기 파주시 문산읍 방촌로 1675-34
@@ -197,7 +197,7 @@ export const SideBar = (
             <Icons
               key={"Phone"}
               name={"Phone"}
-              className={"w-12 h-12"}
+              className={"w-12px h-12px"}
             />
             <Div className={"fs-0-8rem"}>
               031-952-8083
@@ -207,7 +207,7 @@ export const SideBar = (
             <Icons
               key={"Mail"}
               name={"Mail"}
-              className={"w-12 h-12"}
+              className={"w-12px h-12px"}
             />
             <Div className={"fs-0-8rem"}>
               sooookee@naver.com
@@ -223,12 +223,12 @@ export const SideBar = (
             <Icons
               key={"Copyright"}
               name={"Copyright"}
-              className={"w-10 h-10"}
+              className={"w-10px h-10px"}
             />
-            <Div className={"fs-0-7rem fw-400 ms-n5"}>
+            <Div className={"fs-0-7rem fw-400 ml-n5"}>
               2024
             </Div>
-            <Div className={"fs-0-7rem fw-600 ms-5 dark"}>
+            <Div className={"fs-0-7rem fw-600 ml-5pxdark"}>
               PajuKaesong
             </Div>
           </Div>
@@ -236,12 +236,12 @@ export const SideBar = (
             <Icons
               key={"Copyright"}
               name={"Copyright"}
-              className={"w-10 h-10"}
+              className={"w-10px h-10px"}
             />
-            <Div className={"fs-0-7rem fw-400 ms-n5"}>
+            <Div className={"fs-0-7rem fw-400 ml-n5"}>
               Designed by
             </Div>
-            <Div className={"fs-0-7rem fw-600 ms-5 dark"}>
+            <Div className={"fs-0-7rem fw-600 ml-5pxdark"}>
               JUNGHO
             </Div>
           </Div>
@@ -249,12 +249,12 @@ export const SideBar = (
             <Icons
               key={"Copyright"}
               name={"Copyright"}
-              className={"w-10 h-10"}
+              className={"w-10px h-10px"}
             />
-            <Div className={"fs-0-7rem fw-400 ms-n5"}>
+            <Div className={"fs-0-7rem fw-400 ml-n5"}>
               Version
             </Div>
-            <Div className={"fs-0-7rem fw-600 ms-5 dark"}>
+            <Div className={"fs-0-7rem fw-600 ml-5pxdark"}>
               {appDate}
             </Div>
           </Div>

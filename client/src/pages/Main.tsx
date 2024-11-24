@@ -30,7 +30,6 @@ export const Main = () => {
 
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
-    setLOADING(true);
     Promise.all([
       axios.get(`${URL}/api/menu/list`, {
         params: {
@@ -60,9 +59,6 @@ export const Main = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   }, [URL, PAGING, category]);
 
@@ -72,7 +68,7 @@ export const Main = () => {
     // 2. menu -------------------------------------------------------------------------------------
     const menuSection = () => {
       const titleFragment = () => (
-        <Grid container={true} spacing={0} className={"p-0"}>
+        <Grid container={true} spacing={0} className={"p-0px"}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-6rem fw-700"}>
               메뉴 소개
@@ -81,9 +77,9 @@ export const Main = () => {
         </Grid>
       );
       const selectFragment = () => (
-        <Grid container={true} spacing={0} className={"p-10"}>
+        <Grid container={true} spacing={0} className={"p-10px"}>
           <Grid size={12} className={"d-row-center"}>
-            <Div className={`${category === "main" ? "bg-burgundy" : ""} border-1 radius-50 p-10 me-1vw hover`}>
+            <Div className={`${category === "main" ? "bg-burgundy" : ""} border-1 radius-50 p-10px mr-1vw hover`}>
               <Div
                 className={`fs-0-8rem fw-600 ${category === "main" ? "white" : "black"}`}
                 onClick={() => {
@@ -93,7 +89,7 @@ export const Main = () => {
                 메인 메뉴
               </Div>
             </Div>
-            <Div className={`${category === "side" ? "bg-burgundy" : ""} border-1 radius-50 p-10 ms-1vw hover`}>
+            <Div className={`${category === "side" ? "bg-burgundy" : ""} border-1 radius-50 p-10px ml-1vw hover`}>
               <Div
                 className={`fs-0-8rem fw-600 ${category === "side" ? "white" : "black"}`}
                 onClick={() => {
@@ -115,7 +111,7 @@ export const Main = () => {
               centeredSlides={false}
               loop={true}
               navigation={false}
-              className={"p-20"}
+              className={"p-20px"}
               autoplay={{
                 delay: 2000,
               }}
@@ -167,7 +163,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"bg-ivory-light border-dark-top-1 py-20"}>
+        <Grid container={true} spacing={0} className={"bg-ivory-light border-dark-top-1px py-20px"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {titleFragment()}
             {selectFragment()}
@@ -181,7 +177,7 @@ export const Main = () => {
     // 3. notice -----------------------------------------------------------------------------------
     const noticeSection = () => {
       const titleFragment = () => (
-        <Grid container={true} spacing={0} className={"p-0"}>
+        <Grid container={true} spacing={0} className={"p-0px"}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-6rem fw-700"}>
               공지사항
@@ -199,7 +195,7 @@ export const Main = () => {
               centeredSlides={false}
               loop={true}
               navigation={false}
-              className={"p-20"}
+              className={"p-20px"}
               pagination={{
                 clickable: true,
                 enabled: true,
@@ -216,7 +212,7 @@ export const Main = () => {
             >
               {OBJECT_NOTICE?.map((item: any, index: number) => (
                 <SwiperSlide key={index}>
-                  <Div className={"d-col-center bg-white border-1 radius-3 shadow-1 p-20"}>
+                  <Div className={"d-col-center bg-white border-1 radius-3 shadow-1 p-20px"}>
                     <Img
                       max={200}
                       hover={true}
@@ -257,7 +253,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"bg-ivory border-dark-top-1 py-20"}>
+        <Grid container={true} spacing={0} className={"bg-ivory border-dark-top-1px py-20px"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {titleFragment()}
             {noticeFragment()}
@@ -270,7 +266,7 @@ export const Main = () => {
     // 4. location ---------------------------------------------------------------------------------
     const locationSection = () => {
       const titleFragment = () => (
-        <Grid container={true} spacing={0} className={"p-0"}>
+        <Grid container={true} spacing={0} className={"p-0px"}>
           <Grid size={12} className={"d-center"}>
             <Div className={"fs-1-6rem fw-700"}>
               오시는 길
@@ -279,7 +275,7 @@ export const Main = () => {
         </Grid>
       );
       const locationFragment = () => (
-        <Grid container={true} spacing={0} className={"p-20"}>
+        <Grid container={true} spacing={0} className={"p-20px"}>
           <Grid size={12} className={"d-center"}>
             <Location
               width={"100%"}
@@ -290,7 +286,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"bg-ivory-light border-dark-top-1 py-20"}>
+        <Grid container={true} spacing={0} className={"bg-ivory-light border-dark-top-1px py-20px"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {titleFragment()}
             {locationFragment()}

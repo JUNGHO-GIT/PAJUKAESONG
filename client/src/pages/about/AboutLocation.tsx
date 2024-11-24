@@ -1,6 +1,7 @@
 // AboutLocation.tsx
 
-import { useResponsive } from "@importHooks";
+import { useEffect } from "@importReacts";
+import { useResponsive, useStoreLoading } from "@importHooks";
 import { Location } from "@importContainers";
 import { Paper } from "@importMuis";
 
@@ -9,6 +10,12 @@ export const AboutLocation = () => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { paperClass } = useResponsive();
+  const { setLOADING } = useStoreLoading();
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
+    setLOADING(true);
+  }, []);
 
   // 7. locationNode -------------------------------------------------------------------------------
   const locationNode = () => {

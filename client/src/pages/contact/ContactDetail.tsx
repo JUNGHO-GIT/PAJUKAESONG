@@ -27,6 +27,10 @@ export const ContactDetail = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
+  }, []);
+
+  // 2-3. useEffect --------------------------------------------------------------------------------
+  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/detail`, {
       params: {
         _id: location_id
@@ -42,9 +46,6 @@ export const ContactDetail = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   }, [URL, SUBFIX, location_id]);
 
@@ -52,7 +53,6 @@ export const ContactDetail = () => {
   const flowDelete = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "delete")) {
-      setLOADING(false);
       return;
     }
     axios.delete(`${URL}${SUBFIX}/delete`, {
@@ -89,9 +89,6 @@ export const ContactDetail = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
-    })
-    .finally(() => {
-      setLOADING(false);
     });
   };
 
@@ -131,7 +128,7 @@ export const ContactDetail = () => {
                     label={""}
                     disabled={true}
                     value={item?.contact_content}
-                    inputclass={"h-min50vh border-none"}
+                    inputclass={"h-min-50vh border-none"}
                   />
                 </Grid>
               </Grid>
@@ -141,7 +138,7 @@ export const ContactDetail = () => {
                     key={"Calendar"}
                     name={"Calendar"}
                     fill={"whitesmoke"}
-                    className={"w-20 h-20"}
+                    className={"w-20px h-20px"}
                   />
                   <Div className={"fs-1-0rem fw-500"}>
                     {getDayFmt(item?.contact_regDt)}
@@ -152,9 +149,9 @@ export const ContactDetail = () => {
                     key={"Person"}
                     name={"Person"}
                     fill={"whitesmoke"}
-                    className={"w-20 h-20"}
+                    className={"w-20px h-20px"}
                   />
-                  <Div className={"fs-0-9rem fw-500 me-10"}>
+                  <Div className={"fs-0-9rem fw-500 mr-10px"}>
                     {item?.contact_name}
                   </Div>
                 </Grid>
@@ -164,9 +161,9 @@ export const ContactDetail = () => {
         </Grid>
       );
       return (
-        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20"}>
+        <Card className={"d-col-center border-1 radius-2 shadow-1 p-20px"}>
           {headFragment()}
-          <Hr m={40} className={"bg-burgundy h-2"} />
+          <Hr m={40} className={"bg-burgundy h-2px"} />
           {descFragment()}
         </Card>
       )
@@ -187,7 +184,7 @@ export const ContactDetail = () => {
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
         {detailSection()}
-        <Hr m={60} className={"bg-light h-5"} />
+        <Hr m={60} className={"bg-light h-5px"} />
         {filterSection()}
       </Paper>
     );
