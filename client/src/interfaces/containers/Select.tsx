@@ -19,6 +19,32 @@ export const Select = (props: any) => (
       "& .MuiSelect-icon": {
         display: props?.disabled && "none"
       },
+      "& .MuiInputBase-root": {
+        cursor : (
+          props?.readOnly && (
+            props?.onClick ? "pointer" : "not-allowed"
+          )
+        ),
+        backgroundColor: (
+          props?.readOnly && (
+            props?.onClick ? "transparent" : "#f7f7f7"
+          )
+        ),
+        "&:hover": {
+          backgroundColor: (
+            props?.readOnly && (
+              props?.onClick ? "transparent" : "#f7f7f7"
+            )
+          ),
+        },
+        "&:focus": {
+          backgroundColor: (
+            props?.readOnly && (
+              props?.onClick ? "transparent" : "#f7f7f7"
+            )
+          ),
+        }
+      },
     }}
     slotProps={{
       ...props?.slotProps,
