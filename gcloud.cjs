@@ -72,21 +72,20 @@ const modifyChangelog = () => {
     });
 
     const changelog = fs.readFileSync('changelog.md', 'utf8');
-    const versionPattern = /\d+\.\d+\.\d+/g;
+    const versionPattern = /(\s*)(\d+[.]\d+[.]\d+)(\s*)/g;
     const matches = [...changelog.matchAll(versionPattern)];
-    const lastMatch = matches[matches.length - 1][0];
-    const versionArray = lastMatch.split('.');
-
-    // 세 번째 숫자에 +1
+    const lastMatch = matches[matches.length - 1];
+    const lastVersion = lastMatch[2];
+    const versionArray = lastVersion.split('.');
     versionArray[2] = (parseInt(versionArray[2]) + 1).toString();
 
     let newVersion = `\\[ ${versionArray.join('.')} \\]`;
     let newDateTime = `- ${currentDate} (${currentTime})`;
-    let newEntry = `\n\n## ${newVersion}\n\t${newDateTime}`;
+    newDateTime = newDateTime.replace(/([.]\s*[(])/g, ' (');
+    newDateTime = newDateTime.replace(/([.]\s*)/g, '-');
+    newDateTime = newDateTime.replace(/[(](\W*)(\s*)/g, '(');
 
-    newEntry = newEntry.replace(/([.]\s*[(])/g, ' (');
-    newEntry = newEntry.replace(/([.]\s*)/g, '-');
-    newEntry = newEntry.replace(/[(](\W*)(\s*)/g, '(');
+    let newEntry = `\n\n## ${newVersion}\n\t${newDateTime}`;
 
     const updatedChangelog = changelog + newEntry;
 
