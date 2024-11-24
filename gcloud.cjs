@@ -74,11 +74,11 @@ const modifyChangelog = () => {
     const changelog = fs.readFileSync('changelog.md', 'utf8');
     const versionPattern = /\d+\.\d+\.\d+/g;
     const matches = [...changelog.matchAll(versionPattern)];
-    const lastMatch = matches[matches.length - 1];
-    const versionArray = lastMatch[0].match(/\d+/g) || [];
+    const lastMatch = matches[matches.length - 1][0];
+    const versionArray = lastMatch.split('.');
 
     // 세 번째 숫자에 +1
-    versionArray[2] = (parseFloat(versionArray[2]) + 1).toString();
+    versionArray[2] = (parseInt(versionArray[2]) + 1).toString();
 
     let newVersion = `\\[ ${versionArray.join('.')} \\]`;
     let newDateTime = `- ${currentDate} (${currentTime})`;
