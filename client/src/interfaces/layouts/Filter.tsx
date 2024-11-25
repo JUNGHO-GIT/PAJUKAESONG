@@ -84,7 +84,7 @@ export const Filter = (
             page={PAGING.page}
             showFirstButton={true}
             showLastButton={true}
-            className={"border-bottom-1px p-2px"}
+            className={"border-bottom-1 p-2px"}
             onPageChange={(_event, newPage) => {
               setPAGING((prev: any) => ({
                 ...prev,
@@ -145,7 +145,7 @@ export const Filter = (
             page={PAGING.page}
             showFirstButton={true}
             showLastButton={true}
-            className={"border-bottom-1px p-2px"}
+            className={"border-bottom-1 p-2px"}
             onPageChange={(_event, newPage) => {
               setPAGING((prev: any) => ({
                 ...prev,

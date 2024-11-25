@@ -213,7 +213,7 @@ export const Header = () => {
       </Grid>
     );
     return (
-      <Paper className={`layout-wrapper p-sticky top-0vh border-bottom-1px shadow-bottom-4px radius-0 p-20px ${tabHeight}`}>
+      <Paper className={`layout-wrapper p-sticky top-0vh border-bottom-1 shadow-bottom-4 radius-0 p-20px ${tabHeight}`}>
         <Grid container={true} spacing={2}>
           <Grid
             size={xxs ? 2 : xs ? 2 : sm ? 0 : md ? 0 : lg ? 0 : xl ? 0 : 0}
