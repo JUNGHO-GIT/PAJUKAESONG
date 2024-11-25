@@ -140,19 +140,18 @@ const runRemoteScript = () => {
     const ipAddr = "104.196.212.101";
     const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/server';
     const cmdGitFetch = 'sudo git fetch --all';
-    const cmdGitReset = 'sudo git reset --hard origin/main';
+    const cmdGitReset = 'sudo git reset --hard origin/master';
     const cmdRmClient = 'sudo rm -rf client';
     const cmdCh = 'sudo chmod -R 755 /var/www/pajukaesong.com/PAJUKAESONG/server';
+    const cmdStop = 'if pm2 describe PAJUKAESONG >/dev/null 2>&1; then sudo pm2 stop PAJUKAESONG && pm2 save; fi';
     const cmdNpm = 'sudo npm install';
-    const cmdRestart = 'sudo pm2 restart all';
-    const cmdSave = 'sudo pm2 save';
+    const cmdStart = 'sudo pm2 start ecosystem.config.cjs --env production && pm2 save';
 
-    const winCommand = `powershell -Command "ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdCh} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'"
-    `;
-    const linuxCommand = `ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdCh} && ${cmdNpm} && ${cmdRestart} && ${cmdSave}\'`;
+    const winCommand = `powershell -Command "ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdCh} && ${cmdStop} && ${cmdNpm} && ${cmdStart}\'"`;
+
+    const linuxCommand = `ssh -i ${keyPath} ${serviceId}@${ipAddr} \'${cmdCd} && ${cmdGitFetch} && ${cmdGitReset} && ${cmdRmClient} && ${cmdCh} && ${cmdStop} && ${cmdNpm} && ${cmdStart}\'`;
 
     const sshCommand = winOrLinux === "win" ? winCommand : linuxCommand;
-
     execSync(sshCommand, { stdio: 'inherit' });
   }
   catch (error) {
@@ -176,7 +175,7 @@ const restoreEnvAndIndex = () => {
         return `CLIENT_URL=http://localhost:3000/PAJUKAESONG`;
       }
       if (line.startsWith('GOOGLE_CALLBACK_URL=')) {
-        return `GOOGLE_CALLBACK_URL=http://localhost:4100/PAJUKAESONG/api/auth/google/callback`;
+        return `GOOGLE_CALLBACK_URL=http://localhost:4002/PAJUKAESONG/api/auth/google/callback`;
       }
       // 다른 줄은 그대로 유지
       return line;
