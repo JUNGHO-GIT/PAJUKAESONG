@@ -6,8 +6,7 @@ import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { Notice } from "@importSchemas";
 import { Filter } from "@importLayouts";
-import { Div, Hr, Br } from "@importComponents";
-import { Paper, Grid, Card } from "@importMuis";
+import { Div, Hr, Br, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const NoticeList = () => {

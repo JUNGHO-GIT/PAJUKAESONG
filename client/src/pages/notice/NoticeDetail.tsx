@@ -7,8 +7,7 @@ import { axios } from "@importLibs";
 import { Notice } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { TextArea } from "@importContainers";
-import { Div, Hr, Icons } from "@importComponents";
-import { Paper, Grid, Card } from "@importMuis";
+import { Div, Hr, Icons, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const NoticeDetail = () => {

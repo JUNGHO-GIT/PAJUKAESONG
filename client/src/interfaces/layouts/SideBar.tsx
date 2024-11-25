@@ -3,8 +3,8 @@
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useStoreAlert } from "@importHooks";
 import { axios } from "@importLibs";
-import { Icons, Div, Img, Hr } from "@importComponents";
-import { Drawer, List, ListItem, Collapse, Grid } from "@importMuis";
+import { Icons, Div, Img, Hr, Grid } from "@importComponents";
+import { Drawer, List, ListItem, Collapse } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 declare type SideBarProps = {
@@ -172,7 +172,7 @@ export const SideBar = (
     );
     const textSection1 = () => (
       <Grid container={true} spacing={2}>
-        <Grid size={12} className={"d-col-left horizontal-text"}>
+        <Grid size={12} className={"d-col-left horizontal"}>
           <Div className={"d-row-center"}>
             <Icons
               key={"Info"}
@@ -180,7 +180,7 @@ export const SideBar = (
               className={"w-12px h-12px"}
             />
             <Div className={"fs-0-7rem"}>
-              사업자 등록번호: 883-03-03096
+              사업자번호: 883-03-03096
             </Div>
           </Div>
           <Div className={"d-row-center"}>
@@ -190,7 +190,7 @@ export const SideBar = (
               className={"w-12px h-12px"}
             />
             <Div className={"fs-0-7rem"}>
-              경기 파주시 문산읍 방촌로 1675-34
+              파주시 문산읍 방촌로 1675-34
             </Div>
           </Div>
           <Div className={"d-row-center"}>
@@ -218,7 +218,7 @@ export const SideBar = (
     );
     const textSection2 = () => (
       <Grid container={true} spacing={2}>
-        <Grid size={12} className={"d-col-left horizontal-text"}>
+        <Grid size={12} className={"d-col-left horizontal"}>
           <Div className={"d-row-center"}>
             <Icons
               key={"Copyright"}

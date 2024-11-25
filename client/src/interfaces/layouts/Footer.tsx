@@ -1,8 +1,7 @@
 // Footer.tsx
 
 import { useResponsive, useCommonValue } from "@importHooks";
-import { Div, Img, Icons } from "@importComponents";
-import { Paper, Grid } from "@importMuis";
+import { Div, Img, Icons, Paper, Grid } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const Footer = () => {
@@ -33,7 +32,7 @@ export const Footer = () => {
     );
     // 3. text
     const textSection = () => (
-      <Grid container={true} spacing={0} className={`horizontal-text`}>
+      <Grid container={true} spacing={0} className={`horizontal`}>
         <Grid size={12} className={`d-row-${xxs || xs ? "center" : "left"}`}>
           <Icons
             key={"Info"}

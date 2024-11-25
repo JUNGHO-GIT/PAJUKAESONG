@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "@importReacts";
 import { useResponsive, useStoreLoading } from "@importHooks";
-import { Div, Br, Hr } from "@importComponents";
-import { Paper, Grid, Card, Stepper, Step, StepLabel } from "@importMuis";
+import { Div, Br, Hr, Paper, Grid, Card } from "@importComponents";
+import { Stepper, Step, StepLabel } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseInfo = () => {

@@ -2,7 +2,8 @@
 
 import { moment } from "@importLibs";
 import { PopUp, Input } from "@importContainers";
-import { DigitalClock, AdapterMoment, LocalizationProvider, Grid } from "@importMuis";
+import { Grid } from "@importComponents";
+import { DigitalClock, AdapterMoment, LocalizationProvider } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 declare type PickerTimeProps = {

@@ -8,8 +8,8 @@ import { makeForm, insertComma } from "@importScripts";
 import { Filter } from "@importLayouts";
 import { Product } from "@importSchemas";
 import { Input, InputFile, Select } from "@importContainers";
-import { Br } from "@importComponents";
-import { Paper, Grid, Card, MenuItem } from "@importMuis";
+import { Br, Paper, Grid, Card } from "@importComponents";
+import { MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ProductSave = () => {

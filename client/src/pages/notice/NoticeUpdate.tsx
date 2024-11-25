@@ -8,8 +8,7 @@ import { makeForm } from "@importScripts";
 import { Notice } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, TextArea, InputFile } from "@importContainers";
-import { Br } from "@importComponents";
-import { Paper, Grid, Card } from "@importMuis";
+import { Br, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const NoticeUpdate = () => {

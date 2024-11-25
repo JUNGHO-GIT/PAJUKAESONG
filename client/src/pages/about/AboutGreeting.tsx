@@ -2,8 +2,7 @@
 
 import { useEffect } from "@importReacts";
 import { useResponsive, useStoreLoading } from "@importHooks";
-import { Div, Img } from "@importComponents";
-import { Paper, Grid, Card } from "@importMuis";
+import { Div, Img, Card, Paper, Grid } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutGreeting = () => {

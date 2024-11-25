@@ -3,7 +3,7 @@
 import { useEffect } from "@importReacts";
 import { useResponsive, useStoreLoading } from "@importHooks";
 import { Location } from "@importContainers";
-import { Paper } from "@importMuis";
+import { Paper } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutLocation = () => {

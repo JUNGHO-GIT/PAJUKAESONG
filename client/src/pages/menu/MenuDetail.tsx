@@ -7,8 +7,7 @@ import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
 import { insertComma } from "@importScripts";
 import { Filter } from "@importLayouts";
 import { Menu } from "@importSchemas";
-import { Div, Img, Hr, Icons } from "@importComponents";
-import { Paper, Grid, Card } from "@importMuis";
+import { Div, Img, Hr, Icons, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuDetail = () => {

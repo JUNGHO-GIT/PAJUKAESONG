@@ -6,8 +6,7 @@ import { useStoreAlert, useStoreLoading, useValidateFranchise } from "@importHoo
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
 import { Filter } from "@importLayouts";
 import { Franchise } from "@importSchemas";
-import { Div, Img, Hr, Icons } from "@importComponents";
-import { Paper, Grid, Card } from "@importMuis";
+import { Div, Img, Hr, Icons, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseDetail = () => {

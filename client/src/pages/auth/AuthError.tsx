@@ -1,8 +1,7 @@
 // AuthError.tsx
 
 import { useCommonValue } from "@importHooks";
-import { Div, Btn } from "@importComponents";
-import { Grid, Paper, Card } from "@importMuis";
+import { Div, Btn, Grid, Paper, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const AuthError = () => {

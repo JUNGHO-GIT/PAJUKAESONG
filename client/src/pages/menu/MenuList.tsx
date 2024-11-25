@@ -6,8 +6,7 @@ import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { axios } from "@importLibs";
 import { Menu } from "@importSchemas";
 import { Filter } from "@importLayouts";
-import { Div, Img, Hr } from "@importComponents";
-import { Paper, Grid, Card } from "@importMuis";
+import { Div, Img, Hr, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuList = () => {

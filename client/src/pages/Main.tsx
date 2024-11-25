@@ -6,8 +6,7 @@ import { useStoreAlert, useStoreLoading } from "@importHooks";
 import { Swiper, SwiperSlide, Autoplay, axios, Pagination } from "@importLibs";
 import { Menu, Notice } from "@importSchemas";
 import { Location } from "@importContainers";
-import { Div, Img, Br, Hr } from "@importComponents";
-import { Grid, Paper } from "@importMuis";
+import { Div, Img, Br, Hr, Grid, Paper } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const Main = () => {
@@ -168,7 +167,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"bg-light-ivory border-dark-top-1px py-20px"}>
+        <Grid container={true} spacing={0} className={"bg-light-ivory border-top-dark-1 py-20px"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {titleFragment()}
             {selectFragment()}
@@ -258,7 +257,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"bg-ivory border-dark-top-1px py-20px"}>
+        <Grid container={true} spacing={0} className={"bg-ivory border-top-dark-1 py-20px"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {titleFragment()}
             {noticeFragment()}
@@ -291,7 +290,7 @@ export const Main = () => {
         </Grid>
       );
       return (
-        <Grid container={true} spacing={0} className={"bg-light-ivory border-dark-top-1px py-20px"}>
+        <Grid container={true} spacing={0} className={"bg-light-ivory border-top-dark-1 py-20px"}>
           <Grid size={{ xs: 12, sm: 10, md: 8, lg: 8, xl: 8 }} className={"d-col-center"}>
             {titleFragment()}
             {locationFragment()}

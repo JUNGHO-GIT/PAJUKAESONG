@@ -8,8 +8,7 @@ import { insertComma, getSession, setSession } from "@importScripts";
 import { Product } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input } from "@importContainers";
-import { Div, Img, Hr, Br, Icons, Btn } from "@importComponents";
-import { Paper, Grid, Card } from "@importMuis";
+import { Div, Img, Hr, Br, Icons, Btn, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const ProductDetail = () => {

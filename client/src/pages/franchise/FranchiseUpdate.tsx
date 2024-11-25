@@ -8,8 +8,8 @@ import { makeForm } from "@importScripts";
 import { Franchise } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, InputFile, Select } from "@importContainers";
-import { Br } from "@importComponents";
-import { Paper, Grid, Card, MenuItem } from "@importMuis";
+import { Br, Paper, Grid, Card } from "@importComponents";
+import { MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseUpdate = () => {

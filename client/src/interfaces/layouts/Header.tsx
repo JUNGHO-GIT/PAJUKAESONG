@@ -3,8 +3,8 @@
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useResponsive } from "@importHooks";
 import { SideBar } from '@importLayouts';
-import { Div, Img, Icons } from "@importComponents";
-import { Paper, Grid, Tabs, Tab, Menu, MenuItem, tabsClasses } from "@importMuis";
+import { Div, Img, Icons, Paper, Grid } from "@importComponents";
+import { Tabs, Tab, Menu, MenuItem, tabsClasses } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Header = () => {
@@ -149,7 +149,7 @@ export const Header = () => {
                 key={`tab-${idx}`}
                 label={item?.titleKo}
                 value={item?.titleEn}
-                className={`pointer-burgundy fs-1-1rem horizontal-text mx-auto ${selectedTab === item?.titleEn ? "burgundy fw-600" : ""}`}
+                className={`pointer-burgundy fs-1-1rem horizontal mx-auto ${selectedTab === item?.titleEn ? "burgundy fw-600" : ""}`}
                 onClick={(e) => {
                   setSelectedTab(item?.titleEn);
                   setSelectedAnchorEl({

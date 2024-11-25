@@ -19,7 +19,7 @@ import {
   FormControl, FormControlLabel, FormGroup,
 
   // g
-  Grid2 as Grid,
+  Grid2 as Grid, GlobalStyles,
 
   // h - k
   InputAdornment, InputBase, InputLabel, IconButton,
@@ -44,6 +44,11 @@ import {
   // u
   useMediaQuery, useTheme,
 
+} from '@mui/material';
+
+// props -------------------------------------------------------------------------------------------
+import type {
+  CardProps, PaperProps, Grid2Props as GridProps
 } from '@mui/material';
 
 // datePickers -------------------------------------------------------------------------------------
@@ -92,7 +97,7 @@ export {
   FormControl, FormControlLabel, FormGroup,
 
   // g
-  Grid,
+  Grid, GlobalStyles,
 
   // h - k
   InputAdornment, InputBase, InputLabel, IconButton,
@@ -113,6 +118,10 @@ export {
   // t
   Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, TableSortLabel, TabScrollButton, Toolbar, Tooltip, Tabs, Tab, tabsClasses,
   TextField, TextArea,
+
+
+  // props
+  CardProps, PaperProps, GridProps,
 
   // u
   useMediaQuery, useTheme,

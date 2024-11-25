@@ -8,8 +8,7 @@ import { insertComma, setSession } from "@importScripts";
 import { Order } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input } from "@importContainers";
-import { Div, Hr, Br, Img, Icons } from "@importComponents";
-import { Paper, Grid, Card } from "@importMuis";
+import { Div, Hr, Br, Img, Icons, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const OrderDetail = () => {

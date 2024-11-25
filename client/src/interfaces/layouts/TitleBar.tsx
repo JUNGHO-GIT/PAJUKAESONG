@@ -3,8 +3,7 @@
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue } from "@importHooks";
 import { Swiper, SwiperSlide } from "@importLibs";
-import { Div, Img, Icons } from "@importComponents";
-import { Grid, Paper } from "@importMuis";
+import { Div, Img, Icons, Grid, Paper } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const TitleBar = () => {
@@ -222,7 +221,7 @@ export const TitleBar = () => {
       </Grid>
     );
     return (
-      <Paper className={`layout-wrapper p-relative border-dark-bottom-1px border-dark-top-1px z-100 fadeIn radius-0 ${objectHeight} ${objectBgColor}`}>
+      <Paper className={`layout-wrapper p-relative border-bottom-dark-1 border-top-dark-1 z-100 fadeIn radius-0 ${objectHeight} ${objectBgColor}`}>
         {PATH.includes("main") ? mainSection() : titleSection()}
       </Paper>
     );
