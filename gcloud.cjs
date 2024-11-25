@@ -140,7 +140,7 @@ const runRemoteScript = () => {
     const ipAddr = "104.196.212.101";
     const cmdCd = 'cd /var/www/pajukaesong.com/PAJUKAESONG/server';
     const cmdGitFetch = 'sudo git fetch --all';
-    const cmdGitReset = 'sudo git reset --hard origin/master';
+    const cmdGitReset = 'sudo git reset --hard origin/main';
     const cmdRmClient = 'sudo rm -rf client';
     const cmdCh = 'sudo chmod -R 755 /var/www/pajukaesong.com/PAJUKAESONG/server';
     const cmdStop = 'if pm2 describe PAJUKAESONG >/dev/null 2>&1; then sudo pm2 stop PAJUKAESONG && pm2 save; fi';
