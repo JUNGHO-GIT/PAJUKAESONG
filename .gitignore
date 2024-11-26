@@ -12,8 +12,8 @@
 *test/
 
 # directories 2
-.vscode/
-.idea/
+# .vscode/
+# .idea/
 .tmp/
 .cache/
 .nyc_output/
