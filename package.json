@@ -28,9 +28,7 @@
   },
   "scripts": {
     "start": "tsx watch --clear-screen=false --ignore node_modules index.ts",
-    "fetch": "git fetch --all && git reset --hard origin/master",
-    "push": "git add . && git commit -m 'update' && git push origin master",
-    "npm-reset": "powershell -Command \"Remove-Item -Recurse -Force package-lock.json, node_modules; npm install --legacy-peer-deps; npm cache clean --force\"",
+    "npm-reset": "powershell -Command \"Remove-Item -Recurse -Force package-lock.json, node_modules; npm install --legacy-peer-deps;\"",
     "gcloud": "node gcloud.cjs"
   },
   "dependencies": {
