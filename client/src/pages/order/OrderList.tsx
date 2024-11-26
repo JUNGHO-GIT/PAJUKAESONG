@@ -32,10 +32,6 @@ export const OrderList = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-  }, []);
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
         order_name: location.state?.order_name || "",
@@ -57,6 +53,9 @@ export const OrderList = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   }, [URL, SUBFIX, PAGING]);
 

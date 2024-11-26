@@ -70,6 +70,9 @@ const App = () => {
 
   useEffect(() => {
     setLOADING(true);
+    setTimeout(() => {
+      setLOADING(false);
+    }, 500);
   }, []);
 
   useRoot();

@@ -31,10 +31,6 @@ export const NoticeList = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-  }, []);
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
         PAGING: PAGING
@@ -54,6 +50,9 @@ export const NoticeList = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   }, [URL, SUBFIX, PAGING]);
 

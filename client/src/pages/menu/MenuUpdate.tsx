@@ -28,10 +28,6 @@ export const MenuUpdate = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-  }, []);
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/detail`, {
       params: {
         _id: location_id
@@ -42,6 +38,9 @@ export const MenuUpdate = () => {
     })
     .catch((err: any) => {
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   }, [URL, SUBFIX, location_id]);
 

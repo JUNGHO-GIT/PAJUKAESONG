@@ -30,10 +30,6 @@ export const Main = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-  }, []);
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
     Promise.all([
       axios.get(`${URL}/api/menu/list`, {
         params: {
@@ -63,6 +59,9 @@ export const Main = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   }, [URL, PAGING, category]);
 
@@ -116,6 +115,7 @@ export const Main = () => {
               loop={true}
               navigation={false}
               className={"p-20px"}
+              speed={500}
               autoplay={{
                 delay: 2000,
               }}
@@ -129,7 +129,7 @@ export const Main = () => {
                 Autoplay,
               ]}
             >
-              {OBJECT_MENU?.map((item: any, index: number) => (
+              {OBJECT_MENU?.filter((f: any) => f._id).map((item: any, index: number) => (
                 <SwiperSlide key={index}>
                   <Div className={"d-col-center"}>
                     <Img

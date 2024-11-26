@@ -45,10 +45,6 @@ export const AdminDashboard = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-  }, []);
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
     Promise.all([
       axios.get(`${URL}${SUBFIX}/visitCount`, {
         params: {
@@ -88,6 +84,9 @@ export const AdminDashboard = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   }, [URL, SUBFIX, DATE, PAGING_CONTACT, PAGING_ORDER]);
 

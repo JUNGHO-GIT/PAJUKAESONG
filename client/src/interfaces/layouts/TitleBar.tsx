@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue } from "@importHooks";
-import { Swiper, SwiperSlide } from "@importLibs";
+import { Swiper, SwiperSlide, Autoplay } from "@importLibs";
 import { Div, Img, Icons, Grid, Paper } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
@@ -160,33 +160,47 @@ export const TitleBar = () => {
 
   // 7. title --------------------------------------------------------------------------------------
   const titleNode = () => {
-    const mainSection = () => (
-      <Grid container={true} spacing={0}>
-        <Grid size={12} className={"d-col-center"}>
-          <Swiper
-            spaceBetween={0}
-            slidesPerView={1}
-            centeredSlides={false}
-            loop={true}
-            navigation={false}
-            speed={1500}
-            fadeEffect={{ crossFade: true }}
-          >
-            {["title_main1.webp", "title_main2.webp"].map((item: string, i: number) => (
-              <SwiperSlide key={`slide-${i}`} className={"w-100p h-100p d-center"}>
-                <Img
-                  hover={false}
-                  shadow={false}
-                  radius={false}
-                  group={"main"}
-                  src={item}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+    const mainSection = () => {
+      const slides = ["title_main1.webp", "title_main2.webp"];
+      const duplicatedSlides = slides.concat(slides).concat(slides);
+      return (
+        <Grid container={true} spacing={0}>
+          <Grid size={12} className={"d-col-center"}>
+            <Swiper
+              spaceBetween={0}
+              slidesPerView={1}
+              slidesPerGroup={1}
+              centeredSlides={false}
+              loop={true}
+		          loopAddBlankSlides={true}
+              navigation={false}
+              speed={1500}
+              autoplay={{
+                delay: 1000,
+              }}
+              fadeEffect={{
+                crossFade: true,
+              }}
+              modules={[
+                Autoplay,
+              ]}
+            >
+              {duplicatedSlides.map((item, i) => (
+                <SwiperSlide className={"w-100p h-100p d-center"} key={`slide-${i}`}>
+                  <Img
+                    hover={false}
+                    shadow={false}
+                    radius={false}
+                    group={"main"}
+                    src={item}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
         </Grid>
-      </Grid>
-    );
+      );
+    };
     const titleSection = () => (
       <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-row-center"}>

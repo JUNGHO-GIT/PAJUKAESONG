@@ -14,14 +14,18 @@
 .MuiGrid2-root {
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
+  border: none;
+  box-shadow: none;
+  border-radius: 0px;
 }
 /** card **/
 .MuiCard-root {
   width: 100%;
-  border-radius: 0px;
-  box-shadow: none;
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
+  border: none;
+  box-shadow: none;
+  border-radius: 0px;
 }
 
 /** table **/
@@ -141,8 +145,6 @@
 .MuiButtonBase-root {
   min-width: 30px !important;
 }
-
-/** badge **/
 .MuiBadge-badge {
   min-width: 0px !important;
   min-height: 0px !important;
@@ -150,9 +152,10 @@
 
 /** skeleton **/
 .MuiSkeleton-root {
-  margin: 0px 0px 0px 0px !important;
-  padding: 0px 0px 0px 0px !important;
-  height: max-content !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 5vh !important;
+  max-height: 100% !important;
 }
 
 /** input **/

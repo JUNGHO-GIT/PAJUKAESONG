@@ -28,10 +28,6 @@ export const OrderUpdate = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-  }, []);
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/detail`, {
       params: {
         _id: location_id

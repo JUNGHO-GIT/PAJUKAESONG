@@ -30,10 +30,6 @@ export const FranchiseList = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   useEffect(() => {
     setLOADING(true);
-  }, []);
-
-  // 2-3. useEffect --------------------------------------------------------------------------------
-  useEffect(() => {
     axios.get(`${URL}${SUBFIX}/list`, {
       params: {
         PAGING: PAGING,
@@ -54,6 +50,9 @@ export const FranchiseList = () => {
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   }, [URL, SUBFIX, PAGING, location_category]);
 
