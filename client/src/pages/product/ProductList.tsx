@@ -36,6 +36,7 @@ export const ProductList = () => {
       }
     })
     .then((res: any) => {
+      setLOADING(false);
       setOBJECT(res.data.result.length > 0 ? res.data.result : [Product]);
       setCOUNT((prev: any) => ({
         ...prev,
@@ -43,6 +44,7 @@ export const ProductList = () => {
       }));
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",

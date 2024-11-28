@@ -39,6 +39,7 @@ export const ContactList = () => {
       }
     })
     .then((res: any) => {
+      setLOADING(false);
       setOBJECT(res.data.result.length > 0 ? res.data.result : [Contact]);
       setCOUNT((prev: any) => ({
         ...prev,
@@ -46,6 +47,7 @@ export const ContactList = () => {
       }));
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",

@@ -10,7 +10,7 @@ export const PopUp = (props: any) => {
     popupId: "popup",
   });
 
-  let popupStyle = {
+  let popupStyle: Partial<CSSStyleDeclaration> = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -81,9 +81,7 @@ export const PopUp = (props: any) => {
       }}
       slotProps={{
         paper: {
-          style: {
-            ...popupStyle
-          }
+          style: popupStyle as React.CSSProperties
         }
       }}
     >
@@ -133,9 +131,7 @@ export const PopUp = (props: any) => {
       }}
       slotProps={{
         paper: {
-          style: {
-            ...popupStyle
-          }
+          style: popupStyle as React.CSSProperties
         }
       }}
     >

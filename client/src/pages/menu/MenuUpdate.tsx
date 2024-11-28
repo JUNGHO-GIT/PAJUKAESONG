@@ -34,6 +34,7 @@ export const MenuUpdate = () => {
       },
     })
     .then((res: any) => {
+      setLOADING(false);
       setOBJECT(res.data.result || Menu);
     })
     .catch((err: any) => {
@@ -48,6 +49,7 @@ export const MenuUpdate = () => {
   const flowUpdate = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, fileList, "update")) {
+      setLOADING(false);
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
@@ -73,20 +75,25 @@ export const MenuUpdate = () => {
         });
       }
       else {
+        setLOADING(false);
         setALERT({
           open: true,
-          severity: "error",
+          severity: "success",
           msg: res.data.msg,
         });
       }
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   };
 

@@ -53,6 +53,7 @@ export const Main = () => {
       setOBJECT_NOTICE(resNotice.data.result.length > 0 ? resNotice.data.result : [Notice]);
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",

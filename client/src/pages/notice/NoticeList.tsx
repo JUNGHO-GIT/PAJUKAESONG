@@ -37,6 +37,7 @@ export const NoticeList = () => {
       }
     })
     .then((res: any) => {
+      setLOADING(false);
       setOBJECT(res.data.result.length > 0 ? res.data.result : [Notice]);
       setCOUNT((prev: any) => ({
         ...prev,
@@ -44,6 +45,7 @@ export const NoticeList = () => {
       }));
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",

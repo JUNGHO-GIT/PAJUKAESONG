@@ -70,6 +70,7 @@ export const OrderSave = () => {
   const flowSave = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "save")) {
+      setLOADING(false);
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`, {
@@ -87,20 +88,25 @@ export const OrderSave = () => {
         navigate("/order/find");
       }
       else {
+        setLOADING(false);
         setALERT({
           open: true,
-          severity: "error",
+          severity: "success",
           msg: res.data.msg,
         });
       }
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   };
 

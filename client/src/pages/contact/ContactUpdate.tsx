@@ -34,6 +34,7 @@ export const ContactUpdate = () => {
       },
     })
     .then((res: any) => {
+      setLOADING(false);
       setOBJECT(res.data.result || Contact);
     })
     .catch((err: any) => {
@@ -48,6 +49,7 @@ export const ContactUpdate = () => {
   const flowUpdate = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, fileList, "update")) {
+      setLOADING(false);
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
@@ -69,20 +71,25 @@ export const ContactUpdate = () => {
         navigate("/contact/find");
       }
       else {
+        setLOADING(false);
         setALERT({
           open: true,
-          severity: "error",
+          severity: "success",
           msg: res.data.msg,
         });
       }
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   };
 

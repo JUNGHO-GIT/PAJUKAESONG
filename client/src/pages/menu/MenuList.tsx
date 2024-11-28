@@ -37,6 +37,7 @@ export const MenuList = () => {
       }
     })
     .then((res: any) => {
+      setLOADING(false);
       setOBJECT(res.data.result.length > 0 ? res.data.result : [Menu]);
       setCOUNT((prev: any) => ({
         ...prev,
@@ -44,6 +45,7 @@ export const MenuList = () => {
       }));
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",

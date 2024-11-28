@@ -31,9 +31,11 @@ export const MenuDetail = () => {
       }
     })
     .then((res: any) => {
+      setLOADING(false);
       setOBJECT(res.data.result || Menu);
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",
@@ -50,6 +52,7 @@ export const MenuDetail = () => {
   const flowDelete = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "delete")) {
+      setLOADING(false);
       return;
     }
     axios.delete(`${URL}${SUBFIX}/delete`, {
@@ -71,20 +74,25 @@ export const MenuDetail = () => {
         });
       }
       else {
+        setLOADING(false);
         setALERT({
           open: true,
-          severity: "error",
+          severity: "success",
           msg: res.data.msg,
         });
       }
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   };
 

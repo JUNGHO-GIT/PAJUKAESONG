@@ -34,6 +34,7 @@ export const ContactFind = () => {
   const flowSearch = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "find")) {
+      setLOADING(false);
       return;
     }
     axios.get(`${URL}${SUBFIX}/find`, {
@@ -52,20 +53,25 @@ export const ContactFind = () => {
         });
       }
       else {
+        setLOADING(false);
         setALERT({
           open: true,
-          severity: "error",
+          severity: "success",
           msg: res.data.msg,
         });
       }
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   };
 

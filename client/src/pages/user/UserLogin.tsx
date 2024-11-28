@@ -55,6 +55,7 @@ export const UserLogin = () => {
   const flowLogin = async () => {
     setLOADING(true);
     if (!await validate(OBJECT, null, "login")) {
+      setLOADING(false);
       return;
     }
     axios.post(`${URL}${SUBFIX}/login`, {
@@ -87,21 +88,26 @@ export const UserLogin = () => {
         navigate("/main");
       }
       else {
+        setLOADING(false);
         setALERT({
           open: true,
-          severity: "error",
+          severity: "success",
           msg: res.data.msg,
         });
         localStorage.clear();
       }
     })
     .catch((err: any) => {
+      setLOADING(false);
       setALERT({
         open: true,
         severity: "error",
         msg: err.response.data.msg,
       });
       console.error(err);
+    })
+    .finally(() => {
+      setLOADING(false);
     });
   };
 
