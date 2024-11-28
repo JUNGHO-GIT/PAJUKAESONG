@@ -10,7 +10,7 @@ export const PopUp = (props: any) => {
     popupId: "popup",
   });
 
-  let popupStyle: any = {
+  let popupStyle = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",

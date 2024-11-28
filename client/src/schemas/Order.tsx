@@ -3,7 +3,7 @@
 import { moment } from "@importLibs";
 
 // -------------------------------------------------------------------------------------------------
-export const Order: any = {
+export const Order = {
 
   _id: "",
 

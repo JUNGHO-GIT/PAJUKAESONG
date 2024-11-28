@@ -1,7 +1,7 @@
 // Franchise.tsx
 
 // -------------------------------------------------------------------------------------------------
-export const Franchise: any = {
+export const Franchise = {
 
   _id: "",
 
