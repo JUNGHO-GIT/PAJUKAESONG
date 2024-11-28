@@ -1,7 +1,7 @@
 // useValidateUser.tsx
 
 import { useState, createRef, useRef } from "@importReacts";
-import { useStoreAlert } from "@importHooks";
+import { useStoreAlert } from "@importStores";
 
 // -------------------------------------------------------------------------------------------------
 export const useValidateUser = () => {

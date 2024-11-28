@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importStores";
 import { Swiper, SwiperSlide, Autoplay, axios, Pagination } from "@importLibs";
 import { Menu, Notice } from "@importSchemas";
 import { Location } from "@importContainers";

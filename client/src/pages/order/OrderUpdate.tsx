@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateOrder } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
 import { insertComma, setSession } from "@importScripts";
 import { Order, Product } from "@importSchemas";

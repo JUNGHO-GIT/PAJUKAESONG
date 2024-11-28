@@ -1,8 +1,8 @@
 // FranchiseDetail.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
-import { useStoreAlert, useStoreLoading, useValidateFranchise } from "@importHooks";
+import { useCommonValue, useCommonDate, useResponsive, useValidateFranchise } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
 import { Filter } from "@importLayouts";
 import { Franchise } from "@importSchemas";

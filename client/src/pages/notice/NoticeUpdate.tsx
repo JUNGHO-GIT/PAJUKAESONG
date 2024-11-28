@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateNotice } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
 import { makeForm } from "@importScripts";
 import { Notice } from "@importSchemas";

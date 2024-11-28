@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateMenu } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
 import { makeForm, insertComma } from "@importScripts";
 import { Menu } from "@importSchemas";

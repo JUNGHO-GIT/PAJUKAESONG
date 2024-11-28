@@ -16,8 +16,12 @@ import {
 } from "@importMuis";
 
 import {
-  useRoot, useScrollTop, useLanguageSetting, useStoreLoading
+  useRoot, useScrollTop, useLanguageSetting
 } from "@importHooks";
+
+import {
+  useStoreLoading
+} from "@importStores";
 
 import {
   Header, Footer, Alert, Confirm, TitleBar, Loader

@@ -1,6 +1,6 @@
 // Alert.tsx
 
-import { useStoreAlert } from "@importHooks";
+import { useStoreAlert } from "@importStores";
 import { Icons } from "@importComponents";
 import { Snackbar, Alert as MuiAlert } from "@importMuis";
 

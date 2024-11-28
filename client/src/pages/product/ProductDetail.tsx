@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
 import { insertComma, getSession, setSession } from "@importScripts";
 import { Product } from "@importSchemas";

@@ -1,8 +1,8 @@
 // ContactSave.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useCommonValue, useResponsive } from "@importHooks";
-import { useStoreAlert, useStoreLoading, useValidateContact } from "@importHooks";
+import { useCommonValue, useResponsive, useValidateContact } from "@importHooks";
+import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
 import { makeForm } from "@importScripts";
 import { Contact } from "@importSchemas";

@@ -1,7 +1,8 @@
 // FranchiseInfo.tsx
 
 import { useState, useEffect } from "@importReacts";
-import { useResponsive, useStoreLoading } from "@importHooks";
+import { useResponsive } from "@importHooks";
+import { useStoreLoading } from "@importStores";
 import { Div, Br, Hr, Paper, Grid, Card } from "@importComponents";
 import { Stepper, Step, StepLabel } from "@importMuis";
 

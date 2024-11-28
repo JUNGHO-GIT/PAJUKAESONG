@@ -1,7 +1,7 @@
 // useValidateProduct.tsx
 
 import { useState, createRef, useRef } from "@importReacts";
-import { useStoreAlert, useStoreConfirm } from "@importHooks";
+import { useStoreAlert, useStoreConfirm } from "@importStores";
 
 // -------------------------------------------------------------------------------------------------
 export const useValidateProduct = () => {
