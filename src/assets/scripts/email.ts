@@ -33,14 +33,14 @@ export const emailSending = async (email: string, code: string) => {
       subject: "LIFECHANGE 인증 코드",
 
       // html
-      html: `
+      html: /* html*/ `
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
           <head>
+            <title>LIFECHANGE 인증 코드</title>
             <meta charset="UTF-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>LIFECHANGE 인증 코드</title>
           </head>
           <body
             style="
@@ -68,7 +68,7 @@ export const emailSending = async (email: string, code: string) => {
                 "
               >
                 <img
-                  src="https://storage.googleapis.com/jungho-bucket/JPAGE/IMAGE/LIFECHANGE/png/logo2.png"
+                  src="${process.env.GCLOUD_BUCKET_PATH}/main/logo1.webp"
                   alt="logo2"
                   loading="lazy"
                   style="
@@ -78,7 +78,7 @@ export const emailSending = async (email: string, code: string) => {
                   "
                 />
                 <img
-                  src="https://storage.googleapis.com/jungho-bucket/JPAGE/IMAGE/LIFECHANGE/png/logo3.png"
+                  src="${process.env.GCLOUD_BUCKET_PATH}/main/logo3.webp"
                   alt="logo3"
                   loading="lazy"
                   style="
@@ -167,11 +167,11 @@ export const emailSending = async (email: string, code: string) => {
 
     return "success";
   }
-  catch (error) {
+  catch (err: any) {
     const consoleStr = `
       ========================================
       이메일 전송 중 오류가 발생했습니다.
-      ${error}
+      ${err}
     `;
     console.log(consoleStr);
 

@@ -1,6 +1,6 @@
 {
   "name": "PAJUKAESONG-client",
-  "homepage": "/JPAGE",
+  "homepage": "/PAJUKAESONG",
   "version": "1.0.0",
   "main": "index.tsx",
   "type": "module",
