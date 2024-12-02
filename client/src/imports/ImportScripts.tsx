@@ -1,4 +1,4 @@
-// ImportUtils.tsx
+// ImportScripts.tsx
 
 import { dataArray } from "@assets/scripts/dataArray";
 import { randomNumber, randomTime } from "@assets/scripts/utils";

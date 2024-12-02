@@ -24,7 +24,6 @@ import { useStorageLocal } from "@hooks/storage/useStorageLocal";
 import { useRoot } from "@hooks/utils/useRoot";
 import { useScrollTop } from "@hooks/utils/useScrollTop";
 import { useResponsive } from "@hooks/utils/useResponsive";
-import { useCdn } from "@hooks/utils/useCdn";
 
 // -------------------------------------------------------------------------------------------------
 export {
@@ -53,5 +52,4 @@ export {
   useRoot,
   useScrollTop,
   useResponsive,
-  useCdn
 };
