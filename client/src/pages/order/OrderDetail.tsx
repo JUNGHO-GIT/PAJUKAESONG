@@ -282,7 +282,7 @@ export const OrderDetail = () => {
         {productSection()}
         <Br m={30} />
         {orderSection()}
-        <Hr m={60} className={"bg-light h-5px"} />
+        <Hr m={60} className={"bg-light h-2px"} />
         {filterSection()}
       </Paper>
     );

@@ -212,19 +212,14 @@ export const TitleBar = () => {
               className={"w-20px h-20px"}
             />
           </Div>
-          <Div className={"fs-0-9rem fw-300 white ls-2"}>
+          <Div className={"fs-0-9rem fw-300 white ls-2-0"}>
             {`PAJU KAESONG`}
           </Div>
-          <Div className={`fs-1-1rem fw-400 white ml-10pxmr-10px`}>
+          <Div className={`fs-1-1rem fw-400 white mx-10px`}>
             {`/`}
           </Div>
-          <Div style={{
-            fontSize: '1.1rem',
-            fontWeight: 500,
-            color: "rgb(255 255 255 / 80%)",
-            letterSpacing: 4,
-          }}>
-            {titleBreadcrumb}
+          <Div className={"fs-1-2rem fw-500 white ls-4-0"}>
+            {`${titleBreadcrumb}`}
           </Div>
         </Grid>
         <Grid size={12} className={"d-row-center"}>

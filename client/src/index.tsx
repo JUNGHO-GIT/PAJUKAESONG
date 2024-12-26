@@ -12,7 +12,7 @@ import {
 } from "@importReacts";
 
 import {
-  CssBaseline, createTheme, ThemeProvider
+  CssBaseline
 } from "@importMuis";
 
 import {
@@ -145,15 +145,7 @@ const App = () => {
 // -------------------------------------------------------------------------------------------------
 createRoot(document.getElementById('root') as HTMLDivElement).render(
   <BrowserRouter basename={"/PAJUKAESONG"}>
-    <ThemeProvider theme={
-      createTheme({
-        typography:{
-          fontFamily:"Pretendard Variable, Pretendard, Noto Sans KR, Roboto, sans-serif"
-        }
-      })
-    }>
-      <CssBaseline  />
-      <App />
-    </ThemeProvider>
+    <CssBaseline  />
+    <App />
   </BrowserRouter>
 );

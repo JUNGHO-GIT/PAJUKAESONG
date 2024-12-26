@@ -79,7 +79,7 @@ export const Footer = () => {
             name={"Copyright"}
             className={"w-12px h-12px"}
           />
-          <Div className={"fs-0-8rem pointer"}>
+          <Div className={"fs-0-8rem"}>
             2024 파주개성면옥. All rights reserved.
           </Div>
         </Grid>

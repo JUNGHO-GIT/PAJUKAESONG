@@ -245,7 +245,7 @@ export const UserLogin = () => {
         {loginSection()}
         <Br m={30} />
         {filterSection()}
-        <Hr m={60} className={"bg-light h-5px"} />
+        <Hr m={60} className={"bg-light h-2px"} />
         {linkSection()}
       </Paper>
     );

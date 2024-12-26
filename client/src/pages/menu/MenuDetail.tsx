@@ -208,7 +208,7 @@ export const MenuDetail = () => {
     return (
       <Paper className={`${paperClass} border-0 shadow-0`}>
         {detailSection()}
-        <Hr m={60} className={"bg-light h-5px"} />
+        <Hr m={60} className={"bg-light h-2px"} />
         {filterSection()}
       </Paper>
     );

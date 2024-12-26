@@ -42,12 +42,6 @@ export const dataArray = [
     titleEn: "order",
     sub: [
       {
-        titleKo: "상품 목록",
-        titleEn: "list",
-        url: "/product/list",
-        category: "",
-      },
-      {
         titleKo: "주문 하기",
         titleEn: "save",
         url: "/order/save",

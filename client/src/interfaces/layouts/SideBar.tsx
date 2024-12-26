@@ -229,7 +229,7 @@ export const SideBar = (
             <Div className={"fs-0-7rem fw-400 ml-n5"}>
               2024
             </Div>
-            <Div className={"fs-0-7rem fw-600 ml-5pxdark"}>
+            <Div className={"fs-0-7rem fw-600 ml-5px dark"}>
               PajuKaesong
             </Div>
           </Div>
@@ -242,7 +242,7 @@ export const SideBar = (
             <Div className={"fs-0-7rem fw-400 ml-n5"}>
               Designed by
             </Div>
-            <Div className={"fs-0-7rem fw-600 ml-5pxdark"}>
+            <Div className={"fs-0-7rem fw-600 ml-5px dark"}>
               JUNGHO
             </Div>
           </Div>
@@ -255,7 +255,7 @@ export const SideBar = (
             <Div className={"fs-0-7rem fw-400 ml-n5"}>
               Version
             </Div>
-            <Div className={"fs-0-7rem fw-600 ml-5pxdark"}>
+            <Div className={"fs-0-7rem fw-600 ml-5px dark"}>
               {appDate}
             </Div>
           </Div>
