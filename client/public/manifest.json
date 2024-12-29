@@ -1,0 +1,9 @@
+{
+  "short_name": "PAJUKAESONG",
+  "name": "PAJUKAESONG",
+  "id": "com.PAJUKAESONG",
+  "start_url": "PAJUKAESONG/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
