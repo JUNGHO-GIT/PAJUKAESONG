@@ -24,13 +24,12 @@ export const Alert = () => {
           open: false
         });
       }}
-    >
-      <MuiAlert
-        severity={ALERT.severity === "error" ? "error" : "info"}
-        variant={"standard"}
-        className={"w-95vw h-8vh d-center border-dark radius-2 shadow-2 fs-1-0rem fw-600 snackbar z-10000"}
-        action={
-          <>
+      children={
+        <MuiAlert
+          severity={ALERT.severity === "error" ? "error" : "info"}
+          variant={"standard"}
+          className={"w-95vw h-8vh d-center border-dark radius-2 shadow-2 fs-1-0rem fw-600 snackbar z-10000"}
+          action={
             <Icons
               key={"Check"}
               name={"Check"}
@@ -41,12 +40,15 @@ export const Alert = () => {
                 });
               }}
             />
-          </>
-        }
-      >
-        {ALERT.msg}
-      </MuiAlert>
-    </Snackbar>
+          }
+          children={
+            <>
+            {ALERT.msg}
+            </>
+          }
+        />
+      }
+    />
   );
 
   // 10. return ------------------------------------------------------------------------------------

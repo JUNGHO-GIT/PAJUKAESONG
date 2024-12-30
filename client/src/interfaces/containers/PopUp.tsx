@@ -59,7 +59,6 @@ export const PopUp = (props: any) => {
     <>
     <Popover
       {...bindPopover(popupState)}
-      id={"popover"}
       open={popupState.isOpen}
       anchorEl={popupState.anchorEl}
       onClose={(_event, reason) => {
@@ -112,7 +111,6 @@ export const PopUp = (props: any) => {
     <>
     <Popover
       {...bindPopover(popupState)}
-      id={"popover"}
       open={popupState.isOpen}
       anchorEl={null}
       onClose={(_event, reason) => {
