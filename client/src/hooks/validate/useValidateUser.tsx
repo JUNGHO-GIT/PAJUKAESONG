@@ -38,13 +38,13 @@ export const useValidateUser = () => {
   };
 
   // 이메일 형식 -----------------------------------------------------------------------------------
-  const validateEmail = (email: string) => {
+  const _validateEmail = (email: string) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
 
   // 8자 이상, 문자, 숫자, 특수문자 포함 -----------------------------------------------------------
-  const validatePassword = (password: string) => {
+  const _validatePassword = (password: string) => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
     return passwordRegex.test(password);
   };

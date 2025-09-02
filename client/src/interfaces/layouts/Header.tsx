@@ -101,7 +101,7 @@ export const Header = () => {
     );
     const logoSection = () => (
       <Grid container={true} spacing={0}>
-        <Grid size={12} className={sm ? "d-row-center" : "d-row-left"}>
+        <Grid size={12} className={sm ? "d-row-center hover" : "d-row-left hover"}>
           <Img
             max={xxs ? 150 : 200}
             hover={false}
