@@ -1,0 +1,131 @@
+{
+  "project": "tsconfig.json",
+  "apply": true,
+  "totalFiles": 8,
+  "modifiedFiles": 8,
+  "skippedFiles": [],
+  "details": [
+    {
+      "file": "\\src\\imports\\ImportComponents.tsx",
+      "removed": [
+        "Bg"
+      ],
+      "skipped": false
+    },
+    {
+      "file": "\\src\\imports\\ImportHooks.tsx",
+      "removed": [
+        "useStorageSession",
+        "useStorageLocal"
+      ],
+      "skipped": false
+    },
+    {
+      "file": "\\src\\imports\\ImportLibs.tsx",
+      "removed": [
+        "Moment",
+        "parseISO",
+        "formatISO",
+        "CalendarReact",
+        "SwiperProps",
+        "Navigation"
+      ],
+      "skipped": false
+    },
+    {
+      "file": "\\src\\imports\\ImportMuis.tsx",
+      "removed": [
+        "AlertTitle",
+        "AppBar",
+        "Autocomplete",
+        "Avatar",
+        "AvatarGroup",
+        "Accordion",
+        "AccordionActions",
+        "AccordionDetails",
+        "AccordionSummary",
+        "Backdrop",
+        "BottomNavigation",
+        "BottomNavigationAction",
+        "Checkbox",
+        "Container",
+        "Dialog",
+        "DialogActions",
+        "DialogContent",
+        "DialogContentText",
+        "DialogTitle",
+        "FormControl",
+        "FormControlLabel",
+        "FormGroup",
+        "GlobalStyles",
+        "InputAdornment",
+        "InputBase",
+        "InputLabel",
+        "Link",
+        "MenuList",
+        "Modal",
+        "Pagination",
+        "Popper",
+        "Select",
+        "Switch",
+        "SpeedDial",
+        "SpeedDialAction",
+        "SpeedDialIcon",
+        "SnackbarContent",
+        "Stack",
+        "Table",
+        "TableBody",
+        "TableCell",
+        "TableContainer",
+        "TableFooter",
+        "TableHead",
+        "TableRow",
+        "TableSortLabel",
+        "TabScrollButton",
+        "Toolbar",
+        "Tooltip",
+        "TextArea",
+        "useTheme",
+        "DayCalendarSkeleton",
+        "PopupState",
+        "bindTrigger",
+        "bindMenu"
+      ],
+      "skipped": false
+    },
+    {
+      "file": "\\src\\imports\\ImportReacts.tsx",
+      "removed": [
+        "useCallback"
+      ],
+      "skipped": false
+    },
+    {
+      "file": "\\src\\imports\\ImportSchemas.tsx",
+      "removed": [
+        "Admin",
+        "About"
+      ],
+      "skipped": false
+    },
+    {
+      "file": "\\src\\imports\\ImportScripts.tsx",
+      "removed": [
+        "randomNumber",
+        "randomTime",
+        "calcDate",
+        "strToDecimal",
+        "decimalToStr",
+        "makePhoneNumber"
+      ],
+      "skipped": false
+    },
+    {
+      "file": "\\src\\hooks\\utils\\useCdn.tsx",
+      "removed": [
+        "useCdn"
+      ],
+      "skipped": false
+    }
+  ]
+}

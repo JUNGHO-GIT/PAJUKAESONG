@@ -1,26 +1,18 @@
 // ImportScripts.tsx
 
-import { dataArray } from "@assets/scripts/dataArray";
-import { randomNumber, randomTime } from "@assets/scripts/utils";
-import { calcDate, strToDecimal, decimalToStr } from "@assets/scripts/utils";
-import { insertComma } from "@assets/scripts/utils";
-import { makePhoneNumber, makeForm } from "@assets/scripts/utils";
-import { getLocal, setLocal, getSession, setSession } from "@assets/scripts/storage";
-
-
 // -------------------------------------------------------------------------------------------------
 export {
-  dataArray,
-  randomNumber,
-  randomTime,
+	dataArray
+} from "@assets/scripts/dataArray";
+
+export {
   insertComma,
-  calcDate,
-  makePhoneNumber,
-  strToDecimal,
-  decimalToStr,
+  makeForm,
+} from "@assets/scripts/utils";
+
+export {
   getLocal,
   setLocal,
   getSession,
   setSession,
-  makeForm,
-};
+} from "@assets/scripts/storage";

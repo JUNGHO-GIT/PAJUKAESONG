@@ -1,24 +1,10 @@
 // ImportSchemas.tsx
 
-import { Admin } from "@schemas/Admin";
-import { About } from "@schemas/About";
-import { Contact } from "@schemas/Contact";
-import { Franchise } from "@schemas/Franchise";
-import { Menu } from "@schemas/Menu";
-import { Notice } from "@schemas/Notice";
-import { Order } from "@schemas/Order";
-import { Product } from "@schemas/Product";
-import { User } from "@schemas/User";
-
 // -------------------------------------------------------------------------------------------------
-export {
-  Admin,
-  About,
-  Contact,
-  Franchise,
-  Menu,
-  Notice,
-  Order,
-  Product,
-  User,
-};
+export { Contact } from "@schemas/Contact";
+export { Franchise } from "@schemas/Franchise";
+export { Menu } from "@schemas/Menu";
+export { Notice } from "@schemas/Notice";
+export { Order } from "@schemas/Order";
+export { Product } from "@schemas/Product";
+export { User } from "@schemas/User";
