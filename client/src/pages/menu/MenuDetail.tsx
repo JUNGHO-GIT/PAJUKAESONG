@@ -1,6 +1,6 @@
 // MenuDetail.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateMenu } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
@@ -10,7 +10,7 @@ import { Menu } from "@importSchemas";
 import { Div, Img, Hr, Icons, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuDetail = () => {
+export const MenuDetail = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, URL, SUBFIX } = useCommonValue();
@@ -190,7 +190,7 @@ export const MenuDetail = () => {
           <Hr m={40} className={"bg-burgundy h-2px"} />
           {descFragment()}
         </Card>
-      )
+      );
     };
     // 4. filter
     const filterSection = () => (
@@ -220,4 +220,4 @@ export const MenuDetail = () => {
       {detailNode()}
     </>
   );
-};
+});

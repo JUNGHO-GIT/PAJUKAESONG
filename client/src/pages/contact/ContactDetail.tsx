@@ -1,6 +1,6 @@
 // ContactDetail.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useCommonDate, useResponsive, useValidateContact } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
@@ -10,7 +10,7 @@ import { TextArea } from "@importContainers";
 import { Div, Hr, Icons, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const ContactDetail = () => {
+export const ContactDetail = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, URL, SUBFIX } = useCommonValue();
@@ -202,4 +202,4 @@ export const ContactDetail = () => {
       {detailNode()}
     </>
   );
-};
+});

@@ -1,10 +1,10 @@
 // ProductUpdate.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { makeForm, insertComma } from "@importScripts";
+import { fnMakeForm, insertComma } from "@importScripts";
 import { Product } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, InputFile, Select } from "@importContainers";
@@ -12,7 +12,7 @@ import { Br, Paper, Grid, Card } from "@importComponents";
 import { MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const ProductUpdate = () => {
+export const ProductUpdate = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location_id } = useCommonValue();
@@ -53,7 +53,7 @@ export const ProductUpdate = () => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      makeForm( OBJECT, fileList, { _id: location_id } ),
+      fnMakeForm( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -279,4 +279,4 @@ export const ProductUpdate = () => {
       {updateNode()}
     </>
   );
-};
+});

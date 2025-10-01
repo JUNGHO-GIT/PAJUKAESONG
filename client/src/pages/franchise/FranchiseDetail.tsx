@@ -1,6 +1,6 @@
 // FranchiseDetail.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useCommonDate, useResponsive, useValidateFranchise } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
@@ -9,7 +9,7 @@ import { Franchise } from "@importSchemas";
 import { Div, Img, Hr, Icons, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const FranchiseDetail = () => {
+export const FranchiseDetail = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, URL, SUBFIX } = useCommonValue();
@@ -235,4 +235,4 @@ export const FranchiseDetail = () => {
       {detailNode()}
     </>
   );
-};
+});

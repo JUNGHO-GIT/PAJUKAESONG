@@ -1,6 +1,6 @@
 // useRoot.tsx
 
-import { useEffect } from "@importReacts";
+import { useEffect, memo } from "@importReacts";
 import { useCommonValue } from "@importHooks";
 
 // -------------------------------------------------------------------------------------------------

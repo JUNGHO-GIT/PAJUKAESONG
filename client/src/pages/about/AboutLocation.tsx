@@ -1,13 +1,13 @@
 // AboutLocation.tsx
 
-import { useEffect } from "@importReacts";
+import { useEffect, memo } from "@importReacts";
 import { useResponsive } from "@importHooks";
 import { useStoreLoading } from "@importStores";
 import { Location } from "@importContainers";
 import { Paper } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const AboutLocation = () => {
+export const AboutLocation = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { paperClass } = useResponsive();
@@ -45,4 +45,4 @@ export const AboutLocation = () => {
       {locationNode()}
     </>
   );
-};
+});

@@ -1,6 +1,6 @@
 // OrderList.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
@@ -10,7 +10,7 @@ import { Filter } from "@importLayouts";
 import { Div, Hr, Br, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const OrderList = () => {
+export const OrderList = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location, } = useCommonValue();
@@ -154,4 +154,4 @@ export const OrderList = () => {
       {listNode()}
     </>
   );
-};
+});

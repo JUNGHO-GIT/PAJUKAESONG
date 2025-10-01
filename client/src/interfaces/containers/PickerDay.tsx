@@ -1,5 +1,6 @@
 // PickerDay.tsx
 
+import { memo, useMemo } from "@importReacts";
 import { useCommonDate } from "@importHooks";
 import { PopUp, Input } from "@importContainers";
 import { Btn, Div, Icons, Grid } from "@importComponents";
@@ -17,7 +18,7 @@ declare type PickerDayProps = {
 }
 
 // -------------------------------------------------------------------------------------------------
-export const PickerDay = (
+export const PickerDay = memo((
   { OBJECT, setOBJECT, REFS, ERRORS, extra, variant, i }: PickerDayProps
 ) => {
 
@@ -196,4 +197,4 @@ export const PickerDay = (
       {pickerNode()}
     </>
   );
-};
+});

@@ -1,5 +1,6 @@
 // Time.tsx
 
+import { memo } from "@importReacts";
 import { moment } from "@importLibs";
 import { PopUp, Input } from "@importContainers";
 import { Grid } from "@importComponents";
@@ -16,8 +17,8 @@ declare type PickerTimeProps = {
 }
 
 // -------------------------------------------------------------------------------------------------
-export const PickerTime = (
-  { OBJECT, setOBJECT, REFS, ERRORS, extra, i }: PickerTimeProps
+export const PickerTime = memo((
+	{ OBJECT, setOBJECT, REFS, ERRORS, extra, i }: PickerTimeProps
 ) => {
 
   // 7. time ---------------------------------------------------------------------------------------
@@ -81,4 +82,4 @@ export const PickerTime = (
       {timeNode()}
     </>
   );
-};
+});

@@ -1,6 +1,6 @@
 // MenuList.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
@@ -9,7 +9,7 @@ import { Filter } from "@importLayouts";
 import { Div, Img, Hr, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuList = () => {
+export const MenuList = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate, location_category } = useCommonValue();
@@ -126,4 +126,4 @@ export const MenuList = () => {
       {listNode()}
     </>
   );
-};
+});

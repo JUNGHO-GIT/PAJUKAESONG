@@ -1,10 +1,10 @@
 // OrderSave.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateOrder } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { insertComma, getSession, setSession } from "@importScripts";
+import { insertComma, fnGetSession, fnSetSession } from "@importScripts";
 import { Order, Product } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, Select, PickerDay, PickerTime } from "@importContainers";
@@ -12,7 +12,7 @@ import { Div, Hr, Br, Img, Icons, Paper, Grid, Card } from "@importComponents";
 import { MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const OrderSave = () => {
+export const OrderSave = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
@@ -36,7 +36,7 @@ export const OrderSave = () => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 초기 로딩 시 세션에서 데이터 불러오기
   useEffect(() => {
-    const existOrderProduct = getSession("order_product", "", "");
+    const existOrderProduct = fnGetSession("order_product", "", "");
 
     // 세션에 데이터가 있으면 불러오기
     if (existOrderProduct && existOrderProduct.length > 0) {
@@ -62,7 +62,7 @@ export const OrderSave = () => {
     }));
 
     // 세션에 저장
-    setSession("order_product", "", "", PRODUCT);
+    fnSetSession("order_product", "", "", PRODUCT);
 
   }, [PRODUCT]);
 
@@ -84,7 +84,7 @@ export const OrderSave = () => {
           msg: res.data.msg,
         });
         document?.querySelector("input[type=file]")?.remove();
-        setSession("order_product", "", "", []);
+        fnSetSession("order_product", "", "", []);
         navigate("/order/find");
       }
       else {
@@ -467,4 +467,4 @@ export const OrderSave = () => {
       {saveNode()}
     </>
   );
-};
+});

@@ -1,6 +1,6 @@
 // NoticeList.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
@@ -9,7 +9,7 @@ import { Filter } from "@importLayouts";
 import { Div, Hr, Br, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const NoticeList = () => {
+export const NoticeList = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate } = useCommonValue();
@@ -154,4 +154,4 @@ export const NoticeList = () => {
       {listNode()}
     </>
   );
-};
+});

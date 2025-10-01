@@ -1,17 +1,17 @@
 // OrderDetail.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useCommonDate, useResponsive, useValidateOrder } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { insertComma, setSession } from "@importScripts";
+import { insertComma, fnSetSession } from "@importScripts";
 import { Order } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input } from "@importContainers";
 import { Div, Hr, Br, Img, Icons, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const OrderDetail = () => {
+export const OrderDetail = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location_id } = useCommonValue();
@@ -70,7 +70,7 @@ export const OrderDetail = () => {
           msg: res.data.msg,
         });
         document?.querySelector("input[type=file]")?.remove();
-        setSession("order_product", "", "", []);
+        fnSetSession("order_product", "", "", []);
         navigate('/order/list', {
           state: {
             order_name: OBJECT?.order_name,
@@ -294,4 +294,4 @@ export const OrderDetail = () => {
       {saveNode()}
     </>
   );
-};
+});

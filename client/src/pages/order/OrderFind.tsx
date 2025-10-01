@@ -1,6 +1,6 @@
 // OrderFind.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateOrder } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
@@ -10,7 +10,7 @@ import { Input } from "@importContainers";
 import { Br, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const OrderFind = () => {
+export const OrderFind = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
@@ -175,4 +175,4 @@ export const OrderFind = () => {
       {findNode()}
     </>
   );
-};
+});

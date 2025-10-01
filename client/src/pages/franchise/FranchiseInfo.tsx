@@ -1,13 +1,13 @@
 // FranchiseInfo.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useResponsive } from "@importHooks";
 import { useStoreLoading } from "@importStores";
 import { Div, Br, Hr, Paper, Grid, Card } from "@importComponents";
 import { Stepper, Step, StepLabel } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const FranchiseInfo = () => {
+export const FranchiseInfo = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { xxs, xs, paperClass } = useResponsive();
@@ -282,4 +282,4 @@ export const FranchiseInfo = () => {
       {infoNode()}
     </>
   );
-};
+});

@@ -1,10 +1,10 @@
 // FranchiseSave.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateFranchise } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { makeForm } from "@importScripts";
+import { fnMakeForm } from "@importScripts";
 import { Franchise } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, InputFile, Select } from "@importContainers";
@@ -12,7 +12,7 @@ import { Br, Paper, Grid, Card } from "@importComponents";
 import { MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const FranchiseSave = () => {
+export const FranchiseSave = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
@@ -41,7 +41,7 @@ export const FranchiseSave = () => {
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
-      makeForm(
+      fnMakeForm(
         OBJECT,
         fileList
       ),
@@ -295,4 +295,4 @@ export const FranchiseSave = () => {
       {saveNode()}
     </>
   );
-};
+});

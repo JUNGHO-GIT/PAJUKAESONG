@@ -1,5 +1,6 @@
 // Filter.tsx
 
+import { memo } from "@importReacts";
 import { useCommonValue } from "@importHooks";
 import { Select } from "@importContainers";
 import { Div, Btn, Grid, Paper } from "@importComponents";
@@ -16,7 +17,7 @@ declare type FilterProps = {
 }
 
 // -------------------------------------------------------------------------------------------------
-export const Filter = (
+export const Filter = memo((
   { OBJECT, PAGING, setPAGING, COUNT, flow, extra }: FilterProps
 ) => {
 
@@ -338,4 +339,4 @@ export const Filter = (
       {filterNode()}
     </>
   );
-};
+});

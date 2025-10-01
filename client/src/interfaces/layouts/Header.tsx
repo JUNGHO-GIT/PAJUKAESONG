@@ -1,13 +1,13 @@
 // Header.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { memo, useState, useEffect } from "@importReacts";
 import { useCommonValue, useResponsive } from "@importHooks";
 import { SideBar } from '@importLayouts';
 import { Div, Img, Icons, Paper, Grid } from "@importComponents";
 import { Tabs, Tab, Menu, MenuItem, tabsClasses } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const Header = () => {
+export const Header = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, PATH, firstStr, secondStr } = useCommonValue();
@@ -67,7 +67,7 @@ export const Header = () => {
 
     // 나머지 경우
     else {
-      dataArray.forEach((item) => {
+      dataArray.forEach((item: { titleEn: string; }) => {
         if (item?.titleEn === firstStr) {
           setSelectedTab(firstStr);
           setSelectedTabVal(firstStr);
@@ -144,7 +144,7 @@ export const Header = () => {
               },
             }}
           >
-            {dataArray.map((item, idx) => (
+            {dataArray.map((item: any, idx: any) => (
               <Tab
                 key={`tab-${idx}`}
                 label={item?.titleKo}
@@ -182,7 +182,7 @@ export const Header = () => {
               }));
             }}
           >
-            {dataArray.find((item) => item?.titleEn === selectedTab)?.sub.map((subItem, subIdx) => (
+            {dataArray.find((item: { titleEn: string; }) => item?.titleEn === selectedTab)?.sub.map((subItem: any, subIdx: any) => (
               <MenuItem
                 key={`menuItem-${subIdx}`}
                 selected={selectedMenuItem === subItem.titleEn}
@@ -244,4 +244,4 @@ export const Header = () => {
       {headerNode()}
     </>
   );
-};
+});

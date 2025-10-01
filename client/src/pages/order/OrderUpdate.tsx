@@ -1,10 +1,10 @@
 // OrderUpdate.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateOrder } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { insertComma, setSession } from "@importScripts";
+import { insertComma, fnSetSession } from "@importScripts";
 import { Order, Product } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, Select, PickerDay, PickerTime } from "@importContainers";
@@ -12,7 +12,7 @@ import { Div, Hr, Br, Img, Icons, Paper, Grid, Card } from "@importComponents";
 import { MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const OrderUpdate = () => {
+export const OrderUpdate = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location_id } = useCommonValue();
@@ -63,7 +63,7 @@ export const OrderUpdate = () => {
     }));
 
     // 세션에 저장
-    setSession("order_product", "", "", JSON.stringify(PRODUCT));
+    fnSetSession("order_product", "", "", JSON.stringify(PRODUCT));
 
   }, [PRODUCT]);
 
@@ -86,7 +86,7 @@ export const OrderUpdate = () => {
           msg: res.data.msg,
         });
         document?.querySelector("input[type=file]")?.remove();
-        setSession("order_product", "", "", []);
+        fnSetSession("order_product", "", "", []);
         navigate("/order/find");
       }
       else {
@@ -465,4 +465,4 @@ export const OrderUpdate = () => {
       {updateNode()}
     </>
   );
-};
+});

@@ -1,13 +1,14 @@
 // Confirm.tsx
 
-import { useStoreConfirm } from "@importStores";
 import { Icons } from "@importComponents";
-import { Snackbar, Alert as MuiAlert } from "@importMuis";
+import { MuiAlert, Snackbar } from "@importMuis";
+import { memo } from "@importReacts";
+import { useStoreConfirm } from "@importStores";
 
 // -------------------------------------------------------------------------------------------------
-export const Confirm = () => {
+export const Confirm = memo(() => {
 
-  // 1. common -------------------------------------------------------------------------------------
+	// 1. common ----------------------------------------------------------------------------------
   const { CONFIRM, setCONFIRM } = useStoreConfirm();
 
   // 7. confirm ------------------------------------------------------------------------------------
@@ -26,13 +27,13 @@ export const Confirm = () => {
           open: false,
         });
       }}
-      children={
-        <MuiAlert
-          severity={"success"}
-          variant={"standard"}
-          className={"w-95vw h-8vh d-center border-dark radius-2 shadow-2 fs-1-0rem fw-600 snackbar z-10000"}
-          action={
-            <>
+    >
+      <MuiAlert
+        severity={"success"}
+        variant={"standard"}
+        className={"w-95vw h-8vh d-center border-dark radius-2 shadow-2 fs-0-8rem fw-700 snackbar z-10000"}
+        action={
+          <>
             <Icons
               key={"Check"}
               name={"Check"}
@@ -55,22 +56,18 @@ export const Confirm = () => {
                 CONFIRM.callback && CONFIRM.callback(false);
               }}
             />
-            </>
-          }
-          children={
-            <>
-            {CONFIRM.msg}
-            </>
-          }
-        />
-      }
-    />
+          </>
+        }
+      >
+        {CONFIRM.msg}
+      </MuiAlert>
+    </Snackbar>
   );
 
-  // 10. return ------------------------------------------------------------------------------------
+	// 10. return ----------------------------------------------------------------------------------
   return (
     <>
       {confirmNode()}
     </>
   );
-};
+});

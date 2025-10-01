@@ -1,16 +1,16 @@
 // UserLogin.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateUser } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { setLocal } from "@importScripts";
+import { fnSetLocal } from "@importScripts";
 import { User } from "@importSchemas";
 import { Input } from "@importContainers";
 import { Div, Btn, Hr, Br, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const UserLogin = () => {
+export const UserLogin = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { URL, SUBFIX, navigate } = useCommonValue();
@@ -70,7 +70,7 @@ export const UserLogin = () => {
           msg: res.data.msg,
         });
         if (res.data.admin === "admin") {
-          setLocal("setting", "id", "", {
+          fnSetLocal("setting", "id", "", {
             adminId: OBJECT?.user_id,
             adminPw: OBJECT?.user_pw,
             admin: "true",
@@ -78,7 +78,7 @@ export const UserLogin = () => {
           });
         }
         else {
-          setLocal("setting", "id", "", {
+          fnSetLocal("setting", "id", "", {
             userId: OBJECT?.user_id,
             userPw: OBJECT?.user_pw,
             admin: "false",
@@ -115,7 +115,7 @@ export const UserLogin = () => {
   const handleLogout = () => {
     localStorage.clear();
     navigate("/main");
-  }
+  };
 
   // 7. loginNode ----------------------------------------------------------------------------------
   const loginNode = () => {
@@ -257,4 +257,4 @@ export const UserLogin = () => {
       {loginNode()}
     </>
   );
-};
+});

@@ -1,10 +1,10 @@
 // MenuSave.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateMenu } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { makeForm, insertComma } from "@importScripts";
+import { fnMakeForm, insertComma } from "@importScripts";
 import { Menu } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, Select, InputFile } from "@importContainers";
@@ -12,7 +12,7 @@ import { Br, Paper, Grid, Card } from "@importComponents";
 import { MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const MenuSave = () => {
+export const MenuSave = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
@@ -41,7 +41,7 @@ export const MenuSave = () => {
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
-      makeForm(
+      fnMakeForm(
         OBJECT,
         fileList
       ),
@@ -274,4 +274,4 @@ export const MenuSave = () => {
       {saveNode()}
     </>
   );
-};
+});

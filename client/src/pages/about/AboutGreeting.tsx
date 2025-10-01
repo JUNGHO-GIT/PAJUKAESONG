@@ -1,12 +1,12 @@
 // AboutGreeting.tsx
 
-import { useEffect } from "@importReacts";
+import { useEffect, memo } from "@importReacts";
 import { useResponsive } from "@importHooks";
 import { useStoreLoading } from "@importStores";
 import { Div, Img, Card, Paper, Grid } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const AboutGreeting = () => {
+export const AboutGreeting = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { paperClass } = useResponsive();
@@ -91,4 +91,4 @@ export const AboutGreeting = () => {
       {greetingNode()}
     </>
   );
-};
+});

@@ -1,10 +1,10 @@
 // ContactUpdate.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateContact } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { makeForm } from "@importScripts";
+import { fnMakeForm } from "@importScripts";
 import { Contact } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Select, Input, TextArea, InputFile } from "@importContainers";
@@ -12,7 +12,7 @@ import { Br, Paper, Grid, Card } from "@importComponents";
 import { MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const ContactUpdate = () => {
+export const ContactUpdate = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX, location_id } = useCommonValue();
@@ -53,7 +53,7 @@ export const ContactUpdate = () => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      makeForm( OBJECT, fileList, { _id: location_id } ),
+      fnMakeForm( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -300,4 +300,4 @@ export const ContactUpdate = () => {
       {updateNode()}
     </>
   );
-};
+});

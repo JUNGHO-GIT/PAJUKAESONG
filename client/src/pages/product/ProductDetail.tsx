@@ -1,17 +1,17 @@
 // ProductDetail.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
-import { insertComma, getSession, setSession } from "@importScripts";
+import { insertComma, fnGetSession, fnSetSession } from "@importScripts";
 import { Product } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input } from "@importContainers";
 import { Div, Img, Hr, Br, Icons, Btn, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const ProductDetail = () => {
+export const ProductDetail = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, location_id, URL, SUBFIX } = useCommonValue();
@@ -61,10 +61,10 @@ export const ProductDetail = () => {
       product_price: orderPrice,
       product_images: OBJECT?.product_images,
     };
-    const existOrderProduct = getSession("order_product", "", "");
+    const existOrderProduct = fnGetSession("order_product", "", "");
 
     if (extra === "buy") {
-      setSession("order_product", "", "", [orderProduct]);
+      fnSetSession("order_product", "", "", [orderProduct]);
     }
     else {
       if (existOrderProduct && existOrderProduct.length > 0) {
@@ -82,10 +82,10 @@ export const ProductDetail = () => {
         else {
           existOrderProduct.push(orderProduct);
         }
-        setSession("order_product", "", "", existOrderProduct);
+        fnSetSession("order_product", "", "", existOrderProduct);
       }
       else {
-        setSession("order_product", "", "", [orderProduct]);
+        fnSetSession("order_product", "", "", [orderProduct]);
       }
     }
 
@@ -347,4 +347,4 @@ export const ProductDetail = () => {
       {detailNode()}
     </>
   );
-};
+});

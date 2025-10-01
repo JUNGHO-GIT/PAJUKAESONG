@@ -1,17 +1,17 @@
 // NoticeSave.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateNotice } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { makeForm } from "@importScripts";
+import { fnMakeForm } from "@importScripts";
 import { Notice } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, TextArea, InputFile } from "@importContainers";
 import { Br, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const NoticeSave = () => {
+export const NoticeSave = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
@@ -40,7 +40,7 @@ export const NoticeSave = () => {
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
-      makeForm(
+      fnMakeForm(
         OBJECT,
         fileList
       ),
@@ -185,4 +185,4 @@ export const NoticeSave = () => {
       {saveNode()}
     </>
   );
-};
+});

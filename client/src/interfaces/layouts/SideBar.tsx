@@ -1,6 +1,6 @@
 // SideBar.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue } from "@importHooks";
 import { useStoreAlert } from "@importStores";
 import { axios } from "@importLibs";
@@ -14,7 +14,7 @@ declare type SideBarProps = {
 }
 
 // -------------------------------------------------------------------------------------------------
-export const SideBar = (
+export const SideBar = memo((
   { isOpen, toggleSidebar }: SideBarProps
 ) => {
 
@@ -91,7 +91,7 @@ export const SideBar = (
     const sidebarSection = () => (
       <Grid container={true} spacing={0}>
         <Grid size={12} className={"d-col-left"}>
-          {dataArray.filter((f: any) => f).map((item, idx) => (
+          {dataArray.filter((f: any) => f).map((item: any, idx: any) => (
             <List component={"nav"} key={idx}>
               {/* 메인 항목 */}
               <ListItem
@@ -132,7 +132,7 @@ export const SideBar = (
                 unmountOnExit={true}
               >
                 <List>
-                  {item?.sub.map((subItem, subIdx) => (
+                  {item?.sub.map((subItem: any, subIdx: any) => (
                     <ListItem
                       key={subIdx}
                       onClick={() => {
@@ -296,4 +296,4 @@ export const SideBar = (
       {sideBarNode()}
     </>
   );
-};
+});

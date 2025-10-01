@@ -1,10 +1,10 @@
 // ProductSave.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { makeForm, insertComma } from "@importScripts";
+import { fnMakeForm, insertComma } from "@importScripts";
 import { Filter } from "@importLayouts";
 import { Product } from "@importSchemas";
 import { Input, InputFile, Select } from "@importContainers";
@@ -12,7 +12,7 @@ import { Br, Paper, Grid, Card } from "@importComponents";
 import { MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const ProductSave = () => {
+export const ProductSave = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
@@ -41,7 +41,7 @@ export const ProductSave = () => {
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
-      makeForm(
+      fnMakeForm(
         OBJECT,
         fileList
       ),
@@ -270,4 +270,4 @@ export const ProductSave = () => {
       {saveNode()}
     </>
   );
-};
+});

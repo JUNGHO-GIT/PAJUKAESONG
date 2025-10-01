@@ -1,6 +1,6 @@
 // Main.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { Swiper, SwiperSlide, Autoplay, axios, Pagination } from "@importLibs";
@@ -9,7 +9,7 @@ import { Location } from "@importContainers";
 import { Div, Img, Br, Hr, Grid, Paper } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const Main = () => {
+export const Main = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { URL, navigate } = useCommonValue();
@@ -316,4 +316,4 @@ export const Main = () => {
       {mainNode()}
     </>
   );
-};
+});

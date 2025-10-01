@@ -1,24 +1,24 @@
 // InputFile.tsx
 
-import { useState, useEffect } from "@importReacts";
-import { useStoreAlert } from "@importStores";
-import { Div, Br, Img, Icons, Grid } from "@importComponents";
+import { Br, Div, Grid, Icons, Img } from "@importComponents";
 import { MuiFileInput } from "@importMuis";
+import { memo, useEffect, useState } from "@importReacts";
+import { useStoreAlert } from "@importStores";
 
 // -------------------------------------------------------------------------------------------------
-export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
+export const InputFile = memo(({ handleExistingFilesChange, ...props }: any) => {
 
-  // 1. common -------------------------------------------------------------------------------------
+	// 1. common ----------------------------------------------------------------------------------
   const { setALERT } = useStoreAlert();
 
-  // 2-1. useState ---------------------------------------------------------------------------------
+	// 2-2. useState ---------------------------------------------------------------------------------
   const [fileExisting, setFileExisting] = useState<any[]>([]);
   const [fileList, setFileList] = useState<File[] | null>(null);
   const [fileCount, setFileCount] = useState<number>(0);
   const [fileHeight, setFileHeight] = useState<string>("100px");
   const [fileLimit, setFileLimit] = useState<number>(1);
 
-  // 2-3. useEffect --------------------------------------------------------------------------------
+	// 2-3. useEffect -----------------------------------------------------------------------------
   useEffect(() => {
     const defaultInput = props?.inputRef?.current;
     const existAdornment = document.querySelector(`.MuiInputAdornment-root.MuiInputAdornment-positionEnd.MuiInputAdornment-outlined.MuiInputAdornment-sizeSmall`);
@@ -46,17 +46,17 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
     }
   }, []);
 
-  // 2-3. useEffect --------------------------------------------------------------------------------
+	// 2-3. useEffect -----------------------------------------------------------------------------
   useEffect(() => {
     setFileExisting(props?.existing || []);
   }, [props?.existing]);
 
-  // 2-3. useEffect --------------------------------------------------------------------------------
+	// 2-3. useEffect -----------------------------------------------------------------------------
   useEffect(() => {
     setFileLimit(props?.limit || 1);
   }, [props?.limit]);
 
-  // 2-3. useEffect --------------------------------------------------------------------------------
+	// 2-3. useEffect -----------------------------------------------------------------------------
   useEffect(() => {
 
     // 최초 로드 시 파일 배열 초기화
@@ -65,15 +65,15 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
     // 파일 높이 계산
     const heightPerFile = 30;
     const minHeight = 100;
-    setFileHeight(`${Math.max(minHeight, (props?.value || []).length * heightPerFile)}px`);
+    setFileHeight(`${Math.max(minHeight, (props?.value || [])?.length * heightPerFile)}px`);
 
   }, [props?.value]);
 
-  // 2-3. useEffect --------------------------------------------------------------------------------
+	// 2-3. useEffect -----------------------------------------------------------------------------
   useEffect(() => {
     if (fileList) {
-      const newCount = fileList.length;
-      const existingCount = fileExisting.length;
+      const newCount = fileList?.length;
+      const existingCount = fileExisting?.length;
 
       if (newCount + existingCount > 0) {
         setFileCount(newCount + existingCount);
@@ -104,7 +104,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
     }
 
     // 파일이 제한 개수 이상인 경우
-    else if (newFiles && newFiles.length + fileCount > fileLimit) {
+    else if (newFiles && newFiles?.length + fileCount > fileLimit) {
       setALERT({
         open: true,
         severity: "error",
@@ -139,7 +139,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
       const existingFiles = fileList || [];
 
       // Filter out duplicate files
-      const nonDuplicateFiles = newFiles.filter((newFile) => (
+      const nonDuplicateFiles = newFiles?.filter((newFile) => (
         !existingFiles.some((existingFile) => existingFile.name === newFile.name)
       ));
 
@@ -176,7 +176,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
       if (!fileList) {
         return;
       }
-      const updatedFiles = fileList.filter((_file, i) => i !== index);
+      const updatedFiles = fileList?.filter((_file, i) => i !== index);
       setFileList(updatedFiles);
       props.onChange(updatedFiles);
     }
@@ -188,7 +188,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
 
   // 6. handle (파일 삭제) -------------------------------------------------------------------------
   const handleExistingFileDelete = (index: number) => {
-    const updatedExistingFile = fileExisting.filter((_file: any, i: number) => i !== index);
+    const updatedExistingFile = fileExisting?.filter((_file: any, i: number) => i !== index);
     setFileExisting(updatedExistingFile);
 
     if (handleExistingFilesChange) {
@@ -200,30 +200,30 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
   const adornmentNode = (
     <Grid container={true} spacing={0}>
       <Grid size={8} className={"d-col-left"}>
-        {fileList && fileList.length > 0 && fileList.map((file: any, index: number) => (
+        {fileList && fileList?.length > 0 && fileList.map((file: any, index: number) => (
           <Div className={"d-row-center"} key={index}>
             <Img
               max={25}
-              hover={false}
+              hover={true}
               shadow={true}
               radius={false}
               group={"new"}
               src={URL.createObjectURL(file)}
               className={"mr-10px"}
             />
-            <Div max={12} className={"black fs-0-9rem fw-500"}>
+            <Div max={14} className={"black fs-0-9rem fw-500"}>
               {file?.name}
             </Div>
             <Div
               className={"black fs-0-9rem fw-500 pointer-burgundy ml-15px"}
               onClick={() => handleFileDelete(index, "single")}
             >
-              {!file?.name ? "" : "x"}
+              {file?.name ? "x" : ""}
             </Div>
           </Div>
         ))}
       </Grid>
-      <Grid size={4} className={"d-col-right mr-n20"}>
+      <Grid size={4} className={"d-col-right mr-n20px"}>
         <Icons
           key={"CirclePlus"}
           name={"CirclePlus"}
@@ -252,14 +252,14 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
           <Div className={"d-row-center"} key={index}>
             <Img
               max={25}
-              hover={false}
+              hover={true}
               shadow={true}
               radius={false}
               group={props?.group}
               src={file}
               className={"mr-10px"}
             />
-            <Div max={20} className={"black fs-0-9rem fw-500"}>
+            <Div max={14} className={"black fs-0-9rem fw-500"}>
               {file}
             </Div>
             <Div
@@ -268,7 +268,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
                 handleExistingFileDelete(index);
               }}
             >
-              {!file ? "" : "x"}
+              {file?.name ? "x" : ""}
             </Div>
           </Div>
         ))}
@@ -276,7 +276,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
     </Grid>
   );
 
-  // 10. return ------------------------------------------------------------------------------------
+	// 10. return ----------------------------------------------------------------------------------
   return (
     <>
     <MuiFileInput
@@ -305,7 +305,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
           props?.inputclass?.includes("fs-") ? (
             `text-left ${props?.inputclass || ""}`
           ) : (
-            `fs-1-0rem text-left ${props?.inputclass || ""}`
+            `fs-0-9rem text-left ${props?.inputclass || ""}`
           )
         ),
         startAdornment: adornmentNode,
@@ -313,7 +313,7 @@ export const InputFile = ({ handleExistingFilesChange, ...props }: any) => {
     />
     <Br m={20} />
     {/** 기존 이미지 표시하기 **/}
-    {fileExisting.length > 0 && existingNode()}
+    {fileExisting?.length > 0 && existingNode()}
     </>
   );
-};
+});

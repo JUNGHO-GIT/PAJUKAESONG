@@ -8,7 +8,7 @@ import "@assets/styles/Mui.css";
 import '@assets/styles/Components.css';
 
 import {
-  BrowserRouter, Routes, Route, createRoot, useEffect
+  BrowserRouter, Routes, Route, createRoot, useEffect, memo
 } from "@importReacts";
 
 import {
@@ -68,7 +68,7 @@ import {
 } from "@importPages";
 
 // -------------------------------------------------------------------------------------------------
-const App = () => {
+const App = memo(() => {
 
   const { setLOADING } = useStoreLoading();
 
@@ -140,17 +140,16 @@ const App = () => {
       <Footer />
     </div>
   );
-};
+});
 
 // -------------------------------------------------------------------------------------------------
-createRoot(document.getElementById('root') as HTMLDivElement).render(
+const fontFamily = "'Pretendard Variable', Pretendard, FontAwesome, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif";
+
+// -------------------------------------------------------------------------------------------------
+createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter basename={"/PAJUKAESONG"}>
     <ThemeProvider theme={
-      createTheme({
-        typography:{
-          fontFamily: "'Pretendard Variable', Pretendard, FontAwesome, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif",
-        },
-      })
+      createTheme({ typography:{ fontFamily: fontFamily } })
     }>
       <CssBaseline />
       <App />

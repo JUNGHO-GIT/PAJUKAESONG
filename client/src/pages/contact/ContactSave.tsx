@@ -1,10 +1,10 @@
 // ContactSave.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateContact } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { makeForm } from "@importScripts";
+import { fnMakeForm } from "@importScripts";
 import { Contact } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Select, Input, TextArea, InputFile } from "@importContainers";
@@ -12,7 +12,7 @@ import { Br, Paper, Grid, Card } from "@importComponents";
 import { MenuItem } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const ContactSave = () => {
+export const ContactSave = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
@@ -36,12 +36,13 @@ export const ContactSave = () => {
   // 3. flow ---------------------------------------------------------------------------------------
   const flowSave = async () => {
     setLOADING(true);
-    if (!await validate(OBJECT, fileList, "save")) {
+    const isValid = await validate(OBJECT, fileList, "save");
+    if (!isValid) {
       setLOADING(false);
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
-      makeForm(
+      fnMakeForm(
         OBJECT,
         fileList
       ),
@@ -52,23 +53,22 @@ export const ContactSave = () => {
       }
     )
     .then((res: any) => {
-      if (res.data.status === "success") {
+      res.data.status === "success" ? (
         setALERT({
           open: true,
           severity: "success",
           msg: res.data.msg,
-        });
-        document?.querySelector("input[type=file]")?.remove();
-        navigate("/contact/find");
-      }
-      else {
-        setLOADING(false);
+        }),
+        document?.querySelector("input[type=file]")?.remove(),
+        navigate("/contact/find")
+      ) : (
+        setLOADING(false),
         setALERT({
           open: true,
-          severity: "success",
+          severity: "error",
           msg: res.data.msg,
-        });
-      }
+        })
+      );
     })
     .catch((err: any) => {
       setLOADING(false);
@@ -173,21 +173,15 @@ export const ContactSave = () => {
                     placeholder={"010-1234-5678"}
                     onChange={(e: any) => {
                       // 빈값 처리
-                      let value = e.target.value === "" ? "" : e.target.value.replace(/[^0-9]/g, "")
+                      let value = e.target.value === "" ? "" : e.target.value.replace(/[^0-9]/g, "");
                       // 11자 제한 + 정수
                       if (value.length > 11 || !/^\d+$/.test(value)) {
                         return;
                       }
-                      // 010-1234-5678 형식으로 변경
-                      if (7 <= value.length && value.length < 12) {
-                        value = value.replace(/(\d{3})(\d{4})(\d{0,4})/, "$1-$2-$3");
-                      }
-                      else if (4 <= value.length && value.length < 7) {
-                        value = value.replace(/(\d{3})(\d{1,4})/, "$1-$2");
-                      }
-                      else if (0 <= value.length && value.length < 4) {
-                        value = value.replace(/(\d{0,3})/, "$1");
-                      }
+                      // 전화번호 형식 변경
+                      value = (7 <= value.length && value.length < 12) ? value.replace(/(\d{3})(\d{4})(\d{0,4})/, "$1-$2-$3") :
+                              (4 <= value.length && value.length < 7) ? value.replace(/(\d{3})(\d{1,4})/, "$1-$2") :
+                              (0 <= value.length && value.length < 4) ? value.replace(/(\d{0,3})/, "$1") : value;
                       // object 설정
                       setOBJECT((prev: any) => ({
                         ...prev,
@@ -291,4 +285,4 @@ export const ContactSave = () => {
       {saveNode()}
     </>
   );
-};
+});

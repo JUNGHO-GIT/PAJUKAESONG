@@ -1,11 +1,11 @@
 // Card.tsx
 
-import { useEffect, useRef } from "@importReacts";
+import { useEffect, useRef, memo } from "@importReacts";
 import { Card as MuiCard } from "@importMuis";
 import { CardProps } from "@importMuis";
 
 // -------------------------------------------------------------------------------------------------
-export const Card = (props: CardProps) => {
+export const Card = memo((props: CardProps) => {
   const cardRef = useRef<HTMLDivElement | null>(null);
 
   // style 속성 자체를 제거
@@ -23,4 +23,4 @@ export const Card = (props: CardProps) => {
       className={props?.className || ""}
     />
   );
-};
+});

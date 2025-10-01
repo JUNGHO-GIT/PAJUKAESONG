@@ -1,6 +1,6 @@
 // ContactFind.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateContact } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
@@ -10,7 +10,7 @@ import { Input } from "@importContainers";
 import { Br, Paper, Grid, Card } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const ContactFind = () => {
+export const ContactFind = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate, URL, SUBFIX } = useCommonValue();
@@ -175,4 +175,4 @@ export const ContactFind = () => {
       {findNode()}
     </>
   );
-};
+});

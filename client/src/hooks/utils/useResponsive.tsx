@@ -1,6 +1,6 @@
 // useResponsive.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue } from "@importHooks";
 import { useMediaQuery } from "@importMuis";
 

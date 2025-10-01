@@ -1,9 +1,9 @@
 // useLanguageSetting.tsx
 
-import { useEffect } from "@importReacts";
+import { useEffect, memo } from "@importReacts";
 import { useCommonValue } from "@importHooks";
 import { moment, getCountryForTimezone, getAllInfoByISO } from "@importLibs";
-import { setLocal } from "@importScripts";
+import { fnSetLocal } from "@importScripts";
 
 // -------------------------------------------------------------------------------------------------
 export const useLanguageSetting = () => {
@@ -48,7 +48,7 @@ export const useLanguageSetting = () => {
       }
 
       // Save to local storage
-      setLocal("setting", "locale", "", {
+      fnSetLocal("setting", "locale", "", {
         timeZone: timeZone,
         lang: lang,
         zoneName: zoneName,

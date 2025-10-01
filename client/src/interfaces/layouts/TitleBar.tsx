@@ -1,12 +1,12 @@
 // TitleBar.tsx
 
-import { useState, useEffect } from "@importReacts";
+import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue } from "@importHooks";
 import { Swiper, SwiperSlide, Autoplay } from "@importLibs";
 import { Div, Img, Icons, Grid, Paper } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const TitleBar = () => {
+export const TitleBar = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { PATH, location_category } = useCommonValue();
@@ -242,4 +242,4 @@ export const TitleBar = () => {
       {titleNode()}
     </>
   );
-};
+});

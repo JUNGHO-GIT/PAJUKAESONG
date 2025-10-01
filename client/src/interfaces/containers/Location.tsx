@@ -1,10 +1,10 @@
 // Location.tsx
 
-import { useEffect } from "@importReacts";
+import { useEffect, memo } from "@importReacts";
 import { Div } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const Location = (props: any) => {
+export const Location = memo((props: any) => {
 
   // 1. common -------------------------------------------------------------------------------------
   const NAVER_MAPS_CLIENT_ID = process.env.REACT_APP_NAVER_MAPS_CLIENT_ID;
@@ -112,4 +112,4 @@ export const Location = (props: any) => {
       {locationNode()}
     </>
   );
-};
+});

@@ -1,10 +1,11 @@
 // Footer.tsx
 
+import { memo } from "@importReacts";
 import { useResponsive, useCommonValue } from "@importHooks";
 import { Div, Img, Icons, Paper, Grid } from "@importComponents";
 
 // -------------------------------------------------------------------------------------------------
-export const Footer = () => {
+export const Footer = memo(() => {
 
   // 1. common -------------------------------------------------------------------------------------
   const { navigate } = useCommonValue();
@@ -106,4 +107,4 @@ export const Footer = () => {
       {footerNode()}
     </>
   );
-};
+});
