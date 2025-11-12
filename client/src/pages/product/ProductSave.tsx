@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { fnMakeForm, insertComma } from "@importScripts";
+import { makeForm, insertComma } from "@importScripts";
 import { Filter } from "@importLayouts";
 import { Product } from "@importSchemas";
 import { Input, InputFile, Select } from "@importContainers";
@@ -41,7 +41,7 @@ export const ProductSave = memo(() => {
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
-      fnMakeForm(
+  makeForm(
         OBJECT,
         fileList
       ),

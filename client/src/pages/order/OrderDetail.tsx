@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useCommonDate, useResponsive, useValidateOrder } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { insertComma, fnSetSession } from "@importScripts";
+import { insertComma, setSession } from "@importScripts";
 import { Order } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input } from "@importContainers";
@@ -70,7 +70,7 @@ export const OrderDetail = memo(() => {
           msg: res.data.msg,
         });
         document?.querySelector("input[type=file]")?.remove();
-        fnSetSession("order_product", "", "", []);
+  setSession("order_product", "", "", []);
         navigate('/order/list', {
           state: {
             order_name: OBJECT?.order_name,

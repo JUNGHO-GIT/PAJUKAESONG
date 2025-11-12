@@ -3,7 +3,7 @@
 import { useEffect, memo } from "@importReacts";
 import { useCommonValue } from "@importHooks";
 import { moment, getCountryForTimezone, getAllInfoByISO } from "@importLibs";
-import { fnSetLocal } from "@importScripts";
+import { setLocal } from "@importScripts";
 
 // -------------------------------------------------------------------------------------------------
 export const useLanguageSetting = () => {
@@ -48,7 +48,7 @@ export const useLanguageSetting = () => {
       }
 
       // Save to local storage
-      fnSetLocal("setting", "locale", "", {
+  setLocal("setting", "locale", "", {
         timeZone: timeZone,
         lang: lang,
         zoneName: zoneName,

@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateOrder } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { insertComma, fnGetSession, fnSetSession } from "@importScripts";
+import { insertComma, getSession, setSession } from "@importScripts";
 import { Order, Product } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, Select, PickerDay, PickerTime } from "@importContainers";
@@ -36,7 +36,7 @@ export const OrderSave = memo(() => {
   // 2-3. useEffect --------------------------------------------------------------------------------
   // 초기 로딩 시 세션에서 데이터 불러오기
   useEffect(() => {
-    const existOrderProduct = fnGetSession("order_product", "", "");
+  const existOrderProduct = getSession("order_product", "", "");
 
     // 세션에 데이터가 있으면 불러오기
     if (existOrderProduct && existOrderProduct.length > 0) {
@@ -62,7 +62,7 @@ export const OrderSave = memo(() => {
     }));
 
     // 세션에 저장
-    fnSetSession("order_product", "", "", PRODUCT);
+  setSession("order_product", "", "", PRODUCT);
 
   }, [PRODUCT]);
 
@@ -84,7 +84,7 @@ export const OrderSave = memo(() => {
           msg: res.data.msg,
         });
         document?.querySelector("input[type=file]")?.remove();
-        fnSetSession("order_product", "", "", []);
+  setSession("order_product", "", "", []);
         navigate("/order/find");
       }
       else {

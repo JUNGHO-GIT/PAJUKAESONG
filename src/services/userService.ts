@@ -1,7 +1,7 @@
 // userService.ts
 
 import * as repository from "@repositories/userRepository";
-import { token, fnAdminCheck, fnCombinePw, fnHashPw, fnComparePw } from "@assets/scripts/utils";
+import { token, adminCheck, combinePw, hashPw, comparePw } from "@assets/scripts/utils";
 
 // 2-1. login --------------------------------------------------------------------------------------
 export const login = async (
@@ -25,10 +25,10 @@ export const login = async (
     finalResult = null;
   }
   else {
-    const combinedPw = await fnCombinePw(
+  const combinedPw = await combinePw(
       user_pw_param, findResult.user_token
     );
-    loginResult = await fnComparePw(
+  loginResult = await comparePw(
       combinedPw, findResult.user_pw
     );
 
@@ -41,7 +41,7 @@ export const login = async (
       finalResult = findResult;
     }
 
-    if (fnAdminCheck(findResult.user_id)) {
+  if (adminCheck(findResult.user_id)) {
       adminResult = "admin";
     }
     else {
@@ -75,10 +75,10 @@ export const signup = async (
     finalResult = null;
   }
   else {
-    const combinedPw = await fnCombinePw(
+  const combinedPw = await combinePw(
       OBJECT_param.user_pw, token
     );
-    const hashedPw = await fnHashPw(
+  const hashedPw = await hashPw(
       combinedPw
     );
     OBJECT_param.user_token = token;

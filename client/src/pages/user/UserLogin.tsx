@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateUser } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { fnSetLocal } from "@importScripts";
+import { setLocal } from "@importScripts";
 import { User } from "@importSchemas";
 import { Input } from "@importContainers";
 import { Div, Btn, Hr, Br, Paper, Grid, Card } from "@importComponents";
@@ -70,7 +70,7 @@ export const UserLogin = memo(() => {
           msg: res.data.msg,
         });
         if (res.data.admin === "admin") {
-          fnSetLocal("setting", "id", "", {
+          setLocal("setting", "id", "", {
             adminId: OBJECT?.user_id,
             adminPw: OBJECT?.user_pw,
             admin: "true",
@@ -78,7 +78,7 @@ export const UserLogin = memo(() => {
           });
         }
         else {
-          fnSetLocal("setting", "id", "", {
+          setLocal("setting", "id", "", {
             userId: OBJECT?.user_id,
             userPw: OBJECT?.user_pw,
             admin: "false",

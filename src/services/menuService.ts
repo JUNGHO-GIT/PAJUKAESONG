@@ -1,7 +1,7 @@
 // menuService.ts
 
 import * as repository from "@repositories/menuRepository";
-import { fnUploadCloud } from "@assets/scripts/upload";
+import { uploadCloud } from "@assets/scripts/upload";
 
 const title = "menu";
 
@@ -105,7 +105,7 @@ export const save = async (
     finalResult = saveResult;
 
     // 클라우드에 이미지 업로드
-    fnUploadCloud(title, fileList_param);
+  uploadCloud(title, fileList_param);
   }
 
   return {
@@ -146,7 +146,7 @@ export const update = async (
     finalResult = updateResult;
 
     // 클라우드에 이미지 업로드
-    fnUploadCloud(title, fileList_param);
+  uploadCloud(title, fileList_param);
   }
 
   return {

@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateMenu } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { fnMakeForm, insertComma } from "@importScripts";
+import { makeForm, insertComma } from "@importScripts";
 import { Menu } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, Select, InputFile } from "@importContainers";
@@ -41,7 +41,7 @@ export const MenuSave = memo(() => {
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
-      fnMakeForm(
+  makeForm(
         OBJECT,
         fileList
       ),

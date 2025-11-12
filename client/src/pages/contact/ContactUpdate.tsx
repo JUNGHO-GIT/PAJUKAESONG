@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateContact } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { fnMakeForm } from "@importScripts";
+import { makeForm } from "@importScripts";
 import { Contact } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Select, Input, TextArea, InputFile } from "@importContainers";
@@ -53,7 +53,7 @@ export const ContactUpdate = memo(() => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      fnMakeForm( OBJECT, fileList, { _id: location_id } ),
+  makeForm( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",

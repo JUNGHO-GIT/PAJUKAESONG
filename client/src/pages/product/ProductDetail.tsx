@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
-import { insertComma, fnGetSession, fnSetSession } from "@importScripts";
+import { insertComma, getSession, setSession } from "@importScripts";
 import { Product } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input } from "@importContainers";
@@ -61,10 +61,10 @@ export const ProductDetail = memo(() => {
       product_price: orderPrice,
       product_images: OBJECT?.product_images,
     };
-    const existOrderProduct = fnGetSession("order_product", "", "");
+  const existOrderProduct = getSession("order_product", "", "");
 
     if (extra === "buy") {
-      fnSetSession("order_product", "", "", [orderProduct]);
+  setSession("order_product", "", "", [orderProduct]);
     }
     else {
       if (existOrderProduct && existOrderProduct.length > 0) {
@@ -82,10 +82,10 @@ export const ProductDetail = memo(() => {
         else {
           existOrderProduct.push(orderProduct);
         }
-        fnSetSession("order_product", "", "", existOrderProduct);
+  setSession("order_product", "", "", existOrderProduct);
       }
       else {
-        fnSetSession("order_product", "", "", [orderProduct]);
+  setSession("order_product", "", "", [orderProduct]);
       }
     }
 

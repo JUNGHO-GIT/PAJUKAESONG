@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateContact } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { fnMakeForm } from "@importScripts";
+import { makeForm } from "@importScripts";
 import { Contact } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Select, Input, TextArea, InputFile } from "@importContainers";
@@ -42,7 +42,7 @@ export const ContactSave = memo(() => {
       return;
     }
     axios.post(`${URL}${SUBFIX}/save`,
-      fnMakeForm(
+  makeForm(
         OBJECT,
         fileList
       ),

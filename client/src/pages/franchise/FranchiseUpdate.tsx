@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateFranchise } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { fnMakeForm } from "@importScripts";
+import { makeForm } from "@importScripts";
 import { Franchise } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, InputFile, Select } from "@importContainers";
@@ -54,7 +54,7 @@ export const FranchiseUpdate = memo(() => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      fnMakeForm( OBJECT, fileList, { _id: location_id } ),
+  makeForm( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",

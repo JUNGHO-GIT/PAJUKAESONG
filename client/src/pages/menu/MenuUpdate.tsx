@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateMenu } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { fnMakeForm, insertComma } from "@importScripts";
+import { makeForm, insertComma } from "@importScripts";
 import { Menu } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, Select, InputFile } from "@importContainers";
@@ -53,7 +53,7 @@ export const MenuUpdate = memo(() => {
       return;
     }
     axios.put(`${URL}${SUBFIX}/update`,
-      fnMakeForm( OBJECT, fileList, { _id: location_id } ),
+  makeForm( OBJECT, fileList, { _id: location_id } ),
       {
         headers: {
           "Content-Type": "multipart/form-data",

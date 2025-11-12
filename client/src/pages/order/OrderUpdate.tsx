@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "@importReacts";
 import { useCommonValue, useResponsive, useValidateOrder } from "@importHooks";
 import { useStoreAlert, useStoreLoading } from "@importStores";
 import { axios } from "@importLibs";
-import { insertComma, fnSetSession } from "@importScripts";
+import { insertComma, setSession } from "@importScripts";
 import { Order, Product } from "@importSchemas";
 import { Filter } from "@importLayouts";
 import { Input, Select, PickerDay, PickerTime } from "@importContainers";
@@ -63,7 +63,7 @@ export const OrderUpdate = memo(() => {
     }));
 
     // 세션에 저장
-    fnSetSession("order_product", "", "", JSON.stringify(PRODUCT));
+  setSession("order_product", "", "", JSON.stringify(PRODUCT));
 
   }, [PRODUCT]);
 
@@ -86,7 +86,7 @@ export const OrderUpdate = memo(() => {
           msg: res.data.msg,
         });
         document?.querySelector("input[type=file]")?.remove();
-        fnSetSession("order_product", "", "", []);
+  setSession("order_product", "", "", []);
         navigate("/order/find");
       }
       else {
