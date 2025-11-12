@@ -1,4 +1,4 @@
-// ImportPages.tsx
+// ExportPages.tsx
 
 // main
 export { Main } from "@pages/Main";

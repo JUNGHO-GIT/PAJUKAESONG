@@ -1,4 +1,4 @@
-// ImportSchemas.tsx
+// ExportSchemas.tsx
 
 // -------------------------------------------------------------------------------------------------
 export { Contact } from "@schemas/Contact";
