@@ -1,8 +1,8 @@
 // useResponsive.tsx
 
-import { useState, useEffect, memo } from "@importReacts";
-import { useCommonValue } from "@importHooks";
-import { useMediaQuery } from "@importMuis";
+import { useState, useEffect, memo } from "@exportReacts";
+import { useCommonValue } from "@exportHooks";
+import { useMediaQuery } from "@exportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const useResponsive = () => {

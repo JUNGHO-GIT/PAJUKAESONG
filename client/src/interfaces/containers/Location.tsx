@@ -1,7 +1,7 @@
 // Location.tsx
 
-import { useEffect, memo } from "@importReacts";
-import { Div } from "@importComponents";
+import { useEffect, memo } from "@exportReacts";
+import { Div } from "@exportComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const Location = memo((props: any) => {

@@ -1,10 +1,10 @@
 // AboutLocation.tsx
 
-import { useEffect, memo } from "@importReacts";
-import { useResponsive } from "@importHooks";
-import { useStoreLoading } from "@importStores";
-import { Location } from "@importContainers";
-import { Paper } from "@importComponents";
+import { useEffect, memo } from "@exportReacts";
+import { useResponsive } from "@exportHooks";
+import { useStoreLoading } from "@exportStores";
+import { Location } from "@exportContainers";
+import { Paper } from "@exportComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutLocation = memo(() => {

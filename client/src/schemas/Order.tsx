@@ -1,6 +1,6 @@
 // Order.tsx
 
-import { moment } from "@importLibs";
+import { moment } from "@exportLibs";
 
 // -------------------------------------------------------------------------------------------------
 export const Order = {

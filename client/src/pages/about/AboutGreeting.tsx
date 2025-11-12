@@ -1,9 +1,9 @@
 // AboutGreeting.tsx
 
-import { useEffect, memo } from "@importReacts";
-import { useResponsive } from "@importHooks";
-import { useStoreLoading } from "@importStores";
-import { Div, Img, Card, Paper, Grid } from "@importComponents";
+import { useEffect, memo } from "@exportReacts";
+import { useResponsive } from "@exportHooks";
+import { useStoreLoading } from "@exportStores";
+import { Div, Img, Card, Paper, Grid } from "@exportComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const AboutGreeting = memo(() => {

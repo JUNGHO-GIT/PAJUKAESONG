@@ -1,12 +1,12 @@
 // Main.tsx
 
-import { useState, useEffect, memo } from "@importReacts";
-import { useCommonValue, useCommonDate, useResponsive } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importStores";
-import { Swiper, SwiperSlide, Autoplay, axios, Pagination } from "@importLibs";
-import { Menu, Notice } from "@importSchemas";
-import { Location } from "@importContainers";
-import { Div, Img, Br, Hr, Grid, Paper } from "@importComponents";
+import { useState, useEffect, memo } from "@exportReacts";
+import { useCommonValue, useCommonDate, useResponsive } from "@exportHooks";
+import { useStoreAlert, useStoreLoading } from "@exportStores";
+import { Swiper, SwiperSlide, Autoplay, axios, Pagination } from "@exportLibs";
+import { Menu, Notice } from "@exportSchemas";
+import { Location } from "@exportContainers";
+import { Div, Img, Br, Hr, Grid, Paper } from "@exportComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const Main = memo(() => {

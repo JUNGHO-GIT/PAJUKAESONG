@@ -1,8 +1,8 @@
 // Footer.tsx
 
-import { memo } from "@importReacts";
-import { useResponsive, useCommonValue } from "@importHooks";
-import { Div, Img, Icons, Paper, Grid } from "@importComponents";
+import { memo } from "@exportReacts";
+import { useResponsive, useCommonValue } from "@exportHooks";
+import { Div, Img, Icons, Paper, Grid } from "@exportComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const Footer = memo(() => {

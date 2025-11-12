@@ -1,9 +1,9 @@
 // useLanguageSetting.tsx
 
-import { useEffect, memo } from "@importReacts";
-import { useCommonValue } from "@importHooks";
-import { moment, getCountryForTimezone, getAllInfoByISO } from "@importLibs";
-import { setLocal } from "@importScripts";
+import { useEffect, memo } from "@exportReacts";
+import { useCommonValue } from "@exportHooks";
+import { moment, getCountryForTimezone, getAllInfoByISO } from "@exportLibs";
+import { setLocal } from "@exportScripts";
 
 // -------------------------------------------------------------------------------------------------
 export const useLanguageSetting = () => {

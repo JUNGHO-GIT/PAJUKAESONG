@@ -1,15 +1,15 @@
 // ProductUpdate.tsx
 
-import { useState, useEffect, memo } from "@importReacts";
-import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importStores";
-import { axios } from "@importLibs";
-import { makeForm, insertComma } from "@importScripts";
-import { Product } from "@importSchemas";
-import { Filter } from "@importLayouts";
-import { Input, InputFile, Select } from "@importContainers";
-import { Br, Paper, Grid, Card } from "@importComponents";
-import { MenuItem } from "@importMuis";
+import { useState, useEffect, memo } from "@exportReacts";
+import { useCommonValue, useResponsive, useValidateProduct } from "@exportHooks";
+import { useStoreAlert, useStoreLoading } from "@exportStores";
+import { axios } from "@exportLibs";
+import { makeForm, insertComma } from "@exportScripts";
+import { Product } from "@exportSchemas";
+import { Filter } from "@exportLayouts";
+import { Input, InputFile, Select } from "@exportContainers";
+import { Br, Paper, Grid, Card } from "@exportComponents";
+import { MenuItem } from "@exportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ProductUpdate = memo(() => {

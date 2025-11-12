@@ -1,13 +1,13 @@
 // MenuDetail.tsx
 
-import { useState, useEffect, memo } from "@importReacts";
-import { useCommonValue, useResponsive, useValidateMenu } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importStores";
-import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
-import { insertComma } from "@importScripts";
-import { Filter } from "@importLayouts";
-import { Menu } from "@importSchemas";
-import { Div, Img, Hr, Icons, Paper, Grid, Card } from "@importComponents";
+import { useState, useEffect, memo } from "@exportReacts";
+import { useCommonValue, useResponsive, useValidateMenu } from "@exportHooks";
+import { useStoreAlert, useStoreLoading } from "@exportStores";
+import { axios, Swiper, SwiperSlide, Pagination } from "@exportLibs";
+import { insertComma } from "@exportScripts";
+import { Filter } from "@exportLayouts";
+import { Menu } from "@exportSchemas";
+import { Div, Img, Hr, Icons, Paper, Grid, Card } from "@exportComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const MenuDetail = memo(() => {

@@ -1,12 +1,12 @@
 // FranchiseDetail.tsx
 
-import { useState, useEffect, memo } from "@importReacts";
-import { useCommonValue, useCommonDate, useResponsive, useValidateFranchise } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importStores";
-import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
-import { Filter } from "@importLayouts";
-import { Franchise } from "@importSchemas";
-import { Div, Img, Hr, Icons, Paper, Grid, Card } from "@importComponents";
+import { useState, useEffect, memo } from "@exportReacts";
+import { useCommonValue, useCommonDate, useResponsive, useValidateFranchise } from "@exportHooks";
+import { useStoreAlert, useStoreLoading } from "@exportStores";
+import { axios, Swiper, SwiperSlide, Pagination } from "@exportLibs";
+import { Filter } from "@exportLayouts";
+import { Franchise } from "@exportSchemas";
+import { Div, Img, Hr, Icons, Paper, Grid, Card } from "@exportComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseDetail = memo(() => {

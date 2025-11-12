@@ -9,63 +9,63 @@ import '@assets/styles/Components.css';
 
 import {
   BrowserRouter, Routes, Route, createRoot, useEffect, memo
-} from "@importReacts";
+} from "@exportReacts";
 
 import {
   CssBaseline, ThemeProvider, createTheme
-} from "@importMuis";
+} from "@exportMuis";
 
 import {
   useRoot, useScrollTop, useLanguageSetting
-} from "@importHooks";
+} from "@exportHooks";
 
 import {
   useStoreLoading
-} from "@importStores";
+} from "@exportStores";
 
 import {
   Header, Footer, Alert, Confirm, TitleBar, Loader
-} from "@importLayouts";
+} from "@exportLayouts";
 
 import {
   Main
-} from "@importPages";
+} from "@exportPages";
 
 import {
   AdminDashboard,
-} from "@importPages";
+} from "@exportPages";
 
 import {
   AboutGreeting, AboutLocation
-} from "@importPages";
+} from "@exportPages";
 
 import {
   ContactList, ContactFind, ContactDetail, ContactSave, ContactUpdate
-} from "@importPages";
+} from "@exportPages";
 
 import {
   FranchiseInfo, FranchiseList, FranchiseDetail, FranchiseSave, FranchiseUpdate
-} from "@importPages";
+} from "@exportPages";
 
 import {
   MenuList, MenuDetail, MenuSave, MenuUpdate
-} from "@importPages";
+} from "@exportPages";
 
 import {
   NoticeList, NoticeDetail, NoticeSave, NoticeUpdate
-} from "@importPages";
+} from "@exportPages";
 
 import {
   OrderList, OrderFind, OrderDetail, OrderSave, OrderUpdate
-} from "@importPages";
+} from "@exportPages";
 
 import {
   ProductList, ProductDetail, ProductSave, ProductUpdate
-} from "@importPages";
+} from "@exportPages";
 
 import {
   UserLogin, AuthError, AuthPrivacy
-} from "@importPages";
+} from "@exportPages";
 
 // -------------------------------------------------------------------------------------------------
 const App = memo(() => {

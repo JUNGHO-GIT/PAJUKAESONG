@@ -1,10 +1,10 @@
 // FranchiseInfo.tsx
 
-import { useState, useEffect, memo } from "@importReacts";
-import { useResponsive } from "@importHooks";
-import { useStoreLoading } from "@importStores";
-import { Div, Br, Hr, Paper, Grid, Card } from "@importComponents";
-import { Stepper, Step, StepLabel } from "@importMuis";
+import { useState, useEffect, memo } from "@exportReacts";
+import { useResponsive } from "@exportHooks";
+import { useStoreLoading } from "@exportStores";
+import { Div, Br, Hr, Paper, Grid, Card } from "@exportComponents";
+import { Stepper, Step, StepLabel } from "@exportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const FranchiseInfo = memo(() => {

@@ -1,8 +1,8 @@
 // Card.tsx
 
-import { useEffect, useRef, memo } from "@importReacts";
-import { Card as MuiCard } from "@importMuis";
-import { CardProps } from "@importMuis";
+import { useEffect, useRef, memo } from "@exportReacts";
+import { Card as MuiCard } from "@exportMuis";
+import { CardProps } from "@exportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const Card = memo((props: CardProps) => {

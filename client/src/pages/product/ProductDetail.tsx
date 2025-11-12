@@ -1,14 +1,14 @@
 // ProductDetail.tsx
 
-import { useState, useEffect, memo } from "@importReacts";
-import { useCommonValue, useResponsive, useValidateProduct } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importStores";
-import { axios, Swiper, SwiperSlide, Pagination } from "@importLibs";
-import { insertComma, getSession, setSession } from "@importScripts";
-import { Product } from "@importSchemas";
-import { Filter } from "@importLayouts";
-import { Input } from "@importContainers";
-import { Div, Img, Hr, Br, Icons, Btn, Paper, Grid, Card } from "@importComponents";
+import { useState, useEffect, memo } from "@exportReacts";
+import { useCommonValue, useResponsive, useValidateProduct } from "@exportHooks";
+import { useStoreAlert, useStoreLoading } from "@exportStores";
+import { axios, Swiper, SwiperSlide, Pagination } from "@exportLibs";
+import { insertComma, getSession, setSession } from "@exportScripts";
+import { Product } from "@exportSchemas";
+import { Filter } from "@exportLayouts";
+import { Input } from "@exportContainers";
+import { Div, Img, Hr, Br, Icons, Btn, Paper, Grid, Card } from "@exportComponents";
 
 // -------------------------------------------------------------------------------------------------
 export const ProductDetail = memo(() => {

@@ -1,10 +1,10 @@
 // Time.tsx
 
-import { memo } from "@importReacts";
-import { moment } from "@importLibs";
-import { PopUp, Input } from "@importContainers";
-import { Grid } from "@importComponents";
-import { DigitalClock, AdapterMoment, LocalizationProvider } from "@importMuis";
+import { memo } from "@exportReacts";
+import { moment } from "@exportLibs";
+import { PopUp, Input } from "@exportContainers";
+import { Grid } from "@exportComponents";
+import { DigitalClock, AdapterMoment, LocalizationProvider } from "@exportMuis";
 
 // -------------------------------------------------------------------------------------------------
 declare type PickerTimeProps = {

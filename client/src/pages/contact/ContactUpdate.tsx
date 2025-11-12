@@ -1,15 +1,15 @@
 // ContactUpdate.tsx
 
-import { useState, useEffect, memo } from "@importReacts";
-import { useCommonValue, useResponsive, useValidateContact } from "@importHooks";
-import { useStoreAlert, useStoreLoading } from "@importStores";
-import { axios } from "@importLibs";
-import { makeForm } from "@importScripts";
-import { Contact } from "@importSchemas";
-import { Filter } from "@importLayouts";
-import { Select, Input, TextArea, InputFile } from "@importContainers";
-import { Br, Paper, Grid, Card } from "@importComponents";
-import { MenuItem } from "@importMuis";
+import { useState, useEffect, memo } from "@exportReacts";
+import { useCommonValue, useResponsive, useValidateContact } from "@exportHooks";
+import { useStoreAlert, useStoreLoading } from "@exportStores";
+import { axios } from "@exportLibs";
+import { makeForm } from "@exportScripts";
+import { Contact } from "@exportSchemas";
+import { Filter } from "@exportLayouts";
+import { Select, Input, TextArea, InputFile } from "@exportContainers";
+import { Br, Paper, Grid, Card } from "@exportComponents";
+import { MenuItem } from "@exportMuis";
 
 // -------------------------------------------------------------------------------------------------
 export const ContactUpdate = memo(() => {

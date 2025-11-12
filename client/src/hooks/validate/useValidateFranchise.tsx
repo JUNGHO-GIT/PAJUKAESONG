@@ -1,7 +1,7 @@
 // useValidateFranchise.tsx
 
-import { useState, createRef, useRef } from "@importReacts";
-import { useStoreAlert, useStoreConfirm } from "@importStores";
+import { useState, createRef, useRef } from "@exportReacts";
+import { useStoreAlert, useStoreConfirm } from "@exportStores";
 
 // -------------------------------------------------------------------------------------------------
 export const useValidateFranchise = () => {
