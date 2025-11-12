@@ -1,4 +1,4 @@
-// autofix.cjs
+// server/autofix.cjs
 
 const { spawnSync } = require(`child_process`);
 const fs = require(`fs`);
