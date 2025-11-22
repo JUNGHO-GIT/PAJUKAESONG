@@ -7,7 +7,7 @@ import { Div } from "@exportComponents";
 export const Location = memo((props: any) => {
 
   // 1. common -------------------------------------------------------------------------------------
-  const NAVER_MAPS_CLIENT_ID = process.env.REACT_APP_NAVER_MAPS_CLIENT_ID;
+  const NAVER_MAPS_CLIENT_ID = import.meta.env.VITE_APP_NAVER_MAPS_CLIENT_ID;
   const srcPre = "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=";
   const scriptSrc = `${srcPre}${NAVER_MAPS_CLIENT_ID}`;
 

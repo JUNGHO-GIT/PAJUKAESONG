@@ -3,6 +3,19 @@
 import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
+// 0. types ---------------------------------------------------------------------------------------
+interface MenuDoc extends mongoose.Document {
+  menu_number: number;
+  menu_seq: number;
+  menu_category: string;
+  menu_name: string;
+  menu_description: string;
+  menu_price: string;
+  menu_images: any[];
+  menu_regDt: Date;
+  menu_updateDt: Date;
+}
+
 // 1. schema ---------------------------------------------------------------------------------------
 const schema = new mongoose.Schema(
   {
@@ -64,14 +77,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre("save", async function(next) {
+schema.pre<MenuDoc>("save", async function() {
   if (this.isNew) {
     this.menu_number = await incrementSeq("menu_number", "Menu");
   }
-  next();
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Menu = mongoose.model(
-  "Menu", schema
-);
+export const Menu = mongoose.model<MenuDoc>("Menu", schema);

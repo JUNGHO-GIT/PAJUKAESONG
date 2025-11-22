@@ -3,6 +3,28 @@
 import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
+// 0. types ---------------------------------------------------------------------------------------
+interface OrderProductDoc {
+  product_name: string;
+  product_count: string;
+  product_price: string;
+  product_images: any[];
+}
+interface OrderDoc extends mongoose.Document {
+  order_number: number;
+  order_category: string;
+  order_name: string;
+  order_email: string;
+  order_phone: string;
+  order_date: string;
+  order_time: string;
+  order_headcount: string;
+  order_total_price: string;
+  order_product: OrderProductDoc[];
+  order_regDt: Date;
+  order_updateDt: Date;
+}
+
 // 1. schema ---------------------------------------------------------------------------------------
 const schema = new mongoose.Schema(
   {
@@ -96,14 +118,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre("save", async function(next) {
+schema.pre<OrderDoc>("save", async function() {
   if (this.isNew) {
     this.order_number = await incrementSeq("order_number", "Order");
   }
-  next();
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Order = mongoose.model(
-  "Order", schema,
-);
+export const Order = mongoose.model<OrderDoc>("Order", schema);

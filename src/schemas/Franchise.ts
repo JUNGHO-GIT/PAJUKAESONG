@@ -3,6 +3,19 @@
 import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
+// 0. types ---------------------------------------------------------------------------------------
+interface FranchiseDoc extends mongoose.Document {
+  franchise_number: number;
+  franchise_seq: number;
+  franchise_name: string;
+  franchise_address_main: string;
+  franchise_address_detail: string;
+  franchise_phone: string;
+  franchise_images: any[];
+  franchise_regDt: Date;
+  franchise_updateDt: Date;
+}
+
 // 1. schema ---------------------------------------------------------------------------------------
 const schema = new mongoose.Schema(
   {
@@ -64,14 +77,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre("save", async function(next) {
+schema.pre<FranchiseDoc>("save", async function() {
   if (this.isNew) {
     this.franchise_number = await incrementSeq("franchise_number", "Franchise");
   }
-  next();
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Franchise = mongoose.model(
-  "Franchise", schema,
-);
+export const Franchise = mongoose.model<FranchiseDoc>("Franchise", schema);

@@ -3,6 +3,16 @@
 import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
+// 0. types ---------------------------------------------------------------------------------------
+interface AboutDoc extends mongoose.Document {
+  about_number: number;
+  about_greeting: string;
+  about_info: string;
+  about_location: string;
+  about_regDt: Date;
+  about_updateDt: Date;
+}
+
 // 1. schema ---------------------------------------------------------------------------------------
 const schema = new mongoose.Schema(
   {
@@ -48,14 +58,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre("save", async function(next) {
+schema.pre<AboutDoc>("save", async function() {
   if (this.isNew) {
     this.about_number = await incrementSeq("about_number", "About");
   }
-  next();
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const About = mongoose.model(
-  "About", schema,
-);
+export const About = mongoose.model<AboutDoc>("About", schema);

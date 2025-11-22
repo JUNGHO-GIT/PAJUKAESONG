@@ -3,6 +3,20 @@
 import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
+// 0. types ---------------------------------------------------------------------------------------
+interface ContactDoc extends mongoose.Document {
+  contact_number: number;
+  contact_category: string;
+  contact_name: string;
+  contact_email: string;
+  contact_phone: string;
+  contact_title: string;
+  contact_content: string;
+  contact_images: any[];
+  contact_regDt: Date;
+  contact_updateDt: Date;
+}
+
 // 1. schema ---------------------------------------------------------------------------------------
 const schema = new mongoose.Schema(
   {
@@ -69,14 +83,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre("save", async function(next) {
+schema.pre<ContactDoc>("save", async function() {
   if (this.isNew) {
     this.contact_number = await incrementSeq("contact_number", "Contact");
   }
-  next();
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Contact = mongoose.model(
-  "Contact", schema,
-);
+export const Contact = mongoose.model<ContactDoc>("Contact", schema);

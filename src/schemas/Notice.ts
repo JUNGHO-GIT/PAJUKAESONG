@@ -3,6 +3,17 @@
 import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
+// 0. types ---------------------------------------------------------------------------------------
+interface NoticeDoc extends mongoose.Document {
+  notice_number: number;
+  notice_title: string;
+  notice_content: string;
+  notice_view: string;
+  notice_images: any[];
+  notice_regDt: Date;
+  notice_updateDt: Date;
+}
+
 // 1. schema ---------------------------------------------------------------------------------------
 const schema = new mongoose.Schema(
   {
@@ -54,14 +65,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre("save", async function(next) {
+schema.pre<NoticeDoc>("save", async function() {
   if (this.isNew) {
     this.notice_number = await incrementSeq("notice_number", "Notice");
   }
-  next();
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Notice = mongoose.model(
-  "Notice", schema
-);
+export const Notice = mongoose.model<NoticeDoc>("Notice", schema);

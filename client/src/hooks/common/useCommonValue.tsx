@@ -17,10 +17,11 @@ export const useCommonValue = () => {
   const thirdStr: string = PATH?.split("/")[3] || "";
 
   // env
-  const TITLE = process.env.REACT_APP_TITLE || "";
-  const URL = process.env.REACT_APP_SERVER_URL || "";
-  const SUBFIX = process.env[`REACT_APP_${firstStr.toUpperCase()}_URL`] || "";
-  const GCLOUD_URL = process.env.REACT_APP_GCLOUD_URL || "";
+  const TITLE: string = import.meta.env.VITE_APP_TITLE || "";
+  const URL: string = import.meta.env.VITE_APP_SERVER_URL || "";
+  const SUBFIX_KEY = `VITE_APP_${firstStr.toUpperCase()}_URL`;
+  const SUBFIX: string = (import.meta.env as unknown as Record<string, string>)[SUBFIX_KEY] || "";
+  const GCLOUD_URL: string = import.meta.env.VITE_APP_GCLOUD_URL || "";
 
   // local storage (object 타입)
   const localTitle: any = JSON.parse(localStorage.getItem(TITLE) || "{}");
