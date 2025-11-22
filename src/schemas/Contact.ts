@@ -74,7 +74,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "contact",
+    collection: "Contact",
     timestamps: {
       createdAt: "contact_regDt",
       updatedAt: "contact_updateDt"
@@ -85,9 +85,9 @@ const schema = new mongoose.Schema(
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre<ContactType>("save", async function() {
   if (this.isNew) {
-    this.contact_number = await incrementSeq("contact_number", "contact");
+    this.contact_number = await incrementSeq("contact_number", "Contact");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Contact = mongoose.model<ContactType>("contact", schema);
+export const Contact = mongoose.model<ContactType>("Contact", schema);

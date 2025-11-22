@@ -68,7 +68,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "menu",
+    collection: "Menu",
     timestamps: {
       createdAt: "menu_regDt",
       updatedAt: "menu_updateDt"
@@ -79,9 +79,9 @@ const schema = new mongoose.Schema(
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre<MenuType>("save", async function() {
   if (this.isNew) {
-    this.menu_number = await incrementSeq("menu_number", "menu");
+    this.menu_number = await incrementSeq("menu_number", "Menu");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Menu = mongoose.model<MenuType>("menu", schema);
+export const Menu = mongoose.model<MenuType>("Menu", schema);

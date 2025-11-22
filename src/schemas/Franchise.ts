@@ -68,7 +68,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "franchise",
+    collection: "Franchise",
     timestamps: {
       createdAt: "franchise_regDt",
       updatedAt: "franchise_updateDt"
@@ -79,9 +79,9 @@ const schema = new mongoose.Schema(
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre<FranchiseType>("save", async function() {
   if (this.isNew) {
-    this.franchise_number = await incrementSeq("franchise_number", "franchise");
+    this.franchise_number = await incrementSeq("franchise_number", "Franchise");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Franchise = mongoose.model<FranchiseType>("franchise", schema);
+export const Franchise = mongoose.model<FranchiseType>("Franchise", schema);

@@ -68,7 +68,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "product",
+    collection: "Product",
     timestamps: {
       createdAt: "product_regDt",
       updatedAt: "product_updateDt"
@@ -79,9 +79,9 @@ const schema = new mongoose.Schema(
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre<ProductType>("save", async function() {
   if (this.isNew) {
-    this.product_number = await incrementSeq("product_number", "product");
+    this.product_number = await incrementSeq("product_number", "Product");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Product = mongoose.model<ProductType>("product", schema);
+export const Product = mongoose.model<ProductType>("Product", schema);

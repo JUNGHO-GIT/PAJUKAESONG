@@ -109,7 +109,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "order",
+    collection: "Order",
     timestamps: {
       createdAt: "order_regDt",
       updatedAt: "order_updateDt"
@@ -120,9 +120,9 @@ const schema = new mongoose.Schema(
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre<OrderType>("save", async function() {
   if (this.isNew) {
-    this.order_number = await incrementSeq("order_number", "order");
+    this.order_number = await incrementSeq("order_number", "Order");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Order = mongoose.model<OrderType>("order", schema);
+export const Order = mongoose.model<OrderType>("Order", schema);

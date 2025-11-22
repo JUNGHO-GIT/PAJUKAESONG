@@ -56,7 +56,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "notice",
+    collection: "Notice",
     timestamps: {
       createdAt: "notice_regDt",
       updatedAt: "notice_updateDt"
@@ -67,9 +67,9 @@ const schema = new mongoose.Schema(
 // 3. counter --------------------------------------------------------------------------------------
 schema.pre<NoticeType>("save", async function() {
   if (this.isNew) {
-    this.notice_number = await incrementSeq("notice_number", "notice");
+    this.notice_number = await incrementSeq("notice_number", "Notice");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Notice = mongoose.model<NoticeType>("notice", schema);
+export const Notice = mongoose.model<NoticeType>("Notice", schema);
