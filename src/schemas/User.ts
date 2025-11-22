@@ -4,17 +4,17 @@ import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
 // 0. types ---------------------------------------------------------------------------------------
-interface UserDoc extends mongoose.Document {
-  user_number: number;
-  user_id: string;
-  user_token: string;
-  user_pw: string;
-  user_name: string;
-  user_email: string;
-  user_phone: string;
-  user_address: string;
-  user_regDt: Date;
-  user_updateDt: Date;
+declare type UserType = mongoose.Document & {
+	user_number: number;
+	user_id: string;
+	user_token: string;
+	user_pw: string;
+	user_name: string;
+	user_email: string;
+	user_phone: string;
+	user_address: string;
+	user_regDt: Date;
+	user_updateDt: Date;
 }
 
 // 1. schema ---------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "User",
+    collection: "user",
     timestamps: {
       createdAt: "user_regDt",
       updatedAt: "user_updateDt"
@@ -83,11 +83,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre<UserDoc>("save", async function() {
+schema.pre<UserType>("save", async function() {
   if (this.isNew) {
-    this.user_number = await incrementSeq("user_number", "User");
+    this.user_number = await incrementSeq("user_number", "user");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const User = mongoose.model<UserDoc>("User", schema);
+export const User = mongoose.model<UserType>("user", schema);

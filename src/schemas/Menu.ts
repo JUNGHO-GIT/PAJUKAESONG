@@ -4,16 +4,16 @@ import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
 // 0. types ---------------------------------------------------------------------------------------
-interface MenuDoc extends mongoose.Document {
-  menu_number: number;
-  menu_seq: number;
-  menu_category: string;
-  menu_name: string;
-  menu_description: string;
-  menu_price: string;
-  menu_images: any[];
-  menu_regDt: Date;
-  menu_updateDt: Date;
+declare type MenuType = mongoose.Document & {
+	menu_number: number;
+	menu_seq: number;
+	menu_category: string;
+	menu_name: string;
+	menu_description: string;
+	menu_price: string;
+	menu_images: any[];
+	menu_regDt: Date;
+	menu_updateDt: Date;
 }
 
 // 1. schema ---------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "Menu",
+    collection: "menu",
     timestamps: {
       createdAt: "menu_regDt",
       updatedAt: "menu_updateDt"
@@ -77,11 +77,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre<MenuDoc>("save", async function() {
+schema.pre<MenuType>("save", async function() {
   if (this.isNew) {
-    this.menu_number = await incrementSeq("menu_number", "Menu");
+    this.menu_number = await incrementSeq("menu_number", "menu");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Menu = mongoose.model<MenuDoc>("Menu", schema);
+export const Menu = mongoose.model<MenuType>("menu", schema);

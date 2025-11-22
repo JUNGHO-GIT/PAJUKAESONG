@@ -14,7 +14,7 @@ export default defineConfig(({ command, mode }) => {
   const isProd = mode === "production";
 
   return {
-    base: env.VITE_PUBLIC_URL || "/PAJUKAESONG/",
+    base: env.VITE_APP_PUBLIC_URL || "/PAJUKAESONG/",
     plugins: [
       react(),
 			isProd ? (
@@ -32,7 +32,7 @@ export default defineConfig(({ command, mode }) => {
     ].filter(Boolean),
     define: {
       "process.env.NODE_ENV": JSON.stringify(mode),
-      "process.env.PUBLIC_URL": JSON.stringify(env.VITE_PUBLIC_URL || "/PAJUKAESONG/")
+      "process.env.PUBLIC_URL": JSON.stringify(env.VITE_APP_PUBLIC_URL || "/PAJUKAESONG/")
     },
     resolve: {
       alias: {

@@ -4,14 +4,14 @@ import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
 // 0. types ---------------------------------------------------------------------------------------
-interface NoticeDoc extends mongoose.Document {
-  notice_number: number;
-  notice_title: string;
-  notice_content: string;
-  notice_view: string;
-  notice_images: any[];
-  notice_regDt: Date;
-  notice_updateDt: Date;
+declare type NoticeType = mongoose.Document & {
+	notice_number: number;
+	notice_title: string;
+	notice_content: string;
+	notice_view: string;
+	notice_images: any[];
+	notice_regDt: Date;
+	notice_updateDt: Date;
 }
 
 // 1. schema ---------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "Notice",
+    collection: "notice",
     timestamps: {
       createdAt: "notice_regDt",
       updatedAt: "notice_updateDt"
@@ -65,11 +65,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre<NoticeDoc>("save", async function() {
+schema.pre<NoticeType>("save", async function() {
   if (this.isNew) {
-    this.notice_number = await incrementSeq("notice_number", "Notice");
+    this.notice_number = await incrementSeq("notice_number", "notice");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Notice = mongoose.model<NoticeDoc>("Notice", schema);
+export const Notice = mongoose.model<NoticeType>("notice", schema);

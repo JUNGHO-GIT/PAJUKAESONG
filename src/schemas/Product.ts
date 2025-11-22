@@ -4,16 +4,16 @@ import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
 // 0. types ---------------------------------------------------------------------------------------
-interface ProductDoc extends mongoose.Document {
-  product_number: number;
-  product_seq: number;
-  product_category: string;
-  product_name: string;
-  product_description: string;
-  product_price: string;
-  product_images: any[];
-  product_regDt: Date;
-  product_updateDt: Date;
+declare type ProductType = mongoose.Document & {
+	product_number: number;
+	product_seq: number;
+	product_category: string;
+	product_name: string;
+	product_description: string;
+	product_price: string;
+	product_images: any[];
+	product_regDt: Date;
+	product_updateDt: Date;
 }
 
 // 1. schema ---------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "Product",
+    collection: "product",
     timestamps: {
       createdAt: "product_regDt",
       updatedAt: "product_updateDt"
@@ -77,11 +77,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre<ProductDoc>("save", async function() {
+schema.pre<ProductType>("save", async function() {
   if (this.isNew) {
-    this.product_number = await incrementSeq("product_number", "Product");
+    this.product_number = await incrementSeq("product_number", "product");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Product = mongoose.model<ProductDoc>("Product", schema);
+export const Product = mongoose.model<ProductType>("product", schema);

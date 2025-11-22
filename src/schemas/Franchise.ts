@@ -4,16 +4,16 @@ import mongoose from "mongoose";
 import { incrementSeq } from "@schemas/Counter";
 
 // 0. types ---------------------------------------------------------------------------------------
-interface FranchiseDoc extends mongoose.Document {
-  franchise_number: number;
-  franchise_seq: number;
-  franchise_name: string;
-  franchise_address_main: string;
-  franchise_address_detail: string;
-  franchise_phone: string;
-  franchise_images: any[];
-  franchise_regDt: Date;
-  franchise_updateDt: Date;
+declare type FranchiseType = mongoose.Document & {
+	franchise_number: number;
+	franchise_seq: number;
+	franchise_name: string;
+	franchise_address_main: string;
+	franchise_address_detail: string;
+	franchise_phone: string;
+	franchise_images: any[];
+	franchise_regDt: Date;
+	franchise_updateDt: Date;
 }
 
 // 1. schema ---------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ const schema = new mongoose.Schema(
     }
   },
   {
-    collection: "Franchise",
+    collection: "franchise",
     timestamps: {
       createdAt: "franchise_regDt",
       updatedAt: "franchise_updateDt"
@@ -77,11 +77,11 @@ const schema = new mongoose.Schema(
 );
 
 // 3. counter --------------------------------------------------------------------------------------
-schema.pre<FranchiseDoc>("save", async function() {
+schema.pre<FranchiseType>("save", async function() {
   if (this.isNew) {
-    this.franchise_number = await incrementSeq("franchise_number", "Franchise");
+    this.franchise_number = await incrementSeq("franchise_number", "franchise");
   }
 });
 
 // 5. model ----------------------------------------------------------------------------------------
-export const Franchise = mongoose.model<FranchiseDoc>("Franchise", schema);
+export const Franchise = mongoose.model<FranchiseType>("franchise", schema);
